@@ -1,0 +1,19 @@
+{
+  "titulo": "El seguidor que tiembla",
+  "resumen": "Ajusta el motor de tu cámara para seguir la luz con rapidez y estabilidad.",
+  "instrucciones": [
+    "Elige ganancia o amortiguación y cambia 1 parámetro por prueba.",
+    "Pulsa Probar y observa 5 s. Compara la respuesta continua con la anterior discontinua.",
+    "Entra en la franja ±4 % antes del límite, sobrepasa como máximo 5 % y termina con error ≤1,5 %: reglas de este modelo.",
+    "En el arreglo con rampa, da al motor la velocidad prevista: unos 15°/h del cielo. El reloj va ×720."
+  ],
+  "controles": "↑ ↓: elegir control. ← →: ajustar. E / Intro: Probar. Espacio: conservar solo el cambio elegido. Ratón: arrastrar diales y pulsar botones.",
+  "pistas": [
+    "Órbita mira la curva que cruza y vuelve a cruzar la referencia: ¿le falta amortiguación?",
+    "La ganancia responde al error; la amortiguación reduce oscilaciones. En rampa, anticipa el giro con prealimentación.",
+    "Prueba ganancia 16 y luego amortiguación 6,5, en pruebas separadas. En rampa: ganancia 8, amortiguación 5 y cielo 15°/h."
+  ],
+  "ficha": "realimentacion",
+  "escena": "1.2",
+  "orden": 1
+}

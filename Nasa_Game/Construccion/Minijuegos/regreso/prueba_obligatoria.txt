@@ -1,0 +1,30 @@
+ERROR: Failed to open 'user://logs/godot2026-11-14T10.41.04.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK regreso.minijuego_json
+PRUEBA_OK regreso.json.titulo
+PRUEBA_OK regreso.json.resumen
+PRUEBA_OK regreso.json.controles
+PRUEBA_OK regreso.json.instrucciones
+PRUEBA_OK regreso.json.pistas
+PRUEBA_OK regreso.json.ficha
+REGRESO d1 vuelo=20.008 dentro=20.008 calor=0.00 desvio=6.00 juego=21.127
+MINIJUEGO regreso superado=true puntos=100.0 detalle=Ordenaste los 6 pasos y mantuviste el escudo dentro del margen 20.0 de 20 s. Los paracaídas frenaron antes del amerizaje.
+PRUEBA_OK regreso.d1.termina_solo
+PRUEBA_OK regreso.d1.se_puede_superar
+REGRESO d3 vuelo=20.008 dentro=20.008 calor=0.00 desvio=6.00 juego=21.804
+MINIJUEGO regreso superado=true puntos=100.0 detalle=Ordenaste los 6 pasos y mantuviste el escudo dentro del margen 20.0 de 20 s. Los paracaídas frenaron antes del amerizaje.
+PRUEBA_OK regreso.d3.termina_solo
+PRUEBA_OK regreso.d3.se_puede_superar
+REGRESO d1 vuelo=2.858 dentro=0.608 calor=100.00 desvio=85.00 juego=3.533
+MINIJUEGO regreso superado=false puntos=0.0 detalle=El escudo quedó de lado demasiado tiempo: el calor llegó a 100. Las correcciones tardías y grandes hacen oscilar; usa pulsos cortos y frena antes del centro.
+PRUEBA_OK regreso.se_puede_fallar
+PRUEBA_OK regreso.el_fallo_explica_la_causa
+PRUEBAS hechas=13 fallos=0
+FIN
+[godot: ok; 8 s; lineas=29; errores=0]

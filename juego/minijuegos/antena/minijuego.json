@@ -1,0 +1,18 @@
+{
+  "titulo": "Rastrear como en el Cotopaxi",
+  "resumen": "Ajusta la ganancia para que el haz de la antena siga al satélite.",
+  "instrucciones": [
+    "Mueve GANANCIA y pulsa Probar. El paso simulado dura entre 7 y 10 s.",
+    "Mantén la señal por encima del 70 % durante al menos el 80 % del paso.",
+    "Compara los errores actual y anterior. Tienes 3 pruebas y 180 s: poca ganancia atrasa; mucha hace oscilar."
+  ],
+  "controles": "← → / A y D: ganancia · E / Intro / Espacio: Probar · Ratón: deslizador y botón.",
+  "pistas": [
+    "Órbita mira el haz: ¿queda detrás del satélite o cruza de un lado al otro?",
+    "Si el error sigue por encima de 0°, sube la ganancia. Si cruza 0° muchas veces, bájala: el motor responde con retardo.",
+    "Pon GANANCIA en 3,0 y pulsa Probar. Ese equilibrio permite seguir el paso incluso con las ráfagas."
+  ],
+  "ficha": "ganancia",
+  "escena": "2.1",
+  "orden": 2
+}

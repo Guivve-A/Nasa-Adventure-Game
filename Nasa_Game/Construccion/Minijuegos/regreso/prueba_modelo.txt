@@ -1,0 +1,53 @@
+ERROR: Failed to open 'user://logs/godot2026-11-14T10.45.06.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK regreso.teclado_toma_y_mueve
+PRUEBA_OK regreso.teclado_suelta_y_selecciona
+PRUEBA_OK regreso.raton_arrastra_y_suelta
+PRUEBA_OK regreso.boton_comprobar_inicia_reentrada
+PRUEBA_OK regreso.raton_corrige_con_fisica
+PRUEBA_OK regreso.soltar_conserva_inercia
+PRUEBA_OK regreso.par_0_causa_real
+PRUEBA_OK regreso.par_1_causa_real
+PRUEBA_OK regreso.par_2_causa_real
+PRUEBA_OK regreso.par_3_causa_real
+PRUEBA_OK regreso.par_4_causa_real
+REGRESO d1 vuelo=20.008 dentro=20.008 calor=0.00 desvio=6.00 juego=20.683
+PRUEBA_OK regreso.piloto_d1_dt0.017
+REGRESO_QA d1 dt=0.017 total=23.700 dentro=20.008 calor=0.00
+REGRESO d1 vuelo=20.008 dentro=20.008 calor=0.00 desvio=6.00 juego=21.000
+PRUEBA_OK regreso.piloto_d1_dt0.200
+REGRESO_QA d1 dt=0.200 total=24.000 dentro=20.008 calor=0.00
+REGRESO d1 vuelo=2.858 dentro=0.608 calor=100.00 desvio=85.00 juego=3.533
+PRUEBA_OK regreso.piloto_falla_por_calor_d1
+REGRESO d2 vuelo=20.008 dentro=20.008 calor=0.00 desvio=6.00 juego=20.900
+PRUEBA_OK regreso.piloto_d2_dt0.017
+REGRESO_QA d2 dt=0.017 total=23.917 dentro=20.008 calor=0.00
+REGRESO d2 vuelo=20.008 dentro=20.008 calor=0.00 desvio=6.00 juego=21.200
+PRUEBA_OK regreso.piloto_d2_dt0.200
+REGRESO_QA d2 dt=0.200 total=24.200 dentro=20.008 calor=0.00
+REGRESO d2 vuelo=2.725 dentro=0.475 calor=100.00 desvio=85.00 juego=3.617
+PRUEBA_OK regreso.piloto_falla_por_calor_d2
+REGRESO d3 vuelo=20.008 dentro=20.008 calor=0.00 desvio=6.00 juego=21.783
+PRUEBA_OK regreso.piloto_d3_dt0.017
+REGRESO_QA d3 dt=0.017 total=24.800 dentro=20.008 calor=0.00
+REGRESO d3 vuelo=20.008 dentro=20.008 calor=0.00 desvio=6.00 juego=22.000
+PRUEBA_OK regreso.piloto_d3_dt0.200
+REGRESO_QA d3 dt=0.200 total=25.000 dentro=20.008 calor=0.00
+REGRESO d3 vuelo=2.583 dentro=0.325 calor=100.00 desvio=85.00 juego=4.350
+PRUEBA_OK regreso.piloto_falla_por_calor_d3
+PRUEBA_OK regreso.intento_previo_persistente
+REGRESO d1 vuelo=0.100 dentro=0.000 calor=100.00 desvio=20.05 juego=0.000
+PRUEBA_OK regreso.umbral_calor_100
+REGRESO d1 vuelo=20.009 dentro=15.010 calor=11.94 desvio=0.00 juego=0.000
+PRUEBA_OK regreso.exige_16_s_dentro
+PRUEBA_OK regreso.limite_orden_150_s
+PRUEBAS hechas=25 fallos=0
+FIN
+[godot: ok; 4 s; lineas=52; errores=0]

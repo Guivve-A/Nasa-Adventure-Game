@@ -25,10 +25,58 @@
  },
  "regreso": {
   "id": "regreso",
-  "estado": "error (codigo 1073807364)",
-  "minutos": 2.8,
-  "bytes_informe": 0,
+  "estado": "ok",
+  "minutos": 13.3,
+  "bytes_informe": 889,
   "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\regreso.md",
   "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\regreso.log"
+ },
+ "seguidor": {
+  "id": "seguidor",
+  "estado": "ok",
+  "minutos": 11.9,
+  "bytes_informe": 903,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\seguidor.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\seguidor.log"
+ },
+ "antena": {
+  "id": "antena",
+  "estado": "ok",
+  "minutos": 9.0,
+  "bytes_informe": 962,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\antena.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\antena.log"
+ },
+ "satelite": {
+  "id": "satelite",
+  "estado": "ok",
+  "minutos": 9.1,
+  "bytes_informe": 1363,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\satelite.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\satelite.log"
+ },
+ "telescopio": {
+  "id": "telescopio",
+  "estado": "ok",
+  "minutos": 18.0,
+  "bytes_informe": 1137,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\telescopio.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\telescopio.log"
+ },
+ "muestras": {
+  "id": "muestras",
+  "estado": "ok",
+  "minutos": 13.4,
+  "bytes_informe": 1187,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\muestras.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\muestras.log"
+ },
+ "banderas": {
+  "id": "banderas",
+  "estado": "ok",
+  "minutos": 7.6,
+  "bytes_informe": 943,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\banderas.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\banderas.log"
  }
 }

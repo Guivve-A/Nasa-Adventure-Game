@@ -1,0 +1,15 @@
+Regreso — entrega del 14-11-2026
+
+Archivos: `juego/minijuegos/regreso/regreso.gd`, `minijuego.json` y `prueba_regreso.gd`. Esta carpeta conserva la nota, las dos salidas de prueba y las capturas `tarjetas.png` y `reentrada.png`, ambas inspeccionadas visualmente a 1280 × 720. Solo se escribieron archivos dentro de los dos directorios autorizados.
+
+Modelo del sueño: ordenar los 6 pasos mediante intercambios adyacentes y Comprobar. Un par invertido termina el intento con su causa; el anfitrión permite reintentar. Límite para ordenar: 150 s. Después, reentrada de 20 s, al menos 16 s dentro del margen y calor menor que 100; cierre con paracaídas y amerizaje de 3 s. Máximo manual: unos 173 s. Márgenes por dificultad: ±18°, ±14°, ±10°. Ráfagas: amplitud 9, 14 o 20 multiplicada por `sin(1,4t) + 0,55 sin(3,2t + 0,7)`.
+
+Integración fija a 120 pasos/s, acumulada solo con delta: aceleración de giro = mando × 65 + ráfaga − giro × 0,65; ángulo inicial 6°, giro inicial 0, límite de dibujo ±85°. Calor relativo inicial 12; dentro del margen enfría 6 unidades/s; fuera aumenta `min(14 + 1,1 × exceso angular, 45)` unidades/s. Falla al alcanzar 100, o por no reunir 16 s dentro del margen. Estas cifras son reglas didácticas, señaladas como tales en pantalla, sin equivalencia con temperaturas o márgenes de una cápsula real. Se conserva el trazo anterior por dificultad durante la sesión del anfitrión.
+
+Datos históricos: texto literal de `modulo_mando` y `muestras_apolo11`; orden didáctico de `regreso_seis_pasos` y FUENTES.md. 24-07-1969, Pacífico; 21,5 kg y 58 muestras. Caja y escudo dibujados por código, sin recursos descargados ni insignias.
+
+Prueba solicitada: `python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:regreso --ritmo=8 --todo`: código 0. Se repitió con `--todo` también antes del separador para guardar toda la salida: `PRUEBAS hechas=13 fallos=0`, `[godot: ok; 8 s; lineas=29; errores=0]`. Sin PRUEBA_FALLO ni SCRIPT ERROR.
+
+Prueba propia: `python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/regreso/prueba_regreso.gd --ritmo=8`: `PRUEBAS hechas=25 fallos=0`, código 0. Comprueba entradas de teclado y ratón por sus manejadores, los 5 pares causales, inercia, dificultades 1/2/3 con cuadros de 1/60 y 0,2 s, historial, calor 100, mínimo de 16 s y límite de 150 s. Victorias completas: 23,7–25 s. Fallos con giro sostenido: 3,5–4,4 s. El piloto ordena con intercambios reales y corrige con pulsos −1/0/+1; no fuerza resultados.
+
+Pendiente del entorno: Godot avisa de acceso a `user://logs` y del almacén de certificados. La primera prueba propia cerraba antes de acabar las voces de audio de su simulación sincrónica; el diagnóstico identificó AudioStreamWAV/AudioStreamPlaybackWAV y se añadió una espera de 0,3 s solo al final de la prueba. La ejecución final da 25 comprobaciones, 0 fallos y ningún aviso ObjectDB. No se modificaron el núcleo ni el envoltorio. Falta la valoración humana del tacto del control; no hay requisitos funcionales pendientes detectados.

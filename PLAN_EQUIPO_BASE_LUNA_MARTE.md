@@ -4,7 +4,7 @@
 >
 > **«¿Quién eres: Joel, Domenica o Jean?»**
 >
-> Espera la respuesta. No leas código, no propongas nada y no escribas archivos hasta saberlo. Si responde otro nombre, dile que el integrador es Guillermo y pregúntale qué carril le asignó él.
+> Espera la respuesta. No leas código, no propongas nada y no escribas archivos hasta saberlo. Si responde otro nombre, dile que este plan es solo para ellos tres y que consulte con Guillermo.
 >
 > Cuando lo sepas: salúdale por su nombre, resúmele su carril en 5 líneas (qué entrega, en qué carpeta, cómo se prueba) y sigue la sección 6.
 
@@ -34,14 +34,17 @@ De otros juegos se toman principios, nunca nombres, personajes, interfaz ni dibu
 
 ## 3. Reparto
 
-| Persona | Carril | Carpeta propia (solo toca esta) |
-|---|---|---|
-| **Jean** | Motor común: reglas, dibujo en píxeles, crisis por turnos y pruebas | `juego/minijuegos/base_comun/` |
-| **Joel** | Base en la Luna: mapa, módulos, números y sucesos lunares | `juego/minijuegos/base_luna/` |
-| **Domenica** | Base en Marte: mapa, módulos, números y sucesos marcianos | `juego/minijuegos/base_marte/` |
-| Guillermo | Integración, datos verificados, biblioteca de la plaza y validación del arte | El resto del proyecto |
+Decisión de Guillermo (2026-11-14): dos parejas. Cada minijuego vive dentro de un **libro** de la biblioteca del juego principal: al abrir el libro, se juega.
 
-Si quieren cambiar de carril, lo acuerdan entre ustedes y avisan a Guillermo antes de empezar.
+| Equipo | Persona | Carril | Carpeta propia (solo toca esta) |
+|---|---|---|---|
+| **Luna** | **Jean** | Assets en píxel-art (módulos, suelos, personaje, iconos) y motor común: reglas, dibujo y crisis por turnos | `juego/minijuegos/base_comun/` |
+| **Luna** | **Joel** | El minijuego lunar: mapa, números, sucesos, textos y pruebas | `juego/minijuegos/base_luna/` |
+| **Marte** | **Domenica** | El minijuego marciano completo: mapa, assets marcianos, números, sucesos, textos y pruebas | `juego/minijuegos/base_marte/` |
+
+- Guillermo **no trabaja en los minijuegos**: se encarga de todo lo demás del juego (la biblioteca, los libros, la integración y la validación del arte). Los tres llevan los minijuegos de principio a fin.
+- El equipo de la Luna va primero: su motor y sus assets comunes son la base del de Marte. Jean atiende también lo que Domenica necesite del motor.
+- Si quieren cambiar el reparto, lo acuerdan entre los tres y avisan a Guillermo.
 
 Cada quien deja su evidencia (capturas y una nota `NOTA.md`) en `Nasa_Game/Construccion/Minijuegos/<su carpeta>/`.
 
@@ -93,7 +96,9 @@ func terminado() -> Dictionary           # {"fin": bool, "superado": bool, "caus
 - `minijuego.json` (título, resumen, instrucciones, controles, 3 pistas, `ficha`, `orden`).
 - Los dibujos en píxel-art de sus módulos, su suelo y su personaje con traje, dentro del `escenario.json` o en un `sprites.json` al lado.
 
-Si a Joel o a Domenica les falta algo en el motor, **se lo piden a Jean**; no editan `base_comun/`.
+Si a Joel o a Domenica les falta algo en el motor o en los assets comunes, **se lo piden a Jean**; no editan `base_comun/`.
+
+**El libro.** Cada minijuego se abre desde un libro de la biblioteca. Guillermo pone los dos libros en el juego principal; ellos llaman a `Interfaz.abrir_minijuego("base_luna")` y `Interfaz.abrir_minijuego("base_marte")`. Los equipos no tocan la biblioteca: basta con que su minijuego funcione desde el menú «Minijuegos».
 
 ## 5. Qué hace distinto a cada mundo
 
@@ -141,7 +146,7 @@ python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=base_luna --au
 2. **GDScript** sin `class_name`, con tabuladores y comentarios sin tildes. Los textos del jugador, en español correcto y con tildes. Ojo con `:=` sobre valores de diccionarios o JSON: pon el tipo (`var x: float = d["a"]`).
 3. **El minijuego hereda** de `res://nucleo/minijuego.gd`: lienzo de 1120 × 520, tiempo siempre con `delta`, `terminar(superado, puntos, "causa")` y `jugar_solo(acierta)` obligatorio (gana jugando de verdad; falla por un camino real; menos de 40 s).
 4. **Píxel-art propio, dibujado por código.** No descargues sprites ni uses generadores de imagen de pago. Nada de insignias, logotipos ni textos de la NASA o de misiones; nada copiado de otros juegos.
-5. **Datos reales.** Una cifra real solo se muestra si viene con su fuente primaria (NASA, ESA, artículo científico). Mientras no esté verificada, va en `escenario.json` con `"verificado": false` y **no se muestra como dato**: Guillermo la verifica. Los números de equilibrio del juego se rotulan «modelo simplificado».
+5. **Datos reales.** Una cifra real solo se muestra si viene con su fuente primaria (NASA, ESA, artículo científico). Mientras no esté verificada, va en `escenario.json` con `"verificado": false` y **no se muestra como dato**. La verifica quien la usa: abre la fuente primaria, anota la cita y la dirección en su `NOTA.md` y entonces pone `"verificado": true`. Los números de equilibrio del juego se rotulan «modelo simplificado».
 6. **Nunca «incorrecto».** Al fallar se explica la causa («sin batería guardada, la sombra apagó el soporte vital»).
 7. **Se juega con teclado y con ratón.** Acciones: `mover_izquierda`, `mover_derecha`, `mover_arriba`, `mover_abajo`, `interactuar` (E o Intro) y `saltar` (Espacio). Texto de 16 px o más; nada que dependa solo del color.
 8. **Nada se da por bueno sin evidencia:** la prueba automática en verde y una captura que el agente haya mirado.

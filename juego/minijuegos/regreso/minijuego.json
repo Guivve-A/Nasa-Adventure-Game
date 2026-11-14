@@ -1,0 +1,19 @@
+{
+  "titulo": "Volver como el módulo de mando",
+  "resumen": "Ordena los 6 pasos del regreso y guía la caja de cartón con el escudo por delante.",
+  "instrucciones": [
+    "Ordena las 6 tarjetas de arriba abajo y pulsa Comprobar.",
+    "En la reentrada, corrige con pulsos cortos: la caja conserva el giro al soltar.",
+    "Mantén el escudo dentro del margen durante 20 s; fuera del margen sube la temperatura.",
+    "Llega con menos de 100 de calor y al menos 16 s dentro del margen. Son reglas del sueño."
+  ],
+  "controles": "↑ ↓: elegir o mover tarjeta · E / Intro: tomar o soltar · Espacio: comprobar. Reentrada: ← →. Ratón: arrastrar tarjetas, Comprobar y mantener pulsados los botones de giro.",
+  "pistas": [
+    "Órbita mira el escudo y después la estela: ¿sigue girando aunque sueltes?",
+    "Sin encuentro en órbita lunar no hay nave para volver. En el aire, frena el giro antes del centro.",
+    "Despegue → encuentro → separación → reentrada → paracaídas → amerizaje. Corrige hacia el centro y da un pulso al lado opuesto para frenar."
+  ],
+  "ficha": "modulo_mando",
+  "escena": "3.6",
+  "orden": 9
+}

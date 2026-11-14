@@ -1,0 +1,5 @@
+Codex: C:\Users\guill\AppData\Local\OpenAI\Codex\bin\9e1da79431da526b\codex.exe
+3 tareas, 2 en paralelo
+  telescopio                   ok                      18.0 min     1137 bytes
+  muestras                     ok                      13.4 min     1187 bytes
+  banderas                     ok                       7.6 min      943 bytes

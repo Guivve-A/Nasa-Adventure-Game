@@ -1,0 +1,24 @@
+ERROR: Failed to open 'user://logs/godot2026-11-14T11.14.13.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK banderas.minijuego_json
+PRUEBA_OK banderas.json.titulo
+PRUEBA_OK banderas.json.resumen
+PRUEBA_OK banderas.json.controles
+PRUEBA_OK banderas.json.instrucciones
+PRUEBA_OK banderas.json.pistas
+PRUEBA_OK banderas.json.ficha
+MINIJUEGO banderas superado=true puntos=100.0 detalle=Una bandera no da territorio: artículo II del Tratado del Espacio. Ecuador firmó los Acuerdos Artemisa el 21-06-2023, como país n.º 26. Es cooperación.
+PRUEBA_OK banderas.d1.termina_solo
+PRUEBA_OK banderas.d1.se_puede_superar
+MINIJUEGO banderas superado=true puntos=100.0 detalle=Una bandera no da territorio: artículo II del Tratado del Espacio. Ecuador firmó los Acuerdos Artemisa el 21-06-2023, como país n.º 26. Es cooperación.
+PRUEBA_OK banderas.d3.termina_solo
+PRUEBA_OK banderas.d3.se_puede_superar
+MINIJUEGO banderas superado=false puntos=0.0 detalle=Tras 3 comprobaciones, queda una barra corta. La tela se ve ondulada porque no hay viento que la sostenga; extiende ambas al 100 %.
+PRUEBA_OK banderas.se_puede_fallar
+PRUEBA_OK banderas.el_fallo_explica_la_causa
+FIN
+[godot: ok; 9 s; lineas=26; errores=0]
