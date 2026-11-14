@@ -1,0 +1,48 @@
+{
+	"adapter_name": "ANGLE (Intel, Intel(R) HD Graphics 620 (0x00005916) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.101.2140)",
+	"draw_calls_max": 308,
+	"draw_calls_mean": 305.387955182073,
+	"effects": {
+		"glow": false,
+		"sdfgi": false,
+		"ssao": false
+	},
+	"fps_1pct_low": 46.0508516529378,
+	"fps_mean": 71.3234556673778,
+	"frame_time_max_ms": 23.641,
+	"frame_time_mean_ms": 14.0206330532213,
+	"frames": 714,
+	"godot_version": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"graphics_api_version": "OpenGL ES 3.0 (ANGLE 2.1.1 git hash: aaebda1c5a40)",
+	"measured_seconds": 10.010732,
+	"measurement_notes": "CPU wall-clock frame intervals; 1% low = reciprocal mean of slowest ceil(frames*0.01); rendering counters may be 0 when unavailable; video memory is engine accounting, not dedicated VRAM.",
+	"primitives_max": 94638,
+	"primitives_mean": 93311.6134453782,
+	"rendering_driver": "opengl3_angle",
+	"rendering_method": "gl_compatibility",
+	"requested_seconds": 10.0,
+	"resolution": {
+		"height": 1080,
+		"width": 1920
+	},
+	"resolution_changed": false,
+	"scene": "base",
+	"schema_version": 1,
+	"seed": 7200620,
+	"slowest_1pct_frames": 8,
+	"video_memory_last_bytes": 25322651,
+	"video_memory_max_bytes": 25322651,
+	"video_memory_mean_bytes": 25322651.0,
+	"vsync_mode": 0,
+	"warmup_seconds": 3.0
+}

@@ -1,0 +1,193 @@
+{
+  "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+  "salida": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_v4B.glb",
+  "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+  "sha256_entrada": "249490277719be670c948c09feda8836725bb1461cf088c84e970ea7b5ed70d9",
+  "sha256_hoja": "eb5cf7817c99aef8844c7f21a73e4514e65da6fd48f1671d696ec65f631e8200",
+  "argumentos": {
+    "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+    "salida": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_v4B.glb",
+    "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+    "diagnosticos": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\parecido\\v4B",
+    "pares": "dtw",
+    "puntos": 100,
+    "rejilla": 45,
+    "dist_interior": 30,
+    "lambdas": [
+      0.0,
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1
+    ],
+    "det_min": 0.05,
+    "peso_original": 0.01,
+    "rasante": 0.0,
+    "tolerancia_px": 3.0,
+    "sin_deformacion": false,
+    "solo_deformacion": false
+  },
+  "triangulos": 7522,
+  "textura_px": [
+    4096,
+    4096
+  ],
+  "texels_superficie": 10414844,
+  "texels_con_hoja": 8249173,
+  "texels_con_hoja_pct_superficie": 79.20591993504655,
+  "padding_texels": 1652567,
+  "vistas": {
+    "frente": {
+      "iou": 0.8499310577707742,
+      "escala_base": 897.0,
+      "factor_escala": 1.0150000000000001,
+      "desplazamiento_px": [
+        7,
+        -12
+      ],
+      "limites_desplazamiento_px": [
+        27.599999999999998,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        264.51243632648595,
+        457.70904833869724
+      ],
+      "centro_inicial_px": [
+        259.309777984884,
+        469.70904833869724
+      ],
+      "tps_lambda": 0.0,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": 0.12949857678508594,
+          "det_p1": 0.5899897256303442,
+          "det_max": 2.359455834330166,
+          "residuo_contorno_medio_px": 3.344455859671721e-12,
+          "residuo_contorno_max_px": 9.96512311874994e-12
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 41,
+      "pares": "dtw",
+      "desplazamiento_medio_px": 5.772235981868585,
+      "desplazamiento_max_px": 66.97320966004999,
+      "long_contorno_malla_px": 4740.734557122016,
+      "long_contorno_hoja_px": 4822.658438676268,
+      "muestras_aceptadas": 4126357,
+      "muestras_ocultas_rechazadas": 1275588,
+      "muestras_fuera_de_mascara": 32651
+    },
+    "perfil": {
+      "iou": 0.8696375025977496,
+      "escala_base": 898.0,
+      "factor_escala": 1.0150000000000001,
+      "desplazamiento_px": [
+        3,
+        -7
+      ],
+      "limites_desplazamiento_px": [
+        20.16,
+        53.94
+      ],
+      "traslacion_px": [
+        184.84115833909462,
+        457.23812833940195
+      ],
+      "centro_inicial_px": [
+        184.05762173784842,
+        464.23812833940195
+      ],
+      "tps_lambda": 0.0,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": 0.20471123930755053,
+          "det_p1": 0.554514887960472,
+          "det_max": 2.211236016056104,
+          "residuo_contorno_medio_px": 4.126015902898222e-12,
+          "residuo_contorno_max_px": 9.817304419212988e-12
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 30,
+      "pares": "dtw",
+      "desplazamiento_medio_px": 5.142028064010693,
+      "desplazamiento_max_px": 73.05538405425798,
+      "long_contorno_malla_px": 2871.412480458819,
+      "long_contorno_hoja_px": 2897.6307345282985,
+      "muestras_aceptadas": 2464652,
+      "muestras_ocultas_rechazadas": 2571583,
+      "muestras_fuera_de_mascara": 12373
+    },
+    "espalda": {
+      "iou": 0.8708628877808948,
+      "escala_base": 896.0,
+      "factor_escala": 1.021,
+      "desplazamiento_px": [
+        -4,
+        -10
+      ],
+      "limites_desplazamiento_px": [
+        26.52,
+        53.82
+      ],
+      "traslacion_px": [
+        241.99013565235578,
+        456.62763015931034
+      ],
+      "centro_inicial_px": [
+        244.18418488425732,
+        466.62763015931034
+      ],
+      "tps_lambda": 0.001,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": -0.03641977324241433,
+          "det_p1": 0.4516090507381315,
+          "det_max": 2.278129783970139,
+          "residuo_contorno_medio_px": 5.214398202466835e-12,
+          "residuo_contorno_max_px": 1.0091908289347042e-11
+        },
+        {
+          "lambda": 1e-05,
+          "det_min": -0.028921520381748472,
+          "det_p1": 0.4547673676635371,
+          "det_max": 2.274117039497052,
+          "residuo_contorno_medio_px": 0.03339256806050887,
+          "residuo_contorno_max_px": 0.14861633471842006
+        },
+        {
+          "lambda": 0.0001,
+          "det_min": 0.03272102841948349,
+          "det_p1": 0.4819219514868255,
+          "det_max": 2.2393833953053583,
+          "residuo_contorno_medio_px": 0.30566173665296476,
+          "residuo_contorno_max_px": 1.370659317708817
+        },
+        {
+          "lambda": 0.001,
+          "det_min": 0.3561464532431494,
+          "det_p1": 0.6296262532899575,
+          "det_max": 1.9950047921594578,
+          "residuo_contorno_medio_px": 1.758147036860388,
+          "residuo_contorno_max_px": 7.942791219925749
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 42,
+      "pares": "dtw",
+      "desplazamiento_medio_px": 4.724626652962818,
+      "desplazamiento_max_px": 42.571939633538726,
+      "long_contorno_malla_px": 4766.391411371508,
+      "long_contorno_hoja_px": 4714.692926561674,
+      "muestras_aceptadas": 3644530,
+      "muestras_ocultas_rechazadas": 1287830,
+      "muestras_fuera_de_mascara": 47888
+    }
+  },
+  "segundos": 224.2
+}

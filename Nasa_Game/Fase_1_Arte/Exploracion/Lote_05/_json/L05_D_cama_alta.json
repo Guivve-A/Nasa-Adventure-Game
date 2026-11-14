@@ -1,0 +1,49 @@
+[
+  {
+    "created_at": "2026-11-13T04:33:34.474392Z",
+    "display_name": "GPT Image 2.6",
+    "id": "aa9f6ee9-af99-4730-a9e2-611370b21c20",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_043334_aa9f6ee9-af99-4730-a9e2-611370b21c20_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/ff4e139f-ab33-4aff-8831-db4b2f92c40d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of a compact, cozy bedroom-workshop in a hillside house of a tropical port city, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. A loft bed on a sturdy wooden frame with a short ladder sits along the back wall, and under it the workshop: a wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires), a vintage oscilloscope with a wobbly cyan trace, an open engineering notebook with ink sketches, a pegboard of tools and drawers of parts. the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag sits on a stool at the bench, small in the frame, and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag peeks over the edge of the loft bed. A cardboard box under the ladder, a small white refractor telescope on a tripod beside a louvred window that shows the colorful houses of the hillside stair neighborhood, a hammock rolled in a corner, potted plants, terracotta floor tiles; a wooden door in the side wall opens onto the stair landing that leads down to the house. Warm afternoon light through the louvres in striped shafts plus a warm desk lamp, cool petrol-blue shade under the loft. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts with floating dust motes, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_043334_aa9f6ee9-af99-4730-a9e2-611370b21c20.png",
+    "status": "completed"
+  }
+]

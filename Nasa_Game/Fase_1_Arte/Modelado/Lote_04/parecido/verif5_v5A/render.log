@@ -1,0 +1,15 @@
+11:32:42 | INFO: Data are loaded, start creating Blender stuff
+11:32:42 | INFO: Blender create Mesh node tripo_mesh_0bdbe7f0-ec27-490d-9a5c-b799c663252b
+11:32:42 | INFO: glTF import finished in 0.05s
+00:07.172  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\verif5_v5A\mx_cuerpo.png'
+00:07.640  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\verif5_v5A\mx_cabeza.png'
+00:08.031  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\verif5_v5A\px_cuerpo.png'
+00:08.437  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\verif5_v5A\px_cabeza.png'
+00:08.797  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\verif5_v5A\my_cuerpo.png'
+00:09.219  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\verif5_v5A\my_cabeza.png'
+00:09.531  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\verif5_v5A\py_cuerpo.png'
+00:10.109  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\verif5_v5A\py_cabeza.png'
+VISTAS_OK caja=(-0.196, -0.262, -0.5) tam=(0.39, 0.506, 0.994)
+Blender 5.3.0 (hash 02f0899d78e3 built 2026-11-10 01:33:43)
+
+Blender quit

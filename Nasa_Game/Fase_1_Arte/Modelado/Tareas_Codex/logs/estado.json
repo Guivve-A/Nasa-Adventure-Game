@@ -1,0 +1,58 @@
+{
+ "limpiar_personaje": {
+  "id": "limpiar_personaje",
+  "estado": "ok",
+  "minutos": 4.0,
+  "bytes_informe": 2030,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\informes\\limpiar_personaje.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\logs\\limpiar_personaje.log"
+ },
+ "mixamo": {
+  "id": "mixamo",
+  "estado": "ok",
+  "minutos": 10.2,
+  "bytes_informe": 1976,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\informes\\mixamo.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\logs\\mixamo.log"
+ },
+ "rig_gato": {
+  "id": "rig_gato",
+  "estado": "ok",
+  "minutos": 12.1,
+  "bytes_informe": 2021,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\informes\\rig_gato.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\logs\\rig_gato.log"
+ },
+ "rig_gato_acciones": {
+  "id": "rig_gato_acciones",
+  "estado": "ok",
+  "minutos": 10.6,
+  "bytes_informe": 2307,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\informes\\rig_gato_acciones.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\logs\\rig_gato_acciones.log"
+ },
+ "multimesh_escena": {
+  "id": "multimesh_escena",
+  "estado": "ok",
+  "minutos": 14.5,
+  "bytes_informe": 1269,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\informes\\multimesh_escena.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\logs\\multimesh_escena.log"
+ },
+ "gato_paso": {
+  "id": "gato_paso",
+  "estado": "ok",
+  "minutos": 17.3,
+  "bytes_informe": 983,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\informes\\gato_paso.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\logs\\gato_paso.log"
+ },
+ "proyectar_hoja": {
+  "id": "proyectar_hoja",
+  "estado": "ok",
+  "minutos": 12.6,
+  "bytes_informe": 1357,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\informes\\proyectar_hoja.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Tareas_Codex\\logs\\proyectar_hoja.log"
+ }
+}

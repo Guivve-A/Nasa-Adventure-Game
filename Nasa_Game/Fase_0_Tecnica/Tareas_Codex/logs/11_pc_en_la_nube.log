@@ -1,0 +1,702 @@
+OpenAI Codex v0.167.0-alpha.3.2
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1cea5-31e9-7631-8151-edccdb7ba71d
+--------
+user
+# Brief común — Fase 0, revisión B (objetivo AAA con PC en la nube)
+
+Fecha: 2026-11-12. Idioma de los informes: español.
+
+## Proyecto
+
+RPG de aventura, simulación y exploración educativa en Godot 4.7.2 (nombre de trabajo: «Proyecto NASA-Ecuador»). Un estudiante de ingeniería de control en Guayaquil en su viaje para llegar a la NASA, con un gato científico de compañero. Cámara alta 3/4 en exploración y hub lateral tipo diorama. El tablero de referencia del usuario está en `Nasa_Game/Referencias/Tablero_usuario/` y su análisis en `Analisis del tablero.md`. Referentes de estilo: RPG de Nintendo, Monster Hunter, Pokémon, Zelda Ocarina of Time 3D y la saga Bravely. El juego debe ser original.
+
+## Qué cambió
+
+El usuario corrigió la restricción principal de la Fase 0 anterior (`Nasa_Game/Fase_0_Tecnica/Fase 0 - Analisis.md`), que limitaba todo a lo que rinde su portátil y proponía el renderizador Mobile a 720p. Sus palabras: «quiero que el sistema sea totalmente AAA, no quiero que te enfoques en que voy a renderizar todo aquí. Puedo alquilar PC en la nube. Valida esa opción para un videojuego totalmente impresionante, con texturas y arte innovador». También pidió un mundo que se sienta vivo: interacción con todo el entorno, movimiento ambiental sutil, sonido coherente y paleta consistente.
+
+## Datos medidos hoy
+
+- **Portátil local:** Intel i5-7200U (2 núcleos), 8 GB de RAM, Intel HD Graphics 620, Windows 10, conexión por Wi-Fi. Pasa a ser un terminal: edición ligera, asistentes de IA y streaming del PC en la nube.
+- **Latencia desde Guayaquil** (conexión TCP, 02:22 hora local): Miami 62 ms, Atlanta 74, Chicago 93, Virginia 94, Nueva Jersey 96, Dallas 99, Ohio 118, Ciudad de México 121, Santiago de Chile 131, Los Ángeles 132, São Paulo de 153 a 193 y Oregón 164.
+- **Ancho de banda:** 106 Mbps de bajada y 45 Mbps de subida contra un nodo cercano. En una sola conexión TCP, 46 Mbps desde Atlanta y 10 Mbps desde Miami.
+- **Rendimiento del portátil:** `Nasa_Game/Fase_0_Tecnica/Datos/bench_render_resultados.md`. Sirve como perfil mínimo de compatibilidad.
+- **Higgsfield:** 1000 créditos de suscripción que caducan al cierre del periodo (hacia el 2026-12-12). Costos en `Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md`. Ofrece imagen, video, audio, sprites y 3D (Tripo, Hunyuan3D y Meshy) por créditos.
+- **Equipo humano:** un desarrollador con asistentes de IA (Claude Code y Codex). El asistente puede operar un equipo remoto por SSH.
+- **Presupuesto en dinero para la nube:** sin definir. Da escenarios.
+
+## Reglas para ti
+
+1. No instales nada, no descargues ejecutables y no modifiques archivos: trabajas en solo lectura y tu respuesta final es el informe.
+2. No crees cuentas, no contrates servicios y no ejecutes comandos que gasten créditos de Higgsfield.
+3. En las búsquedas web usa consultas técnicas genéricas: no incluyas nombres de personas ni datos del proyecto.
+4. Cita la fuente de cada precio, especificación y licencia con su URL y la fecha consultada. Distingue **[doc]** (página oficial del proveedor o documentación primaria), **[sec]** (fuente secundaria) e **[inf]** (inferencia tuya). Si no pudiste verificar algo, escribe «sin verificar». No inventes precios, regiones, versiones ni licencias.
+5. No reproduzcas texto con derechos de autor: resume con tus palabras.
+6. No añadas al informe avisos de herramientas, mensajes de facturación ni enlaces de pago.
+
+## Formato de tu respuesta final (Markdown compatible con Obsidian)
+
+Usa exactamente estas secciones, en este orden:
+
+```
+# <título del informe>
+## Resumen ejecutivo            (máximo 180 palabras)
+## Decisiones recomendadas       (tabla: Decisión | Recomendación | Alternativa descartada y por qué | Confianza alta/media/baja)
+## Afirmaciones que sostienen las decisiones   (máximo 14, numeradas, cada una con URL y etiqueta [doc]/[sec]/[inf])
+## Riesgos y cómo mitigarlos
+## Preguntas que debe decidir el usuario
+## Desarrollo                    (el análisis completo, con subtítulos)
+## Fuentes
+```
+
+---
+
+# TU TAREA
+
+Valida la opción de alquilar un PC en la nube para desarrollar este juego desde Guayaquil.
+
+1. Opciones reales hoy: PC en la nube con Windows y GPU, por hora o por mes (Shadow PC, Paperspace de DigitalOcean, AWS EC2 G4dn, G5 y G6 con DCV, Azure serie NV, Google Cloud con GPU, Vagon, AirGPU, Maximum Settings, TensorDock y otras que encuentres), y alquiler de GPU en Linux para cargas de IA (RunPod, Vast.ai, Lambda y similares). Para cada una: GPU y VRAM, precio por hora y por mes, costo del disco persistente y del tráfico de salida, regiones (¿hay Miami, Atlanta o Virginia?), si acepta clientes de Ecuador y con qué formas de pago, protocolo de streaming, si el disco persiste al apagar y límites de uso.
+2. Con las latencias medidas, qué región y qué proveedor convienen. Qué latencia total esperar con Parsec, con Moonlight y Sunshine o con DCV. Requisitos de red (Mbps, cable frente a Wi-Fi) y del equipo cliente (decodificación H.264 y H.265 en una Intel HD 620).
+3. Dimensionamiento: qué GPU, VRAM, RAM y disco necesitan (a) Godot 4.7 Forward+ con SDFGI y volumétricos, junto con Blender; (b) la generación local de imagen y de 3D con modelos abiertos (ComfyUI, imagen a malla). ¿Una sola máquina o dos perfiles distintos?
+4. Tres escenarios de costo mensual (20, 60 y 120 horas de uso) con desglose: cómputo, disco, tráfico y licencias. Compáralos con comprar una PC de escritorio con una GPU equivalente (punto de equilibrio en meses) y con los servicios de tarifa plana.
+5. Flujo de trabajo: dónde corre cada cosa (editor de Godot, Blender, Claude Code y Codex, Git y Git LFS, bóveda de Obsidian); operación por SSH desde el asistente frente a escritorio remoto; sincronización; copias de seguridad; apagado automático para no pagar horas muertas; seguridad de las credenciales.
+6. Riesgos: latencia al probar un juego de acción, cortes de red, cambios de precio, disponibilidad de GPU, pérdida de datos al borrar la instancia y restricciones por país.
+7. Plan de prueba de 2 a 3 horas para validar antes de comprometerse: qué medir (latencia de entrada, calidad de imagen, fps del benchmark de `pruebas/bench_render/`, tiempo de importación del proyecto) y criterios de aceptación.
+
+Entrega una recomendación principal y una alternativa, con su costo mensual estimado.
+codex
+Voy a revisar los datos locales y contrastar precios, regiones y condiciones oficiales para separar las opciones viables de las que requieren una prueba desde Ecuador.
+web search: 
+web search: AirGPU pricing regions Miami Windows GPU persistent storage bandwidth ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Location; rg --files -g AGENTS.md -g '*Fase 0*' -g '*bench_render*' -g '*hf_costos*' -g '*Analisis del tablero*' -g '*bench*'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 989ms:
+
+Path                              
+----                              
+C:\Users\guill\Desktop\Juego 2d-hd
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 15
++ Get-Location; rg --files -g AGENTS.md -g '*Fase 0*' -g '*bench_render ...
++               ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+
+
+web search: 
+web search: 
+web search: https://airgpu.com/
+web search: site.digitalocean.com paperspace pricing GPU Windows discontinued ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -Path . -Recurse -File -Filter AGENTS.md | Select-Object -ExpandProperty FullName; Get-ChildItem -LiteralPath 'Nasa_Game/Fase_0_Tecnica','Nasa_Game/Referencias/Tablero_usuario','pruebas/bench_render' -Recurse -File -ErrorAction SilentlyContinue | Select-Object FullName,Length" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 1318ms:
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_4pi1rfpl'.
+En l�nea: 2 Car�cter: 1
++ Get-ChildItem -Path . -Recurse -File -Filter AGENTS.md | Select-Objec ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_4pi1rfpl:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_kz4ist6c'.
+En l�nea: 2 Car�cter: 1
++ Get-ChildItem -Path . -Recurse -File -Filter AGENTS.md | Select-Objec ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_kz4ist6c:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+
+FullName                                                                                                              L
+                                                                                                                      e
+                                                                                                                      n
+                                                                                                                      g
+                                                                                                                      t
+                                                                                                                      h
+--------                                                                                                              -
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Fase 0 - Analisis.md                                      7
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\bench_render_resultados.md                          8
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_animaciones_3d.json                              3
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_default.md                                6
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_matriz.json                               9
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_matriz.md                                 7
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_modelos.json                                     7
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\placeholder_costos.png                              5
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\red_latencias.md                                    6
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\01_motor_render.md                          6
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\02_pipeline_personajes.md                   1
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\03_higgsfield_arte2d.md                     7
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\04_caso_after_the_wind.md                   3
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\05_referencias_aaa.md                       9
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\06_arquitectura_godot.md                    3
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\07_proceso_estudio.md                       8
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\08_antecedentes_boveda_anterior.md          5
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\09_bench_render_instrucciones.md            0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\10_mundo_vivo.md                            7
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\tareas_fase0.md                              3
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\tareas_fase0_revB.md                         6
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\01_motor_render.log                     0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\02_pipeline_personajes.log              0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\03_higgsfield_arte2d.log                5
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\04_caso_after_the_wind.log              0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\05_referencias_aaa.log                  7
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\06_arquitectura_godot.log               9
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\06_arquitectura_godot_reanudado.log     1
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\07_proceso_estudio.log                  3
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\08_antecedentes.log                     6
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\09_bench_render.log                     9
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\10_mundo_vivo.log                       3
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\11_pc_en_la_nube.log                    0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\12_render_aaa.log                       0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\13_arte_generativo_gpu.log              0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\estado.json                             8
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\Analisis del tablero.md                      4
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_01.jpg                                   9
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_02.jpg                                   5
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_03.jpg                                   0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_04.jpg                                   5
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_05.jpg                                   5
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_06.jpg                                   0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_07.jpg                                   0
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_08.jpg                                   3
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_09.jpg                                   8
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_10.jpg                                   1
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_11.jpg                                   5
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_12.jpg                                   9
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_13.jpg                                   4
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_14.jpg                                   2
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\bench.gd                                                      5
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\bench.tscn                                                    5
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\correr_bench.py                                               8
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\extras.py                                                     3
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\project.godot                                                 8
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\README.md                                                     0
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\resultados.json                                               9
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\resultados.md                                                 7
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\resultados_extra.md                                           1
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\tabla.py                                                      8
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\forward_plus_d3d12_1280x720_hierba.json        1
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\gl_compatibility_opengl3_1920x1080_base.json   6
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\gl_compatibility_opengl3_1920x1080_hierba.json 9
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\mobile_d3d12_1280x720_base.json                8
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\mobile_d3d12_1280x720_hierba.json              3
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\mobile_d3d12_1280x720_sprites.json             4
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\mobile_d3d12_1920x1080_hierba.json             3
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\mobile_vulkan_1920x1080_base.json              5
+C:\Users\guill\Desktop\Juego 2d-hd\pruebas\bench_render\corridas\extra\mobile_vulkan_1920x1080_hierba.json            7
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Datos/bench_render_resultados.md','Nasa_Game/Fase_0_Tecnica/Datos/red_latencias.md','Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md','Nasa_Game/Referencias/Tablero_usuario/Analisis del tablero.md','pruebas/bench_render/README.md','pruebas/bench_render/project.godot' -Encoding UTF8" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1371ms:
+---
+tipo: datos
+fase: 0
+fecha: 2026-11-12
+---
+
+# Rendimiento de los renderizadores de Godot 4.7.2 en la Intel HD 620
+
+Medido con `pruebas/bench_render/` (escrito por Codex, revisado y ejecutado por Claude). Cada corrida calienta 3 s y mide de 10 a 12 s con vsync desactivado. Los JSON de cada corrida est�n en `pruebas/bench_render/corridas/`.
+
+- **base:** 150 mallas con sombreado toon, suelo con textura, una luz direccional con sombra.
+- **hierba:** la base m�s 40 000 briznas en un `MultiMesh` con viento.
+- **sprites:** la base m�s 200 `Sprite3D` en billboard, con recorte alfa y sombra.
+- **sdfgi:** la base con SDFGI, SSAO y glow.
+
+## Corrida principal
+
+| M�todo | Controlador | Escena | Resoluci�n | FPS medio | FPS 1 % | Cuadro m�x. ms | Llamadas | Primitivas | Memoria MiB |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| forward_plus | vulkan | base | 1280�720 | 68,1 | 54,8 | 19 | 305 | 93 321 | 117 |
+| forward_plus | vulkan | base | 1920�1066 | 38,6 | 32,4 | 31 | 305 | 93 429 | 149 |
+| forward_plus | vulkan | hierba | 1280�720 | 34,5 | 29,9 | 34 | 309 | 573 452 | 121 |
+| forward_plus | vulkan | hierba | 1920�1066 | 22,9 | 19,1 | 55 | 308 | 573 429 | 152 |
+| forward_plus | vulkan | sdfgi | 1280�720 | 19,7 | 8,7 | 119 | 306 | 93 468 | 481 |
+| forward_plus | vulkan | sdfgi | 1920�1066 | 12,9 | 7,4 | 135 | 306 | 93 437 | 556 |
+| forward_plus | vulkan | sprites | 1280�720 | 58,4 | 32,8 | 50 | 707 | 94 205 | 118 |
+| forward_plus | vulkan | sprites | 1920�1066 | 35,5 | 27,8 | 38 | 707 | 94 228 | 149 |
+| gl_compatibility | opengl3_angle | base | 1280�720 | 73,3 | 48,5 | 21 | 306 | 93 497 | 15 |
+| gl_compatibility | opengl3_angle | base | 1920�1066 | 61,5 | 36,4 | 30 | 306 | 93 476 | 24 |
+| gl_compatibility | opengl3_angle | hierba | 1280�720 | 41,7 | 27,7 | 37 | 309 | 573 452 | 17 |
+| gl_compatibility | opengl3_angle | hierba | 1920�1066 | 30,0 | 21,7 | 48 | 308 | 573 413 | 26 |
+| gl_compatibility | opengl3_angle | sprites | 1280�720 | 40,5 | 24,1 | 44 | 707 | 94 325 | 15 |
+| gl_compatibility | opengl3_angle | sprites | 1920�1066 | 40,2 | 23,7 | 44 | 707 | 94 204 | 24 |
+| mobile | vulkan | base | 1280�720 | 90,2 | 71,5 | 14 | 297 | 93 417 | 82 |
+| mobile | vulkan | base | 1920�1066 | 56,4 | 44,5 | 24 | 297 | 93 423 | 97 |
+| mobile | vulkan | hierba | 1280�720 | 42,5 | 35,7 | 29 | 299 | 573 444 | 85 |
+| mobile | vulkan | hierba | 1920�1066 | 29,9 | 24,9 | 41 | 299 | 573 403 | 100 |
+| mobile | vulkan | sprites | 1280�720 | 74,8 | 56,5 | 19 | 679 | 94 234 | 82 |
+| mobile | vulkan | sprites | 1920�1066 | 49,7 | 28,3 | 78 | 679 | 94 207 | 97 |
+
+Las corridas de �1920�1066� se pidieron a 1920�1080 en ventana; la ventana no cabe en la pantalla y Godot la recorta.
+
+## Corridas extra: D3D12 y 1080p a pantalla completa
+
+| M�todo | Controlador | Escena | Resoluci�n | FPS medio | FPS 1 % | Cuadro m�x. ms | Llamadas | Primitivas | Memoria MiB |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| mobile | d3d12 | base | 1280�720 | 114,4 | 50,8 | 33 | 297 | 93 515 | 95 |
+| mobile | d3d12 | hierba | 1280�720 | 42,9 | 35,7 | 28 | 299 | 573 331 | 99 |
+| mobile | d3d12 | sprites | 1280�720 | 98,3 | 60,8 | 18 | 679 | 94 089 | 145 |
+| mobile | d3d12 | hierba | 1920�1080 | 31,4 | 28,6 | 36 | 299 | 573 281 | 114 |
+| mobile | vulkan | base | 1920�1080 | 56,6 | 32,6 | 44 | 297 | 93 305 | 97 |
+| mobile | vulkan | hierba | 1920�1080 | 32,0 | 28,2 | 36 | 299 | 573 293 | 100 |
+| gl_compatibility | opengl3_angle | base | 1920�1080 | 71,3 | 46,1 | 24 | 305 | 93 312 | 24 |
+| gl_compatibility | opengl3_angle | hierba | 1920�1080 | 32,1 | 28,5 | 35 | 308 | 573 330 | 26 |
+| forward_plus | d3d12 | hierba | 1280�720 | 366,7 | 167,0 | 13 | 310 | 574 447 | 136 |
+
+La �ltima fila es an�mala: 367 fps con 574 000 primitivas no es cre�ble en esta gr�fica. No se usa.
+
+## L�mites
+
+- Las escenas son sint�ticas. No representan el juego.
+- Durante la corrida principal hab�a tareas de Codex activas. Una corrida r�pida anterior dio cifras casi iguales en Mobile (90,8 / 43,2 / 75,0).
+- La primera corrida de Forward+ super� el l�mite de 90 s, por la compilaci�n de shaders del primer arranque.
+- La memoria es la contabilidad del motor, no la memoria dedicada de video.
+---
+tipo: datos
+fase: 0
+fecha: 2026-11-12
+---
+
+# Conexi�n desde Guayaquil hacia centros de datos
+
+Medido el 2026-11-12 a las 02:22 (hora local) desde el port�til, por Wi-Fi, con `herramientas/red_nube.py`. La latencia es el tiempo de abrir una conexi�n TCP: equivale a una ida y vuelta de red. Ocho muestras por destino.
+
+| Destino | M�nimo ms | Mediana ms | M�ximo ms |
+|---|---:|---:|---:|
+| Miami (Vultr) | 62 | 62 | 96 |
+| Atlanta (Vultr) | 74 | 74 | 77 |
+| Chicago (Vultr) | 92 | 93 | 105 |
+| Virginia (AWS us-east-1) | 93 | 94 | 107 |
+| Nueva Jersey (Vultr) | 94 | 96 | 109 |
+| Dallas (Vultr) | 95 | 99 | 109 |
+| Ohio (AWS us-east-2) | 107 | 118 | 153 |
+| Ciudad de M�xico (Vultr) | 118 | 121 | 123 |
+| M�xico (AWS mx-central-1) | 128 | 130 | 136 |
+| Santiago de Chile (Vultr) | 129 | 131 | 133 |
+| Los �ngeles (Vultr) | 125 | 132 | 137 |
+| S�o Paulo (AWS sa-east-1) | 149 | 153 | 157 |
+| Oreg�n (AWS us-west-2) | 159 | 164 | 166 |
+| S�o Paulo (Vultr) | 184 | 193 | 196 |
+
+## Ancho de banda
+
+| Prueba | Resultado |
+|---|---|
+| Bajada desde un nodo cercano de Cloudflare (25 MB) | 106 Mbps |
+| Subida a Cloudflare (8 MB) | 45 Mbps |
+| Bajada desde Atlanta, una conexi�n TCP (25 MB) | 46 Mbps |
+| Bajada desde Miami, una conexi�n TCP (25 MB) | 10 Mbps |
+
+## Lectura
+
+- El sureste de Estados Unidos es la zona m�s cercana: Miami y Atlanta. Sudam�rica queda m�s lejos por red que Estados Unidos.
+- La latencia de red es solo una parte. El streaming de un escritorio a�ade la codificaci�n, la decodificaci�n y la pantalla.
+- Es una sola medici�n, de madrugada. Conviene repetirla en horario de trabajo y con cable.
+# Higgsfield: matriz de costos para arte de videojuego
+
+Generado con `herramientas/hf_costos_matriz.py`. Solo `generate cost`: no se creo ningun trabajo ni se gasto ningun credito.
+Las cotizaciones con imagen usan un marcador gris; las de `model_url` usan una URL ficticia.
+
+| Grupo | Caso | Creditos | Error |
+|---|---|---|---|
+| imagen | gpt_image_2_6 calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_6 calidad=low 2k | 0.5 |  |
+| imagen | gpt_image_2_6 calidad=low 4k | 0.75 |  |
+| imagen | gpt_image_2_6 calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_6 calidad=medium 2k | 1 |  |
+| imagen | gpt_image_2_6 calidad=medium 4k | 1.25 |  |
+| imagen | gpt_image_2_6 calidad=high 1k | 1.5 |  |
+| imagen | gpt_image_2_6 calidad=high 2k | 2.75 |  |
+| imagen | gpt_image_2_6 calidad=high 4k | 4.25 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 1k | 2.5 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 2k | 4.5 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 4k | 7 |  |
+| imagen | gpt_image_2_6 calidad=max 1k | 5 |  |
+| imagen | gpt_image_2_6 calidad=max 2k | 9 |  |
+| imagen | gpt_image_2_6 calidad=max 4k | 15 |  |
+| imagen | gpt_image_2_6 high 1k fondo transparente | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k con 1 referencia | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k con 4 referencias | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k lote de 4 | 6 |  |
+| imagen | gpt_image_2_6_flare calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_5 calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_6_flare calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_5 calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_6_flare calidad=high 1k | 1.5 |  |
+| imagen | gpt_image_2_5 calidad=high 1k | 1.5 |  |
+| imagen | nano_banana_pro 1k | 2 |  |
+| imagen | nano_banana_flash (NB2) 1k | 1.5 |  |
+| imagen | nano_banana_2_1 1k | 1.5 |  |
+| imagen | nano_banana_pro 2k | 2 |  |
+| imagen | nano_banana_flash (NB2) 2k | 2 |  |
+| imagen | nano_banana_2_1 2k | 2 |  |
+| imagen | nano_banana_pro 4k | 4 |  |
+| imagen | nano_banana_flash (NB2) 4k | 3 |  |
+| imagen | nano_banana_2_1 4k | 3 |  |
+| imagen | nano_banana_pro 2k con 4 referencias | 2 |  |
+| imagen | seedream_5_5 1k | 2.5 |  |
+| imagen | 3d_jutsu_angles 1k | 1.25 |  |
+| imagen | seedream_5_5 1.5k | 2.5 |  |
+| imagen | 3d_jutsu_angles 1.5k | 1.25 |  |
+| imagen | seedream_5_5 2k | 3.5 |  |
+| imagen | 3d_jutsu_angles 2k | 2.5 |  |
+| imagen | 3d_jutsu_angles 2k con 1 referencia | 2.5 |  |
+| imagen | seedream_5_5 2k con 4 referencias | 3.5 |  |
+| imagen | seedream_v5_pro (defecto) | 2.5 |  |
+| imagen | seedream_v5_lite (defecto) | 1 |  |
+| imagen | seedream_5_0_flash (defecto) | 0.5 |  |
+| imagen | seedream_v4_5 (defecto) | 1 |  |
+| imagen | flux_3_image (defecto) | 2 |  |
+| imagen | flux_2 (defecto) | 1 |  |
+| imagen | flux_kontext (defecto) | 1.5 |  |
+| imagen | z_image (defecto) | 0.15 |  |
+| imagen | text2image_soul_v2 (defecto) | 0.12 |  |
+| imagen | soul_location (defecto) | 0.12 |  |
+| imagen | recraft_v4_1 (defecto) | 1.25 |  |
+| imagen | ideogram_4_5 (defecto) | 6.25 |  |
+| imagen | kling_omni_image (defecto) | 0.5 |  |
+| imagen | image_auto (defecto) | 2 |  |
+| imagen | nano_banana (defecto) | 1 |  |
+| imagen | nano_banana_2_lite (defecto) | 1 |  |
+| imagen | grok_image_2_0 (defecto) | 2 |  |
+| imagen | minimax_h3_image (defecto) | 4 |  |
+| imagen | flux_kontext con 1 referencia | 1.5 |  |
+| imagen | ideogram_vector generate calidad=low | 4 |  |
+| imagen | ideogram_vector generate calidad=medium | 5 |  |
+| imagen | ideogram_vector generate calidad=high | 6.5 |  |
+| imagen | ideogram_vector vectorize | 3 |  |
+| utilidad | image_background_remover | 1 |  |
+| utilidad | bytedance_image_upscale 2k | 2 |  |
+| utilidad | bytedance_image_upscale 4k | 2 |  |
+| utilidad | topaz_image 2048x2048 | - | Error: job_type 'topaz_image' does not support alpha v2 cost estimation |
+| utilidad | topaz_image 4096x4096 | - | Error: job_type 'topaz_image' does not support alpha v2 cost estimation |
+| utilidad | nano_banana_2_relight | 2 |  |
+| utilidad | nano_banana_2_shots | 4 |  |
+| utilidad | outpaint | 2 |  |
+| utilidad | flux_2_pro_outpaint | - | Error: at least one expand side must be non-zero | Hint: Run: hf model get flux_2_pro_outpaint |
+| autosprite | autosprite iso_walk_down tier=turbo 25f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down tier=pro 25f 256px | 3 |  |
+| autosprite | autosprite iso_walk_down tier=max 25f 256px | 14 |  |
+| autosprite | autosprite idle turbo 25f 256px | 2 |  |
+| autosprite | autosprite walk turbo 25f 256px | 2 |  |
+| autosprite | autosprite attack turbo 25f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 8f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 12f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 16f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 49f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 128px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 512px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 1024px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo remove_bg=ultra | 2 |  |
+| autosprite | autosprite custom turbo | 2 |  |
+| autosprite | autosprite no humanoide (gato) iso_walk_down turbo | 2 |  |
+| 3d | tripo_3d texto (defecto) | 5 |  |
+| 3d | tripo_3d texto sin textura | 2.5 |  |
+| 3d | tripo_3d texto detallado | 12.5 |  |
+| 3d | hunyuan3d_v3_1_text_to_3d std | 7 |  |
+| 3d | hunyuan3d_v3_1_text_to_3d pro | 12 |  |
+| 3d | meshy_v6_text_to_3d full | 25 |  |
+| 3d | meshy_v6_text_to_3d preview | 25 |  |
+| 3d | meshy_v6_text_to_3d lowpoly | 25 |  |
+| 3d | image_to_3d (defecto: sin textura) | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d con textura | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + remesh | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + rig | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + rig + animacion | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas (defecto) | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas con textura | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas textura + rig | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | meshy_v7_image_to_3d (defecto: textura + remesh) | 38 |  |
+| 3d | meshy_v7_image_to_3d lowpoly | 38 |  |
+| 3d | meshy_v7_image_to_3d sin textura | 25 |  |
+| 3d | meshy_v7_image_to_3d + rig | 44 |  |
+| 3d | meshy_v7_image_to_3d + rig + animacion | 47.5 |  |
+| 3d | meshy_v7_image_to_3d ultra | 44 |  |
+| 3d | hunyuan3d_v3_image_to_3d Normal | 11 |  |
+| 3d | hunyuan3d_v3_image_to_3d LowPoly quads | - | Error: face_count: Input should be greater than or equal to 40000 |
+| 3d | hunyuan3d_v3_image_to_3d Geometry (sin textura) | 7 |  |
+| 3d | hunyuan3d_v3_image_to_3d Normal + PBR | 15 |  |
+| 3d | tripo_h3_1_image_to_3d (defecto) | 9 |  |
+| 3d | tripo_h3_1_image_to_3d sin textura | 6 |  |
+| 3d | tripo_h3_1_image_to_3d quads 8000 caras | 10.5 |  |
+| 3d | tripo_h3_1_image_to_3d detallado | 18 |  |
+| 3d | tripo_h3_1_multiview_to_3d 4 vistas | 9 |  |
+| 3d | tripo_p2_image_to_3d (defecto) | 34 |  |
+| 3d | tripo_p2_image_to_3d quads 8000 caras | 34 |  |
+| 3d | tripo_p2_image_to_3d textura=fast | 34 |  |
+| 3d | tripo_p2_image_to_3d textura=detailed | 37 |  |
+| 3d | tripo_p2_image_to_3d textura=extreme | 40 |  |
+| 3d | sam_3_3d (objetos desde foto) | - | Error: job_type 'sam_3_3d' does not support alpha v2 cost estimation |
+| 3d | sam_3_3d_body | 1 |  |
+| 3d | 3d_rigging (solo rig) | - | Error: job_type '3d_rigging' does not support alpha v2 cost estimation |
+| 3d | 3d_rigging + animacion | - | Error: job_type '3d_rigging' does not support alpha v2 cost estimation |
+| 3d | meshy_v5_remesh quads 8000 | 6 |  |
+| 3d | meshy_v5_retexture por texto | 9.5 |  |
+| 3d | meshy_v5_retexture por imagen | 9.5 |  |
+| audio | elevenlabs_music_v2_5 15s instrumental | 2.18 |  |
+| audio | sonilo_music 15s | 0.94 |  |
+| audio | elevenlabs_music_v2_5 30s instrumental | 4.36 |  |
+| audio | sonilo_music 30s | 1.88 |  |
+| audio | elevenlabs_music_v2_5 60s instrumental | 8.72 |  |
+| audio | sonilo_music 60s | 3.75 |  |
+| audio | elevenlabs_music_v2_5 120s instrumental | 17.44 |  |
+| audio | sonilo_music 120s | 7.5 |  |
+| audio | elevenlabs_music_v2_5 180s instrumental | 26.16 |  |
+| audio | sonilo_music 180s | 11.25 |  |
+| audio | elevenlabs_music_v2 30s | 1.92 |  |
+| audio | elevenlabs_music_v2 120s | 7.68 |  |
+| audio | mirelo_text_to_audio (SFX) 1s | 0.25 |  |
+| audio | mirelo_text_to_audio (SFX) 3s | 0.75 |  |
+| audio | mirelo_text_to_audio (SFX) 5s | 1.25 |  |
+| audio | mirelo_text_to_audio (SFX) 10s | 2.5 |  |
+| audio | seed_audio (defecto) | 0.1 |  |
+| video | seedance_2_0_mini texto (defecto) | 5 |  |
+| video | seedance_2_0_mini imagen->video (defecto) | 5 |  |
+| video | seedance1_5 texto (defecto) | 4.8 |  |
+| video | seedance1_5 imagen->video (defecto) | 4.8 |  |
+| video | grok_video_v15_lite texto (defecto) | 5 |  |
+| video | grok_video_v15_lite imagen->video (defecto) | 5 |  |
+| video | kling3_0_turbo texto (defecto) | 7.5 |  |
+| video | kling3_0_turbo imagen->video (defecto) | 7.5 |  |
+| video | wan3_0 texto (defecto) | 8.75 |  |
+| video | wan3_0 imagen->video (defecto) | 8.75 |  |
+| video | kling_o3_flf texto (defecto) | 6.25 |  |
+| video | kling_o3_flf imagen->video (defecto) | 6.25 |  |
+| video | veo3_1_lite texto (defecto) | 12 |  |
+| video | veo3_1_lite imagen->video (defecto) | 12 |  |
+| video | kling4_0 texto (defecto) | 32.5 |  |
+| video | kling4_0 imagen->video (defecto) | - | Error: Text-to-video does not accept reference inputs. | Hint: Run: hf model get kling4_0 |
+| video | seedance_2_5 texto (defecto) | 35 |  |
+| video | seedance_2_5 imagen->video (defecto) | - | Error: mode 't2v' does not accept reference media | Hint: Run: hf model get seedance_2_5 |
+---
+tipo: referencia
+fase: 0
+fecha: 2026-11-12
+estado: borrador para validar en la Fase 1
+---
+
+# An�lisis del tablero de referencia
+
+Son 14 capturas que Guillermo adjunt� el 2026-11-12. Vienen de un video de YouTube del canal @stefan_3d_ai sobre �After the Wind�, un juego hecho con IA (marca r/TopologyAI).
+
+**Uso:** fijan el nivel de acabado y el cat�logo de pantallas. No se copian el nombre, el logotipo, los personajes, las criaturas, el mapa ni la ambientaci�n.
+
+## Qu� muestra cada captura
+
+| Captura | Pantalla | Lo que interesa |
+|---|---|---|
+| ![[ref_03.jpg\|220]] | T�tulo | Logotipo ilustrado sobre un diorama lateral. Men� en un panel de papel. La opci�n activa se marca con un trazo de pincel. Ayudas de tecla abajo a la derecha. |
+| ![[ref_14.jpg\|220]] | Creador de personaje, cuerpo completo | Chibi de 2,5 a 3 cabezas. Opciones: nombre, cuerpo, piel, peinado, color de pelo, barba, bigote, ojos y color de ojos. Muestras de color en fila. Girar, restablecer, color libre y �sorpr�ndeme�. |
+| ![[ref_01.jpg\|220]] | Creador de personaje, rostro | Primer plano para pelo y cara. Rostro plano de anime con ojos simples: la expresi�n cabe en una textura. |
+| ![[ref_09.jpg\|220]] | Hub lateral | Diorama 2.5D en capas: hierba delante, tiendas y forja en el plano de juego, monta�as con perspectiva atmosf�rica y cielo saturado. Aviso de interacci�n sobre el objeto. |
+| ![[ref_12.jpg\|220]] | Hub con un NPC | Aviso de misi�n en una banda de tinta centrada. El NPC se distingue por su silueta (cuernos, pelo largo). |
+| ![[ref_08.jpg\|220]] | Exploraci�n 3/4 | C�mara alta de 50 a 60�. Suelo pintado con trazo visible, sendero de tierra, rocas facetadas con musgo y sombras suaves. |
+| ![[ref_05.jpg\|220]] | HUD de exploraci�n | Retrato enmarcado, barra de vida verde, barra de energ�a amarilla y contador de pociones. Misi�n arriba a la derecha con hora del d�a. Controles abajo a la derecha. |
+| ![[ref_06.jpg\|220]] | Combate | N�mero de da�o sobre el enemigo. La lista de combos cambia seg�n el ataque en curso. |
+| ![[ref_10.jpg\|220]] | Recolecci�n | Aviso �Obtenido� en una banda de tinta, con el total en la bolsa. El toc�n queda cortado: el mundo cambia al recolectar. |
+| ![[ref_04.jpg\|220]] | Mapa | Ilustraci�n sobre papel con zonas rotuladas, iconos dibujados, filtros arriba, leyenda abajo y un panel �Est�s aqu��. |
+| ![[ref_13.jpg\|220]] | Carga | Dos vi�etas tipo c�mic que cuentan una escena del mundo, con el nombre de la zona. |
+| ![[ref_02.jpg\|220]] | Exploraci�n | Rocas gigantes como hitos. El r�tulo anuncia un sistema de clima din�mico. |
+| ![[ref_07.jpg\|220]] ![[ref_11.jpg\|220]] | Exploraci�n | El mismo encuadre en movimiento: la c�mara no cambia de �ngulo dentro de un modo. |
+
+## Por qu� se ve profesional
+
+1. **Un solo lenguaje de material.** Suelo, roca, tela e interfaz parecen pintados con el mismo pincel: trazo visible, planos facetados y nada de ruido fotogr�fico.
+2. **Estructura de valores.** El personaje lleva el mayor contraste y el color m�s saturado (la capa roja) sobre un suelo de valor medio. Las rocas claras marcan hitos.
+3. **Proporci�n constante.** Cabeza grande, manos y pies simplificados. El personaje se lee aunque mida unos 50 px de alto en pantalla.
+4. **C�mara disciplinada.** 3/4 alta en exploraci�n y lateral por capas en el hub. No se mezclan �ngulos dentro de un modo.
+5. **Luz sencilla y coherente.** Una luz principal c�lida con sombra suave y relleno fr�o. No hay negros puros. El fondo del hub se aclara con la distancia.
+6. **Interfaz como objeto f�sico.** Papel, tinta y trazos de pincel sirven de estados (selecci�n, avisos). Una tipograf�a rotulada para t�tulos y otra muy legible para datos.
+7. **Detalle graduado.** Los mechones de hierba se concentran junto a senderos y rocas. Quedan zonas amplias de descanso visual.
+8. **Continuidad.** T�tulo, carga, mapa y HUD comparten paleta y trazo.
+
+## Hip�tesis de traducci�n a nuestro juego
+
+Se validan en la Fase 1, una por una.
+
+| Del tablero | En el Proyecto NASA-Ecuador |
+|---|---|
+| Hub lateral del campamento | Cuarto y barrio de Guayaquil al atardecer |
+| Exploraci�n 3/4 del valle | Campus, malec�n, laboratorio y centro de simulaci�n |
+| Mapa de pergamino | Cuaderno de ingenier�a con papel milimetrado |
+| Pergamino y pincel | Papel t�cnico, cinta, sellos y telemetr�a con DotGothic16 |
+| Vi�etas de carga | Apuntes ilustrados con el gato cient�fico |
+| Capa roja como acento | Un acento propio del protagonista, por definir |
+# Benchmark procedural de Godot 4.7
+
+Proyecto minimo para Intel i5-7200U, Intel HD 620 y Windows 10. No requiere assets,
+paquetes de Python, plugins, importaciones externas ni acceso a Internet.
+El ejecutor requiere Python 3.13 y un ejecutable local de Godot **4.7** con soporte
+para abrir proyectos (`--path`), por ejemplo el editor oficial.
+
+Desde la raiz del repositorio, en PowerShell:
+
+```powershell
+py -3.13 pruebas/bench_render/correr_bench.py 'C:\Godot\Godot_v4.7-stable_win64.exe' --rapido
+py -3.13 pruebas/bench_render/correr_bench.py 'C:\Godot\Godot_v4.7-stable_win64.exe'
+```
+
+La primera orden hace 10 corridas de 6 s a 1280x720. La segunda hace 20 corridas de
+12 s a 1280x720 y 1920x1080. Cada corrida tiene ademas 3 s de calentamiento,
+posteriores a construir la escena y generar la textura de ruido. SDFGI se prueba
+solo con `forward_plus`. El limite por corrida es 120 s, incluido el arranque;
+puedes cambiarlo con `--timeout 180`. No se lanza una nueva corrida hasta cerrar
+la anterior. El codigo de salida del ejecutor es 0 si todas son validas, 1 si hay
+fallos y 130 si se interrumpe con Ctrl+C.
+
+Los resultados se escriben junto a este README: `resultados.json` contiene los
+registros completos y `resultados.md` la tabla. Se actualizan despues de cada
+corrida. Cada invocacion conserva sus JSON individuales y logs en una carpeta
+nueva `corridas/run_*/`, evitando reutilizar un resultado antiguo. Un fallo de
+arranque, codigo de salida no nulo, JSON invalido o tiempo agotado queda registrado;
+el ejecutor termina el proceso (y su arbol en Windows) y sigue con la matriz.
+
+Ejemplo individual desde la raiz del repositorio:
+
+```powershell
+& 'C:\Godot\Godot_v4.7-stable_win64.exe' --path pruebas/bench_render --rendering-method gl_compatibility --rendering-driver opengl3 --resolution 1280x720 --windowed --disable-vsync -- --escena=sprites --segundos=12 --salida=individual.json
+```
+
+Los argumentos propios van despues de `--`; `bench.gd` usa
+`OS.get_cmdline_user_args()`. Admite `--escena=base|hierba|sprites|sdfgi`,
+`--segundos=N` positivo y finito y `--salida=ruta.json`. Por defecto usa `base`,
+12 s y `resultado_individual.json`. Las rutas relativas de salida se resuelven
+respecto al proyecto, con creacion de los directorios padres.
+
+## Escenas y condiciones
+
+- `base`: suelo de 60x60 m con `NoiseTexture2D` de 512x512 y semilla fija;
+  50 cajas, 50 esferas y 50 cilindros con materiales toon; sol con sombras;
+  cielo procedural y ambiente. Camara con perspectiva, FOV vertical de 30 grados,
+  inclinacion de -55 grados, azimut inicial de 45 grados y orbita de 0.025 rad/s.
+- `hierba`: base mas 40000 instancias de una malla de dos quads cruzados
+  (cuatro triangulos por brizna), con deformacion de viento por shader y sombras.
+- `sprites`: base mas 200 `Sprite3D` con una textura RGBA generada en memoria,
+  billboard, `ALPHA_CUT_DISCARD`, iluminacion y proyeccion de sombras.
+- `sdfgi`: base con `sdfgi_enabled`, `ssao_enabled` y `glow_enabled`;
+  geometria estatica marcada como `GI_MODE_STATIC` para contribuir a SDFGI.
+
+El proyecto abre a 1280x720, sin escalado del viewport, sin limite de FPS y con
+vsync desactivado. `--resolution` cambia el tamano real solicitado de la ventana;
+el JSON registra el tamano efectivo del render target y si cambio. El ejecutor
+rechaza resoluciones efectivas distintas: una pantalla que limite la ventana de
+1920x1080 puede producir una corrida invalida. Manten la ventana visible.
+
+El ejecutor fija Vulkan para Forward+ y Mobile, y OpenGL 3 para Compatibility,
+de modo que la comparacion de los dos primeros use la misma API. El proyecto
+desactiva el fallback automatico a OpenGL y D3D12. Ademas, el ejecutor comprueba
+version 4.7, metodo, controlador, resolucion, vsync y efectos declarados por Godot.
+Si el controlador del equipo no admite una combinacion, se registra como fallo;
+no se atribuyen sus cifras a otro renderizador. Abrir el proyecto directamente
+usa Compatibility. No se usa modo headless para medir renderizado.
+
+## Metricas
+
+`Time.get_ticks_usec()` mide los intervalos entre callbacks de `_process()`.
+Se descarta el intervalo que cruza el final del calentamiento; la medicion acaba
+al completar el primer cuadro que alcanza N segundos. `measured_seconds` refleja
+la duracion real y puede exceder ligeramente la solicitada.
+
+- `fps_mean`: cuadros medidos / segundos reales; no media de los FPS instantaneos.
+- `fps_1pct_low`: 1000000 / media en microsegundos de los `ceil(cuadros * 0.01)`
+  intervalos mas lentos. No es el percentil 99 invertido.
+- `frame_time_mean_ms`, `frame_time_max_ms`: media y maximo de esos intervalos.
+- `draw_calls_mean/max`, `primitives_mean/max`: contadores del motor por cuadro,
+  leidos durante la medicion, con la posible latencia del render thread.
+- `video_memory_mean_bytes`, `video_memory_max_bytes`, `video_memory_last_bytes`:
+  memoria contabilizada por Godot. La tabla muestra el maximo en MiB.
+- `adapter_name`, `graphics_api_version`, `rendering_method`, `rendering_driver`:
+  informacion del dispositivo y del backend realmente usados.
+
+Un contador de renderizado puede devolver 0 cuando no esta disponible. La memoria
+reportada no equivale a VRAM fisica dedicada ni a toda la memoria compartida de
+la HD 620. Los tiempos incluyen CPU, presentacion y esperas, no son tiempos GPU.
+Los efectos y costes visuales pueden diferir entre renderizadores. Usa las mismas
+condiciones de energia, temperatura y aplicaciones abiertas para comparar.
+
+## API verificada en la documentacion oficial 4.7
+
+- [Linea de comandos](https://docs.godotengine.org/en/4.7/tutorials/editor/command_line_tutorial.html):
+  `--path <directory>`, `--rendering-method <renderer>`,
+  `--rendering-driver <driver>`, `--resolution <W>x<H>`, `--windowed`,
+  `--disable-vsync`, `--max-fps <fps>`, `--audio-driver <driver>` y separador `--`.
+  Los tres metodos son `forward_plus`, `mobile` y `gl_compatibility`.
+- [RenderingServer](https://docs.godotengine.org/en/4.7/classes/class_renderingserver.html):
+  `get_rendering_info(info: RenderingInfo) -> int`,
+  `RENDERING_INFO_TOTAL_PRIMITIVES_IN_FRAME = 1`,
+  `RENDERING_INFO_TOTAL_DRAW_CALLS_IN_FRAME = 2`,
+  `RENDERING_INFO_VIDEO_MEM_USED = 5` (bytes). Los contadores requieren al menos
+  dos cuadros renderizados y pueden devolver 0 si no estan disponibles.
+  Identificacion mediante `get_video_adapter_name()`,
+  `get_video_adapter_api_version()`, `get_current_rendering_method()` y
+  `get_current_rendering_driver_name()`; controladores `vulkan` y `opengl3`.
+- [OS](https://docs.godotengine.org/en/4.7/classes/class_os.html):
+  `get_cmdline_user_args() -> PackedStringArray` obtiene los argumentos tras `--`.
+- [ProjectSettings](https://docs.godotengine.org/en/4.7/classes/class_projectsettings.html):
+  ventana, vsync, escalado desactivado y fallbacks del dispositivo.
+- [SpriteBase3D](https://docs.godotengine.org/en/4.7/classes/class_spritebase3d.html),
+  [BaseMaterial3D](https://docs.godotengine.org/en/4.7/classes/class_basematerial3d.html),
+  [Environment](https://docs.godotengine.org/en/4.7/classes/class_environment.html),
+  [NoiseTexture2D](https://docs.godotengine.org/en/4.7/classes/class_noisetexture2d.html) y
+  [GeometryInstance3D](https://docs.godotengine.org/en/4.7/classes/class_geometryinstance3d.html):
+  materiales toon, billboard y descarte alfa, efectos, textura asincrona y GI estatica.
+
+Todos los assets se generan por codigo. No hay recursos de terceros.
+La entrega se reviso de forma estatica y el ejecutor se verifico con procesos
+simulados; no se ejecuto Godot ni se midio rendimiento durante su creacion.
+; Benchmark procedural para Godot 4.7.
+config_version=5
+
+[application]
+config/name="Bench render HD 620"
+run/main_scene="res://bench.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+run/max_fps=0
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+window/stretch/mode="disabled"
+window/vsync/vsync_mode=0
+
+[debug]
+file_logging/enable_file_logging=false
+file_logging/enable_file_logging.pc=false
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+rendering_device/fallback_to_opengl3=false
+rendering_device/fallback_to_d3d12=false
+
+web search: 
+web search: site.docs.digitalocean.com products paperspace machines pricing Windows July 2024 ...
+web search: 
+web search: 
+web search: https://docs.digitalocean.com/products/paperspace/machines/details/pricing/
+web search: bandwidth pricing payment methods ...
+codex
+La nube sí elimina el límite de renderizado del portátil. El filtro principal ahora es la conexión: Miami tiene el menor retardo medido, pero solo entregó 10 Mbps en esa prueba; Atlanta dio 46 Mbps. Además, estoy comprobando qué servicios ofrecen Windows a clientes nuevos, porque algunas ofertas publicadas ya no lo permiten.
+web search: 
+web search: bandwidth data transfer pricing ...
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:27 AM.
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:27 AM.
+tokens used
+54.368

@@ -1,0 +1,118 @@
+Alineando frente...
+  IoU 0.9210, escala 1.0100, desplazamiento [2, -5]
+Alineando perfil...
+  IoU 0.9302, escala 1.0120, desplazamiento [2, -6]
+Alineando espalda...
+  IoU 0.9369, escala 1.0050, desplazamiento [-3, 0]
+Horneando triangulo 0/7522
+Horneando triangulo 1000/7522
+Horneando triangulo 2000/7522
+Horneando triangulo 3000/7522
+Horneando triangulo 4000/7522
+Horneando triangulo 5000/7522
+Horneando triangulo 6000/7522
+Horneando triangulo 7000/7522
+Rellenando bordes UV...
+{
+  "entrada": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_v4D_geometria.glb",
+  "salida": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_v4D.glb",
+  "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+  "sha256_entrada": "bfe6477a2d5ac9aab502a46cf271f40305e0133b35792710ef90d96d2d717661",
+  "sha256_hoja": "eb5cf7817c99aef8844c7f21a73e4514e65da6fd48f1671d696ec65f631e8200",
+  "triangulos": 7522,
+  "textura_px": [
+    4096,
+    4096
+  ],
+  "geometria_uv_nodos_materiales_identicos": true,
+  "texels_superficie": 10414844,
+  "texels_con_hoja": 5769450,
+  "texels_con_hoja_pct_superficie": 55.39641304276857,
+  "texels_con_hoja_pct_imagen": 34.388601779937744,
+  "texels_fondo": 0,
+  "texels_fondo_pct_pintados": 0.0,
+  "muestras_fondo": 0,
+  "texels_izquierda_conservados": 2046647,
+  "texels_izquierda_diferentes": 0,
+  "criterio_izquierda": "normal interpolada con eje dominante -Z; no hay proyeccion desde -Z",
+  "padding_texels": 1652567,
+  "peso_original": 0.15,
+  "erosion_px": 3,
+  "profundidad_supermuestreo": 2,
+  "profundidad_tolerancia_m": 2e-05,
+  "vistas": {
+    "frente": {
+      "iou": 0.9209655178057753,
+      "escala_base": 902.5191371389055,
+      "factor_escala": 1.0100000000000002,
+      "desplazamiento_px": [
+        2,
+        -5
+      ],
+      "limites_desplazamiento_px": [
+        27.599999999999998,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        262.1316867364992,
+        457.6253702485508
+      ],
+      "centro_inicial_px": [
+        254.08470618387506,
+        465.43633204054134
+      ],
+      "muestras_aceptadas": 2650278,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 996114
+    },
+    "perfil": {
+      "iou": 0.9302308892915448,
+      "escala_base": 903.5252900231184,
+      "factor_escala": 1.012,
+      "desplazamiento_px": [
+        2,
+        -6
+      ],
+      "limites_desplazamiento_px": [
+        20.22,
+        53.94
+      ],
+      "traslacion_px": [
+        184.43249686563672,
+        456.00053831285516
+      ],
+      "centro_inicial_px": [
+        182.35912877013493,
+        464.820206307908
+      ],
+      "muestras_aceptadas": 1947720,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 2383923
+    },
+    "espalda": {
+      "iou": 0.9368624103503971,
+      "escala_base": 902.5191371389055,
+      "factor_escala": 1.005,
+      "desplazamiento_px": [
+        -3,
+        0
+      ],
+      "limites_desplazamiento_px": [
+        26.52,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        240.37974058534942,
+        459.5493158247285
+      ],
+      "centro_inicial_px": [
+        249.39678559068335,
+        462.3463619642835
+      ],
+      "muestras_aceptadas": 2433089,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 976625
+    }
+  },
+  "segundos": 386.2
+}

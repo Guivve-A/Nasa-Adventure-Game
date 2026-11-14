@@ -1,0 +1,17 @@
+{
+ "salida": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas",
+ "fondo": "#e6e1dc",
+ "lado": 1024,
+ "recortes": [
+  {"id": "PER01_frente", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png", "caja": [190, 0, 720, 919]},
+  {"id": "PER01_perfil", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png", "caja": [1395, 0, 1800, 919]},
+  {"id": "PER01_espalda", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png", "caja": [1950, 0, 2445, 919]},
+  {"id": "PER09_frente", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_gato_orbita_hoja.png", "caja": [170, 40, 620, 705], "sin_sombra": true},
+  {"id": "PER09_perfil", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_gato_orbita_hoja.png", "caja": [1290, 40, 1945, 705], "sin_sombra": true},
+  {"id": "PER09_espalda", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_gato_orbita_hoja.png", "caja": [2040, 40, 2490, 705], "sin_sombra": true},
+  {"id": "PER09_perfil_espejo", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_gato_orbita_hoja.png", "caja": [1290, 40, 1945, 705], "espejo": true, "sin_sombra": true},
+  {"id": "FAU01_lado", "hoja": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png", "caja": [355, 195, 812, 459], "sin_sombra": true},
+  {"id": "FAU01_frente", "hoja": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png", "caja": [470, 463, 728, 668], "sin_sombra": true},
+  {"id": "COL01_antena", "hoja": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png", "caja": [290, 205, 722, 657], "sin_cian": true, "borrar": [[480, 205, 570, 300]]}
+ ]
+}

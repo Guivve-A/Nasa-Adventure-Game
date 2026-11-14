@@ -1,0 +1,37 @@
+Alineando y deformando frente...
+  frente: lambda 0, det min 1.000, p1 1.000, max 1.000, residuo medio 0.00 px
+  IoU global 0.8499, contorno 100 + fijos 41, desplazamiento medio 0.0 px
+Alineando y deformando perfil...
+  perfil: lambda 0, det min 1.000, p1 1.000, max 1.000, residuo medio 0.00 px
+  IoU global 0.8696, contorno 100 + fijos 30, desplazamiento medio 0.0 px
+Alineando y deformando espalda...
+  espalda: lambda 0, det min 1.000, p1 1.000, max 1.000, residuo medio 0.00 px
+  IoU global 0.8709, contorno 100 + fijos 42, desplazamiento medio 0.0 px
+Horneando triangulo 300/7522
+Horneando triangulo 600/7522
+Horneando triangulo 900/7522
+Horneando triangulo 1200/7522
+Horneando triangulo 1500/7522
+Horneando triangulo 1800/7522
+Horneando triangulo 2100/7522
+Horneando triangulo 2400/7522
+Horneando triangulo 2700/7522
+Horneando triangulo 3000/7522
+Horneando triangulo 3300/7522
+Horneando triangulo 3600/7522
+Horneando triangulo 3900/7522
+Horneando triangulo 4200/7522
+Horneando triangulo 4500/7522
+Horneando triangulo 4800/7522
+Horneando triangulo 5100/7522
+Horneando triangulo 5400/7522
+Horneando triangulo 5700/7522
+Horneando triangulo 6000/7522
+Horneando triangulo 6300/7522
+Horneando triangulo 6600/7522
+Horneando triangulo 6900/7522
+Horneando triangulo 7200/7522
+Horneando triangulo 7500/7522
+Horneando triangulo 7522/7522
+Rellenando bordes UV...
+{"texels_con_hoja_pct_superficie": 76.22360930226127, "segundos": 199.4}

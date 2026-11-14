@@ -1,0 +1,21 @@
+{
+  "lote": "L03b",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_03",
+  "tope": 6,
+  "trabajos": [
+    {
+      "id": "L03_mirador_noche_vista_juego",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_VISTA_JUEGO", "@ANC_HUB"],
+      "prompt": "Use the exact art style of the reference images. In-game screenshot {CAMARA_JUEGO} Night on the hilltop lookout beside a lighthouse: {PROTAGONISTA} looks through a large white refractor telescope on a stone viewing deck, and {GATO} sits on the stone railing beside them, looking up at the sky. The base of a white lighthouse with terracotta bands sends a soft sweeping beam across the deck. Warm string lights between wooden posts, a stone bench, coin-operated binoculars, potted plants, the mosaic stair path climbing up the hill, rooftops of colorful houses far below with warm windows. Cool blue moonlight from a thin crescent Moon low in the west, out of frame, warm practical lights, long soft shadows, a few fireflies. {ESTILO} {SIN_TEXTO}"
+    },
+    {
+      "id": "L03_ui_telescopio_luna",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_GATO", "@ANC_MAPA", "@ANC_HUB"],
+      "prompt": "Game interface mockup, full screen: the telescope view of a stylized exploration RPG at a hilltop lookout at night. Left two thirds: a large circular telescope eyepiece view with a soft dark vignette and a thin cyan crosshair reticle. Inside it, a photorealistic grayscale Moon as seen tonight from the equator: a thin waxing crescent about 12 percent illuminated, lying almost horizontally like a smile, with the bright curved edge along the bottom of the disk, tilted very slightly to the right, and the rest of the disk faintly visible in soft gray earthshine against a starry sky. Two small cyan callout lines with tiny labels: one pointing at the line between lunar day and night labeled \"Terminador\", one pointing at the dim part of the disk labeled \"Luz cenicienta\". Bottom-left, overlapping the edge of the eyepiece: {GATO}, exactly like the first reference image, sitting upright with one paw raised like a presenter, with a speech bubble of torn notebook paper that reads \"¿Ves la sonrisa? Cerca del ecuador, la Luna creciente se ve acostada.\" Right third: a column of data cards on torn cream graph paper with ink lettering, headed \"Luna · esta noche\", listing \"Fase: creciente\", \"Iluminada: 12 %\", \"Distancia: 403 151 km\", \"Tamaño aparente: 29,6′\", \"Altura: 20°\", \"Se pone: 21:05\", and a small footer \"Fuente: JPL Horizons · 12 nov 2026 · 19:30 · Guayaquil\". Top-left title \"Mirador del Faro · Telescopio\" beside a small lighthouse emblem. Bottom bar with small key caps and hints: \"E Enfocar\", \"Q Acercar\", \"R Marcar\", \"Esc Salir\". The interface follows the engineer's field-notebook style of the second reference image: cream graph paper, ink lines, torn paper edges, petrol blue and cyan accents. The Moon is photographic; the interface and the cat are stylized like the game. No logos."
+    }
+  ]
+}

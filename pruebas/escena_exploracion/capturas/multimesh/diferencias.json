@@ -1,0 +1,118 @@
+{
+  "21": {
+    "normal": {
+      "mae_rgb_255": 2.260027488425926,
+      "mae_normalizado": 0.008862852895787945,
+      "porcentaje_pixeles_distintos": 20.61306423611111,
+      "porcentaje_pixeles_delta_mayor_2": 14.31369357638889,
+      "maximo_canal": 209
+    },
+    "fijo": {
+      "mae_rgb_255": 0.001292679398148148,
+      "mae_normalizado": 5.069330973129992e-06,
+      "porcentaje_pixeles_distintos": 0.3426649305555556,
+      "porcentaje_pixeles_delta_mayor_2": 0.005533854166666666,
+      "maximo_canal": 28
+    },
+    "viento": {
+      "mae_rgb_255": 0.003152126736111111,
+      "mae_normalizado": 1.2361281318082789e-05,
+      "porcentaje_pixeles_distintos": 0.877712673611111,
+      "porcentaje_pixeles_delta_mayor_2": 0.014756944444444444,
+      "maximo_canal": 6
+    },
+    "sin_inclinacion": {
+      "mae_rgb_255": 0.0007689525462962963,
+      "mae_normalizado": 3.0155001815541034e-06,
+      "porcentaje_pixeles_distintos": 0.22330729166666666,
+      "porcentaje_pixeles_delta_mayor_2": 0.0,
+      "maximo_canal": 2
+    },
+    "efecto_viento_antes": {
+      "mae_rgb_255": 3.3093836805555554,
+      "mae_normalizado": 0.012977975217864923,
+      "porcentaje_pixeles_distintos": 20.23285590277778,
+      "porcentaje_pixeles_delta_mayor_2": 14.719075520833332,
+      "maximo_canal": 201
+    },
+    "efecto_inclinacion_antes": {
+      "mae_rgb_255": 27.005367115162038,
+      "mae_normalizado": 0.10590340045161584,
+      "porcentaje_pixeles_distintos": 79.62814670138889,
+      "porcentaje_pixeles_delta_mayor_2": 75.2578125,
+      "maximo_canal": 248
+    },
+    "efecto_viento_despues": {
+      "mae_rgb_255": 3.3091771556712963,
+      "mae_normalizado": 0.012977165316358025,
+      "porcentaje_pixeles_distintos": 20.130967881944446,
+      "porcentaje_pixeles_delta_mayor_2": 14.718098958333334,
+      "maximo_canal": 201
+    },
+    "efecto_inclinacion_despues": {
+      "mae_rgb_255": 27.005369285300926,
+      "mae_normalizado": 0.10590340896196442,
+      "porcentaje_pixeles_distintos": 79.61631944444446,
+      "porcentaje_pixeles_delta_mayor_2": 75.25726996527777,
+      "maximo_canal": 248
+    }
+  },
+  "12": {
+    "normal": {
+      "mae_rgb_255": 5.479378978587963,
+      "mae_normalizado": 0.021487760700344954,
+      "porcentaje_pixeles_distintos": 30.58572048611111,
+      "porcentaje_pixeles_delta_mayor_2": 24.798394097222225,
+      "maximo_canal": 215
+    },
+    "fijo": {
+      "mae_rgb_255": 9.403935185185186e-06,
+      "mae_normalizado": 3.687817719680465e-08,
+      "porcentaje_pixeles_distintos": 0.00010850694444444444,
+      "porcentaje_pixeles_delta_mayor_2": 0.00010850694444444444,
+      "maximo_canal": 13
+    },
+    "viento": {
+      "mae_rgb_255": 0.0,
+      "mae_normalizado": 0.0,
+      "porcentaje_pixeles_distintos": 0.0,
+      "porcentaje_pixeles_delta_mayor_2": 0.0,
+      "maximo_canal": 0
+    },
+    "sin_inclinacion": {
+      "mae_rgb_255": 0.0,
+      "mae_normalizado": 0.0,
+      "porcentaje_pixeles_distintos": 0.0,
+      "porcentaje_pixeles_delta_mayor_2": 0.0,
+      "maximo_canal": 0
+    },
+    "efecto_viento_antes": {
+      "mae_rgb_255": 4.848493200231482,
+      "mae_normalizado": 0.019013698824437184,
+      "porcentaje_pixeles_distintos": 24.445963541666664,
+      "porcentaje_pixeles_delta_mayor_2": 19.515299479166668,
+      "maximo_canal": 224
+    },
+    "efecto_inclinacion_antes": {
+      "mae_rgb_255": 27.919391637731483,
+      "mae_normalizado": 0.10948781034404503,
+      "porcentaje_pixeles_distintos": 81.87282986111111,
+      "porcentaje_pixeles_delta_mayor_2": 75.87749565972223,
+      "maximo_canal": 248
+    },
+    "efecto_viento_despues": {
+      "mae_rgb_255": 4.848499710648148,
+      "mae_normalizado": 0.019013724355482934,
+      "porcentaje_pixeles_distintos": 24.445963541666664,
+      "porcentaje_pixeles_delta_mayor_2": 19.51540798611111,
+      "maximo_canal": 224
+    },
+    "efecto_inclinacion_despues": {
+      "mae_rgb_255": 27.919384403935187,
+      "mae_normalizado": 0.10948778197621642,
+      "porcentaje_pixeles_distintos": 81.87282986111111,
+      "porcentaje_pixeles_delta_mayor_2": 75.87749565972223,
+      "maximo_canal": 248
+    }
+  }
+}

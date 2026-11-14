@@ -1,0 +1,70 @@
+{
+  "lote": "L03a",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia",
+  "tope": 25,
+  "trabajos": [
+    {
+      "id": "HR_VEG_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_HUB", "@ANC_VISTA_JUEGO"],
+      "prompt": "{HOJA} Title: \"Vegetación · v1\". Fourteen plants of a tropical port city and its dry forest. Top row, the trees: \"VEG-01 Ceibo\" a large ceiba tree with a swollen bottle-shaped gray-green trunk, buttress roots, a wide flat crown and a few white cotton pods; \"VEG-02 Flamboyán\" a broad umbrella-shaped tree covered in red-orange flowers; \"VEG-03 Guayacán\" a slender leafless tree in full bloom with bright yellow flowers; \"VEG-04 Cocotero\" a leaning coconut palm with a cluster of coconuts; \"VEG-05 Mangle rojo\" a red mangrove tree standing on arching stilt roots. Middle row, the shrubs: \"VEG-06 Platanera\" a banana plant with wide torn leaves and a green bunch; \"VEG-07 Ave del paraíso\" a bird-of-paradise plant with orange and blue flowers; \"VEG-08 Buganvilla\" a bougainvillea shrub with magenta bracts; \"VEG-09 Cayena\" a hibiscus shrub with red flowers; \"VEG-10 Costilla de Adán\" a monstera with split leaves; \"VEG-11 Cactus del bosque seco\" a tall columnar cactus. Bottom row, the ground cover: \"VEG-12 Helecho\" a fern clump; \"VEG-13 Mechones de hierba\" three grass tufts in small, medium and large sizes; \"VEG-14 Flores silvestres\" small clusters of white, pink and yellow wildflowers. {ROTULOS} {ESTILO}"
+    },
+    {
+      "id": "HR_TER_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_HUB", "@ANC_VISTA_JUEGO"],
+      "prompt": "{HOJA} Title: \"Rocas y terreno · v1\". Twelve modular terrain pieces for a top-down exploration game. Top row: \"TER-01 Roca grande\" a large faceted boulder with moss on top; \"TER-02 Roca mediana\" a medium boulder; \"TER-03 Piedras sueltas\" a cluster of small stones; \"TER-04 Saliente rocoso\" a cliff ledge piece with layered strata; \"TER-05 Piedras de río\" smooth rounded river stones; \"TER-06 Tronco caído\" a fallen mossy log. Bottom row: \"TER-07 Sendero de tierra\" a straight and a curved dirt path tile with pebbles; \"TER-08 Borde de hierba\" a grass edge strip; \"TER-09 Orilla de arroyo\" a stream bank piece with shallow turquoise water; \"TER-10 Puente de tablones\" a small plank bridge with rope rails; \"TER-11 Escalinata de mosaico\" a stair segment with colorful mosaic risers; \"TER-12 Muro de piedra\" a low stone wall segment. {ROTULOS} {ESTILO}"
+    },
+    {
+      "id": "HR_ARQ_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_HUB", "@ANC_VISTA_JUEGO"],
+      "prompt": "{HOJA} Title: \"Arquitectura de Las Escalinatas · v1\". A modular building kit for a hillside neighborhood of colorful houses in a tropical port city. Top row: \"ARQ-01 Casa amarilla\" a two-story house facade painted yellow with a covered wooden balcony; \"ARQ-02 Casa azul\" a one-story house facade painted blue; \"ARQ-03 Techo de zinc\" corrugated tin roof panels, slightly rusty; \"ARQ-04 Ventana con reja\" a window with an ornamental iron grille; \"ARQ-05 Puerta de madera\" a painted wooden double door; \"ARQ-06 Balcón de madera\" a wooden balcony with turned balusters. Bottom row: \"ARQ-07 Baranda metálica\" a painted metal railing segment; \"ARQ-08 Poste de luz\" a wooden utility pole with sagging cables and a small transformer; \"ARQ-09 Farol\" a classic black street lamp; \"ARQ-10 Tendedero\" a laundry line with colorful clothes; \"ARQ-11 Tanque de agua\" a rooftop water tank on a small stand; \"ARQ-12 Escalón numerado\" a single stone step with a painted number on its riser. {ROTULOS} {ESTILO}"
+    },
+    {
+      "id": "HR_URB_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_HUB", "@ANC_VISTA_JUEGO"],
+      "prompt": "{HOJA} Title: \"Plaza y malecón · v1\". Twelve pieces of street furniture for a central plaza and a riverfront promenade. Top row: \"URB-01 Banca\" a wood-and-iron park bench; \"URB-02 Fuente\" a small round stone fountain; \"URB-03 Kiosco de jugos\" a small juice stand with a striped awning and crates of tropical fruit; \"URB-04 Glorieta\" a white iron gazebo; \"URB-05 Farol doble\" a double-arm street lamp; \"URB-06 Basurero\" a park trash bin. Bottom row: \"URB-07 Jardinera\" a raised planter with tropical plants; \"URB-08 Estatua de iguana\" a stone statue of an iguana on a pedestal; \"URB-09 Baranda del malecón\" a riverfront railing segment; \"URB-10 Poste indicador\" a wooden direction signpost with blank arrow boards; \"URB-11 Bicicletero\" a bike rack with one bicycle; \"URB-12 Puesto de electrónica\" a covered market stall selling used electronic parts. {ROTULOS} {ESTILO}"
+    },
+    {
+      "id": "HR_COL_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_HUB", "@ANC_VISTA_JUEGO"],
+      "prompt": "{HOJA} Title: \"Recolectables · v1\". Twelve collectible objects found while exploring, each lying on a small round patch of grass or dirt with a faint cyan sparkle above it that marks it as collectible. Top row: \"COL-01 Antena parabólica\" a rusty fallen satellite dish; \"COL-02 Panel solar\" a cracked old solar panel; \"COL-03 Placa de circuito\" a green printed circuit board; \"COL-04 Radio antigua\" a transistor radio; \"COL-05 Motor\" a small electric motor; \"COL-06 Cable de cobre\" a coil of copper wire. Bottom row: \"COL-07 Batería\" a battery pack; \"COL-08 Antena de varilla\" a telescopic rod antenna; \"COL-09 Muestra de agua\" a capped sample vial with brown estuary water; \"COL-10 Vaina de ceibo\" a ceiba seed pod bursting with white cotton; \"COL-11 Muestra de roca\" a rock sample with a shiny mineral vein; \"COL-12 Carta estelar\" a folded star chart page. {ROTULOS} {ESTILO}"
+    },
+    {
+      "id": "HR_TAL_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_HUB", "@ANC_VISTA_JUEGO"],
+      "prompt": "{HOJA} Title: \"Taller de electrónica · v1\". The props of the student's rooftop workshop, matching the first reference image. Top row: \"TAL-01 Banco de trabajo\" a wooden workbench with drawers; \"TAL-02 Osciloscopio\" a vintage oscilloscope showing a cyan sine wave; \"TAL-03 Estación de soldadura\" a soldering iron in its stand with a solder spool; \"TAL-04 Multímetro\" a yellow handheld multimeter; \"TAL-05 Fuente de poder\" a bench power supply; \"TAL-06 Protoboard\" a breadboard with jumper wires and components; \"TAL-07 Caja de herramientas\" a metal toolbox. Bottom row: \"TAL-08 Tablero de herramientas\" a pegboard with pliers, screwdrivers and a cable coil; \"TAL-09 Lámpara\" an articulated desk lamp; \"TAL-10 Taburete\" a wooden stool; \"TAL-11 Maqueta de satélite\" a small hanging model satellite; \"TAL-12 Libro cerrado\" the old science book, closed; \"TAL-13 Libro con holograma\" the same book open, projecting a cyan hologram of a ringed planet; \"TAL-14 Telescopio pequeño\" a small white refractor telescope on a tripod. {ROTULOS} {ESTILO}"
+    },
+    {
+      "id": "HR_FAU_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_HUB", "@ANC_VISTA_JUEGO"],
+      "prompt": "{HOJA} Title: \"Fauna · v1\". Eleven animals of a tropical port city, its mangroves and its dry forest, with slightly chibi proportions but anatomically recognizable, each shown in side view with a small front view beside it. Top row: \"FAU-01 Iguana verde\" a green iguana with a crest of spines; \"FAU-02 Ardilla de Guayaquil\" a gray-brown squirrel with a bushy tail; \"FAU-03 Pelícano pardo\" a brown pelican; \"FAU-04 Fragata\" a black frigatebird with a red throat pouch; \"FAU-05 Garza blanca\" a great egret; \"FAU-06 Cangrejo rojo\" a red mangrove crab. Bottom row: \"FAU-07 Colibrí\" a green hummingbird; \"FAU-08 Periquito del Pacífico\" a tiny green parrotlet; \"FAU-09 Mariposa\" a blue butterfly; \"FAU-10 Perro callejero\" a friendly mixed-breed street dog; \"FAU-11 Gato callejero\" an orange tabby street cat, clearly different from the companion cat. {ROTULOS} {ESTILO}"
+    },
+    {
+      "id": "HR_PER_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_PROTA_1", "@ANC_PROTA_2", "@ANC_GATO", "@ANC_HUB"],
+      "prompt": "Professional character lineup sheet for a game: plain light warm-gray background with faint horizontal height guide lines, even neutral studio lighting, all characters standing in one row on the same baseline in a relaxed front three-quarter pose, consistent scale. Title: \"Reparto · v1\". From left to right: \"PER-01 Protagonista A\" and \"PER-02 Protagonista B\" exactly as the two student designs in the first two reference images; \"PER-03 Elena\" the mother, round silhouette, hair tied up, bottle-green apron (#386653) over a simple dress, drying her hands with a dish towel; \"PER-04 Rafael\" the father, straight shoulders, sand-colored shirt (#BA8A5B), holding a small cardboard box; \"PER-05 Lidia\" a juice vendor, short-brim straw hat, terracotta apron (#A14F3F), holding a silver thermos; \"PER-06 Sam\" a fellow student, petrol-green jacket (#315E63), tall quiff, holding a yellow folder (#E1AE53); \"PER-07 Dra. Vega\" a mission mentor, tall upright silhouette, dark headset, ink-blue jacket (#283B5B); \"PER-08 Ari\" a younger student, low ponytail, holding a square notebook with a coral spine (#D47762); \"PER-09 Órbita\" the companion cat from the third reference image, sitting at the feet of the first student. Students are three heads tall, adults about three and a half heads tall. {ROTULOS} {ESTILO}"
+    },
+    {
+      "id": "HR_MIR_v1",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": ["@ANC_HUB", "@ANC_VISTA_JUEGO"],
+      "prompt": "{HOJA} Title: \"Mirador del Faro · v1\". The props of a hilltop lookout with a lighthouse, where the player observes the sky. Top row: \"MIR-01 Faro\" a white lighthouse with terracotta bands and a glass lantern room; \"MIR-02 Plataforma del mirador\" a stone viewing deck with a railing; \"MIR-03 Telescopio del mirador\" a large white refractor telescope on an equatorial mount and a sturdy tripod, with a faint cyan glow on its eyepiece that marks it as interactive; \"MIR-04 Binoculares de moneda\" coin-operated viewing binoculars on a post. Bottom row: \"MIR-05 Atril con carta estelar\" a lectern holding a star chart; \"MIR-06 Banca\" a stone bench; \"MIR-07 Guirnalda de luces\" warm string lights between two wooden posts; \"MIR-08 Cúpula de observación\" a small white observatory dome with its slit open. {ROTULOS} {ESTILO}"
+    }
+  ]
+}

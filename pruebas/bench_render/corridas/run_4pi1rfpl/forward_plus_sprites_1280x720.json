@@ -1,0 +1,48 @@
+{
+	"adapter_name": "Intel(R) HD Graphics 620",
+	"draw_calls_max": 710,
+	"draw_calls_mean": 707.787301587302,
+	"effects": {
+		"glow": false,
+		"sdfgi": false,
+		"ssao": false
+	},
+	"fps_1pct_low": 32.6581265665695,
+	"fps_mean": 52.4847444342844,
+	"frame_time_max_ms": 32.48,
+	"frame_time_mean_ms": 19.0531555555556,
+	"frames": 315,
+	"godot_version": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"graphics_api_version": "1.3.215",
+	"measured_seconds": 6.001744,
+	"measurement_notes": "CPU wall-clock frame intervals; 1% low = reciprocal mean of slowest ceil(frames*0.01); rendering counters may be 0 when unavailable; video memory is engine accounting, not dedicated VRAM.",
+	"primitives_max": 95442,
+	"primitives_mean": 94814.9079365079,
+	"rendering_driver": "vulkan",
+	"rendering_method": "forward_plus",
+	"requested_seconds": 6.0,
+	"resolution": {
+		"height": 720,
+		"width": 1280
+	},
+	"resolution_changed": false,
+	"scene": "sprites",
+	"schema_version": 1,
+	"seed": 7200620,
+	"slowest_1pct_frames": 4,
+	"video_memory_last_bytes": 123250496,
+	"video_memory_max_bytes": 123250496,
+	"video_memory_mean_bytes": 123250496.0,
+	"vsync_mode": 0,
+	"warmup_seconds": 3.0
+}

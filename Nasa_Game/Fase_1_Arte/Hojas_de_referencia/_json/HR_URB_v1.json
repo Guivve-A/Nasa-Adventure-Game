@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:55:10.668602Z",
+    "display_name": "GPT Image 2.6",
+    "id": "0292c983-522b-4e23-95b9-dd5e8d1afaf7",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175510_0292c983-522b-4e23-95b9-dd5e8d1afaf7_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/4412c12c-6589-45e4-9453-f695ac27ccbc.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Plaza y malecón · v1\". Twelve pieces of street furniture for a central plaza and a riverfront promenade. Top row: \"URB-01 Banca\" a wood-and-iron park bench; \"URB-02 Fuente\" a small round stone fountain; \"URB-03 Kiosco de jugos\" a small juice stand with a striped awning and crates of tropical fruit; \"URB-04 Glorieta\" a white iron gazebo; \"URB-05 Farol doble\" a double-arm street lamp; \"URB-06 Basurero\" a park trash bin. Bottom row: \"URB-07 Jardinera\" a raised planter with tropical plants; \"URB-08 Estatua de iguana\" a stone statue of an iguana on a pedestal; \"URB-09 Baranda del malecón\" a riverfront railing segment; \"URB-10 Poste indicador\" a wooden direction signpost with blank arrow boards; \"URB-11 Bicicletero\" a bike rack with one bicycle; \"URB-12 Puesto de electrónica\" a covered market stall selling used electronic parts. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175510_0292c983-522b-4e23-95b9-dd5e8d1afaf7.png",
+    "status": "completed"
+  }
+]

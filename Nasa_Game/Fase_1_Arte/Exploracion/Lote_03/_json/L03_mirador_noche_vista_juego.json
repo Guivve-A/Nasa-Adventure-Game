@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:57:44.106446Z",
+    "display_name": "GPT Image 2.6",
+    "id": "e02f85be-06ea-496c-943f-f5b7e6111746",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175744_e02f85be-06ea-496c-943f-f5b7e6111746_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/4412c12c-6589-45e4-9453-f695ac27ccbc.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Use the exact art style of the reference images. In-game screenshot seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. Night on the hilltop lookout beside a lighthouse: the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag looks through a large white refractor telescope on a stone viewing deck, and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag sits on the stone railing beside them, looking up at the sky. The base of a white lighthouse with terracotta bands sends a soft sweeping beam across the deck. Warm string lights between wooden posts, a stone bench, coin-operated binoculars, potted plants, the mosaic stair path climbing up the hill, rooftops of colorful houses far below with warm windows. Cool blue moonlight from a thin crescent Moon low in the west, out of frame, warm practical lights, long soft shadows, a few fireflies. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175744_e02f85be-06ea-496c-943f-f5b7e6111746.png",
+    "status": "completed"
+  }
+]

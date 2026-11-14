@@ -1,0 +1,35 @@
+[
+  {
+    "created_at": "2026-11-12T20:44:38.079075Z",
+    "display_name": "Tripo H3.1 Image to 3D",
+    "id": "ef09053a-2b2c-443e-bc1f-11aa0b685e13",
+    "job_type": "tripo_h3_1_image_to_3d",
+    "min_result_url": null,
+    "params": {
+      "auto_size": false,
+      "face_limit": 2500,
+      "folder_id": null,
+      "geometry_quality": "standard",
+      "medias": [
+        {
+          "data": {
+            "id": "c1c218b4-d591-4643-9572-87fcc8b9fa06",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/c1c218b4-d591-4643-9572-87fcc8b9fa06.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "orientation": "align_image",
+      "pbr": false,
+      "quad": false,
+      "seed": null,
+      "texture": true,
+      "texture_alignment": "original_image",
+      "texture_quality": "standard",
+      "texture_seed": null
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_204438_ef09053a-2b2c-443e-bc1f-11aa0b685e13.glb",
+    "status": "completed"
+  }
+]

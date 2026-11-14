@@ -1,0 +1,25 @@
+; Benchmark procedural para Godot 4.7.
+config_version=5
+
+[application]
+config/name="Bench render HD 620"
+run/main_scene="res://bench.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+run/max_fps=0
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+window/stretch/mode="disabled"
+window/vsync/vsync_mode=0
+
+[debug]
+file_logging/enable_file_logging=false
+file_logging/enable_file_logging.pc=false
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+rendering_device/fallback_to_opengl3=false
+rendering_device/fallback_to_d3d12=false

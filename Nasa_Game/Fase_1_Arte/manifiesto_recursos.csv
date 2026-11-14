@@ -1,0 +1,105 @@
+﻿id,nombre,categoria,hoja,archivo_hoja,encargo,estado,version
+VEG-01,Ceibo,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,"a large ceiba tree with a swollen bottle-shaped gray-green trunk, buttress roots, a wide flat crown and a few white cotton pods",Concepto v1 · espera veredicto,v1
+VEG-02,Flamboyán,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a broad umbrella-shaped tree covered in red-orange flowers,Concepto v1 · espera veredicto,v1
+VEG-03,Guayacán,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a slender leafless tree in full bloom with bright yellow flowers,Concepto v1 · espera veredicto,v1
+VEG-04,Cocotero,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a leaning coconut palm with a cluster of coconuts,Concepto v1 · espera veredicto,v1
+VEG-05,Mangle rojo,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a red mangrove tree standing on arching stilt roots,Concepto v1 · espera veredicto,v1
+VEG-06,Platanera,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a banana plant with wide torn leaves and a green bunch,Concepto v1 · espera veredicto,v1
+VEG-07,Ave del paraíso,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a bird-of-paradise plant with orange and blue flowers,Concepto v1 · espera veredicto,v1
+VEG-08,Buganvilla,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a bougainvillea shrub with magenta bracts,Concepto v1 · espera veredicto,v1
+VEG-09,Cayena,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a hibiscus shrub with red flowers,Concepto v1 · espera veredicto,v1
+VEG-10,Costilla de Adán,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a monstera with split leaves,Concepto v1 · espera veredicto,v1
+VEG-11,Cactus del bosque seco,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a tall columnar cactus,Concepto v1 · espera veredicto,v1
+VEG-12,Helecho,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,a fern clump,Concepto v1 · espera veredicto,v1
+VEG-13,Mechones de hierba,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,"three grass tufts in small, medium and large sizes",Concepto v1 · espera veredicto,v1
+VEG-14,Flores silvestres,Vegetación,HR_VEG_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png,"small clusters of white, pink and yellow wildflowers",Concepto v1 · espera veredicto,v1
+TER-01,Roca grande,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a large faceted boulder with moss on top,Concepto v1 · espera veredicto,v1
+TER-02,Roca mediana,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a medium boulder,Concepto v1 · espera veredicto,v1
+TER-03,Piedras sueltas,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a cluster of small stones,Concepto v1 · espera veredicto,v1
+TER-04,Saliente rocoso,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a cliff ledge piece with layered strata,Concepto v1 · espera veredicto,v1
+TER-05,Piedras de río,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,smooth rounded river stones,Concepto v1 · espera veredicto,v1
+TER-06,Tronco caído,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a fallen mossy log,Concepto v1 · espera veredicto,v1
+TER-07,Sendero de tierra,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a straight and a curved dirt path tile with pebbles,Concepto v1 · espera veredicto,v1
+TER-08,Borde de hierba,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a grass edge strip,Concepto v1 · espera veredicto,v1
+TER-09,Orilla de arroyo,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a stream bank piece with shallow turquoise water,Concepto v1 · espera veredicto,v1
+TER-10,Puente de tablones,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a small plank bridge with rope rails,Concepto v1 · espera veredicto,v1
+TER-11,Escalinata de mosaico,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a stair segment with colorful mosaic risers,Concepto v1 · espera veredicto,v1
+TER-12,Muro de piedra,Rocas y terreno,HR_TER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png,a low stone wall segment,Concepto v1 · espera veredicto,v1
+ARQ-01,Casa amarilla,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a two-story house facade painted yellow with a covered wooden balcony,Concepto v1 · espera veredicto,v1
+ARQ-02,Casa azul,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a one-story house facade painted blue,Concepto v1 · espera veredicto,v1
+ARQ-03,Techo de zinc,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,"corrugated tin roof panels, slightly rusty",Concepto v1 · espera veredicto,v1
+ARQ-04,Ventana con reja,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a window with an ornamental iron grille,Concepto v1 · espera veredicto,v1
+ARQ-05,Puerta de madera,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a painted wooden double door,Concepto v1 · espera veredicto,v1
+ARQ-06,Balcón de madera,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a wooden balcony with turned balusters,Concepto v1 · espera veredicto,v1
+ARQ-07,Baranda metálica,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a painted metal railing segment,Concepto v1 · espera veredicto,v1
+ARQ-08,Poste de luz,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a wooden utility pole with sagging cables and a small transformer,Concepto v1 · espera veredicto,v1
+ARQ-09,Farol,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a classic black street lamp,Concepto v1 · espera veredicto,v1
+ARQ-10,Tendedero,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a laundry line with colorful clothes,Concepto v1 · espera veredicto,v1
+ARQ-11,Tanque de agua,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a rooftop water tank on a small stand,Concepto v1 · espera veredicto,v1
+ARQ-12,Escalón numerado,Arquitectura,HR_ARQ_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png,a single stone step with a painted number on its riser,Concepto v1 · espera veredicto,v1
+URB-01,Banca,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a wood-and-iron park bench,Concepto v1 · espera veredicto,v1
+URB-02,Fuente,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a small round stone fountain,Concepto v1 · espera veredicto,v1
+URB-03,Kiosco de jugos,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a small juice stand with a striped awning and crates of tropical fruit,Concepto v1 · espera veredicto,v1
+URB-04,Glorieta,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a white iron gazebo,Concepto v1 · espera veredicto,v1
+URB-05,Farol doble,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a double-arm street lamp,Concepto v1 · espera veredicto,v1
+URB-06,Basurero,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a park trash bin,Concepto v1 · espera veredicto,v1
+URB-07,Jardinera,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a raised planter with tropical plants,Concepto v1 · espera veredicto,v1
+URB-08,Estatua de iguana,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a stone statue of an iguana on a pedestal,Concepto v1 · espera veredicto,v1
+URB-09,Baranda del malecón,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a riverfront railing segment,Concepto v1 · espera veredicto,v1
+URB-10,Poste indicador,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a wooden direction signpost with blank arrow boards,Concepto v1 · espera veredicto,v1
+URB-11,Bicicletero,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a bike rack with one bicycle,Concepto v1 · espera veredicto,v1
+URB-12,Puesto de electrónica,Plaza y malecón,HR_URB_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png,a covered market stall selling used electronic parts,Concepto v1 · espera veredicto,v1
+COL-01,Antena parabólica,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a rusty fallen satellite dish,Concepto v1 · espera veredicto,v1
+COL-02,Panel solar,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a cracked old solar panel,Concepto v1 · espera veredicto,v1
+COL-03,Placa de circuito,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a green printed circuit board,Concepto v1 · espera veredicto,v1
+COL-04,Radio antigua,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a transistor radio,Concepto v1 · espera veredicto,v1
+COL-05,Motor,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a small electric motor,Concepto v1 · espera veredicto,v1
+COL-06,Cable de cobre,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a coil of copper wire,Concepto v1 · espera veredicto,v1
+COL-07,Batería,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a battery pack,Concepto v1 · espera veredicto,v1
+COL-08,Antena de varilla,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a telescopic rod antenna,Concepto v1 · espera veredicto,v1
+COL-09,Muestra de agua,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a capped sample vial with brown estuary water,Concepto v1 · espera veredicto,v1
+COL-10,Vaina de ceibo,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a ceiba seed pod bursting with white cotton,Concepto v1 · espera veredicto,v1
+COL-11,Muestra de roca,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a rock sample with a shiny mineral vein,Concepto v1 · espera veredicto,v1
+COL-12,Carta estelar,Recolectables,HR_COL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png,a folded star chart page,Concepto v1 · espera veredicto,v1
+TAL-01,Banco de trabajo,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a wooden workbench with drawers,Concepto v1 · espera veredicto,v1
+TAL-02,Osciloscopio,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a vintage oscilloscope showing a cyan sine wave,Concepto v1 · espera veredicto,v1
+TAL-03,Estación de soldadura,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a soldering iron in its stand with a solder spool,Concepto v1 · espera veredicto,v1
+TAL-04,Multímetro,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a yellow handheld multimeter,Concepto v1 · espera veredicto,v1
+TAL-05,Fuente de poder,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a bench power supply,Concepto v1 · espera veredicto,v1
+TAL-06,Protoboard,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a breadboard with jumper wires and components,Concepto v1 · espera veredicto,v1
+TAL-07,Caja de herramientas,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a metal toolbox,Concepto v1 · espera veredicto,v1
+TAL-08,Tablero de herramientas,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,"a pegboard with pliers, screwdrivers and a cable coil",Concepto v1 · espera veredicto,v1
+TAL-09,Lámpara,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,an articulated desk lamp,Concepto v1 · espera veredicto,v1
+TAL-10,Taburete,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a wooden stool,Concepto v1 · espera veredicto,v1
+TAL-11,Maqueta de satélite,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a small hanging model satellite,Concepto v1 · espera veredicto,v1
+TAL-12,Libro cerrado,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,"the old science book, closed",Concepto v1 · espera veredicto,v1
+TAL-13,Libro con holograma,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,"the same book open, projecting a cyan hologram of a ringed planet",Concepto v1 · espera veredicto,v1
+TAL-14,Telescopio pequeño,Taller de electrónica,HR_TAL_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png,a small white refractor telescope on a tripod,Concepto v1 · espera veredicto,v1
+FAU-01,Iguana verde,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a green iguana with a crest of spines,Concepto v1 · espera veredicto,v1
+FAU-02,Ardilla de Guayaquil,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a gray-brown squirrel with a bushy tail,Concepto v1 · espera veredicto,v1
+FAU-03,Pelícano pardo,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a brown pelican,Concepto v1 · espera veredicto,v1
+FAU-04,Fragata,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a black frigatebird with a red throat pouch,Concepto v1 · espera veredicto,v1
+FAU-05,Garza blanca,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a great egret,Concepto v1 · espera veredicto,v1
+FAU-06,Cangrejo rojo,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a red mangrove crab,Concepto v1 · espera veredicto,v1
+FAU-07,Colibrí,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a green hummingbird,Concepto v1 · espera veredicto,v1
+FAU-08,Periquito del Pacífico,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a tiny green parrotlet,Concepto v1 · espera veredicto,v1
+FAU-09,Mariposa,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a blue butterfly,Concepto v1 · espera veredicto,v1
+FAU-10,Perro callejero,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,a friendly mixed-breed street dog,Concepto v1 · espera veredicto,v1
+FAU-11,Gato callejero,Fauna,HR_FAU_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png,"an orange tabby street cat, clearly different from the companion cat",Concepto v1 · espera veredicto,v1
+PER-01,Protagonista A,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,and,Concepto v1 · espera veredicto,v1
+PER-02,Protagonista B,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,exactly as the two student designs in the first two reference images,Concepto v1 · espera veredicto,v1
+PER-03,Elena,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,"the mother, round silhouette, hair tied up, bottle-green apron (#386653) over a simple dress, drying her hands with a dish towel",Concepto v1 · espera veredicto,v1
+PER-04,Rafael,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,"the father, straight shoulders, sand-colored shirt (#BA8A5B), holding a small cardboard box",Concepto v1 · espera veredicto,v1
+PER-05,Lidia,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,"a juice vendor, short-brim straw hat, terracotta apron (#A14F3F), holding a silver thermos",Concepto v1 · espera veredicto,v1
+PER-06,Sam,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,"a fellow student, petrol-green jacket (#315E63), tall quiff, holding a yellow folder (#E1AE53)",Concepto v1 · espera veredicto,v1
+PER-07,Dra. Vega,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,"a mission mentor, tall upright silhouette, dark headset, ink-blue jacket (#283B5B)",Concepto v1 · espera veredicto,v1
+PER-08,Ari,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,"a younger student, low ponytail, holding a square notebook with a coral spine (#D47762)",Concepto v1 · espera veredicto,v1
+PER-09,Órbita,Reparto,HR_PER_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png,"the companion cat from the third reference image, sitting at the feet of the first student",Concepto v1 · espera veredicto,v1
+MIR-01,Faro,Mirador del Faro,HR_MIR_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png,a white lighthouse with terracotta bands and a glass lantern room,Concepto v1 · espera veredicto,v1
+MIR-02,Plataforma del mirador,Mirador del Faro,HR_MIR_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png,a stone viewing deck with a railing,Concepto v1 · espera veredicto,v1
+MIR-03,Telescopio del mirador,Mirador del Faro,HR_MIR_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png,"a large white refractor telescope on an equatorial mount and a sturdy tripod, with a faint cyan glow on its eyepiece that marks it as interactive",Concepto v1 · espera veredicto,v1
+MIR-04,Binoculares de moneda,Mirador del Faro,HR_MIR_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png,coin-operated viewing binoculars on a post,Concepto v1 · espera veredicto,v1
+MIR-05,Atril con carta estelar,Mirador del Faro,HR_MIR_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png,a lectern holding a star chart,Concepto v1 · espera veredicto,v1
+MIR-06,Banca,Mirador del Faro,HR_MIR_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png,a stone bench,Concepto v1 · espera veredicto,v1
+MIR-07,Guirnalda de luces,Mirador del Faro,HR_MIR_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png,warm string lights between two wooden posts,Concepto v1 · espera veredicto,v1
+MIR-08,Cúpula de observación,Mirador del Faro,HR_MIR_v1,Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png,a small white observatory dome with its slit open,Concepto v1 · espera veredicto,v1

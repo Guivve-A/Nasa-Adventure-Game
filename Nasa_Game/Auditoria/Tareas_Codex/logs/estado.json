@@ -1,0 +1,18 @@
+{
+ "accesibilidad": {
+  "id": "accesibilidad",
+  "estado": "ok",
+  "minutos": 3.2,
+  "bytes_informe": 7966,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Auditoria\\Investigacion\\01_accesibilidad.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Auditoria\\Tareas_Codex\\logs\\accesibilidad.log"
+ },
+ "datos_pendientes": {
+  "id": "datos_pendientes",
+  "estado": "ok",
+  "minutos": 4.2,
+  "bytes_informe": 4004,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Auditoria\\Investigacion\\02_datos_pendientes.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Auditoria\\Tareas_Codex\\logs\\datos_pendientes.log"
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "salida": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas_giro",
+ "fondo": "#e6e1dc",
+ "lado": 1024,
+ "recortes": [
+  {"id": "PER01g_frente", "hoja": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro.png", "caja": [95, 130, 730, 1321]},
+  {"id": "PER01g_lado_a", "hoja": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro.png", "caja": [740, 130, 1260, 1321]},
+  {"id": "PER01g_espalda", "hoja": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro.png", "caja": [1300, 130, 2000, 1321]},
+  {"id": "PER01g_lado_b", "hoja": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro.png", "caja": [2030, 130, 2560, 1321]},
+  {"id": "PER01g_lado_a_espejo", "hoja": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro.png", "caja": [740, 130, 1260, 1321], "espejo": true},
+  {"id": "PER01g_lado_b_espejo", "hoja": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro.png", "caja": [2030, 130, 2560, 1321], "espejo": true}
+ ]
+}

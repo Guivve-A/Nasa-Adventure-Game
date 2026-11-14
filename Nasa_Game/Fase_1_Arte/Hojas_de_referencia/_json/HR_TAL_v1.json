@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:55:16.028667Z",
+    "display_name": "GPT Image 2.6",
+    "id": "71173bf0-b73f-47aa-9755-13b36ec0983b",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175516_71173bf0-b73f-47aa-9755-13b36ec0983b_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/4412c12c-6589-45e4-9453-f695ac27ccbc.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Taller de electrónica · v1\". The props of the student's rooftop workshop, matching the first reference image. Top row: \"TAL-01 Banco de trabajo\" a wooden workbench with drawers; \"TAL-02 Osciloscopio\" a vintage oscilloscope showing a cyan sine wave; \"TAL-03 Estación de soldadura\" a soldering iron in its stand with a solder spool; \"TAL-04 Multímetro\" a yellow handheld multimeter; \"TAL-05 Fuente de poder\" a bench power supply; \"TAL-06 Protoboard\" a breadboard with jumper wires and components; \"TAL-07 Caja de herramientas\" a metal toolbox. Bottom row: \"TAL-08 Tablero de herramientas\" a pegboard with pliers, screwdrivers and a cable coil; \"TAL-09 Lámpara\" an articulated desk lamp; \"TAL-10 Taburete\" a wooden stool; \"TAL-11 Maqueta de satélite\" a small hanging model satellite; \"TAL-12 Libro cerrado\" the old science book, closed; \"TAL-13 Libro con holograma\" the same book open, projecting a cyan hologram of a ringed planet; \"TAL-14 Telescopio pequeño\" a small white refractor telescope on a tripod. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175516_71173bf0-b73f-47aa-9755-13b36ec0983b.png",
+    "status": "completed"
+  }
+]

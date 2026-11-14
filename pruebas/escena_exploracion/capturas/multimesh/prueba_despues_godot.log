@@ -1,0 +1,20 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.3.215 - Forward Mobile - Using Device #0: Intel - Intel(R) HD Graphics 620
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+MULTIMESH recursos=227 lotes=18
+ESCENA recursos=240 triangulos=217984 faltan=["modelos/COL-01_script.glb", "modelos/COL-02.glb", "modelos/FX-01.glb"]
+PRUEBA_LOTES lotes=18 transformaciones=229
+ERROR: Condition "f.is_null()" is true.
+   at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:696)
+ERROR: Condition "f.is_null()" is true.
+   at: _save_to_cache (servers/rendering/renderer_rd/shader_rd.cpp:696)
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/pruebas/escena_exploracion/capturas/multimesh/despues_21_fijo.png
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/pruebas/escena_exploracion/capturas/multimesh/despues_21_viento.png
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/pruebas/escena_exploracion/capturas/multimesh/despues_21_sin_inclinacion.png
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/pruebas/escena_exploracion/capturas/multimesh/despues_12_fijo.png
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/pruebas/escena_exploracion/capturas/multimesh/despues_12_viento.png
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/pruebas/escena_exploracion/capturas/multimesh/despues_12_sin_inclinacion.png
+PRUEBA_CONTROLES inclinacion=OK antena_tripo=OK encuadres=OK
+PRUEBA version=despues fallos=0 materiales_follaje=12

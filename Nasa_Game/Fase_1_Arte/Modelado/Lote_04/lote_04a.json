@@ -1,0 +1,24 @@
+{
+ "lote": "L04a",
+ "carpeta": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04",
+ "tope": 36,
+ "_nota": "Escena de exploracion v1 (piloto de modelado). Partida aprobada por Guillermo el 2026-11-12: 37,5 seguros y tope de 52,75. Vistas recortadas de las hojas con herramientas/recortar_vistas.py (recortes.json) y subidas una vez con herramientas/hf_subir.py (subidas.json: nombre -> id).",
+ "trabajos": [
+  {"id": "L04_PER01_tripo_mv", "modelo": "tripo_h3_1_multiview_to_3d",
+   "_vistas": ["PER01_frente", "PER01_perfil", "PER01_espalda"],
+   "imagenes": ["d736e2b9-2cce-4b9b-8546-5be1f73cf156", "19c12620-ce6f-46b8-864a-516c61955a03", "710cb3cb-2307-4e44-9b50-bb5a000d5af0"],
+   "params": {"texture": true, "pbr": false, "face_limit": 5000, "orientation": "align_image"}},
+  {"id": "L04_PER09_tripo_mv", "modelo": "tripo_h3_1_multiview_to_3d",
+   "_vistas": ["PER09_frente", "PER09_perfil", "PER09_espalda", "PER09_perfil_espejo"],
+   "imagenes": ["b1faa263-98fe-40d9-8deb-0919756d028a", "17bf8af8-125b-43c8-b03e-294991836f73", "4663bda8-b70f-4c89-80a3-e53c6fdb8545", "7d0cb245-5587-4a4a-b6c5-2d9eac29e8a8"],
+   "params": {"texture": true, "pbr": false, "face_limit": 3000, "orientation": "align_image"}},
+  {"id": "L04_FAU01_tripo_mv", "modelo": "tripo_h3_1_multiview_to_3d",
+   "_vistas": ["FAU01_frente", "FAU01_lado"],
+   "imagenes": ["96197841-db32-4496-b5b4-e67f0d4303fe", "96e1650d-01d5-4a3f-947c-a7e7d87037da"],
+   "params": {"texture": true, "pbr": false, "face_limit": 2500, "orientation": "align_image"}},
+  {"id": "L04_COL01_tripo", "modelo": "tripo_h3_1_image_to_3d",
+   "_vistas": ["COL01_antena"],
+   "imagenes": ["c1c218b4-d591-4643-9572-87fcc8b9fa06"],
+   "params": {"texture": true, "pbr": false, "face_limit": 2500, "orientation": "align_image"}}
+ ]
+}

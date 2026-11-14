@@ -1,0 +1,3302 @@
+OpenAI Codex v0.167.0-alpha.3.2
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1ce78-2a53-7552-8415-1e0e24991f72
+--------
+user
+# Brief común — Fase 0 (investigación técnica, arquitectura y pipeline)
+
+Fecha: 2026-11-12. Idioma de los informes: español.
+
+## Proyecto
+
+RPG de aventura, simulación y exploración educativa en Godot 4 (nombre de trabajo: «Proyecto NASA-Ecuador»). Un estudiante de ingeniería de control en Guayaquil en su viaje para llegar a la NASA. Enseña ciencia real (astrofísica, electrónica) con mecánicas, nunca como examen. Estilo 2.5D/2D-HD, música ambient/shoegaze, tipografía DotGothic16 y un gato científico de compañero. El plan maestro tiene 8 fases con puertas de validación (PDF en `Nasa_Game/00_Plan_Maestro/`).
+
+La Fase 0 (la actual) pide:
+1. Motor y renderizado: Godot 4 Forward+, SDFGI frente a lightmaps horneados para el estilo 2D-HD, y sombras 3D sobre sprites 2D.
+2. Pipeline de arte con IA: mallas base con Higgsfield, retopología automática, UV y texturizado, con consistencia visual y buen rendimiento.
+3. Estructura de datos: ECS frente a la orientación a objetos de Godot, Git LFS y CI/CD.
+
+## Objetivo visual (tablero del usuario)
+
+Hay 14 capturas en `Nasa_Game/Referencias/Tablero_usuario/`. Son de un juego hecho con IA, «After the Wind», mostrado en un video de YouTube del canal @stefan_3d_ai (marca r/TopologyAI). El usuario quiere ese nivel de acabado, no copiarlo:
+- Exploración con cámara alta 3/4 (unos 50-60° de inclinación), personaje chibi (2,5 a 3 cabezas) en 3D, suelo y rocas con textura pintada a mano, hierba en mechones y sombras suaves.
+- Hub en vista lateral tipo diorama 2.5D con capas de profundidad (hierba en primer plano, tiendas, montañas con perspectiva atmosférica).
+- Creador de personaje (cuerpo, piel, peinado, color, barba, ojos) con vista de cara y de cuerpo completo.
+- Interfaz diegética de pergamino con trazos de pincel: HUD (retrato, vida, energía, objetos), rastreador de misión, lista de combos, avisos de «Obtenido», mapa ilustrado con leyenda, pantalla de título y pantallas de carga con viñetas tipo cómic.
+
+Referentes de estilo que nombró el usuario: RPG de Nintendo, Monster Hunter, Pokémon, Zelda Ocarina of Time 3D y la saga Bravely. El juego debe ser original: se toman principios y técnicas, nunca personajes, arte, nombres ni diseños de esos juegos.
+
+## Restricciones duras
+
+- **Equipo de desarrollo (medido hoy):** Intel Core i5-7200U (2 núcleos, 4 hilos), 7,9 GB de RAM, gráfica integrada Intel HD Graphics 620 (controlador 31.0.101.2140), pantalla de 1920×1080, Windows 10 Home y 27 GB libres en disco. No hay GPU dedicada. Todo lo que recomiendes debe poder desarrollarse y ejecutarse ahí.
+- **Motor:** Godot 4.7.2-stable (ya descargado, firma válida).
+- **Instalado:** Git, Git LFS, Python 3.13, ffmpeg 9, ImageMagick 7, .NET, VS Code, GitHub CLI y Node 24. **No instalado:** Blender ni editores de imagen.
+- **Presupuesto de IA:** 1000 créditos de Higgsfield (plan Plus), sin recarga prevista. Los costos reales medidos están en `Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md` y `hf_costos_default.md`; los parámetros de cada modelo, en `hf_modelos.json`. Higgsfield ofrece imagen, video, audio y también 3D (imagen→malla con Tripo, Hunyuan3D y Meshy; remesh, retexturizado y rigging) y sprites animados (`autosprite`, con direcciones isométricas).
+- Un solo desarrollador con asistentes de IA. Cada recurso pasa por una puerta de validación con el usuario.
+
+## Reglas para ti
+
+1. No instales nada, no descargues ejecutables y no modifiques archivos: trabajas en solo lectura y tu respuesta final es el informe.
+2. No ejecutes comandos que gasten créditos de Higgsfield ni que suban archivos (`generate create`, `generate workflow`, `upload create`, etc.).
+3. En las búsquedas web usa consultas técnicas genéricas: no incluyas nombres de personas ni datos del proyecto.
+4. Cita la fuente de cada afirmación técnica con su URL y distingue **[doc]** (documentación primaria), **[sec]** (fuente secundaria) e **[inf]** (inferencia tuya). Si no pudiste verificar algo, escribe «sin verificar». No inventes versiones, cifras ni compatibilidades. Prefiere fuentes de 2025-2026.
+5. No reproduzcas texto con derechos de autor: resume con tus palabras.
+
+## Formato de tu respuesta final (Markdown compatible con Obsidian)
+
+Usa exactamente estas secciones, en este orden:
+
+```
+# <título del informe>
+## Resumen ejecutivo            (máximo 180 palabras)
+## Decisiones recomendadas       (tabla: Decisión | Recomendación | Alternativa descartada y por qué | Confianza alta/media/baja)
+## Afirmaciones que sostienen las decisiones   (máximo 12, numeradas, cada una con URL y etiqueta [doc]/[sec]/[inf])
+## Riesgos y cómo mitigarlos
+## Preguntas que debe decidir el usuario
+## Desarrollo                    (el análisis completo, con subtítulos)
+## Fuentes
+```
+
+---
+
+# TU TAREA
+
+Diseña el proceso de producción y validación de arte «de estudio» adaptado a un desarrollador que trabaja con IA generativa.
+
+1. Entregables de preproducción de un estudio AAA y su contenido estándar: biblia de arte, guía de estilo, hoja de modelo o turnaround (vistas, anotaciones, proporciones en cabezas, paleta con valores hex, materiales), hoja de expresiones y poses, hoja de props con escala, lineup de escala, concept de entorno, color script, claves de iluminación, y style frames de interfaz y de VFX. Qué debe llevar cada uno para considerarse aprobable.
+2. Puertas de revisión por tipo de recurso con una lista de comprobación objetiva: silueta, lectura en escala de grises (valores), cumplimiento de paleta, proporciones, legibilidad a la distancia de la cámara de juego, densidad de téxel, coherencia de luz y presupuesto técnico. Incluye cómo medir cada criterio (por ejemplo con ImageMagick o Python).
+3. Etapas de un recurso (concepto → hoja aprobada → blockout → modelo o sprite → textura → rig y animación → integración en motor → pulido) y qué se valida en cada una.
+4. Manifiesto de recursos: campos (ID, tipo, fase, estado, modelo de IA, prompt, referencias, semilla si existe, costo en créditos, archivo fuente, archivo en motor, veredicto y fecha), convención de nombres y versiones.
+5. Cómo adaptar la dirección de arte a la IA generativa: biblia de prompts con bloques de estilo fijos, imágenes ancla, control de la deriva de estilo, criterios de rechazo y límite de reintentos por recurso para proteger el presupuesto de 1000 créditos.
+6. Definición de vertical slice y de «terminado» para este proyecto; riesgos de producción y mitigaciones.
+7. Cómo presentar cada recurso al usuario para que lo valide rápido (lámina comparativa con la referencia, vista en motor con la cámara real, lista de comprobación con semáforo).
+
+Entrega plantillas listas para usar en Markdown (compatibles con Obsidian): ficha de recurso, lista de comprobación de puerta, hoja de modelo y registro de créditos.
+codex
+Revisaré los documentos locales y las fuentes técnicas para proponer un proceso de arte con criterios medibles, puertas de aprobación y control de créditos. Trabajaré en solo lectura, sin generar ni subir recursos.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Location; rg --files -g AGENTS.md -g '*.md' -g '*.json' -g '*.pdf' -g '*.png' -g '*.jpg' -g '*.webp' Nasa_Game" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 598ms:
+
+Path                              
+----                              
+C:\Users\guill\Desktop\Juego 2d-hd
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 15
++ Get-Location; rg --files -g AGENTS.md -g '*.md' -g '*.json' -g '*.pdf ...
++               ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+
+
+web search: 
+web search: site.gdcvault.com art direction style guide production concept art ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-ChildItem -Path . -Filter AGENTS.md -Recurse -File | Select-Object -ExpandProperty FullName' in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-ChildItem -LiteralPath Nasa_Game -Recurse -File | Select-Object FullName,Length | Format-Table -AutoSize' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 10582ms:
+web search: 
+web search: site.partner.steamgames.com character art guide silhouette value gradient ...
+codex
+Las fuentes revisadas respaldan priorizar silueta, valores y pruebas con la cámara real. Los umbrales numéricos del informe serán propuestas para calibrar en este equipo: no existe una lista universal de aprobación «AAA». También distinguiré una imagen atractiva de un recurso listo para animar, integrar y mantener.
+ succeeded in 54344ms:
+
+FullName                                                                                                 Length
+--------                                                                                                 ------
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Bienvenido.md                                                  206
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\.obsidian\app.json                                               2
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\.obsidian\appearance.json                                        2
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\.obsidian\core-plugins.json                                    666
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\.obsidian\graph.json                                           493
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\.obsidian\workspace.json                                      4932
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\00_Plan_Maestro\Plan Maestro de Desarrollo AAA.pdf          231827
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_default.md                    13226
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_matriz.json                   40239
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_matriz.md                     10347
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_modelos.json                        244007
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\placeholder_costos.png                   8035
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\tareas_fase0.md                  25604
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\01_motor_render.log          7602
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\02_pipeline_personajes.log   8696
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\03_higgsfield_arte2d.log     8212
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\04_caso_after_the_wind.log   6574
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\05_referencias_aaa.log       6811
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\06_arquitectura_godot.log    7594
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\07_proceso_estudio.log       8382
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\08_antecedentes.log          6710
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\09_bench_render.log          3303
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_01.jpg                       76669
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_02.jpg                       99355
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_03.jpg                      111480
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_04.jpg                      104315
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_05.jpg                      113425
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_06.jpg                       99540
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_07.jpg                      116600
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_08.jpg                      122163
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_09.jpg                      146768
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_10.jpg                      101441
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_11.jpg                      123095
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_12.jpg                      127429
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_13.jpg                       97924
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_14.jpg                      118022
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_default.md','Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md' -Encoding UTF8" in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Datos','Nasa_Game/Referencias/Tablero_usuario' -File | Select-Object Name,Length | ConvertTo-Json" in C:\Users\guill\Desktop\Juego 2d-hd
+web search: 
+web search: https://help.steampowered.com/en/faqs/view/0688-7692-4D5A-1935
+ succeeded in 6546ms:
+[
+    {
+        "Name":  "hf_costos_default.md",
+        "Length":  13226
+    },
+    {
+        "Name":  "hf_costos_matriz.json",
+        "Length":  40239
+    },
+    {
+        "Name":  "hf_costos_matriz.md",
+        "Length":  10347
+    },
+    {
+        "Name":  "hf_modelos.json",
+        "Length":  244007
+    },
+    {
+        "Name":  "placeholder_costos.png",
+        "Length":  8035
+    },
+    {
+        "Name":  "ref_01.jpg",
+        "Length":  76669
+    },
+    {
+        "Name":  "ref_02.jpg",
+        "Length":  99355
+    },
+    {
+        "Name":  "ref_03.jpg",
+        "Length":  111480
+    },
+    {
+        "Name":  "ref_04.jpg",
+        "Length":  104315
+    },
+    {
+        "Name":  "ref_05.jpg",
+        "Length":  113425
+    },
+    {
+        "Name":  "ref_06.jpg",
+        "Length":  99540
+    },
+    {
+        "Name":  "ref_07.jpg",
+        "Length":  116600
+    },
+    {
+        "Name":  "ref_08.jpg",
+        "Length":  122163
+    },
+    {
+        "Name":  "ref_09.jpg",
+        "Length":  146768
+    },
+    {
+        "Name":  "ref_10.jpg",
+        "Length":  101441
+    },
+    {
+        "Name":  "ref_11.jpg",
+        "Length":  123095
+    },
+    {
+        "Name":  "ref_12.jpg",
+        "Length":  127429
+    },
+    {
+        "Name":  "ref_13.jpg",
+        "Length":  97924
+    },
+    {
+        "Name":  "ref_14.jpg",
+        "Length":  118022
+    }
+]
+
+ succeeded in 32146ms:
+# Higgsfield: costo por defecto de cada modelo
+
+Generado con `herramientas/hf_catalogo.py` (solo lectura: `model list`, `model get`, `generate cost`).
+El costo es el de los parametros por defecto con un prompt de texto; los que exigen imagen o video de entrada figuran con su error.
+
+| Tipo | job_type | Nombre | Creditos (defecto) | Nota |
+|---|---|---|---|---|
+| 3d | `tripo_3d` | Text to 3D | 5 |  |
+| 3d | `hunyuan3d_v3_1_text_to_3d` | Hunyuan 3D v3.1 Text to 3D | 7 |  |
+| 3d | `meshy_v6_text_to_3d` | Meshy 6 Text to 3D | 25 |  |
+| 3d | `3d_rigging` | 3D Rigging | - | Error: Missing required params: model_url | Unknown params: prompt | Hint: Run: hf model get 3d_rigging |
+| 3d | `hunyuan3d_v3_image_to_3d` | Hunyuan3D v3 Image to 3D | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get hunyuan3d_v3_image_to_3d |
+| 3d | `image_to_3d` | Image to 3D | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get image_to_3d |
+| 3d | `meshy_v5_remesh` | Meshy 5 Remesh | - | Error: Missing required params: model_url | Unknown params: prompt | Hint: Run: hf model get meshy_v5_remesh |
+| 3d | `meshy_v5_retexture` | Meshy 5 Retexture | - | Error: Missing required params: model_url | Unknown params: prompt | Hint: Run: hf model get meshy_v5_retexture |
+| 3d | `meshy_v7_image_to_3d` | Meshy 7 Image to 3D | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get meshy_v7_image_to_3d |
+| 3d | `multi_image_to_3d` | Multi-Image to 3D | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get multi_image_to_3d |
+| 3d | `sam_3_3d` | 3D Objects | - | Error: Missing required params: image_references | Hint: Run: hf model get sam_3_3d |
+| 3d | `sam_3_3d_body` | 3D Body | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get sam_3_3d_body |
+| 3d | `tripo_h3_1_image_to_3d` | Tripo H3.1 Image to 3D | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get tripo_h3_1_image_to_3d |
+| 3d | `tripo_h3_1_multiview_to_3d` | Tripo H3.1 Multiview to 3D | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get tripo_h3_1_multiview_to_3d |
+| 3d | `tripo_p2_image_to_3d` | Tripo P2 Image to 3D | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get tripo_p2_image_to_3d |
+| audio | `seed_audio` | Seed Audio 1.0 | 0.1 |  |
+| audio | `elevenlabs_music_v2` | ElevenLabs Music v2 | - | Error: Missing required params: duration | Hint: Run: hf model get elevenlabs_music_v2 |
+| audio | `elevenlabs_music_v2_5` | ElevenLabs Music v2.5 | - | Error: Missing required params: duration | Hint: Run: hf model get elevenlabs_music_v2_5 |
+| audio | `elevenlabs_v4` | Eleven v4 | - | Error: Missing required params: dialogue | Unknown params: prompt | Hint: Run: hf model get elevenlabs_v4 |
+| audio | `elevenlabs_v4_turbo` | Eleven v4 Turbo | - | Error: Missing required params: dialogue | Unknown params: prompt | Hint: Run: hf model get elevenlabs_v4_turbo |
+| audio | `inworld_text_to_speech` | Inworld Text to Speech | - | Error: Missing required params: voice | Hint: Run: hf model get inworld_text_to_speech |
+| audio | `mirelo_text_to_audio` | Mirelo Text to Audio | - | Error: Missing required params: duration | Hint: Run: hf model get mirelo_text_to_audio |
+| audio | `qwen_audio_tts` | Qwen Audio 3.0 TTS Flash | - | Error: Missing required params: voice_id, voice_type | Hint: Run: hf model get qwen_audio_tts |
+| audio | `sonilo_music` | Sonilo Music | - | Error: Missing required params: duration | Hint: Run: hf model get sonilo_music |
+| audio | `text2speech_v2` | Text to Speech V2 | - | Error: Missing required params: variant, voice_id, voice_type | Hint: Run: hf model get text2speech_v2 |
+| data | `clip_transcriber` | Clip Transcriber | - | Error: Unknown params: prompt | Hint: Run: hf model get clip_transcriber |
+| data | `image_text_detection` | Image Text Detection | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get image_text_detection |
+| data | `speech2text` | Speech to Text | - | Error: Missing required params: audio_references | Unknown params: prompt | Hint: Run: hf model get speech2text |
+| image | `soul_cinematic` | Soul Cinematic | 0.12 |  |
+| image | `soul_location` | Soul Location | 0.12 |  |
+| image | `text2image_soul_v2` | Higgsfield Soul 2.0 | 0.12 |  |
+| image | `z_image` | Z Image | 0.15 |  |
+| image | `gpt_image_2_5` | GPT Image 2.5 | 0.25 |  |
+| image | `gpt_image_2_6` | GPT Image 2.6 | 0.25 |  |
+| image | `gpt_image_2_6_flare` | GPT Image 2.6 Flare | 0.25 |  |
+| image | `kling_omni_image` | Kling O1 Image | 0.5 |  |
+| image | `seedream_5_0_flash` | Seedream 5.0 Flash | 0.5 |  |
+| image | `flux_2` | FLUX.2 | 1 |  |
+| image | `grok_image` | Grok Image | 1 |  |
+| image | `nano_banana` | Nano Banana | 1 |  |
+| image | `nano_banana_2_lite` | Nano Banana 2 Lite | 1 |  |
+| image | `seedream_v4_5` | Seedream 4.5 | 1 |  |
+| image | `seedream_v5_lite` | Seedream 5.0 Lite | 1 |  |
+| image | `recraft_v4_1` | Recraft V4.1 | 1.25 |  |
+| image | `flux_kontext` | Flux Kontext | 1.5 |  |
+| image | `nano_banana_2_1` | Nano Banana 2.1 | 1.5 |  |
+| image | `nano_banana_flash` | Nano Banana 2 | 1.5 |  |
+| image | `flux_3_image` | FLUX 3 Image | 2 |  |
+| image | `grok_image_2_0` | Grok Image 2.0 | 2 |  |
+| image | `image_auto` | Image Auto | 2 |  |
+| image | `nano_banana_pro` | Nano Banana Pro | 2 |  |
+| image | `3d_jutsu_angles` | 3D Jutsu Angles | 2.5 |  |
+| image | `seedream_v5_pro` | Seedream 5.0 Pro | 2.5 |  |
+| image | `seedream_5_5` | Seedream 5.5 | 3.5 |  |
+| image | `minimax_h3_image` | MiniMax H3 Image | 4 |  |
+| image | `openai_hazel` | OpenAI Hazel | 4 |  |
+| image | `ideogram_4_5` | Ideogram 4.5 | 6.25 |  |
+| image | `gpt_image_2` | GPT Image 2 | 6.5 |  |
+| image | `autosprite` | AutoSprite Animation | - | Error: Missing required params: image_references | Hint: Run: hf model get autosprite |
+| image | `bytedance_image_upscale` | Bytedance Image Upscale | - | Error: Unknown params: prompt | Hint: Run: hf model get bytedance_image_upscale |
+| image | `flux_2_pro_outpaint` | FLUX.2 Pro Outpaint | - | Error: Unknown params: prompt | Hint: Run: hf model get flux_2_pro_outpaint |
+| image | `ideogram_vector` | Ideogram Vector | - | Error: Missing required params: operation | Hint: Run: hf model get ideogram_vector |
+| image | `image_background_remover` | Image Background Remover | - | Error: Unknown params: prompt | Hint: Run: hf model get image_background_remover |
+| image | `nano_banana_2_ai_stylist` | Nano Banana Pro | - | Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get nano_banana_2_ai_stylist |
+| image | `nano_banana_2_relight` | Nano Banana Pro | - | Error: Missing required params: brightness, color, image_references, light_quality, light_source | Unknown params: prompt | Hint: Run: hf model get nano_banana_2_relight |
+| image | `nano_banana_2_shots` | Nano Banana Pro | - | Error: Unknown params: prompt | Hint: Run: hf model get nano_banana_2_shots |
+| image | `nano_banana_2_skin_enhancer` | Nano Banana Pro | - | Error: Missing required params: image_references, preset_id | Unknown params: prompt | Hint: Run: hf model get nano_banana_2_skin_enhancer |
+| image | `outpaint` | Outpaint | - | Error: Unknown params: prompt | Hint: Run: hf model get outpaint |
+| image | `recraft_v4_styles` | Recraft V4 Styles | - | Error: Missing required params: style_id | Hint: Run: hf model get recraft_v4_styles |
+| image | `soul_cast` | Soul Cast | - | Error: Missing required params: aspect_ratio | Hint: Run: hf model get soul_cast |
+| image | `topaz_image` | Topaz | - | Error: Missing required params: image_references, output_height, output_width | Unknown params: prompt | Hint: Run: hf model get topaz_image |
+| image | `topaz_image_generative` | Topaz | - | Error: Missing required params: image_references, output_height, output_width | Hint: Run: hf model get topaz_image_generative |
+| text | `brain_activity` | Brain Activity | - | Error: Unknown params: prompt | Hint: Run: hf model get brain_activity |
+| video | `seedance1_5` | Seedance 1.5 Pro | 4.8 |  |
+| video | `grok_video_v15_lite` | Grok Imagine Video 1.5 Lite | 5 |  |
+| video | `seedance_2_0_mini` | Seedance 2.0 Mini | 5 |  |
+| video | `minimax_hailuo` | Minimax Hailuo | 6 |  |
+| video | `kling_o3_flf` | Kling 3.0 Omni (Frames) | 6.25 |  |
+| video | `kling_o3_image_reference` | Kling 3.0 Omni | 6.25 |  |
+| video | `grok_video` | Grok Video | 7.5 |  |
+| video | `kling3_0_turbo` | Kling 3.0 Turbo | 7.5 |  |
+| video | `wan2_6` | Wan 2.6 Video | 7.5 |  |
+| video | `wan2_7` | Wan 2.7 | 7.5 |  |
+| video | `wan3_0` | Wan 3.0 | 8.75 |  |
+| video | `kling2_6` | Kling 2.6 Video | 10 |  |
+| video | `kling3_0` | Kling v3.0 | 10 |  |
+| video | `minimax_h3` | MiniMax H3 | 10 |  |
+| video | `veo3_1_lite` | Google Veo 3.1 Lite | 12 |  |
+| video | `happy_horse_video` | Happy Horse Video | 12.5 |  |
+| video | `minimax_h3_max` | MiniMax H3 Max | 12.5 |  |
+| video | `wan3_0_prime` | Wan 3.0 Prime | 15 |  |
+| video | `grok_video_v15` | Grok Video 1.5 | 22.5 |  |
+| video | `seedance_2_0` | Seedance 2.0 | 22.5 |  |
+| video | `gemini_omni` | Gemini Omni Flash | 24 |  |
+| video | `flux_3_video` | FLUX 3 Video | 30 |  |
+| video | `kling_4_0_flash` | Kling 4.0 Flash | 30 |  |
+| video | `veo3_1` | Google Veo 3.1 | 32 |  |
+| video | `kling4_0` | Kling 4.0 | 32.5 |  |
+| video | `ad_multiplier` | Ad Multiplier | 35 |  |
+| video | `seedance_2_5` | Seedance 2.5 | 35 |  |
+| video | `ad_multiplier_v2` | Ad Multiplier Recreate | - | Error: exactly one video_references entry is required | Hint: Run: hf model get ad_multiplier_v2 |
+| video | `bytedance_video_upscale` | Bytedance Video Upscale | - | Error: Missing required params: video_references | Unknown params: prompt | Hint: Run: hf model get bytedance_video_upscale |
+| video | `depth_anything_video` | Depth Anything Video | - | Error: Missing required params: video_references | Unknown params: prompt | Hint: Run: hf model get depth_anything_video |
+| video | `flux_3_video_edit` | FLUX 3 Video Edit | - | Error: Missing required params: video_references | Hint: Run: hf model get flux_3_video_edit |
+| video | `fps_boost` | FPS Boost | - | Error: Missing required params: fps, variant, video_references | Unknown params: prompt | Hint: Run: hf model get fps_boost |
+| video | `gemini_omni_flash_1_1` | Gemini Omni Flash 1.1 | - | Error: Missing required params: mode | Hint: Run: hf model get gemini_omni_flash_1_1 |
+| video | `gemini_omni_flash_1_2` | Gemini Omni Flash 1.2 | - | Error: Missing required params: mode | Hint: Run: hf model get gemini_omni_flash_1_2 |
+| video | `hf_mult_motion_control` | Genjutsu | - | Error: at least one image_references entry is required | exactly one video_references entry is required | Hint: Run: hf model get hf_mult_motion_control |
+| video | `hf_mult_motion_control_flash` | Genjutsu Lite | - | Error: at least one image_references entry is required | exactly one video_references entry is required | Hint: Run: hf model get hf_mult_motion_control_flash |
+| video | `hf_mult_replace_object` | Genjutsu | - | Error: at least one image_references entry is required | exactly one video_references entry is required | Hint: Run: hf model get hf_mult_replace_object |
+| video | `hf_mult_replace_object_flash` | Genjutsu Lite | - | Error: at least one image_references entry is required | exactly one video_references entry is required | Hint: Run: hf model get hf_mult_replace_object_flash |
+| video | `intone` | Higgsfield Intone | - | Error: one or two character_images are required | one to six audio_references are required | Hint: Run: hf model get intone |
+| video | `kling_video_edit` | Kling 3.0 Omni Edit | - | Error: Missing required params: video_references | Hint: Run: hf model get kling_video_edit |
+| video | `sam_3_video` | Remove Background | - | Error: exactly one video_references entry is required | Hint: Run: hf model get sam_3_video |
+| video | `topaz_hyperion_2_5` | Topaz Hyperion 2.5 | - | Error: Missing required params: video_references | Unknown params: prompt | Hint: Run: hf model get topaz_hyperion_2_5 |
+| video | `topaz_video` | Topaz | - | Error: Missing required params: video_references | Unknown params: prompt | Hint: Run: hf model get topaz_video |
+| video | `video_background_remover` | Video Background Remover | - | Error: Unknown params: prompt | Hint: Run: hf model get video_background_remover |
+| video | `video_deflicker` | Video Deflicker | - | Error: Missing required params: input_video | Unknown params: prompt | Hint: Run: hf model get video_deflicker |
+| video | `video_upscale` | Video Upscale | - | Error: Missing required params: input_video | Unknown params: prompt | Hint: Run: hf model get video_upscale |
+# Higgsfield: matriz de costos para arte de videojuego
+
+Generado con `herramientas/hf_costos_matriz.py`. Solo `generate cost`: no se creo ningun trabajo ni se gasto ningun credito.
+Las cotizaciones con imagen usan un marcador gris; las de `model_url` usan una URL ficticia.
+
+| Grupo | Caso | Creditos | Error |
+|---|---|---|---|
+| imagen | gpt_image_2_6 calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_6 calidad=low 2k | 0.5 |  |
+| imagen | gpt_image_2_6 calidad=low 4k | 0.75 |  |
+| imagen | gpt_image_2_6 calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_6 calidad=medium 2k | 1 |  |
+| imagen | gpt_image_2_6 calidad=medium 4k | 1.25 |  |
+| imagen | gpt_image_2_6 calidad=high 1k | 1.5 |  |
+| imagen | gpt_image_2_6 calidad=high 2k | 2.75 |  |
+| imagen | gpt_image_2_6 calidad=high 4k | 4.25 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 1k | 2.5 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 2k | 4.5 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 4k | 7 |  |
+| imagen | gpt_image_2_6 calidad=max 1k | 5 |  |
+| imagen | gpt_image_2_6 calidad=max 2k | 9 |  |
+| imagen | gpt_image_2_6 calidad=max 4k | 15 |  |
+| imagen | gpt_image_2_6 high 1k fondo transparente | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k con 1 referencia | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k con 4 referencias | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k lote de 4 | 6 |  |
+| imagen | gpt_image_2_6_flare calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_5 calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_6_flare calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_5 calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_6_flare calidad=high 1k | 1.5 |  |
+| imagen | gpt_image_2_5 calidad=high 1k | 1.5 |  |
+| imagen | nano_banana_pro 1k | 2 |  |
+| imagen | nano_banana_flash (NB2) 1k | 1.5 |  |
+| imagen | nano_banana_2_1 1k | 1.5 |  |
+| imagen | nano_banana_pro 2k | 2 |  |
+| imagen | nano_banana_flash (NB2) 2k | 2 |  |
+| imagen | nano_banana_2_1 2k | 2 |  |
+| imagen | nano_banana_pro 4k | 4 |  |
+| imagen | nano_banana_flash (NB2) 4k | 3 |  |
+| imagen | nano_banana_2_1 4k | 3 |  |
+| imagen | nano_banana_pro 2k con 4 referencias | 2 |  |
+| imagen | seedream_5_5 1k | 2.5 |  |
+| imagen | 3d_jutsu_angles 1k | 1.25 |  |
+| imagen | seedream_5_5 1.5k | 2.5 |  |
+| imagen | 3d_jutsu_angles 1.5k | 1.25 |  |
+| imagen | seedream_5_5 2k | 3.5 |  |
+| imagen | 3d_jutsu_angles 2k | 2.5 |  |
+| imagen | 3d_jutsu_angles 2k con 1 referencia | 2.5 |  |
+| imagen | seedream_5_5 2k con 4 referencias | 3.5 |  |
+| imagen | seedream_v5_pro (defecto) | 2.5 |  |
+| imagen | seedream_v5_lite (defecto) | 1 |  |
+| imagen | seedream_5_0_flash (defecto) | 0.5 |  |
+| imagen | seedream_v4_5 (defecto) | 1 |  |
+| imagen | flux_3_image (defecto) | 2 |  |
+| imagen | flux_2 (defecto) | 1 |  |
+| imagen | flux_kontext (defecto) | 1.5 |  |
+| imagen | z_image (defecto) | 0.15 |  |
+| imagen | text2image_soul_v2 (defecto) | 0.12 |  |
+| imagen | soul_location (defecto) | 0.12 |  |
+| imagen | recraft_v4_1 (defecto) | 1.25 |  |
+| imagen | ideogram_4_5 (defecto) | 6.25 |  |
+| imagen | kling_omni_image (defecto) | 0.5 |  |
+| imagen | image_auto (defecto) | 2 |  |
+| imagen | nano_banana (defecto) | 1 |  |
+| imagen | nano_banana_2_lite (defecto) | 1 |  |
+| imagen | grok_image_2_0 (defecto) | 2 |  |
+| imagen | minimax_h3_image (defecto) | 4 |  |
+| imagen | flux_kontext con 1 referencia | 1.5 |  |
+| imagen | ideogram_vector generate calidad=low | 4 |  |
+| imagen | ideogram_vector generate calidad=medium | 5 |  |
+| imagen | ideogram_vector generate calidad=high | 6.5 |  |
+| imagen | ideogram_vector vectorize | 3 |  |
+| utilidad | image_background_remover | 1 |  |
+| utilidad | bytedance_image_upscale 2k | 2 |  |
+| utilidad | bytedance_image_upscale 4k | 2 |  |
+| utilidad | topaz_image 2048x2048 | - | Error: job_type 'topaz_image' does not support alpha v2 cost estimation |
+| utilidad | topaz_image 4096x4096 | - | Error: job_type 'topaz_image' does not support alpha v2 cost estimation |
+| utilidad | nano_banana_2_relight | 2 |  |
+| utilidad | nano_banana_2_shots | 4 |  |
+| utilidad | outpaint | 2 |  |
+| utilidad | flux_2_pro_outpaint | - | Error: at least one expand side must be non-zero | Hint: Run: hf model get flux_2_pro_outpaint |
+| autosprite | autosprite iso_walk_down tier=turbo 25f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down tier=pro 25f 256px | 3 |  |
+| autosprite | autosprite iso_walk_down tier=max 25f 256px | 14 |  |
+| autosprite | autosprite idle turbo 25f 256px | 2 |  |
+| autosprite | autosprite walk turbo 25f 256px | 2 |  |
+| autosprite | autosprite attack turbo 25f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 8f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 12f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 16f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 49f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 128px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 512px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 1024px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo remove_bg=ultra | 2 |  |
+| autosprite | autosprite custom turbo | 2 |  |
+| autosprite | autosprite no humanoide (gato) iso_walk_down turbo | 2 |  |
+| 3d | tripo_3d texto (defecto) | 5 |  |
+| 3d | tripo_3d texto sin textura | 2.5 |  |
+| 3d | tripo_3d texto detallado | 12.5 |  |
+| 3d | hunyuan3d_v3_1_text_to_3d std | 7 |  |
+| 3d | hunyuan3d_v3_1_text_to_3d pro | 12 |  |
+| 3d | meshy_v6_text_to_3d full | 25 |  |
+| 3d | meshy_v6_text_to_3d preview | 25 |  |
+| 3d | meshy_v6_text_to_3d lowpoly | 25 |  |
+| 3d | image_to_3d (defecto: sin textura) | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d con textura | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + remesh | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + rig | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + rig + animacion | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas (defecto) | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas con textura | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas textura + rig | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | meshy_v7_image_to_3d (defecto: textura + remesh) | 38 |  |
+| 3d | meshy_v7_image_to_3d lowpoly | 38 |  |
+| 3d | meshy_v7_image_to_3d sin textura | 25 |  |
+| 3d | meshy_v7_image_to_3d + rig | 44 |  |
+| 3d | meshy_v7_image_to_3d + rig + animacion | 47.5 |  |
+| 3d | meshy_v7_image_to_3d ultra | 44 |  |
+| 3d | hunyuan3d_v3_image_to_3d Normal | 11 |  |
+| 3d | hunyuan3d_v3_image_to_3d LowPoly quads | - | Error: face_count: Input should be greater than or equal to 40000 |
+| 3d | hunyuan3d_v3_image_to_3d Geometry (sin textura) | 7 |  |
+| 3d | hunyuan3d_v3_image_to_3d Normal + PBR | 15 |  |
+| 3d | tripo_h3_1_image_to_3d (defecto) | 9 |  |
+| 3d | tripo_h3_1_image_to_3d sin textura | 6 |  |
+| 3d | tripo_h3_1_image_to_3d quads 8000 caras | 10.5 |  |
+| 3d | tripo_h3_1_image_to_3d detallado | 18 |  |
+| 3d | tripo_h3_1_multiview_to_3d 4 vistas | 9 |  |
+| 3d | tripo_p2_image_to_3d (defecto) | 34 |  |
+| 3d | tripo_p2_image_to_3d quads 8000 caras | 34 |  |
+| 3d | tripo_p2_image_to_3d textura=fast | 34 |  |
+| 3d | tripo_p2_image_to_3d textura=detailed | 37 |  |
+| 3d | tripo_p2_image_to_3d textura=extreme | 40 |  |
+| 3d | sam_3_3d (objetos desde foto) | - | Error: job_type 'sam_3_3d' does not support alpha v2 cost estimation |
+| 3d | sam_3_3d_body | 1 |  |
+| 3d | 3d_rigging (solo rig) | - | Error: job_type '3d_rigging' does not support alpha v2 cost estimation |
+| 3d | 3d_rigging + animacion | - | Error: job_type '3d_rigging' does not support alpha v2 cost estimation |
+| 3d | meshy_v5_remesh quads 8000 | 6 |  |
+| 3d | meshy_v5_retexture por texto | 9.5 |  |
+| 3d | meshy_v5_retexture por imagen | 9.5 |  |
+| audio | elevenlabs_music_v2_5 15s instrumental | 2.18 |  |
+| audio | sonilo_music 15s | 0.94 |  |
+| audio | elevenlabs_music_v2_5 30s instrumental | 4.36 |  |
+| audio | sonilo_music 30s | 1.88 |  |
+| audio | elevenlabs_music_v2_5 60s instrumental | 8.72 |  |
+| audio | sonilo_music 60s | 3.75 |  |
+| audio | elevenlabs_music_v2_5 120s instrumental | 17.44 |  |
+| audio | sonilo_music 120s | 7.5 |  |
+| audio | elevenlabs_music_v2_5 180s instrumental | 26.16 |  |
+| audio | sonilo_music 180s | 11.25 |  |
+| audio | elevenlabs_music_v2 30s | 1.92 |  |
+| audio | elevenlabs_music_v2 120s | 7.68 |  |
+| audio | mirelo_text_to_audio (SFX) 1s | 0.25 |  |
+| audio | mirelo_text_to_audio (SFX) 3s | 0.75 |  |
+| audio | mirelo_text_to_audio (SFX) 5s | 1.25 |  |
+| audio | mirelo_text_to_audio (SFX) 10s | 2.5 |  |
+| audio | seed_audio (defecto) | 0.1 |  |
+| video | seedance_2_0_mini texto (defecto) | 5 |  |
+| video | seedance_2_0_mini imagen->video (defecto) | 5 |  |
+| video | seedance1_5 texto (defecto) | 4.8 |  |
+| video | seedance1_5 imagen->video (defecto) | 4.8 |  |
+| video | grok_video_v15_lite texto (defecto) | 5 |  |
+| video | grok_video_v15_lite imagen->video (defecto) | 5 |  |
+| video | kling3_0_turbo texto (defecto) | 7.5 |  |
+| video | kling3_0_turbo imagen->video (defecto) | 7.5 |  |
+| video | wan3_0 texto (defecto) | 8.75 |  |
+| video | wan3_0 imagen->video (defecto) | 8.75 |  |
+| video | kling_o3_flf texto (defecto) | 6.25 |  |
+| video | kling_o3_flf imagen->video (defecto) | 6.25 |  |
+| video | veo3_1_lite texto (defecto) | 12 |  |
+| video | veo3_1_lite imagen->video (defecto) | 12 |  |
+| video | kling4_0 texto (defecto) | 32.5 |  |
+| video | kling4_0 imagen->video (defecto) | - | Error: Text-to-video does not accept reference inputs. | Hint: Run: hf model get kling4_0 |
+| video | seedance_2_5 texto (defecto) | 35 |  |
+| video | seedance_2_5 imagen->video (defecto) | - | Error: mode 't2v' does not accept reference media | Hint: Run: hf model get seedance_2_5 |
+
+web search: 
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'C:/Users/guill/.codex/plugins/cache/openai-primary-runtime/pdf/26.1111.10930/skills/pdf/SKILL.md' -Encoding UTF8" in C:\Users\guill\Desktop\Juego 2d-hd
+web search: site.docs.godotengine.org stable optimizing 3d performance transparent materials ...
+codex
+La matriz local ofrece cotizaciones útiles para fijar límites: Tripo H3.1 imagen→3D figura en 9 créditos, remesh en 6 y retexturizado en 9,5; otras rutas no tienen estimación disponible. Son cotizaciones de prueba, no cargos reales ni garantías de calidad. El presupuesto contabilizará cada operación, incluidos los resultados rechazados.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -c \"import json,pathlib; p=pathlib.Path('Nasa_Game/Fase_0_Tecnica/Datos/hf_modelos.json'); d=json.loads(p.read_text(encoding='utf-8-sig')); print(type(d).__name__); print(str(d)[:2500])\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 30864ms:
+---
+name: "pdf"
+description: "Read, create, inspect, render, and verify PDF files where visual layout matters, including fillable AcroForms. Use Poppler rendering plus Python tools such as reportlab, pdfplumber, and pypdf for generation and extraction."
+---
+
+# PDF Skill
+
+## When To Use
+
+- Read or review PDF content where layout and visuals matter.
+- Create PDFs programmatically with reliable formatting.
+- Fill and validate interactive PDF forms.
+- Validate final rendering before delivery.
+
+## Tools + Contract Requirements
+
+Immediately before the first create/edit authoring command, run `mark_artifact_operation_started.mjs` successfully exactly once using the command below. Do not run it for read-only work. For edits, replace `create` with `edit`; adjust the expected count and output format to match the requested outputs.
+
+
+
+```bash
+node container_tools/mark_artifact_operation_started.mjs --operation-kind create --expected-output-count 1 --output-format pdf
+```
+
+## Workflow
+
+1. Prefer visual review: render PDF pages to PNGs and inspect them.
+   - Use `pdftoppm` from the bundled runtime or system Poppler when available.
+   - If unavailable, install Poppler or ask the user to review the output locally.
+2. Use `reportlab` to generate PDFs when creating new documents.
+3. Use `pdfplumber` or `pypdf` for text extraction and quick checks; do not rely on text extraction for layout fidelity.
+4. After each meaningful update, re-render pages and verify alignment, spacing, and legibility.
+
+## Fill And Validate AcroForms
+
+Visual review alone is not a correctness check for a fillable PDF. A page `/Widget` annotation can render a value from its appearance stream while the canonical `/AcroForm/Fields` tree is missing or contains a stale value.
+
+1. Keep the result interactive by default; set `flatten=True` only when the user explicitly requests a completed, static form. Preserve the source PDF, and do not flatten a signed PDF without an explicit workflow decision.
+2. Inspect both representations before filling: enumerate fields from `reader.get_fields()` and `/Widget` annotations from every page's `/Annots`, following `/Parent` and `/Kids`. If a widget and a canonical field have the same name but are distinct objects with no `/Parent` relationship, do not call `reattach_fields()` blindly: it can create a second top-level field with the same name. Report the ambiguity or produce a static result.
+3. Recover genuinely orphaned widgets, fill all pages, and write the result with `pypdf`:
+
+```python
+from pypdf import PdfReader, PdfWriter
+from pypdf.generic import NameObject
+
+reader = PdfReader(input_pdf)
+writer = PdfWriter()
+writer.clone_document_from_reader(reader)
+
+# Restores widgets that are missing from /AcroForm/Fields.
+writer.reattach_fields()
+fields = writer.get_fields() or {}
+missing = set(expected_values) - set(fields)
+if missing:
+    raise ValueError(f"Form fields not found after repair: {sorted(missing)}")
+
+values_to_write = dict(expected_values)
+if flatten:
+    # Paint every existing value before removing every widget.
+    values_to_write = {
+        name: field.get("/V", "/Off" if field.get("/FT") == "/Btn" else "")
+        for name, field in fields.items()
+    }
+    values_to_write.update(expected_values)
+
+writer.update_page_form_field_values(
+    None, values_to_write, auto_regenerate=False, flatten=flatten
+)
+
+if flatten:
+    # pypdf's flatten=True paints appearances but does not remove widgets.
+    writer.remove_annotations(subtypes="/Widget")
+    writer.root_object.pop(NameObject("/AcroForm"), None)
+
+with open(output_pdf, "wb") as stream:
+    writer.write(stream)
+```
+
+4. Reopen the written PDF before delivery. For an interactive result, require every expected field to be present in `get_fields()` with the expected `/V`, enumerate page widgets again, and confirm their effective `/V` (the widget value or inherited `/Parent` value) agrees. Confirm each updated widget has a non-empty `/AP` `/N` appearance and render the final pages to catch stale or clipped appearances. Do not rely on `/NeedAppearances` or a successful PNG render as proof that logical field data was updated.
+5. For a flattened result, require zero `/Widget` annotations and no remaining `/AcroForm` field tree after reopening, then render the final pages. Keep an editable copy when the user may need to revise the form.
+
+## Temp And Output Conventions
+
+- Use `tmp/pdfs/` for intermediate files; delete them when done.
+- Write final artifacts under `output/pdf/` when working in this repo.
+- Keep filenames stable and descriptive.
+
+## Dependencies
+
+Prefer the Codex bundled workspace/runtime dependencies when available. The primary runtime is expected to include:
+
+- Python packages: `reportlab`, `pdfplumber`, `pypdf`
+- Rendering tools: `pdftoppm` and `pdfinfo` from Poppler
+
+If a dependency is missing, install only what is needed.
+
+Python packages:
+
+```bash
+uv pip install reportlab pdfplumber pypdf
+```
+
+If `uv` is unavailable:
+
+```bash
+python3 -m pip install reportlab pdfplumber pypdf
+```
+
+System tools for rendering:
+
+```bash
+# macOS (Homebrew)
+brew install poppler
+
+# Ubuntu/Debian
+sudo apt-get install -y poppler-utils
+```
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it locally.
+
+## Environment
+
+No required environment variables.
+
+## Rendering Command
+
+```bash
+pdftoppm -png "$INPUT_PDF" "$OUTPUT_PREFIX"
+```
+
+## Quality Expectations
+
+- Maintain polished visual design: consistent typography, spacing, margins, and section hierarchy.
+- Avoid rendering issues: clipped text, overlapping elements, broken tables, black squares, or unreadable glyphs.
+- Charts, tables, and images must be sharp, aligned, and clearly labeled.
+- Use ASCII hyphens only. Avoid U+2011 and other Unicode dashes.
+- Citations and references must be human-readable; never leave tool tokens or placeholder strings.
+
+## Final Checks
+
+- Do not deliver until the latest PNG inspection shows zero visual or formatting defects.
+- Confirm headers, footers, page numbering, and section transitions look polished.
+- Keep intermediate files organized or remove them after final approval.
+
+## Final response
+
+### Final Response Citations
+
+- **Create/edit:** for created or edited PDFs, cite each final deliverable exactly once with `purpose="output"`, in its own paragraph. Briefly describe the result without repeating its filename, path, or link. Never put output directives inside prose or list items.
+- **Q&A and summaries:** Every file whose contents you summarize or use to support an answer MUST receive a `:codex-file-citation{...}` with `purpose="source"` in the final response. Use the source citation in place of the filename, wherever the filename would appear. Do not write the filename separately and append its citation at the end. Files merely inspected but not used in the answer need no citation. Do not emit output citations for unchanged files or read-only answers.
+
+- Emit `:codex-file-citation{...}` directly, without backticks, code fences, or a Markdown-link wrapper. Use verified targets only. No need to cite or reference intermediate work.
+
+For file citations, set `path` to the verified absolute file path on the task host. Omit `mode`.
+
+Some illustrative examples, real responses use verified targets outside code fences.
+
+```text
+:codex-file-citation{path="/absolute/path/review.pdf" purpose="output"}
+```
+
+```text
+The review of :codex-file-citation{path="/absolute/path/review.pdf" purpose="source"} is due Friday.
+```
+
+
+### Additional Citation Guidance
+
+For PDF Q&A, inspect complete relevant pages and preserve material headings, table/figure labels, footnotes, sources, and sample sizes. PDF citations support only plain file citations; do not add `artifact_kind`, `page_number`, or other locators.
+
+ succeeded in 3067ms:
+dict
+{'sam_3_3d_body': {'name': '3D Body', 'type': '3d', 'list_entry': {'display_name': '3D Body', 'job_type': 'sam_3_3d_body', 'type': '3d'}, 'params': {'display_name': '3D Body', 'job_type': 'sam_3_3d_body', 'params': [{'name': 'export_meshes', 'type': 'boolean', 'default': True, 'required': False}, {'name': 'image_references', 'type': 'array', 'default': None, 'required': True}, {'name': 'include_3d_keypoints', 'type': 'boolean', 'default': True, 'required': False}, {'name': 'include_mhr_params', 'type': 'boolean', 'default': True, 'required': False}], 'rules': [], 'type': '3d'}, 'cost_default': None, 'cost_error': 'Error: Missing required params: image_references | Unknown params: prompt | Hint: Run: hf model get sam_3_3d_body'}, 'sam_3_3d': {'name': '3D Objects', 'type': '3d', 'list_entry': {'display_name': '3D Objects', 'job_type': 'sam_3_3d', 'type': '3d'}, 'params': {'display_name': '3D Objects', 'job_type': 'sam_3_3d', 'params': [{'name': 'detection_threshold', 'type': 'number|null', 'default': None, 'required': False}, {'name': 'export_textured_glb', 'type': 'boolean', 'default': True, 'required': False}, {'name': 'folder_id', 'type': 'string|null', 'default': None, 'required': False}, {'name': 'image_references', 'type': 'array', 'default': None, 'required': True}, {'name': 'prompt', 'type': 'string', 'default': '', 'required': False}, {'name': 'seed', 'type': 'integer|null', 'default': None, 'required': False}], 'rules': [], 'type': '3d'}, 'cost_default': None, 'cost_error': 'Error: Missing required params: image_references | Hint: Run: hf model get sam_3_3d'}, '3d_rigging': {'name': '3D Rigging', 'type': '3d', 'list_entry': {'display_name': '3D Rigging', 'job_type': '3d_rigging', 'type': '3d'}, 'params': {'display_name': '3D Rigging', 'job_type': '3d_rigging', 'params': [{'name': 'animation_action_id', 'type': 'integer|null', 'default': None, 'required': False}, {'name': 'enable_animation', 'type': 'boolean', 'default': False, 'required': False}, {'name': 'enable_safety_checker', 'type': 'boolean|null', 'default': None, 'required': False}, {'name': 'folder_id', 'type': 'string|null', 'default': None, 'required': False}, {'name': 'height_meters', 'type': 'number|null', 'default': None, 'required': False}, {'name': 'model_url', 'type': 'string', 'default': None, 'required': True}], 'rules': [], 'type': '3d'}, 'cost_default': None, 'cost_error': 'Error: Missing required params: model_url | Unknown params: prompt | Hint: Run: hf model get 3d_rigging'},
+
+web search: 
+web search: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -c \"import json,pathlib; d=json.loads(pathlib.Path('Nasa_Game/Fase_0_Tecnica/Datos/hf_modelos.json').read_text(encoding='utf-8-sig')); names=['gpt_image_2_6','autosprite','tripo_h3_1_image_to_3d','tripo_h3_1_multiview_to_3d','meshy_v5_remesh','meshy_v5_retexture','3d_rigging']; print(json.dumps({k:d[k]['params'] for k in names},ensure_ascii=False,indent=2))\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1148ms:
+{
+  "gpt_image_2_6": {
+    "display_name": "GPT Image 2.6",
+    "job_type": "gpt_image_2_6",
+    "params": [
+      {
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "1:1",
+        "required": false,
+        "enum": [
+          "auto",
+          "1:1",
+          "3:2",
+          "2:3",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9",
+          "27:16",
+          "16:27",
+          "9:8",
+          "8:9",
+          "4:5",
+          "5:4"
+        ]
+      },
+      {
+        "name": "background",
+        "type": "string|null",
+        "default": null,
+        "required": false,
+        "enum": [
+          "auto",
+          "opaque",
+          "transparent"
+        ]
+      },
+      {
+        "name": "batch_size",
+        "type": "integer",
+        "default": 1,
+        "required": false
+      },
+      {
+        "name": "frame_count",
+        "type": "integer|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "frame_duration_ms",
+        "type": "integer|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "image_references",
+        "type": "array",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "output_format",
+        "type": "string",
+        "default": "png",
+        "required": false,
+        "enum": [
+          "png",
+          "jpeg",
+          "webp",
+          "gif",
+          "svg"
+        ]
+      },
+      {
+        "name": "prompt",
+        "type": "string",
+        "default": null,
+        "required": true
+      },
+      {
+        "name": "quality",
+        "type": "string",
+        "default": "low",
+        "required": false,
+        "enum": [
+          "auto",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ]
+      },
+      {
+        "name": "resolution",
+        "type": "string",
+        "default": "1k",
+        "required": false,
+        "enum": [
+          "1k",
+          "2k",
+          "4k"
+        ]
+      },
+      {
+        "name": "size",
+        "type": "string|null",
+        "default": null,
+        "required": false
+      }
+    ],
+    "rules": [
+      {
+        "cel": "params.output_format == \"gif\" || (params.frame_count == null && params.frame_duration_ms == null)",
+        "message": "Frame parameters are only supported for GIF output."
+      },
+      {
+        "cel": "params.output_format != \"svg\" || size(params.image_references) == 0",
+        "message": "SVG output is only supported without reference images."
+      }
+    ],
+    "type": "image"
+  },
+  "autosprite": {
+    "display_name": "AutoSprite Animation",
+    "job_type": "autosprite",
+    "params": [
+      {
+        "name": "folder_id",
+        "type": "string|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "frame_count",
+        "type": "integer",
+        "default": 25,
+        "required": false
+      },
+      {
+        "name": "frame_size",
+        "type": "integer",
+        "default": 256,
+        "required": false
+      },
+      {
+        "name": "image_references",
+        "type": "array",
+        "default": null,
+        "required": true
+      },
+      {
+        "name": "is_humanoid",
+        "type": "boolean",
+        "default": true,
+        "required": false
+      },
+      {
+        "name": "kind",
+        "type": "string",
+        "default": "idle",
+        "required": false,
+        "enum": [
+          "idle",
+          "walk",
+          "run",
+          "attack",
+          "jump",
+          "custom",
+          "iso_idle_up",
+          "iso_idle_northeast",
+          "iso_idle_right",
+          "iso_idle_southeast",
+          "iso_idle_down",
+          "iso_walk_up",
+          "iso_walk_northeast",
+          "iso_walk_right",
+          "iso_walk_southeast",
+          "iso_walk_down",
+          "iso_run_up",
+          "iso_run_northeast",
+          "iso_run_right",
+          "iso_run_southeast",
+          "iso_run_down",
+          "iso_jump_up",
+          "iso_jump_northeast",
+          "iso_jump_right",
+          "iso_jump_southeast",
+          "iso_jump_down"
+        ]
+      },
+      {
+        "name": "name",
+        "type": "string|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "prompt",
+        "type": "string|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "remove_bg",
+        "type": "string",
+        "default": "default",
+        "required": false,
+        "enum": [
+          "default",
+          "ultra"
+        ]
+      },
+      {
+        "name": "video_tier",
+        "type": "string",
+        "default": "turbo",
+        "required": false,
+        "enum": [
+          "turbo",
+          "pro",
+          "max"
+        ]
+      },
+      {
+        "name": "with_sound",
+        "type": "boolean",
+        "default": false,
+        "required": false
+      }
+    ],
+    "rules": [
+      {
+        "cel": "params.kind != \"custom\" || (type(params.prompt) == string && size(params.prompt) > 0 && type(params.name) == string && size(params.name) > 0)",
+        "message": "prompt and name are required when kind is custom"
+      },
+      {
+        "cel": "params.kind == \"custom\" || (params.prompt == null && params.name == null)",
+        "message": "prompt and name are only supported when kind is custom"
+      }
+    ],
+    "type": "image"
+  },
+  "tripo_h3_1_image_to_3d": {
+    "display_name": "Tripo H3.1 Image to 3D",
+    "job_type": "tripo_h3_1_image_to_3d",
+    "params": [
+      {
+        "name": "auto_size",
+        "type": "boolean",
+        "default": false,
+        "required": false
+      },
+      {
+        "name": "face_limit",
+        "type": "integer|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "geometry_quality",
+        "type": "string",
+        "default": "standard",
+        "required": false,
+        "enum": [
+          "standard",
+          "detailed"
+        ]
+      },
+      {
+        "name": "image_references",
+        "type": "array",
+        "default": null,
+        "required": true
+      },
+      {
+        "name": "orientation",
+        "type": "string",
+        "default": "default",
+        "required": false,
+        "enum": [
+          "default",
+          "align_image"
+        ]
+      },
+      {
+        "name": "pbr",
+        "type": "boolean",
+        "default": true,
+        "required": false
+      },
+      {
+        "name": "quad",
+        "type": "boolean",
+        "default": false,
+        "required": false
+      },
+      {
+        "name": "texture",
+        "type": "boolean",
+        "default": true,
+        "required": false
+      },
+      {
+        "name": "texture_alignment",
+        "type": "string",
+        "default": "original_image",
+        "required": false,
+        "enum": [
+          "original_image",
+          "geometry"
+        ]
+      },
+      {
+        "name": "texture_quality",
+        "type": "string",
+        "default": "standard",
+        "required": false,
+        "enum": [
+          "standard",
+          "detailed"
+        ]
+      },
+      {
+        "name": "texture_seed",
+        "type": "integer|null",
+        "default": null,
+        "required": false
+      }
+    ],
+    "rules": [],
+    "type": "3d"
+  },
+  "tripo_h3_1_multiview_to_3d": {
+    "display_name": "Tripo H3.1 Multiview to 3D",
+    "job_type": "tripo_h3_1_multiview_to_3d",
+    "params": [
+      {
+        "name": "auto_size",
+        "type": "boolean",
+        "default": false,
+        "required": false
+      },
+      {
+        "name": "face_limit",
+        "type": "integer|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "geometry_quality",
+        "type": "string",
+        "default": "standard",
+        "required": false,
+        "enum": [
+          "standard",
+          "detailed"
+        ]
+      },
+      {
+        "name": "image_references",
+        "type": "array",
+        "default": null,
+        "required": true
+      },
+      {
+        "name": "orientation",
+        "type": "string",
+        "default": "default",
+        "required": false,
+        "enum": [
+          "default",
+          "align_image"
+        ]
+      },
+      {
+        "name": "pbr",
+        "type": "boolean",
+        "default": true,
+        "required": false
+      },
+      {
+        "name": "quad",
+        "type": "boolean",
+        "default": false,
+        "required": false
+      },
+      {
+        "name": "texture",
+        "type": "boolean",
+        "default": true,
+        "required": false
+      },
+      {
+        "name": "texture_alignment",
+        "type": "string",
+        "default": "original_image",
+        "required": false,
+        "enum": [
+          "original_image",
+          "geometry"
+        ]
+      },
+      {
+        "name": "texture_quality",
+        "type": "string",
+        "default": "standard",
+        "required": false,
+        "enum": [
+          "standard",
+          "detailed"
+        ]
+      },
+      {
+        "name": "texture_seed",
+        "type": "integer|null",
+        "default": null,
+        "required": false
+      }
+    ],
+    "rules": [],
+    "type": "3d"
+  },
+  "meshy_v5_remesh": {
+    "display_name": "Meshy 5 Remesh",
+    "job_type": "meshy_v5_remesh",
+    "params": [
+      {
+        "name": "model_url",
+        "type": "string",
+        "default": null,
+        "required": true
+      },
+      {
+        "name": "origin_at",
+        "type": "string|null",
+        "default": null,
+        "required": false,
+        "enum": [
+          "bottom",
+          "center"
+        ]
+      },
+      {
+        "name": "resize_height",
+        "type": "number|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "target_polycount",
+        "type": "integer|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "topology",
+        "type": "string|null",
+        "default": null,
+        "required": false,
+        "enum": [
+          "triangle",
+          "quad"
+        ]
+      }
+    ],
+    "rules": [],
+    "type": "3d"
+  },
+  "meshy_v5_retexture": {
+    "display_name": "Meshy 5 Retexture",
+    "job_type": "meshy_v5_retexture",
+    "params": [
+      {
+        "name": "enable_original_uv",
+        "type": "boolean",
+        "default": true,
+        "required": false
+      },
+      {
+        "name": "enable_pbr",
+        "type": "boolean",
+        "default": false,
+        "required": false
+      },
+      {
+        "name": "enable_safety_checker",
+        "type": "boolean",
+        "default": true,
+        "required": false
+      },
+      {
+        "name": "image_style_url",
+        "type": "string|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "model_url",
+        "type": "string",
+        "default": null,
+        "required": true
+      },
+      {
+        "name": "text_style_prompt",
+        "type": "string|null",
+        "default": null,
+        "required": false
+      }
+    ],
+    "rules": [
+      {
+        "cel": "params.text_style_prompt != null || params.image_style_url != null",
+        "message": "text_style_prompt or image_style_url is required"
+      }
+    ],
+    "type": "3d"
+  },
+  "3d_rigging": {
+    "display_name": "3D Rigging",
+    "job_type": "3d_rigging",
+    "params": [
+      {
+        "name": "animation_action_id",
+        "type": "integer|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "enable_animation",
+        "type": "boolean",
+        "default": false,
+        "required": false
+      },
+      {
+        "name": "enable_safety_checker",
+        "type": "boolean|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "folder_id",
+        "type": "string|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "height_meters",
+        "type": "number|null",
+        "default": null,
+        "required": false
+      },
+      {
+        "name": "model_url",
+        "type": "string",
+        "default": null,
+        "required": true
+      }
+    ],
+    "rules": [],
+    "type": "3d"
+  }
+}
+
+codex
+Usaré la habilidad `pdf:pdf` para consultar el plan maestro en solo lectura y alinear estas puertas de arte con sus ocho fases. El informe también separará lo comprobable con las herramientas instaladas de lo pendiente, especialmente la edición de topología, UV y pesos de animación.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -B -c \"import importlib.util; print({m:bool(importlib.util.find_spec(m)) for m in ['pypdf','pdfplumber','fitz','PIL','numpy']})\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1419ms:
+{'pypdf': True, 'pdfplumber': False, 'fitz': True, 'PIL': True, 'numpy': True}
+
+web search: 
+web search: https://gdcvault.com/play/1034593/Art-Direction-Summit-Pre-Production
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -B -c \"from pypdf import PdfReader; r=PdfReader('Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf'); print('PAGINAS',len(r.pages)); print('\\n'.join('PAGINA '+str(i+1)+'\\n'+p.extract_text() for i,p in enumerate(r.pages)))\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 5247ms:
+PAGINAS 3
+PAGINA 1
+Plan Maestro de Desarrollo: Proyecto
+NASA-Ecuador (AAA Scope)
+Instrucción al Agente de IA: Actúa como un Director de Videojuegos AAA, Arquitecto Técnico
+Principal en Godot 4, y Director de Arte/Sonido. El objetivo es estructurar un RPG de aventura,
+simulación y exploración educativa con valores de producción de la más alta calidad.
+Concepto Base: Un estudiante de ingeniería de control en Guayaquil en su viaje para llegar a la
+NASA. El juego enseñará ciencia real (astrofísica, electrónica) mediante ludificación. Se utilizará
+un estilo 2.5D/2D-HD, entornos low-poly generados con Higgsfield AI, música
+ambient/shoegaze, tipografía DotGothic16 y un gato científico interactivo.
+Regla Maestra de Flujo de Trabajo (Puertas de Validación): Abordaremos el desarrollo en 8
+fases estrictas. Presentarás un análisis exhaustivo para UNA SOLA FASE a la vez y te detendrás.
+No avanzarás hasta recibir aprobación milimétrica o correcciones. Se exige un nivel de detalle técnico
+y artístico digno de un estudio First-Party.
+Fase 0: Investigación Técnica, Arquitectura y Pipeline AAA
+Motor y Renderizado: Uso de Godot 4 (Forward+). Análisis de iluminación global (SDFGI) vs.
+Lightmaps horneados para el estilo 2D-HD. Técnicas para proyectar sombras 3D realistas sobre
+sprites 2D ortogonales.
+Pipeline de Arte con Inteligencia Artificial: Creación de una tubería de trabajo (pipeline)
+automatizada o semi-automatizada para generar mallas base con Higgsfield, retopología
+automática, mapeo UV y texturizado para asegurar consistencia visual y rendimiento.
+Estructura de Datos: Arquitectura de código (ECS - Entity Component System vs OOP clásico
+de Godot). Configuración de control de versiones (Git LFS para recursos pesados) e integración
+continua (CI/CD) para builds automáticos.
+Fase 1: Dirección de Arte Visual y Cinematografía
+Paleta y Teoría del Color: Contraste narrativo visual. Guayaquil se representará con tonos
+cálidos (naranjas, amarillos, verdes tropicales húmedos) y la NASA/Centros de simulación con
+tonos asépticos y técnicos (azules profundos, grises titanio, acentos dorados).
+Identidad Low-Poly Estilizada: No es un low-poly genérico. Definiremos reglas de
+sombreado (ej. cel-shading con rim lighting), sin interpolación de normales en bordes duros, y
+texturas tipo hand-painted para integrar los modelos de Higgsfield al mundo 2.5D.
+Proyecto NASA-Ecuador (AAA Godot GDD) Página 1 de 3
+PAGINA 2
+Cinematografía y "Game Feel" de Cámara: Cámaras virtuales dinámicas en Godot
+(PhantomCamera). Uso de tiempos muertos, planos contemplativos (inspiración Wong Kar-wai)
+para enfatizar la soledad del estudio y la magnitud del espacio.
+Fase 2: Estructura Narrativa y Diseño de Misiones
+Progresión del Héroe: De reparar microcontroladores en el barrio a programar simuladores
+orbitales. Estructura de actos claros y pacing (ritmo de juego).
+Ludificación Educativa AAA: Integración de conceptos reales (Leyes de Kepler, compuertas
+lógicas, telemetría) en rompecabezas táctiles. Nunca será un "examen", será una herramienta de
+supervivencia o progreso mecánico.
+Sistema de Diálogos: Uso de árboles de diálogo ramificados, localización profunda (i18n), y
+tono emocional que equilibre el humor costeño con el rigor científico hiperrealista.
+Fase 3: Personajes, Animación y Entidades
+Diseño del Protagonista: Estética urbana y técnica (techwear/streetwear). Análisis de
+animaciones: ¿Sprites 2D dibujados a mano con múltiples direcciones (ej. 8 direcciones) o
+modelos 3D renderizados como sprites?
+El Gato Científico: Diseño de IA del compañero. Usaremos NavigationServer en Godot
+para un pathfinding orgánico. Mecánicas: detección de recursos, asistencia en rompecabezas y
+puerto de interacción secundaria.
+NPCs y Ecosistema: Diseño de rutinas diarias de los personajes secundarios para dar vida al
+mundo (estilo Majora's Mask o Fable).
+Fase 4: Diseño Acústico Espacial y Banda Sonora
+Sistemas Dinámicos (FMOD/Wwise): Implementación de audio adaptativo. La música
+transiciona fluidamente entre exploración y concentración científica.
+Dirección Musical (OST): Combinación de Kankyō Ongaku (Ambient japonés: Hiroshi
+Yoshimura, Meitei) para estudio y ciudad, mezclado con guitarras etéreas (Shoegaze) y
+sintetizadores modulares intensos para descubrimientos astronómicos.
+SFX Táctil: El sonido debe ser hiper-satisfactorio (clics de teclados mecánicos, crujidos de
+soldadura de estaño, zumbidos de osciloscopios). Reverb calculado por volumen del entorno en
+Godot.
+Proyecto NASA-Ecuador (AAA Godot GDD) Página 2 de 3
+PAGINA 3
+Fase 5: Level Design y Generación Masiva (Higgsfield)
+Zona / Bioma Mecánica Principal Lista de Props (Higgsfield)
+Cuarto / Guayaquil
+Centro
+Gestión de recursos, estudio
+teórico
+Placas base, libros, cautín, ventiladores, flora
+local
+Laboratorio
+Universitario
+Ensamblaje, puzzles de
+electrónica
+Osciloscopios, brazos robóticos, pizarrones
+densos
+Simulador Espacial
+(NASA) Telemetría, cálculo orbital Cápsulas, servidores mainframe, trajes
+presurizados
+Se creará un manifiesto estricto para que los prompts ingresados en la IA arrojen topologías
+optimizadas para el motor.
+Fase 6: Mecánicas Core, Físicas y Game Feel
+Manejo de Input: Input buffering y coyote time adaptados a un RPG. El movimiento debe
+sentirse tan pulido como en un Action-RPG de PlatinumGames, incluso si el juego es pausado.
+Sistemas Interactivos: Máquinas de estado finito (FSM) para la recolección, crafting de placas
+de circuito (PCBs) y minijuegos de programación.
+Gestión de Memoria y Guardado: Arquitectura robusta de guardado de estado mundial
+(Serialización JSON o binaria segura).
+Fase 7: UI/UX, Tipografía y Accesibilidad AAA
+Arquitectura de UI (HUD): Uso de la tipografía DotGothic16 como ancla estética. Menús
+minimalistas inspirados en telemetría de los 80s y terminales de comandos reales.
+Accesibilidad (A11y): Cumplimiento de estándares AAA: mapeo total de controles, modos para
+daltonismo (modificando la paleta de la Fase 1 si es necesario), escalado de texto dinámico y
+reducción de movimiento para mareos.
+Feedback Visual: Uso de Shaders para destacar objetos interactivos (outlines) sin romper la
+inmersión del entorno.
+Proyecto NASA-Ecuador (AAA Godot GDD) Página 3 de 3
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'magick -version' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1366ms:
+Version: ImageMagick 7.1.2-29 Q16-HDRI x64 360eda5:20260727 https://imagemagick.org
+Copyright: (C) 1999 ImageMagick Studio LLC
+License: https://imagemagick.org/license/
+Features: Channel-masks(64-bit) Cipher DPC HDRI Modules OpenCL OpenMP(2.0) 
+Delegates (built-in): bzlib cairo freetype gslib heic jng jp2 jpeg jxl lcms lqr lzma openexr pangocairo png ps raqm raw rsvg tiff webp xml zip zlib
+Compiler: Visual Studio 2026 (195136248)
+
+web search: 
+web search: site.docs.godotengine.org stable import process .godot version control ...
+web search: 
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "magick 'Nasa_Game/Referencias/Tablero_usuario/ref_05.jpg' -colorspace LinearGray -format 'ancho=%w alto=%h media=%[fx:mean] desviacion=%[fx:standard_deviation]' info:" in C:\Users\guill\Desktop\Juego 2d-hd
+web search: site.docs.blender.org/manual/en/4.5/modeling/meshes/retopology.html "deformed" "manually" ...
+ succeeded in 786ms:
+ancho=1600 alto=720 media=0.154224 desviacion=0.155854
+codex
+El plan maestro reserva la dirección visual para la Fase 1 y los personajes para la Fase 3. Este informe definirá el proceso y las pruebas piloto de Fase 0, con propuestas visuales pendientes de aprobación. La ruta 3D tendrá una prueba temprana de deformación e importación: obtener una malla o un rig no bastará para aprobarla.
+web search: 
+web search: site.learn.toonboom.com model sheets turnaround character proportions ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -B -c \"import fitz; d=fitz.open('Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf'); print('Paginas verificadas:',len(d)); print('Dimensiones:',[(round(p.rect.width),round(p.rect.height)) for p in d])\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1122ms:
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+Paginas verificadas: 3
+Dimensiones: [(595, 842), (595, 842), (595, 842)]
+
+codex
+# Producción y validación de arte con IA — Fase 0
+
+## Resumen ejecutivo
+
+Se recomienda adoptar la disciplina documental y de revisión de un estudio, con un alcance adecuado para una sola persona: pocos recursos, referencias aprobadas, pruebas dentro de Godot y trazabilidad de cada gasto.
+
+El proceso debe separar **aprobación de diseño**, **aprobación técnica** y **aprobación en contexto**. Una imagen atractiva, una malla generada o un rig automático no demuestran por sí solos que el recurso esté terminado.
+
+Antes de producir personajes o escenarios completos, conviene demostrar una cadena pequeña: hoja coherente → recurso importable → animación funcional → cámara real → rendimiento medido. Los 1000 créditos deben administrarse mediante límites por recurso, por etapa y por proyecto, incluyendo resultados rechazados.
+
+Este informe propone entregables, puertas, métricas y cuatro plantillas copiables a Obsidian. Los valores numéricos son **criterios iniciales propuestos**, pendientes de calibración; no son estándares AAA ni resultados de pruebas del juego.
+
+Se consultaron documentos locales y fuentes primarias. No se modificaron archivos, instalaron programas, subieron recursos ni gastaron créditos.
+
+## Decisiones recomendadas
+
+| Decisión | Recomendación | Alternativa descartada y por qué | Confianza alta/media/baja |
+|---|---|---|---|
+| Disciplina de producción | Biblia breve, hojas ejecutables, manifiesto y evidencia por puerta. [inf] | Documentación extensa sin decisiones verificables: sobrecarga para una persona. | Alta |
+| Patrón de calidad | Aprobar una pequeña familia de recursos dentro del motor y usarla como referencia. [inf] | Comparar cada generación con referentes externos diferentes: dificulta controlar la coherencia. | Alta |
+| Personajes principales | Evaluar primero 3D chibi con una prueba temprana de deformación; conservar una alternativa de sprites. [inf] | Aprobar la ruta por un render estático: deja sin resolver animación, sombras y mantenimiento. | Media |
+| Renderizador para validar arte | Proponer Compatibility como base de evaluación del equipo; comparar Forward+ mediante una prueba pequeña antes de comprometer efectos. [inf] | Hacer depender el acabado de SDFGI desde el inicio: no hay rendimiento local demostrado. | Media |
+| Intercambio 3D | Priorizar GLB/glTF; mantener la integración en una escena propia de Godot. [doc][inf] | Depender de importación directa de `.blend`: Blender no está instalado. | Alta |
+| Topología y UV | Exigir inspección y prueba de deformación después del remesh. [doc][inf] | Considerar «quads» o «low-poly» como certificados de calidad. | Alta |
+| Dirección de IA | Bloques de estilo versionados, imágenes ancla propias y pruebas comparables. [inf] | Cambiar modelo, iluminación y prompt simultáneamente: impide identificar la causa de la deriva. | Alta |
+| Personalización | Probar primero un cuerpo y pocas piezas intercambiables compatibles. [inf] | Generar cada combinación como personaje independiente: multiplica validaciones y gastos. | Alta |
+| Créditos | Bolsa inicial de calibración de 60 créditos y reserva de 220 dentro de los 1000. [inf] | Gastar según aparezcan resultados atractivos, sin coste acumulado por recurso. | Media |
+| Aprobación | Toda puerta aplicable requiere veredicto explícito del usuario sobre una versión identificada. [inf] | Interpretar silencio, entusiasmo general o aprobación del concepto como aprobación final. | Alta |
+
+La propuesta de Compatibility requiere decidir una desviación respecto al Forward+ indicado en el plan maestro. Este informe **no cambia esa decisión ni configura el motor**.
+
+## Afirmaciones que sostienen las decisiones
+
+1. **[doc]** La documentación de producción debe acompañarse de puntos de evaluación claros. La descripción de esta sesión de GDC aborda precisamente las etapas de preproducción y sus requisitos de avance; no establece una plantilla universal. [GDC, preproducción y dirección de arte, 2024](https://gdcvault.com/play/1034593/Art-Direction-Summit-Pre-Production).
+
+2. **[doc]** Las hojas de personaje sirven como referencia de construcción, vistas, poses y expresiones; el lineup comunica relaciones de escala. [Toon Boom, hojas de personaje, actualizado el 10-11-2026](https://helpcentre.toonboom.com/hc/en-ca/articles/57134612631955-Character-Design-03-Finalizing-the-character-sheets), [referencia de model sheets](https://learn.toonboom.com/modules/character-design/topic/character-model-sheets).
+
+3. **[doc]** El desarrollo visual define personajes, mundos, color y composición en relación con la historia; las claves de color orientan posteriormente la iluminación. Son prácticas documentadas en animación, transferibles aquí como metodología, no como requisitos de un motor. [Disney, desarrollo visual](https://disneyanimation.com/process/visual-development/), [iluminación](https://www.disneyanimation.com/process/lighting/).
+
+4. **[doc]** Valve recomienda comprobar silueta, orientación y patrones de valor dentro del juego antes de añadir complejidad de color. Se toman esos principios, sin adoptar sus diseños. [Valve, Character Art Guide](https://help.steampowered.com/en/faqs/view/0688-7692-4D5A-1935).
+
+5. **[doc]** Godot orienta Compatibility hacia equipos antiguos o modestos. SDFGI pertenece a Forward+; las funciones disponibles cambian entre renderizadores. **[inf]** Por ello conviene validar el acabado sin depender inicialmente de SDFGI. [Godot, renderizadores](https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html).
+
+6. **[doc]** LightmapGI permite iluminación precalculada de bajo coste durante la ejecución, pero el horneado integrado requiere soporte para RenderingDevice. Ejecutar lightmaps y poder hornearlos son condiciones distintas. [Godot, LightmapGI](https://docs.godotengine.org/en/stable/classes/class_lightmapgi.html).
+
+7. **[doc]** Godot recomienda glTF 2.0 y admite GLB; importar `.blend` implica llamar a Blender instalado. [Godot, formatos 3D](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html).
+
+8. **[doc]** El remallado automático no garantiza topología adecuada para deformación. **[inf]** Un personaje generado debe superar pruebas de articulaciones antes de aprobarse para animación. [Blender 4.5 LTS, remeshing](https://docs.blender.org/manual/th/4.5/modeling/meshes/retopology.html).
+
+9. **[doc]** Reutilizar materiales y reducir cambios de estado ayuda al renderizado; las transparencias superpuestas pueden aumentar el coste. **[inf]** Deben revisarse conjuntamente geometría, materiales, vegetación y cobertura de efectos. [Godot, optimización de GPU](https://docs.godotengine.org/en/stable/tutorials/performance/gpu_optimization.html).
+
+10. **[doc]** ImageMagick permite extraer alfa, convertir espacios de color y comparar imágenes. **[inf]** Estas operaciones sirven como instrumentos de revisión, pero una métrica de semejanza no determina la calidad artística. [ImageMagick, opciones](https://imagemagick.org/command-line-options/), [comparación](https://imagemagick.org/compare/).
+
+11. **[doc]** WCAG establece contraste mínimo de 4,5:1 para texto normal y 3:1 para texto grande, con condiciones y excepciones. **[inf]** Adoptar 4,5:1 para texto funcional del juego es una referencia conservadora; no certifica accesibilidad integral. [W3C, contraste mínimo](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html).
+
+12. **[doc]** Godot ofrece monitores de memoria, llamadas de dibujo y rendimiento, algunos limitados a depuración. Sus requisitos mínimos no garantizan el rendimiento de un proyecto concreto. **[inf]** La aprobación técnica necesita medición en el portátil indicado. [Godot, Performance](https://docs.godotengine.org/en/stable/classes/class_performance.html), [requisitos del sistema](https://docs.godotengine.org/en/stable/about/system_requirements.html).
+
+## Riesgos y cómo mitigarlos
+
+| Riesgo | Cómo detectarlo | Mitigación propuesta [inf] |
+|---|---|---|
+| Buen concepto, recurso imposible de animar | Hombros, cadera o patas fallan en poses simples. | Probar deformación antes del texturizado final; simplificar ropa y articulaciones. |
+| Falta de herramientas de corrección | Un defecto exige editar UV, pesos o topología fuera de las herramientas actuales. | Marcar la reparación como pendiente. Usar provisionalmente primitivas, piezas rígidas o sprites; no presuponer instalaciones. |
+| Deriva entre generaciones | Cambian proporciones, pincelada, materiales o rasgos de identidad. | Comparación con anclas propias bajo idénticas condiciones; modificar una variable por intento. |
+| Turnaround contradictorio | Bolsillos, mechones o accesorios cambian de lado o volumen. | Resolver contradicciones en la hoja antes de generar la malla. |
+| Personalización demasiado costosa | Cada peinado o cuerpo exige un rig diferente. | Un rig común, interfaces de montaje y matriz pequeña de compatibilidad. |
+| Vegetación y VFX saturan la integrada | Aumenta el tiempo de cuadro al activar esas capas. | Medir por grupos; reducir capas, cobertura y materiales antes de añadir detalle. |
+| Sombras incoherentes | La textura contiene una sombra fija que contradice la luz del motor. | Separar color de material y luz de escena; comprobar dos orientaciones de iluminación. |
+| Gastos invisibles | Se contabiliza solo el resultado elegido. | Registrar cada trabajo, fallo, edición y reintento; reconciliar cargos. |
+| Agotamiento de disco | Crecen originales, variantes y cachés simultáneamente. | Techo de almacenamiento por lote; conservar fuentes aprobadas y registrar descartes sin borrarlos automáticamente. |
+| Falsa precisión de las métricas | Un recurso pasa un promedio y sigue siendo ilegible. | Combinar medición con tareas de reconocimiento a tamaño real. |
+| Arte científico incorrecto | Conectores, instrumentos o diagramas parecen plausibles pero enseñan algo falso. | Verificación técnica específica antes de aprobar recursos educativos. |
+| Referentes demasiado literales | Coinciden vestuario, emblemas, composiciones o interfaz distintiva. | Extraer principios y construir formas, iconografía y contexto propios. |
+
+## Preguntas que debe decidir el usuario
+
+Estas decisiones se presentan para revisión posterior; ninguna se considera aprobada por este informe.
+
+- **Base técnica:** ¿se acepta evaluar Compatibility como perfil principal y Forward+ como comparación?
+- **Personajes:** ¿se prioriza conservar el protagonista 3D, incluso si requiere simplificar accesorios y animaciones?
+- **Interfaz:** ¿se prefiere un cuaderno científico ilustrado, pergamino estilizado o una combinación con telemetría? Recomiendo explorar primero el cuaderno ilustrado.
+- **Personalización inicial:** ¿basta un cuerpo base con variaciones de piel, ojos y dos peinados para demostrar el sistema?
+- **Rendimiento:** ¿se acepta como objetivo inicial 30 FPS con mundo a 1280×720 en la pantalla de 1920×1080?
+- **Presupuesto:** ¿se acepta separar 60 créditos para calibración y mantener 220 de reserva?
+- **Ámbito de aprobación:** ¿cada decisión puede congelarse por recurso y puerta, permitiendo revisar después solo lo que cambie?
+
+## Desarrollo
+
+### 1. Alcance y evidencia revisada
+
+Se leyó el [plan maestro local](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf>), de tres páginas. Se consultaron los dos documentos de costes y los parámetros del catálogo local. Se confirmó la existencia de las 14 capturas y se inspeccionaron siete: exploración, título, obtención de objetos, hub y personalización.
+
+Las capturas permiten estudiar composición y acabado aparente. **No permiten verificar** topología, renderizador, número de polígonos, iluminación utilizada o rendimiento del juego mostrado.
+
+El plan sitúa dirección visual en Fase 1 y personajes en Fase 3. Aquí se define el sistema de producción y sus futuras pruebas; las propuestas de paleta, proporciones y alcance siguen pendientes.
+
+**Convenciones del informe:**
+
+- **[doc]:** documentación primaria.
+- **[sec]:** fuente secundaria; no se necesita para las decisiones principales de este informe.
+- **[inf]:** propuesta o deducción adaptada al proyecto.
+- **Sin verificar:** falta evidencia suficiente.
+
+Las fuentes web se consultaron el **12-11-2026**. Las páginas `stable` de Godot son referencias móviles: no constituyen una verificación exacta de cada comportamiento en el ejecutable 4.7.2 local.
+
+### 2. Qué significa trabajar «como un estudio»
+
+La unidad de producción será **un recurso con una función, una especificación y una versión verificable**. Una misma imagen puede ser un concepto aprobado y seguir sin ser una textura utilizable.
+
+Se recomienda distinguir dos dimensiones:
+
+| Dimensión | Ejemplos |
+|---|---|
+| Etapa de producción | Concepto, hoja, blockout, geometría, textura, animación, integración, pulido. |
+| Estado de revisión | Borrador, en revisión, cambios solicitados, aprobado, rechazado, sustituido. |
+
+Así se evita que «aprobado» signifique simultáneamente aprobado para modelar, aprobado visualmente y terminado.
+
+El desarrollador prepara y mide; el asistente ayuda a detectar defectos y documentar; **el usuario aprueba la versión y la puerta concretas**. [inf]
+
+### 3. Entregables de preproducción y contenido aprobable
+
+No existe un paquete único obligatorio para todos los estudios AAA. La siguiente tabla sintetiza prácticas de desarrollo visual y las convierte en un contrato de producción para este proyecto. Las cantidades son propuestas de alcance. [inf; fundamentos en las afirmaciones 1–4]
+
+| Entregable | Contenido mínimo | Condición para considerarlo aprobable |
+|---|---|---|
+| **Biblia de arte** | Intención narrativa; pilares visuales; lenguaje de formas; personajes, entornos, materiales, luz, UI y VFX; referencias comentadas; límites técnicos; ejemplos permitidos y rechazados; versiones. | Cada pilar se traduce en una regla observable y un ejemplo. No quedan contradicciones entre capítulos. |
+| **Guía de estilo** | Resumen operativo de la biblia: proporciones, paletas, pincelada, bordes, detalle, materiales, iluminación y presentación. | Permite revisar un recurso sin reinterpretar toda la biblia. Enlaza reglas e imágenes ancla vigentes. |
+| **Hoja de modelo / turnaround** | Frente, perfil, espalda y 3/4; vistas adicionales para asimetrías; pose neutra; líneas de construcción; altura en cabezas; medidas; paleta HEX; materiales; accesorios y uniones. | Las vistas describen el mismo objeto. Ningún volumen, lateralidad o material esencial queda ambiguo. |
+| **Hoja de expresiones** | Neutra, alegría, concentración, duda, sorpresa y frustración; ojos y boca separados cuando corresponda; límites de deformación. | Conserva identidad y proporciones. Las expresiones se distinguen al tamaño de retrato previsto. |
+| **Hoja de poses** | Reposo, caminar, observar, manipular herramienta y alcanzar; gato: reposo, marcha, atención y ayuda. Apoyos y centro de masa anotados. | La acción se reconoce por silueta y es realizable con el rig o sistema de sprites previsto. |
+| **Hoja de props** | Vistas necesarias, dimensiones, materiales, variantes, punto de agarre, pivote, colisión y función interactiva. | Escala y montaje inequívocos; conectores y funciones científicas revisados cuando sean relevantes. |
+| **Lineup de escala** | Protagonista, gato, NPC, puerta, mesa, instrumento y otros elementos recurrentes sobre suelo común, con regla métrica. | Todos comparten unidades y escala; la altura estilizada no vuelve inservibles mesas, puertas o agarres. |
+| **Concepto de entorno** | Plano funcional sencillo; rutas; zonas transitables; masas principales; primer, segundo y tercer plano; materiales y módulos reutilizables. | El espacio se puede construir y recorrer. La composición funciona desde la cámara jugable. |
+| **Color script** | Secuencia de pequeñas viñetas con emoción, momento narrativo, dominante, contraste y transición entre zonas. | Se entiende la progresión cromática al ver el conjunto reducido. No exige resolver todavía cada escenario. |
+| **Claves de iluminación** | Una clave por situación importante: dirección de luz, color, relación entre luz y sombra, ambiente, niebla y tratamiento del foco jugable. | Cada efecto tiene una implementación prevista y una alternativa compatible con el perfil técnico. |
+| **Style frames de UI** | HUD, misión, aviso de obtención, diálogo, mapa, título, carga y creador; jerarquía, tipografía y estados. | Textos reales en español, contraste, foco de navegación y tamaños verificables; fondos separados del texto funcional. |
+| **Style frames de VFX** | Inicio, máxima intensidad y disipación; forma, color, duración, área, capas, materiales y función informativa. | Se distingue la acción que comunica y existe un presupuesto técnico. El dibujo estático no se presenta como animación validada. |
+
+**Paquete inicial recomendado:** biblia de 8–12 páginas equivalentes, guía de dos páginas, una hoja del protagonista, una del gato, una de props, un lineup y dos encuadres de entorno. Son límites de trabajo propuestos, no requisitos de industria. [inf]
+
+#### Proporciones y paleta de ejemplo
+
+Para convertir «2,5–3 cabezas» en una regla ejecutable, propongo probar **2,75 cabezas**, con tolerancia inicial de **±0,10** en la hoja ortográfica. El cabello y los accesorios se miden aparte. No se debe medir esa proporción directamente en una vista con escorzo. [inf]
+
+Esta paleta es una **hipótesis original de trabajo**, no una extracción del tablero ni una aprobación de Fase 1:
+
+| Función | HEX de ejemplo |
+|---|---|
+| Tinta y contornos interiores | `#242B34` |
+| Papel cálido | `#E8D9B5` |
+| Tierra | `#B57A50` |
+| Vegetación media | `#66834E` |
+| Sombra vegetal | `#344C40` |
+| Acento cálido | `#C96F3D` |
+| Azul técnico | `#365B7A` |
+| Gris de instrumento | `#87969C` |
+
+La guía necesita **rampas de sombra, base y luz por material**, además de colores para piel, cabello y ojos. Ocho muestras generales no bastan para especificar todos los recursos. [inf]
+
+### 4. Puertas comunes y cómo medirlas
+
+#### Condiciones de prueba
+
+Cada revisión debe identificar resolución, cámara, tamaño en pantalla, renderizador, iluminación, versión del recurso y versión de la biblia.
+
+Se proponen dos contextos: exploración 3/4 y hub lateral. En exploración, «55°» debe definirse como **elevación sobre el plano horizontal**, evitando confundirla con el ángulo respecto a la vertical. La proyección, encuadre y distancia se congelan después del blockout aprobado. [inf]
+
+| Criterio | Medición propuesta | Umbral inicial propuesto [inf] |
+|---|---|---|
+| **Silueta** | Máscara negra desde las vistas homologadas; reconocimiento de tipo y orientación en cinco capturas mezcladas. | Identificación correcta en 4/5, con exposición de dos segundos por captura. |
+| **Conservación de forma** | Superponer máscara aprobada y candidata, alineadas por suelo y escala uniforme; opcionalmente calcular intersección/unión, IoU. | IoU ≥0,85 como alarma de cambio en la misma vista y pose; no sustituye revisión visual. |
+| **Valores** | Captura en gris lineal y muestras de personaje/objeto frente a su fondo local. | Diferencia de mediana de luminancia ≥0,08 en los fondos de prueba, más reconocimiento correcto. Revisar contornos que se pierdan. |
+| **Paleta** | Albedo o imagen neutra, con máscaras por material; comparar con sus rampas aprobadas. | ≥90% de píxeles opacos dentro de la tolerancia pactada; excepciones identificadas. |
+| **Proporciones** | Puntos de referencia en vistas ortográficas: cabeza, hombros, cadera, rodillas y suelo. | Altura en cabezas acordada; relaciones principales dentro de ±5%, salvo deformación expresiva aprobada. |
+| **Lectura en cámara** | Vista a tamaño real, sin ampliar, sobre tres fondos representativos. | Se reconocen orientación, rol e interacción; ningún detalle esencial depende del zoom de revisión. |
+| **Densidad de téxel** | Medir UV frente a área de superficie; checker en el motor. | Objetivo inicial de 256 px/m y variación ±25% entre superficies equivalentes. Excepciones explícitas. |
+| **Luz coherente** | Recurso en escena neutra y dos direcciones de luz; revisión de sombras, brillo y contacto. | Sin sombras direccionales contradictorias en albedo ni reflejos que cambien injustificadamente de material. |
+| **Presupuesto técnico** | Geometría, materiales, texturas, animación y coste dentro de una escena representativa. | Cumplir la ficha y mantener la escena dentro del presupuesto aprobado. |
+| **Integridad** | Importar y recorrer todas las vistas y animaciones previstas. | Sin texturas ausentes, pivotes incorrectos, recortes accidentales o errores nuevos de importación. |
+
+Los promedios de luminancia, el IoU y la proximidad de color son **detectores de problemas**. No certifican belleza, identidad o legibilidad por sí solos. [inf]
+
+#### Medición con ImageMagick
+
+Ejemplos para futuras revisiones; los comandos siguientes imprimen resultados y no escriben archivos:
+
+```powershell
+# Dimensiones y canales.
+magick identify -format "%f | %wx%h | %[channels]" "recurso.png"
+
+# Estadísticas de un recorte en gris lineal.
+# Sustituir tamaño y posición por la región de interés.
+magick "captura.png" -crop 120x160+600+260 +repage -colorspace LinearGray -format "media=%[fx:mean] desviacion=%[fx:standard_deviation]" info:
+
+# Caja ocupada por una silueta procedente de alfa.
+magick "recurso.png" -alpha extract -threshold 50% -trim -format "caja=%wx%h desplazamiento=%X,%Y" info:
+
+# Diferencia entre imágenes con idéntico encuadre y dimensiones.
+magick compare -metric RMSE "aprobado.png" "candidato.png" null:
+```
+
+Las operaciones están documentadas por [ImageMagick](https://imagemagick.org/command-line-options/); el uso de RMSE corresponde a su [herramienta de comparación](https://imagemagick.org/compare/). **Un RMSE bajo no implica un buen diseño.**
+
+Se verificó localmente la conversión a `LinearGray` y la lectura de estadísticas sobre una referencia. La media de la captura completa no se utilizó como criterio artístico: contiene interfaz del video, subtítulos y zonas ajenas al juego.
+
+#### Medición con Python
+
+La implementación puede trabajar en memoria con imágenes y máscaras. Se comprobó la disponibilidad local de Pillow y NumPy, sin instalar nada.
+
+- **IoU:** `píxeles(A ∩ B) / píxeles(A ∪ B)`. Comparar máscaras de la misma vista y pose, sin deformar una para hacerla coincidir.
+- **Proporciones:** `altura_corporal / altura_cabeza`. Guardar coordenadas de puntos y definición de cada medida.
+- **Valores:** convertir sRGB a RGB lineal antes de obtener luminancia. No aplicar un umbral a una imagen cuyo contraste se haya normalizado por separado.
+- **Paleta:** para cada material, calcular la distancia al color más cercano de su rampa. Como prueba inicial simple puede usarse distancia RMS en RGB lineal con tolerancia 0,10; no es una medida perceptual.
+- **Estabilidad de sprite:** medir por fotograma la posición del apoyo y los puntos de identidad; distinguir desplazamiento intencional de vibración.
+- **Presupuesto:** sumar bytes de archivos y dimensiones; registrar aparte memoria residente medida en Godot.
+
+Los algoritmos y tolerancias de este apartado son propuestas **[inf]**. La gestión de espacios de color debe seguir la [documentación de ImageMagick](https://imagemagick.org/color-management/).
+
+#### Densidad de téxel y UV
+
+Para una textura de `W × H`, un triángulo con área UV normalizada `Auv` y área en mundo `Am²` permite estimar:
+
+```text
+densidad ≈ sqrt((Auv × W × H) / Am²)    [píxeles/metro]
+```
+
+Es una estimación escalar: debe acompañarse de un checker para detectar estiramiento direccional. Medir después de fijar la escala del recurso. [inf]
+
+La revisión comprueba costuras visibles, distorsión, contaminación entre islas con mipmaps y asignación de resolución según visibilidad. Las UV de albedo pueden compartir zonas cuando se haya previsto; las UV destinadas a lightmaps necesitan su revisión específica. [Godot, preparación de lightmaps — doc](https://docs.godotengine.org/en/stable/tutorials/3d/global_illumination/using_lightmap_gi.html).
+
+### 5. Puertas específicas por tipo de recurso
+
+Todas incorporan los criterios comunes aplicables. «No aplica» exige una explicación.
+
+| Tipo | Comprobaciones adicionales propuestas [inf] |
+|---|---|
+| **Personaje 3D** | Anatomía estilizada consistente; manos y pies distinguibles; accesorios estables; prueba de hombros, cadera y rodillas; apoyos sin deslizamiento visible; transiciones entre clips. |
+| **Gato 3D** | Volúmenes y patrón de pelaje coherentes; cuatro patas distinguibles cuando corresponda; cola y orejas sin deformaciones accidentales; prueba propia de rig cuadrúpedo. |
+| **Sprite animado** | Alfa real; tamaño de celda y pivote estables; continuidad de ropa y rostro; ausencia de fotogramas recortados; direcciones coherentes; bucle sin salto accidental. |
+| **Prop interactivo** | Escala, punto de agarre, estado activo/inactivo, colisión y reconocimiento; instrumento científicamente coherente si comunica una función real. |
+| **Módulo de entorno** | Encaje entre piezas, bordes, colisión, escala de textura, ausencia de huecos y lectura de rutas. |
+| **Vegetación y rocas** | Familia de formas reconocible; variación controlada; repetición poco evidente; contacto con suelo; coste con la cantidad real de instancias. |
+| **UI e iconos** | Estados normal, foco, pulsado y deshabilitado; textos largos; tildes, ñ y símbolos; contraste; navegación; escalado sin cortar contenido. |
+| **Mapa ilustrado** | Correspondencia con el espacio jugable, leyenda, iconos distinguibles y rutas comprensibles. |
+| **VFX** | Anticipación, acción y cierre legibles; duración; oclusión de información importante; coexistencia de varios efectos; modo de movimiento reducido previsto. |
+| **Título y carga** | Identidad propia, jerarquía, zonas seguras de texto y coherencia con el juego real. |
+| **Piezas de personalización** | Compatibilidad con cuerpo y rig; unión de cuello y cabello; intersecciones; retrato y cuerpo consistentes; combinaciones probadas. |
+
+Para sprites en 3D, Godot distingue recibir iluminación, transparencia y comportamiento de billboard; su documentación advierte particularidades de sombras al usar billboards. La puerta debe probar el recurso con la cámara y luz definitivas. [SpriteBase3D — doc](https://docs.godotengine.org/en/stable/classes/class_spritebase3d.html).
+
+### 6. Etapas del recurso y validación
+
+Los códigos `AR0–AR7` identifican puertas de arte; **no son las fases 0–7 del plan maestro**.
+
+| Etapa | Puerta | Qué se valida antes de continuar |
+|---|---|---|
+| **Concepto** | AR0: intención | Función, identidad, silueta, originalidad, prioridad y techo de gasto. |
+| **Hoja aprobada** | AR1: especificación | Vistas coherentes, proporciones, escala, materiales, paleta y asimetrías resueltas. |
+| **Blockout** | AR2: volumen y cámara | Tamaño, encuadre, navegación, agarres, contacto y lectura con geometría sencilla. |
+| **Modelo o sprite** | AR3: construcción | Forma, integridad, pivote, geometría o alfa, UV y presupuesto provisional. En personajes, prueba temprana de deformación. |
+| **Textura** | AR4: superficie | Paleta, materiales, pincelada, téxel y ausencia de iluminación contradictoria. |
+| **Rig y animación** | AR5: movimiento | Pesos, apoyos, continuidad, identidad temporal y acciones necesarias. En sprites equivale a revisar los clips. |
+| **Integración en motor** | AR6: contexto | Cámara real, interacción, sombras, colisión, UI relacionada y coste de la escena. |
+| **Pulido** | AR7: terminado | Correcciones cerradas, evidencias completas, manifiesto actualizado y aprobación final. |
+
+La primera prueba en motor ocurre en blockout. AR6 comprueba la integración completa. [inf]
+
+Si cambia una decisión aprobada, se reabren las puertas afectadas: modificar solo el color no exige reconstruir el rig; modificar proporciones puede afectar geometría, UV, animación y cámara. El manifiesto registra esas dependencias. [inf]
+
+### 7. Pipeline viable con las herramientas actuales
+
+La entrega base será GLB/glTF para 3D y PNG para imágenes/sprites, con metadatos de animación cuando corresponda. Godot documenta el soporte de glTF y sus alternativas de importación. [doc](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html)
+
+Flujo propuesto **[inf]**:
+
+1. Resolver diseño y escala antes de pedir una malla.
+2. Usar imágenes coherentes de la hoja como entrada, según el contrato real del modelo.
+3. Importar el resultado en una escena de revisión pequeña.
+4. Medir geometría y materiales; revisar silueta y UV.
+5. Aplicar remesh únicamente si resuelve un defecto identificado.
+6. Volver a comprobar forma y UV después del remesh.
+7. Aprobar superficie antes de producir animaciones completas.
+8. Integrar mediante una escena propia de Godot con colisión, interacción y configuración de juego.
+
+**Límite actual:** sin Blender ni editor de imagen, puede inspeccionarse e integrarse mucho contenido, pero no debe darse por resuelta la corrección manual de topología, UV o pesos. Un recurso que necesite esas reparaciones queda en `cambios_solicitados`, con la capacidad faltante identificada.
+
+Para props sencillos, el blockout con primitivas y materiales de Godot permite avanzar. Para personajes, piezas rígidas o sprites pueden demostrar comportamiento mientras se decide la solución definitiva. Esto no demuestra equivalencia visual con el objetivo 3D. [inf]
+
+#### Presupuesto técnico inicial
+
+Son límites conservadores de ensayo, **sin verificar mediante una escena del proyecto**:
+
+| Elemento | Propuesta inicial [inf] |
+|---|---|
+| Protagonista | Hasta 8.000 triángulos; hasta dos materiales; albedo de 1024². |
+| Gato | Hasta 4.000 triángulos; un material; albedo de 512². |
+| Prop común | 100–1.500 triángulos; material compartido cuando sea viable. |
+| Entorno | Texturas repetibles o atlas de 512²–1024², según cobertura real. |
+| Rig del protagonista | Hasta 40 huesos deformantes como punto de partida. |
+| Escena piloto | Alarma inicial en 80.000 triángulos visibles y 200 llamadas de dibujo. |
+| Texturas residentes | Alarma inicial en 128 MiB. |
+| Resolución | Mundo de prueba a 1280×720; UI comprobada también a 1920×1080. |
+| Almacenamiento | Revisar lote al añadir 2 GiB; procurar conservar 10 GiB libres. |
+
+Estos números no son máximos de Godot ni garantías de fluidez. Superarlos obliga a revisar evidencia; cumplirlos no garantiza rendimiento.
+
+Los contadores de primitivas del motor pueden incluir pases adicionales y no equivalen directamente al número de triángulos originales. [Godot, Performance — doc](https://docs.godotengine.org/en/stable/classes/class_performance.html).
+
+#### Protocolo de rendimiento
+
+Propuesta **[inf]**:
+
+- Probar una escena con personaje, gato, vegetación, UI y VFX simultáneos.
+- Ejecutar un recorrido reproducible de tres minutos, después del calentamiento.
+- Medir intervalos entre cuadros: objetivo inicial `p95 ≤ 33,3 ms` y `p99 ≤ 50 ms`, separando cargas.
+- Repetir con una sesión de diez minutos para detectar degradación sostenida.
+- Comparar capas activadas y desactivadas para atribuir costes.
+- Medir el juego exportado y, por separado, la experiencia de edición.
+
+Los monitores de Godot apoyan el diagnóstico; para percentiles hace falta registrar intervalos por cuadro. El FPS actualizado una vez por segundo no describe por sí solo los tirones. [doc](https://docs.godotengine.org/en/stable/classes/class_performance.html)
+
+### 8. Manifiesto, nombres y versiones
+
+Se recomienda una ficha Markdown por recurso como fuente de verdad y un índice generado a partir de ellas. No mantener manualmente dos registros completos contradictorios. [inf]
+
+| Grupo | Campos |
+|---|---|
+| Identidad | `id`, nombre, tipo, familia, función, prioridad. |
+| Producción | Fase del plan, etapa, puerta, estado, responsable. |
+| Especificación | Biblia, cámara, unidades, proporciones y presupuesto técnico. |
+| Generación | Proveedor, identificador exacto del modelo, parámetros, prompt enviado, referencias y semilla si existe. |
+| Procedencia | Origen y permiso de las referencias; modificaciones posteriores. |
+| Coste | Cotizado, reservado, cobrado, devolución confirmada y total acumulado. |
+| Archivos | Fuente, derivados, ruta en motor y SHA-256. |
+| Revisión | Evidencias, resultados, veredicto, aprobador, fecha y observaciones. |
+| Dependencias | Recursos utilizados, versiones y puertas que deben reabrirse si cambian. |
+
+Una URL temporal del proveedor no sustituye al archivo fuente conservado. Una semilla ausente se registra como `null`; no se inventa ni se envía a modelos que no la admiten. [inf]
+
+Convención propuesta:
+
+```text
+ID estable:
+chr_001_estudiante
+cmp_001_gato
+prp_014_multimetro
+env_006_roca_tropical
+ui_003_aviso_obtenido
+vfx_002_conexion
+
+Archivo de revisión:
+<id>__<etapa>__<variante>__v###.<ext>
+
+Ejemplos:
+chr_001_estudiante__turnaround__base__v003.png
+chr_001_estudiante__mesh__base__v005.glb
+chr_001_estudiante__tex_albedo__base__v002.png
+chr_001_estudiante__anim_walk__base__v004.glb
+```
+
+Usar minúsculas, ASCII y guiones bajos. Evitar nombres como `final_final`. Las revisiones publicadas no se sobrescriben. El archivo activo en motor puede conservar una ruta estable; la ficha identifica qué revisión y hash contiene. [inf]
+
+Para binarios grandes, Git LFS almacena punteros en Git y el contenido por separado. **No elimina el coste local de los originales ni reemplaza una copia de seguridad.** [Git LFS — doc](https://git-lfs.com/)
+
+Se propone versionar fichas, escenas y configuración; usar LFS de forma selectiva para fuentes binarias. Godot desaconseja versionar su caché `.godot/`. [Proceso de importación — doc](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/import_process.html)
+
+Una futura validación automática puede comprobar IDs, campos, rutas, hashes, dimensiones, presupuestos y ausencia de referencias rotas. La aprobación artística seguirá siendo humana. [inf]
+
+### 9. Dirección de arte para IA generativa
+
+#### Biblia de prompts
+
+Cada receta debe incluir bloques versionados y diferenciar intención visual de parámetros realmente admitidos por el modelo. [inf]
+
+```text
+RECETA: chr_turnaround_v001
+BIBLIA: art_v001
+ANCLAS: lista de IDs y versiones
+
+[ESTILO FIJO]
+Aventura científica ilustrada.
+Volúmenes simplificados y superficies pintadas.
+Detalle concentrado en rostro, manos y función del objeto.
+Acabado coherente con las imágenes ancla aprobadas.
+
+[IDENTIDAD FIJA]
+Proporciones y rasgos de la hoja aprobada.
+Vestuario, materiales y lateralidad de accesorios.
+Elementos que deben permanecer invariantes.
+
+[RECURSO VARIABLE]
+Qué personaje, prop o entorno se necesita.
+Función jugable y diferencias permitidas.
+
+[PRESENTACIÓN]
+Vista, pose, encuadre, fondo y luz de revisión.
+Separación necesaria entre piezas.
+
+[EXCLUSIONES]
+Marcas ajenas, texto decorativo ilegible, accesorios adicionales,
+fotorealismo y cambios de identidad no solicitados.
+
+[SALIDA]
+Resolución, formato, transparencia y cantidad solicitada.
+```
+
+`[EXCLUSIONES]` es parte de la receta textual. Solo se convierte en un campo de prompt negativo si el modelo lo admite.
+
+En el catálogo local, `gpt_image_2_6` no expone `seed`; Tripo H3.1 expone `texture_seed`, que no debe describirse como semilla completa de geometría. `autosprite` restringe `prompt` y `name` al modo `custom`. Estos son datos del [catálogo local consultado](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_modelos.json>), no una comprobación del servicio en vivo.
+
+#### Imágenes ancla
+
+Propuesta **[inf]**:
+
+- Una hoja propia aprobada del protagonista.
+- Una hoja propia del gato.
+- Una muestra de roca, suelo y vegetación.
+- Un encuadre de exploración y otro de hub.
+- Un frame de UI y otro de VFX.
+
+Los referentes externos explican objetivos generales. Las anclas propias gobiernan la producción.
+
+Después del primer modelo aprobado, sus renders ortográficos pueden reemplazar vistas contradictorias de un turnaround generado. La ficha debe distinguir entre especificación de diseño y evidencia del recurso construido.
+
+#### Control de deriva
+
+Evaluar cada candidato junto al último aprobado, con igual escala, luz y cámara. Registrar diferencias en cinco ejes: forma, proporción, paleta, superficie y detalle. Cambiar una variable principal por intento. [inf]
+
+Se propone revisar el conjunto después de cada cinco recursos aprobados. Si una variante mejora la dirección general, primero se aprueba una nueva versión de la biblia y se determina qué recursos quedan afectados.
+
+**Rechazo inmediato propuesto:**
+
+- Contradicción entre vistas o pérdida de identidad.
+- Elementos ajenos al brief.
+- Anatomía o conexiones funcionales incorrectas.
+- Texto falso incorporado a instrumentos educativos.
+- Sombras incompatibles con el tratamiento acordado.
+- Artefactos de alfa o animación que alteren la silueta.
+- Recurso sin ruta viable de integración o corrección.
+- Similitud demasiado literal con un diseño externo.
+
+Un incumplimiento medible y reparable puede recibir `cambios_solicitados`; un candidato que exige rediseño vuelve a la puerta correspondiente. [inf]
+
+### 10. Protección del presupuesto de 1000 créditos
+
+La [matriz local](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md>) describe consultas de coste con entradas de prueba. **No es un registro de consumo ni una garantía de precio futuro.**
+
+| Operación | Cotización registrada |
+|---|---:|
+| GPT Image 2.6, low, 1k | 0,25 |
+| GPT Image 2.6, high, 1k | 1,5 |
+| GPT Image 2.6, high, 2k | 2,75 |
+| Tripo H3.1 imagen→3D, defecto | 9 |
+| Tripo H3.1 multivista, caso de cuatro vistas | 9 |
+| Hunyuan3D v3 imagen→3D, Normal | 11 |
+| Meshy 7 imagen→3D, defecto | 38 |
+| Meshy 5 remesh, caso de 8000 quads | 6 |
+| Meshy 5 retexturizado | 9,5 |
+| AutoSprite turbo, casos consultados | 2 |
+| AutoSprite pro, caso consultado | 3 |
+| AutoSprite max, caso consultado | 14 |
+
+La estimación del rigging independiente y algunas rutas 3D no está disponible en esa matriz. **Coste sin verificar** no significa gratuito. El caso Hunyuan `LowPoly quads` contiene un error de validación, por lo que no ofrece un precio utilizable.
+
+#### Distribución propuesta [inf]
+
+| Bolsa | Créditos |
+|---|---:|
+| Calibración técnica del pipeline | 60 |
+| Anclas y preproducción visual | 120 |
+| Personajes, props y animación prioritarios | 300 |
+| Kit inicial de entorno | 120 |
+| UI y VFX | 100 |
+| Audio posterior | 80 |
+| Reserva | 220 |
+| **Total** | **1000** |
+
+Es una distribución del presupuesto declarado; no se consultó el saldo actual. La reserva se mantiene separada hasta revisar consumo y tasa de aprobación.
+
+#### Límites de intentos [inf]
+
+| Etapa | Límite ordinario |
+|---|---|
+| Concepto de un diseño | Una generación inicial y hasta dos correcciones. |
+| Conversión a malla | Una inicial y un reintento dirigido. |
+| Remesh | Una operación por versión de geometría. |
+| Retexturizado | Una operación por versión de geometría/UV. |
+| Clip de animación | Una inicial y una corrección antes de revisar la receta. |
+| Coste acumulado | Alarma en 25 créditos para recurso común y 60 para protagonista o compañero. |
+
+Se detiene al alcanzar **el límite de intentos o el económico**, lo que ocurra primero. Renombrar una variante no reinicia el presupuesto.
+
+Ejemplo: dos intentos Tripo de 9, un remesh de 6 y un retexturizado de 9,5 suman **33,5 créditos**, antes de conceptos y rigging. Es una simulación aritmética basada en cotizaciones locales.
+
+Para sprites, el coste crece por acción y dirección. Cinco direcciones y dos acciones equivalen a diez trabajos: **20 créditos a 2 por trabajo**, si siguen vigentes esas condiciones. El catálogo contiene cinco direcciones isométricas nominales por varias acciones; no demuestra ocho vistas independientes ni coherencia entre ellas.
+
+La simetría puede permitir reutilización reflejada, pero debe rechazarse cuando invierta accesorios, escritura o elementos de identidad. [inf]
+
+### 11. Vertical slice y definición de «terminado»
+
+#### Prueba técnica de Fase 0
+
+Debe demostrar una cadena de producción pequeña: un prop, una muestra de superficie y una prueba mínima de personaje animado en una escena de revisión. Su aprobación responde a «¿podemos producir y validar esto en el equipo disponible?». [inf]
+
+No equivale a aprobar diseños definitivos de las fases siguientes.
+
+#### Vertical slice propuesto [inf]
+
+Un recorrido de **5–8 minutos**, desarrollado cuando las puertas del plan permitan avanzar:
+
+- Hub lateral pequeño con un personaje interactuable.
+- Zona de exploración 3/4 conectada.
+- Protagonista y gato con sus acciones imprescindibles.
+- Entre 8 y 12 recursos de entorno reutilizables.
+- Una interacción científica con efecto observable.
+- HUD, objetivo, aviso de obtención y diálogo.
+- Una familia de VFX y una ambientación sonora representativa.
+
+Ejemplo de interacción: recuperar una medición ajustando un instrumento y observar cómo cambia una señal. Su exactitud científica requiere diseño y comprobación específicos; no se aprueba aquí una mecánica concreta.
+
+El creador completo queda fuera del alcance inicial recomendado. Un cuerpo, variaciones de color y dos peinados pueden demostrar la compatibilidad de piezas.
+
+#### «Terminado» para un recurso
+
+- Supera las puertas aplicables.
+- Se reconoce y funciona con la cámara real.
+- Cumple la especificación técnica aprobada.
+- No tiene defectos críticos abiertos.
+- Conserva fuente, parámetros y procedencia.
+- Registra todos sus gastos conocidos.
+- Identifica versión, hash y dependencias.
+- Tiene aprobación explícita del usuario en AR7.
+
+#### «Terminado» para el vertical slice
+
+Además de sus recursos, debe demostrar recorrido completo, interacción comprensible, coherencia entre escenas y rendimiento sostenido en el portátil. La producción debe poder repetirse para un segundo recurso de la misma familia sin inventar nuevamente el proceso. [inf]
+
+### 12. Presentación para aprobación rápida
+
+Cada revisión contendrá una lámina breve y evidencia complementaria. [inf]
+
+| Zona | Contenido |
+|---|---|
+| Encabezado | ID, versión, puerta y decisión solicitada. |
+| Referencia | Hoja o ancla propia aprobada; referente externo solo si explica un principio. |
+| Candidato | Misma vista, escala y condiciones que la referencia. |
+| Diagnóstico | Silueta, gris, paleta y detalle del defecto relevante. |
+| Motor | Captura completa con cámara real; recorte 1:1 identificado aparte. |
+| Semáforo | Criterio, umbral, resultado y evidencia. |
+| Pie | Cambios desde la revisión anterior y coste acumulado. |
+
+Propuesta de semáforo:
+
+- **Verde — cumple:** criterio aplicable demostrado.
+- **Amarillo — pendiente:** falta prueba o corrección; no autoriza avanzar en lo que dependa de ella.
+- **Rojo — incumple:** necesita corrección o cambio de diseño.
+- **N/A — justificado:** no corresponde a ese recurso.
+
+No promediar colores para ocultar un fallo crítico. Ningún amarillo aplicable queda convertido en aprobación por defecto.
+
+Formato de respuesta del usuario:
+
+```text
+APROBAR chr_001_estudiante v003 AR1
+CAMBIOS chr_001_estudiante v003 AR1: reducir mochila; conservar rostro
+RECHAZAR chr_001_estudiante v003 AR1: no corresponde a la dirección acordada
+```
+
+Para movimiento, adjuntar un clip corto a velocidad real y una vista lenta adicional. Para rendimiento, medir sin que la grabación altere la prueba. Antes de integración, la captura en motor se marca **pendiente**; un montaje ilustrado no ocupa su lugar.
+
+### 13. Plantillas listas para Obsidian
+
+Las cuatro plantillas siguientes son propuestas **[inf]**. Los campos vacíos no equivalen a criterios cumplidos.
+
+#### Plantilla: ficha de recurso
+
+```markdown
+---
+id: chr_001_estudiante
+nombre: Estudiante
+tipo: personaje_3d
+familia: protagonistas
+fase_plan: 0
+etapa: concepto
+puerta: AR0
+estado: borrador
+version: v001
+prioridad: alta
+responsable: ""
+biblia_version: ""
+receta_prompt_version: ""
+modelo_ia: ""
+semilla: null
+semilla_alcance: no_disponible
+coste_cotizado: null
+coste_reservado: 0
+coste_cobrado: null
+coste_acumulado: null
+techo_creditos: 60
+archivo_fuente: ""
+archivo_motor: ""
+sha256: ""
+veredicto: pendiente
+aprobador: ""
+fecha_veredicto: null
+---
+
+# chr_001_estudiante — Estudiante
+
+## Función
+- Función jugable:
+- Qué debe reconocer el jugador:
+- Diferencias permitidas:
+- Invariantes:
+
+## Especificación
+| Campo | Objetivo aprobado | Medido |
+|---|---|---|
+| Altura y unidades | | |
+| Proporción en cabezas | | |
+| Triángulos o celdas | | |
+| Materiales | | |
+| Texturas y dimensiones | | |
+| Densidad de téxel | | |
+| Huesos / clips / direcciones | | |
+| Cámara y tamaño en pantalla | | |
+
+## Generación
+- Proveedor:
+- Modelo exacto:
+- Identificador de trabajo:
+- Fecha:
+- Parámetros exactos:
+- Semilla y alcance:
+- Operaciones posteriores:
+
+### Prompt realmente enviado
+> Pegar el texto completo, sin resumir.
+
+### Referencias
+| ID / versión | Ruta o URL | Uso | Procedencia / permiso |
+|---|---|---|---|
+| | | | |
+
+## Archivos y dependencias
+| Papel | Ruta | Versión / hash |
+|---|---|---|
+| Fuente | | |
+| Derivado | | |
+| Motor | | |
+| Evidencia | | |
+
+- Depende de:
+- Un cambio aquí obliga a revisar:
+
+## Créditos
+- Trabajos asociados: [[Registro de créditos]]
+- Cotizado:
+- Reservado:
+- Cobrado confirmado:
+- Cargos pendientes:
+- Total acumulado del recurso:
+
+## Revisión
+- Puerta solicitada:
+- Checklist: [[Puerta de revisión]]
+- Cambios desde la versión anterior:
+- Defectos abiertos:
+- Decisión solicitada:
+- Veredicto literal del usuario:
+- Fecha y versión aprobadas:
+```
+
+#### Plantilla: lista de comprobación de puerta
+
+```markdown
+---
+recurso_id: ""
+version: ""
+puerta: AR0
+estado: pendiente
+fecha: null
+aprobador: ""
+---
+
+# Puerta de revisión
+
+## Condiciones
+- Biblia / receta:
+- Cámara / escena:
+- Renderizador:
+- Resolución del mundo / de la UI:
+- Tamaño del recurso en pantalla:
+- Iluminación:
+- Equipo:
+- Versión del motor:
+- Hash del recurso:
+
+## Evidencia
+- Hoja de referencia:
+- Comparativa:
+- Captura en motor:
+- Clip:
+- Registro técnico:
+
+## Comprobaciones
+Usar: VERDE, AMARILLO, ROJO o N/A con justificación.
+
+| Criterio | Método | Umbral aprobado | Resultado | Semáforo |
+|---|---|---|---|---|
+| Silueta y orientación | | | | |
+| Valores | | | | |
+| Paleta | | | | |
+| Proporciones y escala | | | | |
+| Lectura en cámara | | | | |
+| Téxel y UV | | | | |
+| Materiales y luz | | | | |
+| Geometría / alfa | | | | |
+| Animación / continuidad | | | | |
+| Interacción / colisión | | | | |
+| Presupuesto técnico | | | | |
+| Exactitud científica | | | | |
+| Identidad y procedencia | | | | |
+
+## Cierre
+- [ ] Todas las comprobaciones aplicables tienen evidencia.
+- [ ] Los N/A están justificados.
+- [ ] No quedan incumplimientos críticos.
+- [ ] Coste acumulado actualizado.
+- [ ] Fuente y archivo de motor identificados.
+- [ ] Aprobación explícita recibida.
+
+## Veredicto
+- Decisión: PENDIENTE / APROBADO / CAMBIOS / RECHAZADO
+- Recurso, versión y puerta:
+- Texto literal del usuario:
+- Fecha:
+- Correcciones requeridas:
+- Puertas o dependencias que se reabren:
+```
+
+#### Plantilla: hoja de modelo
+
+```markdown
+---
+recurso_id: ""
+version: v001
+estado: borrador
+biblia_version: ""
+unidad_mundo: metro
+altura_m: null
+altura_cabezas: null
+---
+
+# Hoja de modelo
+
+## Identidad
+- Nombre funcional:
+- Tres rasgos invariantes:
+- Función y personalidad visual:
+- Elementos intercambiables:
+- Asimetrías que no se pueden reflejar:
+
+## Vistas
+Todas comparten escala y línea de suelo.
+
+| Vista | Imagen | Anotaciones pendientes |
+|---|---|---|
+| Frente | ![[frente.png]] | |
+| Perfil | ![[perfil.png]] | |
+| Espalda | ![[espalda.png]] | |
+| Tres cuartos | ![[tres_cuartos.png]] | |
+| Vista adicional necesaria | | |
+
+## Construcción y medidas
+| Medida | Objetivo | Tolerancia | Observación |
+|---|---|---|---|
+| Altura corporal sin accesorios | | | |
+| Altura de cabeza sin cabello | | | |
+| Altura en cabezas | | | |
+| Ancho de hombros | | | |
+| Línea de cadera | | | |
+| Altura de rodilla | | | |
+| Tamaño de manos y pies | | | |
+
+## Paleta
+Especificar HEX sRGB; no confiar en texto generado dentro de la imagen.
+
+| Material / zona | Sombra HEX | Base HEX | Luz HEX |
+|---|---|---|---|
+| Piel / pelaje | | | |
+| Cabello | | | |
+| Ropa principal | | | |
+| Accesorios | | | |
+
+## Materiales
+| Zona | Material | Brillo / rugosidad previstos | Detalle permitido |
+|---|---|---|---|
+| | | | |
+
+## Montaje y movimiento
+- Pose neutra:
+- Pivote:
+- Puntos de agarre:
+- Piezas separadas:
+- Articulaciones críticas:
+- Límites de deformación:
+- Colisión prevista:
+
+## Expresiones y poses
+- [[Hoja de expresiones]]
+- [[Hoja de poses]]
+- [[Lineup de escala]]
+
+## Cámara real
+- Cámara / encuadre:
+- Altura aproximada en píxeles:
+- Rasgos que deben sobrevivir a esa escala:
+- Evidencia de blockout:
+
+## Aprobación AR1
+- [ ] Vistas coherentes.
+- [ ] Proporciones medibles.
+- [ ] Materiales y paleta completos.
+- [ ] Asimetrías resueltas.
+- [ ] Función, escala y montaje claros.
+- [ ] Veredicto explícito sobre esta versión.
+
+- Veredicto:
+- Aprobador:
+- Fecha:
+```
+
+#### Plantilla: registro de créditos
+
+```markdown
+---
+presupuesto_inicial: 1000
+fecha_inicio: null
+saldo_proveedor_consultado: null
+fecha_saldo_proveedor: null
+---
+
+# Registro de créditos
+
+## Bolsas
+Son asignaciones de planificación, no cargos.
+
+| Bolsa | Asignado | Cobrado confirmado | Reservado pendiente |
+|---|---:|---:|---:|
+| Calibración | 60 | 0 | 0 |
+| Anclas y preproducción | 120 | 0 | 0 |
+| Personajes, props y animación | 300 | 0 | 0 |
+| Entorno | 120 | 0 | 0 |
+| UI y VFX | 100 | 0 | 0 |
+| Audio | 80 | 0 | 0 |
+| Reserva | 220 | 0 | 0 |
+| Total | 1000 | 0 | 0 |
+
+## Trabajos
+Una fila por trabajo, incluidos fallos y resultados rechazados.
+"N/D" significa cargo todavía desconocido, nunca cero.
+
+| Fecha | ID trabajo | Recurso / versión | Operación / modelo | Parámetros o enlace | Cotizado | Reserva pendiente | Cobrado | Devuelto confirmado | Resultado / decisión |
+|---|---|---|---|---|---:|---:|---:|---:|---|
+| | | | | | | | N/D | 0 | |
+
+## Conciliación
+- Cobrado confirmado acumulado:
+- Devoluciones confirmadas:
+- Consumo neto:
+- Reservas todavía pendientes:
+- Trabajos con cargo desconocido:
+- Disponible para nuevos trabajos:
+- Diferencia con saldo del proveedor:
+- Explicación de la diferencia:
+
+## Reglas de cálculo
+Consumo neto =
+cargos confirmados - devoluciones confirmadas.
+
+Disponible de planificación =
+1000 - consumo neto - reservas todavía pendientes.
+
+No contabilizar simultáneamente un cargo y su antigua reserva.
+No anticipar devoluciones.
+Si un trabajo sigue sin cargo conocido, mantener su reserva.
+
+## Eficiencia
+- Recursos aprobados:
+- Coste de trabajos asociados a esos recursos:
+- Coste total de intentos, incluidos descartes:
+- Horas de reparación:
+- Causas recurrentes de rechazo:
+
+## Cambios de presupuesto
+| Fecha | Bolsa origen | Bolsa destino | Créditos | Motivo | Aprobación |
+|---|---|---|---:|---|---|
+| | | | | | |
+```
+
+## Fuentes
+
+**Documentación primaria y prácticas de producción**
+
+- **[doc]** [GDC 2024: preproducción y dirección de arte](https://gdcvault.com/play/1034593/Art-Direction-Summit-Pre-Production). Se consultó la descripción pública; no se atribuye contenido no revisado de la charla.
+- **[doc]** [Toon Boom: finalización de hojas de personaje](https://helpcentre.toonboom.com/hc/en-ca/articles/57134612631955-Character-Design-03-Finalizing-the-character-sheets). Actualizado el 10-11-2026.
+- **[doc]** [Toon Boom: Character Model Sheets](https://learn.toonboom.com/modules/character-design/topic/character-model-sheets).
+- **[doc]** [Disney: desarrollo visual](https://disneyanimation.com/process/visual-development/) e [iluminación](https://www.disneyanimation.com/process/lighting/). Referencias de animación; su adaptación al proyecto está identificada como inferencia.
+- **[doc]** [Valve: Character Art Guide](https://help.steampowered.com/en/faqs/view/0688-7692-4D5A-1935). Principios de silueta y valores; fecha de actualización sin verificar.
+
+**Documentación técnica**
+
+- **[doc]** Godot: [renderizadores](https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html), [requisitos](https://docs.godotengine.org/en/stable/about/system_requirements.html), [formatos 3D](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html).
+- **[doc]** Godot: [LightmapGI](https://docs.godotengine.org/en/stable/classes/class_lightmapgi.html), [preparación de lightmaps](https://docs.godotengine.org/en/stable/tutorials/3d/global_illumination/using_lightmap_gi.html), [SpriteBase3D](https://docs.godotengine.org/en/stable/classes/class_spritebase3d.html).
+- **[doc]** Godot: [optimización de GPU](https://docs.godotengine.org/en/stable/tutorials/performance/gpu_optimization.html), [Performance](https://docs.godotengine.org/en/stable/classes/class_performance.html), [proceso de importación](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/import_process.html).
+- **[doc]** [Blender 4.5 LTS: remeshing](https://docs.blender.org/manual/th/4.5/modeling/meshes/retopology.html). Limitación del remallado automático verificada en el contenido indexado; no se comprobó ejecución local de Blender.
+- **[doc]** ImageMagick: [opciones](https://imagemagick.org/command-line-options/), [gestión de color](https://imagemagick.org/color-management/), [comparación](https://imagemagick.org/compare/).
+- **[doc]** [W3C: contraste mínimo](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html).
+- **[doc]** [Git LFS](https://git-lfs.com/).
+
+**Fuentes locales**
+
+- [Plan maestro](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf>): fases, dirección general y puertas de validación.
+- [Matriz de costes](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md>) y [costes por defecto](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_default.md>): cotizaciones registradas, no consumo real.
+- [Catálogo de parámetros](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_modelos.json>): restricciones y campos disponibles en la captura local.
+- [Tablero del usuario](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Referencias/Tablero_usuario/>): evidencia visual; técnicas internas y rendimiento del juego mostrado, **sin verificar**.
+tokens used
+123.768
+# Producción y validación de arte con IA — Fase 0
+
+## Resumen ejecutivo
+
+Se recomienda adoptar la disciplina documental y de revisión de un estudio, con un alcance adecuado para una sola persona: pocos recursos, referencias aprobadas, pruebas dentro de Godot y trazabilidad de cada gasto.
+
+El proceso debe separar **aprobación de diseño**, **aprobación técnica** y **aprobación en contexto**. Una imagen atractiva, una malla generada o un rig automático no demuestran por sí solos que el recurso esté terminado.
+
+Antes de producir personajes o escenarios completos, conviene demostrar una cadena pequeña: hoja coherente → recurso importable → animación funcional → cámara real → rendimiento medido. Los 1000 créditos deben administrarse mediante límites por recurso, por etapa y por proyecto, incluyendo resultados rechazados.
+
+Este informe propone entregables, puertas, métricas y cuatro plantillas copiables a Obsidian. Los valores numéricos son **criterios iniciales propuestos**, pendientes de calibración; no son estándares AAA ni resultados de pruebas del juego.
+
+Se consultaron documentos locales y fuentes primarias. No se modificaron archivos, instalaron programas, subieron recursos ni gastaron créditos.
+
+## Decisiones recomendadas
+
+| Decisión | Recomendación | Alternativa descartada y por qué | Confianza alta/media/baja |
+|---|---|---|---|
+| Disciplina de producción | Biblia breve, hojas ejecutables, manifiesto y evidencia por puerta. [inf] | Documentación extensa sin decisiones verificables: sobrecarga para una persona. | Alta |
+| Patrón de calidad | Aprobar una pequeña familia de recursos dentro del motor y usarla como referencia. [inf] | Comparar cada generación con referentes externos diferentes: dificulta controlar la coherencia. | Alta |
+| Personajes principales | Evaluar primero 3D chibi con una prueba temprana de deformación; conservar una alternativa de sprites. [inf] | Aprobar la ruta por un render estático: deja sin resolver animación, sombras y mantenimiento. | Media |
+| Renderizador para validar arte | Proponer Compatibility como base de evaluación del equipo; comparar Forward+ mediante una prueba pequeña antes de comprometer efectos. [inf] | Hacer depender el acabado de SDFGI desde el inicio: no hay rendimiento local demostrado. | Media |
+| Intercambio 3D | Priorizar GLB/glTF; mantener la integración en una escena propia de Godot. [doc][inf] | Depender de importación directa de `.blend`: Blender no está instalado. | Alta |
+| Topología y UV | Exigir inspección y prueba de deformación después del remesh. [doc][inf] | Considerar «quads» o «low-poly» como certificados de calidad. | Alta |
+| Dirección de IA | Bloques de estilo versionados, imágenes ancla propias y pruebas comparables. [inf] | Cambiar modelo, iluminación y prompt simultáneamente: impide identificar la causa de la deriva. | Alta |
+| Personalización | Probar primero un cuerpo y pocas piezas intercambiables compatibles. [inf] | Generar cada combinación como personaje independiente: multiplica validaciones y gastos. | Alta |
+| Créditos | Bolsa inicial de calibración de 60 créditos y reserva de 220 dentro de los 1000. [inf] | Gastar según aparezcan resultados atractivos, sin coste acumulado por recurso. | Media |
+| Aprobación | Toda puerta aplicable requiere veredicto explícito del usuario sobre una versión identificada. [inf] | Interpretar silencio, entusiasmo general o aprobación del concepto como aprobación final. | Alta |
+
+La propuesta de Compatibility requiere decidir una desviación respecto al Forward+ indicado en el plan maestro. Este informe **no cambia esa decisión ni configura el motor**.
+
+## Afirmaciones que sostienen las decisiones
+
+1. **[doc]** La documentación de producción debe acompañarse de puntos de evaluación claros. La descripción de esta sesión de GDC aborda precisamente las etapas de preproducción y sus requisitos de avance; no establece una plantilla universal. [GDC, preproducción y dirección de arte, 2024](https://gdcvault.com/play/1034593/Art-Direction-Summit-Pre-Production).
+
+2. **[doc]** Las hojas de personaje sirven como referencia de construcción, vistas, poses y expresiones; el lineup comunica relaciones de escala. [Toon Boom, hojas de personaje, actualizado el 10-11-2026](https://helpcentre.toonboom.com/hc/en-ca/articles/57134612631955-Character-Design-03-Finalizing-the-character-sheets), [referencia de model sheets](https://learn.toonboom.com/modules/character-design/topic/character-model-sheets).
+
+3. **[doc]** El desarrollo visual define personajes, mundos, color y composición en relación con la historia; las claves de color orientan posteriormente la iluminación. Son prácticas documentadas en animación, transferibles aquí como metodología, no como requisitos de un motor. [Disney, desarrollo visual](https://disneyanimation.com/process/visual-development/), [iluminación](https://www.disneyanimation.com/process/lighting/).
+
+4. **[doc]** Valve recomienda comprobar silueta, orientación y patrones de valor dentro del juego antes de añadir complejidad de color. Se toman esos principios, sin adoptar sus diseños. [Valve, Character Art Guide](https://help.steampowered.com/en/faqs/view/0688-7692-4D5A-1935).
+
+5. **[doc]** Godot orienta Compatibility hacia equipos antiguos o modestos. SDFGI pertenece a Forward+; las funciones disponibles cambian entre renderizadores. **[inf]** Por ello conviene validar el acabado sin depender inicialmente de SDFGI. [Godot, renderizadores](https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html).
+
+6. **[doc]** LightmapGI permite iluminación precalculada de bajo coste durante la ejecución, pero el horneado integrado requiere soporte para RenderingDevice. Ejecutar lightmaps y poder hornearlos son condiciones distintas. [Godot, LightmapGI](https://docs.godotengine.org/en/stable/classes/class_lightmapgi.html).
+
+7. **[doc]** Godot recomienda glTF 2.0 y admite GLB; importar `.blend` implica llamar a Blender instalado. [Godot, formatos 3D](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html).
+
+8. **[doc]** El remallado automático no garantiza topología adecuada para deformación. **[inf]** Un personaje generado debe superar pruebas de articulaciones antes de aprobarse para animación. [Blender 4.5 LTS, remeshing](https://docs.blender.org/manual/th/4.5/modeling/meshes/retopology.html).
+
+9. **[doc]** Reutilizar materiales y reducir cambios de estado ayuda al renderizado; las transparencias superpuestas pueden aumentar el coste. **[inf]** Deben revisarse conjuntamente geometría, materiales, vegetación y cobertura de efectos. [Godot, optimización de GPU](https://docs.godotengine.org/en/stable/tutorials/performance/gpu_optimization.html).
+
+10. **[doc]** ImageMagick permite extraer alfa, convertir espacios de color y comparar imágenes. **[inf]** Estas operaciones sirven como instrumentos de revisión, pero una métrica de semejanza no determina la calidad artística. [ImageMagick, opciones](https://imagemagick.org/command-line-options/), [comparación](https://imagemagick.org/compare/).
+
+11. **[doc]** WCAG establece contraste mínimo de 4,5:1 para texto normal y 3:1 para texto grande, con condiciones y excepciones. **[inf]** Adoptar 4,5:1 para texto funcional del juego es una referencia conservadora; no certifica accesibilidad integral. [W3C, contraste mínimo](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html).
+
+12. **[doc]** Godot ofrece monitores de memoria, llamadas de dibujo y rendimiento, algunos limitados a depuración. Sus requisitos mínimos no garantizan el rendimiento de un proyecto concreto. **[inf]** La aprobación técnica necesita medición en el portátil indicado. [Godot, Performance](https://docs.godotengine.org/en/stable/classes/class_performance.html), [requisitos del sistema](https://docs.godotengine.org/en/stable/about/system_requirements.html).
+
+## Riesgos y cómo mitigarlos
+
+| Riesgo | Cómo detectarlo | Mitigación propuesta [inf] |
+|---|---|---|
+| Buen concepto, recurso imposible de animar | Hombros, cadera o patas fallan en poses simples. | Probar deformación antes del texturizado final; simplificar ropa y articulaciones. |
+| Falta de herramientas de corrección | Un defecto exige editar UV, pesos o topología fuera de las herramientas actuales. | Marcar la reparación como pendiente. Usar provisionalmente primitivas, piezas rígidas o sprites; no presuponer instalaciones. |
+| Deriva entre generaciones | Cambian proporciones, pincelada, materiales o rasgos de identidad. | Comparación con anclas propias bajo idénticas condiciones; modificar una variable por intento. |
+| Turnaround contradictorio | Bolsillos, mechones o accesorios cambian de lado o volumen. | Resolver contradicciones en la hoja antes de generar la malla. |
+| Personalización demasiado costosa | Cada peinado o cuerpo exige un rig diferente. | Un rig común, interfaces de montaje y matriz pequeña de compatibilidad. |
+| Vegetación y VFX saturan la integrada | Aumenta el tiempo de cuadro al activar esas capas. | Medir por grupos; reducir capas, cobertura y materiales antes de añadir detalle. |
+| Sombras incoherentes | La textura contiene una sombra fija que contradice la luz del motor. | Separar color de material y luz de escena; comprobar dos orientaciones de iluminación. |
+| Gastos invisibles | Se contabiliza solo el resultado elegido. | Registrar cada trabajo, fallo, edición y reintento; reconciliar cargos. |
+| Agotamiento de disco | Crecen originales, variantes y cachés simultáneamente. | Techo de almacenamiento por lote; conservar fuentes aprobadas y registrar descartes sin borrarlos automáticamente. |
+| Falsa precisión de las métricas | Un recurso pasa un promedio y sigue siendo ilegible. | Combinar medición con tareas de reconocimiento a tamaño real. |
+| Arte científico incorrecto | Conectores, instrumentos o diagramas parecen plausibles pero enseñan algo falso. | Verificación técnica específica antes de aprobar recursos educativos. |
+| Referentes demasiado literales | Coinciden vestuario, emblemas, composiciones o interfaz distintiva. | Extraer principios y construir formas, iconografía y contexto propios. |
+
+## Preguntas que debe decidir el usuario
+
+Estas decisiones se presentan para revisión posterior; ninguna se considera aprobada por este informe.
+
+- **Base técnica:** ¿se acepta evaluar Compatibility como perfil principal y Forward+ como comparación?
+- **Personajes:** ¿se prioriza conservar el protagonista 3D, incluso si requiere simplificar accesorios y animaciones?
+- **Interfaz:** ¿se prefiere un cuaderno científico ilustrado, pergamino estilizado o una combinación con telemetría? Recomiendo explorar primero el cuaderno ilustrado.
+- **Personalización inicial:** ¿basta un cuerpo base con variaciones de piel, ojos y dos peinados para demostrar el sistema?
+- **Rendimiento:** ¿se acepta como objetivo inicial 30 FPS con mundo a 1280×720 en la pantalla de 1920×1080?
+- **Presupuesto:** ¿se acepta separar 60 créditos para calibración y mantener 220 de reserva?
+- **Ámbito de aprobación:** ¿cada decisión puede congelarse por recurso y puerta, permitiendo revisar después solo lo que cambie?
+
+## Desarrollo
+
+### 1. Alcance y evidencia revisada
+
+Se leyó el [plan maestro local](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf>), de tres páginas. Se consultaron los dos documentos de costes y los parámetros del catálogo local. Se confirmó la existencia de las 14 capturas y se inspeccionaron siete: exploración, título, obtención de objetos, hub y personalización.
+
+Las capturas permiten estudiar composición y acabado aparente. **No permiten verificar** topología, renderizador, número de polígonos, iluminación utilizada o rendimiento del juego mostrado.
+
+El plan sitúa dirección visual en Fase 1 y personajes en Fase 3. Aquí se define el sistema de producción y sus futuras pruebas; las propuestas de paleta, proporciones y alcance siguen pendientes.
+
+**Convenciones del informe:**
+
+- **[doc]:** documentación primaria.
+- **[sec]:** fuente secundaria; no se necesita para las decisiones principales de este informe.
+- **[inf]:** propuesta o deducción adaptada al proyecto.
+- **Sin verificar:** falta evidencia suficiente.
+
+Las fuentes web se consultaron el **12-11-2026**. Las páginas `stable` de Godot son referencias móviles: no constituyen una verificación exacta de cada comportamiento en el ejecutable 4.7.2 local.
+
+### 2. Qué significa trabajar «como un estudio»
+
+La unidad de producción será **un recurso con una función, una especificación y una versión verificable**. Una misma imagen puede ser un concepto aprobado y seguir sin ser una textura utilizable.
+
+Se recomienda distinguir dos dimensiones:
+
+| Dimensión | Ejemplos |
+|---|---|
+| Etapa de producción | Concepto, hoja, blockout, geometría, textura, animación, integración, pulido. |
+| Estado de revisión | Borrador, en revisión, cambios solicitados, aprobado, rechazado, sustituido. |
+
+Así se evita que «aprobado» signifique simultáneamente aprobado para modelar, aprobado visualmente y terminado.
+
+El desarrollador prepara y mide; el asistente ayuda a detectar defectos y documentar; **el usuario aprueba la versión y la puerta concretas**. [inf]
+
+### 3. Entregables de preproducción y contenido aprobable
+
+No existe un paquete único obligatorio para todos los estudios AAA. La siguiente tabla sintetiza prácticas de desarrollo visual y las convierte en un contrato de producción para este proyecto. Las cantidades son propuestas de alcance. [inf; fundamentos en las afirmaciones 1–4]
+
+| Entregable | Contenido mínimo | Condición para considerarlo aprobable |
+|---|---|---|
+| **Biblia de arte** | Intención narrativa; pilares visuales; lenguaje de formas; personajes, entornos, materiales, luz, UI y VFX; referencias comentadas; límites técnicos; ejemplos permitidos y rechazados; versiones. | Cada pilar se traduce en una regla observable y un ejemplo. No quedan contradicciones entre capítulos. |
+| **Guía de estilo** | Resumen operativo de la biblia: proporciones, paletas, pincelada, bordes, detalle, materiales, iluminación y presentación. | Permite revisar un recurso sin reinterpretar toda la biblia. Enlaza reglas e imágenes ancla vigentes. |
+| **Hoja de modelo / turnaround** | Frente, perfil, espalda y 3/4; vistas adicionales para asimetrías; pose neutra; líneas de construcción; altura en cabezas; medidas; paleta HEX; materiales; accesorios y uniones. | Las vistas describen el mismo objeto. Ningún volumen, lateralidad o material esencial queda ambiguo. |
+| **Hoja de expresiones** | Neutra, alegría, concentración, duda, sorpresa y frustración; ojos y boca separados cuando corresponda; límites de deformación. | Conserva identidad y proporciones. Las expresiones se distinguen al tamaño de retrato previsto. |
+| **Hoja de poses** | Reposo, caminar, observar, manipular herramienta y alcanzar; gato: reposo, marcha, atención y ayuda. Apoyos y centro de masa anotados. | La acción se reconoce por silueta y es realizable con el rig o sistema de sprites previsto. |
+| **Hoja de props** | Vistas necesarias, dimensiones, materiales, variantes, punto de agarre, pivote, colisión y función interactiva. | Escala y montaje inequívocos; conectores y funciones científicas revisados cuando sean relevantes. |
+| **Lineup de escala** | Protagonista, gato, NPC, puerta, mesa, instrumento y otros elementos recurrentes sobre suelo común, con regla métrica. | Todos comparten unidades y escala; la altura estilizada no vuelve inservibles mesas, puertas o agarres. |
+| **Concepto de entorno** | Plano funcional sencillo; rutas; zonas transitables; masas principales; primer, segundo y tercer plano; materiales y módulos reutilizables. | El espacio se puede construir y recorrer. La composición funciona desde la cámara jugable. |
+| **Color script** | Secuencia de pequeñas viñetas con emoción, momento narrativo, dominante, contraste y transición entre zonas. | Se entiende la progresión cromática al ver el conjunto reducido. No exige resolver todavía cada escenario. |
+| **Claves de iluminación** | Una clave por situación importante: dirección de luz, color, relación entre luz y sombra, ambiente, niebla y tratamiento del foco jugable. | Cada efecto tiene una implementación prevista y una alternativa compatible con el perfil técnico. |
+| **Style frames de UI** | HUD, misión, aviso de obtención, diálogo, mapa, título, carga y creador; jerarquía, tipografía y estados. | Textos reales en español, contraste, foco de navegación y tamaños verificables; fondos separados del texto funcional. |
+| **Style frames de VFX** | Inicio, máxima intensidad y disipación; forma, color, duración, área, capas, materiales y función informativa. | Se distingue la acción que comunica y existe un presupuesto técnico. El dibujo estático no se presenta como animación validada. |
+
+**Paquete inicial recomendado:** biblia de 8–12 páginas equivalentes, guía de dos páginas, una hoja del protagonista, una del gato, una de props, un lineup y dos encuadres de entorno. Son límites de trabajo propuestos, no requisitos de industria. [inf]
+
+#### Proporciones y paleta de ejemplo
+
+Para convertir «2,5–3 cabezas» en una regla ejecutable, propongo probar **2,75 cabezas**, con tolerancia inicial de **±0,10** en la hoja ortográfica. El cabello y los accesorios se miden aparte. No se debe medir esa proporción directamente en una vista con escorzo. [inf]
+
+Esta paleta es una **hipótesis original de trabajo**, no una extracción del tablero ni una aprobación de Fase 1:
+
+| Función | HEX de ejemplo |
+|---|---|
+| Tinta y contornos interiores | `#242B34` |
+| Papel cálido | `#E8D9B5` |
+| Tierra | `#B57A50` |
+| Vegetación media | `#66834E` |
+| Sombra vegetal | `#344C40` |
+| Acento cálido | `#C96F3D` |
+| Azul técnico | `#365B7A` |
+| Gris de instrumento | `#87969C` |
+
+La guía necesita **rampas de sombra, base y luz por material**, además de colores para piel, cabello y ojos. Ocho muestras generales no bastan para especificar todos los recursos. [inf]
+
+### 4. Puertas comunes y cómo medirlas
+
+#### Condiciones de prueba
+
+Cada revisión debe identificar resolución, cámara, tamaño en pantalla, renderizador, iluminación, versión del recurso y versión de la biblia.
+
+Se proponen dos contextos: exploración 3/4 y hub lateral. En exploración, «55°» debe definirse como **elevación sobre el plano horizontal**, evitando confundirla con el ángulo respecto a la vertical. La proyección, encuadre y distancia se congelan después del blockout aprobado. [inf]
+
+| Criterio | Medición propuesta | Umbral inicial propuesto [inf] |
+|---|---|---|
+| **Silueta** | Máscara negra desde las vistas homologadas; reconocimiento de tipo y orientación en cinco capturas mezcladas. | Identificación correcta en 4/5, con exposición de dos segundos por captura. |
+| **Conservación de forma** | Superponer máscara aprobada y candidata, alineadas por suelo y escala uniforme; opcionalmente calcular intersección/unión, IoU. | IoU ≥0,85 como alarma de cambio en la misma vista y pose; no sustituye revisión visual. |
+| **Valores** | Captura en gris lineal y muestras de personaje/objeto frente a su fondo local. | Diferencia de mediana de luminancia ≥0,08 en los fondos de prueba, más reconocimiento correcto. Revisar contornos que se pierdan. |
+| **Paleta** | Albedo o imagen neutra, con máscaras por material; comparar con sus rampas aprobadas. | ≥90% de píxeles opacos dentro de la tolerancia pactada; excepciones identificadas. |
+| **Proporciones** | Puntos de referencia en vistas ortográficas: cabeza, hombros, cadera, rodillas y suelo. | Altura en cabezas acordada; relaciones principales dentro de ±5%, salvo deformación expresiva aprobada. |
+| **Lectura en cámara** | Vista a tamaño real, sin ampliar, sobre tres fondos representativos. | Se reconocen orientación, rol e interacción; ningún detalle esencial depende del zoom de revisión. |
+| **Densidad de téxel** | Medir UV frente a área de superficie; checker en el motor. | Objetivo inicial de 256 px/m y variación ±25% entre superficies equivalentes. Excepciones explícitas. |
+| **Luz coherente** | Recurso en escena neutra y dos direcciones de luz; revisión de sombras, brillo y contacto. | Sin sombras direccionales contradictorias en albedo ni reflejos que cambien injustificadamente de material. |
+| **Presupuesto técnico** | Geometría, materiales, texturas, animación y coste dentro de una escena representativa. | Cumplir la ficha y mantener la escena dentro del presupuesto aprobado. |
+| **Integridad** | Importar y recorrer todas las vistas y animaciones previstas. | Sin texturas ausentes, pivotes incorrectos, recortes accidentales o errores nuevos de importación. |
+
+Los promedios de luminancia, el IoU y la proximidad de color son **detectores de problemas**. No certifican belleza, identidad o legibilidad por sí solos. [inf]
+
+#### Medición con ImageMagick
+
+Ejemplos para futuras revisiones; los comandos siguientes imprimen resultados y no escriben archivos:
+
+```powershell
+# Dimensiones y canales.
+magick identify -format "%f | %wx%h | %[channels]" "recurso.png"
+
+# Estadísticas de un recorte en gris lineal.
+# Sustituir tamaño y posición por la región de interés.
+magick "captura.png" -crop 120x160+600+260 +repage -colorspace LinearGray -format "media=%[fx:mean] desviacion=%[fx:standard_deviation]" info:
+
+# Caja ocupada por una silueta procedente de alfa.
+magick "recurso.png" -alpha extract -threshold 50% -trim -format "caja=%wx%h desplazamiento=%X,%Y" info:
+
+# Diferencia entre imágenes con idéntico encuadre y dimensiones.
+magick compare -metric RMSE "aprobado.png" "candidato.png" null:
+```
+
+Las operaciones están documentadas por [ImageMagick](https://imagemagick.org/command-line-options/); el uso de RMSE corresponde a su [herramienta de comparación](https://imagemagick.org/compare/). **Un RMSE bajo no implica un buen diseño.**
+
+Se verificó localmente la conversión a `LinearGray` y la lectura de estadísticas sobre una referencia. La media de la captura completa no se utilizó como criterio artístico: contiene interfaz del video, subtítulos y zonas ajenas al juego.
+
+#### Medición con Python
+
+La implementación puede trabajar en memoria con imágenes y máscaras. Se comprobó la disponibilidad local de Pillow y NumPy, sin instalar nada.
+
+- **IoU:** `píxeles(A ∩ B) / píxeles(A ∪ B)`. Comparar máscaras de la misma vista y pose, sin deformar una para hacerla coincidir.
+- **Proporciones:** `altura_corporal / altura_cabeza`. Guardar coordenadas de puntos y definición de cada medida.
+- **Valores:** convertir sRGB a RGB lineal antes de obtener luminancia. No aplicar un umbral a una imagen cuyo contraste se haya normalizado por separado.
+- **Paleta:** para cada material, calcular la distancia al color más cercano de su rampa. Como prueba inicial simple puede usarse distancia RMS en RGB lineal con tolerancia 0,10; no es una medida perceptual.
+- **Estabilidad de sprite:** medir por fotograma la posición del apoyo y los puntos de identidad; distinguir desplazamiento intencional de vibración.
+- **Presupuesto:** sumar bytes de archivos y dimensiones; registrar aparte memoria residente medida en Godot.
+
+Los algoritmos y tolerancias de este apartado son propuestas **[inf]**. La gestión de espacios de color debe seguir la [documentación de ImageMagick](https://imagemagick.org/color-management/).
+
+#### Densidad de téxel y UV
+
+Para una textura de `W × H`, un triángulo con área UV normalizada `Auv` y área en mundo `Am²` permite estimar:
+
+```text
+densidad ≈ sqrt((Auv × W × H) / Am²)    [píxeles/metro]
+```
+
+Es una estimación escalar: debe acompañarse de un checker para detectar estiramiento direccional. Medir después de fijar la escala del recurso. [inf]
+
+La revisión comprueba costuras visibles, distorsión, contaminación entre islas con mipmaps y asignación de resolución según visibilidad. Las UV de albedo pueden compartir zonas cuando se haya previsto; las UV destinadas a lightmaps necesitan su revisión específica. [Godot, preparación de lightmaps — doc](https://docs.godotengine.org/en/stable/tutorials/3d/global_illumination/using_lightmap_gi.html).
+
+### 5. Puertas específicas por tipo de recurso
+
+Todas incorporan los criterios comunes aplicables. «No aplica» exige una explicación.
+
+| Tipo | Comprobaciones adicionales propuestas [inf] |
+|---|---|
+| **Personaje 3D** | Anatomía estilizada consistente; manos y pies distinguibles; accesorios estables; prueba de hombros, cadera y rodillas; apoyos sin deslizamiento visible; transiciones entre clips. |
+| **Gato 3D** | Volúmenes y patrón de pelaje coherentes; cuatro patas distinguibles cuando corresponda; cola y orejas sin deformaciones accidentales; prueba propia de rig cuadrúpedo. |
+| **Sprite animado** | Alfa real; tamaño de celda y pivote estables; continuidad de ropa y rostro; ausencia de fotogramas recortados; direcciones coherentes; bucle sin salto accidental. |
+| **Prop interactivo** | Escala, punto de agarre, estado activo/inactivo, colisión y reconocimiento; instrumento científicamente coherente si comunica una función real. |
+| **Módulo de entorno** | Encaje entre piezas, bordes, colisión, escala de textura, ausencia de huecos y lectura de rutas. |
+| **Vegetación y rocas** | Familia de formas reconocible; variación controlada; repetición poco evidente; contacto con suelo; coste con la cantidad real de instancias. |
+| **UI e iconos** | Estados normal, foco, pulsado y deshabilitado; textos largos; tildes, ñ y símbolos; contraste; navegación; escalado sin cortar contenido. |
+| **Mapa ilustrado** | Correspondencia con el espacio jugable, leyenda, iconos distinguibles y rutas comprensibles. |
+| **VFX** | Anticipación, acción y cierre legibles; duración; oclusión de información importante; coexistencia de varios efectos; modo de movimiento reducido previsto. |
+| **Título y carga** | Identidad propia, jerarquía, zonas seguras de texto y coherencia con el juego real. |
+| **Piezas de personalización** | Compatibilidad con cuerpo y rig; unión de cuello y cabello; intersecciones; retrato y cuerpo consistentes; combinaciones probadas. |
+
+Para sprites en 3D, Godot distingue recibir iluminación, transparencia y comportamiento de billboard; su documentación advierte particularidades de sombras al usar billboards. La puerta debe probar el recurso con la cámara y luz definitivas. [SpriteBase3D — doc](https://docs.godotengine.org/en/stable/classes/class_spritebase3d.html).
+
+### 6. Etapas del recurso y validación
+
+Los códigos `AR0–AR7` identifican puertas de arte; **no son las fases 0–7 del plan maestro**.
+
+| Etapa | Puerta | Qué se valida antes de continuar |
+|---|---|---|
+| **Concepto** | AR0: intención | Función, identidad, silueta, originalidad, prioridad y techo de gasto. |
+| **Hoja aprobada** | AR1: especificación | Vistas coherentes, proporciones, escala, materiales, paleta y asimetrías resueltas. |
+| **Blockout** | AR2: volumen y cámara | Tamaño, encuadre, navegación, agarres, contacto y lectura con geometría sencilla. |
+| **Modelo o sprite** | AR3: construcción | Forma, integridad, pivote, geometría o alfa, UV y presupuesto provisional. En personajes, prueba temprana de deformación. |
+| **Textura** | AR4: superficie | Paleta, materiales, pincelada, téxel y ausencia de iluminación contradictoria. |
+| **Rig y animación** | AR5: movimiento | Pesos, apoyos, continuidad, identidad temporal y acciones necesarias. En sprites equivale a revisar los clips. |
+| **Integración en motor** | AR6: contexto | Cámara real, interacción, sombras, colisión, UI relacionada y coste de la escena. |
+| **Pulido** | AR7: terminado | Correcciones cerradas, evidencias completas, manifiesto actualizado y aprobación final. |
+
+La primera prueba en motor ocurre en blockout. AR6 comprueba la integración completa. [inf]
+
+Si cambia una decisión aprobada, se reabren las puertas afectadas: modificar solo el color no exige reconstruir el rig; modificar proporciones puede afectar geometría, UV, animación y cámara. El manifiesto registra esas dependencias. [inf]
+
+### 7. Pipeline viable con las herramientas actuales
+
+La entrega base será GLB/glTF para 3D y PNG para imágenes/sprites, con metadatos de animación cuando corresponda. Godot documenta el soporte de glTF y sus alternativas de importación. [doc](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html)
+
+Flujo propuesto **[inf]**:
+
+1. Resolver diseño y escala antes de pedir una malla.
+2. Usar imágenes coherentes de la hoja como entrada, según el contrato real del modelo.
+3. Importar el resultado en una escena de revisión pequeña.
+4. Medir geometría y materiales; revisar silueta y UV.
+5. Aplicar remesh únicamente si resuelve un defecto identificado.
+6. Volver a comprobar forma y UV después del remesh.
+7. Aprobar superficie antes de producir animaciones completas.
+8. Integrar mediante una escena propia de Godot con colisión, interacción y configuración de juego.
+
+**Límite actual:** sin Blender ni editor de imagen, puede inspeccionarse e integrarse mucho contenido, pero no debe darse por resuelta la corrección manual de topología, UV o pesos. Un recurso que necesite esas reparaciones queda en `cambios_solicitados`, con la capacidad faltante identificada.
+
+Para props sencillos, el blockout con primitivas y materiales de Godot permite avanzar. Para personajes, piezas rígidas o sprites pueden demostrar comportamiento mientras se decide la solución definitiva. Esto no demuestra equivalencia visual con el objetivo 3D. [inf]
+
+#### Presupuesto técnico inicial
+
+Son límites conservadores de ensayo, **sin verificar mediante una escena del proyecto**:
+
+| Elemento | Propuesta inicial [inf] |
+|---|---|
+| Protagonista | Hasta 8.000 triángulos; hasta dos materiales; albedo de 1024². |
+| Gato | Hasta 4.000 triángulos; un material; albedo de 512². |
+| Prop común | 100–1.500 triángulos; material compartido cuando sea viable. |
+| Entorno | Texturas repetibles o atlas de 512²–1024², según cobertura real. |
+| Rig del protagonista | Hasta 40 huesos deformantes como punto de partida. |
+| Escena piloto | Alarma inicial en 80.000 triángulos visibles y 200 llamadas de dibujo. |
+| Texturas residentes | Alarma inicial en 128 MiB. |
+| Resolución | Mundo de prueba a 1280×720; UI comprobada también a 1920×1080. |
+| Almacenamiento | Revisar lote al añadir 2 GiB; procurar conservar 10 GiB libres. |
+
+Estos números no son máximos de Godot ni garantías de fluidez. Superarlos obliga a revisar evidencia; cumplirlos no garantiza rendimiento.
+
+Los contadores de primitivas del motor pueden incluir pases adicionales y no equivalen directamente al número de triángulos originales. [Godot, Performance — doc](https://docs.godotengine.org/en/stable/classes/class_performance.html).
+
+#### Protocolo de rendimiento
+
+Propuesta **[inf]**:
+
+- Probar una escena con personaje, gato, vegetación, UI y VFX simultáneos.
+- Ejecutar un recorrido reproducible de tres minutos, después del calentamiento.
+- Medir intervalos entre cuadros: objetivo inicial `p95 ≤ 33,3 ms` y `p99 ≤ 50 ms`, separando cargas.
+- Repetir con una sesión de diez minutos para detectar degradación sostenida.
+- Comparar capas activadas y desactivadas para atribuir costes.
+- Medir el juego exportado y, por separado, la experiencia de edición.
+
+Los monitores de Godot apoyan el diagnóstico; para percentiles hace falta registrar intervalos por cuadro. El FPS actualizado una vez por segundo no describe por sí solo los tirones. [doc](https://docs.godotengine.org/en/stable/classes/class_performance.html)
+
+### 8. Manifiesto, nombres y versiones
+
+Se recomienda una ficha Markdown por recurso como fuente de verdad y un índice generado a partir de ellas. No mantener manualmente dos registros completos contradictorios. [inf]
+
+| Grupo | Campos |
+|---|---|
+| Identidad | `id`, nombre, tipo, familia, función, prioridad. |
+| Producción | Fase del plan, etapa, puerta, estado, responsable. |
+| Especificación | Biblia, cámara, unidades, proporciones y presupuesto técnico. |
+| Generación | Proveedor, identificador exacto del modelo, parámetros, prompt enviado, referencias y semilla si existe. |
+| Procedencia | Origen y permiso de las referencias; modificaciones posteriores. |
+| Coste | Cotizado, reservado, cobrado, devolución confirmada y total acumulado. |
+| Archivos | Fuente, derivados, ruta en motor y SHA-256. |
+| Revisión | Evidencias, resultados, veredicto, aprobador, fecha y observaciones. |
+| Dependencias | Recursos utilizados, versiones y puertas que deben reabrirse si cambian. |
+
+Una URL temporal del proveedor no sustituye al archivo fuente conservado. Una semilla ausente se registra como `null`; no se inventa ni se envía a modelos que no la admiten. [inf]
+
+Convención propuesta:
+
+```text
+ID estable:
+chr_001_estudiante
+cmp_001_gato
+prp_014_multimetro
+env_006_roca_tropical
+ui_003_aviso_obtenido
+vfx_002_conexion
+
+Archivo de revisión:
+<id>__<etapa>__<variante>__v###.<ext>
+
+Ejemplos:
+chr_001_estudiante__turnaround__base__v003.png
+chr_001_estudiante__mesh__base__v005.glb
+chr_001_estudiante__tex_albedo__base__v002.png
+chr_001_estudiante__anim_walk__base__v004.glb
+```
+
+Usar minúsculas, ASCII y guiones bajos. Evitar nombres como `final_final`. Las revisiones publicadas no se sobrescriben. El archivo activo en motor puede conservar una ruta estable; la ficha identifica qué revisión y hash contiene. [inf]
+
+Para binarios grandes, Git LFS almacena punteros en Git y el contenido por separado. **No elimina el coste local de los originales ni reemplaza una copia de seguridad.** [Git LFS — doc](https://git-lfs.com/)
+
+Se propone versionar fichas, escenas y configuración; usar LFS de forma selectiva para fuentes binarias. Godot desaconseja versionar su caché `.godot/`. [Proceso de importación — doc](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/import_process.html)
+
+Una futura validación automática puede comprobar IDs, campos, rutas, hashes, dimensiones, presupuestos y ausencia de referencias rotas. La aprobación artística seguirá siendo humana. [inf]
+
+### 9. Dirección de arte para IA generativa
+
+#### Biblia de prompts
+
+Cada receta debe incluir bloques versionados y diferenciar intención visual de parámetros realmente admitidos por el modelo. [inf]
+
+```text
+RECETA: chr_turnaround_v001
+BIBLIA: art_v001
+ANCLAS: lista de IDs y versiones
+
+[ESTILO FIJO]
+Aventura científica ilustrada.
+Volúmenes simplificados y superficies pintadas.
+Detalle concentrado en rostro, manos y función del objeto.
+Acabado coherente con las imágenes ancla aprobadas.
+
+[IDENTIDAD FIJA]
+Proporciones y rasgos de la hoja aprobada.
+Vestuario, materiales y lateralidad de accesorios.
+Elementos que deben permanecer invariantes.
+
+[RECURSO VARIABLE]
+Qué personaje, prop o entorno se necesita.
+Función jugable y diferencias permitidas.
+
+[PRESENTACIÓN]
+Vista, pose, encuadre, fondo y luz de revisión.
+Separación necesaria entre piezas.
+
+[EXCLUSIONES]
+Marcas ajenas, texto decorativo ilegible, accesorios adicionales,
+fotorealismo y cambios de identidad no solicitados.
+
+[SALIDA]
+Resolución, formato, transparencia y cantidad solicitada.
+```
+
+`[EXCLUSIONES]` es parte de la receta textual. Solo se convierte en un campo de prompt negativo si el modelo lo admite.
+
+En el catálogo local, `gpt_image_2_6` no expone `seed`; Tripo H3.1 expone `texture_seed`, que no debe describirse como semilla completa de geometría. `autosprite` restringe `prompt` y `name` al modo `custom`. Estos son datos del [catálogo local consultado](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_modelos.json>), no una comprobación del servicio en vivo.
+
+#### Imágenes ancla
+
+Propuesta **[inf]**:
+
+- Una hoja propia aprobada del protagonista.
+- Una hoja propia del gato.
+- Una muestra de roca, suelo y vegetación.
+- Un encuadre de exploración y otro de hub.
+- Un frame de UI y otro de VFX.
+
+Los referentes externos explican objetivos generales. Las anclas propias gobiernan la producción.
+
+Después del primer modelo aprobado, sus renders ortográficos pueden reemplazar vistas contradictorias de un turnaround generado. La ficha debe distinguir entre especificación de diseño y evidencia del recurso construido.
+
+#### Control de deriva
+
+Evaluar cada candidato junto al último aprobado, con igual escala, luz y cámara. Registrar diferencias en cinco ejes: forma, proporción, paleta, superficie y detalle. Cambiar una variable principal por intento. [inf]
+
+Se propone revisar el conjunto después de cada cinco recursos aprobados. Si una variante mejora la dirección general, primero se aprueba una nueva versión de la biblia y se determina qué recursos quedan afectados.
+
+**Rechazo inmediato propuesto:**
+
+- Contradicción entre vistas o pérdida de identidad.
+- Elementos ajenos al brief.
+- Anatomía o conexiones funcionales incorrectas.
+- Texto falso incorporado a instrumentos educativos.
+- Sombras incompatibles con el tratamiento acordado.
+- Artefactos de alfa o animación que alteren la silueta.
+- Recurso sin ruta viable de integración o corrección.
+- Similitud demasiado literal con un diseño externo.
+
+Un incumplimiento medible y reparable puede recibir `cambios_solicitados`; un candidato que exige rediseño vuelve a la puerta correspondiente. [inf]
+
+### 10. Protección del presupuesto de 1000 créditos
+
+La [matriz local](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md>) describe consultas de coste con entradas de prueba. **No es un registro de consumo ni una garantía de precio futuro.**
+
+| Operación | Cotización registrada |
+|---|---:|
+| GPT Image 2.6, low, 1k | 0,25 |
+| GPT Image 2.6, high, 1k | 1,5 |
+| GPT Image 2.6, high, 2k | 2,75 |
+| Tripo H3.1 imagen→3D, defecto | 9 |
+| Tripo H3.1 multivista, caso de cuatro vistas | 9 |
+| Hunyuan3D v3 imagen→3D, Normal | 11 |
+| Meshy 7 imagen→3D, defecto | 38 |
+| Meshy 5 remesh, caso de 8000 quads | 6 |
+| Meshy 5 retexturizado | 9,5 |
+| AutoSprite turbo, casos consultados | 2 |
+| AutoSprite pro, caso consultado | 3 |
+| AutoSprite max, caso consultado | 14 |
+
+La estimación del rigging independiente y algunas rutas 3D no está disponible en esa matriz. **Coste sin verificar** no significa gratuito. El caso Hunyuan `LowPoly quads` contiene un error de validación, por lo que no ofrece un precio utilizable.
+
+#### Distribución propuesta [inf]
+
+| Bolsa | Créditos |
+|---|---:|
+| Calibración técnica del pipeline | 60 |
+| Anclas y preproducción visual | 120 |
+| Personajes, props y animación prioritarios | 300 |
+| Kit inicial de entorno | 120 |
+| UI y VFX | 100 |
+| Audio posterior | 80 |
+| Reserva | 220 |
+| **Total** | **1000** |
+
+Es una distribución del presupuesto declarado; no se consultó el saldo actual. La reserva se mantiene separada hasta revisar consumo y tasa de aprobación.
+
+#### Límites de intentos [inf]
+
+| Etapa | Límite ordinario |
+|---|---|
+| Concepto de un diseño | Una generación inicial y hasta dos correcciones. |
+| Conversión a malla | Una inicial y un reintento dirigido. |
+| Remesh | Una operación por versión de geometría. |
+| Retexturizado | Una operación por versión de geometría/UV. |
+| Clip de animación | Una inicial y una corrección antes de revisar la receta. |
+| Coste acumulado | Alarma en 25 créditos para recurso común y 60 para protagonista o compañero. |
+
+Se detiene al alcanzar **el límite de intentos o el económico**, lo que ocurra primero. Renombrar una variante no reinicia el presupuesto.
+
+Ejemplo: dos intentos Tripo de 9, un remesh de 6 y un retexturizado de 9,5 suman **33,5 créditos**, antes de conceptos y rigging. Es una simulación aritmética basada en cotizaciones locales.
+
+Para sprites, el coste crece por acción y dirección. Cinco direcciones y dos acciones equivalen a diez trabajos: **20 créditos a 2 por trabajo**, si siguen vigentes esas condiciones. El catálogo contiene cinco direcciones isométricas nominales por varias acciones; no demuestra ocho vistas independientes ni coherencia entre ellas.
+
+La simetría puede permitir reutilización reflejada, pero debe rechazarse cuando invierta accesorios, escritura o elementos de identidad. [inf]
+
+### 11. Vertical slice y definición de «terminado»
+
+#### Prueba técnica de Fase 0
+
+Debe demostrar una cadena de producción pequeña: un prop, una muestra de superficie y una prueba mínima de personaje animado en una escena de revisión. Su aprobación responde a «¿podemos producir y validar esto en el equipo disponible?». [inf]
+
+No equivale a aprobar diseños definitivos de las fases siguientes.
+
+#### Vertical slice propuesto [inf]
+
+Un recorrido de **5–8 minutos**, desarrollado cuando las puertas del plan permitan avanzar:
+
+- Hub lateral pequeño con un personaje interactuable.
+- Zona de exploración 3/4 conectada.
+- Protagonista y gato con sus acciones imprescindibles.
+- Entre 8 y 12 recursos de entorno reutilizables.
+- Una interacción científica con efecto observable.
+- HUD, objetivo, aviso de obtención y diálogo.
+- Una familia de VFX y una ambientación sonora representativa.
+
+Ejemplo de interacción: recuperar una medición ajustando un instrumento y observar cómo cambia una señal. Su exactitud científica requiere diseño y comprobación específicos; no se aprueba aquí una mecánica concreta.
+
+El creador completo queda fuera del alcance inicial recomendado. Un cuerpo, variaciones de color y dos peinados pueden demostrar la compatibilidad de piezas.
+
+#### «Terminado» para un recurso
+
+- Supera las puertas aplicables.
+- Se reconoce y funciona con la cámara real.
+- Cumple la especificación técnica aprobada.
+- No tiene defectos críticos abiertos.
+- Conserva fuente, parámetros y procedencia.
+- Registra todos sus gastos conocidos.
+- Identifica versión, hash y dependencias.
+- Tiene aprobación explícita del usuario en AR7.
+
+#### «Terminado» para el vertical slice
+
+Además de sus recursos, debe demostrar recorrido completo, interacción comprensible, coherencia entre escenas y rendimiento sostenido en el portátil. La producción debe poder repetirse para un segundo recurso de la misma familia sin inventar nuevamente el proceso. [inf]
+
+### 12. Presentación para aprobación rápida
+
+Cada revisión contendrá una lámina breve y evidencia complementaria. [inf]
+
+| Zona | Contenido |
+|---|---|
+| Encabezado | ID, versión, puerta y decisión solicitada. |
+| Referencia | Hoja o ancla propia aprobada; referente externo solo si explica un principio. |
+| Candidato | Misma vista, escala y condiciones que la referencia. |
+| Diagnóstico | Silueta, gris, paleta y detalle del defecto relevante. |
+| Motor | Captura completa con cámara real; recorte 1:1 identificado aparte. |
+| Semáforo | Criterio, umbral, resultado y evidencia. |
+| Pie | Cambios desde la revisión anterior y coste acumulado. |
+
+Propuesta de semáforo:
+
+- **Verde — cumple:** criterio aplicable demostrado.
+- **Amarillo — pendiente:** falta prueba o corrección; no autoriza avanzar en lo que dependa de ella.
+- **Rojo — incumple:** necesita corrección o cambio de diseño.
+- **N/A — justificado:** no corresponde a ese recurso.
+
+No promediar colores para ocultar un fallo crítico. Ningún amarillo aplicable queda convertido en aprobación por defecto.
+
+Formato de respuesta del usuario:
+
+```text
+APROBAR chr_001_estudiante v003 AR1
+CAMBIOS chr_001_estudiante v003 AR1: reducir mochila; conservar rostro
+RECHAZAR chr_001_estudiante v003 AR1: no corresponde a la dirección acordada
+```
+
+Para movimiento, adjuntar un clip corto a velocidad real y una vista lenta adicional. Para rendimiento, medir sin que la grabación altere la prueba. Antes de integración, la captura en motor se marca **pendiente**; un montaje ilustrado no ocupa su lugar.
+
+### 13. Plantillas listas para Obsidian
+
+Las cuatro plantillas siguientes son propuestas **[inf]**. Los campos vacíos no equivalen a criterios cumplidos.
+
+#### Plantilla: ficha de recurso
+
+```markdown
+---
+id: chr_001_estudiante
+nombre: Estudiante
+tipo: personaje_3d
+familia: protagonistas
+fase_plan: 0
+etapa: concepto
+puerta: AR0
+estado: borrador
+version: v001
+prioridad: alta
+responsable: ""
+biblia_version: ""
+receta_prompt_version: ""
+modelo_ia: ""
+semilla: null
+semilla_alcance: no_disponible
+coste_cotizado: null
+coste_reservado: 0
+coste_cobrado: null
+coste_acumulado: null
+techo_creditos: 60
+archivo_fuente: ""
+archivo_motor: ""
+sha256: ""
+veredicto: pendiente
+aprobador: ""
+fecha_veredicto: null
+---
+
+# chr_001_estudiante — Estudiante
+
+## Función
+- Función jugable:
+- Qué debe reconocer el jugador:
+- Diferencias permitidas:
+- Invariantes:
+
+## Especificación
+| Campo | Objetivo aprobado | Medido |
+|---|---|---|
+| Altura y unidades | | |
+| Proporción en cabezas | | |
+| Triángulos o celdas | | |
+| Materiales | | |
+| Texturas y dimensiones | | |
+| Densidad de téxel | | |
+| Huesos / clips / direcciones | | |
+| Cámara y tamaño en pantalla | | |
+
+## Generación
+- Proveedor:
+- Modelo exacto:
+- Identificador de trabajo:
+- Fecha:
+- Parámetros exactos:
+- Semilla y alcance:
+- Operaciones posteriores:
+
+### Prompt realmente enviado
+> Pegar el texto completo, sin resumir.
+
+### Referencias
+| ID / versión | Ruta o URL | Uso | Procedencia / permiso |
+|---|---|---|---|
+| | | | |
+
+## Archivos y dependencias
+| Papel | Ruta | Versión / hash |
+|---|---|---|
+| Fuente | | |
+| Derivado | | |
+| Motor | | |
+| Evidencia | | |
+
+- Depende de:
+- Un cambio aquí obliga a revisar:
+
+## Créditos
+- Trabajos asociados: [[Registro de créditos]]
+- Cotizado:
+- Reservado:
+- Cobrado confirmado:
+- Cargos pendientes:
+- Total acumulado del recurso:
+
+## Revisión
+- Puerta solicitada:
+- Checklist: [[Puerta de revisión]]
+- Cambios desde la versión anterior:
+- Defectos abiertos:
+- Decisión solicitada:
+- Veredicto literal del usuario:
+- Fecha y versión aprobadas:
+```
+
+#### Plantilla: lista de comprobación de puerta
+
+```markdown
+---
+recurso_id: ""
+version: ""
+puerta: AR0
+estado: pendiente
+fecha: null
+aprobador: ""
+---
+
+# Puerta de revisión
+
+## Condiciones
+- Biblia / receta:
+- Cámara / escena:
+- Renderizador:
+- Resolución del mundo / de la UI:
+- Tamaño del recurso en pantalla:
+- Iluminación:
+- Equipo:
+- Versión del motor:
+- Hash del recurso:
+
+## Evidencia
+- Hoja de referencia:
+- Comparativa:
+- Captura en motor:
+- Clip:
+- Registro técnico:
+
+## Comprobaciones
+Usar: VERDE, AMARILLO, ROJO o N/A con justificación.
+
+| Criterio | Método | Umbral aprobado | Resultado | Semáforo |
+|---|---|---|---|---|
+| Silueta y orientación | | | | |
+| Valores | | | | |
+| Paleta | | | | |
+| Proporciones y escala | | | | |
+| Lectura en cámara | | | | |
+| Téxel y UV | | | | |
+| Materiales y luz | | | | |
+| Geometría / alfa | | | | |
+| Animación / continuidad | | | | |
+| Interacción / colisión | | | | |
+| Presupuesto técnico | | | | |
+| Exactitud científica | | | | |
+| Identidad y procedencia | | | | |
+
+## Cierre
+- [ ] Todas las comprobaciones aplicables tienen evidencia.
+- [ ] Los N/A están justificados.
+- [ ] No quedan incumplimientos críticos.
+- [ ] Coste acumulado actualizado.
+- [ ] Fuente y archivo de motor identificados.
+- [ ] Aprobación explícita recibida.
+
+## Veredicto
+- Decisión: PENDIENTE / APROBADO / CAMBIOS / RECHAZADO
+- Recurso, versión y puerta:
+- Texto literal del usuario:
+- Fecha:
+- Correcciones requeridas:
+- Puertas o dependencias que se reabren:
+```
+
+#### Plantilla: hoja de modelo
+
+```markdown
+---
+recurso_id: ""
+version: v001
+estado: borrador
+biblia_version: ""
+unidad_mundo: metro
+altura_m: null
+altura_cabezas: null
+---
+
+# Hoja de modelo
+
+## Identidad
+- Nombre funcional:
+- Tres rasgos invariantes:
+- Función y personalidad visual:
+- Elementos intercambiables:
+- Asimetrías que no se pueden reflejar:
+
+## Vistas
+Todas comparten escala y línea de suelo.
+
+| Vista | Imagen | Anotaciones pendientes |
+|---|---|---|
+| Frente | ![[frente.png]] | |
+| Perfil | ![[perfil.png]] | |
+| Espalda | ![[espalda.png]] | |
+| Tres cuartos | ![[tres_cuartos.png]] | |
+| Vista adicional necesaria | | |
+
+## Construcción y medidas
+| Medida | Objetivo | Tolerancia | Observación |
+|---|---|---|---|
+| Altura corporal sin accesorios | | | |
+| Altura de cabeza sin cabello | | | |
+| Altura en cabezas | | | |
+| Ancho de hombros | | | |
+| Línea de cadera | | | |
+| Altura de rodilla | | | |
+| Tamaño de manos y pies | | | |
+
+## Paleta
+Especificar HEX sRGB; no confiar en texto generado dentro de la imagen.
+
+| Material / zona | Sombra HEX | Base HEX | Luz HEX |
+|---|---|---|---|
+| Piel / pelaje | | | |
+| Cabello | | | |
+| Ropa principal | | | |
+| Accesorios | | | |
+
+## Materiales
+| Zona | Material | Brillo / rugosidad previstos | Detalle permitido |
+|---|---|---|---|
+| | | | |
+
+## Montaje y movimiento
+- Pose neutra:
+- Pivote:
+- Puntos de agarre:
+- Piezas separadas:
+- Articulaciones críticas:
+- Límites de deformación:
+- Colisión prevista:
+
+## Expresiones y poses
+- [[Hoja de expresiones]]
+- [[Hoja de poses]]
+- [[Lineup de escala]]
+
+## Cámara real
+- Cámara / encuadre:
+- Altura aproximada en píxeles:
+- Rasgos que deben sobrevivir a esa escala:
+- Evidencia de blockout:
+
+## Aprobación AR1
+- [ ] Vistas coherentes.
+- [ ] Proporciones medibles.
+- [ ] Materiales y paleta completos.
+- [ ] Asimetrías resueltas.
+- [ ] Función, escala y montaje claros.
+- [ ] Veredicto explícito sobre esta versión.
+
+- Veredicto:
+- Aprobador:
+- Fecha:
+```
+
+#### Plantilla: registro de créditos
+
+```markdown
+---
+presupuesto_inicial: 1000
+fecha_inicio: null
+saldo_proveedor_consultado: null
+fecha_saldo_proveedor: null
+---
+
+# Registro de créditos
+
+## Bolsas
+Son asignaciones de planificación, no cargos.
+
+| Bolsa | Asignado | Cobrado confirmado | Reservado pendiente |
+|---|---:|---:|---:|
+| Calibración | 60 | 0 | 0 |
+| Anclas y preproducción | 120 | 0 | 0 |
+| Personajes, props y animación | 300 | 0 | 0 |
+| Entorno | 120 | 0 | 0 |
+| UI y VFX | 100 | 0 | 0 |
+| Audio | 80 | 0 | 0 |
+| Reserva | 220 | 0 | 0 |
+| Total | 1000 | 0 | 0 |
+
+## Trabajos
+Una fila por trabajo, incluidos fallos y resultados rechazados.
+"N/D" significa cargo todavía desconocido, nunca cero.
+
+| Fecha | ID trabajo | Recurso / versión | Operación / modelo | Parámetros o enlace | Cotizado | Reserva pendiente | Cobrado | Devuelto confirmado | Resultado / decisión |
+|---|---|---|---|---|---:|---:|---:|---:|---|
+| | | | | | | | N/D | 0 | |
+
+## Conciliación
+- Cobrado confirmado acumulado:
+- Devoluciones confirmadas:
+- Consumo neto:
+- Reservas todavía pendientes:
+- Trabajos con cargo desconocido:
+- Disponible para nuevos trabajos:
+- Diferencia con saldo del proveedor:
+- Explicación de la diferencia:
+
+## Reglas de cálculo
+Consumo neto =
+cargos confirmados - devoluciones confirmadas.
+
+Disponible de planificación =
+1000 - consumo neto - reservas todavía pendientes.
+
+No contabilizar simultáneamente un cargo y su antigua reserva.
+No anticipar devoluciones.
+Si un trabajo sigue sin cargo conocido, mantener su reserva.
+
+## Eficiencia
+- Recursos aprobados:
+- Coste de trabajos asociados a esos recursos:
+- Coste total de intentos, incluidos descartes:
+- Horas de reparación:
+- Causas recurrentes de rechazo:
+
+## Cambios de presupuesto
+| Fecha | Bolsa origen | Bolsa destino | Créditos | Motivo | Aprobación |
+|---|---|---|---:|---|---|
+| | | | | | |
+```
+
+## Fuentes
+
+**Documentación primaria y prácticas de producción**
+
+- **[doc]** [GDC 2024: preproducción y dirección de arte](https://gdcvault.com/play/1034593/Art-Direction-Summit-Pre-Production). Se consultó la descripción pública; no se atribuye contenido no revisado de la charla.
+- **[doc]** [Toon Boom: finalización de hojas de personaje](https://helpcentre.toonboom.com/hc/en-ca/articles/57134612631955-Character-Design-03-Finalizing-the-character-sheets). Actualizado el 10-11-2026.
+- **[doc]** [Toon Boom: Character Model Sheets](https://learn.toonboom.com/modules/character-design/topic/character-model-sheets).
+- **[doc]** [Disney: desarrollo visual](https://disneyanimation.com/process/visual-development/) e [iluminación](https://www.disneyanimation.com/process/lighting/). Referencias de animación; su adaptación al proyecto está identificada como inferencia.
+- **[doc]** [Valve: Character Art Guide](https://help.steampowered.com/en/faqs/view/0688-7692-4D5A-1935). Principios de silueta y valores; fecha de actualización sin verificar.
+
+**Documentación técnica**
+
+- **[doc]** Godot: [renderizadores](https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html), [requisitos](https://docs.godotengine.org/en/stable/about/system_requirements.html), [formatos 3D](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_3d_scenes/available_formats.html).
+- **[doc]** Godot: [LightmapGI](https://docs.godotengine.org/en/stable/classes/class_lightmapgi.html), [preparación de lightmaps](https://docs.godotengine.org/en/stable/tutorials/3d/global_illumination/using_lightmap_gi.html), [SpriteBase3D](https://docs.godotengine.org/en/stable/classes/class_spritebase3d.html).
+- **[doc]** Godot: [optimización de GPU](https://docs.godotengine.org/en/stable/tutorials/performance/gpu_optimization.html), [Performance](https://docs.godotengine.org/en/stable/classes/class_performance.html), [proceso de importación](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/import_process.html).
+- **[doc]** [Blender 4.5 LTS: remeshing](https://docs.blender.org/manual/th/4.5/modeling/meshes/retopology.html). Limitación del remallado automático verificada en el contenido indexado; no se comprobó ejecución local de Blender.
+- **[doc]** ImageMagick: [opciones](https://imagemagick.org/command-line-options/), [gestión de color](https://imagemagick.org/color-management/), [comparación](https://imagemagick.org/compare/).
+- **[doc]** [W3C: contraste mínimo](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html).
+- **[doc]** [Git LFS](https://git-lfs.com/).
+
+**Fuentes locales**
+
+- [Plan maestro](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf>): fases, dirección general y puertas de validación.
+- [Matriz de costes](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md>) y [costes por defecto](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_default.md>): cotizaciones registradas, no consumo real.
+- [Catálogo de parámetros](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_0_Tecnica/Datos/hf_modelos.json>): restricciones y campos disponibles en la captura local.
+- [Tablero del usuario](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Referencias/Tablero_usuario/>): evidencia visual; técnicas internas y rendimiento del juego mostrado, **sin verificar**.

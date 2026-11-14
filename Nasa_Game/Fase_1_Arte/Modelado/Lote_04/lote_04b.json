@@ -1,0 +1,12 @@
+{
+ "lote": "L04b",
+ "carpeta": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04",
+ "tope": 2.75,
+ "_nota": "Reserva de la partida de la escena v1 (aprobada el 2026-11-12, tope 52,75). Guillermo: la protagonista de Tripo 'se ve totalmente mal, las facciones'. Hoja de giro limpia para 3D: frente, izquierda, espalda y derecha, misma pose, sin bolso, cara despejada, luz plana.",
+ "trabajos": [
+  {"id": "L04_PER01_giro", "modelo": "gpt_image_2_6",
+   "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+   "imagenes": ["@ANC_PROTA_1", "d736e2b9-2cce-4b9b-8546-5be1f73cf156"],
+   "prompt": "Character turnaround sheet for 3D modeling. Draw EXACTLY the same girl as in the reference images (the protagonist): same face shape, same large round warm-brown eyes with white highlights, same thick dark eyebrows, small nose, gentle closed-mouth smile, small stud earrings, warm tan skin; same voluminous dark-brown curly hair made of chunky faceted curls forming a rounded crown that frames the face and leaves the whole face, forehead and ears clearly visible; same khaki short-sleeve shirt with rolled sleeves, two chest pockets and small shoulder patches over a dark charcoal t-shirt; brown belt with a square buckle; brown cargo pants with side pockets, gathered at the ankles; white and navy high-top sneakers; black wristwatch on her left wrist. Chibi proportions, about 3 heads tall, exactly like the references. Four full-body orthographic views side by side in one row, from left to right: 1 FRONT view facing the viewer; 2 LEFT SIDE view showing the character's left side, the character facing the left edge of the image; 3 BACK view; 4 RIGHT SIDE view showing the character's right side, the character facing the right edge of the image. The same relaxed A-pose in all four views: arms straight down and slightly away from the body at about 25 degrees, hands open with fingers together, legs straight and slightly apart, feet flat on the ground. NO bag, NO shoulder strap, NO tools, nothing in the hands, nothing covering the body. Same height and same ground line for all four figures, generous empty space between them, nothing overlapping. Flat even neutral studio lighting with no cast shadows, no rim light, no glow; plain uniform light gray background. Low-poly hand-painted 3D style with crisp flat facets and soft painted gradients, matching the references. No text, no labels, no logos, no interface."}
+ ]
+}

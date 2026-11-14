@@ -1,0 +1,224 @@
+{
+ "cotizaciones": [
+  {
+   "caso": "Paso 5: prop por Tripo, 1 imagen, face_limit 3000",
+   "modelo": "tripo_h3_1_image_to_3d",
+   "imagenes": 1,
+   "params": {
+    "texture": true,
+    "pbr": false,
+    "face_limit": 3000,
+    "orientation": "align_image"
+   },
+   "creditos": 9,
+   "error": null
+  },
+  {
+   "caso": "Control: misma, face_limit 500",
+   "modelo": "tripo_h3_1_image_to_3d",
+   "imagenes": 1,
+   "params": {
+    "texture": true,
+    "pbr": false,
+    "face_limit": 500,
+    "orientation": "align_image"
+   },
+   "creditos": 9,
+   "error": null
+  },
+  {
+   "caso": "Control: misma, face_limit 20000",
+   "modelo": "tripo_h3_1_image_to_3d",
+   "imagenes": 1,
+   "params": {
+    "texture": true,
+    "pbr": false,
+    "face_limit": 20000,
+    "orientation": "align_image"
+   },
+   "creditos": 9,
+   "error": null
+  },
+  {
+   "caso": "Control: smart_low_poly",
+   "modelo": "tripo_h3_1_image_to_3d",
+   "imagenes": 1,
+   "params": {
+    "texture": true,
+    "smart_low_poly": true,
+    "face_limit": 3000
+   },
+   "creditos": null,
+   "error": "Error: Unknown params: smart_low_poly | Hint: Run: hf model get tripo_h3_1_image_to_3d"
+  },
+  {
+   "caso": "Paso 6: prop por Hunyuan LowPoly",
+   "modelo": "hunyuan3d_v3_image_to_3d",
+   "imagenes": 1,
+   "params": {
+    "generate_type": "LowPoly"
+   },
+   "creditos": 14,
+   "error": null
+  },
+  {
+   "caso": "Paso 8: protagonista multivista, 3 vistas, face_limit 20000",
+   "modelo": "tripo_h3_1_multiview_to_3d",
+   "imagenes": 3,
+   "params": {
+    "texture": true,
+    "pbr": false,
+    "face_limit": 20000,
+    "orientation": "align_image"
+   },
+   "creditos": 9,
+   "error": null
+  },
+  {
+   "caso": "Paso 8, reserva: vistas limpias gpt_image_2_6 high 2k, 1 referencia",
+   "modelo": "gpt_image_2_6",
+   "imagenes": 1,
+   "params": {
+    "prompt": "prueba",
+    "quality": "high",
+    "resolution": "2k"
+   },
+   "creditos": 2.75,
+   "error": null
+  }
+ ],
+ "contrato_multivista": {
+  "display_name": "Tripo H3.1 Multiview to 3D",
+  "job_type": "tripo_h3_1_multiview_to_3d",
+  "params": [
+   {
+    "name": "auto_size",
+    "type": "boolean",
+    "default": false,
+    "required": false
+   },
+   {
+    "name": "face_limit",
+    "type": "integer|null",
+    "default": null,
+    "required": false
+   },
+   {
+    "name": "geometry_quality",
+    "type": "string",
+    "default": "standard",
+    "required": false,
+    "enum": [
+     "standard",
+     "detailed"
+    ]
+   },
+   {
+    "name": "image_references",
+    "type": "array",
+    "default": null,
+    "required": true
+   },
+   {
+    "name": "orientation",
+    "type": "string",
+    "default": "default",
+    "required": false,
+    "enum": [
+     "default",
+     "align_image"
+    ]
+   },
+   {
+    "name": "pbr",
+    "type": "boolean",
+    "default": true,
+    "required": false
+   },
+   {
+    "name": "quad",
+    "type": "boolean",
+    "default": false,
+    "required": false
+   },
+   {
+    "name": "texture",
+    "type": "boolean",
+    "default": true,
+    "required": false
+   },
+   {
+    "name": "texture_alignment",
+    "type": "string",
+    "default": "original_image",
+    "required": false,
+    "enum": [
+     "original_image",
+     "geometry"
+    ]
+   },
+   {
+    "name": "texture_quality",
+    "type": "string",
+    "default": "standard",
+    "required": false,
+    "enum": [
+     "standard",
+     "detailed"
+    ]
+   },
+   {
+    "name": "texture_seed",
+    "type": "integer|null",
+    "default": null,
+    "required": false
+   }
+  ],
+  "rules": [],
+  "type": "3d"
+ },
+ "contrato_3d_rigging": {
+  "display_name": "3D Rigging",
+  "job_type": "3d_rigging",
+  "params": [
+   {
+    "name": "animation_action_id",
+    "type": "integer|null",
+    "default": null,
+    "required": false
+   },
+   {
+    "name": "enable_animation",
+    "type": "boolean",
+    "default": false,
+    "required": false
+   },
+   {
+    "name": "enable_safety_checker",
+    "type": "boolean|null",
+    "default": null,
+    "required": false
+   },
+   {
+    "name": "folder_id",
+    "type": "string|null",
+    "default": null,
+    "required": false
+   },
+   {
+    "name": "height_meters",
+    "type": "number|null",
+    "default": null,
+    "required": false
+   },
+   {
+    "name": "model_url",
+    "type": "string",
+    "default": null,
+    "required": true
+   }
+  ],
+  "rules": [],
+  "type": "3d"
+ }
+}

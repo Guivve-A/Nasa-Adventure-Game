@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-12T17:22:00.081965Z",
+    "display_name": "GPT Image 2.6",
+    "id": "4b7e046c-f67c-41b8-a6f1-0d588cb3c17b",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172200_4b7e046c-f67c-41b8-a6f1-0d588cb3c17b_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Game interface mockup, full screen: the region map screen of an exploration RPG, designed as a page of an engineer's field notebook. Background: cream graph paper with a faint blue grid and small ink doodles of circuit symbols in the margins. Center-left: a hand-illustrated map with an irregular torn-edge outline, flat gouache fills and ink outlines, showing a medium-sized riverside district of a tropical port city seen from above: a hill crowned by a lighthouse, a stair neighborhood of colorful houses, a riverfront promenade with a Ferris wheel, a covered electronics market, a plaza with iguanas, a university campus beside a small lake, a patch of dry forest with a giant ceibo tree, a mangrove estuary with a boardwalk, and docks with cranes. Winding cream paths connect every zone; tiny icons mark collectible parts, wildlife and landmarks. Hand-lettered zone labels in Spanish: \"MIRADOR DEL FARO\", \"LAS ESCALINATAS\", \"MALECÓN\", \"MERCADO\", \"PLAZA DE LAS IGUANAS\", \"CAMPUS DEL LAGO\", \"BOSQUE SECO\", \"MANGLAR\", \"ASTILLERO\". A small red triangle marker labeled \"Tú\". Top left title \"Cerro del Faro\" beside a small lighthouse emblem. Top right filter tabs: \"Todo\", \"Componentes\", \"Fauna\", \"Hitos\". Right panel on torn paper with a compass rose and the heading \"Estás aquí\". Bottom legend row with small icons: \"Chatarra\", \"Componentes\", \"Muestras\", \"Fauna\", \"Hitos\". Palette of cream, terracotta, tropical green, petrol blue and cyan accents. Clean, legible, charming, no brand logos.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172200_4b7e046c-f67c-41b8-a6f1-0d588cb3c17b.png",
+    "status": "completed"
+  }
+]

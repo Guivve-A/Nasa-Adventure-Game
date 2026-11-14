@@ -1,0 +1,34 @@
+{
+ "fichas_cuaderno": {
+  "id": "fichas_cuaderno",
+  "estado": "ok",
+  "minutos": 7.0,
+  "bytes_informe": 1049,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\fichas_cuaderno.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\fichas_cuaderno.log"
+ },
+ "linea_tiempo": {
+  "id": "linea_tiempo",
+  "estado": "ok",
+  "minutos": 8.5,
+  "bytes_informe": 820,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\linea_tiempo.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\linea_tiempo.log"
+ },
+ "orbita": {
+  "id": "orbita",
+  "estado": "ok",
+  "minutos": 11.0,
+  "bytes_informe": 1087,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\orbita.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\orbita.log"
+ },
+ "regreso": {
+  "id": "regreso",
+  "estado": "error (codigo 1073807364)",
+  "minutos": 2.8,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\regreso.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\regreso.log"
+ }
+}

@@ -1,0 +1,288 @@
+{
+  "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+  "salida": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_v4D_geometria.glb",
+  "vertices": 5156,
+  "soldados": 3755,
+  "triangulos": 7522,
+  "max_cm": 2.57,
+  "medio_cm": 0.97,
+  "p95_cm": 1.72,
+  "vertices_mas_1cm": 1703,
+  "caras_invertidas": 0,
+  "caras_colapsadas_20pct": 0,
+  "caja_mundo": [
+    [
+      -0.18652081312788557,
+      -0.5000260944370812,
+      -0.24119457108720715
+    ],
+    [
+      0.1863603281910837,
+      0.4938586221923298,
+      0.2544621200827343
+    ]
+  ],
+  "parametros": {
+    "radio_px": 48,
+    "sigma_px": 16,
+    "w0": 0.01,
+    "max_m": 0.04,
+    "vueltas": 5,
+    "bolso_ignorado": {
+      "frente": [
+        100,
+        458,
+        215,
+        628
+      ],
+      "perfil": [
+        105,
+        458,
+        186,
+        634
+      ],
+      "espalda": [
+        300,
+        452,
+        400,
+        630
+      ]
+    }
+  },
+  "alineacion": {
+    "frente": {
+      "iou": 0.8500852610919855,
+      "escala_base": 897.0,
+      "factor_escala": 1.0140000000000002,
+      "desplazamiento_px": [
+        6,
+        -12
+      ],
+      "limites_desplazamiento_px": [
+        27.599999999999998,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        263.513792031735,
+        458.10072683322363
+      ],
+      "centro_inicial_px": [
+        259.30936291017406,
+        470.10072683322363
+      ]
+    },
+    "perfil": {
+      "iou": 0.8700079563942097,
+      "escala_base": 898.0,
+      "factor_escala": 1.0150000000000001,
+      "desplazamiento_px": [
+        3,
+        -7
+      ],
+      "limites_desplazamiento_px": [
+        20.22,
+        53.94
+      ],
+      "traslacion_px": [
+        184.84970062167443,
+        457.27286276015667
+      ],
+      "centro_inicial_px": [
+        184.06616402042823,
+        464.27286276015667
+      ]
+    },
+    "espalda": {
+      "iou": 0.8706505264104,
+      "escala_base": 897.0,
+      "factor_escala": 1.0190000000000001,
+      "desplazamiento_px": [
+        -4,
+        -10
+      ],
+      "limites_desplazamiento_px": [
+        26.52,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        241.9765536426185,
+        457.0107567569658
+      ],
+      "centro_inicial_px": [
+        244.1721288643844,
+        467.0107567569658
+      ]
+    }
+  },
+  "registro": [
+    {
+      "vuelta": 0,
+      "vistas": {
+        "frente": {
+          "pares_malla_hoja": 4800,
+          "pares_hoja_malla": 4857,
+          "contorno_sin_pareja": 0,
+          "iou": 0.8562,
+          "iou_sin_bolso": 0.8862
+        },
+        "perfil": {
+          "pares_malla_hoja": 2987,
+          "pares_hoja_malla": 2943,
+          "contorno_sin_pareja": 0,
+          "iou": 0.8745,
+          "iou_sin_bolso": 0.9168
+        },
+        "espalda": {
+          "pares_malla_hoja": 4849,
+          "pares_hoja_malla": 4793,
+          "contorno_sin_pareja": 0,
+          "iou": 0.8743,
+          "iou_sin_bolso": 0.8973
+        }
+      },
+      "desplazamiento_max_cm": 0.0,
+      "desplazamiento_medio_cm": 0.0
+    },
+    {
+      "vuelta": 1,
+      "vistas": {
+        "frente": {
+          "pares_malla_hoja": 4809,
+          "pares_hoja_malla": 4861,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9045,
+          "iou_sin_bolso": 0.9337
+        },
+        "perfil": {
+          "pares_malla_hoja": 2981,
+          "pares_hoja_malla": 2943,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9167,
+          "iou_sin_bolso": 0.953
+        },
+        "espalda": {
+          "pares_malla_hoja": 4844,
+          "pares_hoja_malla": 4793,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9217,
+          "iou_sin_bolso": 0.9412
+        }
+      },
+      "desplazamiento_max_cm": 1.5,
+      "desplazamiento_medio_cm": 0.6
+    },
+    {
+      "vuelta": 2,
+      "vistas": {
+        "frente": {
+          "pares_malla_hoja": 4807,
+          "pares_hoja_malla": 4861,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9161,
+          "iou_sin_bolso": 0.9437
+        },
+        "perfil": {
+          "pares_malla_hoja": 2995,
+          "pares_hoja_malla": 2943,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9264,
+          "iou_sin_bolso": 0.9614
+        },
+        "espalda": {
+          "pares_malla_hoja": 4885,
+          "pares_hoja_malla": 4793,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9273,
+          "iou_sin_bolso": 0.9467
+        }
+      },
+      "desplazamiento_max_cm": 1.87,
+      "desplazamiento_medio_cm": 0.79
+    },
+    {
+      "vuelta": 3,
+      "vistas": {
+        "frente": {
+          "pares_malla_hoja": 4833,
+          "pares_hoja_malla": 4866,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9204,
+          "iou_sin_bolso": 0.9474
+        },
+        "perfil": {
+          "pares_malla_hoja": 3000,
+          "pares_hoja_malla": 2943,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9308,
+          "iou_sin_bolso": 0.9655
+        },
+        "espalda": {
+          "pares_malla_hoja": 4872,
+          "pares_hoja_malla": 4793,
+          "contorno_sin_pareja": 0,
+          "iou": 0.928,
+          "iou_sin_bolso": 0.9475
+        }
+      },
+      "desplazamiento_max_cm": 2.06,
+      "desplazamiento_medio_cm": 0.88
+    },
+    {
+      "vuelta": 4,
+      "vistas": {
+        "frente": {
+          "pares_malla_hoja": 4853,
+          "pares_hoja_malla": 4866,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9217,
+          "iou_sin_bolso": 0.9482
+        },
+        "perfil": {
+          "pares_malla_hoja": 3003,
+          "pares_hoja_malla": 2943,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9325,
+          "iou_sin_bolso": 0.9671
+        },
+        "espalda": {
+          "pares_malla_hoja": 4891,
+          "pares_hoja_malla": 4793,
+          "contorno_sin_pareja": 0,
+          "iou": 0.928,
+          "iou_sin_bolso": 0.9474
+        }
+      },
+      "desplazamiento_max_cm": 2.36,
+      "desplazamiento_medio_cm": 0.93
+    },
+    {
+      "vuelta": 5,
+      "vistas": {
+        "frente": {
+          "pares_malla_hoja": 4836,
+          "pares_hoja_malla": 4866,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9236,
+          "iou_sin_bolso": 0.95
+        },
+        "perfil": {
+          "pares_malla_hoja": 3005,
+          "pares_hoja_malla": 2943,
+          "contorno_sin_pareja": 0,
+          "iou": 0.9334,
+          "iou_sin_bolso": 0.9679
+        },
+        "espalda": {
+          "pares_malla_hoja": 4884,
+          "pares_hoja_malla": 4793,
+          "contorno_sin_pareja": 0,
+          "iou": 0.928,
+          "iou_sin_bolso": 0.9475
+        }
+      },
+      "desplazamiento_max_cm": 2.57,
+      "desplazamiento_medio_cm": 0.97
+    }
+  ],
+  "segundos": 364.6
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:54:05.088279Z",
+    "display_name": "GPT Image 2.6",
+    "id": "5505a63c-6d24-4b00-a733-c2680cddc78b",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175405_5505a63c-6d24-4b00-a733-c2680cddc78b_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/4412c12c-6589-45e4-9453-f695ac27ccbc.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Vegetación · v1\". Fourteen plants of a tropical port city and its dry forest. Top row, the trees: \"VEG-01 Ceibo\" a large ceiba tree with a swollen bottle-shaped gray-green trunk, buttress roots, a wide flat crown and a few white cotton pods; \"VEG-02 Flamboyán\" a broad umbrella-shaped tree covered in red-orange flowers; \"VEG-03 Guayacán\" a slender leafless tree in full bloom with bright yellow flowers; \"VEG-04 Cocotero\" a leaning coconut palm with a cluster of coconuts; \"VEG-05 Mangle rojo\" a red mangrove tree standing on arching stilt roots. Middle row, the shrubs: \"VEG-06 Platanera\" a banana plant with wide torn leaves and a green bunch; \"VEG-07 Ave del paraíso\" a bird-of-paradise plant with orange and blue flowers; \"VEG-08 Buganvilla\" a bougainvillea shrub with magenta bracts; \"VEG-09 Cayena\" a hibiscus shrub with red flowers; \"VEG-10 Costilla de Adán\" a monstera with split leaves; \"VEG-11 Cactus del bosque seco\" a tall columnar cactus. Bottom row, the ground cover: \"VEG-12 Helecho\" a fern clump; \"VEG-13 Mechones de hierba\" three grass tufts in small, medium and large sizes; \"VEG-14 Flores silvestres\" small clusters of white, pink and yellow wildflowers. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175405_5505a63c-6d24-4b00-a733-c2680cddc78b.png",
+    "status": "completed"
+  }
+]

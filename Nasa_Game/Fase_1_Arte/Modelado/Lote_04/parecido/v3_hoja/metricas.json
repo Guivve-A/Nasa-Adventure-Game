@@ -1,0 +1,62 @@
+{
+  "antes": {
+    "etiqueta": "v3 (bolso con paleta sRGB, correa 3 cm)",
+    "parecido_total": 61.0,
+    "vistas": {
+      "frente": {
+        "silueta": 81.3,
+        "color": 61.7,
+        "estructura": 28.6,
+        "parecido": 59.6
+      },
+      "cabeza": {
+        "silueta": 94.0,
+        "color": 46.3,
+        "estructura": 26.1,
+        "parecido": 59.3
+      },
+      "perfil": {
+        "silueta": 80.0,
+        "color": 61.7,
+        "estructura": 28.0,
+        "parecido": 58.9
+      },
+      "espalda": {
+        "silueta": 86.2,
+        "color": 71.9,
+        "estructura": 44.3,
+        "parecido": 69.3
+      }
+    }
+  },
+  "despues": {
+    "etiqueta": "v3 hoja, visibilidad y original 0.15",
+    "parecido_total": 64.9,
+    "vistas": {
+      "frente": {
+        "silueta": 79.9,
+        "color": 69.1,
+        "estructura": 29.4,
+        "parecido": 61.5
+      },
+      "cabeza": {
+        "silueta": 94.0,
+        "color": 50.8,
+        "estructura": 24.3,
+        "parecido": 60.1
+      },
+      "perfil": {
+        "silueta": 86.0,
+        "color": 76.7,
+        "estructura": 47.1,
+        "parecido": 71.5
+      },
+      "espalda": {
+        "silueta": 84.8,
+        "color": 81.4,
+        "estructura": 54.8,
+        "parecido": 74.8
+      }
+    }
+  }
+}

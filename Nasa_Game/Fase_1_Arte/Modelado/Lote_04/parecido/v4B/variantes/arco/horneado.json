@@ -1,0 +1,265 @@
+{
+  "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+  "salida": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\parecido\\v4B\\variantes\\arco\\malla.glb",
+  "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+  "sha256_entrada": "249490277719be670c948c09feda8836725bb1461cf088c84e970ea7b5ed70d9",
+  "sha256_hoja": "eb5cf7817c99aef8844c7f21a73e4514e65da6fd48f1671d696ec65f631e8200",
+  "argumentos": {
+    "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+    "salida": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\parecido\\v4B\\variantes\\arco\\malla.glb",
+    "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+    "diagnosticos": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\parecido\\v4B\\variantes\\arco",
+    "pares": "arco",
+    "puntos": 100,
+    "rejilla": 45,
+    "dist_interior": 30,
+    "lambdas": [
+      0.0,
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1
+    ],
+    "det_min": 0.05,
+    "peso_original": 0.01,
+    "rasante": 0.0,
+    "tolerancia_px": 3.0,
+    "sin_deformacion": false,
+    "solo_deformacion": false
+  },
+  "triangulos": 7522,
+  "textura_px": [
+    4096,
+    4096
+  ],
+  "texels_superficie": 10414844,
+  "texels_con_hoja": 7851650,
+  "texels_con_hoja_pct_superficie": 75.38903127113569,
+  "padding_texels": 1652567,
+  "vistas": {
+    "frente": {
+      "iou": 0.8499310577707742,
+      "escala_base": 897.0,
+      "factor_escala": 1.0150000000000001,
+      "desplazamiento_px": [
+        7,
+        -12
+      ],
+      "limites_desplazamiento_px": [
+        27.599999999999998,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        264.51243632648595,
+        457.70904833869724
+      ],
+      "centro_inicial_px": [
+        259.309777984884,
+        469.70904833869724
+      ],
+      "tps_lambda": 0.01,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": -1.979305836771317,
+          "det_p1": -0.7239685108690458,
+          "det_max": 3.701236333281022,
+          "residuo_contorno_medio_px": 1.503698079838999e-11,
+          "residuo_contorno_max_px": 4.288665494743169e-11
+        },
+        {
+          "lambda": 1e-05,
+          "det_min": -1.9372420737994358,
+          "det_p1": -0.7031249925147354,
+          "det_max": 3.6725095661576033,
+          "residuo_contorno_medio_px": 0.1412862487813275,
+          "residuo_contorno_max_px": 0.9903981051892738
+        },
+        {
+          "lambda": 0.0001,
+          "det_min": -1.6039061015259894,
+          "det_p1": -0.5848235341719564,
+          "det_max": 3.5351327248975615,
+          "residuo_contorno_medio_px": 1.2771821273538329,
+          "residuo_contorno_max_px": 8.097086043810535
+        },
+        {
+          "lambda": 0.001,
+          "det_min": -0.5267547430141726,
+          "det_p1": -0.08400664780457649,
+          "det_max": 2.798293599286853,
+          "residuo_contorno_medio_px": 7.296864598664619,
+          "residuo_contorno_max_px": 36.079853301477456
+        },
+        {
+          "lambda": 0.01,
+          "det_min": 0.2506364717534294,
+          "det_p1": 0.4794607649501032,
+          "det_max": 1.9586811556570465,
+          "residuo_contorno_medio_px": 18.821726177913348,
+          "residuo_contorno_max_px": 66.00634129323659
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 41,
+      "pares": "arco",
+      "desplazamiento_medio_px": 16.78620222978012,
+      "desplazamiento_max_px": 90.18107606627,
+      "long_contorno_malla_px": 4740.734557122016,
+      "long_contorno_hoja_px": 4822.658438676268,
+      "muestras_aceptadas": 3761467,
+      "muestras_ocultas_rechazadas": 1275588,
+      "muestras_fuera_de_mascara": 397541
+    },
+    "perfil": {
+      "iou": 0.8696375025977496,
+      "escala_base": 898.0,
+      "factor_escala": 1.0150000000000001,
+      "desplazamiento_px": [
+        3,
+        -7
+      ],
+      "limites_desplazamiento_px": [
+        20.16,
+        53.94
+      ],
+      "traslacion_px": [
+        184.84115833909462,
+        457.23812833940195
+      ],
+      "centro_inicial_px": [
+        184.05762173784842,
+        464.23812833940195
+      ],
+      "tps_lambda": 0.01,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": -2.3994076628472674,
+          "det_p1": -0.29721898577828837,
+          "det_max": 2.5537353482247402,
+          "residuo_contorno_medio_px": 1.2500505418004768e-11,
+          "residuo_contorno_max_px": 3.507681133681641e-11
+        },
+        {
+          "lambda": 1e-05,
+          "det_min": -2.24862856005203,
+          "det_p1": -0.28654520264454175,
+          "det_max": 2.541256811526841,
+          "residuo_contorno_medio_px": 0.09029047848717975,
+          "residuo_contorno_max_px": 0.6227228740171921
+        },
+        {
+          "lambda": 0.0001,
+          "det_min": -1.33267152290713,
+          "det_p1": -0.19568049623821338,
+          "det_max": 2.441646806916478,
+          "residuo_contorno_medio_px": 0.7672427305022856,
+          "residuo_contorno_max_px": 4.449905246892071
+        },
+        {
+          "lambda": 0.001,
+          "det_min": -0.2117604028072696,
+          "det_p1": 0.1995023735618157,
+          "det_max": 2.155971789232167,
+          "residuo_contorno_medio_px": 3.5548710346056964,
+          "residuo_contorno_max_px": 15.22578398053754
+        },
+        {
+          "lambda": 0.01,
+          "det_min": 0.4556911207134143,
+          "det_p1": 0.6147926796451795,
+          "det_max": 1.6568658307830781,
+          "residuo_contorno_medio_px": 8.668312322000697,
+          "residuo_contorno_max_px": 29.676092730217093
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 30,
+      "pares": "arco",
+      "desplazamiento_medio_px": 15.178345282257093,
+      "desplazamiento_max_px": 66.88190225448034,
+      "long_contorno_malla_px": 2871.412480458819,
+      "long_contorno_hoja_px": 2897.6307345282985,
+      "muestras_aceptadas": 2280437,
+      "muestras_ocultas_rechazadas": 2571583,
+      "muestras_fuera_de_mascara": 196588
+    },
+    "espalda": {
+      "iou": 0.8708628877808948,
+      "escala_base": 896.0,
+      "factor_escala": 1.021,
+      "desplazamiento_px": [
+        -4,
+        -10
+      ],
+      "limites_desplazamiento_px": [
+        26.52,
+        53.82
+      ],
+      "traslacion_px": [
+        241.99013565235578,
+        456.62763015931034
+      ],
+      "centro_inicial_px": [
+        244.18418488425732,
+        466.62763015931034
+      ],
+      "tps_lambda": 0.01,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": -1.4285451180851467,
+          "det_p1": -0.2126544602812877,
+          "det_max": 3.2283273471749587,
+          "residuo_contorno_medio_px": 8.099614274935752e-12,
+          "residuo_contorno_max_px": 2.5132570535820693e-11
+        },
+        {
+          "lambda": 1e-05,
+          "det_min": -1.3759222647046054,
+          "det_p1": -0.1973150408592785,
+          "det_max": 3.1757525395187622,
+          "residuo_contorno_medio_px": 0.10953876882929349,
+          "residuo_contorno_max_px": 0.6589520603586347
+        },
+        {
+          "lambda": 0.0001,
+          "det_min": -0.9931611959495514,
+          "det_p1": -0.09283056201269115,
+          "det_max": 2.7924593392007027,
+          "residuo_contorno_medio_px": 0.9860595894464766,
+          "residuo_contorno_max_px": 5.405724278200916
+        },
+        {
+          "lambda": 0.001,
+          "det_min": -0.0909687609978588,
+          "det_p1": 0.3318002974600227,
+          "det_max": 1.9017693580509203,
+          "residuo_contorno_medio_px": 5.404383333784719,
+          "residuo_contorno_max_px": 19.33803375330935
+        },
+        {
+          "lambda": 0.01,
+          "det_min": 0.509150484451269,
+          "det_p1": 0.6546210885449643,
+          "det_max": 1.4753902765262066,
+          "residuo_contorno_medio_px": 12.653430229236765,
+          "residuo_contorno_max_px": 34.01982636221423
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 42,
+      "pares": "arco",
+      "desplazamiento_medio_px": 9.817749774126174,
+      "desplazamiento_max_px": 32.16479204533596,
+      "long_contorno_malla_px": 4766.391411371508,
+      "long_contorno_hoja_px": 4714.692926561674,
+      "muestras_aceptadas": 3546076,
+      "muestras_ocultas_rechazadas": 1287830,
+      "muestras_fuera_de_mascara": 146342
+    }
+  },
+  "segundos": 267.3
+}

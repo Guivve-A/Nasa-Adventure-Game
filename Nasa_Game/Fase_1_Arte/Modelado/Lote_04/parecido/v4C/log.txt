@@ -1,0 +1,40 @@
+Alineando frente...
+  IoU 0.8501, escala 1.0140
+Alineando perfil...
+  IoU 0.8700, escala 1.0150
+Alineando espalda...
+  IoU 0.8707, escala 1.0190
+Registro de la cara: {"escala": 1.0249999999999995, "giro_grados": 0.5, "traslacion_px": [0.5, 0.5], "centro_px": [268.0, 192.0], "ncc": 0.9341962243147375, "ncc_gruesa": 0.920924844377125, "ncc_identidad": 0.894052744233629, "pixeles_plantilla": 18827, "modo": "ncc"}
+Horneando triangulo 0/7522
+Horneando triangulo 1000/7522
+Horneando triangulo 2000/7522
+Horneando triangulo 3000/7522
+Horneando triangulo 4000/7522
+Horneando triangulo 5000/7522
+Horneando triangulo 6000/7522
+Horneando triangulo 7000/7522
+Ajuste de color...
+Rellenando bordes UV...
+{
+  "registro_cara": {
+    "escala": 1.0249999999999995,
+    "giro_grados": 0.5,
+    "traslacion_px": [
+      0.5,
+      0.5
+    ],
+    "centro_px": [
+      268.0,
+      192.0
+    ],
+    "ncc": 0.9341962243147375,
+    "ncc_gruesa": 0.920924844377125,
+    "ncc_identidad": 0.894052744233629,
+    "pixeles_plantilla": 18827,
+    "modo": "ncc"
+  },
+  "texels_vistos_pct": 54.07203410824012,
+  "texels_cara": 449299,
+  "ajuste_no_visto_dE76_medio": 8.960087776184082,
+  "segundos": 135.4
+}

@@ -1,0 +1,106 @@
+{
+ "10_mundo_vivo": {
+  "id": "10_mundo_vivo",
+  "estado": "ok",
+  "minutos": 13.7,
+  "bytes_informe": 56007,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\10_mundo_vivo.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\10_mundo_vivo.log"
+ },
+ "01_motor_render": {
+  "id": "01_motor_render",
+  "estado": "ok",
+  "minutos": 15.2,
+  "bytes_informe": 46145,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\01_motor_render.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\01_motor_render.log"
+ },
+ "02_pipeline_personajes": {
+  "id": "02_pipeline_personajes",
+  "estado": "ok",
+  "minutos": 16.9,
+  "bytes_informe": 50711,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\02_pipeline_personajes.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\02_pipeline_personajes.log"
+ },
+ "03_higgsfield_arte2d": {
+  "id": "03_higgsfield_arte2d",
+  "estado": "ok",
+  "minutos": 21.2,
+  "bytes_informe": 46967,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\03_higgsfield_arte2d.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\03_higgsfield_arte2d.log"
+ },
+ "04_caso_after_the_wind": {
+  "id": "04_caso_after_the_wind",
+  "estado": "ok",
+  "minutos": 13.9,
+  "bytes_informe": 35423,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\04_caso_after_the_wind.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\04_caso_after_the_wind.log"
+ },
+ "05_referencias_aaa": {
+  "id": "05_referencias_aaa",
+  "estado": "ok",
+  "minutos": 22.5,
+  "bytes_informe": 51429,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\05_referencias_aaa.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\05_referencias_aaa.log"
+ },
+ "06_arquitectura_godot": {
+  "id": "06_arquitectura_godot",
+  "estado": "timeout",
+  "minutos": 30.0,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\06_arquitectura_godot.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\06_arquitectura_godot.log"
+ },
+ "07_proceso_estudio": {
+  "id": "07_proceso_estudio",
+  "estado": "ok",
+  "minutos": 13.3,
+  "bytes_informe": 55198,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\07_proceso_estudio.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\07_proceso_estudio.log"
+ },
+ "08_antecedentes": {
+  "id": "08_antecedentes",
+  "estado": "ok",
+  "minutos": 16.0,
+  "bytes_informe": 42195,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\08_antecedentes_boveda_anterior.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\08_antecedentes.log"
+ },
+ "09_bench_render": {
+  "id": "09_bench_render",
+  "estado": "ok",
+  "minutos": 13.2,
+  "bytes_informe": 770,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\09_bench_render_instrucciones.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\09_bench_render.log"
+ },
+ "11_pc_en_la_nube": {
+  "id": "11_pc_en_la_nube",
+  "estado": "error (codigo 1)",
+  "minutos": 1.1,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\11_pc_en_la_nube.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\11_pc_en_la_nube.log"
+ },
+ "12_render_aaa": {
+  "id": "12_render_aaa",
+  "estado": "error (codigo 1)",
+  "minutos": 1.2,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\12_render_aaa.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\12_render_aaa.log"
+ },
+ "13_arte_generativo_gpu": {
+  "id": "13_arte_generativo_gpu",
+  "estado": "error (codigo 1)",
+  "minutos": 1.2,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Investigacion\\13_arte_generativo_gpu.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_0_Tecnica\\Tareas_Codex\\logs\\13_arte_generativo_gpu.log"
+ }
+}

@@ -1,0 +1,13 @@
+{
+ "entrada": "L04_PER01_tripo_mv.glb",
+ "frente": "-x",
+ "espejo": true,
+ "triangulos": 4930,
+ "textura": 2048,
+ "en_fondo_pct": {
+  "frente": 1.7,
+  "espalda": 2.3,
+  "derecha": 2.5,
+  "izquierda": 3.1
+ }
+}

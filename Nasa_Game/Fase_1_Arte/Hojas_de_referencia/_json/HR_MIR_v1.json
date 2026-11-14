@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:56:22.948399Z",
+    "display_name": "GPT Image 2.6",
+    "id": "aa5ed102-6ef6-4709-88a9-154a59d5fef1",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175622_aa5ed102-6ef6-4709-88a9-154a59d5fef1_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/4412c12c-6589-45e4-9453-f695ac27ccbc.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Mirador del Faro · v1\". The props of a hilltop lookout with a lighthouse, where the player observes the sky. Top row: \"MIR-01 Faro\" a white lighthouse with terracotta bands and a glass lantern room; \"MIR-02 Plataforma del mirador\" a stone viewing deck with a railing; \"MIR-03 Telescopio del mirador\" a large white refractor telescope on an equatorial mount and a sturdy tripod, with a faint cyan glow on its eyepiece that marks it as interactive; \"MIR-04 Binoculares de moneda\" coin-operated viewing binoculars on a post. Bottom row: \"MIR-05 Atril con carta estelar\" a lectern holding a star chart; \"MIR-06 Banca\" a stone bench; \"MIR-07 Guirnalda de luces\" warm string lights between two wooden posts; \"MIR-08 Cúpula de observación\" a small white observatory dome with its slit open. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175622_aa5ed102-6ef6-4709-88a9-154a59d5fef1.png",
+    "status": "completed"
+  }
+]

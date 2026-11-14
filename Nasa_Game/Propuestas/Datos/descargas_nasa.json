@@ -1,0 +1,32 @@
+[
+ {
+  "archivo": "externos/nasa_svs_4720_color/lroc_color_poles_4k.tif",
+  "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_poles_4k.tif",
+  "pagina": "https://svs.gsfc.nasa.gov/4720",
+  "bytes": 13095388,
+  "bytes_anunciados": 13095388,
+  "sha256": "918649a7f8ed2f1329b2cd95bb0d25483befdcb60ae1a66db681a637cc21344f",
+  "fecha": "2026-11-12 03:47",
+  "aprobado_por": "Guillermo, 2026-11-12 («Sí, descárgalos»)"
+ },
+ {
+  "archivo": "externos/nasa_svs_4720_relieve/ldem_4.tif",
+  "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/ldem_4.tif",
+  "pagina": "https://svs.gsfc.nasa.gov/4720",
+  "bytes": 4153352,
+  "bytes_anunciados": 4153352,
+  "sha256": "330afa2556a86fd05ac6ba2f912f246600fdade35de2a0d90593d50d07b01b65",
+  "fecha": "2026-11-12 03:47",
+  "aprobado_por": "Guillermo, 2026-11-12 («Sí, descárgalos»)"
+ },
+ {
+  "archivo": "externos/nasa_svs_5587_tabla/mooninfo_2026.json",
+  "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005587/mooninfo_2026.json",
+  "pagina": "https://svs.gsfc.nasa.gov/5587",
+  "bytes": 2094339,
+  "bytes_anunciados": 2094339,
+  "sha256": "098ec6434ba4fecb84e66485385816d465b7969f142864bcfc9ffc68311b4a86",
+  "fecha": "2026-11-12 03:47",
+  "aprobado_por": "Guillermo, 2026-11-12 («Sí, descárgalos»)"
+ }
+]

@@ -1,0 +1,12 @@
+{
+ "lote": "L04c",
+ "carpeta": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04",
+ "tope": 12,
+ "_nota": "Reserva de la partida de la escena v1 (aprobada el 2026-11-12, tope 52,75; quedan 14,00). Protagonista rehecha desde la hoja de giro L04_PER01_giro.png. Las dos vistas laterales de la hoja miran a la derecha (lado derecho): se usa lado_a y su espejo. Orden de Tripo: frente, izquierda (mira a la izquierda), espalda, derecha (mira a la derecha). Recortes en recortes_giro.json; ids en subidas.json.",
+ "trabajos": [
+  {"id": "L04_PER01_giro_tripo_mv", "modelo": "tripo_h3_1_multiview_to_3d",
+   "_vistas": ["PER01g_frente", "PER01g_lado_a_espejo", "PER01g_espalda", "PER01g_lado_a"],
+   "imagenes": ["1e3dd21f-3d0e-490d-9932-8f6cf49beb27", "064dae45-83bf-4a0b-92f0-89b2f0740b48", "b60847ac-9ae7-448e-9e1a-7e354edf70e7", "a0a14843-e260-49f8-93f7-390f94e0f9bb"],
+   "params": {"texture": true, "texture_quality": "detailed", "texture_alignment": "original_image", "pbr": false, "face_limit": 8000, "orientation": "align_image"}}
+ ]
+}

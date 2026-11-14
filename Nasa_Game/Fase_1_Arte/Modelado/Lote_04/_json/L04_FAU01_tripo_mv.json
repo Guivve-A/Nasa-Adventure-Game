@@ -1,0 +1,43 @@
+[
+  {
+    "created_at": "2026-11-12T20:42:54.995137Z",
+    "display_name": "Tripo H3.1 Multiview to 3D",
+    "id": "3ca25a7c-c353-448b-b5ef-2ecc3386efae",
+    "job_type": "tripo_h3_1_multiview_to_3d",
+    "min_result_url": null,
+    "params": {
+      "auto_size": false,
+      "face_limit": 2500,
+      "folder_id": null,
+      "geometry_quality": "standard",
+      "medias": [
+        {
+          "data": {
+            "id": "96197841-db32-4496-b5b4-e67f0d4303fe",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/96197841-db32-4496-b5b4-e67f0d4303fe.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "96e1650d-01d5-4a3f-947c-a7e7d87037da",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/96e1650d-01d5-4a3f-947c-a7e7d87037da.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "orientation": "align_image",
+      "pbr": false,
+      "quad": false,
+      "seed": null,
+      "texture": true,
+      "texture_alignment": "original_image",
+      "texture_quality": "standard",
+      "texture_seed": null
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_204254_3ca25a7c-c353-448b-b5ef-2ecc3386efae.glb",
+    "status": "completed"
+  }
+]

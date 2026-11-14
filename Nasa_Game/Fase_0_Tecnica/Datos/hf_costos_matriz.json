@@ -1,0 +1,1900 @@
+[
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=low 1k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "low",
+   "resolution": "1k"
+  },
+  "creditos": 0.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=low 2k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "low",
+   "resolution": "2k"
+  },
+  "creditos": 0.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=low 4k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "low",
+   "resolution": "4k"
+  },
+  "creditos": 0.75,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=medium 1k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "medium",
+   "resolution": "1k"
+  },
+  "creditos": 0.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=medium 2k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "medium",
+   "resolution": "2k"
+  },
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=medium 4k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "medium",
+   "resolution": "4k"
+  },
+  "creditos": 1.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=high 1k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "1k"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=high 2k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "2k"
+  },
+  "creditos": 2.75,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=high 4k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "4k"
+  },
+  "creditos": 4.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=xhigh 1k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "xhigh",
+   "resolution": "1k"
+  },
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=xhigh 2k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "xhigh",
+   "resolution": "2k"
+  },
+  "creditos": 4.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=xhigh 4k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "xhigh",
+   "resolution": "4k"
+  },
+  "creditos": 7,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=max 1k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "max",
+   "resolution": "1k"
+  },
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=max 2k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "max",
+   "resolution": "2k"
+  },
+  "creditos": 9,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 calidad=max 4k",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "max",
+   "resolution": "4k"
+  },
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 high 1k fondo transparente",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "1k",
+   "background": "transparent"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 high 1k con 1 referencia",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "1k",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 high 1k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "1k",
+   "image": "4 refs"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 high 1k lote de 4",
+  "job_type": "gpt_image_2_6",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "1k",
+   "batch_size": 4
+  },
+  "creditos": 6,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6_flare calidad=low 1k",
+  "job_type": "gpt_image_2_6_flare",
+  "params": {
+   "prompt": "test",
+   "quality": "low",
+   "resolution": "1k"
+  },
+  "creditos": 0.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_5 calidad=low 1k",
+  "job_type": "gpt_image_2_5",
+  "params": {
+   "prompt": "test",
+   "quality": "low",
+   "resolution": "1k"
+  },
+  "creditos": 0.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6_flare calidad=medium 1k",
+  "job_type": "gpt_image_2_6_flare",
+  "params": {
+   "prompt": "test",
+   "quality": "medium",
+   "resolution": "1k"
+  },
+  "creditos": 0.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_5 calidad=medium 1k",
+  "job_type": "gpt_image_2_5",
+  "params": {
+   "prompt": "test",
+   "quality": "medium",
+   "resolution": "1k"
+  },
+  "creditos": 0.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6_flare calidad=high 1k",
+  "job_type": "gpt_image_2_6_flare",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "1k"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_5 calidad=high 1k",
+  "job_type": "gpt_image_2_5",
+  "params": {
+   "prompt": "test",
+   "quality": "high",
+   "resolution": "1k"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_pro 1k",
+  "job_type": "nano_banana_pro",
+  "params": {
+   "prompt": "test",
+   "resolution": "1k"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_flash (NB2) 1k",
+  "job_type": "nano_banana_flash",
+  "params": {
+   "prompt": "test",
+   "resolution": "1k"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_2_1 1k",
+  "job_type": "nano_banana_2_1",
+  "params": {
+   "prompt": "test",
+   "resolution": "1k"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_pro 2k",
+  "job_type": "nano_banana_pro",
+  "params": {
+   "prompt": "test",
+   "resolution": "2k"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_flash (NB2) 2k",
+  "job_type": "nano_banana_flash",
+  "params": {
+   "prompt": "test",
+   "resolution": "2k"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_2_1 2k",
+  "job_type": "nano_banana_2_1",
+  "params": {
+   "prompt": "test",
+   "resolution": "2k"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_pro 4k",
+  "job_type": "nano_banana_pro",
+  "params": {
+   "prompt": "test",
+   "resolution": "4k"
+  },
+  "creditos": 4,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_flash (NB2) 4k",
+  "job_type": "nano_banana_flash",
+  "params": {
+   "prompt": "test",
+   "resolution": "4k"
+  },
+  "creditos": 3,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_2_1 4k",
+  "job_type": "nano_banana_2_1",
+  "params": {
+   "prompt": "test",
+   "resolution": "4k"
+  },
+  "creditos": 3,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_pro 2k con 4 referencias",
+  "job_type": "nano_banana_pro",
+  "params": {
+   "prompt": "test",
+   "resolution": "2k",
+   "image": "4 refs"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_5_5 1k",
+  "job_type": "seedream_5_5",
+  "params": {
+   "prompt": "test",
+   "resolution": "1k"
+  },
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "3d_jutsu_angles 1k",
+  "job_type": "3d_jutsu_angles",
+  "params": {
+   "prompt": "test",
+   "resolution": "1k"
+  },
+  "creditos": 1.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_5_5 1.5k",
+  "job_type": "seedream_5_5",
+  "params": {
+   "prompt": "test",
+   "resolution": "1.5k"
+  },
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "3d_jutsu_angles 1.5k",
+  "job_type": "3d_jutsu_angles",
+  "params": {
+   "prompt": "test",
+   "resolution": "1.5k"
+  },
+  "creditos": 1.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_5_5 2k",
+  "job_type": "seedream_5_5",
+  "params": {
+   "prompt": "test",
+   "resolution": "2k"
+  },
+  "creditos": 3.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "3d_jutsu_angles 2k",
+  "job_type": "3d_jutsu_angles",
+  "params": {
+   "prompt": "test",
+   "resolution": "2k"
+  },
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "3d_jutsu_angles 2k con 1 referencia",
+  "job_type": "3d_jutsu_angles",
+  "params": {
+   "prompt": "test",
+   "resolution": "2k",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_5_5 2k con 4 referencias",
+  "job_type": "seedream_5_5",
+  "params": {
+   "prompt": "test",
+   "resolution": "2k",
+   "image": "4 refs"
+  },
+  "creditos": 3.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_v5_pro (defecto)",
+  "job_type": "seedream_v5_pro",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_v5_lite (defecto)",
+  "job_type": "seedream_v5_lite",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_5_0_flash (defecto)",
+  "job_type": "seedream_5_0_flash",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 0.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_v4_5 (defecto)",
+  "job_type": "seedream_v4_5",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "flux_3_image (defecto)",
+  "job_type": "flux_3_image",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "flux_2 (defecto)",
+  "job_type": "flux_2",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "flux_kontext (defecto)",
+  "job_type": "flux_kontext",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "z_image (defecto)",
+  "job_type": "z_image",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 0.15,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "text2image_soul_v2 (defecto)",
+  "job_type": "text2image_soul_v2",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 0.12,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "soul_location (defecto)",
+  "job_type": "soul_location",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 0.12,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "recraft_v4_1 (defecto)",
+  "job_type": "recraft_v4_1",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 1.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "ideogram_4_5 (defecto)",
+  "job_type": "ideogram_4_5",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 6.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "kling_omni_image (defecto)",
+  "job_type": "kling_omni_image",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 0.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "image_auto (defecto)",
+  "job_type": "image_auto",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana (defecto)",
+  "job_type": "nano_banana",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "nano_banana_2_lite (defecto)",
+  "job_type": "nano_banana_2_lite",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "grok_image_2_0 (defecto)",
+  "job_type": "grok_image_2_0",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "minimax_h3_image (defecto)",
+  "job_type": "minimax_h3_image",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 4,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "flux_kontext con 1 referencia",
+  "job_type": "flux_kontext",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "ideogram_vector generate calidad=low",
+  "job_type": "ideogram_vector",
+  "params": {
+   "operation": "generate",
+   "prompt": "test",
+   "quality": "low"
+  },
+  "creditos": 4,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "ideogram_vector generate calidad=medium",
+  "job_type": "ideogram_vector",
+  "params": {
+   "operation": "generate",
+   "prompt": "test",
+   "quality": "medium"
+  },
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "ideogram_vector generate calidad=high",
+  "job_type": "ideogram_vector",
+  "params": {
+   "operation": "generate",
+   "prompt": "test",
+   "quality": "high"
+  },
+  "creditos": 6.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "ideogram_vector vectorize",
+  "job_type": "ideogram_vector",
+  "params": {
+   "operation": "vectorize",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 3,
+  "error": null
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "image_background_remover",
+  "job_type": "image_background_remover",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "bytedance_image_upscale 2k",
+  "job_type": "bytedance_image_upscale",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "resolution": "2k"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "bytedance_image_upscale 4k",
+  "job_type": "bytedance_image_upscale",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "resolution": "4k"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "topaz_image 2048x2048",
+  "job_type": "topaz_image",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "output_width": 2048,
+   "output_height": 2048
+  },
+  "creditos": null,
+  "error": "Error: job_type 'topaz_image' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "topaz_image 4096x4096",
+  "job_type": "topaz_image",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "output_width": 4096,
+   "output_height": 4096
+  },
+  "creditos": null,
+  "error": "Error: job_type 'topaz_image' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "nano_banana_2_relight",
+  "job_type": "nano_banana_2_relight",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "brightness": 50,
+   "color": "#ffd9a0",
+   "light_quality": "soft",
+   "light_source": "ful"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "nano_banana_2_shots",
+  "job_type": "nano_banana_2_shots",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 4,
+  "error": null
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "outpaint",
+  "job_type": "outpaint",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "utilidad",
+  "caso": "flux_2_pro_outpaint",
+  "job_type": "flux_2_pro_outpaint",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": null,
+  "error": "Error: at least one expand side must be non-zero | Hint: Run: hf model get flux_2_pro_outpaint"
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down tier=turbo 25f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "video_tier": "turbo"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down tier=pro 25f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "video_tier": "pro"
+  },
+  "creditos": 3,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down tier=max 25f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "video_tier": "max"
+  },
+  "creditos": 14,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite idle turbo 25f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "idle"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite walk turbo 25f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "walk"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite attack turbo 25f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "attack"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down turbo 8f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "frame_count": 8
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down turbo 12f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "frame_count": 12
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down turbo 16f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "frame_count": 16
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down turbo 49f 256px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "frame_count": 49
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down turbo 25f 128px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "frame_size": 128
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down turbo 25f 512px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "frame_size": 512
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down turbo 25f 1024px",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "frame_size": 1024
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite iso_walk_down turbo remove_bg=ultra",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "remove_bg": "ultra"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite custom turbo",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "custom",
+   "name": "soldar",
+   "prompt": "soldering at a desk"
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "autosprite",
+  "caso": "autosprite no humanoide (gato) iso_walk_down turbo",
+  "job_type": "autosprite",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "kind": "iso_walk_down",
+   "is_humanoid": false
+  },
+  "creditos": 2,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_3d texto (defecto)",
+  "job_type": "tripo_3d",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_3d texto sin textura",
+  "job_type": "tripo_3d",
+  "params": {
+   "prompt": "test",
+   "texture": false,
+   "pbr": false
+  },
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_3d texto detallado",
+  "job_type": "tripo_3d",
+  "params": {
+   "prompt": "test",
+   "geometry_quality": "detailed",
+   "texture_quality": "detailed"
+  },
+  "creditos": 12.5,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "hunyuan3d_v3_1_text_to_3d std",
+  "job_type": "hunyuan3d_v3_1_text_to_3d",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 7,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "hunyuan3d_v3_1_text_to_3d pro",
+  "job_type": "hunyuan3d_v3_1_text_to_3d",
+  "params": {
+   "prompt": "test",
+   "mode": "pro"
+  },
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v6_text_to_3d full",
+  "job_type": "meshy_v6_text_to_3d",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v6_text_to_3d preview",
+  "job_type": "meshy_v6_text_to_3d",
+  "params": {
+   "prompt": "test",
+   "mode": "preview"
+  },
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v6_text_to_3d lowpoly",
+  "job_type": "meshy_v6_text_to_3d",
+  "params": {
+   "prompt": "test",
+   "model_type": "lowpoly"
+  },
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "image_to_3d (defecto: sin textura)",
+  "job_type": "image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": null,
+  "error": "Error: job_type 'image_to_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "image_to_3d con textura",
+  "job_type": "image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "should_texture": true
+  },
+  "creditos": null,
+  "error": "Error: job_type 'image_to_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "image_to_3d textura + remesh",
+  "job_type": "image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "should_texture": true,
+   "should_remesh": true,
+   "target_polycount": 8000,
+   "topology": "quad"
+  },
+  "creditos": null,
+  "error": "Error: job_type 'image_to_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "image_to_3d textura + rig",
+  "job_type": "image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "should_texture": true,
+   "enable_rigging": true,
+   "pose_mode": "a-pose"
+  },
+  "creditos": null,
+  "error": "Error: job_type 'image_to_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "image_to_3d textura + rig + animacion",
+  "job_type": "image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "should_texture": true,
+   "enable_rigging": true,
+   "pose_mode": "a-pose",
+   "enable_animation": true,
+   "animation_action_id": 92
+  },
+  "creditos": null,
+  "error": "Error: job_type 'image_to_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "multi_image_to_3d 4 vistas (defecto)",
+  "job_type": "multi_image_to_3d",
+  "params": {
+   "image": "4 refs"
+  },
+  "creditos": null,
+  "error": "Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "multi_image_to_3d 4 vistas con textura",
+  "job_type": "multi_image_to_3d",
+  "params": {
+   "image": "4 refs",
+   "should_texture": true
+  },
+  "creditos": null,
+  "error": "Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "multi_image_to_3d 4 vistas textura + rig",
+  "job_type": "multi_image_to_3d",
+  "params": {
+   "image": "4 refs",
+   "should_texture": true,
+   "enable_rigging": true,
+   "pose_mode": "a-pose"
+  },
+  "creditos": null,
+  "error": "Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v7_image_to_3d (defecto: textura + remesh)",
+  "job_type": "meshy_v7_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 38,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v7_image_to_3d lowpoly",
+  "job_type": "meshy_v7_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "model_type": "lowpoly"
+  },
+  "creditos": 38,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v7_image_to_3d sin textura",
+  "job_type": "meshy_v7_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "should_texture": false
+  },
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v7_image_to_3d + rig",
+  "job_type": "meshy_v7_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "enable_rigging": true,
+   "pose_mode": "a-pose"
+  },
+  "creditos": 44,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v7_image_to_3d + rig + animacion",
+  "job_type": "meshy_v7_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "enable_rigging": true,
+   "pose_mode": "a-pose",
+   "enable_animation": true
+  },
+  "creditos": 47.5,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v7_image_to_3d ultra",
+  "job_type": "meshy_v7_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "ultra_mode": true
+  },
+  "creditos": 44,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "hunyuan3d_v3_image_to_3d Normal",
+  "job_type": "hunyuan3d_v3_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 11,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "hunyuan3d_v3_image_to_3d LowPoly quads",
+  "job_type": "hunyuan3d_v3_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "generate_type": "LowPoly",
+   "polygon_type": "quadrilateral",
+   "face_count": 8000
+  },
+  "creditos": null,
+  "error": "Error: face_count: Input should be greater than or equal to 40000"
+ },
+ {
+  "grupo": "3d",
+  "caso": "hunyuan3d_v3_image_to_3d Geometry (sin textura)",
+  "job_type": "hunyuan3d_v3_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "generate_type": "Geometry"
+  },
+  "creditos": 7,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "hunyuan3d_v3_image_to_3d Normal + PBR",
+  "job_type": "hunyuan3d_v3_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "enable_pbr": true
+  },
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_h3_1_image_to_3d (defecto)",
+  "job_type": "tripo_h3_1_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 9,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_h3_1_image_to_3d sin textura",
+  "job_type": "tripo_h3_1_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "texture": false,
+   "pbr": false
+  },
+  "creditos": 6,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_h3_1_image_to_3d quads 8000 caras",
+  "job_type": "tripo_h3_1_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "quad": true,
+   "face_limit": 8000
+  },
+  "creditos": 10.5,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_h3_1_image_to_3d detallado",
+  "job_type": "tripo_h3_1_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "geometry_quality": "detailed",
+   "texture_quality": "detailed"
+  },
+  "creditos": 18,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_h3_1_multiview_to_3d 4 vistas",
+  "job_type": "tripo_h3_1_multiview_to_3d",
+  "params": {
+   "image": "4 refs"
+  },
+  "creditos": 9,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_p2_image_to_3d (defecto)",
+  "job_type": "tripo_p2_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 34,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_p2_image_to_3d quads 8000 caras",
+  "job_type": "tripo_p2_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "quad": true,
+   "face_limit": 8000
+  },
+  "creditos": 34,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_p2_image_to_3d textura=fast",
+  "job_type": "tripo_p2_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "texture_quality": "fast",
+   "texture_version": "v3.5-20260815"
+  },
+  "creditos": 34,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_p2_image_to_3d textura=detailed",
+  "job_type": "tripo_p2_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "texture_quality": "detailed"
+  },
+  "creditos": 37,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "tripo_p2_image_to_3d textura=extreme",
+  "job_type": "tripo_p2_image_to_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37",
+   "texture_quality": "extreme"
+  },
+  "creditos": 40,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "sam_3_3d (objetos desde foto)",
+  "job_type": "sam_3_3d",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": null,
+  "error": "Error: job_type 'sam_3_3d' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "sam_3_3d_body",
+  "job_type": "sam_3_3d_body",
+  "params": {
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "3d_rigging (solo rig)",
+  "job_type": "3d_rigging",
+  "params": {
+   "model_url": "https://example.com/modelo.glb"
+  },
+  "creditos": null,
+  "error": "Error: job_type '3d_rigging' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "3d_rigging + animacion",
+  "job_type": "3d_rigging",
+  "params": {
+   "model_url": "https://example.com/modelo.glb",
+   "enable_animation": true,
+   "animation_action_id": 92
+  },
+  "creditos": null,
+  "error": "Error: job_type '3d_rigging' does not support alpha v2 cost estimation"
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v5_remesh quads 8000",
+  "job_type": "meshy_v5_remesh",
+  "params": {
+   "model_url": "https://example.com/modelo.glb",
+   "target_polycount": 8000,
+   "topology": "quad"
+  },
+  "creditos": 6,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v5_retexture por texto",
+  "job_type": "meshy_v5_retexture",
+  "params": {
+   "model_url": "https://example.com/modelo.glb",
+   "text_style_prompt": "hand painted"
+  },
+  "creditos": 9.5,
+  "error": null
+ },
+ {
+  "grupo": "3d",
+  "caso": "meshy_v5_retexture por imagen",
+  "job_type": "meshy_v5_retexture",
+  "params": {
+   "model_url": "https://example.com/modelo.glb",
+   "image_style_url": "https://example.com/estilo.png"
+  },
+  "creditos": 9.5,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 15s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "params": {
+   "prompt": "test",
+   "duration": 15,
+   "force_instrumental": true
+  },
+  "creditos": 2.18,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 15s",
+  "job_type": "sonilo_music",
+  "params": {
+   "prompt": "test",
+   "duration": 15
+  },
+  "creditos": 0.94,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 30s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "params": {
+   "prompt": "test",
+   "duration": 30,
+   "force_instrumental": true
+  },
+  "creditos": 4.36,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 30s",
+  "job_type": "sonilo_music",
+  "params": {
+   "prompt": "test",
+   "duration": 30
+  },
+  "creditos": 1.88,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 60s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "params": {
+   "prompt": "test",
+   "duration": 60,
+   "force_instrumental": true
+  },
+  "creditos": 8.72,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 60s",
+  "job_type": "sonilo_music",
+  "params": {
+   "prompt": "test",
+   "duration": 60
+  },
+  "creditos": 3.75,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 120s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "params": {
+   "prompt": "test",
+   "duration": 120,
+   "force_instrumental": true
+  },
+  "creditos": 17.44,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 120s",
+  "job_type": "sonilo_music",
+  "params": {
+   "prompt": "test",
+   "duration": 120
+  },
+  "creditos": 7.5,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 180s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "params": {
+   "prompt": "test",
+   "duration": 180,
+   "force_instrumental": true
+  },
+  "creditos": 26.16,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 180s",
+  "job_type": "sonilo_music",
+  "params": {
+   "prompt": "test",
+   "duration": 180
+  },
+  "creditos": 11.25,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2 30s",
+  "job_type": "elevenlabs_music_v2",
+  "params": {
+   "prompt": "test",
+   "duration": 30
+  },
+  "creditos": 1.92,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2 120s",
+  "job_type": "elevenlabs_music_v2",
+  "params": {
+   "prompt": "test",
+   "duration": 120
+  },
+  "creditos": 7.68,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "mirelo_text_to_audio (SFX) 1s",
+  "job_type": "mirelo_text_to_audio",
+  "params": {
+   "prompt": "test",
+   "duration": 1
+  },
+  "creditos": 0.25,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "mirelo_text_to_audio (SFX) 3s",
+  "job_type": "mirelo_text_to_audio",
+  "params": {
+   "prompt": "test",
+   "duration": 3
+  },
+  "creditos": 0.75,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "mirelo_text_to_audio (SFX) 5s",
+  "job_type": "mirelo_text_to_audio",
+  "params": {
+   "prompt": "test",
+   "duration": 5
+  },
+  "creditos": 1.25,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "mirelo_text_to_audio (SFX) 10s",
+  "job_type": "mirelo_text_to_audio",
+  "params": {
+   "prompt": "test",
+   "duration": 10
+  },
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "seed_audio (defecto)",
+  "job_type": "seed_audio",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 0.1,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0_mini texto (defecto)",
+  "job_type": "seedance_2_0_mini",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0_mini imagen->video (defecto)",
+  "job_type": "seedance_2_0_mini",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance1_5 texto (defecto)",
+  "job_type": "seedance1_5",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 4.8,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance1_5 imagen->video (defecto)",
+  "job_type": "seedance1_5",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 4.8,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15_lite texto (defecto)",
+  "job_type": "grok_video_v15_lite",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15_lite imagen->video (defecto)",
+  "job_type": "grok_video_v15_lite",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0_turbo texto (defecto)",
+  "job_type": "kling3_0_turbo",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 7.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0_turbo imagen->video (defecto)",
+  "job_type": "kling3_0_turbo",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 7.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 texto (defecto)",
+  "job_type": "wan3_0",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 8.75,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 imagen->video (defecto)",
+  "job_type": "wan3_0",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 8.75,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf texto (defecto)",
+  "job_type": "kling_o3_flf",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 6.25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf imagen->video (defecto)",
+  "job_type": "kling_o3_flf",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 6.25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1_lite texto (defecto)",
+  "job_type": "veo3_1_lite",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1_lite imagen->video (defecto)",
+  "job_type": "veo3_1_lite",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 texto (defecto)",
+  "job_type": "kling4_0",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 32.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 imagen->video (defecto)",
+  "job_type": "kling4_0",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": null,
+  "error": "Error: Text-to-video does not accept reference inputs. | Hint: Run: hf model get kling4_0"
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 texto (defecto)",
+  "job_type": "seedance_2_5",
+  "params": {
+   "prompt": "test"
+  },
+  "creditos": 35,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 imagen->video (defecto)",
+  "job_type": "seedance_2_5",
+  "params": {
+   "prompt": "test",
+   "image": "dcfc3212-00c2-4602-9d58-aed0b8109c37"
+  },
+  "creditos": null,
+  "error": "Error: mode 't2v' does not accept reference media | Hint: Run: hf model get seedance_2_5"
+ }
+]

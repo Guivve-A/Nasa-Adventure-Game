@@ -1,0 +1,19 @@
+{
+  "titulo": "Ecuador ya dejó un mensaje",
+  "resumen": "Ordena las diapositivas del atril desde el hito más antiguo hasta el más reciente.",
+  "instrucciones": [
+    "Elige una tarjeta y lee su pista de época. El año empieza oculto.",
+    "Tómala con E o Intro y muévela con izquierda o derecha; pulsa E para soltar. También puedes arrastrarla con el ratón.",
+    "Pulsa Comprobar o Espacio: ✓ revela la fecha cuando el orden con ambas vecinas es correcto; las demás reciben una pista más clara al seleccionarlas.",
+    "Ordena todas antes de gastar las comprobaciones: nivel 1, 5 tarjetas y 4; nivel 2, 7 y 4; nivel 3, 9 y 3."
+  ],
+  "controles": "← → / A D: elegir; E / Intro: tomar o soltar; ← →: mover la tomada; ↑ ↓ / W S: elegir otra; Espacio: comprobar. Ratón: arrastrar y pulsar Comprobar.",
+  "pistas": [
+    "Órbita mira la tarjeta del Observatorio de Quito y luego el extremo izquierdo del atril.",
+    "El observatorio abre la secuencia. El cierre de la estación va antes de su entrega a Ecuador. Los Acuerdos Artemisa van al final.",
+    "Orden completo: Observatorio (1873), estación Quito (1957), disco (1969), Apolo-Soyuz (1975), STS-2 (14-11-1981), entrega (01-07-1982), EXA (2007), Pegaso (2013), Acuerdos Artemisa (21-06-2023). Usa solo las tarjetas presentes."
+  ],
+  "ficha": "disco_apolo11",
+  "escena": "2.4",
+  "orden": 5
+}

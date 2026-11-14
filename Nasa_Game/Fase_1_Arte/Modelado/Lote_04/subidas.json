@@ -1,0 +1,72 @@
+{
+ "PER01_frente": {
+  "id": "d736e2b9-2cce-4b9b-8546-5be1f73cf156",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/PER01_frente.jpg",
+  "bytes": 103983
+ },
+ "PER01_perfil": {
+  "id": "19c12620-ce6f-46b8-864a-516c61955a03",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/PER01_perfil.jpg",
+  "bytes": 71025
+ },
+ "PER01_espalda": {
+  "id": "710cb3cb-2307-4e44-9b50-bb5a000d5af0",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/PER01_espalda.jpg",
+  "bytes": 86286
+ },
+ "PER09_frente": {
+  "id": "b1faa263-98fe-40d9-8deb-0919756d028a",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/PER09_frente.jpg",
+  "bytes": 94521
+ },
+ "PER09_perfil": {
+  "id": "17bf8af8-125b-43c8-b03e-294991836f73",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/PER09_perfil.jpg",
+  "bytes": 97205
+ },
+ "PER09_espalda": {
+  "id": "4663bda8-b70f-4c89-80a3-e53c6fdb8545",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/PER09_espalda.jpg",
+  "bytes": 76346
+ },
+ "PER09_perfil_espejo": {
+  "id": "7d0cb245-5587-4a4a-b6c5-2d9eac29e8a8",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/PER09_perfil_espejo.jpg",
+  "bytes": 97243
+ },
+ "FAU01_frente": {
+  "id": "96197841-db32-4496-b5b4-e67f0d4303fe",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/FAU01_frente.jpg",
+  "bytes": 87602
+ },
+ "FAU01_lado": {
+  "id": "96e1650d-01d5-4a3f-947c-a7e7d87037da",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/FAU01_lado.jpg",
+  "bytes": 92699
+ },
+ "COL01_antena": {
+  "id": "c1c218b4-d591-4643-9572-87fcc8b9fa06",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas/jpg/COL01_antena.jpg",
+  "bytes": 179673
+ },
+ "PER01g_frente": {
+  "id": "1e3dd21f-3d0e-490d-9932-8f6cf49beb27",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas_giro/jpg/PER01g_frente.jpg",
+  "bytes": 94102
+ },
+ "PER01g_lado_a_espejo": {
+  "id": "064dae45-83bf-4a0b-92f0-89b2f0740b48",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas_giro/jpg/PER01g_lado_a_espejo.jpg",
+  "bytes": 60363
+ },
+ "PER01g_espalda": {
+  "id": "b60847ac-9ae7-448e-9e1a-7e354edf70e7",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas_giro/jpg/PER01g_espalda.jpg",
+  "bytes": 77481
+ },
+ "PER01g_lado_a": {
+  "id": "a0a14843-e260-49f8-93f7-390f94e0f9bb",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/vistas_giro/jpg/PER01g_lado_a.jpg",
+  "bytes": 60338
+ }
+}

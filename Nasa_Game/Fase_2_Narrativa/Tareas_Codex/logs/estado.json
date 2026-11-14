@@ -1,0 +1,18 @@
+{
+ "datos_espaciales": {
+  "id": "datos_espaciales",
+  "estado": "ok",
+  "minutos": 8.1,
+  "bytes_informe": 18965,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_2_Narrativa\\Investigacion\\01_datos_espaciales_ecuador.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_2_Narrativa\\Tareas_Codex\\logs\\datos_espaciales.log"
+ },
+ "historia_existente": {
+  "id": "historia_existente",
+  "estado": "ok",
+  "minutos": 2.2,
+  "bytes_informe": 7743,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_2_Narrativa\\Investigacion\\02_historia_existente.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_2_Narrativa\\Tareas_Codex\\logs\\historia_existente.log"
+ }
+}

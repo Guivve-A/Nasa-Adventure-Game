@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:22:11.03735Z",
+    "display_name": "GPT Image 2.6",
+    "id": "68ce37d6-dfef-464e-9c2e-b7fc3d149945",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172211_68ce37d6-dfef-464e-9c2e-b7fc3d149945_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "c7aed878-4944-403a-9740-e5af5c08d5cd",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/c7aed878-4944-403a-9740-e5af5c08d5cd_resize.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "fa9a62be-1d6c-46d1-93e4-770df3cfbea6",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/fa9a62be-1d6c-46d1-93e4-770df3cfbea6_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Use the exact art style of the reference images. In-game screenshot of a stylized 3D exploration RPG seen from a fixed high top-down three-quarter camera pitched steeply down about 60 degrees: no horizon and no sky, the ground fills the entire frame. In the center, small, about one eighth of the image height: a chibi engineering student with voluminous dark curly hair, khaki utility jacket, cargo pants and a brown crossbody tool bag walks along a winding dirt footpath, with a small gray-and-cream cat wearing a glowing cyan collar tag at their side. Setting: a grassy clearing of a tropical dry-forest park at the foot of a hill, late afternoon. Tufts of tall grass, wildflowers, mossy faceted boulders, the wide canopy of a ceibo tree, a green iguana basking on a rock, a small stream crossed by a plank bridge, the first steps of a mosaic stair in one corner. A rusty fallen satellite dish and an old solar panel lie half hidden in the grass, each with a faint cyan sparkle marking it as collectible. Long soft shadows, warm light, cool teal shade. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded light with rim light, matte materials. No text, no logos, no interface.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172211_68ce37d6-dfef-464e-9c2e-b7fc3d149945.png",
+    "status": "completed"
+  }
+]

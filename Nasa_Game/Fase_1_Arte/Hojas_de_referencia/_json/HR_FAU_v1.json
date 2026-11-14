@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:56:20.362498Z",
+    "display_name": "GPT Image 2.6",
+    "id": "74f29a99-632c-4004-bf94-a7aab419cdf8",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175620_74f29a99-632c-4004-bf94-a7aab419cdf8_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/4412c12c-6589-45e4-9453-f695ac27ccbc.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Fauna · v1\". Eleven animals of a tropical port city, its mangroves and its dry forest, with slightly chibi proportions but anatomically recognizable, each shown in side view with a small front view beside it. Top row: \"FAU-01 Iguana verde\" a green iguana with a crest of spines; \"FAU-02 Ardilla de Guayaquil\" a gray-brown squirrel with a bushy tail; \"FAU-03 Pelícano pardo\" a brown pelican; \"FAU-04 Fragata\" a black frigatebird with a red throat pouch; \"FAU-05 Garza blanca\" a great egret; \"FAU-06 Cangrejo rojo\" a red mangrove crab. Bottom row: \"FAU-07 Colibrí\" a green hummingbird; \"FAU-08 Periquito del Pacífico\" a tiny green parrotlet; \"FAU-09 Mariposa\" a blue butterfly; \"FAU-10 Perro callejero\" a friendly mixed-breed street dog; \"FAU-11 Gato callejero\" an orange tabby street cat, clearly different from the companion cat. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175620_74f29a99-632c-4004-bf94-a7aab419cdf8.png",
+    "status": "completed"
+  }
+]

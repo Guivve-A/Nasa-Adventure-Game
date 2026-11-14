@@ -1,0 +1,53 @@
+{
+ "vistas": [
+  {
+   "id": "frente",
+   "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png",
+   "caja": [
+    200,
+    10,
+    720,
+    923
+   ],
+   "render": "C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/verif_v9/renders/px_cuerpo.png",
+   "peso": 2
+  },
+  {
+   "id": "cabeza",
+   "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png",
+   "caja": [
+    200,
+    10,
+    720,
+    923
+   ],
+   "render": "C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/verif_v9/renders/px_cuerpo.png",
+   "peso": 2,
+   "cabeza": true
+  },
+  {
+   "id": "perfil",
+   "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png",
+   "caja": [
+    1410,
+    10,
+    1790,
+    923
+   ],
+   "render": "C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/verif_v9/renders/my_cuerpo.png",
+   "peso": 1
+  },
+  {
+   "id": "espalda",
+   "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png",
+   "caja": [
+    1960,
+    10,
+    2450,
+    923
+   ],
+   "render": "C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/verif_v9/renders/mx_cuerpo.png",
+   "peso": 1
+  }
+ ]
+}

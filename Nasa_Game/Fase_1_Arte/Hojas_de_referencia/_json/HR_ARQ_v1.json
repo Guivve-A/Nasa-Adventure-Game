@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:54:03.580685Z",
+    "display_name": "GPT Image 2.6",
+    "id": "caaa84dd-d8d5-413f-86f1-1bb8114011ee",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175403_caaa84dd-d8d5-413f-86f1-1bb8114011ee_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/4412c12c-6589-45e4-9453-f695ac27ccbc.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Arquitectura de Las Escalinatas · v1\". A modular building kit for a hillside neighborhood of colorful houses in a tropical port city. Top row: \"ARQ-01 Casa amarilla\" a two-story house facade painted yellow with a covered wooden balcony; \"ARQ-02 Casa azul\" a one-story house facade painted blue; \"ARQ-03 Techo de zinc\" corrugated tin roof panels, slightly rusty; \"ARQ-04 Ventana con reja\" a window with an ornamental iron grille; \"ARQ-05 Puerta de madera\" a painted wooden double door; \"ARQ-06 Balcón de madera\" a wooden balcony with turned balusters. Bottom row: \"ARQ-07 Baranda metálica\" a painted metal railing segment; \"ARQ-08 Poste de luz\" a wooden utility pole with sagging cables and a small transformer; \"ARQ-09 Farol\" a classic black street lamp; \"ARQ-10 Tendedero\" a laundry line with colorful clothes; \"ARQ-11 Tanque de agua\" a rooftop water tank on a small stand; \"ARQ-12 Escalón numerado\" a single stone step with a painted number on its riser. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175403_caaa84dd-d8d5-413f-86f1-1bb8114011ee.png",
+    "status": "completed"
+  }
+]

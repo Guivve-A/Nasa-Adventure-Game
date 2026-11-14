@@ -1,0 +1,27 @@
+; Prueba: Luna del sueno (etapa 7, carril C5). Prueba de rendimiento, no el nivel final.
+; Misma configuracion que pruebas/escena_exploracion: Mobile, 1280x720. El vsync se apaga al medir.
+config_version=5
+
+[application]
+
+config/name="Luna del sueno - prueba de rendimiento"
+run/main_scene="res://escena.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+
+[physics]
+
+; gravedad lunar: 1,624 m/s2 (dato L6, Fase 2, verificado con NASA «Moon by the numbers»)
+3d/default_gravity=1.624
+
+[rendering]
+
+renderer/rendering_method="mobile"
+anti_aliasing/quality/msaa_3d=1
+lights_and_shadows/directional_shadow/size=4096
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=2

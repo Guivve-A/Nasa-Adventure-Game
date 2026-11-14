@@ -1,0 +1,4449 @@
+{
+ "camara": {
+  "inclinacion_deg": 48.0,
+  "fov_deg": 40.0,
+  "objetivo": [
+   0.45,
+   0.0,
+   -0.6
+  ],
+  "inclinacion_objetos": 0.45,
+  "encuadres": {
+   "21": 0.21,
+   "12": 0.125
+  },
+  "alto_personaje": 1.05
+ },
+ "ambiente": {
+  "moteado": {
+   "centro": [
+    -0.888,
+    -2.828
+   ],
+   "radios": [
+    3.791,
+    1.691
+   ],
+   "fuerza": 1.0,
+   "sombra": 0.45
+  },
+  "pinceladas": 0.7
+ },
+ "recursos": [
+  {
+   "id": "TER-suelo",
+   "glb": "modelos/TER-suelo.glb",
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "TER-09_agua",
+   "glb": "modelos/TER-09_agua.glb",
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "VEG-hierba_corta",
+   "glb": "modelos/VEG-hierba_corta.glb",
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "TER-13_mosaico",
+   "glb": "modelos/TER-13_mosaico.glb",
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "roca_iguana",
+   "glb": "modelos/TER-01_a.glb",
+   "pos": [
+    -2.596,
+    0.012,
+    -0.61
+   ],
+   "rot_y": 20.0,
+   "escala": 1.0
+  },
+  {
+   "id": "roca_arbol",
+   "glb": "modelos/TER-02_a.glb",
+   "pos": [
+    -1.159,
+    0.018,
+    -3.223
+   ],
+   "rot_y": 60.0,
+   "escala": 0.558
+  },
+  {
+   "id": "roca_centro",
+   "glb": "modelos/TER-02_b.glb",
+   "pos": [
+    0.799,
+    -0.043,
+    -3.377
+   ],
+   "rot_y": 10.0,
+   "escala": 0.434
+  },
+  {
+   "id": "roca_frente",
+   "glb": "modelos/TER-01_b.glb",
+   "pos": [
+    0.892,
+    0.043,
+    0.761
+   ],
+   "rot_y": 200.0,
+   "escala": 0.589
+  },
+  {
+   "id": "roca_frente2",
+   "glb": "modelos/TER-02_a.glb",
+   "pos": [
+    1.277,
+    0.021,
+    1.366
+   ],
+   "rot_y": 120.0,
+   "escala": 0.558
+  },
+  {
+   "id": "roca_cascada",
+   "glb": "modelos/TER-01_b.glb",
+   "pos": [
+    5.144,
+    -0.9,
+    -3.172
+   ],
+   "rot_y": 75.0,
+   "escala": 0.651
+  },
+  {
+   "id": "roca_orilla",
+   "glb": "modelos/TER-02_b.glb",
+   "pos": [
+    4.229,
+    -0.62,
+    -3.588
+   ],
+   "rot_y": 300.0,
+   "escala": 0.558
+  },
+  {
+   "id": "roca_orilla2",
+   "glb": "modelos/TER-01_a.glb",
+   "pos": [
+    4.486,
+    -0.01,
+    -1.46
+   ],
+   "rot_y": 140.0,
+   "escala": 0.558
+  },
+  {
+   "id": "roca_orilla3",
+   "glb": "modelos/TER-02_b.glb",
+   "pos": [
+    5.627,
+    -0.775,
+    -2.279
+   ],
+   "rot_y": 220.0,
+   "escala": 0.558
+  },
+  {
+   "id": "roca_derecha",
+   "glb": "modelos/TER-01_b.glb",
+   "pos": [
+    4.402,
+    0.005,
+    0.235
+   ],
+   "rot_y": 30.0,
+   "escala": 0.744
+  },
+  {
+   "id": "roca_lejos",
+   "glb": "modelos/TER-02_a.glb",
+   "pos": [
+    3.49,
+    -0.049,
+    -5.912
+   ],
+   "rot_y": 230.0,
+   "escala": 0.558
+  },
+  {
+   "id": "roca_puente",
+   "glb": "modelos/TER-02_b.glb",
+   "pos": [
+    4.714,
+    -0.615,
+    -6.365
+   ],
+   "rot_y": 80.0,
+   "escala": 0.496
+  },
+  {
+   "id": "roca_puente2",
+   "glb": "modelos/TER-01_b.glb",
+   "pos": [
+    6.781,
+    -0.017,
+    -5.345
+   ],
+   "rot_y": 15.0,
+   "escala": 0.527
+  },
+  {
+   "id": "roca_plaza",
+   "glb": "modelos/TER-02_a.glb",
+   "pos": [
+    -1.461,
+    -0.043,
+    0.452
+   ],
+   "rot_y": 150.0,
+   "escala": 0.46499999999999997
+  },
+  {
+   "id": "roca_bajo_der",
+   "glb": "modelos/TER-02_a.glb",
+   "pos": [
+    3.517,
+    -0.025,
+    1.409
+   ],
+   "rot_y": 40.0,
+   "escala": 0.558
+  },
+  {
+   "id": "roca_rio1",
+   "glb": "modelos/TER-02_b.glb",
+   "pos": [
+    3.586,
+    -0.329,
+    -3.122
+   ],
+   "rot_y": 110.0,
+   "escala": 0.372
+  },
+  {
+   "id": "roca_rio2",
+   "glb": "modelos/TER-02_a.glb",
+   "pos": [
+    3.086,
+    -0.1,
+    -3.482
+   ],
+   "rot_y": 250.0,
+   "escala": 0.341
+  },
+  {
+   "id": "roca_rio3",
+   "glb": "modelos/TER-02_b.glb",
+   "pos": [
+    6.738,
+    -0.04,
+    -5.912
+   ],
+   "rot_y": 30.0,
+   "escala": 0.46499999999999997
+  },
+  {
+   "id": "roca_rio4",
+   "glb": "modelos/TER-01_b.glb",
+   "pos": [
+    2.682,
+    -0.002,
+    -6.06
+   ],
+   "rot_y": 160.0,
+   "escala": 0.434
+  },
+  {
+   "id": "roca_lejos2",
+   "glb": "modelos/TER-01_a.glb",
+   "pos": [
+    -7.261,
+    -0.002,
+    -9.739
+   ],
+   "rot_y": 90.0,
+   "escala": 0.744
+  },
+  {
+   "id": "roca_lejos3",
+   "glb": "modelos/TER-01_b.glb",
+   "pos": [
+    8.407,
+    0.035,
+    -4.089
+   ],
+   "rot_y": 200.0,
+   "escala": 0.806
+  },
+  {
+   "id": "roca_lejos4",
+   "glb": "modelos/TER-02_a.glb",
+   "pos": [
+    -5.004,
+    -0.8,
+    1.05
+   ],
+   "rot_y": 40.0,
+   "escala": 0.682
+  },
+  {
+   "id": "roca_lejos5",
+   "glb": "modelos/TER-02_b.glb",
+   "pos": [
+    5.904,
+    0.007,
+    1.05
+   ],
+   "rot_y": 300.0,
+   "escala": 0.744
+  },
+  {
+   "id": "roca_lejos6",
+   "glb": "modelos/TER-01_a.glb",
+   "pos": [
+    -2.651,
+    -0.021,
+    -13.829
+   ],
+   "rot_y": 120.0,
+   "escala": 0.62
+  },
+  {
+   "id": "piedras_0",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    -0.505,
+    -0.038,
+    0.859
+   ],
+   "rot_y": 0.0,
+   "escala": 0.5
+  },
+  {
+   "id": "piedras_1",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    0.575,
+    -0.017,
+    0.452
+   ],
+   "rot_y": 47.0,
+   "escala": 0.5
+  },
+  {
+   "id": "piedras_2",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    0.179,
+    -0.029,
+    1.12
+   ],
+   "rot_y": 94.0,
+   "escala": 0.5
+  },
+  {
+   "id": "piedras_3",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    1.004,
+    -0.026,
+    -0.61
+   ],
+   "rot_y": 141.0,
+   "escala": 0.5
+  },
+  {
+   "id": "piedras_4",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    0.623,
+    -0.032,
+    0.065
+   ],
+   "rot_y": 188.0,
+   "escala": 0.5
+  },
+  {
+   "id": "piedras_5",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    -0.835,
+    -0.04,
+    1.322
+   ],
+   "rot_y": 235.0,
+   "escala": 0.5
+  },
+  {
+   "id": "piedras_6",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    1.533,
+    -0.038,
+    -2.456
+   ],
+   "rot_y": 282.0,
+   "escala": 0.5
+  },
+  {
+   "id": "piedras_7",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    0.45,
+    -0.039,
+    -1.694
+   ],
+   "rot_y": 329.0,
+   "escala": 0.5
+  },
+  {
+   "id": "piedras_8",
+   "glb": "modelos/TER-03.glb",
+   "pos": [
+    1.955,
+    -0.034,
+    -3.325
+   ],
+   "rot_y": 376.0,
+   "escala": 0.5
+  },
+  {
+   "id": "cantos_0",
+   "glb": "modelos/TER-05.glb",
+   "pos": [
+    4.653,
+    -0.54,
+    -4.462
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "cantos_1",
+   "glb": "modelos/TER-05.glb",
+   "pos": [
+    4.026,
+    -0.54,
+    -3.519
+   ],
+   "rot_y": 63.0,
+   "escala": 1.0
+  },
+  {
+   "id": "cantos_2",
+   "glb": "modelos/TER-05.glb",
+   "pos": [
+    5.239,
+    -0.82,
+    -2.922
+   ],
+   "rot_y": 126.0,
+   "escala": 1.0
+  },
+  {
+   "id": "cantos_3",
+   "glb": "modelos/TER-05.glb",
+   "pos": [
+    6.063,
+    -0.26,
+    -7.039
+   ],
+   "rot_y": 189.0,
+   "escala": 1.0
+  },
+  {
+   "id": "cantos_4",
+   "glb": "modelos/TER-05.glb",
+   "pos": [
+    5.552,
+    -0.82,
+    -2.289
+   ],
+   "rot_y": 252.0,
+   "escala": 1.0
+  },
+  {
+   "id": "VEG-02",
+   "glb": "modelos/VEG-02.glb",
+   "pos": [
+    -2.664,
+    0.038,
+    -1.937
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0,
+   "escala_y": 0.62
+  },
+  {
+   "id": "VEG-02_lejos",
+   "glb": "modelos/VEG-02.glb",
+   "pos": [
+    8.6,
+    -0.0,
+    -7.5
+   ],
+   "rot_y": 140.0,
+   "escala": 0.9,
+   "escala_y": 0.62
+  },
+  {
+   "id": "VEG-02_petalos",
+   "glb": "modelos/VEG-02_petalos.glb",
+   "pos": [
+    -1.556,
+    0.007,
+    -1.537
+   ],
+   "rot_y": 0.0,
+   "escala": 0.7
+  },
+  {
+   "id": "TER-10",
+   "glb": "modelos/TER-10.glb",
+   "pos": [
+    3.407,
+    0.02,
+    -4.361
+   ],
+   "rot_y": 27.8,
+   "escala": 0.7
+  },
+  {
+   "id": "TER-12_muro_A",
+   "glb": "modelos/TER-12_muro_A.glb",
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "TER-12_muro_B1",
+   "glb": "modelos/TER-12_muro_B1.glb",
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "TER-12_muro_B2",
+   "glb": "modelos/TER-12_muro_B2.glb",
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "URB-09_0",
+   "glb": "modelos/URB-09.glb",
+   "pos": [
+    -2.015,
+    0.07,
+    1.19
+   ],
+   "rot_y": -26.6,
+   "escala": 1.0
+  },
+  {
+   "id": "URB-09_1",
+   "glb": "modelos/URB-09.glb",
+   "pos": [
+    -4.788,
+    0.07,
+    -0.196
+   ],
+   "rot_y": -26.6,
+   "escala": 1.0
+  },
+  {
+   "id": "URB-09_2",
+   "glb": "modelos/URB-09.glb",
+   "pos": [
+    -7.56,
+    0.07,
+    -1.583
+   ],
+   "rot_y": -26.6,
+   "escala": 1.0
+  },
+  {
+   "id": "TER-11_0",
+   "glb": "modelos/TER-11.glb",
+   "pos": [
+    -3.738,
+    -0.7,
+    1.044
+   ],
+   "rot_y": -26.6,
+   "escala": 1.0
+  },
+  {
+   "id": "TER-11_1",
+   "glb": "modelos/TER-11.glb",
+   "pos": [
+    -1.896,
+    -0.7,
+    1.965
+   ],
+   "rot_y": -26.6,
+   "escala": 1.0
+  },
+  {
+   "id": "COL-01_script",
+   "glb": "modelos/COL-01_script.glb",
+   "pos": [
+    3.013,
+    -0.01,
+    -0.914
+   ],
+   "rot_y": 120.0,
+   "escala": 1.0,
+   "variante": "script"
+  },
+  {
+   "id": "COL-01_tripo",
+   "glb": "tripo/COL-01_tripo.glb",
+   "pos": [
+    3.013,
+    -0.01,
+    -0.914
+   ],
+   "rot_y": -75.0,
+   "escala": 1.0,
+   "variante": "tripo",
+   "altura": 0.9
+  },
+  {
+   "id": "COL-02",
+   "glb": "modelos/COL-02.glb",
+   "pos": [
+    3.188,
+    -0.034,
+    0.609
+   ],
+   "rot_y": 12.0,
+   "escala": 1.0
+  },
+  {
+   "id": "FX-01_antena",
+   "glb": "modelos/FX-01.glb",
+   "pos": [
+    3.279,
+    1.0,
+    -0.083
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "FX-01_panel",
+   "glb": "modelos/FX-01.glb",
+   "pos": [
+    3.146,
+    0.6,
+    0.755
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "PER-01",
+   "glb": "tripo/PER-01_v6.glb",
+   "pos": [
+    0.179,
+    -0.033,
+    -0.386
+   ],
+   "rot_y": 76.1,
+   "escala": 1.0,
+   "altura": 1.05
+  },
+  {
+   "id": "PER-09",
+   "glb": "tripo/PER-09_rig.glb",
+   "pos": [
+    0.768,
+    -0.035,
+    -0.449
+   ],
+   "rot_y": 166.1,
+   "escala": 1.0,
+   "altura": 0.5,
+   "animacion": "caminar"
+  },
+  {
+   "id": "FAU-01",
+   "glb": "tripo/FAU-01.glb",
+   "pos": [
+    -2.634,
+    0.015,
+    -0.743
+   ],
+   "rot_y": 180.0,
+   "escala": 1.0,
+   "altura": 0.3,
+   "sobre": "roca_iguana"
+  },
+  {
+   "id": "VEG-14_blanca_0",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    -0.872,
+    -0.007,
+    -0.481
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_blanca"
+  },
+  {
+   "id": "VEG-14_blanca_1",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    -1.05,
+    -0.038,
+    0.426
+   ],
+   "rot_y": 37.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_blanca"
+  },
+  {
+   "id": "VEG-14_blanca_2",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    1.662,
+    0.032,
+    -1.615
+   ],
+   "rot_y": 74.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_blanca"
+  },
+  {
+   "id": "VEG-14_blanca_3",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    4.064,
+    -0.036,
+    -0.386
+   ],
+   "rot_y": 111.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_blanca"
+  },
+  {
+   "id": "VEG-14_blanca_4",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    2.016,
+    0.005,
+    1.003
+   ],
+   "rot_y": 148.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_blanca"
+  },
+  {
+   "id": "VEG-14_rosa_5",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    1.618,
+    0.02,
+    -0.323
+   ],
+   "rot_y": 185.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_rosa"
+  },
+  {
+   "id": "VEG-14_rosa_6",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    1.669,
+    -0.001,
+    0.66
+   ],
+   "rot_y": 222.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_rosa"
+  },
+  {
+   "id": "VEG-14_rosa_7",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    6.111,
+    -0.69,
+    -3.862
+   ],
+   "rot_y": 259.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_rosa"
+  },
+  {
+   "id": "VEG-14_amarilla_8",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    2.188,
+    -0.009,
+    1.322
+   ],
+   "rot_y": 296.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_amarilla"
+  },
+  {
+   "id": "VEG-14_amarilla_9",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    4.889,
+    -0.012,
+    -0.743
+   ],
+   "rot_y": 333.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_amarilla"
+  },
+  {
+   "id": "VEG-14_rosa_10",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    5.595,
+    -0.554,
+    -4.443
+   ],
+   "rot_y": 370.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_rosa"
+  },
+  {
+   "id": "VEG-14_rosa_11",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    6.011,
+    -0.9,
+    -2.925
+   ],
+   "rot_y": 407.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_rosa"
+  },
+  {
+   "id": "VEG-14_blanca_12",
+   "glb": "modelos/VEG-14.glb",
+   "pos": [
+    2.921,
+    0.034,
+    -2.925
+   ],
+   "rot_y": 444.0,
+   "escala": 1.0,
+   "nodo": "VEG-14_blanca"
+  },
+  {
+   "id": "hierba_0",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.752,
+    0.038,
+    5.253
+   ],
+   "rot_y": 81.1,
+   "escala": 0.9350748282100515,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_1",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.067,
+    -0.022,
+    3.55
+   ],
+   "rot_y": 109.1,
+   "escala": 0.925291525445348,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_2",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -5.393,
+    -0.021,
+    -2.434
+   ],
+   "rot_y": 199.3,
+   "escala": 1.2479751275454767,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_3",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.439,
+    -0.004,
+    0.577
+   ],
+   "rot_y": 77.5,
+   "escala": 0.8720954152360301,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_4",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.476,
+    0.013,
+    -9.253
+   ],
+   "rot_y": 185.4,
+   "escala": 1.00979271139638,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_5",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.178,
+    -0.017,
+    0.697
+   ],
+   "rot_y": 178.9,
+   "escala": 0.9113817149122989,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_6",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -10.741,
+    0.002,
+    -6.729
+   ],
+   "rot_y": 72.2,
+   "escala": 0.966291339770993,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_7",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.602,
+    0.0,
+    -5.451
+   ],
+   "rot_y": 183.5,
+   "escala": 1.1812176108646413,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_8",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.074,
+    -0.004,
+    2.61
+   ],
+   "rot_y": 194.8,
+   "escala": 1.0284975063351576,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_9",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.169,
+    0.024,
+    -3.859
+   ],
+   "rot_y": 21.3,
+   "escala": 0.974434310499828,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_10",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.893,
+    0.022,
+    -7.447
+   ],
+   "rot_y": 136.6,
+   "escala": 1.2404365479850497,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_11",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.98,
+    -0.014,
+    0.286
+   ],
+   "rot_y": 243.5,
+   "escala": 0.8678546086257659,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_12",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.313,
+    0.018,
+    -5.927
+   ],
+   "rot_y": 34.8,
+   "escala": 1.2355226229719696,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_13",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.569,
+    -0.002,
+    -7.763
+   ],
+   "rot_y": 340.2,
+   "escala": 1.206762554688167,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_14",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.449,
+    0.002,
+    0.907
+   ],
+   "rot_y": 135.5,
+   "escala": 0.9849298769707084,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_15",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -5.731,
+    -0.006,
+    -9.353
+   ],
+   "rot_y": 168.4,
+   "escala": 1.0464358396461808,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_16",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -10.446,
+    0.006,
+    -3.673
+   ],
+   "rot_y": 44.2,
+   "escala": 1.2352167059288155,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_17",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.471,
+    0.024,
+    -2.72
+   ],
+   "rot_y": 314.2,
+   "escala": 0.9548948001482118,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_18",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.986,
+    -0.003,
+    1.623
+   ],
+   "rot_y": 186.9,
+   "escala": 1.1443613224753353,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_19",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.002,
+    -0.002,
+    -7.432
+   ],
+   "rot_y": 1.9,
+   "escala": 1.1388398766189893,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_20",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.447,
+    -0.0,
+    -1.279
+   ],
+   "rot_y": 81.5,
+   "escala": 0.8893345165967028,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_21",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.011,
+    -0.0,
+    -6.95
+   ],
+   "rot_y": 341.3,
+   "escala": 1.0579997229250044,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_22",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.519,
+    -0.016,
+    -5.384
+   ],
+   "rot_y": 160.0,
+   "escala": 1.2411776378962653,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_23",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.724,
+    -0.004,
+    2.627
+   ],
+   "rot_y": 153.6,
+   "escala": 1.195184536738226,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_24",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.429,
+    -0.001,
+    6.166
+   ],
+   "rot_y": 290.2,
+   "escala": 1.104412039999367,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_25",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    4.776,
+    0.012,
+    0.704
+   ],
+   "rot_y": 119.8,
+   "escala": 0.9792240018557168,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_26",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.536,
+    -0.032,
+    -9.138
+   ],
+   "rot_y": 329.6,
+   "escala": 1.1780759677212753,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_27",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.15,
+    -0.053,
+    -2.081
+   ],
+   "rot_y": 228.7,
+   "escala": 0.882750228429361,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_28",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.809,
+    -0.009,
+    3.859
+   ],
+   "rot_y": 40.8,
+   "escala": 1.2110096876889704,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_29",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.645,
+    -0.001,
+    4.921
+   ],
+   "rot_y": 329.6,
+   "escala": 0.8209935070792492,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_30",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -10.334,
+    -0.022,
+    -9.656
+   ],
+   "rot_y": 89.5,
+   "escala": 0.884376500460185,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_31",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.989,
+    -0.008,
+    -7.178
+   ],
+   "rot_y": 7.6,
+   "escala": 0.9397565886739377,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_32",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.855,
+    -0.02,
+    1.186
+   ],
+   "rot_y": 68.9,
+   "escala": 1.0584776367160127,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_33",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.122,
+    -0.01,
+    4.518
+   ],
+   "rot_y": 121.9,
+   "escala": 0.943101439038027,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_34",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.544,
+    -0.04,
+    -4.667
+   ],
+   "rot_y": 287.0,
+   "escala": 0.8581120736634462,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_35",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.871,
+    -0.011,
+    5.005
+   ],
+   "rot_y": 206.5,
+   "escala": 1.0874374847099464,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_36",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.405,
+    -0.008,
+    -8.364
+   ],
+   "rot_y": 227.5,
+   "escala": 1.1707484700509063,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_37",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.677,
+    -0.025,
+    -4.438
+   ],
+   "rot_y": 312.2,
+   "escala": 1.2018264911858552,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_38",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.447,
+    -0.007,
+    -9.546
+   ],
+   "rot_y": 77.3,
+   "escala": 1.0536693759201812,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_39",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.786,
+    -0.009,
+    -3.552
+   ],
+   "rot_y": 164.3,
+   "escala": 1.0957597609718301,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_40",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.776,
+    -0.009,
+    -3.53
+   ],
+   "rot_y": 238.5,
+   "escala": 1.1737486395184327,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_41",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.709,
+    0.005,
+    -3.681
+   ],
+   "rot_y": 77.4,
+   "escala": 0.9113343162275469,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_42",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.743,
+    0.003,
+    -2.224
+   ],
+   "rot_y": 271.0,
+   "escala": 1.0605745584931645,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_43",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -4.407,
+    0.036,
+    -8.682
+   ],
+   "rot_y": 47.2,
+   "escala": 0.8599429890573552,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_44",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.125,
+    0.027,
+    -8.619
+   ],
+   "rot_y": 96.9,
+   "escala": 0.9378847606430871,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_45",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.321,
+    0.003,
+    0.539
+   ],
+   "rot_y": 156.5,
+   "escala": 1.197765109124966,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_46",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.082,
+    -0.029,
+    4.038
+   ],
+   "rot_y": 133.5,
+   "escala": 0.8288954000747467,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_47",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.802,
+    -0.009,
+    -5.474
+   ],
+   "rot_y": 269.4,
+   "escala": 1.2034640288416307,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_48",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.234,
+    -0.018,
+    -6.867
+   ],
+   "rot_y": 232.0,
+   "escala": 1.1244377563144898,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_49",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.929,
+    -0.004,
+    5.966
+   ],
+   "rot_y": 279.8,
+   "escala": 0.9777586468428966,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_50",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.107,
+    -0.019,
+    -6.864
+   ],
+   "rot_y": 272.8,
+   "escala": 1.1245828461356235,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_51",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.214,
+    0.035,
+    -3.571
+   ],
+   "rot_y": 12.0,
+   "escala": 1.1799440523851719,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_52",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.932,
+    -0.041,
+    -3.412
+   ],
+   "rot_y": 259.8,
+   "escala": 0.9716573912292781,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_53",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.274,
+    0.036,
+    5.631
+   ],
+   "rot_y": 49.6,
+   "escala": 1.142167983195582,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_54",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.845,
+    0.011,
+    -7.484
+   ],
+   "rot_y": 297.1,
+   "escala": 1.2142573752483625,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_55",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.286,
+    0.027,
+    -8.439
+   ],
+   "rot_y": 42.0,
+   "escala": 0.8795634016116033,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_56",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.117,
+    0.026,
+    -6.308
+   ],
+   "rot_y": 24.3,
+   "escala": 1.0130311644907244,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_57",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -10.284,
+    0.025,
+    -4.665
+   ],
+   "rot_y": 259.1,
+   "escala": 1.00475786741858,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_58",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.551,
+    0.015,
+    5.578
+   ],
+   "rot_y": 141.9,
+   "escala": 0.902230775411009,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_59",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.252,
+    0.025,
+    -9.439
+   ],
+   "rot_y": 44.3,
+   "escala": 0.8793369671156572,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_60",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -5.151,
+    -0.001,
+    -1.042
+   ],
+   "rot_y": 185.8,
+   "escala": 1.0828401158371184,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_61",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.797,
+    -0.042,
+    -3.275
+   ],
+   "rot_y": 314.4,
+   "escala": 0.8807170686596929,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_62",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.001,
+    0.024,
+    -8.076
+   ],
+   "rot_y": 339.0,
+   "escala": 0.9038002320354961,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_63",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.338,
+    0.021,
+    -6.467
+   ],
+   "rot_y": 179.1,
+   "escala": 1.211730156232478,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_64",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -10.108,
+    0.027,
+    -4.639
+   ],
+   "rot_y": 23.9,
+   "escala": 0.9064477593827098,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_65",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.769,
+    0.018,
+    4.975
+   ],
+   "rot_y": 298.4,
+   "escala": 1.1424813976381905,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_66",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    4.57,
+    -0.002,
+    4.445
+   ],
+   "rot_y": 264.8,
+   "escala": 0.9357400262384964,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_67",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.606,
+    0.019,
+    -7.363
+   ],
+   "rot_y": 33.0,
+   "escala": 1.2344424690880582,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_68",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.658,
+    -0.02,
+    3.662
+   ],
+   "rot_y": 288.6,
+   "escala": 1.1162788845150942,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_69",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.161,
+    0.013,
+    6.16
+   ],
+   "rot_y": 149.4,
+   "escala": 1.1114545079532576,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_70",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.371,
+    -0.007,
+    -4.304
+   ],
+   "rot_y": 75.3,
+   "escala": 1.0482649881437973,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_71",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.013,
+    -0.0,
+    -9.738
+   ],
+   "rot_y": 168.7,
+   "escala": 0.9840818853266204,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_72",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    4.85,
+    -0.02,
+    -1.104
+   ],
+   "rot_y": 30.5,
+   "escala": 1.0532563417982928,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_73",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.278,
+    -0.019,
+    5.846
+   ],
+   "rot_y": 163.0,
+   "escala": 1.0839828104720146,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_74",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.051,
+    -0.011,
+    -6.223
+   ],
+   "rot_y": 316.3,
+   "escala": 0.889028948482859,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_75",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    4.561,
+    -0.032,
+    -0.591
+   ],
+   "rot_y": 167.7,
+   "escala": 1.079173445182744,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_76",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.016,
+    -0.036,
+    1.528
+   ],
+   "rot_y": 146.2,
+   "escala": 1.051245556142013,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_77",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.62,
+    0.017,
+    -1.438
+   ],
+   "rot_y": 297.7,
+   "escala": 0.9714331673598062,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_78",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.584,
+    0.012,
+    3.349
+   ],
+   "rot_y": 256.6,
+   "escala": 0.8154753651128773,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_79",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.75,
+    0.028,
+    -0.517
+   ],
+   "rot_y": 244.0,
+   "escala": 1.062619212971206,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_80",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.746,
+    0.0,
+    -6.881
+   ],
+   "rot_y": 105.5,
+   "escala": 0.9938352160881041,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_81",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.979,
+    -0.027,
+    -4.007
+   ],
+   "rot_y": 133.8,
+   "escala": 1.061642482786192,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_82",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.854,
+    -0.014,
+    5.114
+   ],
+   "rot_y": 96.1,
+   "escala": 1.1979793719581298,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_83",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -4.115,
+    -0.025,
+    -1.593
+   ],
+   "rot_y": 151.3,
+   "escala": 1.1726220127835547,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_84",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.786,
+    0.011,
+    -0.72
+   ],
+   "rot_y": 114.0,
+   "escala": 1.1179379470955202,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_85",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.122,
+    0.012,
+    3.896
+   ],
+   "rot_y": 22.5,
+   "escala": 1.107310964950497,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_86",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -5.321,
+    -0.036,
+    -1.899
+   ],
+   "rot_y": 227.2,
+   "escala": 0.8914255287088424,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_87",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.165,
+    -0.013,
+    -5.085
+   ],
+   "rot_y": 92.3,
+   "escala": 0.8303643172556422,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_88",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.987,
+    -0.027,
+    -4.536
+   ],
+   "rot_y": 175.7,
+   "escala": 1.2154328820983087,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_89",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.44,
+    -0.024,
+    0.555
+   ],
+   "rot_y": 270.1,
+   "escala": 0.9547271562564772,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_90",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -5.346,
+    -0.018,
+    -2.56
+   ],
+   "rot_y": 51.0,
+   "escala": 0.9985994877695505,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_91",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.076,
+    -0.033,
+    -7.693
+   ],
+   "rot_y": 62.5,
+   "escala": 0.9274991324112134,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_92",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.158,
+    0.007,
+    -9.562
+   ],
+   "rot_y": 59.4,
+   "escala": 1.0134566113191257,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_93",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.416,
+    0.004,
+    -5.416
+   ],
+   "rot_y": 66.3,
+   "escala": 1.0777079748810339,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_94",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.061,
+    0.02,
+    -2.901
+   ],
+   "rot_y": 57.9,
+   "escala": 1.2157146013049354,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_95",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.657,
+    -0.005,
+    1.361
+   ],
+   "rot_y": 238.8,
+   "escala": 1.070156457063804,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_96",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.974,
+    -0.013,
+    5.065
+   ],
+   "rot_y": 113.5,
+   "escala": 0.8145998850112821,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_97",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.281,
+    0.037,
+    5.557
+   ],
+   "rot_y": 220.3,
+   "escala": 1.0996935104819505,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_98",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.925,
+    -0.031,
+    -0.307
+   ],
+   "rot_y": 218.8,
+   "escala": 0.9510767176387132,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_99",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.283,
+    -0.018,
+    -9.683
+   ],
+   "rot_y": 249.8,
+   "escala": 0.9894730135611131,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_100",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.733,
+    0.0,
+    2.844
+   ],
+   "rot_y": 27.9,
+   "escala": 0.8595003611729943,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_101",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.946,
+    0.013,
+    -4.833
+   ],
+   "rot_y": 334.1,
+   "escala": 0.9252880540458119,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_102",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.769,
+    0.006,
+    1.568
+   ],
+   "rot_y": 145.2,
+   "escala": 0.8014745338611403,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_103",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.378,
+    -0.011,
+    -4.682
+   ],
+   "rot_y": 163.7,
+   "escala": 1.1880603195674515,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_104",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.985,
+    -0.009,
+    2.587
+   ],
+   "rot_y": 261.0,
+   "escala": 1.1142917435326494,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_105",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.475,
+    0.026,
+    -9.55
+   ],
+   "rot_y": 256.9,
+   "escala": 0.8921323917929601,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_106",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.676,
+    0.015,
+    4.618
+   ],
+   "rot_y": 103.7,
+   "escala": 0.9374710002263061,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_107",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -9.306,
+    0.021,
+    -6.268
+   ],
+   "rot_y": 62.3,
+   "escala": 0.828379571570061,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_108",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.753,
+    0.026,
+    -6.355
+   ],
+   "rot_y": 332.1,
+   "escala": 0.9228431148756158,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_109",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.589,
+    0.031,
+    -1.386
+   ],
+   "rot_y": 45.0,
+   "escala": 1.1981507560552183,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_110",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.037,
+    0.015,
+    4.74
+   ],
+   "rot_y": 187.8,
+   "escala": 0.9660521371767904,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_111",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.67,
+    -0.017,
+    -2.296
+   ],
+   "rot_y": 115.2,
+   "escala": 0.8187749263904164,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_112",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.372,
+    -0.008,
+    -7.393
+   ],
+   "rot_y": 204.4,
+   "escala": 1.2291090272262801,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_113",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.747,
+    0.012,
+    1.001
+   ],
+   "rot_y": 205.6,
+   "escala": 1.1385100311386822,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_114",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.964,
+    -0.032,
+    3.647
+   ],
+   "rot_y": 71.3,
+   "escala": 1.0622268144056575,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_115",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.199,
+    0.009,
+    -7.179
+   ],
+   "rot_y": 294.1,
+   "escala": 0.8607894620650054,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_116",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.989,
+    -0.005,
+    2.473
+   ],
+   "rot_y": 97.2,
+   "escala": 0.9675261848015497,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_117",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.917,
+    0.007,
+    1.673
+   ],
+   "rot_y": 38.5,
+   "escala": 1.168048876960145,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_118",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.325,
+    -0.01,
+    -8.278
+   ],
+   "rot_y": 62.5,
+   "escala": 1.1821198242184896,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_119",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.026,
+    -0.017,
+    -9.247
+   ],
+   "rot_y": 69.3,
+   "escala": 1.0112897181002003,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_120",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.275,
+    0.005,
+    -8.807
+   ],
+   "rot_y": 175.3,
+   "escala": 1.0358156126432638,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_121",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.895,
+    -0.03,
+    -3.989
+   ],
+   "rot_y": 270.3,
+   "escala": 0.8523549671906478,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_122",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.781,
+    -0.026,
+    -4.714
+   ],
+   "rot_y": 4.6,
+   "escala": 1.1920715693075388,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_123",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.429,
+    0.039,
+    -2.252
+   ],
+   "rot_y": 182.8,
+   "escala": 0.8744289954008281,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_124",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.939,
+    -0.011,
+    -5.163
+   ],
+   "rot_y": 78.0,
+   "escala": 0.8585472573238646,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_125",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.774,
+    0.009,
+    -3.939
+   ],
+   "rot_y": 101.1,
+   "escala": 0.8152599718355893,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_126",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -5.372,
+    -0.006,
+    -3.123
+   ],
+   "rot_y": 146.4,
+   "escala": 1.1992058593772539,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_127",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.198,
+    0.01,
+    -4.721
+   ],
+   "rot_y": 91.1,
+   "escala": 0.8627855167377324,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_128",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.367,
+    -0.036,
+    0.242
+   ],
+   "rot_y": 52.5,
+   "escala": 1.1205632038969107,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_129",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.54,
+    0.01,
+    -7.761
+   ],
+   "rot_y": 250.5,
+   "escala": 0.8579864040936926,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_130",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.927,
+    -0.015,
+    -8.247
+   ],
+   "rot_y": 119.4,
+   "escala": 1.2220816220904642,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_131",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.455,
+    0.002,
+    -8.86
+   ],
+   "rot_y": 165.2,
+   "escala": 1.0537930469906063,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_132",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.218,
+    0.028,
+    1.537
+   ],
+   "rot_y": 56.4,
+   "escala": 1.16578493843873,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_133",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.619,
+    0.003,
+    6.864
+   ],
+   "rot_y": 163.1,
+   "escala": 1.2242506731035685,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_134",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.806,
+    -0.007,
+    -3.661
+   ],
+   "rot_y": 146.1,
+   "escala": 0.9686447445388886,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_135",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.14,
+    0.026,
+    -3.436
+   ],
+   "rot_y": 50.3,
+   "escala": 0.8274667163537408,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_136",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.588,
+    0.004,
+    -0.404
+   ],
+   "rot_y": 288.8,
+   "escala": 0.9035477731209791,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_137",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -5.857,
+    0.015,
+    -5.276
+   ],
+   "rot_y": 273.8,
+   "escala": 0.9683817138103075,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_138",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.895,
+    -0.016,
+    -8.191
+   ],
+   "rot_y": 272.3,
+   "escala": 0.9333640713215976,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_139",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.993,
+    -0.025,
+    -9.421
+   ],
+   "rot_y": 208.1,
+   "escala": 0.9140383371783541,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_140",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.978,
+    -0.008,
+    -7.379
+   ],
+   "rot_y": 28.8,
+   "escala": 1.236376103363345,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_141",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.548,
+    -0.017,
+    -5.69
+   ],
+   "rot_y": 356.9,
+   "escala": 0.9289677142094318,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_142",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.316,
+    0.02,
+    6.841
+   ],
+   "rot_y": 15.2,
+   "escala": 1.03453283097135,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_143",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.229,
+    -0.012,
+    1.941
+   ],
+   "rot_y": 118.0,
+   "escala": 0.8019278070238769,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_144",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -9.33,
+    0.039,
+    -6.558
+   ],
+   "rot_y": 25.4,
+   "escala": 0.813886927994553,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_145",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -10.792,
+    0.004,
+    -5.835
+   ],
+   "rot_y": 323.2,
+   "escala": 1.0861663626822984,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_146",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.95,
+    -0.033,
+    -4.593
+   ],
+   "rot_y": 78.9,
+   "escala": 0.8114453556123502,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_147",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.79,
+    0.016,
+    -7.352
+   ],
+   "rot_y": 120.8,
+   "escala": 0.9498486160383313,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_148",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.88,
+    -0.029,
+    -0.699
+   ],
+   "rot_y": 36.1,
+   "escala": 0.9171377300735157,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_149",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.84,
+    0.012,
+    6.188
+   ],
+   "rot_y": 230.7,
+   "escala": 1.033468360470711,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_150",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -9.529,
+    0.01,
+    -7.806
+   ],
+   "rot_y": 292.4,
+   "escala": 1.1539477987404292,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_151",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.047,
+    -0.008,
+    -6.99
+   ],
+   "rot_y": 306.5,
+   "escala": 1.2399638583868404,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_152",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.144,
+    0.014,
+    -4.707
+   ],
+   "rot_y": 2.9,
+   "escala": 0.9992215111439984,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_153",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.057,
+    -0.006,
+    4.77
+   ],
+   "rot_y": 114.0,
+   "escala": 0.9261727125636858,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_154",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.877,
+    0.035,
+    -9.22
+   ],
+   "rot_y": 208.5,
+   "escala": 0.8245218379372282,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_155",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.873,
+    0.016,
+    -7.876
+   ],
+   "rot_y": 146.7,
+   "escala": 1.1753119120279554,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_156",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.723,
+    -0.008,
+    2.407
+   ],
+   "rot_y": 75.6,
+   "escala": 1.167994442951425,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_157",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.725,
+    0.019,
+    -1.991
+   ],
+   "rot_y": 194.1,
+   "escala": 0.8256269695035077,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_158",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -9.752,
+    0.0,
+    -5.705
+   ],
+   "rot_y": 194.4,
+   "escala": 0.9716649106304872,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_159",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.081,
+    0.02,
+    -4.971
+   ],
+   "rot_y": 62.3,
+   "escala": 1.2079934107561212,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_160",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.122,
+    -0.09,
+    -1.619
+   ],
+   "rot_y": 309.5,
+   "escala": 0.9304270089099528,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_161",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.668,
+    -0.028,
+    -5.116
+   ],
+   "rot_y": 120.2,
+   "escala": 1.0711707520655414,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_162",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.369,
+    0.007,
+    -9.076
+   ],
+   "rot_y": 195.1,
+   "escala": 0.9705804336751966,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_163",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.294,
+    0.006,
+    -8.82
+   ],
+   "rot_y": 224.3,
+   "escala": 0.8439154817327696,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_164",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.727,
+    0.004,
+    6.358
+   ],
+   "rot_y": 320.1,
+   "escala": 1.1629748844169259,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_165",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.313,
+    -0.008,
+    0.572
+   ],
+   "rot_y": 72.2,
+   "escala": 1.0337607667716897,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_166",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -4.606,
+    0.008,
+    -7.86
+   ],
+   "rot_y": 288.4,
+   "escala": 1.215081521008781,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_167",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.879,
+    0.013,
+    -9.775
+   ],
+   "rot_y": 48.4,
+   "escala": 0.8848819371861532,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_168",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.557,
+    0.008,
+    -6.505
+   ],
+   "rot_y": 104.2,
+   "escala": 0.9796160953583307,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_169",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.805,
+    0.017,
+    5.375
+   ],
+   "rot_y": 258.7,
+   "escala": 0.9392159256350132,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_170",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.677,
+    0.003,
+    -3.301
+   ],
+   "rot_y": 315.8,
+   "escala": 1.1027424043799314,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_171",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.924,
+    0.007,
+    -7.674
+   ],
+   "rot_y": 10.5,
+   "escala": 0.9353923654686666,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_172",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.096,
+    -0.001,
+    -9.743
+   ],
+   "rot_y": 76.8,
+   "escala": 0.8388758467187606,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_173",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.997,
+    0.031,
+    -8.153
+   ],
+   "rot_y": 289.6,
+   "escala": 1.0529449557170898,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_174",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.85,
+    0.025,
+    -2.719
+   ],
+   "rot_y": 140.4,
+   "escala": 1.0298991825701298,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_175",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.862,
+    -0.0,
+    2.431
+   ],
+   "rot_y": 357.1,
+   "escala": 1.1239703661372664,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_176",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.677,
+    0.017,
+    -2.947
+   ],
+   "rot_y": 63.2,
+   "escala": 1.0878323356789537,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_177",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    4.814,
+    -0.02,
+    -1.222
+   ],
+   "rot_y": 168.7,
+   "escala": 1.00920173684876,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_178",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.855,
+    0.008,
+    -9.489
+   ],
+   "rot_y": 217.8,
+   "escala": 0.8332340631837771,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_179",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.065,
+    -0.022,
+    -9.159
+   ],
+   "rot_y": 66.8,
+   "escala": 0.965573152408161,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_180",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.092,
+    0.026,
+    5.921
+   ],
+   "rot_y": 205.1,
+   "escala": 0.8026546263125185,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_181",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.12,
+    -0.047,
+    -5.082
+   ],
+   "rot_y": 29.8,
+   "escala": 0.8535468748107737,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_182",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -4.467,
+    0.012,
+    -0.662
+   ],
+   "rot_y": 308.5,
+   "escala": 0.8265500753463356,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_183",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.032,
+    0.021,
+    6.722
+   ],
+   "rot_y": 277.0,
+   "escala": 0.8437672979311477,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_184",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.217,
+    -0.034,
+    -0.105
+   ],
+   "rot_y": 283.4,
+   "escala": 1.1911578984443099,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_185",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.666,
+    -0.01,
+    -5.481
+   ],
+   "rot_y": 212.9,
+   "escala": 1.0825374124884681,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_186",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.492,
+    -0.023,
+    -9.784
+   ],
+   "rot_y": 130.3,
+   "escala": 1.1681030780178476,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_187",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.724,
+    0.016,
+    1.136
+   ],
+   "rot_y": 31.4,
+   "escala": 1.0080380400275168,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_188",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.364,
+    -0.031,
+    0.168
+   ],
+   "rot_y": 158.4,
+   "escala": 0.9730754376950747,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_189",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.813,
+    0.005,
+    -0.019
+   ],
+   "rot_y": 121.7,
+   "escala": 0.9836429732501626,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_190",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.497,
+    0.018,
+    5.069
+   ],
+   "rot_y": 169.5,
+   "escala": 1.1665547217148557,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_191",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.323,
+    -0.032,
+    6.38
+   ],
+   "rot_y": 45.9,
+   "escala": 1.1736799532377105,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_192",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.407,
+    0.026,
+    -1.348
+   ],
+   "rot_y": 283.1,
+   "escala": 0.8296659719631908,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_193",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.233,
+    -0.012,
+    4.909
+   ],
+   "rot_y": 46.0,
+   "escala": 1.1985535027751035,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_194",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.443,
+    0.017,
+    -7.877
+   ],
+   "rot_y": 88.9,
+   "escala": 0.9835259276648549,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_195",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.085,
+    0.026,
+    5.561
+   ],
+   "rot_y": 58.0,
+   "escala": 1.0148010780893841,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_196",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.178,
+    -0.027,
+    6.821
+   ],
+   "rot_y": 183.9,
+   "escala": 1.2114633920878033,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_197",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.225,
+    -0.029,
+    -5.551
+   ],
+   "rot_y": 115.2,
+   "escala": 1.2171856097543305,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_198",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -9.134,
+    0.026,
+    -6.486
+   ],
+   "rot_y": 256.3,
+   "escala": 0.9319138375495473,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_199",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.804,
+    0.007,
+    5.192
+   ],
+   "rot_y": 92.2,
+   "escala": 0.8002955412601287,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_200",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.802,
+    -0.005,
+    -8.986
+   ],
+   "rot_y": 330.1,
+   "escala": 1.2354739848018035,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_201",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    4.752,
+    -0.001,
+    4.671
+   ],
+   "rot_y": 129.0,
+   "escala": 0.8445697396637082,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_202",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    5.004,
+    0.011,
+    -7.672
+   ],
+   "rot_y": 358.5,
+   "escala": 1.0519034863079466,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_203",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.478,
+    0.0,
+    6.114
+   ],
+   "rot_y": 359.8,
+   "escala": 1.2103909140000844,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_204",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.994,
+    -0.013,
+    -4.437
+   ],
+   "rot_y": 329.6,
+   "escala": 0.8836144655329121,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_205",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.159,
+    -0.009,
+    1.421
+   ],
+   "rot_y": 15.4,
+   "escala": 0.8413347491587847,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_206",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -0.004,
+    -0.018,
+    -9.146
+   ],
+   "rot_y": 265.1,
+   "escala": 1.095834116925734,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_207",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.566,
+    0.004,
+    -9.211
+   ],
+   "rot_y": 323.1,
+   "escala": 0.8554492255375086,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_208",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.662,
+    0.022,
+    -7.083
+   ],
+   "rot_y": 196.8,
+   "escala": 1.1233932654191032,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_209",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.624,
+    0.027,
+    2.518
+   ],
+   "rot_y": 27.1,
+   "escala": 1.1183322980148556,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_210",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.395,
+    0.003,
+    -9.711
+   ],
+   "rot_y": 63.4,
+   "escala": 1.006979150147169,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_211",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.77,
+    0.01,
+    1.686
+   ],
+   "rot_y": 257.4,
+   "escala": 1.010029079338219,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_212",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.911,
+    0.026,
+    -3.784
+   ],
+   "rot_y": 101.2,
+   "escala": 0.9089451540121478,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_213",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.734,
+    0.018,
+    -2.516
+   ],
+   "rot_y": 301.3,
+   "escala": 1.1815523694609646,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_214",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.85,
+    0.016,
+    -3.894
+   ],
+   "rot_y": 159.7,
+   "escala": 1.0926193525713361,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_215",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.115,
+    0.016,
+    -7.643
+   ],
+   "rot_y": 239.7,
+   "escala": 1.158141730228399,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_216",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.973,
+    0.032,
+    4.795
+   ],
+   "rot_y": 254.9,
+   "escala": 0.9188508642286247,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_217",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.575,
+    -0.038,
+    -8.96
+   ],
+   "rot_y": 291.2,
+   "escala": 1.0995491870561607,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_218",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    1.676,
+    -0.003,
+    0.492
+   ],
+   "rot_y": 81.1,
+   "escala": 1.1266447357987643,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_219",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.988,
+    0.006,
+    -8.508
+   ],
+   "rot_y": 224.2,
+   "escala": 1.214799699350654,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_220",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.914,
+    -0.018,
+    -1.699
+   ],
+   "rot_y": 250.0,
+   "escala": 1.0870475519341738,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_221",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    2.366,
+    0.005,
+    -2.188
+   ],
+   "rot_y": 6.3,
+   "escala": 1.024453890097272,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_222",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.161,
+    0.021,
+    -3.441
+   ],
+   "rot_y": 236.5,
+   "escala": 1.2020847369234438,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_223",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.199,
+    0.019,
+    -8.214
+   ],
+   "rot_y": 45.7,
+   "escala": 1.201229595408568,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_224",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.306,
+    -0.023,
+    -3.848
+   ],
+   "rot_y": 42.4,
+   "escala": 0.9434364149213432,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_225",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.698,
+    -0.029,
+    -3.832
+   ],
+   "rot_y": 50.5,
+   "escala": 1.0609611891285509,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_226",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -1.48,
+    0.01,
+    -5.101
+   ],
+   "rot_y": 268.7,
+   "escala": 0.8602986202672459,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_227",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.833,
+    0.024,
+    0.397
+   ],
+   "rot_y": 354.3,
+   "escala": 1.133245458664688,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_228",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.184,
+    -0.011,
+    -6.239
+   ],
+   "rot_y": 224.5,
+   "escala": 1.216880590507596,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_229",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -4.359,
+    -0.014,
+    -3.281
+   ],
+   "rot_y": 250.8,
+   "escala": 0.9996066045569485,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_230",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.512,
+    -0.026,
+    1.443
+   ],
+   "rot_y": 67.9,
+   "escala": 0.9813045955360464,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_231",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.979,
+    0.018,
+    6.07
+   ],
+   "rot_y": 233.1,
+   "escala": 0.8841733691849422,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_232",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.106,
+    -0.006,
+    2.378
+   ],
+   "rot_y": 251.1,
+   "escala": 1.173510439232397,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_233",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    0.381,
+    -0.012,
+    -4.257
+   ],
+   "rot_y": 56.0,
+   "escala": 1.0211908978938742,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_234",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -2.888,
+    -0.004,
+    -2.834
+   ],
+   "rot_y": 245.3,
+   "escala": 1.1061117317198346,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_235",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.649,
+    -0.004,
+    -6.297
+   ],
+   "rot_y": 33.3,
+   "escala": 0.9767560567486169,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_236",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.908,
+    0.014,
+    -8.539
+   ],
+   "rot_y": 311.6,
+   "escala": 1.0290257830098417,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_237",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.716,
+    0.031,
+    -4.773
+   ],
+   "rot_y": 355.8,
+   "escala": 0.9508233927014259,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_238",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.773,
+    -0.018,
+    1.0
+   ],
+   "rot_y": 71.0,
+   "escala": 0.8477914147195966,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_239",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.719,
+    -0.01,
+    -4.065
+   ],
+   "rot_y": 332.5,
+   "escala": 1.0413023341210406,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_240",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.794,
+    0.0,
+    2.255
+   ],
+   "rot_y": 199.3,
+   "escala": 0.8717167358406066,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_241",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -3.567,
+    -0.012,
+    -6.777
+   ],
+   "rot_y": 234.8,
+   "escala": 1.0075170665240276,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_242",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.781,
+    -0.019,
+    3.564
+   ],
+   "rot_y": 178.1,
+   "escala": 0.9054294307456529,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_243",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -8.747,
+    0.007,
+    -6.682
+   ],
+   "rot_y": 345.5,
+   "escala": 1.1351891138557813,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_244",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.765,
+    -0.034,
+    1.88
+   ],
+   "rot_y": 140.8,
+   "escala": 0.9983066722825066,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_245",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -4.545,
+    -0.021,
+    -2.835
+   ],
+   "rot_y": 27.3,
+   "escala": 0.9244586693346721,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_246",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.21,
+    -0.008,
+    2.325
+   ],
+   "rot_y": 65.1,
+   "escala": 0.9390411109778024,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_247",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    10.853,
+    0.006,
+    1.613
+   ],
+   "rot_y": 107.1,
+   "escala": 1.1613622623595707,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_248",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.335,
+    -0.019,
+    0.114
+   ],
+   "rot_y": 127.8,
+   "escala": 1.08504768431658,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_249",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    8.012,
+    0.027,
+    -4.206
+   ],
+   "rot_y": 1.0,
+   "escala": 0.8618618813585591,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_250",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.726,
+    -0.016,
+    0.618
+   ],
+   "rot_y": 25.0,
+   "escala": 0.9647073537815207,
+   "nodo": "VEG-13_g",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_251",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    6.506,
+    0.001,
+    1.241
+   ],
+   "rot_y": 144.5,
+   "escala": 1.0869346752759992,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_252",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    4.131,
+    -0.007,
+    -2.321
+   ],
+   "rot_y": 347.7,
+   "escala": 1.0099253934222845,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_253",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    4.782,
+    -0.024,
+    -0.908
+   ],
+   "rot_y": 85.2,
+   "escala": 0.8283614111235231,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_254",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -6.803,
+    -0.026,
+    -6.597
+   ],
+   "rot_y": 115.8,
+   "escala": 0.9631489269323746,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_255",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    7.129,
+    -0.003,
+    -4.529
+   ],
+   "rot_y": 319.6,
+   "escala": 0.9344023079627496,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_256",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    3.451,
+    0.025,
+    4.589
+   ],
+   "rot_y": 310.5,
+   "escala": 1.020110504145877,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_257",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -5.196,
+    -0.036,
+    -1.824
+   ],
+   "rot_y": 276.2,
+   "escala": 1.174268982310819,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_258",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    -7.894,
+    -0.025,
+    -7.205
+   ],
+   "rot_y": 166.8,
+   "escala": 1.2303446757963241,
+   "nodo": "VEG-13_p",
+   "grupo": "hierba"
+  },
+  {
+   "id": "hierba_259",
+   "glb": "modelos/VEG-13.glb",
+   "pos": [
+    9.717,
+    -0.027,
+    6.44
+   ],
+   "rot_y": 243.8,
+   "escala": 0.9216760184956571,
+   "nodo": "VEG-13_m",
+   "grupo": "hierba"
+  },
+  {
+   "id": "planta_0",
+   "glb": "modelos/VEG-07.glb",
+   "pos": [
+    -3.97,
+    0.017,
+    -0.811
+   ],
+   "rot_y": 0.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_1",
+   "glb": "modelos/VEG-07.glb",
+   "pos": [
+    -2.202,
+    -0.026,
+    0.007
+   ],
+   "rot_y": 53.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_2",
+   "glb": "modelos/VEG-10.glb",
+   "pos": [
+    -4.015,
+    -0.005,
+    -1.162
+   ],
+   "rot_y": 106.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_3",
+   "glb": "modelos/VEG-10.glb",
+   "pos": [
+    -1.476,
+    -0.005,
+    -0.545
+   ],
+   "rot_y": 159.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_4",
+   "glb": "modelos/VEG-10.glb",
+   "pos": [
+    -3.061,
+    -0.8,
+    1.233
+   ],
+   "rot_y": 212.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_5",
+   "glb": "modelos/VEG-12.glb",
+   "pos": [
+    -4.377,
+    -0.014,
+    -3.223
+   ],
+   "rot_y": 265.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_6",
+   "glb": "modelos/VEG-12.glb",
+   "pos": [
+    4.998,
+    -0.34,
+    -6.365
+   ],
+   "rot_y": 318.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_7",
+   "glb": "modelos/VEG-10.glb",
+   "pos": [
+    3.938,
+    -0.012,
+    1.097
+   ],
+   "rot_y": 371.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_8",
+   "glb": "modelos/VEG-12.glb",
+   "pos": [
+    4.858,
+    -0.019,
+    -1.019
+   ],
+   "rot_y": 424.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_9",
+   "glb": "modelos/VEG-12.glb",
+   "pos": [
+    4.591,
+    -0.62,
+    -4.443
+   ],
+   "rot_y": 477.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_10",
+   "glb": "modelos/VEG-10.glb",
+   "pos": [
+    5.625,
+    -0.9,
+    -3.535
+   ],
+   "rot_y": 530.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_11",
+   "glb": "modelos/VEG-07.glb",
+   "pos": [
+    -1.961,
+    0.022,
+    -1.09
+   ],
+   "rot_y": 583.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_12",
+   "glb": "modelos/VEG-12.glb",
+   "pos": [
+    5.941,
+    -0.34,
+    -6.211
+   ],
+   "rot_y": 636.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_13",
+   "glb": "modelos/VEG-10.glb",
+   "pos": [
+    3.146,
+    0.026,
+    -2.925
+   ],
+   "rot_y": 689.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_14",
+   "glb": "modelos/VEG-12.glb",
+   "pos": [
+    5.954,
+    -0.9,
+    -2.925
+   ],
+   "rot_y": 742.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_15",
+   "glb": "modelos/VEG-10.glb",
+   "pos": [
+    4.212,
+    -0.011,
+    -2.021
+   ],
+   "rot_y": 795.0,
+   "escala": 1.0
+  },
+  {
+   "id": "planta_16",
+   "glb": "modelos/VEG-12.glb",
+   "pos": [
+    3.293,
+    -0.017,
+    -6.365
+   ],
+   "rot_y": 848.0,
+   "escala": 1.0
+  }
+ ]
+}

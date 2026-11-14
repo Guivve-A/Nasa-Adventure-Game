@@ -1,0 +1,2161 @@
+OpenAI Codex v0.167.0-alpha.4.1
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a1d028-4e89-7841-a399-045fbde520b3
+--------
+user
+@@TAREA
+
+Proyecto: RPG educativo de exploracion en Godot 4 (nombre de trabajo «Proyecto NASA-Ecuador»). Una estudiante de ingenieria de control de Guayaquil, con su gato cientifico Orbita, viaja en su sueno de llegar a la NASA. Estilo: low-poly pintado a mano, exploracion 2D-HD con camara alta. Ya existe una prueba del Mirador del Faro: telescopio que muestra la Luna real del momento con datos de JPL Horizons.
+
+Pedido de Guillermo (2026-11-12) para la Fase 2 (historia y misiones):
+- historia de al menos 1 hora de juego, coherente y entretenida, con mas contenido espacial;
+- al acostarse, la protagonista suena que esta en la Luna: camina, recolecta muestras y ve el Apolo; una mision es colocar juntas la bandera de Estados Unidos y la de Ecuador;
+- escenarios en orden, conectados como mundo abierto: 1) habitacion, 2) telescopio, 3) Luna.
+
+Reglas: responde en espanol, texto corto y con cifras. Cada dato con su fuente primaria (URL de NASA, gobierno de Ecuador, tratado, articulo cientifico) y fecha de consulta; marca «sin verificar» lo que no confirmes en una fuente primaria. Usa la busqueda web integrada; NO uses Firecrawl salvo que una pagina no cargue de otra forma. No inventes. No escribas fuera del archivo de salida.
+
+---
+
+# TU TAREA
+
+Lee y resume lo que ya existe de historia, sin inventar:
+- `C:\Users\guill\Desktop\Juego\Juego_2d-hd\3_Guion_y_Mundo\historia.md` y `C:\Users\guill\Desktop\Juego\Juego_2d-hd\2_Arte_e_Interfaz\arte e Historia.md` (boveda anterior);
+- la seccion de la Fase 2 (estructura narrativa y diseno de misiones) del PDF `Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf` (extrae el texto con Python si hace falta);
+- `Nasa_Game/Memory.md`, `Nasa_Game/Propuestas/Mirador del Faro - Luna con datos reales.md` y `Nasa_Game/Fase_1_Arte/Biblia de arte.md`.
+Entrega:
+1. Lo que pide el plan maestro para la Fase 2: entregables, puertas y criterios, citando la pagina.
+2. Inventario de lo existente: personajes (con rasgos), lugares, misiones, mecanicas educativas, tono, finales. Marca lo que contradice decisiones nuevas (por ejemplo, el pixel-art descartado).
+3. Huecos: lo que falta para una historia de al menos 1 hora con escenarios habitacion, telescopio y Luna conectados como mundo abierto.
+codex
+Voy a leer los archivos y extraer la Fase 2 del PDF. Usaré la habilidad de PDF para citar las páginas; marcaré como «sin verificar» cualquier dato que no pueda confirmar.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'C:\\Users\\guill\\.codex\\plugins\\cache\\openai-primary-runtime\\pdf\\26.1111.10930\\skills\\pdf\\SKILL.md'" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 431ms:
+---
+name: "pdf"
+description: "Read, create, inspect, render, and verify PDF files where visual layout matters, including fillable AcroForms. Use Poppler rendering plus Python tools such as reportlab, pdfplumber, and pypdf for generation and extraction."
+---
+
+# PDF Skill
+
+## When To Use
+
+- Read or review PDF content where layout and visuals matter.
+- Create PDFs programmatically with reliable formatting.
+- Fill and validate interactive PDF forms.
+- Validate final rendering before delivery.
+
+## Tools + Contract Requirements
+
+Immediately before the first create/edit authoring command, run `mark_artifact_operation_started.mjs` successfully exactly once using the command below. Do not run it for read-only work. For edits, replace `create` with `edit`; adjust the expected count and output format to match the requested outputs.
+
+
+
+```bash
+node container_tools/mark_artifact_operation_started.mjs --operation-kind create --expected-output-count 1 --output-format pdf
+```
+
+## Workflow
+
+1. Prefer visual review: render PDF pages to PNGs and inspect them.
+   - Use `pdftoppm` from the bundled runtime or system Poppler when available.
+   - If unavailable, install Poppler or ask the user to review the output locally.
+2. Use `reportlab` to generate PDFs when creating new documents.
+3. Use `pdfplumber` or `pypdf` for text extraction and quick checks; do not rely on text extraction for layout fidelity.
+4. After each meaningful update, re-render pages and verify alignment, spacing, and legibility.
+
+## Fill And Validate AcroForms
+
+Visual review alone is not a correctness check for a fillable PDF. A page `/Widget` annotation can render a value from its appearance stream while the canonical `/AcroForm/Fields` tree is missing or contains a stale value.
+
+1. Keep the result interactive by default; set `flatten=True` only when the user explicitly requests a completed, static form. Preserve the source PDF, and do not flatten a signed PDF without an explicit workflow decision.
+2. Inspect both representations before filling: enumerate fields from `reader.get_fields()` and `/Widget` annotations from every page's `/Annots`, following `/Parent` and `/Kids`. If a widget and a canonical field have the same name but are distinct objects with no `/Parent` relationship, do not call `reattach_fields()` blindly: it can create a second top-level field with the same name. Report the ambiguity or produce a static result.
+3. Recover genuinely orphaned widgets, fill all pages, and write the result with `pypdf`:
+
+```python
+from pypdf import PdfReader, PdfWriter
+from pypdf.generic import NameObject
+
+reader = PdfReader(input_pdf)
+writer = PdfWriter()
+writer.clone_document_from_reader(reader)
+
+# Restores widgets that are missing from /AcroForm/Fields.
+writer.reattach_fields()
+fields = writer.get_fields() or {}
+missing = set(expected_values) - set(fields)
+if missing:
+    raise ValueError(f"Form fields not found after repair: {sorted(missing)}")
+
+values_to_write = dict(expected_values)
+if flatten:
+    # Paint every existing value before removing every widget.
+    values_to_write = {
+        name: field.get("/V", "/Off" if field.get("/FT") == "/Btn" else "")
+        for name, field in fields.items()
+    }
+    values_to_write.update(expected_values)
+
+writer.update_page_form_field_values(
+    None, values_to_write, auto_regenerate=False, flatten=flatten
+)
+
+if flatten:
+    # pypdf's flatten=True paints appearances but does not remove widgets.
+    writer.remove_annotations(subtypes="/Widget")
+    writer.root_object.pop(NameObject("/AcroForm"), None)
+
+with open(output_pdf, "wb") as stream:
+    writer.write(stream)
+```
+
+4. Reopen the written PDF before delivery. For an interactive result, require every expected field to be present in `get_fields()` with the expected `/V`, enumerate page widgets again, and confirm their effective `/V` (the widget value or inherited `/Parent` value) agrees. Confirm each updated widget has a non-empty `/AP` `/N` appearance and render the final pages to catch stale or clipped appearances. Do not rely on `/NeedAppearances` or a successful PNG render as proof that logical field data was updated.
+5. For a flattened result, require zero `/Widget` annotations and no remaining `/AcroForm` field tree after reopening, then render the final pages. Keep an editable copy when the user may need to revise the form.
+
+## Temp And Output Conventions
+
+- Use `tmp/pdfs/` for intermediate files; delete them when done.
+- Write final artifacts under `output/pdf/` when working in this repo.
+- Keep filenames stable and descriptive.
+
+## Dependencies
+
+Prefer the Codex bundled workspace/runtime dependencies when available. The primary runtime is expected to include:
+
+- Python packages: `reportlab`, `pdfplumber`, `pypdf`
+- Rendering tools: `pdftoppm` and `pdfinfo` from Poppler
+
+If a dependency is missing, install only what is needed.
+
+Python packages:
+
+```bash
+uv pip install reportlab pdfplumber pypdf
+```
+
+If `uv` is unavailable:
+
+```bash
+python3 -m pip install reportlab pdfplumber pypdf
+```
+
+System tools for rendering:
+
+```bash
+# macOS (Homebrew)
+brew install poppler
+
+# Ubuntu/Debian
+sudo apt-get install -y poppler-utils
+```
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it locally.
+
+## Environment
+
+No required environment variables.
+
+## Rendering Command
+
+```bash
+pdftoppm -png "$INPUT_PDF" "$OUTPUT_PREFIX"
+```
+
+## Quality Expectations
+
+- Maintain polished visual design: consistent typography, spacing, margins, and section hierarchy.
+- Avoid rendering issues: clipped text, overlapping elements, broken tables, black squares, or unreadable glyphs.
+- Charts, tables, and images must be sharp, aligned, and clearly labeled.
+- Use ASCII hyphens only. Avoid U+2011 and other Unicode dashes.
+- Citations and references must be human-readable; never leave tool tokens or placeholder strings.
+
+## Final Checks
+
+- Do not deliver until the latest PNG inspection shows zero visual or formatting defects.
+- Confirm headers, footers, page numbering, and section transitions look polished.
+- Keep intermediate files organized or remove them after final approval.
+
+## Final response
+
+### Final Response Citations
+
+- **Create/edit:** for created or edited PDFs, cite each final deliverable exactly once with `purpose="output"`, in its own paragraph. Briefly describe the result without repeating its filename, path, or link. Never put output directives inside prose or list items.
+- **Q&A and summaries:** Every file whose contents you summarize or use to support an answer MUST receive a `:codex-file-citation{...}` with `purpose="source"` in the final response. Use the source citation in place of the filename, wherever the filename would appear. Do not write the filename separately and append its citation at the end. Files merely inspected but not used in the answer need no citation. Do not emit output citations for unchanged files or read-only answers.
+
+- Emit `:codex-file-citation{...}` directly, without backticks, code fences, or a Markdown-link wrapper. Use verified targets only. No need to cite or reference intermediate work.
+
+For file citations, set `path` to the verified absolute file path on the task host. Omit `mode`.
+
+Some illustrative examples, real responses use verified targets outside code fences.
+
+```text
+:codex-file-citation{path="/absolute/path/review.pdf" purpose="output"}
+```
+
+```text
+The review of :codex-file-citation{path="/absolute/path/review.pdf" purpose="source"} is due Friday.
+```
+
+
+### Additional Citation Guidance
+
+For PDF Q&A, inspect complete relevant pages and preserve material headings, table/figure labels, footnotes, sources, and sample sizes. PDF citations support only plain file citations; do not add `artifact_kind`, `page_number`, or other locators.
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -Force; rg --files -g AGENTS.md -g Memory.md -g '*Maestro*' -g '*Faro*' -g '*Biblia*'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 484ms:
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----        12/11/2026      3:47                externos                                                             
+d-----        12/11/2026      9:25                herramientas                                                         
+d-----        12/11/2026      9:27                Nasa_Game                                                            
+d-----        12/11/2026      6:24                pruebas                                                              
+-a----        12/11/2026      6:57            286 .mcp.json                                                            
+-a----        12/11/2026      3:39           4490 CLAUDE.md                                                            
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 23
++ Get-ChildItem -Force; rg --files -g AGENTS.md -g Memory.md -g '*Maest ...
++                       ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'C:\\Users\\guill\\Desktop\\Juego\\Juego_2d-hd\\3_Guion_y_Mundo\\historia.md','C:\\Users\\guill\\Desktop\\Juego\\Juego_2d-hd\\2_Arte_e_Interfaz\\arte e Historia.md' -Encoding UTF8; Get-ChildItem -LiteralPath 'Nasa_Game/00_Plan_Maestro'" in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -Path . -Recurse -File -Filter AGENTS.md; Get-ChildItem -LiteralPath 'Nasa_Game' -Force; Get-Content -LiteralPath 'Nasa_Game/Memory.md','Nasa_Game/Propuestas/Mirador del Faro - Luna con datos reales.md','Nasa_Game/Fase_1_Arte/Biblia de arte.md' -Encoding UTF8" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 533ms:
+# Historia � Gravedad 2D-HD
+
+**Reto:** Space Mission Design Game. El juego ense�a a dise�ar, gestionar y simular misiones. La historia explica por qu� importa: un estudiante de ingenier�a de Guayaquil, con avatar creado por el jugador, abre un libro de ciencia y a�os despu�s aplica lo aprendido en misiones cada vez m�s exigentes.
+
+**Fuentes.** Esta nota es la fuente narrativa. Une el plan maestro con el [dossier �Arte e Historia�](../2_Arte_e_Interfaz/arte%20e%20Historia.md) de Astra/Codex, que contiene el storyboard visual, las fichas de personaje y las vi�etas 01 a 18. Los nombres y di�logos siguen siendo propuestas que el usuario debe revisar.
+
+## Estructura
+
+| Acto | Vi�etas del dossier | Lugar | Misi�n jugable en la consola | Qu� aprende el jugador | Estado |
+| --- | --- | --- | --- | --- | --- |
+| I � Guayaquil | 01-09 | Cuarto, casa, Malec�n y universidad | **Vig�a del Golfo**: proyecto de la rama estudiantil, un sat�lite en �rbita baja que observa los manglares del Guayas (vi�eta 04, �Una �rbita sale del papel�) | Arrastre atmosf�rico, nubes (radar o c�mara), presupuesto | Cuarto y consola jugables |
+| II � Una se�al d�bil | 10-12 | Sala de entrenamiento de la pr�ctica | **Hielo en la sombra lunar** y **Tormentas de polvo en Marte** como misiones de entrenamiento ficticias | Lanzador, ?v, radiaci�n, energ�a y enlace que caen con la distancia | Jugables |
+| III � Una pregunta compartida | 13 en adelante | Biblioteca brutalista | Simulador de vuelo con inercia, planetario y archivo Apolo | Contexto hist�rico y comparaci�n de mundos | Pendiente |
+
+La vi�eta 11, �Diagnosticar una p�rdida�, es el coraz�n del Acto II. Cuando una simulaci�n falla, la consola explica la causa: energ�a, datos, masa o presupuesto. La **Dra. Vega** pone voz a esa explicaci�n. Su regla (�cambia un par�metro a la vez�) es el consejo de dise�o del juego.
+
+## Personas
+
+| Personaje | Papel en el juego |
+| --- | --- |
+| Avatar | Lo crea el jugador. Estudia ingenier�a en Guayaquil. |
+| Elena y Rafael | Familia en casa. Acto I. |
+| Lidia Vera | Malec�n de Guayaquil. Acto I. |
+| Sam Rivas | Universidad y rama estudiantil. Presenta el modo de equipo de hasta cuatro personas, con un rol por columna de la consola. |
+| Dra. Vega | Mentora en el control de misi�n. Explica las fallas. |
+| Ari | Biblioteca y cierre. Recibe el cuaderno de observaciones. |
+| ��rbita� (mascota cient�fica) | Gu�a la consola y se�ala los datos en el planetario. |
+
+## Reglas narrativas
+
+- El tono es c�lido y costumbrista en Guayaquil, y preciso en la consola. Cada dato t�cnico tiene fuente.
+- La pr�ctica y la sala de control son ficticias. Las misiones reales, como Apolo, LRO, MRO o MAVEN, se citan como referencia educativa. No usar el logotipo de NASA ni sugerir su respaldo.
+- Las lecturas que produce la simulaci�n se identifican como simulaci�n y se distinguen de los datos verificados de NASA o JPL (criterio del dossier).
+- Cada l�nea de di�logo cabe en dos renglones a 384 � 216 px.
+- Al fallar, el juego explica la causa y deja redise�ar. No basta con decir �incorrecto�.
+
+## L�neas iniciales (borrador)
+
+| Momento | Personaje | Texto |
+| --- | --- | --- |
+| Entrar al cuarto | - | Atardecer en Guayaquil. El libro del escritorio brilla otra vez. |
+| Cerca del libro | - | [E] Abrir el libro |
+| Holograma | �rbita | Mapa de misi�n cargado. Elige un objetivo. |
+| Falla a 400 km | Dra. Vega | A 400 km todav�a hay atm�sfera. Sube la �rbita y vuelve a simular. |
+| Datos perdidos | Dra. Vega | Cambia un par�metro a la vez. Empieza por la antena. |
+| Primer �xito | �rbita | Datos recibidos. El Golfo se ve con otros ojos. |
+<!-- section: PORTADA -->
+# Arte e Historia
+
+**Gravedad 2D-HD � Biblia visual y storyboard**
+
+Desde una habitaci�n en Guayaquil hasta una misi�n espacial, un avatar que estudia ingenier�a convierte la curiosidad en algo que puede probar, corregir y compartir.
+
+![Concepto Atardecer, con el avatar junto al escritorio](habitacion-02-atardecer-escala.png)
+_Atardecer. L�mina de concepto Higgsfield. El usuario eligi� sus proporciones como referencia de montaje._
+
+**Documento interno de equipo � 09.11.2026 � v0.1**
+
+<!-- section: 01 / ALCANCE -->
+## La historia y el alcance
+
+**Premisa.** El jugador crea un avatar de ingenier�a, abre un libro de ciencia en su cuarto y descubre una forma de mirar su ciudad y el cielo con las mismas preguntas. A�os despu�s aplica ese aprendizaje a una misi�n, preserva el registro de lo que encontr� y vuelve a ponerlo al alcance de otros.
+
+**Acto I � Guayaquil.** El viaje empieza con una transici�n del espacio al cuarto. Un libro responde al jugador. La casa, la ciudad y la universidad ampl�an el mundo y muestran el paso del tiempo hasta la aceptaci�n de una pr�ctica.
+
+**Acto II � Una se�al d�bil.** Una misi�n ficticia de entrenamiento durante la pr�ctica en la NASA convierte la curiosidad en decisi�n. El jugador observa telemetr�a, ajusta el sat�lite y comprende qu� cambi� y por qu�.
+
+**Acto III � Una pregunta compartida.** El libro reaparece en una biblioteca. Abre un simulador de vuelo, un planetario y un homenaje a Apolo. La historia termina cuando otra persona recibe el cuaderno de observaciones del avatar.
+
+### Decisiones y estado
+
+| Estado | Alcance |
+| --- | --- |
+| Confirmado por el usuario | Avatar personalizable al inicio con cabello, ojos, colores y detalles. Primera escena en el cuarto con luz c�lida y un libro hologr�fico. Proporciones de Atardecer. Village Square, Emberfall como patr�n visual. Recursos de la habitaci�n recolocables. |
+| Prototipo interno | Pantalla inicial, creador de avatar, intro y habitaci�n hasta abrir el libro. El alcance jugable se acredita mediante la build y sus pruebas. |
+| Dise�o futuro | Casa, ciudad, universidad, misi�n, biblioteca, planetario, simulador, Apolo y cierre. Los nombres, di�logos, retos y planos de este documento son propuestas para revisi�n. |
+
+**Recorrido del dossier.** Direcci�n visual, fichas de personaje, 18 vi�etas de storyboard, matriz de recursos y entrega. Los diagramas comunican composici�n y puesta en escena. Las l�minas existentes se identifican como concepto o kit.
+
+**Destino.** Desarrollo interno. Si el equipo considera una presentaci�n en NASA Space Apps, la selecci�n del reto, el calendario y la elegibilidad se consultan en la nota de validaci�n de Claude antes de reutilizar trabajo. [Validaci�n del plan para 2026](../0_Reglas_Globales/validacion-claude-2026-11-09.md)
+
+<!-- section: 02 / DIRECCI�N VISUAL -->
+## Del dormitorio a la �rbita
+
+**Mundo terrestre.** Personajes originales de proporciones chibi, con grupos de p�xeles n�tidos. Habitaciones y calles se leen como vol�menes con madera, yeso, textiles, cemento o piedra. Las sombras de contacto fijan el punto de apoyo. La luz de ventana recorre el suelo, con luz fr�a conservada en las caras en sombra.
+
+**C�mara.** Vista oblicua fija para explorar. El primer plano enmarca, el plano jugable contiene la ruta y el fondo pierde contraste. Mantener pies, caminos e interactuables dentro del plano n�tido. Reservar los movimientos de c�mara para entradas, montajes o transiciones.
+
+**Delimitaci�n espacial.** En �rbita el planeta y la atm�sfera son realistas. Sat�lite, avatar, mascota y HUD mantienen bordes definidos. En el planetario, separar fondo 3D, ayudas visuales y fichas. La tipograf�a DotGothic16 se reserva para telemetr�a y datos orbitales. Para di�logo, usar una familia que admita tildes y lectura c�moda.
+
+**Paleta de prueba.** Luz �mbar #E39D58 � sombra �ndigo #28294C � madera #895545 � vegetaci�n #52694F � holograma #00E5FF � papel #F8F0DF. Son muestras de trabajo para comparar bajo iluminaci�n y se ajustan durante la revisi�n.
+
+### Referencias y reglas de montaje
+
+| Referencia | Qu� aporta |
+| --- | --- |
+| Village Square, Emberfall | Patr�n principal elegido por el usuario. Composici�n en capas, texturas por material, luz c�lida y sombras fr�as. Atribuci�n de la captura pendiente. |
+| Bosque y recursos adjuntos | El bosque aporta separaci�n de vegetaci�n y terreno. La hoja del zorro y el diagrama de producci�n sirven como ejemplo de vistas coherentes y despiece. |
+| Atardecer | Referencia de proporciones del cuarto. El escritorio deja libre un frente de aproximaci�n y la proyecci�n cian tiene un �rea propia. |
+
+**Maqueta de referencia.** 384 � 216 px l�gicos, con avatar de 28 px visibles como hip�tesis. A 1920 � 1080, la escala entera es �5. Validar la relaci�n entre p�xeles y escala del mobiliario dentro de la c�mara. Una misma cuadr�cula, origen bajo las suelas y filtrado de vecino m�s pr�ximo para sprites. Separar luz de ventana, ambiente, sombra y resplandor del libro.
+
+**Lectura y confort.** Cada estado de interacci�n se reconoce mediante forma y texto. Evitar brillos continuos detr�s de cifras. Probar contraste con efectos activos, transiciones reducidas y subt�tulos. [Direcci�n art�stica](direccion-artistica.md) � [An�lisis de Village Square](referencias/referencia-principal.md)
+
+<!-- section: 03 / AVATAR -->
+## Avatar de ingenier�a
+
+![Primera l�mina de concepto del avatar personalizable](avatar-concepto-01.png)
+_Concepto Higgsfield. Las combinaciones orientan la prueba de siluetas y rasgos. El cat�logo visual queda abierto a revisi�n._
+
+**Identidad.** El nombre y la apariencia los elige el jugador. El rol narrativo permanece estable. Durante la historia, el avatar aprende observando, formulando una hip�tesis y prob�ndola. Mantener un rasgo elegido visible en la secuencia de graduaci�n, el centro de control y el cierre.
+
+**Modelo de producci�n.** Frontal, tres cuartos, perfil y espalda con apoyo de pies com�n. Hoja base de prueba de 32 � 40 px para capas, 28 px visibles de pie. Orden sugerido desde el fondo al frente con cabello trasero, cuerpo, ropa, ojos, cabello frontal y accesorios. Usar reposo, caminata e interacci�n con el libro como primer conjunto de acciones.
+
+**Prueba de personaje.** Vista ampliada para ojos y accesorios. Vista a escala jugable para silueta y contraste. Revisar que una gafa no atraviese el flequillo y que un bolso conserve su punto de uni�n durante el giro. El equipo pregunta qu� conservar y qu� ajustar tras mostrar cada iteraci�n, antes de pasar al siguiente conjunto de vistas o animaciones. [Ficha y origen de la l�mina](avatar.md)
+
+<!-- section: 04 / REPARTO -->
+## Personas del viaje
+
+Todos los nombres, voces, prendas y colores de esta p�gina son propuestas. Los personajes secundarios comparten escala y lenguaje de p�xel con el avatar. Cada figura tiene un objeto o una forma reconocible a distancia.
+
+### Elena y Rafael � Casa
+
+**Elena** marca el inicio del d�a con una silueta redonda, delantal verde botella #386653 y cabello recogido. Su gesto es secarse las manos antes de entregar la libreta. **Rafael** tiene hombros rectos, camisa arena #BA8A5B y manos ocupadas con una caja de premios. Modelos en frente, tres cuartos, perfil y espalda. Reposo, saludo y gesto con prop.
+
+> **Elena.** �Lleva la libreta. Si algo te sorprende, ap�ntalo�.  
+> **Rafael.** �Ese estante ya est� lleno. La libreta todav�a tiene sitio�.
+
+### Lidia Vera � Malec�n
+
+Vendedora de una peque�a estaci�n de jugos y observadora del r�o. Sombrero de ala corta, delantal rojo teja #A14F3F y termo plateado. El gesto de se�alar conduce la mirada a la baranda. Modelo en cuatro vistas y retrato en tres cuartos. Reposo, servir, se�alar.
+
+> **Lidia.** �Mira esa hoja. Cerca del muelle cambia de rumbo. �Qu� crees que la empuja?�.
+
+### Sam Rivas � Universidad
+
+Integrante del equipo del avatar. Chaqueta verde petr�leo #315E63, mech�n alto y carpeta amarilla #E1AE53. El gesto de sostener una maqueta debe leerse con la carpeta cerrada o abierta. Modelo en cuatro vistas, retrato en tres cuartos, reposo, saludo y entrega.
+
+> **Sam.** �Probamos una vez m�s. Si falla, apuntamos qu� cambi��.
+
+### Dra. Vega � Control de misi�n
+
+Mentora de la simulaci�n. Silueta vertical, auricular oscuro y chaqueta azul tinta #283B5B. Alterna entre el monitor y el avatar al hablar. Modelo en cuatro vistas, retrato sobrio, reposo, se�alar pantalla y confirmaci�n.
+
+> **Dra. Vega.** �Cambia un par�metro. Si cambias tres, despu�s no sabr�s cu�l arregl� el enlace�.
+
+### Ari � Biblioteca y cierre
+
+Estudiante del club de observaci�n. Silueta de coleta baja y cuaderno cuadrado con lomo coral #D47762. Reutiliza la escala del avatar. Modelo en cuatro vistas, reposo, recibir cuaderno y se�alar la ventana.
+
+> **Ari.** ��De verdad empezaste a mirar el cielo desde aqu�?�.
+
+<!-- section: 05 / MASCOTA Y APOLO -->
+## Gu�as, exploradores y retratos
+
+![Siluetas de mascota y esquema de frente y perfil de una figura de Apolo](storyboard/modelos-esquematicos.png)
+_Esquemas para comparar formas y articulaci�n. La mascota sigue pendiente de elecci�n._
+
+### Mascota cient�fica � Apodo de trabajo ��rbita�
+
+**Rol.** Gu�a del planetario que muestra una ficha a la vez. La especie y la personalidad requieren elecci�n del usuario. Para la revisi�n, comparar gato de orejas triangulares y perro de orejas ca�das con la misma bata #F8F9FA y puntero con acento #00E5FF. Definir pelaje tras esa decisi�n.
+
+**Modelo.** Frente, tres cuartos, perfil, espalda y pose con el puntero extendido. Reposo, se�alar y explicar. Preparar contraste sobre el hemisferio brillante y la cara en sombra. La punta termina al lado del dato y nunca sobre su unidad.
+
+> **�rbita.** �F�jate en la unidad. Si cambia, compara los valores despu�s de convertirlos�.
+
+**Encuadre.** Mascota a la izquierda del HUD, planeta al centro y panel de dato a la derecha. Si el layout se invierte, seleccionar una vista compatible para que el puntero conserve el sentido. [Ficha de mascota](mascota-cientifica.md)
+
+### Exploradores de Apolo � Figuras de recreaci�n
+
+**Rol.** Dos astronautas hist�ricos se representan como siluetas de papel articuladas frente a monitores de archivo, con identificaci�n posterior a la revisi�n de fuentes. La secuencia distingue expl�citamente material de archivo y recreaci�n. El texto educativo corresponde a un r�tulo del museo ficticio o a �rbita.
+
+**Modelo.** Papel con grosor visible al girar, casco circular, equipo volum�trico detr�s y una silueta de brazo clara al saludar. Frente y espalda con piezas separadas para visor, torso y brazos. Perfil de grosor y pruebas de pivote para hombro y pies. Marfil #EBE8DC, gris pizarra #58677B y visor carb�n #232732.
+
+> **R�tulo de sala.** �La tripulaci�n regres�. Parte del equipo qued� en la Luna�.
+
+**Material de archivo.** Preparar una ficha por clip con misi�n, fecha, origen, licencia o condiciones de uso y cr�dito en pantalla. Mantener el r�tulo �Recreaci�n� en las vi�etas dramatizadas. Las l�neas de guion de este dossier son ficci�n original, salvo las descripciones hist�ricas que el equipo valide contra sus fuentes.
+
+<!-- section: 06 / STORYBOARD � ACTO I A -->
+## De la �rbita a la mesa
+
+![Vi�etas esquem�ticas 01 a 03, creador, tr�nsito orbital y habitaci�n](storyboard/01-orbita-y-cuarto.png)
+_Composici�n propuesta. La franja cian indica interacci�n o trayectoria._
+
+### 01 � Dar forma al avatar
+
+**Plano.** Pantalla inicial con un anillo orbital y un t�tulo limpio. Al empezar, el avatar de cuerpo entero queda a la izquierda y el retrato ampliado junto a las opciones. **Acci�n.** Personalizar cabello, ojos, colores y detalles. Confirmar y conservar la combinaci�n en las escenas posteriores. **Texto.** �Crea tu avatar� � �Comenzar�.
+
+### 02 � Del espacio a la ventana
+
+**Plano.** Una roca cruza el encuadre con planetas de fondo. La curvatura de la Tierra ocupa pantalla y corta a nubes, agua y una ventana c�lida. **Acci�n.** Cinem�tica saltable. El encuadre final se comparte con el comienzo en la habitaci�n. **Sonido.** Del paisaje sonoro espacial al ambiente del cuarto. La estela cian enlaza con la futura �rbita hologr�fica.
+
+### 03 � El camino al libro
+
+**Plano.** Habitaci�n Atardecer, con la entrada en primer plano y el escritorio al fondo a la derecha. Una ventana traza luz diagonal sobre un paso despejado. **Acci�n.** Acercarse al escritorio. Un indicador con forma y texto aparece al alcance del libro. **Texto.** �Abrir libro�.
+
+**Alcance.** Estas vi�etas describen el inicio del prototipo interno. Para revisar el cuarto con el usuario, mostrar c�mara, luz y avatar a escala junto al escritorio. [Ficha de montaje](primera-escena.md)
+
+<!-- section: 07 / STORYBOARD � ACTO I B -->
+## La curiosidad sale de casa
+
+![Vi�etas esquem�ticas 04 a 06, libro, casa y Malec�n](storyboard/02-libro-y-guayaquil.png)
+_En exteriores, el recorrido debe seguir visible entre vegetaci�n, fachadas y peatones._
+
+### 04 � Una �rbita sale del papel
+
+**Plano.** El libro cambia de cerrado a abierto sin moverse sobre el tablero. La proyecci�n emerge del lomo con luz cian localizada. **Acci�n.** En el prototipo, activar el holograma. En el dise�o completo, elegir entre F�sica, Qu�mica y C�lculo. En el ejercicio opcional de F�sica, variar el �ngulo de un lanzamiento desde el suelo, manteniendo velocidad inicial y gravedad constantes, y comparar arcos sin resistencia del aire. **Texto propuesto.** �Cambia el �ngulo y compara las trayectorias�.
+
+### 05 � Los premios de abajo
+
+**Plano.** Escalera de madera, vitrina, mesa y puerta a la calle. La vitrina recibe un brillo corto y los padres quedan en el plano n�tido. **Acci�n futura.** Revisar un trofeo escolar original, recibir la libreta y salir. **Elena.** �Lleva la libreta. Si algo te sorprende, ap�ntalo�.
+
+### 06 � Guayaquil junto al r�o
+
+**Plano.** Centro y Malec�n 2000 estilizados. Piedra c�lida, vegetaci�n tropical y hojas ocres como licencia visual. Primer plano de follaje, paseo n�tido y agua al fondo. **Acci�n futura.** Saludar a Lidia y observar una hoja desviarse cerca de la baranda. Acariciar un perro o gato callejero es opcional. **Lidia.** �Cerca del muelle cambia de rumbo. �Qu� crees que la empuja?�.
+
+**Transici�n.** La anotaci�n del r�o entra en el primer fotograma del montaje universitario.
+
+<!-- section: 08 / STORYBOARD � ACTO I C -->
+## Los a�os de formaci�n
+
+![Vi�etas esquem�ticas 07 a 09, campus, tesis y carta](storyboard/03-formacion.png)
+_Las polaroids son transiciones con capas. El juego conserva el avatar elegido en cada etapa._
+
+### 07 � Hacer equipo
+
+**Plano.** Patio universitario con una mesa de prototipos. Corte a fotograf�as de estudio, amistades y eventos de ramas estudiantiles. **Acci�n futura.** Colocar la bandera del club en un soporte de la maqueta. Las afiliaciones del plan, IEEE, AESS e IAS, requieren revisi�n de uso antes de incorporar nombres o marcas. **Sam.** �La bandera va aqu�. Mira c�mo tiembla cuando encendemos el ventilador�.
+
+### 08 � Probar, fallar, registrar
+
+**Plano.** Un tablero de pruebas se llena de anotaciones. La luz cambia de tarde a noche entre fotogramas de ex�menes y tesis. **Acci�n futura.** Comparar dos pruebas de un circuito, elegir el ajuste que corrige el fallo y dejar un registro de la observaci�n. Si la elecci�n falla, la escena muestra la diferencia y permite volver a probar. **Sam.** �Si falla, apuntamos qu� cambi��.
+
+### 09 � Graduaci�n y carta
+
+**Plano.** Foto de graduaci�n, corte al escritorio y una carta abierta con la aceptaci�n para una pr�ctica en la NASA dentro de la historia. El dise�o de la carta evita el uso de insignias oficiales. **Acci�n futura.** Confirmar la lectura de la carta. **Avatar.** �Quiero ver hasta d�nde llega una se�al�.
+
+**Transici�n.** El marco de la �ltima polaroid se transforma en el monitor de la sala de control.
+
+<!-- section: 09 / STORYBOARD � ACTO II -->
+## Mantener la se�al
+
+![Vi�etas esquem�ticas 10 a 12, despliegue, anomal�a y adquisici�n](storyboard/04-control-de-mision.png)
+_Vistas de la interfaz y del exterior. El pulso cian cambia de forma al recuperar la se�al._
+
+### 10 � Desplegar en �rbita baja
+
+**Plano.** Sala de entrenamiento con una ventana digital a la Tierra realista. La c�mara pasa al sat�lite y revela sus paneles. **Acci�n futura.** Leer la lista de verificaci�n y confirmar el despliegue. **Dra. Vega.** �Primero confirma energ�a. Luego, orientaci�n y enlace�.
+
+### 11 � Diagnosticar una p�rdida
+
+**Plano.** La Tierra retrocede en la ventana y el tablero se�ala un enlace d�bil al cambiar la geometr�a de la misi�n simulada. Mantener separados los valores de temperatura, velocidad, radiaci�n y se�al con sus unidades. **Acci�n futura.** Comparar la se�al con los par�metros, orientar la antena y verificar el resultado. Un ajuste improcedente devuelve una pista y permite reintentar desde la lectura inicial. **Dra. Vega.** �Cambia un par�metro. Si cambias tres, despu�s no sabr�s cu�l arregl� el enlace�.
+
+### 12 � Se�al recuperada
+
+**Plano.** El icono discontinuo se convierte en un pulso estable. Se abre la vista espacial del tramo posterior de la misi�n ficticia. **Acci�n futura.** Registrar la lectura y abrir la ficha de una fuente astron�mica. **Texto.** �Enlace restablecido� � �Guardar observaci�n�.
+
+**Criterio cient�fico.** Identificar las lecturas producidas por la simulaci�n como tales. Distinguirlas visualmente de los datos de NASA o JPL verificados por el equipo. Las fichas citan fuente, fecha, unidad y nombre de variable. La salida de �rbita baja se representa mediante un salto narrativo, con el tramo de transferencia identificado en pantalla.
+
+<!-- section: 10 / STORYBOARD � ACTO III A -->
+## El libro de la biblioteca
+
+![Vi�etas esquem�ticas 13 a 15, pedestal, vuelo y planetario](storyboard/05-biblioteca-y-minijuegos.png)
+_El haz del pedestal, la ret�cula de vuelo y la �rbita del planetario gu�an la mirada._
+
+### 13 � Volver a abrir el libro
+
+**Plano.** Biblioteca brutalista acogedora, con concreto visto, madera oscura, sillones y un haz cenital sobre el pedestal. El paso mantiene una franja iluminada. **Acci�n futura.** Abrir el libro y elegir simulador, planetario o archivo Apolo. Las secciones permiten regresar a la biblioteca. **Texto.** �Vuelo� � �Planetario� � �Archivo Apolo�.
+
+### 14 � Pilotar con inercia
+
+**Plano.** Vista cenital de nave, piedras espaciales y baliza. La estela muestra la direcci�n del desplazamiento. **Acci�n futura.** Acelerar, girar y usar empuje en sentido contrario para frenar. Llegar a la baliza con una velocidad segura. Tras una colisi�n, se reinicia el intento con indicaci�n de la �ltima causa. **Texto.** �Reduce tu velocidad para cruzar la baliza�.
+
+### 15 � Comparar dos mundos
+
+**Plano.** Planeta realista al centro, �rbita en el margen izquierdo y fichas legibles al derecho. Escoger un sonido ambiente original o con licencia, de tempo lento y pocos elementos. **Acci�n futura.** Girar, seleccionar otro cuerpo y comparar un dato con la misma unidad y fuente visible. **�rbita.** �F�jate en la unidad. Si cambia, compara los valores despu�s de convertirlos�. [NASA Science � Planetas](https://science.nasa.gov/solar-system/planets/)
+
+**Transici�n.** El c�rculo del planeta se convierte en el visor de un astronauta ante un monitor.
+
+<!-- section: 11 / STORYBOARD � ACTO III B -->
+## Lo que vuelve a la Tierra
+
+![Vi�etas esquem�ticas 16 a 18, archivo Apolo, observaci�n y cierre](storyboard/06-apolo-y-cierre.png)
+_El trazo de la antena de la primera misi�n rima con la l�nea de las ventanas del cierre._
+
+### 16 � Archivo Apolo
+
+**Plano.** Monitor de archivo a la izquierda, recreaci�n de dos astronautas de papel a la derecha. Conservar el cr�dito y el subt�tulo en zonas distintas. **Acci�n futura.** Elegir un objeto de la escena y abrir su ficha. El retrorreflector lunar de Apolo 11 es una opci�n para ese primer objeto. **Texto.** �La tripulaci�n regres�. Parte del equipo qued� en la Luna�. [NASA ILRS � Reflectores lunares](https://ilrs.cddis.eosdis.nasa.gov/missions/satellite_missions/current_missions/ap11_general.html)
+
+### 17 � Completar el cuaderno
+
+**Plano.** Sobre una mesa de la biblioteca reaparecen el dibujo del r�o, la lectura del sat�lite y una ficha del archivo. **Acci�n futura.** Elegir qu� observaci�n quedar� en la primera p�gina del cuaderno. Las otras quedan disponibles para releer. **Avatar.** �Me tom� a�os llegar tan lejos. La primera prueba cab�a en mi escritorio�.
+
+### 18 � Una ventana para Ari
+
+**Plano.** Ari abre el cuaderno junto a una ventana de Guayaquil. La luz c�lida encuentra un punto cian en el papel y la c�mara se eleva sobre el r�o hacia las primeras estrellas. **Acci�n futura.** Entregar el cuaderno. Tras los cr�ditos, ofrecer volver a la biblioteca y consultar las fichas. **Ari.** ��De verdad empezaste a mirar el cielo desde aqu�?�. **Avatar.** �S�. Mira por la ventana�.
+
+**Cierre.** Volver al cielo desde el mismo lugar donde empez� el juego. La decisi�n final del jugador deja una observaci�n concreta que Ari puede continuar.
+
+<!-- section: 12 / RECURSOS -->
+## Matriz de producci�n
+
+| Paquete | Entrega de arte e interfaz | Estado |
+| --- | --- | --- |
+| Inicio y avatar � 01 | Fondo y t�tulo, editor con retrato y cuerpo entero, capas con anclaje compartido, poses y estados de enfoque. | L�mina existente. Capas y animaci�n final pendientes de revisi�n. |
+| Tr�nsito orbital � 02 | Roca, cuerpos celestes, nubes, horizonte, silueta de ciudad, ventana y transici�n con opci�n de saltar. | Storyboard. Cr�ditos de im�genes astron�micas por seleccionar. |
+| Cuarto � 03-04 | PNG independientes, suelo y muros, exterior, luz, libros abierto y cerrado, proyecci�n, indicaci�n y textos. | Kit de 12 PNG existente. Importaci�n aislada documentada. |
+| Casa y Guayaquil � 05-06 | Escalera, vitrina, trofeos, libreta, baranda, r�o, �rboles tropicales y props. Elena, Rafael, Lidia y mascotas de calle. | Futuro. |
+| Universidad � 07-09 | Campus, mesa, maqueta, bandera, tablero, diploma, carta, ropa de graduaci�n y retrato de Sam. | Futuro. |
+| Control y sat�lite � 10-12 | Sala modular, mentor�a, sat�lite, Tierra, terminal DotGothic16, estados de alerta y gr�fico de se�al. | Futuro. |
+| Biblioteca y vuelo � 13-14 | Sala, estanter�as, pedestal, haz, nave, asteroides, baliza, pistas y estado de reintento. | Futuro. |
+| Planetario y Apolo � 15-16 | Material planetario con origen, ficha de datos, �rbita en tres estados, monitor, archivo y recortes articulados. | Futuro. |
+| Cuaderno y cierre � 17-18 | P�ginas del cuaderno, mesa, Ari, panorama del r�o, cr�ditos y regreso a la biblioteca. | Futuro. |
+
+**Contrato de entrega.** Para cada pieza, documentar ID, nombre de archivo, versi�n, estado de revisi�n, dimensiones, ancla, capas, origen y condiciones de uso. Separar mueble, colisi�n, sombra y luces. Para personajes, registrar orientaci�n y fotogramas. Para fuentes cient�ficas y medios, conservar enlace al elemento concreto y su fecha. [Kit y puntos de apoyo](kit-habitacion/README.md) � [Registro de recursos](kit-habitacion/asset-register.csv)
+
+<!-- section: 13 / REVISI�N Y CR�DITOS -->
+## Revisiones de equipo
+
+### Arte e integraci�n
+
+- **Avatar.** Ense�ar cada resultado visual, registrar qu� pide conservar o mejorar el usuario y comprobar capas al girar o caminar. Comparar retrato, silueta a escala de juego y combinaci�n de colores bajo la luz de Atardecer.
+- **Entorno.** Acordar con el usuario c�mara, luz, materiales y elemento protagonista antes de montar cada nuevo lugar en Godot. Recolocar muebles y verificar huella, oclusi�n, sombra y ruta con el avatar presente.
+- **Libro.** Empieza cerrado. Abierto, conserva el anclaje y muestra la proyecci�n por separado. La interacci�n tiene texto e icono, y el resplandor deja libre la lectura del sprite.
+- **Narrativa.** Ingenier�a, guion y arte revisan la misma numeraci�n 01-18. Para nuevos niveles, confirmar acci�n, respuesta y estado de salida antes de producir fondos finales.
+- **Ciencia y archivo.** Verificar unidades, fuente y derechos de cada dato, m�sica, clip y fotograf�a antes de publicar. Conservar marcas de simulaci�n y de recreaci�n donde corresponda.
+
+### Captura interna de 30 segundos
+
+**00-06 s** � T�tulo y cambio visible de una opci�n de avatar.  
+**06-13 s** � Selecci�n confirmada y transici�n orbital a Guayaquil.  
+**13-24 s** � Recorrido real desde la entrada hasta el escritorio.  
+**24-30 s** � Abrir el libro y dejar visible el holograma.  
+
+Montaje propuesto para cuando haya una build verificada. Si se muestra storyboard de fases futuras, identificarlo como concepto en pantalla. Preparar subt�tulos en ingl�s tras cerrar la locuci�n.
+
+### Fuentes de trabajo
+
+Plan maestro aportado por el usuario, �4-6. Decisiones y estado en el [�ndice de la b�veda](../0_Reglas_Globales/index.md) y la [bit�cora](../0_Reglas_Globales/log.md). L�minas Higgsfield acreditadas en las fichas de [avatar](avatar.md) y [habitaci�n](primera-escena.md). Vi�etas de composici�n elaboradas para este dossier. Los recursos generados y las referencias externas conservan sus estados de revisi�n y verificaci�n de derechos.
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\00_Plan_Maestro
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+-a----        12/11/2026      0:58         231827 Plan Maestro de Desarrollo AAA.pdf                                   
+
+
+
+ succeeded in 707ms:
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_4pi1rfpl'.
+En l�nea: 2 Car�cter: 1
++ Get-ChildItem -Path . -Recurse -File -Filter AGENTS.md; Get-ChildItem ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_4pi1rfpl:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_kz4ist6c'.
+En l�nea: 2 Car�cter: 1
++ Get-ChildItem -Path . -Recurse -File -Filter AGENTS.md; Get-ChildItem ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_kz4ist6c:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----        12/11/2026      1:22                .obsidian                                                            
+d-----        12/11/2026      1:30                00_Plan_Maestro                                                      
+d-----        12/11/2026      2:15                Fase_0_Tecnica                                                       
+d-----        12/11/2026      6:44                Fase_1_Arte                                                          
+d-----        12/11/2026      9:27                Fase_2_Narrativa                                                     
+d-----        12/11/2026      5:07                Propuestas                                                           
+d-----        12/11/2026      1:30                Referencias                                                          
+-a----        12/11/2026      1:22            206 Bienvenido.md                                                        
+-a----        12/11/2026      3:40           2321 Inicio.md                                                            
+-a----        12/11/2026      8:12          22951 Memory.md                                                            
+-a----        12/11/2026      9:03          11409 trabajos.md                                                          
+---
+tipo: memoria
+actualizado: 2026-11-12
+---
+
+# Memoria del Proyecto NASA-Ecuador
+
+> Se carga en cada sesi�n desde `CLAUDE.md` (ra�z del repositorio). Aqu� van las directivas de Guillermo, las decisiones con fecha, los datos medidos y las lecciones. El avance y los pendientes van en [[trabajos]].
+
+## 1. Directivas de Guillermo
+
+| Fecha | Directiva |
+|---|---|
+| 2026-11-12 | Crear un juego totalmente �nico con aires de AAA. Pulir cada aspecto y validar juntos cada recurso: escena, luz, isometr�a, ajustes y proporciones. |
+| 2026-11-12 | Trabajar como un estudio profesional, con hojas de referencia y las t�cnicas habituales de los estudios AAA. Referentes: RPG de Nintendo, Monster Hunter, Pok�mon, Ocarina of Time 3D y Bravely. |
+| 2026-11-12 | Sacar el m�ximo provecho de los 1000 cr�ditos de Higgsfield (plan Plus). |
+| 2026-11-12 | Seguir el plan maestro de 8 fases: se presenta una fase y se espera su aprobaci�n. |
+| 2026-11-12 | La b�veda de Obsidian `Nasa_Game/` guarda el contexto. Mantener `CLAUDE.md`, `Memory.md` y `trabajos.md`. |
+| 2026-11-12 | Delegar tareas a Codex para trabajar con eficiencia y gastar menos tokens. |
+| 2026-11-12 | El estilo de la b�veda anterior (p�xel-art) queda descartado: �muy superficial, carece de estilo art�stico v�lido para un juego AAA�. |
+| 2026-11-12 | Pilar �mundo vivo�: interacciones de alto nivel con todo el entorno, movimientos sutiles del ambiente, sonidos coherentes y paleta de colores consistente. |
+| 2026-11-12 | �Quiero que el sistema sea totalmente AAA, no quiero que te enfoques en que voy a renderizar todo aqu�. Puedo alquilar PC en la nube.� Meta: un videojuego totalmente impresionante, con texturas y arte innovador. Corrige la primera versi�n de la Fase 0, que lo limitaba todo al port�til. |
+| 2026-11-12 | Empezar ya los dise�os con Higgsfield: �lowpoly, o cualquier otra forma recomendada�. El alquiler del PC en la nube se ve despu�s. |
+| 2026-11-12 | �Me encant� la vista superior, as� se debe ver.� La vista de juego del lote 02 es la meta de la exploraci�n. |
+| 2026-11-12 | Hacer hojas de referencia de los recursos �para que no se pierdan luego� y el juego sea coherente en dise�o en el tiempo. |
+| 2026-11-12 | Idea de Guillermo: una zona donde incrustar datos satelitales de NASA, por ejemplo mirar la Luna por un telescopio mientras la mascota da datos. |
+| 2026-11-12 | �S�, desc�rgalos�: autoriz� descargar los tres archivos p�blicos de NASA para la prueba de la Luna. |
+| 2026-11-12 | �Si requieres de Blender para modelaje solo ind�camelo que yo lo descargo.� Las instalaciones las hace Guillermo: hay que ped�rselas con la versi�n exacta y la fuente oficial. |
+| 2026-11-12 | Sobre el modelado 3D: �Puedo aprender a usar blender, me gusta mucho la opci�n de tipo� (aprueba la ruta por tipo de recurso, D-014). Propone conectar Blender por MCP para que Claude d� los toques finales. |
+| 2026-11-12 | �Esas tareas finas se las puedes delegar a codex, hasta agotar sus tokens; luego tomar� el chat ma�ana Fable.� El trabajo debe quedar documentado para que otro modelo lo retome. |
+| 2026-11-12 | �En este momento quiero las mallas listas, y una escena completa. Empecemos. Quiero trabajar contigo y validar si las mallas cumplen mis expectativas.� Autoriza adelantar mallas de personajes y entorno (fases 3 y 5) para la escena de prueba, con su validaci�n. |
+
+## 2. Decisiones
+
+Las decisiones t�cnicas de la Fase 0 est�n propuestas en [[Fase 0 - Analisis]] y esperan la aprobaci�n de Guillermo. Al aprobarse se copian aqu� con su fecha.
+
+| ID | Fecha | Decisi�n | Estado |
+|---|---|---|---|
+| D-000 | 2026-11-12 | El p�xel-art de la b�veda anterior no se usa. La meta visual es el tablero de referencia y los referentes de mercado. | Decidido por Guillermo |
+| D-011 | 2026-11-12 | **Direcci�n de arte: low-poly pintado a mano** (A1 del lote 01). Anclas de estilo: `L01_A_lowpoly_hub_gpt26.png` para el hub y `L01_A_lowpoly_exploracion_gpt26.png` para la exploraci�n. | Decidido por Guillermo |
+| D-012 | 2026-11-12 | **Tipo de juego: exploraci�n, mapa mediano y 2D-HD**, como las capturas del tablero: c�mara alta 3/4 con el personaje peque�o y mapa ilustrado de la regi�n con recolecci�n, fauna e hitos. | Decidido por Guillermo |
+| D-013 | 2026-11-12 | **Vista de exploraci�n aprobada:** `L02_exploracion_camara_alta.png`, con c�mara alta a unos 60�, sin horizonte y el personaje a un octavo del alto. Es ancla de estilo. Ojo: en la imagen el personaje mide el 20,9 % del alto, no un octavo; la escena de prueba mide los dos tama�os para que Guillermo elija. | Decidido por Guillermo |
+| D-014 | 2026-11-12 | **Modelado 3D por tipo de recurso (ruta h�brida):** el entorno se hace por script (sin cr�ditos) y las mallas base de personajes y fauna, con Tripo H3.1. Blender 5.2.4 LTS pasa a ser obligatorio, como taller de limpieza, rig y exportaci�n. Detalle en [[Decision - Modelado 3D]]. | Decidido por Guillermo |
+
+## 3. Datos medidos (2026-11-12)
+
+**Equipo de desarrollo**
+- Intel Core i5-7200U (2 n�cleos, 4 hilos), 7,9 GB de RAM y gr�fica integrada Intel HD Graphics 620 (controlador 31.0.101.2140).
+- Pantalla de 1920�1080, Windows 10 Home, 27 GB libres en C:.
+- Instalado: Git, Git LFS, Python 3.13, ffmpeg 9, ImageMagick 7, .NET, VS Code, GitHub CLI y Node 24.
+- No instalado: Blender ni editores de imagen.
+
+**Red desde Guayaquil (02:22 del 2026-11-12, Wi-Fi)**
+- Latencia de conexi�n TCP: Miami 62 ms, Atlanta 74, Chicago 93, Virginia 94, Nueva Jersey 96, Dallas 99, Ohio 118, Ciudad de M�xico 121, Santiago 131, Los �ngeles 132, S�o Paulo de 153 a 193 y Oreg�n 164.
+- Ancho de banda: 106 Mbps de bajada y 45 Mbps de subida contra un nodo cercano; 46 Mbps desde Atlanta y 10 Mbps desde Miami en una sola conexi�n.
+- Se repite con `python herramientas/red_nube.py`.
+
+**Godot**
+- Godot 4.7.2-stable con firma v�lida (Prehensile Tales B.V.), en `C:\Users\guill\Downloads\Godot_v4.7.2-stable_win64.exe\`.
+- En la HD 620 arrancan los cuatro modos: Forward+ con Vulkan 1.3.215, Forward+ con D3D12 (nivel 12_0), Mobile con Vulkan, y Compatibility. Compatibility cambia solo a ANGLE (OpenGL ES 3.0 sobre Direct3D 11) porque el OpenGL del controlador es de baja calidad.
+- Medici�n con `pruebas/bench_render/` (29 corridas, fps medios a 1280�720): Mobile 90 en la escena base, 43 con 40 000 briznas de hierba y 75 con 200 sprites; Compatibility 73, 42 y 41; Forward+ 68, 35 y 58. Forward+ con SDFGI, SSAO y glow da 20 fps con ca�das a 9.
+- A 1920�1080 con hierba densa todos rondan los 30 fps: el l�mite es el relleno de p�xeles.
+- El primer arranque de Forward+ tard� m�s de 90 s por la compilaci�n de shaders.
+- La escena del telescopio (`pruebas/luna_telescopio/`, Mobile) cuesta 0,74 ms de GPU a 720p, y de 2,2 a 2,5 ms con la Luna a pantalla completa. Lo midi� el revisor de c�digo.
+
+**Higgsfield**
+- Plan Plus, espacio de trabajo �Private�, CLI 1.2.2. Saldo tras el lote 04 (mallas 3D): 904,25 cr�ditos. Se gastaron 102,00: 66,00 en los lotes 01 a 03 y 36,00 en el 04. El detalle est� en [[trabajos]].
+- Los 1000 cr�ditos de suscripci�n se acreditaron el 2026-11-12. **No se acumulan:** caducan al cierre del periodo de facturaci�n (t�rminos de Higgsfield, apartado 9.4). Los comprados aparte duran 90 d�as (apartado 9.6). Falta confirmar la fecha de renovaci�n.
+- Los t�rminos permiten el uso comercial de los resultados (apartado 4.4), pero rigen las condiciones m�s restrictivas de cada proveedor (apartado 8). Las licencias de m�sica v�a Higgsfield no est�n verificadas para publicar.
+- 119 modelos: imagen, video, audio y 3D. El 3D incluye imagenmalla (Tripo, Hunyuan3D, Meshy), remesh, retexturizado y rigging con biblioteca de animaciones. `autosprite` genera animaciones de sprites con direcciones isom�tricas.
+- Cat�logo, par�metros y 169 cotizaciones en `Fase_0_Tecnica/Datos/`.
+
+**Codex**
+- App de escritorio 26.1103 con sesi�n de ChatGPT. La l�nea de comandos utilizable es `%LOCALAPPDATA%\OpenAI\Codex\bin\<hash>\codex.exe` (codex-cli 0.167). Modelo configurado: gpt-6.1-sol.
+
+**Trabajo anterior**
+- B�veda y repositorio �Gravedad 2D-HD� en `C:\Users\guill\Desktop\Juego\Juego_2d-hd` (remoto `Guivve-A/Juego_Godot_repo1_agentes`), del 8 y 9 de noviembre de 2026. Naci� para el NASA Space Apps Challenge de Guayaquil, con el reto �Space Mission Design Game�. Resumen en [[08_antecedentes_boveda_anterior]].
+
+## 4. Costos medidos de Higgsfield (cr�ditos)
+
+| Recurso | Opci�n | Cr�ditos |
+|---|---|---|
+| Imagen de borrador | `gpt_image_2_6` calidad low, 1k | 0,25 |
+| Imagen de borrador | `text2image_soul_v2`, `soul_location` | 0,12 |
+| Imagen final | `gpt_image_2_6` calidad high, 1k / 2k | 1,5 / 2,75 |
+| Imagen final con referencias | `nano_banana_pro` 2k (hasta 14 referencias) | 2 |
+| Vistas nuevas de un sujeto | `3d_jutsu_angles` 1k / 2k | 1,25 / 2,5 |
+| Animaci�n de sprite | `autosprite` turbo / pro / max | 2 / 3 / 14 |
+| Imagen  malla 3D | `tripo_h3_1_image_to_3d` (sin textura 6, quads 10,5); el l�mite de caras no cambia el precio | 9 |
+| Vistas  malla 3D | `tripo_h3_1_multiview_to_3d`, de 2 a 4 vistas | 9 |
+| Imagen  malla low-poly | `hunyuan3d_v3_image_to_3d` con `generate_type` LowPoly (no deja fijar las caras) | 14 |
+| Imagen  malla 3D | `hunyuan3d_v3_image_to_3d` (solo geometr�a 7) | 11 |
+| Imagen  malla 3D | `meshy_v7_image_to_3d` (con rig 44, rig y animaci�n 47,5) | 38 |
+| Retopolog�a | `meshy_v5_remesh` | 6 |
+| Retexturizado | `meshy_v5_retexture` | 9,5 |
+| Quitar fondo | `image_background_remover` | 1 |
+| M�sica | `sonilo_music` / `elevenlabs_music_v2_5` por minuto | 3,75 / 8,72 |
+| Efecto de sonido | `mirelo_text_to_audio` por segundo | 0,25 |
+| Video | de `seedance1_5` a `seedance_2_5` por clip | 4,8 a 35 |
+
+Las referencias de imagen no cambian el costo. `generate cost` no cotiza `image_to_3d`, `multi_image_to_3d`, `3d_rigging`, `sam_3_3d` ni `topaz_image`.
+
+## 5. Lecciones
+
+- **PowerShell bloquea los `.ps1`.** Usar `npm.cmd`, `npx.cmd` y `higgsfield.cmd`.
+- **Instalaciones.** El modo autom�tico bloquea instalar software externo. Se le da el comando a Guillermo.
+- **Modelos 3D ocultos.** `higgsfield model list` en tabla no muestra los modelos 3D; `model list --json` s�. Usar `herramientas/hf_catalogo.py`.
+- **Cotizar es gratis.** `generate cost` no crea trabajos. Para los modelos que exigen imagen se usa un marcador gris ya subido.
+- **Codex por lotes.** El `codex.exe` de `WindowsApps` da �Acceso denegado�. Funciona el de `%LOCALAPPDATA%\OpenAI\Codex\bin`, con el prompt por la entrada est�ndar en UTF-8, `-s read-only`, `-c web_search="live"` y `-o informe.md`.
+- **Verificar lo delegado.** Los informes de Codex se contrastan con mediciones propias y con una revisi�n independiente antes de decidir. En la Fase 0, casi todos los informes recomendaban Compatibility sin haberlo medido; la medici�n favoreci� a Mobile.
+- **Codex y Firecrawl.** Codex usa el conector de Firecrawl de la cuenta de Guillermo. Nueve tareas en paralelo agotaron los cr�ditos diarios, que se renuevan solos. Para lotes grandes, repartir las tareas o avisar antes.
+- **Workflows y Firecrawl.** Los agentes de los workflows tambi�n usan Firecrawl. Los tres agentes del estudio de modelado lo dejaron sin cr�ditos hasta el 2026-11-13 a las 03:58 UTC. En los encargos de investigaci�n, pedir WebFetch y WebSearch para lo simple.
+- **Medir las anclas, no confiar en el encargo.** Una imagen generada no respeta las proporciones pedidas. En `L02_exploracion_camara_alta.png` el encargo ped�a al personaje a un octavo del alto (12,5 %) y sali� al 20,9 %. La biblia de arte y D-013 copiaron el texto del encargo.
+- **Hojas de personaje para multivista.** Antes de mandarlas a 3D, revisar que las vistas coincidan. En la hoja de PER-01, el bolso cuelga delante de la cadera en el frente y detr�s en el perfil. Adem�s, el perfil mira a la derecha (muestra el lado derecho), y Tripo pide frente, izquierda y espalda.
+- **Modelado 3D.** Higgsfield no da low-poly controlable: Tripo rechaza `smart_low_poly` y Hunyuan LowPoly no deja fijar las caras. Tampoco separa piezas ni hace rig de cuadr�pedos. Las mallas de IA necesitan limpieza en Blender. Estudio completo en [[Decision - Modelado 3D]].
+- **Tripo multivista por Higgsfield.**
+  - Las vistas van en orden frente, izquierda, espalda y derecha. �Izquierda� es el lado izquierdo del objeto, que en la imagen mira hacia la izquierda.
+  - Un perfil que mira a la derecha, puesto en la segunda ranura, deja la malla en espejo.
+  - Las mallas salen mirando a �X.
+  - Si el objeto es sim�trico, basta con mandar el perfil y su espejo.
+- **Textura fallida de Tripo.** Puede devolver un gris plano (media 102, desviaci�n 3) sin ning�n aviso. Hay que revisar la desviaci�n de cada textura. `herramientas/mallas/proyectar_vistas.py --auto` pinta la textura desde las vistas de la hoja, elige el frente y el espejo seg�n c�mo calzan las siluetas y no gasta cr�ditos.
+- **Subir una vez.** `herramientas/hf_subir.py` sube las im�genes de entrada como JPEG de 70 a 175 KB y guarda sus ids. Con ids, cotizar un lote de 4 mallas tarda segundos. Con rutas locales, cada cotizaci�n sube el archivo y una se cort� a los 120 s.
+- **Godot: luz propia.** En `light()`, `LIGHT_COLOR` llega multiplicado por p: dividir entre p para igualar el Lambert est�ndar.
+- **Godot: GLB en tiempo de ejecuci�n.** `GLTFDocument.append_from_file` carga mallas sin importarlas. Si se guardan en una carpeta con `.gdignore`, el editor no las importa y se pueden regenerar al momento.
+- **Comandos para Guillermo.** Usa la app de escritorio y no tiene el CLI `claude`. Los MCP se registran en el `.mcp.json` del proyecto. Su terminal es PowerShell: una ruta `.exe` entre comillas se ejecuta con `&` delante, o se le deja un lanzador `.cmd` (por ejemplo `pruebas/escena_exploracion/abrir_escena.cmd`).
+- **MCP de Blender** (complemento `blender_mcp.py` 2.0, paquete `mcp-for-blender` 2.2.8).
+  - Sus campos de claves de API (Hyper3D, Hunyuan3D, Tripo, Meshy, World Labs, Sketchfab, Poly Pizza) no vienen con Higgsfield: son cuentas aparte y se cobran aparte. El c�digo no menciona Higgsfield.
+  - La generaci�n sigue por Higgsfield y el GLB se importa en Blender.
+  - �Allow Telemetry�, que env�a prompts, c�digo y capturas, y �Allow Remote Connections� vienen apagadas por defecto, pero aparecieron marcadas: hay que dejarlas desmarcadas.
+  - `install-addon` falla si Blender a�n no cre� su carpeta de configuraci�n: abrir Blender una vez antes.
+- **Blender 5.3 instalado** (2026-11-12, `C:\Program Files\Blender Foundation\Blender 5.3\blender.exe`), en vez de la 5.2.4 LTS. Arranca sin ventana en la HD 620.
+  - Sin ventana, una imagen empaquetada que viene de un GLB tiene `has_data` en falso hasta usarla: comprobar `packed_file`.
+  - `herramientas/blender/limpiar_personaje.py` (Codex) funcion� tras esa correcci�n: niveles exactos de 1 500 y 3 000 tri�ngulos en 9,3 s.
+- **Rig de cuadr�pedos con Rigify, por script** (`herramientas/blender/rig_gato.py`, probado con �rbita en Blender 5.3):
+  1. Soldar los v�rtices de Tripo antes de los pesos autom�ticos; si no, el c�lculo de pesos no converge.
+  2. Copiar el peso del vecino m�s cercano a las piezas finas sueltas.
+  3. Hornear solo posici�n y rotaci�n: la escala de Rigify produce cizallamiento, que glTF no admite.
+  4. Exportar en modo `NLA_TRACKS`.
+  5. Al crear los huesos de exportaci�n, copiar sus extremos y su orientaci�n. Con longitud cero pierden la direcci�n de descanso y la animaci�n deforma la malla.
+  6. En Godot, activar el bucle de cada animaci�n.
+  7. Revisar siempre la pose de uni�n contra la animada: separa los fallos de pesos de los fallos de animaci�n.
+- **Inclinaci�n hacia atr�s.** En el ancla, los objetos y personajes no tienen el escorzo de una c�mara de 55�. Una cizalla en el shader (`z -= 0,55�y`) los muestra erguidos sin mover el suelo, y las sombras siguen correctas.
+- **L�mite de uso de Codex.** Las diez tareas de la Fase 0 agotaron el l�mite del plan de ChatGPT de Guillermo el 2026-11-12 a las 02:26; se restablec�a a las 06:27. Enviar pocas tareas a la vez, con esfuerzo medio cuando baste, y comprobar que queda cupo antes de un lote.
+- **Tiempo de las tareas de Codex.** Con esfuerzo alto tardan de 14 a 23 minutos. Dar 45 minutos de l�mite. Si una se corta, se reanuda con `codex exec resume <id de sesi�n>`; el id est� al inicio de su log.
+- **Meshy se retira.** El proveedor retir� `lowpoly` el 30-10-2026 y retira Meshy 7 para geometr�a el 31-12-2026. No basar la producci�n en `meshy_v7_image_to_3d`.
+- **Mixamo** solo acepta FBX, OBJ o ZIP y solo hace rig de b�pedos. Su licencia permite el uso comercial dentro del juego, sin redistribuir los archivos crudos.
+- **Medir a 1080p.** Una ventana de 1920�1080 no cabe en esta pantalla: para medir esa resoluci�n hay que usar `--fullscreen`.
+- **Resultados de Higgsfield.** La respuesta trae `result_url` (el original en PNG) y `min_result_url` (una miniatura). Hay que bajar `result_url`. `herramientas/hf_generar.py` ya lo hace, cotiza antes, respeta un tope por lote y registra cada generaci�n.
+- **Modelos de imagen para este juego** (lote 01, mismo encargo): GPT Image 2.6 en calidad high y 2k sigue la direcci�n de arte al detalle. Nano Banana Pro deriva a caricatura isom�trica con contorno. Seedream 5.5 da luz cinematogr�fica, pero ignora el low-poly.
+- **Encargos de imagen.** Funciona un bloque de escena fijo m�s un bloque de estilo que cambia. Terminar con �No text, no logos, no interface�. Revisar que no aparezcan objetos parecidos a productos comerciales.
+- **Consistencia entre lotes.** Pasar como referencia las im�genes aprobadas (anclas de estilo) y un recorte del personaje mantiene el dise�o: en el lote 02 el protagonista y el gato salieron iguales en hojas y escenas. Las referencias no cambian el costo en GPT Image 2.6.
+- **Texto en im�genes.** GPT Image 2.6 escribi� bien los r�tulos en espa�ol del mapa, con tildes. Sirve para maquetas de interfaz; el texto final se compone en el motor.
+- **Fondo transparente.** Una hoja de personaje puede volver con canal alfa aunque se pida fondo gris. Para verla o montarla hay que aplanarla: `magick archivo.png -background "#cfc8c3" -alpha remove`.
+- **Fallo de subida.** Un error HTTP 520 al subir una referencia no cobra cr�ditos. Se reintenta con `--solo <id>`.
+- **Anclas subidas una vez.** Las im�genes aprobadas se suben a Higgsfield en JPEG de 1600 px con `herramientas/hf_anclas.py` y se citan como `@ANC_.`. Evita volver a subir PNG de 5 a 7 MB en cada encargo, que fue lo que provoc� el error 520.
+- **Hojas con r�tulos.** En el lote 03, GPT Image 2.6 escribi� bien los 104 r�tulos con ID y tildes (�VEG-01 Ceibo�.) en nueve hojas. Pedir r�tulos en las hojas sirve.
+- **Indicador de paleta.** Con ?E = 20, `paleta.py comparar` detecta desv�os de familia de color (c�lida frente a fr�a), no de estilo: las direcciones descartadas del lote 01 tambi�n dan 100 %. El estilo lo juzga Guillermo.
+- **Descargas.** Cada archivo externo va a su propia carpeta en `externos/` con `herramientas/descargar_nasa.py`, que comprueba el tama�o y guarda el SHA-256. `curl -I` no mostr� las cabeceras de NASA SVS en PowerShell; con Python s�.
+- **Orientaci�n de mapas lunares.** Antes de usar un mapa, ubicar el punto m�s alto (cumbre Selenean, 5,4� N y 158,6� O) y el m�s bajo (cr�ter Antoniadi, unos 70� S y 172� O). El CGI Moon Kit tiene la longitud 0 al centro y el este a la derecha.
+- **Prueba objetiva de la Luna.** El modo `--prueba` del telescopio pinta la m�scara de luz; `herramientas/luna_medir.py` mide la fracci�n iluminada y el �ngulo del borde y los compara con Horizons. Con `--captura` y `--textura` tambi�n correlaciona la textura con la luz cenicienta, y as� detecta un giro o un espejo.
+- **Pruebas por correlaci�n.** Hay que excluir de la zona medida lo que dibuja la interfaz: dos l�neas de r�tulos bajaron la correlaci�n de 0,990 a 0,650.
+- **Juego exportado.** `Image.load_from_file` sobre una ruta `res://` funciona en el editor, pero falla en el juego exportado, porque el `.pck` solo lleva los `.ctex` importados. Las texturas van como recursos importados y se cargan con `preload`. Se prueba sin plantillas de exportaci�n: `--headless --export-pack "<preset>" x.pck` y despu�s `--main-pack x.pck`.
+- **HDR 2D.** Con `rendering/viewport/hdr_2d` el lienzo es lineal.
+  - Un shader que hace su propia gamma debe entregar color lineal con la curva sRGB exacta. Con `pow(x, 2.2)` las sombras bajan unos 6 niveles.
+  - `Image.linear_to_srgb()` de Godot 4.7.2 solo acepta RGB8 y RGBA8, pero la captura con HDR llega en RGBAH. Se convierte p�xel a p�xel con `Color.linear_to_srgb()`, en 2,6 s a 720p.
+- **Otras fechas para probar.** `luna_efemerides.py --salida <carpeta temporal>` no ensucia `Propuestas/Datos`. Despu�s, `luna_parametros.py` escribe el `luna.json` de una copia del proyecto.
+- **Relieve y terminador.** Un mapa de normales enciende cr�teres en plena noche si no se limita la luz a la zona cercana al terminador geom�trico (`smoothstep` sobre el producto punto-Sol).
+- **Luna con datos reales.** La API de JPL Horizons y Dial-A-Moon de NASA SVS responden para 2026. Script: `herramientas/luna_efemerides.py`. En la salida CSV de Horizons las columnas se llaman `Azi_(a-app)` y `Elev_(a-app)`.
+- **NASA.** Los mapas de textura y pol�gonos de NASA se pueden usar en simulaciones con cr�dito. La insignia, el logotipo y los identificadores de NASA no son de dominio p�blico y no pueden aparecer en im�genes generadas por IA. El uso comercial no puede sugerir respaldo. Las versiones con m�sica de los videos de NASA SVS usan pistas con derechos de terceros.
+- **PowerShell.** `"$n: texto"` invalida la l�nea entera: escribir `${n}`. `Remove-Item` con comod�n sobre una ruta en variable se bloquea: borrar por nombre con `-LiteralPath`.
+
+## 6. �ndice de la b�veda
+
+- [[Inicio]]: mapa de la b�veda.
+- [[trabajos]]: avances, pendientes y registro de cr�ditos.
+- `00_Plan_Maestro/`: PDF del plan maestro.
+- `Fase_0_Tecnica/`: [[Fase 0 - Analisis]], `Investigacion/`, `Datos/` y `Tareas_Codex/`.
+- `Fase_1_Arte/`:
+  - [[Biblia de arte]], `paleta_maestra.png`, `anclas.json`, `bloques_prompt.json`, `manifiesto_recursos.csv` y `registro_generaciones.json`.
+  - [[Decision - Modelado 3D]] y su evidencia en `Modelado/`.
+  - `Hojas_de_referencia/`: nueve hojas v1 y el [[Catalogo de recursos]].
+  - `Exploracion/Lote_NN/`: [[Lote 01 - Direcciones de arte]], [[Lote 02 - Tipo de juego y personajes]] y [[Lote 03 - Hojas de referencia y Mirador]].
+- `Propuestas/`: [[Mirador del Faro - Luna con datos reales]], sus datos en `Propuestas/Datos/` y sus capturas en `Propuestas/Capturas/`.
+- `Referencias/Tablero_usuario/`: 14 capturas y [[Analisis del tablero]].
+---
+tipo: propuesta
+fecha: 2026-11-12
+origen: idea de Guillermo
+estado: validada con una prueba en Godot � espera la aprobaci�n de dise�o
+fases: 2 (misiones), 5 (niveles) y 7 (interfaz)
+---
+
+# Mirador del Faro: la Luna con datos reales de NASA
+
+> Idea de Guillermo (2026-11-12): �una zona donde pueda incrustar data satelital de la NASA, por ejemplo ver desde un telescopio y poder observar la Luna y que nuestra mascota aparezca dando datos, mientras la Luna se observa�.
+
+## Veredicto
+
+**Viable, y da para m�s de lo previsto.** El juego puede mostrar la Luna real del d�a en que se juega, vista desde Guayaquil, con su fase, su distancia y su inclinaci�n exactas. Los datos y las texturas salen de servicios p�blicos de NASA que se comprobaron hoy.
+
+| Pregunta | Respuesta | Evidencia |
+|---|---|---|
+| �Hay datos de la Luna para cualquier hora y lugar? | S�: fase, distancia, tama�o, altura y orientaci�n | Consulta real a JPL Horizons, m�s abajo |
+| �Hay im�genes de la Luna para cada hora de 2026? | S�: 8 760 im�genes y una tabla JSON | NASA SVS 5587 y su API Dial-A-Moon, probada |
+| �Hay texturas para una Luna 3D detallada? | S�: mapa de color de LROC y mapa de relieve de LOLA | NASA SVS 4720, �CGI Moon Kit� |
+| �Se pueden usar en un juego? | S�, con cr�dito a NASA y sin sugerir su respaldo | Gu�a de uso de im�genes de NASA |
+| �Rinde en el equipo? | Deber�a: es una esfera con textura | Sin medir todav�a |
+
+![[L03_ui_telescopio_luna.png]]
+
+*Maqueta de interfaz del lote 03. La Luna de la maqueta la dibuj� la IA; en el juego se usar� la textura de NASA. Los n�meros de las fichas son los reales de esta noche.*
+
+## La prueba: la Luna de esta noche desde el Mirador
+
+Consulta a la API de JPL Horizons (versi�n 1.2, efem�rides DE441) para el faro del cerro Santa Ana, el 12 de noviembre de 2026. Script: `herramientas/luna_efemerides.py`. Respuesta guardada en `Propuestas/Datos/`.
+
+| Hora en Guayaquil | Cielo | Altura | Iluminada | Distancia | Tama�o aparente | Borde iluminado |
+|---|---|---:|---:|---:|---:|---|
+| 18:00 | d�a | 38,8� | 11,9 % | 401 311 km | 29,8� | abajo, algo a la derecha |
+| 19:00 | crep�sculo | 26,4� | 12,1 % | 402 491 km | 29,7� | abajo |
+| 19:30 | noche | 20,0� | 12,2 % | 403 151 km | 29,6� | abajo |
+| 20:00 | noche | 13,6� | 12,3 % | 403 846 km | 29,6� | abajo |
+| 21:00 | noche | 0,8� | 12,5 % | 405 290 km | 29,5� | abajo |
+
+**Cruce con una segunda fuente.** Dial-A-Moon (NASA SVS) da, para las 20:00: fase del 12,76 %, edad de 3,75 d�as y distancia de 405 396 km. Su distancia es desde el centro de la Tierra; la de Horizons, desde el Mirador. La diferencia, 1 550 km, cuadra con el radio terrestre por el seno de la altura de la Luna: 6 371 km � sen 13,6� ~ 1 498 km.
+
+### Lo que esta noche puede ense�ar el juego
+
+- **La Luna �sonriente�.** El borde iluminado apunta hacia abajo: de 182� a 206� medidos desde el cenit. Cerca del ecuador, la Luna creciente se ve acostada, como una sonrisa. Es un detalle propio de Guayaquil que el juego puede mostrar con exactitud.
+- **La luz cenicienta.** En una creciente tan fina se ve la parte oscura del disco, iluminada por la luz que refleja la Tierra.
+- **La distancia cambia seg�n d�nde est�s.** Desde el Mirador la Luna se alej� casi 4 000 km entre las 18:00 y las 21:00. Casi todo se debe al giro de la Tierra, que aleja el Mirador de la Luna mientras esta se pone.
+- **Esta noche est� cerca de su distancia m�xima:** 405 396 km desde el centro de la Tierra, dentro del rango del apogeo, con 29,6� de tama�o aparente.
+
+## Fuentes de NASA comprobadas hoy
+
+1. **JPL Horizons API.** Calcula la posici�n y el aspecto de la Luna para un punto de la Tierra y una hora. Se prob� con datos reales.
+2. **NASA SVS 5587, �Moon Phase and Libration, 2026�.** Publicada el 11-12-2025.
+   - Una imagen por hora del a�o: 8 760 cuadros, hasta 5760�3240.
+   - Tabla de datos `mooninfo_2026.json`: fase, di�metro, distancia, ascensi�n recta y declinaci�n, punto subsolar, punto subterrestre y �ngulo de posici�n.
+   - El norte celeste va arriba. La versi�n con el sur arriba es la 5588.
+   - Su API Dial-A-Moon responde por hora; se prob�.
+3. **NASA SVS 4720, �CGI Moon Kit�.** Actualizada el 09-01-2026.
+   - Mapas de color de LROC WAC: de 1024�512 a 27360�13680. Por ejemplo, `lroc_color_poles_4k.tif` (4096�2048, 12,5 MB).
+   - Mapas de relieve de LOLA, en kil�metros: de `ldem_4.tif` (1440�720, 4,0 MB) a `ldem_64.tif` (23040�11520, 1 012,6 MB).
+   - Cr�dito pedido: �NASA's Scientific Visualization Studio�. Aviso de la p�gina: est�n optimizados para la est�tica, no para la ciencia.
+4. **Gu�a de uso de im�genes y medios de NASA.**
+   - El material de NASA, incluidos los mapas de textura y los pol�gonos de modelos 3D, en general no tiene derechos de autor en EE. UU. La gu�a menciona las simulaciones gr�ficas por computadora entre los usos permitidos.
+   - Hay que reconocer a NASA como fuente.
+   - El uso comercial no puede sugerir, expl�cita ni impl�citamente, que NASA respalda el producto.
+   - La insignia, el logotipo y los identificadores de NASA no son de dominio p�blico. La insignia no puede aparecer en im�genes generadas por IA.
+
+## C�mo funcionar�a en el juego
+
+**La escena del telescopio**
+
+- La Luna es una esfera 3D con el mapa de color de LROC (4k) y el relieve de LOLA convertido en mapa de normales.
+- La luz del Sol llega desde la direcci�n del borde iluminado. La esfera gira seg�n el punto subterrestre (la libraci�n) y el �ngulo paral�ctico del Mirador. As� coinciden la fase, la inclinaci�n y la cara visible.
+- El ocular es una vi�eta circular con ret�cula cian, enfoque y zoom. Una opci�n muestra la imagen invertida, como en un telescopio real.
+- �rbita aparece en una esquina y comenta con los datos de la tabla, citando la fuente y la hora.
+- Se pueden marcar mares y cr�teres con su nombre. Los lugares de alunizaje del programa Apolo enlazan con el archivo Apolo del guion anterior.
+
+**Los datos**
+
+- **Sin conexi�n:** una tabla por hora para varios a�os, generada con `luna_efemerides.py` desde Horizons o tomada de la tabla anual de NASA SVS.
+- **Con conexi�n (opcional):** una consulta a Horizons para la fecha y el lugar del jugador.
+- **Respaldo:** f�rmulas astron�micas en GDScript, comparadas contra Horizons con una tolerancia fijada.
+
+**El juego**
+
+- En el Acto I, la primera visita al Mirador muestra la Luna de ese d�a.
+- Misi�n propuesta, �Bit�cora lunar�: observar la Luna en tres fases distintas y anotarlas en el cuaderno. La recompensa es la carta estelar `COL-12`.
+- Conecta con el Mirador del mapa del lote 02 y con el planetario y el archivo Apolo del guion anterior.
+
+## Riesgos
+
+| Riesgo | Qu� hacer |
+|---|---|
+| El t�tulo de trabajo dice �NASA� | Para publicar, usar un t�tulo sin �NASA�. En los cr�ditos: �Datos: NASA/JPL Horizons; NASA Scientific Visualization Studio; LRO�. |
+| La pr�ctica �en la NASA� del guion anterior | Mantener el centro espacial como ficticio, sin logotipos ni insignias, como en el lote 02. |
+| M�sica de los videos de NASA SVS | Las versiones con m�sica usan pistas de Universal Production Music, con derechos de terceros. No usarlas. |
+| Precisi�n cient�fica | Las texturas son �para la est�tica�. Las cifras de las fichas salen siempre de Horizons o de la tabla de NASA. |
+| Jugar sin internet | Tabla incluida en el juego; la consulta en l�nea es opcional. |
+
+## Extensiones por validar
+
+- **Planetas por el telescopio:** J�piter con sus lunas y Saturno con sus anillos, con la misma API.
+- **La Tierra vista desde sat�lites:** im�genes reales del estuario del Guayas para la misi�n �Vig�a del Golfo� del guion anterior.
+- **La Estaci�n Espacial** pasando sobre Guayaquil, con sus datos orbitales p�blicos.
+
+## Prueba t�cnica en Godot (2026-11-12)
+
+Guillermo autoriz� la descarga el mismo d�a (�S�, desc�rgalos�).
+
+![[luna_telescopio.png]]
+
+*Captura de Godot 4.7.2 (`pruebas/luna_telescopio/`): la Luna de las 19:30 desde el Mirador, con texturas de LRO, la luz cenicienta, a �rbita y las fichas calculadas.*
+
+### Descargas
+
+Cada archivo est� en su propia carpeta de `externos/`, con tama�o y SHA-256 en `Propuestas/Datos/descargas_nasa.json`.
+
+| Archivo | Bytes | Contenido |
+|---|---:|---|
+| `lroc_color_poles_4k.tif` | 13 095 388 | Color, 4096�2048, RGB de 8 bits |
+| `ldem_4.tif` | 4 153 352 | Relieve, 1440�720, en km, coma flotante |
+| `mooninfo_2026.json` | 2 094 339 | 8 760 horas de 2026 |
+
+### C�mo funciona
+
+1. `herramientas/luna_texturas.py` comprueba la orientaci�n de los mapas con rasgos conocidos:
+   - el punto m�s alto cae a 0,0� de la cumbre Selenean;
+   - el m�s bajo, a 0,4� del cr�ter Antoniadi;
+   - la cara visible es m�s oscura y m�s baja.
+
+   Despu�s convierte el color a JPG y el relieve a un mapa de normales sin exagerar.
+2. `herramientas/luna_efemerides.py` consulta Horizons para el Mirador: punto subobservador, punto subsolar, �ngulo del polo norte y �ngulo paral�ctico. `herramientas/luna_parametros.py` toma la fila de una hora y calcula la puesta.
+3. El shader proyecta cada p�xel del disco sobre la esfera, lo pasa a longitud y latitud selenogr�ficas y lee las texturas. La luz sigue la ley de Lommel-Seeliger, que da a la Luna llena su brillo parejo hasta el borde. El relieve se exagera �4 junto al terminador y �1,5 en el resto.
+4. Las texturas son recursos importados de Godot y se cargan con `preload`: el color en BC7 con mipmaps y las normales sin p�rdida. As� existen tambi�n en el juego exportado.
+5. Las fichas, los r�tulos (�Terminador�, �Luz cenicienta�) y la frase de �rbita se calculan con los datos, seg�n la fase y la altura.
+6. `herramientas/luna_medir.py` mide las capturas contra Horizons: fracci�n iluminada, �ngulo del borde y orientaci�n de la textura.
+
+### Mediciones
+
+Todas con el c�digo final. `luna_medir.py` da �coincide con Horizons� en los tres casos medidos: editor, juego exportado y HDR 2D.
+
+| Prueba | Godot | Referencia o criterio |
+|---|---:|---:|
+| Fracci�n iluminada (m�scara) | 12,15 % | Horizons: 12,2 % |
+| Borde iluminado desde el cenit | 192,6� | Horizons: 192,6� |
+| Orientaci�n de la textura (`luna_medir.py`) | Correlaci�n 0,990; mejor giro 0,00�; en espejo, 0,303 como m�ximo | M�s de 0,9; giro de 0,5� o menos; espejo por debajo de 0,5 |
+| Posici�n de Mare Crisium (revisor) | (586,8; 524,3) px | Proyecci�n independiente: (588,4; 522,4) px |
+| Gibosa del 21 nov a las 21:00, a 70,6� de altura | 91,21 % y borde a 41,0� | Horizons: 91,2 % y 41,0� |
+| Juego exportado (`.pck`) contra el editor | 0 niveles de diferencia | Id�nticos |
+| HDR 2D contra normal, dentro del disco | 0,85 niveles de media, 1 como m�ximo | Sin cambio visible |
+| Costo en GPU, HD 620 a 720p (revisor) | 0,74 ms; 2,2 a 2,5 ms con la Luna a pantalla completa | 16,7 ms por cuadro a 60 fps |
+
+![[luna_gibosa_2026-11-21.png]]
+
+*La misma escena con la gibosa del 21 de noviembre a las 21:00: el disco crece a 32,7� y el borde iluminado queda arriba a la izquierda. Sin luz cenicienta visible, el r�tulo no aparece.*
+
+![[luna_bajo_horizonte_2026-11-12.png]]
+
+*A las 22:00 de hoy la Luna ya se puso: no se dibuja, y �rbita lo dice. A las 06:00 de ma�ana, por el este, dice que todav�a no sale.*
+
+### Verificaci�n independiente
+
+- **Orientaci�n:** un revisor reh�zo la proyecci�n por su cuenta, sin mirar el shader. Los rasgos caen a 0,6 px o menos en la luz cenicienta y a entre 1 y 2,5 px en la media luna. Descart� el espejo, el giro de 180� y los errores de signo. Confirm� en la documentaci�n de Horizons que las longitudes son positivas al este y que NP.ang y SN.ang se miden de norte a este.
+- **Datos:** otro revisor compar� la tabla de NASA con Horizons en las 8 760 horas de 2026. Diferencia m�xima: 0,0075 puntos de iluminaci�n, 0,67 km de distancia y 0,006� en la libraci�n. Con las correcciones topoc�ntricas (paralaje y �ngulo paral�ctico) la tabla reproduce lo que se ve desde el Mirador. Las descargas coinciden en tama�o y SHA-256.
+- **C�digo:** un tercer revisor audit� el shader y el script como si fueran a producci�n, con un emulador propio del shader y un `.pck` exportado. Encontr� 9 problemas: 1 cr�tico, 3 medios y 5 bajos. La captura de esta noche era correcta; los fallos aparec�an en el juego exportado, en otras fechas o con otros ajustes.
+
+### Correcciones aplicadas tras la verificaci�n
+
+- **Hora de puesta:** pas� de 21:04 a **21:07**. Ahora sigue el criterio de los almanaques: el borde superior toca el horizonte, con 34� de refracci�n. La de 21:04 era el centro del disco sin refracci�n. La maqueta del lote 03 dec�a 21:05.
+- **Decimales:** el �ngulo del polo norte y el paral�ctico se guardan con tres decimales. El redondeo giraba el disco 0,02�.
+
+Hallazgos del revisor de c�digo:
+
+| Hallazgo | Gravedad | Correcci�n y prueba |
+|---|---|---|
+| Las texturas no exist�an en el juego exportado: la Luna sal�a como un disco gris y el gato desaparec�a | Cr�tica | Recursos importados y `preload`. El `.pck` exportado da una captura id�ntica a la del editor |
+| La Luna se dibujaba bajo el horizonte; r�tulos y frase fijos | Media | Aviso y frase seg�n el acimut; r�tulos seg�n la fase. Probado a las 22:00 de hoy, a las 06:00 de ma�ana y con la gibosa del 21 de noviembre |
+| Con HDR 2D la gamma se aplicaba dos veces y la captura no lo mostraba | Media | El shader entrega color lineal con la curva sRGB exacta y la captura lo convierte de vuelta. Disco: 0,85 niveles de diferencia |
+| La orientaci�n vale solo para la hora de la fila; cerca del cenit gira hasta 12� por minuto | Media | **Pendiente**: calcular el �ngulo paral�ctico en el juego para cada instante |
+| Polos y costura de �180�: saltos de nivel de detalle | Baja | Sin envolver en vertical y derivadas corregidas en la costura |
+| Derivadas dentro de ramas y `smoothstep` con los bordes invertidos | Baja | Geometr�a fuera de las ramas y bordes en orden |
+| Relieve �4 horneado en el mapa | Baja | Mapa sin exagerar; el shader aplica �4 junto al terminador y �1,5 en el resto |
+| La luz cenicienta oscurec�a el limbo un 40 % y no cambiaba con la fase | Baja | Sin el factor de �ngulo y escalada con la fase de la Tierra vista desde la Luna |
+| Aspecto y tama�o del disco fijos | Baja | El disco escala con el di�metro aparente (29,4� a 33,5�) y la ventana conserva la proporci�n |
+
+Dos hallazgos m�s salieron al probar las correcciones:
+
+- `Image.linear_to_srgb()` de Godot 4.7.2 solo acepta im�genes de 8 bits. Con HDR 2D la captura quedaba sin convertir, 20 niveles m�s oscura. Ahora se convierte p�xel a p�xel (2,6 s por captura).
+- La salida lineal con `pow(x, 2.2)` oscurec�a las sombras unos 6 niveles frente a la curva sRGB exacta que usa Godot.
+
+La prueba de orientaci�n de `luna_medir.py` daba 0,650: las l�neas cian de los r�tulos cruzan la zona de luz cenicienta. Al excluirlas da 0,990.
+
+### L�mites conocidos
+
+- **Una hora fija:** la escena usa la fila de una hora. Cerca del cenit, que en Guayaquil ocurre unas dos veces al mes, el disco gira r�pido: el 21 de noviembre el borde iluminado pasa de 41� a 89� entre las 21:00 y las 22:00. Para cualquier instante, el juego debe calcular el �ngulo paral�ctico con la declinaci�n y el �ngulo horario.
+- **Solo 2026:** la tabla cubre las 8 760 horas de 2026. Para otro a�o hace falta la tabla anual de NASA de ese a�o o Horizons.
+- **Ruta sin conexi�n:** el �ngulo del eje de la tabla se mide desde el norte J2000. Hay que pasarlo al norte de la fecha (hasta 0,17�) antes de restar el �ngulo paral�ctico.
+- **Cielo siempre nocturno:** de d�a y en el crep�sculo se siguen dibujando estrellas sobre fondo negro.
+- **Sin eclipses:** en un eclipse lunar la Luna saldr�a llena y blanca.
+- **Bajo el horizonte:** el panel no da la hora de salida; �Se pone� queda en �-�.
+- **Vista a ojo desnudo:** un telescopio real sin diagonal invierte la imagen 180�. Puede ser una opci�n del juego.
+- **Sin sombras proyectadas:** el relieve solo sombrea; no hay sombras arrojadas por cr�teres.
+- **Imagen fija:** no hay enfoque ni zoom todav�a.
+---
+tipo: biblia de arte
+version: v0.1
+fecha: 2026-11-12
+estado: borrador � se ampl�a con cada veredicto de Guillermo
+decisiones: D-011, D-012, D-013
+---
+
+# Biblia de arte � v0.1
+
+Reglas para que todo el juego se vea igual en el tiempo. Nace de las tres im�genes que aprob� Guillermo. Cada recurso nuevo se compara contra esta p�gina antes de mostrarse.
+
+## 1. Anclas de estilo
+
+Son las im�genes aprobadas. Se pasan como referencia en cada encargo; est�n subidas a Higgsfield y sus identificadores est�n en `anclas.json`.
+
+| Ancla | Qu� fija | Decisi�n |
+|---|---|---|
+| ![[L01_A_lowpoly_hub_gpt26.png\|300]] `ANC_HUB` | Estilo de interiores y del hub lateral | D-011 |
+| ![[L01_A_lowpoly_exploracion_gpt26.png\|300]] `ANC_EXPLORACION` | Estilo de los exteriores | D-011 |
+| ![[L02_exploracion_camara_alta.png\|300]] `ANC_VISTA_JUEGO` | C�mara y acabado de la exploraci�n | D-013 |
+
+Referencias de dise�o, sin veredicto todav�a: `ANC_PROTA_1`, `ANC_PROTA_2`, `ANC_GATO` y `ANC_MAPA` (lote 02).
+
+## 2. Cinco pilares visuales
+
+1. **Low-poly pintado a mano.** Facetas planas y n�tidas, cada una con un degradado pintado. Sin texturas fotogr�ficas.
+2. **Luz c�lida, sombra fr�a.** Luz principal c�lida, sombra azul petr�leo, borde de luz (rim) en las siluetas.
+3. **La silueta primero.** Formas gruesas y simples que se lean a un octavo de la pantalla.
+4. **El cian es la tecnolog�a.** Se reserva para datos, hologramas, interacci�n y recolectables. Ning�n otro objeto lo usa.
+5. **Guayaquil vivo.** Vegetaci�n tropical, fauna, cables, ropa tendida, techos de zinc y escalinatas.
+
+## 3. Paleta maestra (medida)
+
+Medida con `herramientas/paleta.py` sobre las tres anclas: 16 colores por k-means, m�s el cian del holograma.
+
+![[paleta_maestra.png]]
+
+| Papel | Colores |
+|---|---|
+| Luz c�lida | `#F8C991` crema � `#F4A159` naranja de sol � `#DAAA25` dorado |
+| Tierra, muros y terracota | `#D09880` � `#AF795E` � `#924930` � acento coral `#E46043` |
+| Vegetaci�n | `#A48A29` hierba al sol � `#6D6A2B` hierba en sombra |
+| Maderas | `#836258` � `#583F22` |
+| Sombra fr�a y piedra | `#516B7C` azul petr�leo � `#4B4E47` � `#998385` � `#B8BBC6` |
+| Lo m�s oscuro | `#322C1D`, nunca negro puro |
+| Tecnolog�a y datos | `#62E4E0` cian � `#36B1B2` cian medio � `#CEF8F5` brillo |
+
+**Comprobaci�n autom�tica:** `python herramientas/paleta.py comparar <imagen>` mide qu� parte del color de un recurso nuevo cae cerca de esta paleta. Es un indicador para detectar desv�os, no un veredicto. El resultado de cada hoja aparece en [[Catalogo de recursos]].
+
+**Calibraci�n (2026-11-12):** las anclas dan del 99 al 100 %, y las direcciones descartadas del lote 01 (gouache y maqueta) tambi�n dan 100 %. El indicador detecta desv�os de color, no de estilo. El centro espacial da 47 % porque usa la paleta fr�a: necesitar� su propia paleta maestra cuando se apruebe.
+
+**Excepci�n:** la Luna, los planetas y las im�genes de sat�lite del telescopio usan datos reales de NASA. Son fotogr�ficos a prop�sito, dentro de un marco de interfaz que s� sigue la paleta.
+
+## 4. Proporciones
+
+- Estudiantes: 3 cabezas. Adultos: unas 3,5 cabezas.
+- El gato llega m�s o menos a la rodilla del protagonista.
+- Toda hoja de objetos lleva la silueta gris del estudiante como escala.
+
+## 5. C�maras
+
+- **Exploraci�n:** c�mara alta fija, a unos 60� hacia abajo, sin horizonte ni cielo. El personaje ocupa un octavo del alto de la pantalla. Ancla: `ANC_VISTA_JUEGO`.
+- **Hub e interiores:** diorama lateral en corte, con capas de primer plano y fondo. Ancla: `ANC_HUB`.
+- **Telescopio:** vista de ocular a pantalla completa. Ver [[Mirador del Faro - Luna con datos reales]].
+
+## 6. Interfaz
+
+Cuaderno de ingenier�a: papel milimetrado crema, tinta, papel rasgado, garabatos de circuitos y acentos azul petr�leo y cian. Ancla: `ANC_MAPA`. En el juego, el texto se compone en el motor para poder traducirlo.
+
+## 7. Luz por momento del d�a
+
+| Momento | Luz principal | Sombras | Pr�cticas |
+|---|---|---|---|
+| Tarde, la luz base | Sol c�lido y bajo | Azul petr�leo | - |
+| Noche | Luna azul fr�a | Azul profundo | Faroles, ventanas y guirnaldas c�lidas |
+| Centro espacial | Blanco fr�o | Azul y gris titanio | Dorado y cian |
+
+## 8. Hacer y evitar
+
+| Hacer | Evitar |
+|---|---|
+| Facetas visibles con degradado pintado | Texturas fotogr�ficas, salvo los datos reales de NASA |
+| Materiales mates; brillos peque�os solo en metal | Reflejos de espejo y pl�stico brillante |
+| Silueta clara y pocas piezas | Ruido de detalle que no se lee a escala de juego |
+| Cian solo para tecnolog�a e interacci�n | Cian en ropa, flores o decoraci�n |
+| Dise�os propios inspirados en Guayaquil | Logotipos, marcas, insignias de NASA y dise�os de otros juegos |
+
+## 9. C�mo nace un recurso
+
+1. **Ficha.** Darle un ID con su prefijo de categor�a, como `VEG-15`, y a�adirlo a un encargo de hoja.
+2. **Encargo.** Usar los bloques fijos de `bloques_prompt.json` (`{ESTILO}`, `{HOJA}`, `{ROTULOS}`.) y pasar las anclas como referencia (`@ANC_HUB`).
+3. **Generaci�n.** Con `herramientas/hf_generar.py`, que cotiza, respeta el tope del lote, descarga el original y registra todo.
+4. **Control.** Medir la paleta y revisar la hoja ampliada: manos, r�tulos y objetos.
+5. **Veredicto.** Guillermo aprueba o pide cambios. El estado va a `veredictos.json`.
+6. **Cat�logo.** `python herramientas/manifiesto.py` actualiza `manifiesto_recursos.csv` y [[Catalogo de recursos]].
+7. **Versiones.** Un cambio crea `v2`; la `v1` no se borra.
+
+## 10. Bloques fijos de los encargos (v1)
+
+Est�n en `bloques_prompt.json` y no se editan: un cambio crea un bloque nuevo, como `ESTILO_V2`, y se anota aqu�.
+
+| Bloque | Para qu� sirve |
+|---|---|
+| `ESTILO` | El estilo low-poly pintado, la luz y la paleta |
+| `HOJA` | Fondo, luz neutra, cuadr�cula y silueta de escala de las hojas |
+| `ROTULOS` | R�tulos en espa�ol bajo cada objeto |
+| `CAMARA_JUEGO` | La c�mara alta aprobada |
+| `PROTAGONISTA` y `GATO` | La descripci�n fija de los dos personajes |
+| `SIN_TEXTO` | Im�genes sin texto ni logotipos |
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command '$env:PYTHONIOENCODING='"'utf-8'; @'
+from pathlib import Path
+from pypdf import PdfReader
+p=Path('Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf')
+r=PdfReader(p)
+print('PAGINAS',len(r.pages))
+for i,p in enumerate(r.pages):
+ t=p.extract_text()
+ if any(s in t.lower() for s in ['fase 2','narrativ','puerta']):
+  print('\\n--- PAGINA',i+1,'---\\n',t)
+'@ | python -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1397ms:
+PAGINAS 3
+
+--- PAGINA 1 ---
+ Plan Maestro de Desarrollo: Proyecto
+NASA-Ecuador (AAA Scope)
+Instrucción al Agente de IA: Actúa como un Director de Videojuegos AAA, Arquitecto Técnico
+Principal en Godot 4, y Director de Arte/Sonido. El objetivo es estructurar un RPG de aventura,
+simulación y exploración educativa con valores de producción de la más alta calidad.
+Concepto Base: Un estudiante de ingeniería de control en Guayaquil en su viaje para llegar a la
+NASA. El juego enseñará ciencia real (astrofísica, electrónica) mediante ludificación. Se utilizará
+un estilo 2.5D/2D-HD, entornos low-poly generados con Higgsfield AI, música
+ambient/shoegaze, tipografía DotGothic16 y un gato científico interactivo.
+Regla Maestra de Flujo de Trabajo (Puertas de Validación): Abordaremos el desarrollo en 8
+fases estrictas. Presentarás un análisis exhaustivo para UNA SOLA FASE a la vez y te detendrás.
+No avanzarás hasta recibir aprobación milimétrica o correcciones. Se exige un nivel de detalle técnico
+y artístico digno de un estudio First-Party.
+Fase 0: Investigación Técnica, Arquitectura y Pipeline AAA
+Motor y Renderizado: Uso de Godot 4 (Forward+). Análisis de iluminación global (SDFGI) vs.
+Lightmaps horneados para el estilo 2D-HD. Técnicas para proyectar sombras 3D realistas sobre
+sprites 2D ortogonales.
+Pipeline de Arte con Inteligencia Artificial: Creación de una tubería de trabajo (pipeline)
+automatizada o semi-automatizada para generar mallas base con Higgsfield, retopología
+automática, mapeo UV y texturizado para asegurar consistencia visual y rendimiento.
+Estructura de Datos: Arquitectura de código (ECS - Entity Component System vs OOP clásico
+de Godot). Configuración de control de versiones (Git LFS para recursos pesados) e integración
+continua (CI/CD) para builds automáticos.
+Fase 1: Dirección de Arte Visual y Cinematografía
+Paleta y Teoría del Color: Contraste narrativo visual. Guayaquil se representará con tonos
+cálidos (naranjas, amarillos, verdes tropicales húmedos) y la NASA/Centros de simulación con
+tonos asépticos y técnicos (azules profundos, grises titanio, acentos dorados).
+Identidad Low-Poly Estilizada: No es un low-poly genérico. Definiremos reglas de
+sombreado (ej. cel-shading con rim lighting), sin interpolación de normales en bordes duros, y
+texturas tipo hand-painted para integrar los modelos de Higgsfield al mundo 2.5D.
+Proyecto NASA-Ecuador (AAA Godot GDD) Página 1 de 3
+
+--- PAGINA 2 ---
+ Cinematografía y "Game Feel" de Cámara: Cámaras virtuales dinámicas en Godot
+(PhantomCamera). Uso de tiempos muertos, planos contemplativos (inspiración Wong Kar-wai)
+para enfatizar la soledad del estudio y la magnitud del espacio.
+Fase 2: Estructura Narrativa y Diseño de Misiones
+Progresión del Héroe: De reparar microcontroladores en el barrio a programar simuladores
+orbitales. Estructura de actos claros y pacing (ritmo de juego).
+Ludificación Educativa AAA: Integración de conceptos reales (Leyes de Kepler, compuertas
+lógicas, telemetría) en rompecabezas táctiles. Nunca será un "examen", será una herramienta de
+supervivencia o progreso mecánico.
+Sistema de Diálogos: Uso de árboles de diálogo ramificados, localización profunda (i18n), y
+tono emocional que equilibre el humor costeño con el rigor científico hiperrealista.
+Fase 3: Personajes, Animación y Entidades
+Diseño del Protagonista: Estética urbana y técnica (techwear/streetwear). Análisis de
+animaciones: ¿Sprites 2D dibujados a mano con múltiples direcciones (ej. 8 direcciones) o
+modelos 3D renderizados como sprites?
+El Gato Científico: Diseño de IA del compañero. Usaremos NavigationServer en Godot
+para un pathfinding orgánico. Mecánicas: detección de recursos, asistencia en rompecabezas y
+puerto de interacción secundaria.
+NPCs y Ecosistema: Diseño de rutinas diarias de los personajes secundarios para dar vida al
+mundo (estilo Majora's Mask o Fable).
+Fase 4: Diseño Acústico Espacial y Banda Sonora
+Sistemas Dinámicos (FMOD/Wwise): Implementación de audio adaptativo. La música
+transiciona fluidamente entre exploración y concentración científica.
+Dirección Musical (OST): Combinación de Kankyō Ongaku (Ambient japonés: Hiroshi
+Yoshimura, Meitei) para estudio y ciudad, mezclado con guitarras etéreas (Shoegaze) y
+sintetizadores modulares intensos para descubrimientos astronómicos.
+SFX Táctil: El sonido debe ser hiper-satisfactorio (clics de teclados mecánicos, crujidos de
+soldadura de estaño, zumbidos de osciloscopios). Reverb calculado por volumen del entorno en
+Godot.
+Proyecto NASA-Ecuador (AAA Godot GDD) Página 2 de 3
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'C:\\Users\\guill\\Desktop\\Juego\\Juego_2d-hd\\3_Guion_y_Mundo\\historia.md' -Encoding UTF8; Get-ChildItem -LiteralPath 'Nasa_Game/Fase_2_Narrativa' -Force" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 429ms:
+# Historia � Gravedad 2D-HD
+
+**Reto:** Space Mission Design Game. El juego ense�a a dise�ar, gestionar y simular misiones. La historia explica por qu� importa: un estudiante de ingenier�a de Guayaquil, con avatar creado por el jugador, abre un libro de ciencia y a�os despu�s aplica lo aprendido en misiones cada vez m�s exigentes.
+
+**Fuentes.** Esta nota es la fuente narrativa. Une el plan maestro con el [dossier �Arte e Historia�](../2_Arte_e_Interfaz/arte%20e%20Historia.md) de Astra/Codex, que contiene el storyboard visual, las fichas de personaje y las vi�etas 01 a 18. Los nombres y di�logos siguen siendo propuestas que el usuario debe revisar.
+
+## Estructura
+
+| Acto | Vi�etas del dossier | Lugar | Misi�n jugable en la consola | Qu� aprende el jugador | Estado |
+| --- | --- | --- | --- | --- | --- |
+| I � Guayaquil | 01-09 | Cuarto, casa, Malec�n y universidad | **Vig�a del Golfo**: proyecto de la rama estudiantil, un sat�lite en �rbita baja que observa los manglares del Guayas (vi�eta 04, �Una �rbita sale del papel�) | Arrastre atmosf�rico, nubes (radar o c�mara), presupuesto | Cuarto y consola jugables |
+| II � Una se�al d�bil | 10-12 | Sala de entrenamiento de la pr�ctica | **Hielo en la sombra lunar** y **Tormentas de polvo en Marte** como misiones de entrenamiento ficticias | Lanzador, ?v, radiaci�n, energ�a y enlace que caen con la distancia | Jugables |
+| III � Una pregunta compartida | 13 en adelante | Biblioteca brutalista | Simulador de vuelo con inercia, planetario y archivo Apolo | Contexto hist�rico y comparaci�n de mundos | Pendiente |
+
+La vi�eta 11, �Diagnosticar una p�rdida�, es el coraz�n del Acto II. Cuando una simulaci�n falla, la consola explica la causa: energ�a, datos, masa o presupuesto. La **Dra. Vega** pone voz a esa explicaci�n. Su regla (�cambia un par�metro a la vez�) es el consejo de dise�o del juego.
+
+## Personas
+
+| Personaje | Papel en el juego |
+| --- | --- |
+| Avatar | Lo crea el jugador. Estudia ingenier�a en Guayaquil. |
+| Elena y Rafael | Familia en casa. Acto I. |
+| Lidia Vera | Malec�n de Guayaquil. Acto I. |
+| Sam Rivas | Universidad y rama estudiantil. Presenta el modo de equipo de hasta cuatro personas, con un rol por columna de la consola. |
+| Dra. Vega | Mentora en el control de misi�n. Explica las fallas. |
+| Ari | Biblioteca y cierre. Recibe el cuaderno de observaciones. |
+| ��rbita� (mascota cient�fica) | Gu�a la consola y se�ala los datos en el planetario. |
+
+## Reglas narrativas
+
+- El tono es c�lido y costumbrista en Guayaquil, y preciso en la consola. Cada dato t�cnico tiene fuente.
+- La pr�ctica y la sala de control son ficticias. Las misiones reales, como Apolo, LRO, MRO o MAVEN, se citan como referencia educativa. No usar el logotipo de NASA ni sugerir su respaldo.
+- Las lecturas que produce la simulaci�n se identifican como simulaci�n y se distinguen de los datos verificados de NASA o JPL (criterio del dossier).
+- Cada l�nea de di�logo cabe en dos renglones a 384 � 216 px.
+- Al fallar, el juego explica la causa y deja redise�ar. No basta con decir �incorrecto�.
+
+## L�neas iniciales (borrador)
+
+| Momento | Personaje | Texto |
+| --- | --- | --- |
+| Entrar al cuarto | - | Atardecer en Guayaquil. El libro del escritorio brilla otra vez. |
+| Cerca del libro | - | [E] Abrir el libro |
+| Holograma | �rbita | Mapa de misi�n cargado. Elige un objetivo. |
+| Falla a 400 km | Dra. Vega | A 400 km todav�a hay atm�sfera. Sube la �rbita y vuelve a simular. |
+| Datos perdidos | Dra. Vega | Cambia un par�metro a la vez. Empieza por la antena. |
+| Primer �xito | �rbita | Datos recibidos. El Golfo se ve con otros ojos. |
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_2_Narrativa
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----        12/11/2026      9:27                Investigacion                                                        
+d-----        12/11/2026      9:27                Tareas_Codex                                                         
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'C:\\Users\\guill\\Desktop\\Juego\\Juego_2d-hd\\2_Arte_e_Interfaz\\arte e Historia.md' -Encoding UTF8" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 267ms:
+<!-- section: PORTADA -->
+# Arte e Historia
+
+**Gravedad 2D-HD � Biblia visual y storyboard**
+
+Desde una habitaci�n en Guayaquil hasta una misi�n espacial, un avatar que estudia ingenier�a convierte la curiosidad en algo que puede probar, corregir y compartir.
+
+![Concepto Atardecer, con el avatar junto al escritorio](habitacion-02-atardecer-escala.png)
+_Atardecer. L�mina de concepto Higgsfield. El usuario eligi� sus proporciones como referencia de montaje._
+
+**Documento interno de equipo � 09.11.2026 � v0.1**
+
+<!-- section: 01 / ALCANCE -->
+## La historia y el alcance
+
+**Premisa.** El jugador crea un avatar de ingenier�a, abre un libro de ciencia en su cuarto y descubre una forma de mirar su ciudad y el cielo con las mismas preguntas. A�os despu�s aplica ese aprendizaje a una misi�n, preserva el registro de lo que encontr� y vuelve a ponerlo al alcance de otros.
+
+**Acto I � Guayaquil.** El viaje empieza con una transici�n del espacio al cuarto. Un libro responde al jugador. La casa, la ciudad y la universidad ampl�an el mundo y muestran el paso del tiempo hasta la aceptaci�n de una pr�ctica.
+
+**Acto II � Una se�al d�bil.** Una misi�n ficticia de entrenamiento durante la pr�ctica en la NASA convierte la curiosidad en decisi�n. El jugador observa telemetr�a, ajusta el sat�lite y comprende qu� cambi� y por qu�.
+
+**Acto III � Una pregunta compartida.** El libro reaparece en una biblioteca. Abre un simulador de vuelo, un planetario y un homenaje a Apolo. La historia termina cuando otra persona recibe el cuaderno de observaciones del avatar.
+
+### Decisiones y estado
+
+| Estado | Alcance |
+| --- | --- |
+| Confirmado por el usuario | Avatar personalizable al inicio con cabello, ojos, colores y detalles. Primera escena en el cuarto con luz c�lida y un libro hologr�fico. Proporciones de Atardecer. Village Square, Emberfall como patr�n visual. Recursos de la habitaci�n recolocables. |
+| Prototipo interno | Pantalla inicial, creador de avatar, intro y habitaci�n hasta abrir el libro. El alcance jugable se acredita mediante la build y sus pruebas. |
+| Dise�o futuro | Casa, ciudad, universidad, misi�n, biblioteca, planetario, simulador, Apolo y cierre. Los nombres, di�logos, retos y planos de este documento son propuestas para revisi�n. |
+
+**Recorrido del dossier.** Direcci�n visual, fichas de personaje, 18 vi�etas de storyboard, matriz de recursos y entrega. Los diagramas comunican composici�n y puesta en escena. Las l�minas existentes se identifican como concepto o kit.
+
+**Destino.** Desarrollo interno. Si el equipo considera una presentaci�n en NASA Space Apps, la selecci�n del reto, el calendario y la elegibilidad se consultan en la nota de validaci�n de Claude antes de reutilizar trabajo. [Validaci�n del plan para 2026](../0_Reglas_Globales/validacion-claude-2026-11-09.md)
+
+<!-- section: 02 / DIRECCI�N VISUAL -->
+## Del dormitorio a la �rbita
+
+**Mundo terrestre.** Personajes originales de proporciones chibi, con grupos de p�xeles n�tidos. Habitaciones y calles se leen como vol�menes con madera, yeso, textiles, cemento o piedra. Las sombras de contacto fijan el punto de apoyo. La luz de ventana recorre el suelo, con luz fr�a conservada en las caras en sombra.
+
+**C�mara.** Vista oblicua fija para explorar. El primer plano enmarca, el plano jugable contiene la ruta y el fondo pierde contraste. Mantener pies, caminos e interactuables dentro del plano n�tido. Reservar los movimientos de c�mara para entradas, montajes o transiciones.
+
+**Delimitaci�n espacial.** En �rbita el planeta y la atm�sfera son realistas. Sat�lite, avatar, mascota y HUD mantienen bordes definidos. En el planetario, separar fondo 3D, ayudas visuales y fichas. La tipograf�a DotGothic16 se reserva para telemetr�a y datos orbitales. Para di�logo, usar una familia que admita tildes y lectura c�moda.
+
+**Paleta de prueba.** Luz �mbar #E39D58 � sombra �ndigo #28294C � madera #895545 � vegetaci�n #52694F � holograma #00E5FF � papel #F8F0DF. Son muestras de trabajo para comparar bajo iluminaci�n y se ajustan durante la revisi�n.
+
+### Referencias y reglas de montaje
+
+| Referencia | Qu� aporta |
+| --- | --- |
+| Village Square, Emberfall | Patr�n principal elegido por el usuario. Composici�n en capas, texturas por material, luz c�lida y sombras fr�as. Atribuci�n de la captura pendiente. |
+| Bosque y recursos adjuntos | El bosque aporta separaci�n de vegetaci�n y terreno. La hoja del zorro y el diagrama de producci�n sirven como ejemplo de vistas coherentes y despiece. |
+| Atardecer | Referencia de proporciones del cuarto. El escritorio deja libre un frente de aproximaci�n y la proyecci�n cian tiene un �rea propia. |
+
+**Maqueta de referencia.** 384 � 216 px l�gicos, con avatar de 28 px visibles como hip�tesis. A 1920 � 1080, la escala entera es �5. Validar la relaci�n entre p�xeles y escala del mobiliario dentro de la c�mara. Una misma cuadr�cula, origen bajo las suelas y filtrado de vecino m�s pr�ximo para sprites. Separar luz de ventana, ambiente, sombra y resplandor del libro.
+
+**Lectura y confort.** Cada estado de interacci�n se reconoce mediante forma y texto. Evitar brillos continuos detr�s de cifras. Probar contraste con efectos activos, transiciones reducidas y subt�tulos. [Direcci�n art�stica](direccion-artistica.md) � [An�lisis de Village Square](referencias/referencia-principal.md)
+
+<!-- section: 03 / AVATAR -->
+## Avatar de ingenier�a
+
+![Primera l�mina de concepto del avatar personalizable](avatar-concepto-01.png)
+_Concepto Higgsfield. Las combinaciones orientan la prueba de siluetas y rasgos. El cat�logo visual queda abierto a revisi�n._
+
+**Identidad.** El nombre y la apariencia los elige el jugador. El rol narrativo permanece estable. Durante la historia, el avatar aprende observando, formulando una hip�tesis y prob�ndola. Mantener un rasgo elegido visible en la secuencia de graduaci�n, el centro de control y el cierre.
+
+**Modelo de producci�n.** Frontal, tres cuartos, perfil y espalda con apoyo de pies com�n. Hoja base de prueba de 32 � 40 px para capas, 28 px visibles de pie. Orden sugerido desde el fondo al frente con cabello trasero, cuerpo, ropa, ojos, cabello frontal y accesorios. Usar reposo, caminata e interacci�n con el libro como primer conjunto de acciones.
+
+**Prueba de personaje.** Vista ampliada para ojos y accesorios. Vista a escala jugable para silueta y contraste. Revisar que una gafa no atraviese el flequillo y que un bolso conserve su punto de uni�n durante el giro. El equipo pregunta qu� conservar y qu� ajustar tras mostrar cada iteraci�n, antes de pasar al siguiente conjunto de vistas o animaciones. [Ficha y origen de la l�mina](avatar.md)
+
+<!-- section: 04 / REPARTO -->
+## Personas del viaje
+
+Todos los nombres, voces, prendas y colores de esta p�gina son propuestas. Los personajes secundarios comparten escala y lenguaje de p�xel con el avatar. Cada figura tiene un objeto o una forma reconocible a distancia.
+
+### Elena y Rafael � Casa
+
+**Elena** marca el inicio del d�a con una silueta redonda, delantal verde botella #386653 y cabello recogido. Su gesto es secarse las manos antes de entregar la libreta. **Rafael** tiene hombros rectos, camisa arena #BA8A5B y manos ocupadas con una caja de premios. Modelos en frente, tres cuartos, perfil y espalda. Reposo, saludo y gesto con prop.
+
+> **Elena.** �Lleva la libreta. Si algo te sorprende, ap�ntalo�.  
+> **Rafael.** �Ese estante ya est� lleno. La libreta todav�a tiene sitio�.
+
+### Lidia Vera � Malec�n
+
+Vendedora de una peque�a estaci�n de jugos y observadora del r�o. Sombrero de ala corta, delantal rojo teja #A14F3F y termo plateado. El gesto de se�alar conduce la mirada a la baranda. Modelo en cuatro vistas y retrato en tres cuartos. Reposo, servir, se�alar.
+
+> **Lidia.** �Mira esa hoja. Cerca del muelle cambia de rumbo. �Qu� crees que la empuja?�.
+
+### Sam Rivas � Universidad
+
+Integrante del equipo del avatar. Chaqueta verde petr�leo #315E63, mech�n alto y carpeta amarilla #E1AE53. El gesto de sostener una maqueta debe leerse con la carpeta cerrada o abierta. Modelo en cuatro vistas, retrato en tres cuartos, reposo, saludo y entrega.
+
+> **Sam.** �Probamos una vez m�s. Si falla, apuntamos qu� cambi��.
+
+### Dra. Vega � Control de misi�n
+
+Mentora de la simulaci�n. Silueta vertical, auricular oscuro y chaqueta azul tinta #283B5B. Alterna entre el monitor y el avatar al hablar. Modelo en cuatro vistas, retrato sobrio, reposo, se�alar pantalla y confirmaci�n.
+
+> **Dra. Vega.** �Cambia un par�metro. Si cambias tres, despu�s no sabr�s cu�l arregl� el enlace�.
+
+### Ari � Biblioteca y cierre
+
+Estudiante del club de observaci�n. Silueta de coleta baja y cuaderno cuadrado con lomo coral #D47762. Reutiliza la escala del avatar. Modelo en cuatro vistas, reposo, recibir cuaderno y se�alar la ventana.
+
+> **Ari.** ��De verdad empezaste a mirar el cielo desde aqu�?�.
+
+<!-- section: 05 / MASCOTA Y APOLO -->
+## Gu�as, exploradores y retratos
+
+![Siluetas de mascota y esquema de frente y perfil de una figura de Apolo](storyboard/modelos-esquematicos.png)
+_Esquemas para comparar formas y articulaci�n. La mascota sigue pendiente de elecci�n._
+
+### Mascota cient�fica � Apodo de trabajo ��rbita�
+
+**Rol.** Gu�a del planetario que muestra una ficha a la vez. La especie y la personalidad requieren elecci�n del usuario. Para la revisi�n, comparar gato de orejas triangulares y perro de orejas ca�das con la misma bata #F8F9FA y puntero con acento #00E5FF. Definir pelaje tras esa decisi�n.
+
+**Modelo.** Frente, tres cuartos, perfil, espalda y pose con el puntero extendido. Reposo, se�alar y explicar. Preparar contraste sobre el hemisferio brillante y la cara en sombra. La punta termina al lado del dato y nunca sobre su unidad.
+
+> **�rbita.** �F�jate en la unidad. Si cambia, compara los valores despu�s de convertirlos�.
+
+**Encuadre.** Mascota a la izquierda del HUD, planeta al centro y panel de dato a la derecha. Si el layout se invierte, seleccionar una vista compatible para que el puntero conserve el sentido. [Ficha de mascota](mascota-cientifica.md)
+
+### Exploradores de Apolo � Figuras de recreaci�n
+
+**Rol.** Dos astronautas hist�ricos se representan como siluetas de papel articuladas frente a monitores de archivo, con identificaci�n posterior a la revisi�n de fuentes. La secuencia distingue expl�citamente material de archivo y recreaci�n. El texto educativo corresponde a un r�tulo del museo ficticio o a �rbita.
+
+**Modelo.** Papel con grosor visible al girar, casco circular, equipo volum�trico detr�s y una silueta de brazo clara al saludar. Frente y espalda con piezas separadas para visor, torso y brazos. Perfil de grosor y pruebas de pivote para hombro y pies. Marfil #EBE8DC, gris pizarra #58677B y visor carb�n #232732.
+
+> **R�tulo de sala.** �La tripulaci�n regres�. Parte del equipo qued� en la Luna�.
+
+**Material de archivo.** Preparar una ficha por clip con misi�n, fecha, origen, licencia o condiciones de uso y cr�dito en pantalla. Mantener el r�tulo �Recreaci�n� en las vi�etas dramatizadas. Las l�neas de guion de este dossier son ficci�n original, salvo las descripciones hist�ricas que el equipo valide contra sus fuentes.
+
+<!-- section: 06 / STORYBOARD � ACTO I A -->
+## De la �rbita a la mesa
+
+![Vi�etas esquem�ticas 01 a 03, creador, tr�nsito orbital y habitaci�n](storyboard/01-orbita-y-cuarto.png)
+_Composici�n propuesta. La franja cian indica interacci�n o trayectoria._
+
+### 01 � Dar forma al avatar
+
+**Plano.** Pantalla inicial con un anillo orbital y un t�tulo limpio. Al empezar, el avatar de cuerpo entero queda a la izquierda y el retrato ampliado junto a las opciones. **Acci�n.** Personalizar cabello, ojos, colores y detalles. Confirmar y conservar la combinaci�n en las escenas posteriores. **Texto.** �Crea tu avatar� � �Comenzar�.
+
+### 02 � Del espacio a la ventana
+
+**Plano.** Una roca cruza el encuadre con planetas de fondo. La curvatura de la Tierra ocupa pantalla y corta a nubes, agua y una ventana c�lida. **Acci�n.** Cinem�tica saltable. El encuadre final se comparte con el comienzo en la habitaci�n. **Sonido.** Del paisaje sonoro espacial al ambiente del cuarto. La estela cian enlaza con la futura �rbita hologr�fica.
+
+### 03 � El camino al libro
+
+**Plano.** Habitaci�n Atardecer, con la entrada en primer plano y el escritorio al fondo a la derecha. Una ventana traza luz diagonal sobre un paso despejado. **Acci�n.** Acercarse al escritorio. Un indicador con forma y texto aparece al alcance del libro. **Texto.** �Abrir libro�.
+
+**Alcance.** Estas vi�etas describen el inicio del prototipo interno. Para revisar el cuarto con el usuario, mostrar c�mara, luz y avatar a escala junto al escritorio. [Ficha de montaje](primera-escena.md)
+
+<!-- section: 07 / STORYBOARD � ACTO I B -->
+## La curiosidad sale de casa
+
+![Vi�etas esquem�ticas 04 a 06, libro, casa y Malec�n](storyboard/02-libro-y-guayaquil.png)
+_En exteriores, el recorrido debe seguir visible entre vegetaci�n, fachadas y peatones._
+
+### 04 � Una �rbita sale del papel
+
+**Plano.** El libro cambia de cerrado a abierto sin moverse sobre el tablero. La proyecci�n emerge del lomo con luz cian localizada. **Acci�n.** En el prototipo, activar el holograma. En el dise�o completo, elegir entre F�sica, Qu�mica y C�lculo. En el ejercicio opcional de F�sica, variar el �ngulo de un lanzamiento desde el suelo, manteniendo velocidad inicial y gravedad constantes, y comparar arcos sin resistencia del aire. **Texto propuesto.** �Cambia el �ngulo y compara las trayectorias�.
+
+### 05 � Los premios de abajo
+
+**Plano.** Escalera de madera, vitrina, mesa y puerta a la calle. La vitrina recibe un brillo corto y los padres quedan en el plano n�tido. **Acci�n futura.** Revisar un trofeo escolar original, recibir la libreta y salir. **Elena.** �Lleva la libreta. Si algo te sorprende, ap�ntalo�.
+
+### 06 � Guayaquil junto al r�o
+
+**Plano.** Centro y Malec�n 2000 estilizados. Piedra c�lida, vegetaci�n tropical y hojas ocres como licencia visual. Primer plano de follaje, paseo n�tido y agua al fondo. **Acci�n futura.** Saludar a Lidia y observar una hoja desviarse cerca de la baranda. Acariciar un perro o gato callejero es opcional. **Lidia.** �Cerca del muelle cambia de rumbo. �Qu� crees que la empuja?�.
+
+**Transici�n.** La anotaci�n del r�o entra en el primer fotograma del montaje universitario.
+
+<!-- section: 08 / STORYBOARD � ACTO I C -->
+## Los a�os de formaci�n
+
+![Vi�etas esquem�ticas 07 a 09, campus, tesis y carta](storyboard/03-formacion.png)
+_Las polaroids son transiciones con capas. El juego conserva el avatar elegido en cada etapa._
+
+### 07 � Hacer equipo
+
+**Plano.** Patio universitario con una mesa de prototipos. Corte a fotograf�as de estudio, amistades y eventos de ramas estudiantiles. **Acci�n futura.** Colocar la bandera del club en un soporte de la maqueta. Las afiliaciones del plan, IEEE, AESS e IAS, requieren revisi�n de uso antes de incorporar nombres o marcas. **Sam.** �La bandera va aqu�. Mira c�mo tiembla cuando encendemos el ventilador�.
+
+### 08 � Probar, fallar, registrar
+
+**Plano.** Un tablero de pruebas se llena de anotaciones. La luz cambia de tarde a noche entre fotogramas de ex�menes y tesis. **Acci�n futura.** Comparar dos pruebas de un circuito, elegir el ajuste que corrige el fallo y dejar un registro de la observaci�n. Si la elecci�n falla, la escena muestra la diferencia y permite volver a probar. **Sam.** �Si falla, apuntamos qu� cambi��.
+
+### 09 � Graduaci�n y carta
+
+**Plano.** Foto de graduaci�n, corte al escritorio y una carta abierta con la aceptaci�n para una pr�ctica en la NASA dentro de la historia. El dise�o de la carta evita el uso de insignias oficiales. **Acci�n futura.** Confirmar la lectura de la carta. **Avatar.** �Quiero ver hasta d�nde llega una se�al�.
+
+**Transici�n.** El marco de la �ltima polaroid se transforma en el monitor de la sala de control.
+
+<!-- section: 09 / STORYBOARD � ACTO II -->
+## Mantener la se�al
+
+![Vi�etas esquem�ticas 10 a 12, despliegue, anomal�a y adquisici�n](storyboard/04-control-de-mision.png)
+_Vistas de la interfaz y del exterior. El pulso cian cambia de forma al recuperar la se�al._
+
+### 10 � Desplegar en �rbita baja
+
+**Plano.** Sala de entrenamiento con una ventana digital a la Tierra realista. La c�mara pasa al sat�lite y revela sus paneles. **Acci�n futura.** Leer la lista de verificaci�n y confirmar el despliegue. **Dra. Vega.** �Primero confirma energ�a. Luego, orientaci�n y enlace�.
+
+### 11 � Diagnosticar una p�rdida
+
+**Plano.** La Tierra retrocede en la ventana y el tablero se�ala un enlace d�bil al cambiar la geometr�a de la misi�n simulada. Mantener separados los valores de temperatura, velocidad, radiaci�n y se�al con sus unidades. **Acci�n futura.** Comparar la se�al con los par�metros, orientar la antena y verificar el resultado. Un ajuste improcedente devuelve una pista y permite reintentar desde la lectura inicial. **Dra. Vega.** �Cambia un par�metro. Si cambias tres, despu�s no sabr�s cu�l arregl� el enlace�.
+
+### 12 � Se�al recuperada
+
+**Plano.** El icono discontinuo se convierte en un pulso estable. Se abre la vista espacial del tramo posterior de la misi�n ficticia. **Acci�n futura.** Registrar la lectura y abrir la ficha de una fuente astron�mica. **Texto.** �Enlace restablecido� � �Guardar observaci�n�.
+
+**Criterio cient�fico.** Identificar las lecturas producidas por la simulaci�n como tales. Distinguirlas visualmente de los datos de NASA o JPL verificados por el equipo. Las fichas citan fuente, fecha, unidad y nombre de variable. La salida de �rbita baja se representa mediante un salto narrativo, con el tramo de transferencia identificado en pantalla.
+
+<!-- section: 10 / STORYBOARD � ACTO III A -->
+## El libro de la biblioteca
+
+![Vi�etas esquem�ticas 13 a 15, pedestal, vuelo y planetario](storyboard/05-biblioteca-y-minijuegos.png)
+_El haz del pedestal, la ret�cula de vuelo y la �rbita del planetario gu�an la mirada._
+
+### 13 � Volver a abrir el libro
+
+**Plano.** Biblioteca brutalista acogedora, con concreto visto, madera oscura, sillones y un haz cenital sobre el pedestal. El paso mantiene una franja iluminada. **Acci�n futura.** Abrir el libro y elegir simulador, planetario o archivo Apolo. Las secciones permiten regresar a la biblioteca. **Texto.** �Vuelo� � �Planetario� � �Archivo Apolo�.
+
+### 14 � Pilotar con inercia
+
+**Plano.** Vista cenital de nave, piedras espaciales y baliza. La estela muestra la direcci�n del desplazamiento. **Acci�n futura.** Acelerar, girar y usar empuje en sentido contrario para frenar. Llegar a la baliza con una velocidad segura. Tras una colisi�n, se reinicia el intento con indicaci�n de la �ltima causa. **Texto.** �Reduce tu velocidad para cruzar la baliza�.
+
+### 15 � Comparar dos mundos
+
+**Plano.** Planeta realista al centro, �rbita en el margen izquierdo y fichas legibles al derecho. Escoger un sonido ambiente original o con licencia, de tempo lento y pocos elementos. **Acci�n futura.** Girar, seleccionar otro cuerpo y comparar un dato con la misma unidad y fuente visible. **�rbita.** �F�jate en la unidad. Si cambia, compara los valores despu�s de convertirlos�. [NASA Science � Planetas](https://science.nasa.gov/solar-system/planets/)
+
+**Transici�n.** El c�rculo del planeta se convierte en el visor de un astronauta ante un monitor.
+
+<!-- section: 11 / STORYBOARD � ACTO III B -->
+## Lo que vuelve a la Tierra
+
+![Vi�etas esquem�ticas 16 a 18, archivo Apolo, observaci�n y cierre](storyboard/06-apolo-y-cierre.png)
+_El trazo de la antena de la primera misi�n rima con la l�nea de las ventanas del cierre._
+
+### 16 � Archivo Apolo
+
+**Plano.** Monitor de archivo a la izquierda, recreaci�n de dos astronautas de papel a la derecha. Conservar el cr�dito y el subt�tulo en zonas distintas. **Acci�n futura.** Elegir un objeto de la escena y abrir su ficha. El retrorreflector lunar de Apolo 11 es una opci�n para ese primer objeto. **Texto.** �La tripulaci�n regres�. Parte del equipo qued� en la Luna�. [NASA ILRS � Reflectores lunares](https://ilrs.cddis.eosdis.nasa.gov/missions/satellite_missions/current_missions/ap11_general.html)
+
+### 17 � Completar el cuaderno
+
+**Plano.** Sobre una mesa de la biblioteca reaparecen el dibujo del r�o, la lectura del sat�lite y una ficha del archivo. **Acci�n futura.** Elegir qu� observaci�n quedar� en la primera p�gina del cuaderno. Las otras quedan disponibles para releer. **Avatar.** �Me tom� a�os llegar tan lejos. La primera prueba cab�a en mi escritorio�.
+
+### 18 � Una ventana para Ari
+
+**Plano.** Ari abre el cuaderno junto a una ventana de Guayaquil. La luz c�lida encuentra un punto cian en el papel y la c�mara se eleva sobre el r�o hacia las primeras estrellas. **Acci�n futura.** Entregar el cuaderno. Tras los cr�ditos, ofrecer volver a la biblioteca y consultar las fichas. **Ari.** ��De verdad empezaste a mirar el cielo desde aqu�?�. **Avatar.** �S�. Mira por la ventana�.
+
+**Cierre.** Volver al cielo desde el mismo lugar donde empez� el juego. La decisi�n final del jugador deja una observaci�n concreta que Ari puede continuar.
+
+<!-- section: 12 / RECURSOS -->
+## Matriz de producci�n
+
+| Paquete | Entrega de arte e interfaz | Estado |
+| --- | --- | --- |
+| Inicio y avatar � 01 | Fondo y t�tulo, editor con retrato y cuerpo entero, capas con anclaje compartido, poses y estados de enfoque. | L�mina existente. Capas y animaci�n final pendientes de revisi�n. |
+| Tr�nsito orbital � 02 | Roca, cuerpos celestes, nubes, horizonte, silueta de ciudad, ventana y transici�n con opci�n de saltar. | Storyboard. Cr�ditos de im�genes astron�micas por seleccionar. |
+| Cuarto � 03-04 | PNG independientes, suelo y muros, exterior, luz, libros abierto y cerrado, proyecci�n, indicaci�n y textos. | Kit de 12 PNG existente. Importaci�n aislada documentada. |
+| Casa y Guayaquil � 05-06 | Escalera, vitrina, trofeos, libreta, baranda, r�o, �rboles tropicales y props. Elena, Rafael, Lidia y mascotas de calle. | Futuro. |
+| Universidad � 07-09 | Campus, mesa, maqueta, bandera, tablero, diploma, carta, ropa de graduaci�n y retrato de Sam. | Futuro. |
+| Control y sat�lite � 10-12 | Sala modular, mentor�a, sat�lite, Tierra, terminal DotGothic16, estados de alerta y gr�fico de se�al. | Futuro. |
+| Biblioteca y vuelo � 13-14 | Sala, estanter�as, pedestal, haz, nave, asteroides, baliza, pistas y estado de reintento. | Futuro. |
+| Planetario y Apolo � 15-16 | Material planetario con origen, ficha de datos, �rbita en tres estados, monitor, archivo y recortes articulados. | Futuro. |
+| Cuaderno y cierre � 17-18 | P�ginas del cuaderno, mesa, Ari, panorama del r�o, cr�ditos y regreso a la biblioteca. | Futuro. |
+
+**Contrato de entrega.** Para cada pieza, documentar ID, nombre de archivo, versi�n, estado de revisi�n, dimensiones, ancla, capas, origen y condiciones de uso. Separar mueble, colisi�n, sombra y luces. Para personajes, registrar orientaci�n y fotogramas. Para fuentes cient�ficas y medios, conservar enlace al elemento concreto y su fecha. [Kit y puntos de apoyo](kit-habitacion/README.md) � [Registro de recursos](kit-habitacion/asset-register.csv)
+
+<!-- section: 13 / REVISI�N Y CR�DITOS -->
+## Revisiones de equipo
+
+### Arte e integraci�n
+
+- **Avatar.** Ense�ar cada resultado visual, registrar qu� pide conservar o mejorar el usuario y comprobar capas al girar o caminar. Comparar retrato, silueta a escala de juego y combinaci�n de colores bajo la luz de Atardecer.
+- **Entorno.** Acordar con el usuario c�mara, luz, materiales y elemento protagonista antes de montar cada nuevo lugar en Godot. Recolocar muebles y verificar huella, oclusi�n, sombra y ruta con el avatar presente.
+- **Libro.** Empieza cerrado. Abierto, conserva el anclaje y muestra la proyecci�n por separado. La interacci�n tiene texto e icono, y el resplandor deja libre la lectura del sprite.
+- **Narrativa.** Ingenier�a, guion y arte revisan la misma numeraci�n 01-18. Para nuevos niveles, confirmar acci�n, respuesta y estado de salida antes de producir fondos finales.
+- **Ciencia y archivo.** Verificar unidades, fuente y derechos de cada dato, m�sica, clip y fotograf�a antes de publicar. Conservar marcas de simulaci�n y de recreaci�n donde corresponda.
+
+### Captura interna de 30 segundos
+
+**00-06 s** � T�tulo y cambio visible de una opci�n de avatar.  
+**06-13 s** � Selecci�n confirmada y transici�n orbital a Guayaquil.  
+**13-24 s** � Recorrido real desde la entrada hasta el escritorio.  
+**24-30 s** � Abrir el libro y dejar visible el holograma.  
+
+Montaje propuesto para cuando haya una build verificada. Si se muestra storyboard de fases futuras, identificarlo como concepto en pantalla. Preparar subt�tulos en ingl�s tras cerrar la locuci�n.
+
+### Fuentes de trabajo
+
+Plan maestro aportado por el usuario, �4-6. Decisiones y estado en el [�ndice de la b�veda](../0_Reglas_Globales/index.md) y la [bit�cora](../0_Reglas_Globales/log.md). L�minas Higgsfield acreditadas en las fichas de [avatar](avatar.md) y [habitaci�n](primera-escena.md). Vi�etas de composici�n elaboradas para este dossier. Los recursos generados y las referencias externas conservan sus estados de revisi�n y verificaci�n de derechos.
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Propuestas/Mirador del Faro - Luna con datos reales.md' -Encoding UTF8; Get-Content -LiteralPath 'Nasa_Game/Fase_1_Arte/Biblia de arte.md' -Encoding UTF8" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 258ms:
+---
+tipo: propuesta
+fecha: 2026-11-12
+origen: idea de Guillermo
+estado: validada con una prueba en Godot � espera la aprobaci�n de dise�o
+fases: 2 (misiones), 5 (niveles) y 7 (interfaz)
+---
+
+# Mirador del Faro: la Luna con datos reales de NASA
+
+> Idea de Guillermo (2026-11-12): �una zona donde pueda incrustar data satelital de la NASA, por ejemplo ver desde un telescopio y poder observar la Luna y que nuestra mascota aparezca dando datos, mientras la Luna se observa�.
+
+## Veredicto
+
+**Viable, y da para m�s de lo previsto.** El juego puede mostrar la Luna real del d�a en que se juega, vista desde Guayaquil, con su fase, su distancia y su inclinaci�n exactas. Los datos y las texturas salen de servicios p�blicos de NASA que se comprobaron hoy.
+
+| Pregunta | Respuesta | Evidencia |
+|---|---|---|
+| �Hay datos de la Luna para cualquier hora y lugar? | S�: fase, distancia, tama�o, altura y orientaci�n | Consulta real a JPL Horizons, m�s abajo |
+| �Hay im�genes de la Luna para cada hora de 2026? | S�: 8 760 im�genes y una tabla JSON | NASA SVS 5587 y su API Dial-A-Moon, probada |
+| �Hay texturas para una Luna 3D detallada? | S�: mapa de color de LROC y mapa de relieve de LOLA | NASA SVS 4720, �CGI Moon Kit� |
+| �Se pueden usar en un juego? | S�, con cr�dito a NASA y sin sugerir su respaldo | Gu�a de uso de im�genes de NASA |
+| �Rinde en el equipo? | Deber�a: es una esfera con textura | Sin medir todav�a |
+
+![[L03_ui_telescopio_luna.png]]
+
+*Maqueta de interfaz del lote 03. La Luna de la maqueta la dibuj� la IA; en el juego se usar� la textura de NASA. Los n�meros de las fichas son los reales de esta noche.*
+
+## La prueba: la Luna de esta noche desde el Mirador
+
+Consulta a la API de JPL Horizons (versi�n 1.2, efem�rides DE441) para el faro del cerro Santa Ana, el 12 de noviembre de 2026. Script: `herramientas/luna_efemerides.py`. Respuesta guardada en `Propuestas/Datos/`.
+
+| Hora en Guayaquil | Cielo | Altura | Iluminada | Distancia | Tama�o aparente | Borde iluminado |
+|---|---|---:|---:|---:|---:|---|
+| 18:00 | d�a | 38,8� | 11,9 % | 401 311 km | 29,8� | abajo, algo a la derecha |
+| 19:00 | crep�sculo | 26,4� | 12,1 % | 402 491 km | 29,7� | abajo |
+| 19:30 | noche | 20,0� | 12,2 % | 403 151 km | 29,6� | abajo |
+| 20:00 | noche | 13,6� | 12,3 % | 403 846 km | 29,6� | abajo |
+| 21:00 | noche | 0,8� | 12,5 % | 405 290 km | 29,5� | abajo |
+
+**Cruce con una segunda fuente.** Dial-A-Moon (NASA SVS) da, para las 20:00: fase del 12,76 %, edad de 3,75 d�as y distancia de 405 396 km. Su distancia es desde el centro de la Tierra; la de Horizons, desde el Mirador. La diferencia, 1 550 km, cuadra con el radio terrestre por el seno de la altura de la Luna: 6 371 km � sen 13,6� ~ 1 498 km.
+
+### Lo que esta noche puede ense�ar el juego
+
+- **La Luna �sonriente�.** El borde iluminado apunta hacia abajo: de 182� a 206� medidos desde el cenit. Cerca del ecuador, la Luna creciente se ve acostada, como una sonrisa. Es un detalle propio de Guayaquil que el juego puede mostrar con exactitud.
+- **La luz cenicienta.** En una creciente tan fina se ve la parte oscura del disco, iluminada por la luz que refleja la Tierra.
+- **La distancia cambia seg�n d�nde est�s.** Desde el Mirador la Luna se alej� casi 4 000 km entre las 18:00 y las 21:00. Casi todo se debe al giro de la Tierra, que aleja el Mirador de la Luna mientras esta se pone.
+- **Esta noche est� cerca de su distancia m�xima:** 405 396 km desde el centro de la Tierra, dentro del rango del apogeo, con 29,6� de tama�o aparente.
+
+## Fuentes de NASA comprobadas hoy
+
+1. **JPL Horizons API.** Calcula la posici�n y el aspecto de la Luna para un punto de la Tierra y una hora. Se prob� con datos reales.
+2. **NASA SVS 5587, �Moon Phase and Libration, 2026�.** Publicada el 11-12-2025.
+   - Una imagen por hora del a�o: 8 760 cuadros, hasta 5760�3240.
+   - Tabla de datos `mooninfo_2026.json`: fase, di�metro, distancia, ascensi�n recta y declinaci�n, punto subsolar, punto subterrestre y �ngulo de posici�n.
+   - El norte celeste va arriba. La versi�n con el sur arriba es la 5588.
+   - Su API Dial-A-Moon responde por hora; se prob�.
+3. **NASA SVS 4720, �CGI Moon Kit�.** Actualizada el 09-01-2026.
+   - Mapas de color de LROC WAC: de 1024�512 a 27360�13680. Por ejemplo, `lroc_color_poles_4k.tif` (4096�2048, 12,5 MB).
+   - Mapas de relieve de LOLA, en kil�metros: de `ldem_4.tif` (1440�720, 4,0 MB) a `ldem_64.tif` (23040�11520, 1 012,6 MB).
+   - Cr�dito pedido: �NASA's Scientific Visualization Studio�. Aviso de la p�gina: est�n optimizados para la est�tica, no para la ciencia.
+4. **Gu�a de uso de im�genes y medios de NASA.**
+   - El material de NASA, incluidos los mapas de textura y los pol�gonos de modelos 3D, en general no tiene derechos de autor en EE. UU. La gu�a menciona las simulaciones gr�ficas por computadora entre los usos permitidos.
+   - Hay que reconocer a NASA como fuente.
+   - El uso comercial no puede sugerir, expl�cita ni impl�citamente, que NASA respalda el producto.
+   - La insignia, el logotipo y los identificadores de NASA no son de dominio p�blico. La insignia no puede aparecer en im�genes generadas por IA.
+
+## C�mo funcionar�a en el juego
+
+**La escena del telescopio**
+
+- La Luna es una esfera 3D con el mapa de color de LROC (4k) y el relieve de LOLA convertido en mapa de normales.
+- La luz del Sol llega desde la direcci�n del borde iluminado. La esfera gira seg�n el punto subterrestre (la libraci�n) y el �ngulo paral�ctico del Mirador. As� coinciden la fase, la inclinaci�n y la cara visible.
+- El ocular es una vi�eta circular con ret�cula cian, enfoque y zoom. Una opci�n muestra la imagen invertida, como en un telescopio real.
+- �rbita aparece en una esquina y comenta con los datos de la tabla, citando la fuente y la hora.
+- Se pueden marcar mares y cr�teres con su nombre. Los lugares de alunizaje del programa Apolo enlazan con el archivo Apolo del guion anterior.
+
+**Los datos**
+
+- **Sin conexi�n:** una tabla por hora para varios a�os, generada con `luna_efemerides.py` desde Horizons o tomada de la tabla anual de NASA SVS.
+- **Con conexi�n (opcional):** una consulta a Horizons para la fecha y el lugar del jugador.
+- **Respaldo:** f�rmulas astron�micas en GDScript, comparadas contra Horizons con una tolerancia fijada.
+
+**El juego**
+
+- En el Acto I, la primera visita al Mirador muestra la Luna de ese d�a.
+- Misi�n propuesta, �Bit�cora lunar�: observar la Luna en tres fases distintas y anotarlas en el cuaderno. La recompensa es la carta estelar `COL-12`.
+- Conecta con el Mirador del mapa del lote 02 y con el planetario y el archivo Apolo del guion anterior.
+
+## Riesgos
+
+| Riesgo | Qu� hacer |
+|---|---|
+| El t�tulo de trabajo dice �NASA� | Para publicar, usar un t�tulo sin �NASA�. En los cr�ditos: �Datos: NASA/JPL Horizons; NASA Scientific Visualization Studio; LRO�. |
+| La pr�ctica �en la NASA� del guion anterior | Mantener el centro espacial como ficticio, sin logotipos ni insignias, como en el lote 02. |
+| M�sica de los videos de NASA SVS | Las versiones con m�sica usan pistas de Universal Production Music, con derechos de terceros. No usarlas. |
+| Precisi�n cient�fica | Las texturas son �para la est�tica�. Las cifras de las fichas salen siempre de Horizons o de la tabla de NASA. |
+| Jugar sin internet | Tabla incluida en el juego; la consulta en l�nea es opcional. |
+
+## Extensiones por validar
+
+- **Planetas por el telescopio:** J�piter con sus lunas y Saturno con sus anillos, con la misma API.
+- **La Tierra vista desde sat�lites:** im�genes reales del estuario del Guayas para la misi�n �Vig�a del Golfo� del guion anterior.
+- **La Estaci�n Espacial** pasando sobre Guayaquil, con sus datos orbitales p�blicos.
+
+## Prueba t�cnica en Godot (2026-11-12)
+
+Guillermo autoriz� la descarga el mismo d�a (�S�, desc�rgalos�).
+
+![[luna_telescopio.png]]
+
+*Captura de Godot 4.7.2 (`pruebas/luna_telescopio/`): la Luna de las 19:30 desde el Mirador, con texturas de LRO, la luz cenicienta, a �rbita y las fichas calculadas.*
+
+### Descargas
+
+Cada archivo est� en su propia carpeta de `externos/`, con tama�o y SHA-256 en `Propuestas/Datos/descargas_nasa.json`.
+
+| Archivo | Bytes | Contenido |
+|---|---:|---|
+| `lroc_color_poles_4k.tif` | 13 095 388 | Color, 4096�2048, RGB de 8 bits |
+| `ldem_4.tif` | 4 153 352 | Relieve, 1440�720, en km, coma flotante |
+| `mooninfo_2026.json` | 2 094 339 | 8 760 horas de 2026 |
+
+### C�mo funciona
+
+1. `herramientas/luna_texturas.py` comprueba la orientaci�n de los mapas con rasgos conocidos:
+   - el punto m�s alto cae a 0,0� de la cumbre Selenean;
+   - el m�s bajo, a 0,4� del cr�ter Antoniadi;
+   - la cara visible es m�s oscura y m�s baja.
+
+   Despu�s convierte el color a JPG y el relieve a un mapa de normales sin exagerar.
+2. `herramientas/luna_efemerides.py` consulta Horizons para el Mirador: punto subobservador, punto subsolar, �ngulo del polo norte y �ngulo paral�ctico. `herramientas/luna_parametros.py` toma la fila de una hora y calcula la puesta.
+3. El shader proyecta cada p�xel del disco sobre la esfera, lo pasa a longitud y latitud selenogr�ficas y lee las texturas. La luz sigue la ley de Lommel-Seeliger, que da a la Luna llena su brillo parejo hasta el borde. El relieve se exagera �4 junto al terminador y �1,5 en el resto.
+4. Las texturas son recursos importados de Godot y se cargan con `preload`: el color en BC7 con mipmaps y las normales sin p�rdida. As� existen tambi�n en el juego exportado.
+5. Las fichas, los r�tulos (�Terminador�, �Luz cenicienta�) y la frase de �rbita se calculan con los datos, seg�n la fase y la altura.
+6. `herramientas/luna_medir.py` mide las capturas contra Horizons: fracci�n iluminada, �ngulo del borde y orientaci�n de la textura.
+
+### Mediciones
+
+Todas con el c�digo final. `luna_medir.py` da �coincide con Horizons� en los tres casos medidos: editor, juego exportado y HDR 2D.
+
+| Prueba | Godot | Referencia o criterio |
+|---|---:|---:|
+| Fracci�n iluminada (m�scara) | 12,15 % | Horizons: 12,2 % |
+| Borde iluminado desde el cenit | 192,6� | Horizons: 192,6� |
+| Orientaci�n de la textura (`luna_medir.py`) | Correlaci�n 0,990; mejor giro 0,00�; en espejo, 0,303 como m�ximo | M�s de 0,9; giro de 0,5� o menos; espejo por debajo de 0,5 |
+| Posici�n de Mare Crisium (revisor) | (586,8; 524,3) px | Proyecci�n independiente: (588,4; 522,4) px |
+| Gibosa del 21 nov a las 21:00, a 70,6� de altura | 91,21 % y borde a 41,0� | Horizons: 91,2 % y 41,0� |
+| Juego exportado (`.pck`) contra el editor | 0 niveles de diferencia | Id�nticos |
+| HDR 2D contra normal, dentro del disco | 0,85 niveles de media, 1 como m�ximo | Sin cambio visible |
+| Costo en GPU, HD 620 a 720p (revisor) | 0,74 ms; 2,2 a 2,5 ms con la Luna a pantalla completa | 16,7 ms por cuadro a 60 fps |
+
+![[luna_gibosa_2026-11-21.png]]
+
+*La misma escena con la gibosa del 21 de noviembre a las 21:00: el disco crece a 32,7� y el borde iluminado queda arriba a la izquierda. Sin luz cenicienta visible, el r�tulo no aparece.*
+
+![[luna_bajo_horizonte_2026-11-12.png]]
+
+*A las 22:00 de hoy la Luna ya se puso: no se dibuja, y �rbita lo dice. A las 06:00 de ma�ana, por el este, dice que todav�a no sale.*
+
+### Verificaci�n independiente
+
+- **Orientaci�n:** un revisor reh�zo la proyecci�n por su cuenta, sin mirar el shader. Los rasgos caen a 0,6 px o menos en la luz cenicienta y a entre 1 y 2,5 px en la media luna. Descart� el espejo, el giro de 180� y los errores de signo. Confirm� en la documentaci�n de Horizons que las longitudes son positivas al este y que NP.ang y SN.ang se miden de norte a este.
+- **Datos:** otro revisor compar� la tabla de NASA con Horizons en las 8 760 horas de 2026. Diferencia m�xima: 0,0075 puntos de iluminaci�n, 0,67 km de distancia y 0,006� en la libraci�n. Con las correcciones topoc�ntricas (paralaje y �ngulo paral�ctico) la tabla reproduce lo que se ve desde el Mirador. Las descargas coinciden en tama�o y SHA-256.
+- **C�digo:** un tercer revisor audit� el shader y el script como si fueran a producci�n, con un emulador propio del shader y un `.pck` exportado. Encontr� 9 problemas: 1 cr�tico, 3 medios y 5 bajos. La captura de esta noche era correcta; los fallos aparec�an en el juego exportado, en otras fechas o con otros ajustes.
+
+### Correcciones aplicadas tras la verificaci�n
+
+- **Hora de puesta:** pas� de 21:04 a **21:07**. Ahora sigue el criterio de los almanaques: el borde superior toca el horizonte, con 34� de refracci�n. La de 21:04 era el centro del disco sin refracci�n. La maqueta del lote 03 dec�a 21:05.
+- **Decimales:** el �ngulo del polo norte y el paral�ctico se guardan con tres decimales. El redondeo giraba el disco 0,02�.
+
+Hallazgos del revisor de c�digo:
+
+| Hallazgo | Gravedad | Correcci�n y prueba |
+|---|---|---|
+| Las texturas no exist�an en el juego exportado: la Luna sal�a como un disco gris y el gato desaparec�a | Cr�tica | Recursos importados y `preload`. El `.pck` exportado da una captura id�ntica a la del editor |
+| La Luna se dibujaba bajo el horizonte; r�tulos y frase fijos | Media | Aviso y frase seg�n el acimut; r�tulos seg�n la fase. Probado a las 22:00 de hoy, a las 06:00 de ma�ana y con la gibosa del 21 de noviembre |
+| Con HDR 2D la gamma se aplicaba dos veces y la captura no lo mostraba | Media | El shader entrega color lineal con la curva sRGB exacta y la captura lo convierte de vuelta. Disco: 0,85 niveles de diferencia |
+| La orientaci�n vale solo para la hora de la fila; cerca del cenit gira hasta 12� por minuto | Media | **Pendiente**: calcular el �ngulo paral�ctico en el juego para cada instante |
+| Polos y costura de �180�: saltos de nivel de detalle | Baja | Sin envolver en vertical y derivadas corregidas en la costura |
+| Derivadas dentro de ramas y `smoothstep` con los bordes invertidos | Baja | Geometr�a fuera de las ramas y bordes en orden |
+| Relieve �4 horneado en el mapa | Baja | Mapa sin exagerar; el shader aplica �4 junto al terminador y �1,5 en el resto |
+| La luz cenicienta oscurec�a el limbo un 40 % y no cambiaba con la fase | Baja | Sin el factor de �ngulo y escalada con la fase de la Tierra vista desde la Luna |
+| Aspecto y tama�o del disco fijos | Baja | El disco escala con el di�metro aparente (29,4� a 33,5�) y la ventana conserva la proporci�n |
+
+Dos hallazgos m�s salieron al probar las correcciones:
+
+- `Image.linear_to_srgb()` de Godot 4.7.2 solo acepta im�genes de 8 bits. Con HDR 2D la captura quedaba sin convertir, 20 niveles m�s oscura. Ahora se convierte p�xel a p�xel (2,6 s por captura).
+- La salida lineal con `pow(x, 2.2)` oscurec�a las sombras unos 6 niveles frente a la curva sRGB exacta que usa Godot.
+
+La prueba de orientaci�n de `luna_medir.py` daba 0,650: las l�neas cian de los r�tulos cruzan la zona de luz cenicienta. Al excluirlas da 0,990.
+
+### L�mites conocidos
+
+- **Una hora fija:** la escena usa la fila de una hora. Cerca del cenit, que en Guayaquil ocurre unas dos veces al mes, el disco gira r�pido: el 21 de noviembre el borde iluminado pasa de 41� a 89� entre las 21:00 y las 22:00. Para cualquier instante, el juego debe calcular el �ngulo paral�ctico con la declinaci�n y el �ngulo horario.
+- **Solo 2026:** la tabla cubre las 8 760 horas de 2026. Para otro a�o hace falta la tabla anual de NASA de ese a�o o Horizons.
+- **Ruta sin conexi�n:** el �ngulo del eje de la tabla se mide desde el norte J2000. Hay que pasarlo al norte de la fecha (hasta 0,17�) antes de restar el �ngulo paral�ctico.
+- **Cielo siempre nocturno:** de d�a y en el crep�sculo se siguen dibujando estrellas sobre fondo negro.
+- **Sin eclipses:** en un eclipse lunar la Luna saldr�a llena y blanca.
+- **Bajo el horizonte:** el panel no da la hora de salida; �Se pone� queda en �-�.
+- **Vista a ojo desnudo:** un telescopio real sin diagonal invierte la imagen 180�. Puede ser una opci�n del juego.
+- **Sin sombras proyectadas:** el relieve solo sombrea; no hay sombras arrojadas por cr�teres.
+- **Imagen fija:** no hay enfoque ni zoom todav�a.
+---
+tipo: biblia de arte
+version: v0.1
+fecha: 2026-11-12
+estado: borrador � se ampl�a con cada veredicto de Guillermo
+decisiones: D-011, D-012, D-013
+---
+
+# Biblia de arte � v0.1
+
+Reglas para que todo el juego se vea igual en el tiempo. Nace de las tres im�genes que aprob� Guillermo. Cada recurso nuevo se compara contra esta p�gina antes de mostrarse.
+
+## 1. Anclas de estilo
+
+Son las im�genes aprobadas. Se pasan como referencia en cada encargo; est�n subidas a Higgsfield y sus identificadores est�n en `anclas.json`.
+
+| Ancla | Qu� fija | Decisi�n |
+|---|---|---|
+| ![[L01_A_lowpoly_hub_gpt26.png\|300]] `ANC_HUB` | Estilo de interiores y del hub lateral | D-011 |
+| ![[L01_A_lowpoly_exploracion_gpt26.png\|300]] `ANC_EXPLORACION` | Estilo de los exteriores | D-011 |
+| ![[L02_exploracion_camara_alta.png\|300]] `ANC_VISTA_JUEGO` | C�mara y acabado de la exploraci�n | D-013 |
+
+Referencias de dise�o, sin veredicto todav�a: `ANC_PROTA_1`, `ANC_PROTA_2`, `ANC_GATO` y `ANC_MAPA` (lote 02).
+
+## 2. Cinco pilares visuales
+
+1. **Low-poly pintado a mano.** Facetas planas y n�tidas, cada una con un degradado pintado. Sin texturas fotogr�ficas.
+2. **Luz c�lida, sombra fr�a.** Luz principal c�lida, sombra azul petr�leo, borde de luz (rim) en las siluetas.
+3. **La silueta primero.** Formas gruesas y simples que se lean a un octavo de la pantalla.
+4. **El cian es la tecnolog�a.** Se reserva para datos, hologramas, interacci�n y recolectables. Ning�n otro objeto lo usa.
+5. **Guayaquil vivo.** Vegetaci�n tropical, fauna, cables, ropa tendida, techos de zinc y escalinatas.
+
+## 3. Paleta maestra (medida)
+
+Medida con `herramientas/paleta.py` sobre las tres anclas: 16 colores por k-means, m�s el cian del holograma.
+
+![[paleta_maestra.png]]
+
+| Papel | Colores |
+|---|---|
+| Luz c�lida | `#F8C991` crema � `#F4A159` naranja de sol � `#DAAA25` dorado |
+| Tierra, muros y terracota | `#D09880` � `#AF795E` � `#924930` � acento coral `#E46043` |
+| Vegetaci�n | `#A48A29` hierba al sol � `#6D6A2B` hierba en sombra |
+| Maderas | `#836258` � `#583F22` |
+| Sombra fr�a y piedra | `#516B7C` azul petr�leo � `#4B4E47` � `#998385` � `#B8BBC6` |
+| Lo m�s oscuro | `#322C1D`, nunca negro puro |
+| Tecnolog�a y datos | `#62E4E0` cian � `#36B1B2` cian medio � `#CEF8F5` brillo |
+
+**Comprobaci�n autom�tica:** `python herramientas/paleta.py comparar <imagen>` mide qu� parte del color de un recurso nuevo cae cerca de esta paleta. Es un indicador para detectar desv�os, no un veredicto. El resultado de cada hoja aparece en [[Catalogo de recursos]].
+
+**Calibraci�n (2026-11-12):** las anclas dan del 99 al 100 %, y las direcciones descartadas del lote 01 (gouache y maqueta) tambi�n dan 100 %. El indicador detecta desv�os de color, no de estilo. El centro espacial da 47 % porque usa la paleta fr�a: necesitar� su propia paleta maestra cuando se apruebe.
+
+**Excepci�n:** la Luna, los planetas y las im�genes de sat�lite del telescopio usan datos reales de NASA. Son fotogr�ficos a prop�sito, dentro de un marco de interfaz que s� sigue la paleta.
+
+## 4. Proporciones
+
+- Estudiantes: 3 cabezas. Adultos: unas 3,5 cabezas.
+- El gato llega m�s o menos a la rodilla del protagonista.
+- Toda hoja de objetos lleva la silueta gris del estudiante como escala.
+
+## 5. C�maras
+
+- **Exploraci�n:** c�mara alta fija, a unos 60� hacia abajo, sin horizonte ni cielo. El personaje ocupa un octavo del alto de la pantalla. Ancla: `ANC_VISTA_JUEGO`.
+- **Hub e interiores:** diorama lateral en corte, con capas de primer plano y fondo. Ancla: `ANC_HUB`.
+- **Telescopio:** vista de ocular a pantalla completa. Ver [[Mirador del Faro - Luna con datos reales]].
+
+## 6. Interfaz
+
+Cuaderno de ingenier�a: papel milimetrado crema, tinta, papel rasgado, garabatos de circuitos y acentos azul petr�leo y cian. Ancla: `ANC_MAPA`. En el juego, el texto se compone en el motor para poder traducirlo.
+
+## 7. Luz por momento del d�a
+
+| Momento | Luz principal | Sombras | Pr�cticas |
+|---|---|---|---|
+| Tarde, la luz base | Sol c�lido y bajo | Azul petr�leo | - |
+| Noche | Luna azul fr�a | Azul profundo | Faroles, ventanas y guirnaldas c�lidas |
+| Centro espacial | Blanco fr�o | Azul y gris titanio | Dorado y cian |
+
+## 8. Hacer y evitar
+
+| Hacer | Evitar |
+|---|---|
+| Facetas visibles con degradado pintado | Texturas fotogr�ficas, salvo los datos reales de NASA |
+| Materiales mates; brillos peque�os solo en metal | Reflejos de espejo y pl�stico brillante |
+| Silueta clara y pocas piezas | Ruido de detalle que no se lee a escala de juego |
+| Cian solo para tecnolog�a e interacci�n | Cian en ropa, flores o decoraci�n |
+| Dise�os propios inspirados en Guayaquil | Logotipos, marcas, insignias de NASA y dise�os de otros juegos |
+
+## 9. C�mo nace un recurso
+
+1. **Ficha.** Darle un ID con su prefijo de categor�a, como `VEG-15`, y a�adirlo a un encargo de hoja.
+2. **Encargo.** Usar los bloques fijos de `bloques_prompt.json` (`{ESTILO}`, `{HOJA}`, `{ROTULOS}`.) y pasar las anclas como referencia (`@ANC_HUB`).
+3. **Generaci�n.** Con `herramientas/hf_generar.py`, que cotiza, respeta el tope del lote, descarga el original y registra todo.
+4. **Control.** Medir la paleta y revisar la hoja ampliada: manos, r�tulos y objetos.
+5. **Veredicto.** Guillermo aprueba o pide cambios. El estado va a `veredictos.json`.
+6. **Cat�logo.** `python herramientas/manifiesto.py` actualiza `manifiesto_recursos.csv` y [[Catalogo de recursos]].
+7. **Versiones.** Un cambio crea `v2`; la `v1` no se borra.
+
+## 10. Bloques fijos de los encargos (v1)
+
+Est�n en `bloques_prompt.json` y no se editan: un cambio crea un bloque nuevo, como `ESTILO_V2`, y se anota aqu�.
+
+| Bloque | Para qu� sirve |
+|---|---|
+| `ESTILO` | El estilo low-poly pintado, la luz y la paleta |
+| `HOJA` | Fondo, luz neutra, cuadr�cula y silueta de escala de las hojas |
+| `ROTULOS` | R�tulos en espa�ol bajo cada objeto |
+| `CAMARA_JUEGO` | La c�mara alta aprobada |
+| `PROTAGONISTA` y `GATO` | La descripci�n fija de los dos personajes |
+| `SIN_TEXTO` | Im�genes sin texto ni logotipos |
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Memory.md' -Encoding UTF8 | Select-Object -Skip 165; Get-ChildItem -LiteralPath 'Nasa_Game/Fase_2_Narrativa' -Recurse -File | Select-Object FullName; Get-ChildItem -LiteralPath . -Filter AGENTS.md; Get-ChildItem -LiteralPath 'Nasa_Game' -Filter AGENTS.md" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 327ms:
+- **Otras fechas para probar.** `luna_efemerides.py --salida <carpeta temporal>` no ensucia `Propuestas/Datos`. Despu�s, `luna_parametros.py` escribe el `luna.json` de una copia del proyecto.
+- **Relieve y terminador.** Un mapa de normales enciende cr�teres en plena noche si no se limita la luz a la zona cercana al terminador geom�trico (`smoothstep` sobre el producto punto-Sol).
+- **Luna con datos reales.** La API de JPL Horizons y Dial-A-Moon de NASA SVS responden para 2026. Script: `herramientas/luna_efemerides.py`. En la salida CSV de Horizons las columnas se llaman `Azi_(a-app)` y `Elev_(a-app)`.
+- **NASA.** Los mapas de textura y pol�gonos de NASA se pueden usar en simulaciones con cr�dito. La insignia, el logotipo y los identificadores de NASA no son de dominio p�blico y no pueden aparecer en im�genes generadas por IA. El uso comercial no puede sugerir respaldo. Las versiones con m�sica de los videos de NASA SVS usan pistas con derechos de terceros.
+- **PowerShell.** `"$n: texto"` invalida la l�nea entera: escribir `${n}`. `Remove-Item` con comod�n sobre una ruta en variable se bloquea: borrar por nombre con `-LiteralPath`.
+
+## 6. �ndice de la b�veda
+
+- [[Inicio]]: mapa de la b�veda.
+- [[trabajos]]: avances, pendientes y registro de cr�ditos.
+- `00_Plan_Maestro/`: PDF del plan maestro.
+- `Fase_0_Tecnica/`: [[Fase 0 - Analisis]], `Investigacion/`, `Datos/` y `Tareas_Codex/`.
+- `Fase_1_Arte/`:
+  - [[Biblia de arte]], `paleta_maestra.png`, `anclas.json`, `bloques_prompt.json`, `manifiesto_recursos.csv` y `registro_generaciones.json`.
+  - [[Decision - Modelado 3D]] y su evidencia en `Modelado/`.
+  - `Hojas_de_referencia/`: nueve hojas v1 y el [[Catalogo de recursos]].
+  - `Exploracion/Lote_NN/`: [[Lote 01 - Direcciones de arte]], [[Lote 02 - Tipo de juego y personajes]] y [[Lote 03 - Hojas de referencia y Mirador]].
+- `Propuestas/`: [[Mirador del Faro - Luna con datos reales]], sus datos en `Propuestas/Datos/` y sus capturas en `Propuestas/Capturas/`.
+- `Referencias/Tablero_usuario/`: 14 capturas y [[Analisis del tablero]].
+
+FullName                                                                                                  
+--------                                                                                                  
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_2_Narrativa\Investigacion\01_datos_espaciales_ecuador.md
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_2_Narrativa\Investigacion\02_historia_existente.md      
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_2_Narrativa\Tareas_Codex\investigacion_historia.md      
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_2_Narrativa\Tareas_Codex\logs\datos_espaciales.log      
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_2_Narrativa\Tareas_Codex\logs\historia_existente.log    
+
+
+
+codex
+La bóveda anterior contiene 3 actos y 18 viñetas, pero describe buena parte del recorrido como propuesta futura. La Fase 2 del PDF ocupa la página 2 y no fija duración ni una lista formal de entregables. El sueño lunar y las 2 banderas son requisitos nuevos, aún no desarrollados en esos textos.
+web search: 
+web search: site.ssd.jpl.nasa.gov horizons observer ephemeris moon topocentric ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command '$env:PYTHONIOENCODING='"'utf-8'; @'
+from pypdf import PdfReader
+r=PdfReader('Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf')
+print('PAGINA 3\\n'+r.pages[2].extract_text())
+from pathlib import Path
+p=Path('Nasa_Game/Fase_2_Narrativa/Tareas_Codex/investigacion_historia.md')
+print('\\nENCARGO\\n'+p.read_text(encoding='utf-8'))
+'@ | python -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 953ms:
+PAGINA 3
+Fase 5: Level Design y Generación Masiva (Higgsfield)
+Zona / Bioma Mecánica Principal Lista de Props (Higgsfield)
+Cuarto / Guayaquil
+Centro
+Gestión de recursos, estudio
+teórico
+Placas base, libros, cautín, ventiladores, flora
+local
+Laboratorio
+Universitario
+Ensamblaje, puzzles de
+electrónica
+Osciloscopios, brazos robóticos, pizarrones
+densos
+Simulador Espacial
+(NASA) Telemetría, cálculo orbital Cápsulas, servidores mainframe, trajes
+presurizados
+Se creará un manifiesto estricto para que los prompts ingresados en la IA arrojen topologías
+optimizadas para el motor.
+Fase 6: Mecánicas Core, Físicas y Game Feel
+Manejo de Input: Input buffering y coyote time adaptados a un RPG. El movimiento debe
+sentirse tan pulido como en un Action-RPG de PlatinumGames, incluso si el juego es pausado.
+Sistemas Interactivos: Máquinas de estado finito (FSM) para la recolección, crafting de placas
+de circuito (PCBs) y minijuegos de programación.
+Gestión de Memoria y Guardado: Arquitectura robusta de guardado de estado mundial
+(Serialización JSON o binaria segura).
+Fase 7: UI/UX, Tipografía y Accesibilidad AAA
+Arquitectura de UI (HUD): Uso de la tipografía DotGothic16 como ancla estética. Menús
+minimalistas inspirados en telemetría de los 80s y terminales de comandos reales.
+Accesibilidad (A11y): Cumplimiento de estándares AAA: mapeo total de controles, modos para
+daltonismo (modificando la paleta de la Fase 1 si es necesario), escalado de texto dinámico y
+reducción de movimiento para mareos.
+Feedback Visual: Uso de Shaders para destacar objetos interactivos (outlines) sin romper la
+inmersión del entorno.
+Proyecto NASA-Ecuador (AAA Godot GDD) Página 3 de 3
+
+ENCARGO
+@@TAREA
+
+Proyecto: RPG educativo de exploracion en Godot 4 (nombre de trabajo «Proyecto NASA-Ecuador»). Una estudiante de ingenieria de control de Guayaquil, con su gato cientifico Orbita, viaja en su sueno de llegar a la NASA. Estilo: low-poly pintado a mano, exploracion 2D-HD con camara alta. Ya existe una prueba del Mirador del Faro: telescopio que muestra la Luna real del momento con datos de JPL Horizons.
+
+Pedido de Guillermo (2026-11-12) para la Fase 2 (historia y misiones):
+- historia de al menos 1 hora de juego, coherente y entretenida, con mas contenido espacial;
+- al acostarse, la protagonista suena que esta en la Luna: camina, recolecta muestras y ve el Apolo; una mision es colocar juntas la bandera de Estados Unidos y la de Ecuador;
+- escenarios en orden, conectados como mundo abierto: 1) habitacion, 2) telescopio, 3) Luna.
+
+Reglas: responde en espanol, texto corto y con cifras. Cada dato con su fuente primaria (URL de NASA, gobierno de Ecuador, tratado, articulo cientifico) y fecha de consulta; marca «sin verificar» lo que no confirmes en una fuente primaria. Usa la busqueda web integrada; NO uses Firecrawl salvo que una pagina no cargue de otra forma. No inventes. No escribas fuera del archivo de salida.
+
+@@TAREA id=datos_espaciales salida=Nasa_Game/Fase_2_Narrativa/Investigacion/01_datos_espaciales_ecuador.md sandbox=read-only timeout=45 esfuerzo=high
+
+Investiga y verifica datos reales que conecten a Ecuador con el espacio y con la Luna, utiles para misiones y dialogos del gato:
+1. Ecuador y el programa Apolo: la estacion de rastreo de la NASA en Quito (nombre, red, anos, que misiones apoyo, si apoyo al Apolo 11); el mensaje de Ecuador en el disco de buena voluntad del Apolo 11; las rocas lunares de buena voluntad (Apolo 11 y 17) regaladas a Ecuador y que paso con ellas.
+2. Ecuador hoy: firma de los Acuerdos Artemisa (fecha exacta y numero de pais firmante); la Agencia Espacial Civil Ecuatoriana (EXA), el satelite NEE-01 Pegaso y Ronnie Nader; el Observatorio Astronomico de Quito; el Chimborazo como punto de la superficie mas alejado del centro de la Tierra (cifra); planetarios o centros de ciencia en Guayaquil.
+3. Superficie lunar en el Apolo, para el nivel del sueno: herramientas de recoleccion de muestras (pinzas, pala, rastrillo, tubos de nucleo, bolsas), como se documentaba cada muestra, cuantos kg trajo cada mision, la gravedad (1/6), temperaturas, regolito, la Tierra vista desde la Luna; la bandera del Apolo (Lunar Flag Assembly, por que parece ondear); la etapa de descenso que quedo en la Luna; como volvio el modulo de mando a la Tierra (amerizaje).
+4. Reglas que el juego debe respetar: Tratado del Espacio Ultraterrestre de 1967 (una bandera no es reclamar territorio); recomendaciones de la NASA de 2011 para proteger los sitios del Apolo (distancias) y la ley One Small Step de 2020; uso de la insignia y el nombre de la NASA en obras comerciales; ley ecuatoriana de simbolos patrios sobre el uso de la bandera en obras y videojuegos.
+Entrega: una tabla por bloque (dato | cifra | fuente | confianza) y al final 10 ideas de mision o dialogo que salgan de esos datos, cada una con el dato que la respalda.
+
+@@TAREA id=historia_existente salida=Nasa_Game/Fase_2_Narrativa/Investigacion/02_historia_existente.md sandbox=read-only timeout=45 esfuerzo=medium
+
+Lee y resume lo que ya existe de historia, sin inventar:
+- `C:\Users\guill\Desktop\Juego\Juego_2d-hd\3_Guion_y_Mundo\historia.md` y `C:\Users\guill\Desktop\Juego\Juego_2d-hd\2_Arte_e_Interfaz\arte e Historia.md` (boveda anterior);
+- la seccion de la Fase 2 (estructura narrativa y diseno de misiones) del PDF `Nasa_Game/00_Plan_Maestro/Plan Maestro de Desarrollo AAA.pdf` (extrae el texto con Python si hace falta);
+- `Nasa_Game/Memory.md`, `Nasa_Game/Propuestas/Mirador del Faro - Luna con datos reales.md` y `Nasa_Game/Fase_1_Arte/Biblia de arte.md`.
+Entrega:
+1. Lo que pide el plan maestro para la Fase 2: entregables, puertas y criterios, citando la pagina.
+2. Inventario de lo existente: personajes (con rasgos), lugares, misiones, mecanicas educativas, tono, finales. Marca lo que contradice decisiones nuevas (por ejemplo, el pixel-art descartado).
+3. Huecos: lo que falta para una historia de al menos 1 hora con escenarios habitacion, telescopio y Luna conectados como mundo abierto.
+
+
+web search: 
+web search: https://ssd.jpl.nasa.gov/horizons/manual.html
+codex
+**Existe una base de 3 actos y 18 viñetas; no acredita todavía 60 minutos ni el recorrido habitación → telescopio → Luna.** El sueño lunar y la misión de las 2 banderas son requisitos nuevos del encargo.
+
+Consulta de todas las fuentes: **12-11-2026**. Las fuentes internas acreditan decisiones y propuestas narrativas; su implementación queda **sin verificar** en esta revisión documental.
+
+**1. Qué exige el plan maestro**
+
+| Elemento | Exigencia documentada | Página |
+|---|---|---:|
+| Progresión | Pasar de reparar microcontroladores en el barrio a programar simuladores orbitales; actos claros y ritmo de juego. | 2 |
+| Educación | Kepler, compuertas lógicas y telemetría mediante rompecabezas táctiles que permitan sobrevivir o progresar; evitar el formato de examen. | 2 |
+| Diálogos | Árboles ramificados, internacionalización y equilibrio entre humor costeño y rigor científico. | 2 |
+| Puerta | Presentar el análisis de **1 fase**, detenerse y recibir aprobación o correcciones antes de avanzar. | 1 |
+
+El PDF **no enumera archivos entregables**, duración mínima, número de misiones ni criterios medibles de aceptación para Fase 2. Guion por actos, fichas de misiones y árboles de diálogo serían traducciones operativas de sus exigencias, **no entregables nombrados literalmente**.
+
+Fuente P: :codex-file-citation{path="C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\00_Plan_Maestro\Plan Maestro de Desarrollo AAA.pdf" purpose="source"}
+
+**2. Inventario existente**
+
+Los nombres y diálogos del guion anterior siguen siendo propuestas para revisión. [H, A]
+
+| Personaje | Rasgos y función escritos |
+|---|---|
+| Avatar | Estudiante de ingeniería en Guayaquil; apariencia y nombre personalizables; aprende observando, formulando hipótesis y probando. |
+| Elena | Familiar; silueta redonda, delantal verde, cabello recogido; entrega la libreta. |
+| Rafael | Familiar; hombros rectos, camisa arena; manipula una caja de premios. |
+| Lidia Vera | Vendedora de jugos del Malecón, observadora del río; sombrero, delantal teja y termo. |
+| Sam Rivas | Compañero universitario; perseverante ante los fallos; chaqueta verde petróleo, carpeta amarilla y maqueta. |
+| Dra. Vega | Mentora de simulación; auricular y chaqueta azul; enseña a cambiar **1 parámetro por prueba**. |
+| Ari | Estudiante del club de observación; coleta baja y cuaderno coral; recibe las observaciones al final. |
+| Órbita | Guía científica de consola y planetario. El dossier dejaba especie y personalidad pendientes; el encargo actual fija **gato científico**. |
+| Exploradores Apolo | **2 figuras** históricas de papel articulado; identificación pendiente de fuentes; recreación diferenciada del archivo. |
+
+| Contenido | Qué existe documentalmente |
+|---|---|
+| Acto I | Cuarto, casa, Malecón y universidad. Libro holográfico, libreta, formación, graduación y carta de práctica. [H, A] |
+| Acto II | Sala ficticia de entrenamiento: despliegue, diagnóstico de enlace y recuperación de señal. [H, A] |
+| Acto III | Biblioteca brutalista, simulador de vuelo, planetario y archivo Apolo. [H, A] |
+| Misiones nombradas | **Vigía del Golfo**, **Hielo en la sombra lunar**, **Tormentas de polvo en Marte**. H las declara jugables; ejecución actual **sin verificar**. [H] |
+| Educación | Presupuesto, masa, energía, datos, arrastre, selección radar/cámara, radiación, enlace, circuitos, trayectorias, inercia y conversión de unidades. Son contenidos previstos, no comprobación de su exactitud científica. [H, A] |
+| Mirador | Telescopio con fichas y comentarios de Órbita. **Bitácora lunar** propone registrar **3 fases** y obtener la carta `COL-12`. [T] |
+| Tono | Cálido y costumbrista en Guayaquil; preciso en consola; observar, equivocarse, recibir explicación y rediseñar. [H, A] |
+| Final | **1 cierre escrito**: elegir la primera observación del cuaderno, entregarlo a Ari y volver a la biblioteca tras los créditos. No constan finales alternativos. [A] |
+
+**Contradicciones y cambios pendientes**
+
+- **Descartado:** píxel-art, cuadrícula de sprites y resolución lógica **384 × 216** como base visual anterior. Memoria fija low-poly pintado a mano y exploración 2D-HD. [A, M, B]
+- **Revisar:** avatar abierto frente a protagonista estudiante de ingeniería de control; mascota gato/perro pendiente frente a Órbita gato. [A; encargo actual]
+- **Reestructurar:** progresión de años mediante montajes frente al nuevo recorrido de **3 escenarios** y sueño al acostarse. No consta una adaptación. [A; encargo actual]
+- **Discrepancia interna:** Biblia indica personaje a **12,5 %** del alto; Memoria advierte que el ancla mide **20,9 %** y deja la elección pendiente. [M, B]
+- **Límite del telescopio:** T documenta una prueba con hora fija y tabla de **2026**, sin enfoque ni zoom. La actualización continua al instante actual sigue pendiente. NASA sí ofrece efemérides por observador y visualizaciones horarias de 2026; esto no verifica la implementación local. [T; [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/manual.html), [NASA SVS](https://svs.gsfc.nasa.gov/5587/); consulta: 12-11-2026]
+
+**3. Huecos para cumplir el nuevo pedido**
+
+Son ausencias identificadas en los **6 documentos**, no propuestas de historia aprobadas.
+
+| Falta | Qué debe quedar definido |
+|---|---|
+| Duración ≥60 min | Presupuesto de tiempo por recorrido y misión, ruta principal y prueba cronometrada. **Duración actual: sin verificar.** |
+| Conexión de escenarios | Mapa, accesos y retornos habitación ↔ mirador; regreso a la cama antes del sueño; reglas para entrar y salir de la Luna. |
+| Mundo abierto | Libertad de recorrido, límites, desbloqueos y persistencia de objetos y misiones; las viñetas actuales describen principalmente una secuencia. |
+| Arco emocional | Motivo inmediato para observar, acostarse y explorar; conflicto, progreso y resolución del sueño. |
+| Luna caminable | Terreno, desplazamiento, orientación, tareas y papel de Órbita. El archivo Apolo anterior es una visita de biblioteca. |
+| Muestras | Herramientas, cantidad, registro, inventario, objetivo educativo, errores y recompensa. |
+| Apolo y banderas | Precisar qué significa «ver el Apolo» y diseñar la colocación conjunta de **2 banderas**. No existe esa misión en las fuentes. |
+| Diálogos | Conversaciones ramificadas, condiciones, consecuencias y textos localizables para los **3 escenarios**. |
+| Ritmo y cierre | Alternancia de exploración, descubrimientos y retos; decidir cómo encaja el cierre de Ari con el despertar. |
+| Bitácora lunar | Resolver cómo completar **3 fases** sin exigir esperar días reales durante una sesión de **1 hora**. |
+
+NASA confirma que Apolo 11 recolectó muestras y desplegó una bandera estadounidense. **La colocación conjunta con la ecuatoriana queda sin verificar como hecho histórico**; en este encargo pertenece al sueño ficticio. Fuente: [NASA, Apollo Missions](https://www.nasa.gov/specials/apollo50th/missions.html), consulta: 12-11-2026.
+
+Fuentes internas del inventario, consultadas el **12-11-2026**:
+
+- H: :codex-file-citation{path="C:\Users\guill\Desktop\Juego\Juego_2d-hd\3_Guion_y_Mundo\historia.md" purpose="source"}
+- A: :codex-file-citation{path="C:\Users\guill\Desktop\Juego\Juego_2d-hd\2_Arte_e_Interfaz\arte e Historia.md" purpose="source"}
+- M: :codex-file-citation{path="C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Memory.md" purpose="source"}
+- T: :codex-file-citation{path="C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Propuestas\Mirador del Faro - Luna con datos reales.md" purpose="source"}
+- B: :codex-file-citation{path="C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Biblia de arte.md" purpose="source"}
+tokens used
+58.090
+**Existe una base de 3 actos y 18 viñetas; no acredita todavía 60 minutos ni el recorrido habitación → telescopio → Luna.** El sueño lunar y la misión de las 2 banderas son requisitos nuevos del encargo.
+
+Consulta de todas las fuentes: **12-11-2026**. Las fuentes internas acreditan decisiones y propuestas narrativas; su implementación queda **sin verificar** en esta revisión documental.
+
+**1. Qué exige el plan maestro**
+
+| Elemento | Exigencia documentada | Página |
+|---|---|---:|
+| Progresión | Pasar de reparar microcontroladores en el barrio a programar simuladores orbitales; actos claros y ritmo de juego. | 2 |
+| Educación | Kepler, compuertas lógicas y telemetría mediante rompecabezas táctiles que permitan sobrevivir o progresar; evitar el formato de examen. | 2 |
+| Diálogos | Árboles ramificados, internacionalización y equilibrio entre humor costeño y rigor científico. | 2 |
+| Puerta | Presentar el análisis de **1 fase**, detenerse y recibir aprobación o correcciones antes de avanzar. | 1 |
+
+El PDF **no enumera archivos entregables**, duración mínima, número de misiones ni criterios medibles de aceptación para Fase 2. Guion por actos, fichas de misiones y árboles de diálogo serían traducciones operativas de sus exigencias, **no entregables nombrados literalmente**.
+
+Fuente P: :codex-file-citation{path="C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\00_Plan_Maestro\Plan Maestro de Desarrollo AAA.pdf" purpose="source"}
+
+**2. Inventario existente**
+
+Los nombres y diálogos del guion anterior siguen siendo propuestas para revisión. [H, A]
+
+| Personaje | Rasgos y función escritos |
+|---|---|
+| Avatar | Estudiante de ingeniería en Guayaquil; apariencia y nombre personalizables; aprende observando, formulando hipótesis y probando. |
+| Elena | Familiar; silueta redonda, delantal verde, cabello recogido; entrega la libreta. |
+| Rafael | Familiar; hombros rectos, camisa arena; manipula una caja de premios. |
+| Lidia Vera | Vendedora de jugos del Malecón, observadora del río; sombrero, delantal teja y termo. |
+| Sam Rivas | Compañero universitario; perseverante ante los fallos; chaqueta verde petróleo, carpeta amarilla y maqueta. |
+| Dra. Vega | Mentora de simulación; auricular y chaqueta azul; enseña a cambiar **1 parámetro por prueba**. |
+| Ari | Estudiante del club de observación; coleta baja y cuaderno coral; recibe las observaciones al final. |
+| Órbita | Guía científica de consola y planetario. El dossier dejaba especie y personalidad pendientes; el encargo actual fija **gato científico**. |
+| Exploradores Apolo | **2 figuras** históricas de papel articulado; identificación pendiente de fuentes; recreación diferenciada del archivo. |
+
+| Contenido | Qué existe documentalmente |
+|---|---|
+| Acto I | Cuarto, casa, Malecón y universidad. Libro holográfico, libreta, formación, graduación y carta de práctica. [H, A] |
+| Acto II | Sala ficticia de entrenamiento: despliegue, diagnóstico de enlace y recuperación de señal. [H, A] |
+| Acto III | Biblioteca brutalista, simulador de vuelo, planetario y archivo Apolo. [H, A] |
+| Misiones nombradas | **Vigía del Golfo**, **Hielo en la sombra lunar**, **Tormentas de polvo en Marte**. H las declara jugables; ejecución actual **sin verificar**. [H] |
+| Educación | Presupuesto, masa, energía, datos, arrastre, selección radar/cámara, radiación, enlace, circuitos, trayectorias, inercia y conversión de unidades. Son contenidos previstos, no comprobación de su exactitud científica. [H, A] |
+| Mirador | Telescopio con fichas y comentarios de Órbita. **Bitácora lunar** propone registrar **3 fases** y obtener la carta `COL-12`. [T] |
+| Tono | Cálido y costumbrista en Guayaquil; preciso en consola; observar, equivocarse, recibir explicación y rediseñar. [H, A] |
+| Final | **1 cierre escrito**: elegir la primera observación del cuaderno, entregarlo a Ari y volver a la biblioteca tras los créditos. No constan finales alternativos. [A] |
+
+**Contradicciones y cambios pendientes**
+
+- **Descartado:** píxel-art, cuadrícula de sprites y resolución lógica **384 × 216** como base visual anterior. Memoria fija low-poly pintado a mano y exploración 2D-HD. [A, M, B]
+- **Revisar:** avatar abierto frente a protagonista estudiante de ingeniería de control; mascota gato/perro pendiente frente a Órbita gato. [A; encargo actual]
+- **Reestructurar:** progresión de años mediante montajes frente al nuevo recorrido de **3 escenarios** y sueño al acostarse. No consta una adaptación. [A; encargo actual]
+- **Discrepancia interna:** Biblia indica personaje a **12,5 %** del alto; Memoria advierte que el ancla mide **20,9 %** y deja la elección pendiente. [M, B]
+- **Límite del telescopio:** T documenta una prueba con hora fija y tabla de **2026**, sin enfoque ni zoom. La actualización continua al instante actual sigue pendiente. NASA sí ofrece efemérides por observador y visualizaciones horarias de 2026; esto no verifica la implementación local. [T; [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/manual.html), [NASA SVS](https://svs.gsfc.nasa.gov/5587/); consulta: 12-11-2026]
+
+**3. Huecos para cumplir el nuevo pedido**
+
+Son ausencias identificadas en los **6 documentos**, no propuestas de historia aprobadas.
+
+| Falta | Qué debe quedar definido |
+|---|---|
+| Duración ≥60 min | Presupuesto de tiempo por recorrido y misión, ruta principal y prueba cronometrada. **Duración actual: sin verificar.** |
+| Conexión de escenarios | Mapa, accesos y retornos habitación ↔ mirador; regreso a la cama antes del sueño; reglas para entrar y salir de la Luna. |
+| Mundo abierto | Libertad de recorrido, límites, desbloqueos y persistencia de objetos y misiones; las viñetas actuales describen principalmente una secuencia. |
+| Arco emocional | Motivo inmediato para observar, acostarse y explorar; conflicto, progreso y resolución del sueño. |
+| Luna caminable | Terreno, desplazamiento, orientación, tareas y papel de Órbita. El archivo Apolo anterior es una visita de biblioteca. |
+| Muestras | Herramientas, cantidad, registro, inventario, objetivo educativo, errores y recompensa. |
+| Apolo y banderas | Precisar qué significa «ver el Apolo» y diseñar la colocación conjunta de **2 banderas**. No existe esa misión en las fuentes. |
+| Diálogos | Conversaciones ramificadas, condiciones, consecuencias y textos localizables para los **3 escenarios**. |
+| Ritmo y cierre | Alternancia de exploración, descubrimientos y retos; decidir cómo encaja el cierre de Ari con el despertar. |
+| Bitácora lunar | Resolver cómo completar **3 fases** sin exigir esperar días reales durante una sesión de **1 hora**. |
+
+NASA confirma que Apolo 11 recolectó muestras y desplegó una bandera estadounidense. **La colocación conjunta con la ecuatoriana queda sin verificar como hecho histórico**; en este encargo pertenece al sueño ficticio. Fuente: [NASA, Apollo Missions](https://www.nasa.gov/specials/apollo50th/missions.html), consulta: 12-11-2026.
+
+Fuentes internas del inventario, consultadas el **12-11-2026**:
+
+- H: :codex-file-citation{path="C:\Users\guill\Desktop\Juego\Juego_2d-hd\3_Guion_y_Mundo\historia.md" purpose="source"}
+- A: :codex-file-citation{path="C:\Users\guill\Desktop\Juego\Juego_2d-hd\2_Arte_e_Interfaz\arte e Historia.md" purpose="source"}
+- M: :codex-file-citation{path="C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Memory.md" purpose="source"}
+- T: :codex-file-citation{path="C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Propuestas\Mirador del Faro - Luna con datos reales.md" purpose="source"}
+- B: :codex-file-citation{path="C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Biblia de arte.md" purpose="source"}

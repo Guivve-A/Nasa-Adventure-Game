@@ -1,0 +1,57 @@
+[
+  {
+    "created_at": "2026-11-13T16:52:07.299853Z",
+    "display_name": "GPT Image 2.6",
+    "id": "b1bd2602-56d5-4a4a-9498-aa56e9f1dbf3",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_165207_b1bd2602-56d5-4a4a-9498-aa56e9f1dbf3_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/ff4e139f-ab33-4aff-8831-db4b2f92c40d.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "0f6a3d7c-2b98-4a34-a7cd-8d31c9132f38",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/0f6a3d7c-2b98-4a34-a7cd-8d31c9132f38.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. Keep the room layout, furniture placement and morning mood of the fourth reference image, and refine it into a clean final concept. In-game screenshot of the protagonist's small bedroom-workshop in a hillside house of a tropical port city, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. Early morning: the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag has just got out of bed and stretches in the middle of the room, while the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag sits on the windowsill. Layout: an unmade single bed in the back-left corner with a cardboard box beside it; a window in the back wall with a view of the colorful houses of the hillside stair neighborhood; a small white refractor telescope on a tripod beside the window; along the right wall a sturdy wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires) next to a vintage oscilloscope with a wobbly cyan trace; an open engineering notebook with ink sketches on the bench; a framed poster of a historic white observatory dome among trees; terracotta floor tiles, a woven rug, potted plants. Entrance and exit: in the front-right corner a wooden staircase goes down through an opening in the floor to the rest of the house, and in front of it a clear, completely uncluttered arrival landing about two meters wide, with a small woven doormat, a low wooden railing with an open gate and a warm lantern, so the way in and out of the room reads at a glance; a subtle soft cyan glow on the floor of the landing marks the transition point. Leave open walking space between the bed, the window, the workbench and the landing. Warm golden sunrise light streams through the window in long diagonal shafts across the floor, cool petrol-blue shade in the corners. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts with floating dust motes, gentle bloom on light sources, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_165207_b1bd2602-56d5-4a4a-9498-aa56e9f1dbf3.png",
+    "status": "completed"
+  }
+]

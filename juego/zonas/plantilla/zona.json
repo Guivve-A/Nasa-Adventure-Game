@@ -1,0 +1,16 @@
+{
+  "nombre": "Zona de plantilla",
+  "lugar": "Banco de pruebas",
+  "momento": "Tarde",
+  "estado_arte": "provisional: bloques de prueba",
+  "oculta": true,
+  "orden": 99,
+  "carga": {
+    "imagen": "",
+    "fichas": ["realimentacion", "luz_cenicienta"]
+  },
+  "entradas": {
+    "inicio": "centro de la zona",
+    "fondo": "junto al borde de abajo, mirando hacia arriba"
+  }
+}

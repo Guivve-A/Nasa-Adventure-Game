@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:54:03.248862Z",
+    "display_name": "GPT Image 2.6",
+    "id": "84ca26a4-bec0-4ca6-8e0a-5fa2f047ca89",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175403_84ca26a4-bec0-4ca6-8e0a-5fa2f047ca89_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/4412c12c-6589-45e4-9453-f695ac27ccbc.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Rocas y terreno · v1\". Twelve modular terrain pieces for a top-down exploration game. Top row: \"TER-01 Roca grande\" a large faceted boulder with moss on top; \"TER-02 Roca mediana\" a medium boulder; \"TER-03 Piedras sueltas\" a cluster of small stones; \"TER-04 Saliente rocoso\" a cliff ledge piece with layered strata; \"TER-05 Piedras de río\" smooth rounded river stones; \"TER-06 Tronco caído\" a fallen mossy log. Bottom row: \"TER-07 Sendero de tierra\" a straight and a curved dirt path tile with pebbles; \"TER-08 Borde de hierba\" a grass edge strip; \"TER-09 Orilla de arroyo\" a stream bank piece with shallow turquoise water; \"TER-10 Puente de tablones\" a small plank bridge with rope rails; \"TER-11 Escalinata de mosaico\" a stair segment with colorful mosaic risers; \"TER-12 Muro de piedra\" a low stone wall segment. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175403_84ca26a4-bec0-4ca6-8e0a-5fa2f047ca89.png",
+    "status": "completed"
+  }
+]

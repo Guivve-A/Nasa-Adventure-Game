@@ -1,0 +1,964 @@
+OpenAI Codex v0.167.0-alpha.4.1
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1d028-4e7f-7971-8f61-94e997fe2e85
+--------
+user
+@@TAREA
+
+Proyecto: RPG educativo de exploracion en Godot 4 (nombre de trabajo «Proyecto NASA-Ecuador»). Una estudiante de ingenieria de control de Guayaquil, con su gato cientifico Orbita, viaja en su sueno de llegar a la NASA. Estilo: low-poly pintado a mano, exploracion 2D-HD con camara alta. Ya existe una prueba del Mirador del Faro: telescopio que muestra la Luna real del momento con datos de JPL Horizons.
+
+Pedido de Guillermo (2026-11-12) para la Fase 2 (historia y misiones):
+- historia de al menos 1 hora de juego, coherente y entretenida, con mas contenido espacial;
+- al acostarse, la protagonista suena que esta en la Luna: camina, recolecta muestras y ve el Apolo; una mision es colocar juntas la bandera de Estados Unidos y la de Ecuador;
+- escenarios en orden, conectados como mundo abierto: 1) habitacion, 2) telescopio, 3) Luna.
+
+Reglas: responde en espanol, texto corto y con cifras. Cada dato con su fuente primaria (URL de NASA, gobierno de Ecuador, tratado, articulo cientifico) y fecha de consulta; marca «sin verificar» lo que no confirmes en una fuente primaria. Usa la busqueda web integrada; NO uses Firecrawl salvo que una pagina no cargue de otra forma. No inventes. No escribas fuera del archivo de salida.
+
+---
+
+# TU TAREA
+
+Investiga y verifica datos reales que conecten a Ecuador con el espacio y con la Luna, utiles para misiones y dialogos del gato:
+1. Ecuador y el programa Apolo: la estacion de rastreo de la NASA en Quito (nombre, red, anos, que misiones apoyo, si apoyo al Apolo 11); el mensaje de Ecuador en el disco de buena voluntad del Apolo 11; las rocas lunares de buena voluntad (Apolo 11 y 17) regaladas a Ecuador y que paso con ellas.
+2. Ecuador hoy: firma de los Acuerdos Artemisa (fecha exacta y numero de pais firmante); la Agencia Espacial Civil Ecuatoriana (EXA), el satelite NEE-01 Pegaso y Ronnie Nader; el Observatorio Astronomico de Quito; el Chimborazo como punto de la superficie mas alejado del centro de la Tierra (cifra); planetarios o centros de ciencia en Guayaquil.
+3. Superficie lunar en el Apolo, para el nivel del sueno: herramientas de recoleccion de muestras (pinzas, pala, rastrillo, tubos de nucleo, bolsas), como se documentaba cada muestra, cuantos kg trajo cada mision, la gravedad (1/6), temperaturas, regolito, la Tierra vista desde la Luna; la bandera del Apolo (Lunar Flag Assembly, por que parece ondear); la etapa de descenso que quedo en la Luna; como volvio el modulo de mando a la Tierra (amerizaje).
+4. Reglas que el juego debe respetar: Tratado del Espacio Ultraterrestre de 1967 (una bandera no es reclamar territorio); recomendaciones de la NASA de 2011 para proteger los sitios del Apolo (distancias) y la ley One Small Step de 2020; uso de la insignia y el nombre de la NASA en obras comerciales; ley ecuatoriana de simbolos patrios sobre el uso de la bandera en obras y videojuegos.
+Entrega: una tabla por bloque (dato | cifra | fuente | confianza) y al final 10 ideas de mision o dialogo que salgan de esos datos, cada una con el dato que la respalda.
+codex
+Voy a contrastar los datos con fuentes primarias y reunir las 4 tablas y las 10 ideas en un único archivo de salida.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-ChildItem -Force' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 510ms:
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----        12/11/2026      3:47                externos                                                             
+d-----        12/11/2026      9:25                herramientas                                                         
+d-----        12/11/2026      9:27                Nasa_Game                                                            
+d-----        12/11/2026      6:24                pruebas                                                              
+-a----        12/11/2026      6:57            286 .mcp.json                                                            
+-a----        12/11/2026      3:39           4490 CLAUDE.md                                                            
+
+
+
+web search: 
+web search: site.nasa.gov Quito tracking station Apollo 11 Ecuador ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content CLAUDE.md; rg --files -g AGENTS.md -g '*fase*' -g '*Fase*' -g '*investig*' -g '*historia*' -g '*salida*'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 371ms:
+# CLAUDE.md �?" Proyecto NASA-Ecuador
+
+Juego RPG de aventura, simulaci��n y exploraci��n educativa en Godot 4. Un estudiante de ingenier��a de control de Guayaquil en su viaje hacia la NASA, con un gato cient��fico de compa��ero. Nombre de trabajo: ��Proyecto NASA-Ecuador��.
+
+## Rol
+
+Director de videojuegos AAA, arquitecto tǸcnico principal en Godot 4 y director de arte y sonido, segǧn el plan maestro (`Nasa_Game/00_Plan_Maestro/`). Responde en espa��ol.
+
+## Antes de trabajar
+
+1. Lee `Nasa_Game/Memory.md`: decisiones, datos del equipo y lecciones.
+2. Lee `Nasa_Game/trabajos.md`: avances, pendientes y registro de crǸditos.
+3. Si la tarea toca una fase, lee su carpeta `Nasa_Game/Fase_N_*/`.
+
+@Nasa_Game/Memory.md
+@Nasa_Game/trabajos.md
+
+## Regla maestra: puertas de validaci��n
+
+- El plan tiene 8 fases estrictas (0 a 7). Se presenta el anǭlisis de **una sola fase** y se detiene. No se avanza sin la aprobaci��n expl��cita de Guillermo.
+- Cada recurso se valida con Ǹl antes del paso siguiente: concepto ��' hoja de referencia ��' producci��n ��' integraci��n en el motor. Esto incluye personajes, escenas, luz, cǭmara, proporciones, interfaz y audio.
+- Nada se da por validado sin evidencia: la imagen, una captura en el motor con la cǭmara real, una medici��n o una prueba.
+- Se trabaja como un estudio: biblia de arte, hojas de referencia, manifiesto de recursos y listas de comprobaci��n por puerta.
+
+## CrǸditos de Higgsfield
+
+- El presupuesto es de 1000 crǸditos, sin recarga prevista.
+- No se gasta ningǧn crǸdito fuera de una partida aprobada por Guillermo.
+- Antes de generar, cotiza con `higgsfield.cmd generate cost` y anota la partida en `trabajos.md`.
+- Los borradores van con modelos baratos. La calidad final se usa solo despuǸs de aprobar el borrador.
+- Registra cada generaci��n: modelo, parǭmetros, prompt, referencias, costo y veredicto.
+
+## Estilo
+
+- La meta visual es el tablero `Nasa_Game/Referencias/Tablero_usuario/` y los referentes de mercado: RPG de Nintendo, Monster Hunter, PokǸmon, Ocarina of Time 3D y Bravely.
+- El juego es original. Se toman principios y tǸcnicas. No se toman personajes, arte, nombres ni dise��os ajenos.
+- El p��xel-art de la b��veda anterior (`Desktop\Juego\Juego_2d-hd`) qued�� descartado el 2026-11-12.
+- Direcci��n aprobada: low-poly pintado a mano (D-011), juego de exploraci��n 2D-HD con mapa mediano (D-012) y la vista superior del lote 02 (D-013). Las normas estǭn en `Nasa_Game/Fase_1_Arte/Biblia de arte.md`; lǸela antes de pedir cualquier imagen.
+- Coherencia en el tiempo:
+  - Las imǭgenes aprobadas estǭn subidas a Higgsfield como anclas (`anclas.json`) y se citan como `@ANC_�?�` en los lotes.
+  - El texto fijo de los encargos estǭ en `bloques_prompt.json` y se cita como `{ESTILO}`, `{HOJA}`, etc.
+  - Cada recurso tiene un ID (`VEG-01`�?�) en `manifiesto_recursos.csv`. Se regenera con `python herramientas/manifiesto.py`.
+  - `python herramientas/paleta.py comparar` mide el color de cada recurso nuevo contra la paleta maestra.
+
+## Equipo y herramientas
+
+- Objetivo de calidad: **AAA**. El 2026-11-12 Guillermo pidi�� no limitar el juego a lo que rinde su portǭtil. El desarrollo grǭfico puede hacerse en un PC en la nube alquilado.
+- Portǭtil local: Intel i5-7200U, 8 GB de RAM e Intel HD Graphics 620. Sirve de terminal y define el perfil m��nimo de compatibilidad, no el techo del juego.
+- PowerShell bloquea los `.ps1`: usa `npm.cmd`, `npx.cmd` y `higgsfield.cmd`.
+- Godot 4.7.2: `C:\Users\guill\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe`.
+- Higgsfield: `herramientas/hf_catalogo.py`, `hf_costos_matriz.py` y `hf_params.py` consultan modelos y costos sin gastar crǸditos.
+- Codex: `herramientas/codex_lote.py` le env��a tareas en lote. Guillermo pidi�� delegarle la investigaci��n y el trabajo mecǭnico para ahorrar tokens. Lo que entregue se verifica antes de usarlo.
+- El modo automǭtico bloquea las instalaciones de software externo: dale el comando a Guillermo para que lo ejecute.
+
+## B��veda de Obsidian
+
+- `Nasa_Game/` es la memoria del proyecto. Los documentos van en Markdown compatible con Obsidian: enlaces `[[...]]`, imǭgenes `![[...]]` y nombres de archivo sin tildes.
+- Al terminar una tarea, actualiza `trabajos.md` (avance, pendientes y crǸditos) y `Memory.md` (decisiones y lecciones).
+
+## Convenciones
+
+- En el c��digo, comentarios sin tildes. En documentos y conversaci��n, con tildes.
+- Texto corto y con cifras concretas.
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 24
++ Get-Content CLAUDE.md; rg --files -g AGENTS.md -g '*fase*' -g '*Fase* ...
++                        ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Content -Encoding UTF8 Nasa_Game/Memory.md; Get-Content -Encoding UTF8 Nasa_Game/trabajos.md; Get-ChildItem Nasa_Game -Directory; Get-ChildItem -Recurse -Filter AGENTS.md | Select-Object -ExpandProperty FullName' in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 531ms:
+---
+tipo: memoria
+actualizado: 2026-11-12
+---
+
+# Memoria del Proyecto NASA-Ecuador
+
+> Se carga en cada sesi�n desde `CLAUDE.md` (ra�z del repositorio). Aqu� van las directivas de Guillermo, las decisiones con fecha, los datos medidos y las lecciones. El avance y los pendientes van en [[trabajos]].
+
+## 1. Directivas de Guillermo
+
+| Fecha | Directiva |
+|---|---|
+| 2026-11-12 | Crear un juego totalmente �nico con aires de AAA. Pulir cada aspecto y validar juntos cada recurso: escena, luz, isometr�a, ajustes y proporciones. |
+| 2026-11-12 | Trabajar como un estudio profesional, con hojas de referencia y las t�cnicas habituales de los estudios AAA. Referentes: RPG de Nintendo, Monster Hunter, Pok�mon, Ocarina of Time 3D y Bravely. |
+| 2026-11-12 | Sacar el m�ximo provecho de los 1000 cr�ditos de Higgsfield (plan Plus). |
+| 2026-11-12 | Seguir el plan maestro de 8 fases: se presenta una fase y se espera su aprobaci�n. |
+| 2026-11-12 | La b�veda de Obsidian `Nasa_Game/` guarda el contexto. Mantener `CLAUDE.md`, `Memory.md` y `trabajos.md`. |
+| 2026-11-12 | Delegar tareas a Codex para trabajar con eficiencia y gastar menos tokens. |
+| 2026-11-12 | El estilo de la b�veda anterior (p�xel-art) queda descartado: �muy superficial, carece de estilo art�stico v�lido para un juego AAA�. |
+| 2026-11-12 | Pilar �mundo vivo�: interacciones de alto nivel con todo el entorno, movimientos sutiles del ambiente, sonidos coherentes y paleta de colores consistente. |
+| 2026-11-12 | �Quiero que el sistema sea totalmente AAA, no quiero que te enfoques en que voy a renderizar todo aqu�. Puedo alquilar PC en la nube.� Meta: un videojuego totalmente impresionante, con texturas y arte innovador. Corrige la primera versi�n de la Fase 0, que lo limitaba todo al port�til. |
+| 2026-11-12 | Empezar ya los dise�os con Higgsfield: �lowpoly, o cualquier otra forma recomendada�. El alquiler del PC en la nube se ve despu�s. |
+| 2026-11-12 | �Me encant� la vista superior, as� se debe ver.� La vista de juego del lote 02 es la meta de la exploraci�n. |
+| 2026-11-12 | Hacer hojas de referencia de los recursos �para que no se pierdan luego� y el juego sea coherente en dise�o en el tiempo. |
+| 2026-11-12 | Idea de Guillermo: una zona donde incrustar datos satelitales de NASA, por ejemplo mirar la Luna por un telescopio mientras la mascota da datos. |
+| 2026-11-12 | �S�, desc�rgalos�: autoriz� descargar los tres archivos p�blicos de NASA para la prueba de la Luna. |
+| 2026-11-12 | �Si requieres de Blender para modelaje solo ind�camelo que yo lo descargo.� Las instalaciones las hace Guillermo: hay que ped�rselas con la versi�n exacta y la fuente oficial. |
+| 2026-11-12 | Sobre el modelado 3D: �Puedo aprender a usar blender, me gusta mucho la opci�n de tipo� (aprueba la ruta por tipo de recurso, D-014). Propone conectar Blender por MCP para que Claude d� los toques finales. |
+| 2026-11-12 | �Esas tareas finas se las puedes delegar a codex, hasta agotar sus tokens; luego tomar� el chat ma�ana Fable.� El trabajo debe quedar documentado para que otro modelo lo retome. |
+| 2026-11-12 | �En este momento quiero las mallas listas, y una escena completa. Empecemos. Quiero trabajar contigo y validar si las mallas cumplen mis expectativas.� Autoriza adelantar mallas de personajes y entorno (fases 3 y 5) para la escena de prueba, con su validaci�n. |
+
+## 2. Decisiones
+
+Las decisiones t�cnicas de la Fase 0 est�n propuestas en [[Fase 0 - Analisis]] y esperan la aprobaci�n de Guillermo. Al aprobarse se copian aqu� con su fecha.
+
+| ID | Fecha | Decisi�n | Estado |
+|---|---|---|---|
+| D-000 | 2026-11-12 | El p�xel-art de la b�veda anterior no se usa. La meta visual es el tablero de referencia y los referentes de mercado. | Decidido por Guillermo |
+| D-011 | 2026-11-12 | **Direcci�n de arte: low-poly pintado a mano** (A1 del lote 01). Anclas de estilo: `L01_A_lowpoly_hub_gpt26.png` para el hub y `L01_A_lowpoly_exploracion_gpt26.png` para la exploraci�n. | Decidido por Guillermo |
+| D-012 | 2026-11-12 | **Tipo de juego: exploraci�n, mapa mediano y 2D-HD**, como las capturas del tablero: c�mara alta 3/4 con el personaje peque�o y mapa ilustrado de la regi�n con recolecci�n, fauna e hitos. | Decidido por Guillermo |
+| D-013 | 2026-11-12 | **Vista de exploraci�n aprobada:** `L02_exploracion_camara_alta.png`, con c�mara alta a unos 60�, sin horizonte y el personaje a un octavo del alto. Es ancla de estilo. Ojo: en la imagen el personaje mide el 20,9 % del alto, no un octavo; la escena de prueba mide los dos tama�os para que Guillermo elija. | Decidido por Guillermo |
+| D-014 | 2026-11-12 | **Modelado 3D por tipo de recurso (ruta h�brida):** el entorno se hace por script (sin cr�ditos) y las mallas base de personajes y fauna, con Tripo H3.1. Blender 5.2.4 LTS pasa a ser obligatorio, como taller de limpieza, rig y exportaci�n. Detalle en [[Decision - Modelado 3D]]. | Decidido por Guillermo |
+
+## 3. Datos medidos (2026-11-12)
+
+**Equipo de desarrollo**
+- Intel Core i5-7200U (2 n�cleos, 4 hilos), 7,9 GB de RAM y gr�fica integrada Intel HD Graphics 620 (controlador 31.0.101.2140).
+- Pantalla de 1920�1080, Windows 10 Home, 27 GB libres en C:.
+- Instalado: Git, Git LFS, Python 3.13, ffmpeg 9, ImageMagick 7, .NET, VS Code, GitHub CLI y Node 24.
+- No instalado: Blender ni editores de imagen.
+
+**Red desde Guayaquil (02:22 del 2026-11-12, Wi-Fi)**
+- Latencia de conexi�n TCP: Miami 62 ms, Atlanta 74, Chicago 93, Virginia 94, Nueva Jersey 96, Dallas 99, Ohio 118, Ciudad de M�xico 121, Santiago 131, Los �ngeles 132, S�o Paulo de 153 a 193 y Oreg�n 164.
+- Ancho de banda: 106 Mbps de bajada y 45 Mbps de subida contra un nodo cercano; 46 Mbps desde Atlanta y 10 Mbps desde Miami en una sola conexi�n.
+- Se repite con `python herramientas/red_nube.py`.
+
+**Godot**
+- Godot 4.7.2-stable con firma v�lida (Prehensile Tales B.V.), en `C:\Users\guill\Downloads\Godot_v4.7.2-stable_win64.exe\`.
+- En la HD 620 arrancan los cuatro modos: Forward+ con Vulkan 1.3.215, Forward+ con D3D12 (nivel 12_0), Mobile con Vulkan, y Compatibility. Compatibility cambia solo a ANGLE (OpenGL ES 3.0 sobre Direct3D 11) porque el OpenGL del controlador es de baja calidad.
+- Medici�n con `pruebas/bench_render/` (29 corridas, fps medios a 1280�720): Mobile 90 en la escena base, 43 con 40 000 briznas de hierba y 75 con 200 sprites; Compatibility 73, 42 y 41; Forward+ 68, 35 y 58. Forward+ con SDFGI, SSAO y glow da 20 fps con ca�das a 9.
+- A 1920�1080 con hierba densa todos rondan los 30 fps: el l�mite es el relleno de p�xeles.
+- El primer arranque de Forward+ tard� m�s de 90 s por la compilaci�n de shaders.
+- La escena del telescopio (`pruebas/luna_telescopio/`, Mobile) cuesta 0,74 ms de GPU a 720p, y de 2,2 a 2,5 ms con la Luna a pantalla completa. Lo midi� el revisor de c�digo.
+
+**Higgsfield**
+- Plan Plus, espacio de trabajo �Private�, CLI 1.2.2. Saldo tras el lote 04 (mallas 3D): 904,25 cr�ditos. Se gastaron 102,00: 66,00 en los lotes 01 a 03 y 36,00 en el 04. El detalle est� en [[trabajos]].
+- Los 1000 cr�ditos de suscripci�n se acreditaron el 2026-11-12. **No se acumulan:** caducan al cierre del periodo de facturaci�n (t�rminos de Higgsfield, apartado 9.4). Los comprados aparte duran 90 d�as (apartado 9.6). Falta confirmar la fecha de renovaci�n.
+- Los t�rminos permiten el uso comercial de los resultados (apartado 4.4), pero rigen las condiciones m�s restrictivas de cada proveedor (apartado 8). Las licencias de m�sica v�a Higgsfield no est�n verificadas para publicar.
+- 119 modelos: imagen, video, audio y 3D. El 3D incluye imagenmalla (Tripo, Hunyuan3D, Meshy), remesh, retexturizado y rigging con biblioteca de animaciones. `autosprite` genera animaciones de sprites con direcciones isom�tricas.
+- Cat�logo, par�metros y 169 cotizaciones en `Fase_0_Tecnica/Datos/`.
+
+**Codex**
+- App de escritorio 26.1103 con sesi�n de ChatGPT. La l�nea de comandos utilizable es `%LOCALAPPDATA%\OpenAI\Codex\bin\<hash>\codex.exe` (codex-cli 0.167). Modelo configurado: gpt-6.1-sol.
+
+**Trabajo anterior**
+- B�veda y repositorio �Gravedad 2D-HD� en `C:\Users\guill\Desktop\Juego\Juego_2d-hd` (remoto `Guivve-A/Juego_Godot_repo1_agentes`), del 8 y 9 de noviembre de 2026. Naci� para el NASA Space Apps Challenge de Guayaquil, con el reto �Space Mission Design Game�. Resumen en [[08_antecedentes_boveda_anterior]].
+
+## 4. Costos medidos de Higgsfield (cr�ditos)
+
+| Recurso | Opci�n | Cr�ditos |
+|---|---|---|
+| Imagen de borrador | `gpt_image_2_6` calidad low, 1k | 0,25 |
+| Imagen de borrador | `text2image_soul_v2`, `soul_location` | 0,12 |
+| Imagen final | `gpt_image_2_6` calidad high, 1k / 2k | 1,5 / 2,75 |
+| Imagen final con referencias | `nano_banana_pro` 2k (hasta 14 referencias) | 2 |
+| Vistas nuevas de un sujeto | `3d_jutsu_angles` 1k / 2k | 1,25 / 2,5 |
+| Animaci�n de sprite | `autosprite` turbo / pro / max | 2 / 3 / 14 |
+| Imagen  malla 3D | `tripo_h3_1_image_to_3d` (sin textura 6, quads 10,5); el l�mite de caras no cambia el precio | 9 |
+| Vistas  malla 3D | `tripo_h3_1_multiview_to_3d`, de 2 a 4 vistas | 9 |
+| Imagen  malla low-poly | `hunyuan3d_v3_image_to_3d` con `generate_type` LowPoly (no deja fijar las caras) | 14 |
+| Imagen  malla 3D | `hunyuan3d_v3_image_to_3d` (solo geometr�a 7) | 11 |
+| Imagen  malla 3D | `meshy_v7_image_to_3d` (con rig 44, rig y animaci�n 47,5) | 38 |
+| Retopolog�a | `meshy_v5_remesh` | 6 |
+| Retexturizado | `meshy_v5_retexture` | 9,5 |
+| Quitar fondo | `image_background_remover` | 1 |
+| M�sica | `sonilo_music` / `elevenlabs_music_v2_5` por minuto | 3,75 / 8,72 |
+| Efecto de sonido | `mirelo_text_to_audio` por segundo | 0,25 |
+| Video | de `seedance1_5` a `seedance_2_5` por clip | 4,8 a 35 |
+
+Las referencias de imagen no cambian el costo. `generate cost` no cotiza `image_to_3d`, `multi_image_to_3d`, `3d_rigging`, `sam_3_3d` ni `topaz_image`.
+
+## 5. Lecciones
+
+- **PowerShell bloquea los `.ps1`.** Usar `npm.cmd`, `npx.cmd` y `higgsfield.cmd`.
+- **Instalaciones.** El modo autom�tico bloquea instalar software externo. Se le da el comando a Guillermo.
+- **Modelos 3D ocultos.** `higgsfield model list` en tabla no muestra los modelos 3D; `model list --json` s�. Usar `herramientas/hf_catalogo.py`.
+- **Cotizar es gratis.** `generate cost` no crea trabajos. Para los modelos que exigen imagen se usa un marcador gris ya subido.
+- **Codex por lotes.** El `codex.exe` de `WindowsApps` da �Acceso denegado�. Funciona el de `%LOCALAPPDATA%\OpenAI\Codex\bin`, con el prompt por la entrada est�ndar en UTF-8, `-s read-only`, `-c web_search="live"` y `-o informe.md`.
+- **Verificar lo delegado.** Los informes de Codex se contrastan con mediciones propias y con una revisi�n independiente antes de decidir. En la Fase 0, casi todos los informes recomendaban Compatibility sin haberlo medido; la medici�n favoreci� a Mobile.
+- **Codex y Firecrawl.** Codex usa el conector de Firecrawl de la cuenta de Guillermo. Nueve tareas en paralelo agotaron los cr�ditos diarios, que se renuevan solos. Para lotes grandes, repartir las tareas o avisar antes.
+- **Workflows y Firecrawl.** Los agentes de los workflows tambi�n usan Firecrawl. Los tres agentes del estudio de modelado lo dejaron sin cr�ditos hasta el 2026-11-13 a las 03:58 UTC. En los encargos de investigaci�n, pedir WebFetch y WebSearch para lo simple.
+- **Medir las anclas, no confiar en el encargo.** Una imagen generada no respeta las proporciones pedidas. En `L02_exploracion_camara_alta.png` el encargo ped�a al personaje a un octavo del alto (12,5 %) y sali� al 20,9 %. La biblia de arte y D-013 copiaron el texto del encargo.
+- **Hojas de personaje para multivista.** Antes de mandarlas a 3D, revisar que las vistas coincidan. En la hoja de PER-01, el bolso cuelga delante de la cadera en el frente y detr�s en el perfil. Adem�s, el perfil mira a la derecha (muestra el lado derecho), y Tripo pide frente, izquierda y espalda.
+- **Modelado 3D.** Higgsfield no da low-poly controlable: Tripo rechaza `smart_low_poly` y Hunyuan LowPoly no deja fijar las caras. Tampoco separa piezas ni hace rig de cuadr�pedos. Las mallas de IA necesitan limpieza en Blender. Estudio completo en [[Decision - Modelado 3D]].
+- **Tripo multivista por Higgsfield.**
+  - Las vistas van en orden frente, izquierda, espalda y derecha. �Izquierda� es el lado izquierdo del objeto, que en la imagen mira hacia la izquierda.
+  - Un perfil que mira a la derecha, puesto en la segunda ranura, deja la malla en espejo.
+  - Las mallas salen mirando a �X.
+  - Si el objeto es sim�trico, basta con mandar el perfil y su espejo.
+- **Textura fallida de Tripo.** Puede devolver un gris plano (media 102, desviaci�n 3) sin ning�n aviso. Hay que revisar la desviaci�n de cada textura. `herramientas/mallas/proyectar_vistas.py --auto` pinta la textura desde las vistas de la hoja, elige el frente y el espejo seg�n c�mo calzan las siluetas y no gasta cr�ditos.
+- **Subir una vez.** `herramientas/hf_subir.py` sube las im�genes de entrada como JPEG de 70 a 175 KB y guarda sus ids. Con ids, cotizar un lote de 4 mallas tarda segundos. Con rutas locales, cada cotizaci�n sube el archivo y una se cort� a los 120 s.
+- **Godot: luz propia.** En `light()`, `LIGHT_COLOR` llega multiplicado por p: dividir entre p para igualar el Lambert est�ndar.
+- **Godot: GLB en tiempo de ejecuci�n.** `GLTFDocument.append_from_file` carga mallas sin importarlas. Si se guardan en una carpeta con `.gdignore`, el editor no las importa y se pueden regenerar al momento.
+- **Comandos para Guillermo.** Usa la app de escritorio y no tiene el CLI `claude`. Los MCP se registran en el `.mcp.json` del proyecto. Su terminal es PowerShell: una ruta `.exe` entre comillas se ejecuta con `&` delante, o se le deja un lanzador `.cmd` (por ejemplo `pruebas/escena_exploracion/abrir_escena.cmd`).
+- **MCP de Blender** (complemento `blender_mcp.py` 2.0, paquete `mcp-for-blender` 2.2.8).
+  - Sus campos de claves de API (Hyper3D, Hunyuan3D, Tripo, Meshy, World Labs, Sketchfab, Poly Pizza) no vienen con Higgsfield: son cuentas aparte y se cobran aparte. El c�digo no menciona Higgsfield.
+  - La generaci�n sigue por Higgsfield y el GLB se importa en Blender.
+  - �Allow Telemetry�, que env�a prompts, c�digo y capturas, y �Allow Remote Connections� vienen apagadas por defecto, pero aparecieron marcadas: hay que dejarlas desmarcadas.
+  - `install-addon` falla si Blender a�n no cre� su carpeta de configuraci�n: abrir Blender una vez antes.
+- **Blender 5.3 instalado** (2026-11-12, `C:\Program Files\Blender Foundation\Blender 5.3\blender.exe`), en vez de la 5.2.4 LTS. Arranca sin ventana en la HD 620.
+  - Sin ventana, una imagen empaquetada que viene de un GLB tiene `has_data` en falso hasta usarla: comprobar `packed_file`.
+  - `herramientas/blender/limpiar_personaje.py` (Codex) funcion� tras esa correcci�n: niveles exactos de 1 500 y 3 000 tri�ngulos en 9,3 s.
+- **Rig de cuadr�pedos con Rigify, por script** (`herramientas/blender/rig_gato.py`, probado con �rbita en Blender 5.3):
+  1. Soldar los v�rtices de Tripo antes de los pesos autom�ticos; si no, el c�lculo de pesos no converge.
+  2. Copiar el peso del vecino m�s cercano a las piezas finas sueltas.
+  3. Hornear solo posici�n y rotaci�n: la escala de Rigify produce cizallamiento, que glTF no admite.
+  4. Exportar en modo `NLA_TRACKS`.
+  5. Al crear los huesos de exportaci�n, copiar sus extremos y su orientaci�n. Con longitud cero pierden la direcci�n de descanso y la animaci�n deforma la malla.
+  6. En Godot, activar el bucle de cada animaci�n.
+  7. Revisar siempre la pose de uni�n contra la animada: separa los fallos de pesos de los fallos de animaci�n.
+- **Inclinaci�n hacia atr�s.** En el ancla, los objetos y personajes no tienen el escorzo de una c�mara de 55�. Una cizalla en el shader (`z -= 0,55�y`) los muestra erguidos sin mover el suelo, y las sombras siguen correctas.
+- **L�mite de uso de Codex.** Las diez tareas de la Fase 0 agotaron el l�mite del plan de ChatGPT de Guillermo el 2026-11-12 a las 02:26; se restablec�a a las 06:27. Enviar pocas tareas a la vez, con esfuerzo medio cuando baste, y comprobar que queda cupo antes de un lote.
+- **Tiempo de las tareas de Codex.** Con esfuerzo alto tardan de 14 a 23 minutos. Dar 45 minutos de l�mite. Si una se corta, se reanuda con `codex exec resume <id de sesi�n>`; el id est� al inicio de su log.
+- **Meshy se retira.** El proveedor retir� `lowpoly` el 30-10-2026 y retira Meshy 7 para geometr�a el 31-12-2026. No basar la producci�n en `meshy_v7_image_to_3d`.
+- **Mixamo** solo acepta FBX, OBJ o ZIP y solo hace rig de b�pedos. Su licencia permite el uso comercial dentro del juego, sin redistribuir los archivos crudos.
+- **Medir a 1080p.** Una ventana de 1920�1080 no cabe en esta pantalla: para medir esa resoluci�n hay que usar `--fullscreen`.
+- **Resultados de Higgsfield.** La respuesta trae `result_url` (el original en PNG) y `min_result_url` (una miniatura). Hay que bajar `result_url`. `herramientas/hf_generar.py` ya lo hace, cotiza antes, respeta un tope por lote y registra cada generaci�n.
+- **Modelos de imagen para este juego** (lote 01, mismo encargo): GPT Image 2.6 en calidad high y 2k sigue la direcci�n de arte al detalle. Nano Banana Pro deriva a caricatura isom�trica con contorno. Seedream 5.5 da luz cinematogr�fica, pero ignora el low-poly.
+- **Encargos de imagen.** Funciona un bloque de escena fijo m�s un bloque de estilo que cambia. Terminar con �No text, no logos, no interface�. Revisar que no aparezcan objetos parecidos a productos comerciales.
+- **Consistencia entre lotes.** Pasar como referencia las im�genes aprobadas (anclas de estilo) y un recorte del personaje mantiene el dise�o: en el lote 02 el protagonista y el gato salieron iguales en hojas y escenas. Las referencias no cambian el costo en GPT Image 2.6.
+- **Texto en im�genes.** GPT Image 2.6 escribi� bien los r�tulos en espa�ol del mapa, con tildes. Sirve para maquetas de interfaz; el texto final se compone en el motor.
+- **Fondo transparente.** Una hoja de personaje puede volver con canal alfa aunque se pida fondo gris. Para verla o montarla hay que aplanarla: `magick archivo.png -background "#cfc8c3" -alpha remove`.
+- **Fallo de subida.** Un error HTTP 520 al subir una referencia no cobra cr�ditos. Se reintenta con `--solo <id>`.
+- **Anclas subidas una vez.** Las im�genes aprobadas se suben a Higgsfield en JPEG de 1600 px con `herramientas/hf_anclas.py` y se citan como `@ANC_.`. Evita volver a subir PNG de 5 a 7 MB en cada encargo, que fue lo que provoc� el error 520.
+- **Hojas con r�tulos.** En el lote 03, GPT Image 2.6 escribi� bien los 104 r�tulos con ID y tildes (�VEG-01 Ceibo�.) en nueve hojas. Pedir r�tulos en las hojas sirve.
+- **Indicador de paleta.** Con ?E = 20, `paleta.py comparar` detecta desv�os de familia de color (c�lida frente a fr�a), no de estilo: las direcciones descartadas del lote 01 tambi�n dan 100 %. El estilo lo juzga Guillermo.
+- **Descargas.** Cada archivo externo va a su propia carpeta en `externos/` con `herramientas/descargar_nasa.py`, que comprueba el tama�o y guarda el SHA-256. `curl -I` no mostr� las cabeceras de NASA SVS en PowerShell; con Python s�.
+- **Orientaci�n de mapas lunares.** Antes de usar un mapa, ubicar el punto m�s alto (cumbre Selenean, 5,4� N y 158,6� O) y el m�s bajo (cr�ter Antoniadi, unos 70� S y 172� O). El CGI Moon Kit tiene la longitud 0 al centro y el este a la derecha.
+- **Prueba objetiva de la Luna.** El modo `--prueba` del telescopio pinta la m�scara de luz; `herramientas/luna_medir.py` mide la fracci�n iluminada y el �ngulo del borde y los compara con Horizons. Con `--captura` y `--textura` tambi�n correlaciona la textura con la luz cenicienta, y as� detecta un giro o un espejo.
+- **Pruebas por correlaci�n.** Hay que excluir de la zona medida lo que dibuja la interfaz: dos l�neas de r�tulos bajaron la correlaci�n de 0,990 a 0,650.
+- **Juego exportado.** `Image.load_from_file` sobre una ruta `res://` funciona en el editor, pero falla en el juego exportado, porque el `.pck` solo lleva los `.ctex` importados. Las texturas van como recursos importados y se cargan con `preload`. Se prueba sin plantillas de exportaci�n: `--headless --export-pack "<preset>" x.pck` y despu�s `--main-pack x.pck`.
+- **HDR 2D.** Con `rendering/viewport/hdr_2d` el lienzo es lineal.
+  - Un shader que hace su propia gamma debe entregar color lineal con la curva sRGB exacta. Con `pow(x, 2.2)` las sombras bajan unos 6 niveles.
+  - `Image.linear_to_srgb()` de Godot 4.7.2 solo acepta RGB8 y RGBA8, pero la captura con HDR llega en RGBAH. Se convierte p�xel a p�xel con `Color.linear_to_srgb()`, en 2,6 s a 720p.
+- **Otras fechas para probar.** `luna_efemerides.py --salida <carpeta temporal>` no ensucia `Propuestas/Datos`. Despu�s, `luna_parametros.py` escribe el `luna.json` de una copia del proyecto.
+- **Relieve y terminador.** Un mapa de normales enciende cr�teres en plena noche si no se limita la luz a la zona cercana al terminador geom�trico (`smoothstep` sobre el producto punto-Sol).
+- **Luna con datos reales.** La API de JPL Horizons y Dial-A-Moon de NASA SVS responden para 2026. Script: `herramientas/luna_efemerides.py`. En la salida CSV de Horizons las columnas se llaman `Azi_(a-app)` y `Elev_(a-app)`.
+- **NASA.** Los mapas de textura y pol�gonos de NASA se pueden usar en simulaciones con cr�dito. La insignia, el logotipo y los identificadores de NASA no son de dominio p�blico y no pueden aparecer en im�genes generadas por IA. El uso comercial no puede sugerir respaldo. Las versiones con m�sica de los videos de NASA SVS usan pistas con derechos de terceros.
+- **PowerShell.** `"$n: texto"` invalida la l�nea entera: escribir `${n}`. `Remove-Item` con comod�n sobre una ruta en variable se bloquea: borrar por nombre con `-LiteralPath`.
+
+## 6. �ndice de la b�veda
+
+- [[Inicio]]: mapa de la b�veda.
+- [[trabajos]]: avances, pendientes y registro de cr�ditos.
+- `00_Plan_Maestro/`: PDF del plan maestro.
+- `Fase_0_Tecnica/`: [[Fase 0 - Analisis]], `Investigacion/`, `Datos/` y `Tareas_Codex/`.
+- `Fase_1_Arte/`:
+  - [[Biblia de arte]], `paleta_maestra.png`, `anclas.json`, `bloques_prompt.json`, `manifiesto_recursos.csv` y `registro_generaciones.json`.
+  - [[Decision - Modelado 3D]] y su evidencia en `Modelado/`.
+  - `Hojas_de_referencia/`: nueve hojas v1 y el [[Catalogo de recursos]].
+  - `Exploracion/Lote_NN/`: [[Lote 01 - Direcciones de arte]], [[Lote 02 - Tipo de juego y personajes]] y [[Lote 03 - Hojas de referencia y Mirador]].
+- `Propuestas/`: [[Mirador del Faro - Luna con datos reales]], sus datos en `Propuestas/Datos/` y sus capturas en `Propuestas/Capturas/`.
+- `Referencias/Tablero_usuario/`: 14 capturas y [[Analisis del tablero]].
+---
+tipo: seguimiento
+actualizado: 2026-11-12
+---
+
+# Trabajos: avances y pendientes
+
+> Qu� se hizo, qu� falta y en qu� se gastaron los cr�ditos. Las decisiones y las lecciones van en [[Memory]].
+
+## Estado por fase
+
+| Fase | Tema | Estado |
+|---|---|---|
+| 0 | Investigaci�n t�cnica, arquitectura y pipeline | En revisi�n. La parte de PC en la nube y objetivo AAA queda para despu�s, por indicaci�n de Guillermo |
+| 1 | Direcci�n de arte visual y cinematograf�a | **Exploraci�n en curso: el lote 03 espera el veredicto de Guillermo** |
+| 2 | Estructura narrativa y dise�o de misiones | Pendiente |
+| 3 | Personajes, animaci�n y entidades | Pendiente |
+| 4 | Dise�o ac�stico espacial y banda sonora | Pendiente |
+| 5 | Dise�o de niveles y generaci�n masiva | Pendiente |
+| 6 | Mec�nicas, f�sicas y game feel | Pendiente |
+| 7 | UI/UX, tipograf�a y accesibilidad | Pendiente |
+
+## Hecho
+
+### 2026-11-12
+
+- [x] Higgsfield listo: CLI 1.2.2, sesi�n iniciada, espacio de trabajo �Private� y 9 skills instaladas.
+- [x] Inventario del equipo y de las herramientas instaladas.
+- [x] Cat�logo de 119 modelos de Higgsfield y 169 cotizaciones, sin gastar cr�ditos (`Fase_0_Tecnica/Datos/`).
+- [x] Plan maestro y 14 referencias guardados en la b�veda. [[Analisis del tablero]] escrito.
+- [x] Conexi�n con Codex por l�nea de comandos (`herramientas/codex_lote.py` y `codex_reanudar.py`).
+- [x] `CLAUDE.md`, [[Memory]], [[Inicio]] y este archivo creados.
+- [x] Nueve informes de investigaci�n de Codex en `Fase_0_Tecnica/Investigacion/`. El de arquitectura se cort� a los 30 minutos y se recuper� reanudando la sesi�n.
+- [x] Prueba de rendimiento en `pruebas/bench_render/`: 29 corridas en la HD 620. Mobile es el renderizador m�s r�pido y estable; SDFGI no es viable.
+- [x] Verificaci�n independiente de los informes: 76 afirmaciones confirmadas, 16 imprecisas, 4 sin poder verificar y ninguna refutada.
+- [x] [[Fase 0 - Analisis]] redactado, con 10 decisiones propuestas.
+- [x] Guillermo pidi� un objetivo AAA sin limitarse al port�til y ofreci� alquilar un PC en la nube. Medidas la latencia y el ancho de banda desde Guayaquil ([[red_latencias]]).
+- [x] Codex agot� su l�mite de uso a las 02:26; se restablec�a a las 06:27.
+- [x] Guillermo pidi� empezar los dise�os con Higgsfield y dejar el alquiler del PC para despu�s.
+- [x] `herramientas/hf_generar.py`: genera lotes con tope de cr�ditos, descarga los originales y registra cada generaci�n.
+- [x] **Lote 01 de direcci�n de arte:** 7 im�genes, 19,25 cr�ditos. Ver [[Lote 01 - Direcciones de arte]].
+- [x] **Veredicto del lote 01:** Guillermo eligi� el low-poly pintado a mano y un juego de exploraci�n con mapa mediano en 2D-HD.
+- [x] **Lote 02:** vista de juego con c�mara alta, mapa de la regi�n, centro espacial, dos hojas del protagonista y hoja del gato. 6 im�genes, 16,50 cr�ditos. Ver [[Lote 02 - Tipo de juego y personajes]].
+- [x] Guillermo aprob� la vista superior del lote 02 (�as� se debe ver�): D-013.
+- [x] Sistema de coherencia: [[Biblia de arte]] v0.1, paleta maestra medida, anclas subidas a Higgsfield, bloques fijos de encargo y manifiesto de recursos con IDs.
+- [x] **Lote 03:** nueve hojas de referencia con 104 recursos, escena de noche del Mirador y maqueta del telescopio. 11 im�genes, 30,25 cr�ditos. Ver [[Lote 03 - Hojas de referencia y Mirador]] y [[Catalogo de recursos]].
+- [x] Idea de la Luna con datos de NASA validada t�cnicamente con datos reales de esta noche: [[Mirador del Faro - Luna con datos reales]].
+- [x] Guillermo autoriz� descargar tres archivos p�blicos de NASA. Descargados a `externos/` con tama�o y SHA-256 comprobados (`Propuestas/Datos/descargas_nasa.json`).
+- [x] Prueba t�cnica en Godot (`pruebas/luna_telescopio/`): la Luna real de las 19:30 desde el Mirador, con texturas de LRO. La m�scara medida da 12,15 % iluminado y el borde a 192,6� del cenit; Horizons dice 12,2 % y 192,6�.
+- [x] Verificaci�n independiente de la prueba con tres revisores: orientaci�n, datos y c�digo. El de c�digo encontr� 9 problemas; el cr�tico era que las texturas no cargaban en el juego exportado. Corregidos 8; queda la orientaci�n para cualquier instante.
+- [x] Pruebas con el c�digo final ([[Mirador del Faro - Luna con datos reales]]):
+  - el juego exportado (`.pck`) da una captura id�ntica a la del editor;
+  - con HDR 2D el disco difiere 0,85 niveles;
+  - la gibosa del 21 de noviembre da 91,21 % y 41,0�, igual que Horizons;
+  - la Luna bajo el horizonte no se dibuja, antes de su salida ni despu�s de su puesta;
+  - `luna_medir.py` tambi�n mide la orientaci�n de la textura: correlaci�n de 0,990, sin giro ni espejo.
+- [x] Capturas de la prueba en `Propuestas/Capturas/`.
+- [x] **Estudio Blender o Higgsfield para el modelado 3D** ([[Decision - Modelado 3D]]):
+  - dos investigadores y un juez, m�s una verificaci�n propia;
+  - recomienda una ruta h�brida: Blender obligatorio para el entorno por script (84 recursos, 0 cr�ditos) y Tripo H3.1 para las mallas base de personajes y fauna (20 recursos);
+  - propone un piloto de 18 cr�ditos seguros y 52,75 de tope;
+  - las cotizaciones se repitieron dos veces, sin gasto.
+- [x] **Lote 04a** (36 cr�ditos): mallas de la protagonista, �rbita, la iguana y la antena. La textura de la protagonista se proyect� desde su hoja con `herramientas/mallas/proyectar_vistas.py`.
+- [x] **Escena de exploraci�n v1** en curso ([[Escena de exploracion v1]]): terreno, arroyo, rocas, hierba y flamboy�n por script; corre a 61-66 fps en la HD 620.
+- [x] **Codex escribi� los scripts de Blender** (`herramientas/blender/`), sin probar porque Blender no est� instalado:
+  - `limpiar_personaje.py`: niveles de detalle;
+  - `glb_a_fbx_mixamo.py` y `fbx_mixamo_a_glb.py`: ida y vuelta por Mixamo;
+  - `rig_gato.py`: metarig Cat de Rigify, con reposo y caminar.
+
+  Informes en `Fase_1_Arte/Modelado/Tareas_Codex/informes/`.
+
+## Pendiente
+
+### De Guillermo
+
+- [ ] **Dar el veredicto del lote 03:** hojas de referencia, escena de noche y vista del telescopio.
+- [ ] Veredicto del resto del lote 02: mapa, centro espacial, protagonista y gato (solo se aprob� la vista superior).
+- [ ] **Decidir el modelado 3D** ([[Decision - Modelado 3D]]):
+  - aprobar la ruta h�brida, con Blender obligatorio;
+  - aprobar la partida del piloto: 18 cr�ditos seguros y un tope de 52,75;
+  - dar a la hoja de PER-01 y a TAL-02 al menos el veredicto �sirve para el piloto�;
+  - decidir el tama�o del personaje: el texto dice 12,5 % y el ancla mide 20,9 %;
+  - contar cu�nta experiencia tiene con Blender.
+- [ ] Instalar Blender 5.2.4 LTS para Windows x64, de download.blender.org, antes del piloto. Guillermo se ofreci� a descargarlo. Reemplaza a la 4.5 LTS que propon�a la Fase 0.
+- [ ] Crear una cuenta gratuita de Adobe para Mixamo, para el paso de rig del piloto.
+- [ ] Aprobar o corregir la Fase 0: [[Fase 0 - Analisis]].
+- [ ] Confirmar la fecha de renovaci�n del plan de Higgsfield. Los cr�ditos de suscripci�n caducan al cierre del periodo, hacia el 2026-12-12; el piloto deber�a terminar antes del 2026-11-26.
+- [ ] Decidir el repositorio remoto y si hay fecha l�mite.
+- [ ] Confirmar en Git el trabajo sin versionar de la b�veda anterior (`Desktop\Juego\Juego_2d-hd`).
+
+### De Claude
+
+- [ ] Luna de cualquier fecha sin conexi�n: leer `mooninfo_2026.json` y aplicar en Godot las correcciones topoc�ntricas de Guayaquil. Calcular el �ngulo paral�ctico en cada instante: cerca del cenit el disco gira hasta 12� por minuto.
+- [ ] Telescopio: cielo de d�a y crep�sculo, eclipses y hora de salida en el panel.
+- [ ] Lote 04, despu�s del veredicto: correcciones de las hojas, noche del Mirador con luz fr�a, HUD sobre la vista de juego y primera malla 3D del protagonista.
+- [ ] Retomar la revisi�n de la Fase 0 para el objetivo AAA con PC en la nube, cuando Guillermo lo pida. El flujo de investigaci�n qued� interrumpido (`wf_3ca8ac6e-3b6`); solo existe el informe parcial `12_render_aaa.md`, sin verificar.
+- [ ] Piloto de modelado 3D, despu�s de la puerta 0 ([[Decision - Modelado 3D]]): prop TAL-02 por tres rutas y la protagonista PER-01 por Tripo y Blender, medidos en Godot. Tope: 52,75 cr�ditos y 36 h. Reemplaza a la prueba de pipeline de 60 cr�ditos de la Fase 0.
+- [ ] Piloto propio del gato (rig y animaci�n de un cuadr�pedo), con tope de horas, despu�s del piloto de modelado.
+- [x] Scripts de Codex probados en Blender 5.3:
+  - `limpiar_personaje.py`: funciona tras una correcci�n. Genera la protagonista con 1 500 y 3 000 tri�ngulos.
+  - `rig_gato.py`: funciona tras cinco correcciones m�as y una de Codex. �rbita camina en la escena, verificada en Godot.
+- [ ] Rig de la protagonista por Mixamo (`glb_a_fbx_mixamo.py` y `fbx_mixamo_a_glb.py`, sin probar). Necesita la cuenta gratuita de Adobe de Guillermo.
+- [ ] En `limpiar_personaje.py` y `rig_gato.py`, permitir salidas fuera de `herramientas/blender/`.
+- [ ] Animaci�n del gato: hoy es un paso peque�o en el sitio. Falta revisar el contacto con el suelo, darle m�s amplitud y moverlo por el mundo.
+- [ ] Probar el horneado de un lightmap en la HD 620.
+- [ ] Probar DotGothic16 con texto en espa�ol a tama�o de juego.
+- [ ] Inicializar Git y Git LFS y crear la estructura del proyecto de Godot.
+- [ ] Fase 1: direcci�n de arte.
+
+## Registro de cr�ditos de Higgsfield
+
+| Fecha | Partida | Modelo | Cantidad | Cr�ditos | Saldo | Aprob� |
+|---|---|---|---|---|---|---|
+| 2026-11-12 | Saldo inicial (1000 de suscripci�n acreditados ese d�a) | - | - | - | 1006,25 | - |
+| 2026-11-12 | Cotizaciones y marcador gris de prueba | `generate cost` | 169 | 0 | 1006,25 | - |
+| 2026-11-12 | Lote 01a: la misma escena low-poly en tres modelos | GPT Image 2.6, Nano Banana Pro y Seedream 5.5 | 3 | 8,25 | 998,00 | Guillermo (�empezar con los dise�os�) |
+| 2026-11-12 | Lote 01b: gouache, maqueta, papel y vista de juego low-poly | GPT Image 2.6 | 4 | 11,00 | 987,00 | Guillermo (�empezar con los dise�os�) |
+| 2026-11-12 | Lote 02: vista de juego, mapa, centro espacial, protagonista (2) y gato | GPT Image 2.6 | 6 | 16,50 | 970,50 | Guillermo (eligi� la direcci�n para seguir) |
+| 2026-11-12 | Lote 03a: nueve hojas de referencia (104 recursos) | GPT Image 2.6 | 9 | 24,75 | 945,75 | Guillermo (�quiero dise�os de recursos. reference sheets�) |
+| 2026-11-12 | Lote 03b: noche del Mirador y maqueta del telescopio | GPT Image 2.6 | 2 | 5,50 | 940,25 | Guillermo (validar la idea del telescopio) |
+| 2026-11-12 | **Partida aprobada:** escena de exploraci�n v1 (piloto de modelado). Seguro: 37,5 (protagonista 9, �rbita 9, iguana 10,5 con su vista limpia, antena COL-01 9 para comparar con el script). Tope: 52,75 | Tripo H3.1 y GPT Image 2.6 | - | - | 940,25 | Guillermo (�S�: 37,5 y tope 52,75�) |
+| 2026-11-12 | Lote 04a: mallas de la protagonista, �rbita, la iguana y la antena. La iguana no necesit� vista limpia: su hoja ya trae frente y lado | Tripo H3.1 (multivista �3, imagen �1) | 4 | 36,00 | 904,25 | Guillermo (partida de la escena v1). Quedan 16,75 de la partida |
+| 2026-11-12 | Lote 04b: hoja de giro limpia de la protagonista (frente, perfil y espalda en A, sin bolso y con la cara despejada). Guillermo: la malla �se ve totalmente mal. las facciones� | GPT Image 2.6 high 2k | 1 | 2,75 | 901,50 | Guillermo (reserva de la partida de la escena v1). Quedan 14,00 |
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----        12/11/2026      1:22                .obsidian                                                            
+d-----        12/11/2026      1:30                00_Plan_Maestro                                                      
+d-----        12/11/2026      2:15                Fase_0_Tecnica                                                       
+d-----        12/11/2026      6:44                Fase_1_Arte                                                          
+d-----        12/11/2026      9:27                Fase_2_Narrativa                                                     
+d-----        12/11/2026      5:07                Propuestas                                                           
+d-----        12/11/2026      1:30                Referencias                                                          
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_4pi1rfpl'.
+En l�nea: 2 Car�cter: 135
++ ... asa_Game -Directory; Get-ChildItem -Recurse -Filter AGENTS.md | Selec ...
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_4pi1rfpl:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_kz4ist6c'.
+En l�nea: 2 Car�cter: 135
++ ... asa_Game -Directory; Get-ChildItem -Recurse -Filter AGENTS.md | Selec ...
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_kz4ist6c:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+
+
+
+web search: 
+web search: site.nasa.gov "Quito" "STADAN" ...
+web search: 
+web search: NASA Quito Ecuador tracking station Cotopaxi 1957 1982
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem Nasa_Game -Directory | Select-Object -ExpandProperty Name; Get-ChildItem Nasa_Game/Fase_2* -Recurse -File | Select-Object FullName; Get-ChildItem herramientas -Filter '*codex*' | Select-Object Name" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 569ms:
+.obsidian
+00_Plan_Maestro
+Fase_0_Tecnica
+Fase_1_Arte
+Fase_2_Narrativa
+Propuestas
+Referencias
+
+Name             
+----             
+codex_lote.py    
+codex_reanudar.py
+
+
+
+web search: 
+web search: site.nasa.gov "Quito" "Apollo" "STADAN" ...
+web search: 
+web search: site.nasa.gov apollo 11 goodwill messages Ecuador disc silicon ...
+codex
+NASA confirma que Ecuador firmó los Acuerdos Artemisa el 21-06-2023 como país número 26. La estación de Quito sí figura en los registros de NASA; todavía debo distinguir su apoyo documentado a Apolo-Soyuz de la afirmación sobre Apolo 11.
+web search: 
+web search: 
+web search: 
+web search: 
+web search: site.gob.ec Chimborazo 6384 centro Tierra
+web search: Ecuador rocas lunares Apollo 11 17 museo desaparecidas
+web search: site.epn.edu.ec Observatorio Astronomico Quito 1873
+web search: site.gob.ec Pegaso NEE-01 Ronnie Nader 2013
+web search: 
+web search: 
+web search: 
+web search: 
+web search: site.epn.edu.ec Observatorio Astronomico Quito 1873
+web search: site.gob.ec Pegaso NEE-01 Ronnie Nader
+web search: Ecuador Apollo moon rocks recovered museum Apollo 11 Apollo 17
+web search: site.gob.ec bandera nacional uso simbolos patrios ley comercial
+web search: 
+web search: https://www.nasa.gov/wp-content/uploads/2024/05/apollo-11-goodwill-messages.pdf
+web search: 
+web search: 
+web search: 
+web search: 
+web search: "Ecuador" "moon rock" site:history.state.gov ...
+web search: site.gob.ec "24-047" "símbolos" ...
+web search: site.exa.ec "privada" "2007" ...
+web search: 'ECUADOR'
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://exa.ec/
+web search: Apollo lunar sample collection tools tongs scoop rake core tubes documentation photographs NASA
+web search: NASA 2011 recommendations lunar historic sites 75 225 meters 2 kilometers
+web search: NASA media usage guidelines commercial entertainment video games logo name
+web search: 
+web search: 
+web search: 
+web search: 
+web search: Moon facts gravity 1.62 temperature regolith Earth near side ...
+web search: Lunar Flag Assembly horizontal crossbar waving flag Apollo ...
+web search: "Agencia Espacial Civil Ecuatoriana" "privada" ...
+web search: Outer Space Treaty 1967 article II VIII IX text ...
+web search: 
+web search: 
+web search: 
+web search: 
+web search: http://www.exa.ec/
+web search: "símbolos patrios" "videojuegos" Ecuador ley ...
+web search: "Lunar Flag Assembly" "horizontal" NASA ...
+web search: "Ecuador" "Apollo 17" "rock" ...
+codex
+Las recomendaciones de NASA dan radios de 75 m para Apolo 11 y 225 m para Apolo 17. Esto permite plantear la misión de las 2 banderas fuera del área histórica, como una acción ficticia del sueño. El paradero de las muestras regaladas a Ecuador sigue sin confirmación primaria.
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://science.nasa.gov/moon/facts/
+web search: https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf
+web search: "EXA" "privada" "espacial" ...
+web search: "simbolos patrios" "comerciales" Ecuador ley ...
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://www.govinfo.gov/content/pkg/PLAW-116publ275/pdf/PLAW-116publ275.pdf
+web search: 'video'
+web search: Chimborazo 6384.41598 geodesy Nocquet ...
+web search: 'temperature'
+web search: 
+web search: 
+web search: 
+web search: 
+web search: Apollo sample documentation before after photographs gnomon bag number geology
+web search: https://ntrs.nasa.gov/api/citations/20080020389/downloads/20080020389.pdf
+web search: "THE ECUADORIAN EXPERIENCE IN SPACE" "iafastro" ...
+web search: Earth appears fixed sky lunar surface Earthrise rotation libration
+web search: 
+web search: 
+web search: 
+web search: 
+web search: "Quito" "Apollo 11" tracking ...
+web search: "Ecuador" "lunar sample" "gift" ...
+web search: "Quito" "Apollo 9" ...
+web search: "THE ECUADORIAN EXPERIENCE IN SPACE" iafastro.directory ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Content -Encoding UTF8 herramientas/codex_lote.py | Select-Object -First 180; Get-ChildItem Nasa_Game/Fase_2_Narrativa -Force' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 369ms:
+"""Lanza un lote de tareas a Codex (codex exec) en paralelo y guarda cada informe.
+
+El archivo de tareas es un Markdown: lo que va antes de la primera linea
+"@@TAREA ..." es el brief comun; cada "@@TAREA clave=valor ..." abre una tarea.
+
+Claves: id, salida (ruta del informe), sandbox (read-only | workspace-write),
+search (1 = busqueda web en vivo), timeout (minutos), cwd (carpeta de trabajo),
+brief (0 = no anteponer el brief), esfuerzo (low | medium | high | xhigh).
+
+Uso:  python herramientas/codex_lote.py <tareas.md> [--solo id1,id2] [--paralelo 5]
+"""
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+sys.stdout.reconfigure(encoding="utf-8")
+RAIZ = Path(__file__).resolve().parent.parent
+
+
+def ruta_codex():
+    base = Path(os.environ["LOCALAPPDATA"]) / "OpenAI" / "Codex" / "bin"
+    exes = sorted(base.glob("*/codex.exe"), key=lambda p: p.stat().st_mtime, reverse=True)
+    if not exes:
+        raise SystemExit(f"No se encontro codex.exe en {base}")
+    return str(exes[0])
+
+
+def leer_tareas(archivo):
+    brief, tareas, actual = [], [], None
+    for linea in Path(archivo).read_text(encoding="utf-8").splitlines():
+        if linea.startswith("@@TAREA "):
+            campos = dict(par.split("=", 1) for par in linea[len("@@TAREA "):].split(" ") if "=" in par)
+            actual = {"campos": campos, "texto": []}
+            tareas.append(actual)
+        elif actual is None:
+            brief.append(linea)
+        else:
+            actual["texto"].append(linea)
+    return "\n".join(brief).strip(), tareas
+
+
+def correr(codex, brief, tarea, carpeta_logs):
+    c = tarea["campos"]
+    ident = c["id"]
+    cwd = Path(c.get("cwd", "."))
+    cwd = cwd if cwd.is_absolute() else (RAIZ / cwd)
+    salida = Path(c["salida"])
+    salida = salida if salida.is_absolute() else (RAIZ / salida)
+    salida.parent.mkdir(parents=True, exist_ok=True)
+    cuerpo = "\n".join(tarea["texto"]).strip()
+    prompt = cuerpo if c.get("brief", "1") == "0" else f"{brief}\n\n---\n\n# TU TAREA\n\n{cuerpo}"
+    cmd = [codex, "exec", "--skip-git-repo-check", "-C", str(cwd), "-s", c.get("sandbox", "read-only"),
+           "--color", "never", "-c", f'model_reasoning_effort="{c.get("esfuerzo", "high")}"']
+    if c.get("search", "0") == "1":
+        cmd += ["-c", 'web_search="live"']
+    cmd += ["-o", str(salida), "-"]
+    log = carpeta_logs / f"{ident}.log"
+    inicio = time.time()
+    estado = "ok"
+    try:
+        with open(log, "wb") as f:
+            r = subprocess.run(cmd, input=prompt.encode("utf-8"), stdout=f, stderr=subprocess.STDOUT,
+                               timeout=float(c.get("timeout", "30")) * 60)
+        if r.returncode != 0:
+            estado = f"error (codigo {r.returncode})"
+    except subprocess.TimeoutExpired:
+        estado = "timeout"
+    minutos = round((time.time() - inicio) / 60, 1)
+    tam = salida.stat().st_size if salida.exists() else 0
+    if estado == "ok" and tam == 0:
+        estado = "sin informe"
+    return {"id": ident, "estado": estado, "minutos": minutos, "bytes_informe": tam,
+            "informe": str(salida), "log": str(log)}
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("archivo")
+    ap.add_argument("--solo", default="")
+    ap.add_argument("--paralelo", type=int, default=5)
+    a = ap.parse_args()
+    codex = ruta_codex()
+    brief, tareas = leer_tareas(a.archivo)
+    if a.solo:
+        elegidas = set(a.solo.split(","))
+        tareas = [t for t in tareas if t["campos"]["id"] in elegidas]
+    carpeta_logs = Path(a.archivo).resolve().parent / "logs"
+    carpeta_logs.mkdir(exist_ok=True)
+    print(f"Codex: {codex}\n{len(tareas)} tareas, {a.paralelo} en paralelo", flush=True)
+    resultados = []
+    with ThreadPoolExecutor(max_workers=a.paralelo) as ex:
+        for res in ex.map(lambda t: correr(codex, brief, t, carpeta_logs), tareas):
+            resultados.append(res)
+            print(f"  {res['id']:28} {res['estado']:22} {res['minutos']:>5} min  {res['bytes_informe']:>7} bytes", flush=True)
+    estado_json = carpeta_logs / "estado.json"
+    previo = json.loads(estado_json.read_text(encoding="utf-8")) if estado_json.exists() else {}
+    previo.update({r["id"]: r for r in resultados})
+    estado_json.write_text(json.dumps(previo, indent=1, ensure_ascii=False), encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_2_Narrativa
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----        12/11/2026      9:27                Investigacion                                                        
+d-----        12/11/2026      9:27                Tareas_Codex                                                         
+
+
+
+web search: 
+web search: 
+web search: 
+web search: https://www.unoosa.org/documents/pdf/psa/hsti/CostaRica2016/5-4.pdf
+web search: https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf
+web search: https://www.geoportaligm.gob.ec/portal/?wpfb_dl=1221
+web search: 
+web search: 
+web search: 
+web search: 
+web search: "símbolos patrios" "Código" "derechos" Ecuador ...
+web search: "Chimborazo" "6.384" ...
+web search: 'Quito'
+web search: https://www.jstage.jst.go.jp/article/tastj/14/ists30/14_Pv_7/_pdf/-char/en
+web search: 
+web search: 
+web search: 
+web search: 
+web search: '250'
+web search: "símbolos patrios" "ley" "1900" ...
+web search: "Agencia Espacial Civil Ecuatoriana" "sin fines" ...
+web search: https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://www.unoosa.org/oosa/en/ourwork/spacelaw/treaties/introouterspacetreaty.html
+web search: https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf
+web search: 'horizontal'
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://www.nasa.gov/wp-content/uploads/static/history/astp/documents/astp%20press%20kit%20%28us%29.pdf
+web search: https://www.sciencedirect.com/science/article/pii/S0094576511001597
+web search: "Instructivo de uso de los Símbolos Patrios" "presidencia" ...
+web search: "Ecuador" "moon" "Nixon" ...
+web search: 
+web search: 
+web search: 
+web search: 
+web search: "Pegaso" "2013" "abril"
+web search: "The ecuadorian experience in space"
+web search: "EXA" "ONG"
+web search: "Planetario" "1984"
+codex
+Para el nivel lunar, ya están respaldadas las herramientas, el registro fotográfico, los kg por misión y el regreso por amerizaje. En la parte legal, separaré las normas confirmadas de lo que sigue sin verificar: no encontré una disposición ecuatoriana específica sobre banderas en videojuegos.
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://ntrs.nasa.gov/api/citations/19940008327/downloads/19940008327.pdf
+web search: 'Respetar y conocer'
+web search: https://www.unoosa.org/pdf/gadocs/A_6352E.pdf
+web search: https://www.creatividad.gob.ec/wp-content/uploads/2021/02/Codigo-Organico-de-los-Conocimientos.pdf
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf
+web search: 'Reproduzcan o imiten'
+web search: 
+web search: https://www.researchgate.net/publication/317265125_THE_ECUADORIAN_EXPERIENCE_IN_SPACE_The_NEE_ALPHA_Satellite_Constellation
+web search: 
+web search: 
+web search: 
+web search: 
+web search: https://ares.jsc.nasa.gov/engagement/infographics/resources/apollo-missions-to-the-moon-infographic.pdf
+web search: 
+web search: https://orbitaldebris.jsc.nasa.gov/quarterly-news/pdfs/odqnv17i3.pdf
+web search: '2.0 km'
+web search: 
+web search: 
+web search: 
+web search: 
+web search: 
+web search: "Pegaso" "04:13" "2013" ...
+web search: "Apollo 12" "34.3" "Apollo 11" "21.6"
+web search: "Instructivo" "Símbolos Patrios" "bandera" "comercial"
+web search: 
+web search: site.nasa.gov "flag" "wrinkles" "Apollo 11" ...
+codex
+**Proyecto NASA-Ecuador — investigación para Fase 2**
+
+**Consulta de todas las fuentes: 12-11-2026.** Alta = respaldo primario explícito; media = declaración del equipo responsable; **sin verificar** = falta confirmación primaria. Las misiones finales son propuestas ficticias.
+
+**1. Ecuador y Apolo**
+
+| Dato | Cifra | Fuente | Confianza |
+|---|---|---|---|
+| **A1. Estación Quito**, situada cerca del Cotopaxi. Comenzó como estación Minitrack; después integró STADAN y STDN. STADAN atendía satélites científicos; STDN significa *Spaceflight Tracking and Data Network*. | **1957–1981**; antena de **12 m**. | [NASA, historia de las redes, pp. 42, 56 y 228–231](https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf). | Alta |
+| **A2. Misiones apoyadas.** Quito aparece expresamente entre las estaciones de Apolo-Soyuz. NASA también documenta su posterior apoyo al transbordador y su cierre durante STS-2. | Apolo-Soyuz: **1975**; STS-2: **noviembre de 1981**. | [NASA, dossier original de Apolo-Soyuz, p. 87](https://www.nasa.gov/wp-content/uploads/static/history/astp/documents/astp%20press%20kit%20%28us%29.pdf); [historia NASA, pp. 228–229](https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf). | Alta |
+| **A3. ¿Apoyó Apolo 11?** No encontré confirmación primaria específica. La historia NASA sitúa la ampliación de Quito hacia vuelos tripulados en Apolo-Soyuz. No atribuirle la transmisión del primer alunizaje. | Apolo 11: **1969**; Apolo-Soyuz: **1975**. | [NASA, p. 229](https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf). | **Sin verificar** el apoyo a Apolo 11 |
+| **A4. Mensaje ecuatoriano en el disco de buena voluntad.** José María Velasco Ibarra deseó éxito a los astronautas y destacó el entendimiento humano y la buena voluntad. Es una paráfrasis del texto publicado en inglés. | Ecuador figura entre **73 países**; mensajes reducidos **200 veces**. | [NASA, comunicado original 69-83F, pp. 2 y 18](https://www.nasa.gov/wp-content/uploads/2024/05/apollo-11-goodwill-messages.pdf). | Alta |
+| **A5. Obsequio de Apolo 11 atribuido a Ecuador.** No localicé acta primaria de entrega, inventario de custodia ni ubicación actual. No afirmar que fue robado, vendido o recuperado. | Recepción y paradero: **sin verificar**. | [NASA, testimonio institucional sobre las placas de Apolo 11 y 17](https://www.nasa.gov/wp-content/uploads/2025/08/parkerla-12-6-11.pdf): confirma el programa general, **no la cadena de custodia ecuatoriana**. | **Sin verificar** |
+| **A6. Obsequio de Apolo 17 atribuido a Ecuador.** Está confirmado el reparto internacional de fragmentos de la roca 70017; no confirmé documentalmente la recepción ni el destino del ejemplar ecuatoriano. NASA explica que no rastrea estos regalos. | Reparto en **1973** a **135 jefes de Estado extranjeros**; roca **70017**. | [NASA, reparto de la roca](https://www.nasa.gov/history/50-years-ago-apollo-17-post-mission-activities/); [NASA OIG, p. 7](https://oig.nasa.gov/wp-content/uploads/2024/02/ig-12-007.pdf). | Alta para el reparto; **sin verificar** para Ecuador |
+
+**2. Ecuador y el espacio**
+
+| Dato | Cifra | Fuente | Confianza |
+|---|---|---|---|
+| **E1. Acuerdos Artemisa.** Gustavo Manrique firmó por Ecuador en su embajada en Washington. La firma no constituye una asignación de vuelo lunar. | **21-06-2023**; país firmante **n.º 26**. | [NASA, anuncio oficial](https://www.nasa.gov/news-release/nasa-welcomes-ecuador-as-26th-artemis-accords-signatory/). | Alta |
+| **E2. EXA.** La Agencia Espacial Civil Ecuatoriana se describe como una ONG civil que administra y ejecuta su programa espacial. No confundirla con una dependencia de NASA. | Creada en **2007**, según sus responsables. | [Nader, Carrión y Urigüen, artículo técnico de 2014, introducción](https://www.researchgate.net/publication/317265125_THE_ECUADORIAN_EXPERIENCE_IN_SPACE_The_NEE_ALPHA_Satellite_Constellation). | Media: fuente primaria del equipo |
+| **E3. NEE-01 Pegaso.** Primer satélite ecuatoriano, desarrollado por EXA; lanzamiento desde Jiuquan, China, en un cohete LM-2D. La fecha indicada por sus autores es la utilizada en Ecuador. | **25-04-2013**; cuerpo de **10 × 10 × 10 cm**; identificador **2013-018B**. | [Artículo técnico del equipo](https://www.researchgate.net/publication/317265125_THE_ECUADORIAN_EXPERIENCE_IN_SPACE_The_NEE_ALPHA_Satellite_Constellation); [NASA, boletín de residuos orbitales, julio de 2013](https://orbitaldebris.jsc.nasa.gov/quarterly-news/pdfs/odqnv17i3.pdf). | Alta; fecha según equipo |
+| **E4. Ronnie Nader.** Dirigió el equipo de Pegaso. La FAE documenta su formación ASA/T; esa formación, por sí sola, no acredita un viaje orbital ni lunar. | Proyecto aprobado en **2010**; satélite lanzado en **2013**. | [Artículo del equipo, sección del proyecto](https://www.researchgate.net/publication/317265125_THE_ECUADORIAN_EXPERIENCE_IN_SPACE_The_NEE_ALPHA_Satellite_Constellation); [FAE, revista Sobrevuelo 2011](https://www.fae.mil.ec/wp-content/uploads/2020/07/Sobrevuelo-2011.pdf). | Alta para liderazgo y formación |
+| **E5. Pegaso y el supuesto choque.** NASA documentó una anomalía tras un acercamiento orbital, pero no confirmó una colisión con el cuerpo del cohete. Evitar convertir la hipótesis en certeza. | Incidente: **23-05-2013**. | [NASA, análisis contemporáneo, pp. 1–2](https://orbitaldebris.jsc.nasa.gov/quarterly-news/pdfs/odqnv17i3.pdf). | Alta para la incertidumbre |
+| **E6. Observatorio Astronómico de Quito.** Pertenece a la Escuela Politécnica Nacional y realiza investigación y divulgación astronómica. | Fundado en **1873**; celebró **150 años** en 2023. | [OAQ-EPN, boletín institucional](https://oaq.epn.edu.ec/index.php/noticias-2023/584-boletin-de-prensa-150-anos-de-fundacion-del-observatorio-astronomico-de-quito). | Alta |
+| **E7. Chimborazo.** Su cumbre es el punto de la superficie más alejado del centro terrestre. La medida depende de esa referencia, distinta del nivel del mar. | **6 384 415,98 m** desde el centro; medición de **2016**. | [Ministerio de Turismo, memoria oficial](https://www.turismo.gob.ec/wp-content/uploads/2016/09/AM-RECORD-GUINNESS-1.pdf). | Alta |
+| **E8. Planetario de la Armada, Guayaquil.** Centro real de divulgación astronómica situado en la avenida 25 de Julio, frente a la Base Naval Sur. Puede inspirar un folleto o recuerdo de la protagonista. | Inaugurado el **24-07-1984**; guía institucional **2026**. | [INOCAR, historia](https://www.inocar.mil.ec/web/index.php/planetario-de-la-armada/177-historia-del-planetario-de-la-armada); [guía 2026](https://inocar.mil.ec/web/index.php/planetario-de-la-armada/2662-guia-informativa-del-planetario-de-la-armada-2026). | Alta |
+
+**3. Superficie lunar y operaciones Apolo**
+
+| Dato | Cifra | Fuente | Confianza |
+|---|---|---|---|
+| **L1. Pinzas y pala/cucharón.** Las pinzas sujetaban rocas; el cucharón recogía suelo y fragmentos pequeños. Mangos extensores permitían trabajar de pie. | **2 funciones** diferenciadas. | [NASA, herramientas de exploración](https://www.nasa.gov/suits-and-rovers/spacewalking-tools/). | Alta |
+| **L2. Rastrillo.** Separaba pequeños fragmentos del material fino. No corresponde al equipo histórico de Apolo 11. | Utilizado en Apolo **15–17**. | [NASA, catálogo técnico de herramientas](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf). | Alta |
+| **L3. Tubos de núcleo.** Se introducían en el suelo para obtener una columna que conservara información de las capas; podían hincarse con martillo. | **1 columna** por extracción. | [NASA, herramientas](https://www.nasa.gov/suits-and-rovers/spacewalking-tools/). | Alta |
+| **L4. Bolsas y documentación.** Las bolsas numeradas vinculaban muestras y registros. Para muestras documentadas se fotografiaba el lugar antes y después; el gnomon aportaba referencias visuales. El procedimiento no se completó uniformemente en todas las misiones. | Protocolo Apolo 16: **3 fotos previas**, **1 posterior** y fotografía de localización. | [NASA, memorando original reproducido en apéndice P, p. 274](https://www.nasa.gov/wp-content/uploads/static/history/alsj/PhinneySP-2015-626.pdf); [informe Apolo 11, equipo y bolsas](https://www.nasa.gov/wp-content/uploads/static/apollo50th/pdf/A11_MissionReport.pdf). | Alta |
+| **L5. Masa de muestras devueltas por misión.** Valores redondeados; no confundir masa con peso lunar. | Apolo **11: 21,6 kg; 12: 34,3 kg; 14: 42,3 kg; 15: 77,3 kg; 16: 95,7 kg; 17: 110,5 kg**. | [NASA NTRS, tabla 1 de recursos lunares](https://ntrs.nasa.gov/api/citations/19910019908/downloads/19910019908.pdf). | Alta |
+| **L6. Gravedad.** Disminuye el peso; la masa transportada sigue siendo la misma. | **1,624 m/s²**, aproximadamente **1/6** de la terrestre. | [NASA, comparación Tierra-Luna](https://science.nasa.gov/moon/by-the-numbers/). | Alta |
+| **L7. Temperaturas.** Son extremos aproximados de la superficie según iluminación, no cambios instantáneos al cruzar una sombra. | Aproximadamente **+127 °C** al Sol y **−173 °C** en oscuridad. | [NASA, hechos lunares](https://science.nasa.gov/moon/facts/). | Alta |
+| **L8. Regolito.** Capa de polvo y fragmentos rocosos producidos por impactos; incluye material fino y rocas. | Formación por impactos durante **miles de millones de años**. | [NASA, superficie lunar](https://science.nasa.gov/moon/facts/). | Alta |
+| **L9. Tierra desde la Luna.** En los lugares Apolo permanece aproximadamente en la misma región del cielo. Presenta fases y pequeñas variaciones por libración; no debe recorrer rápidamente el cielo. | Ciclo de fases de aproximadamente **1 mes lunar**. | [NASA Goddard, explicación geométrica](https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question58.html). | Alta |
+| **L10. Lunar Flag Assembly.** Una barra horizontal sostenía la bandera. Las arrugas y la extensión incompleta de la barra explican su apariencia ondulada; no había viento que la mantuviera flameando. | Bandera nominal de **3 × 5 pies**, aproximadamente **0,91 × 1,52 m**. | [NASA, historia del conjunto](https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/); [Platoff, estudio histórico con documentación original](https://escholarship.org/content/qt5h31r40r/qt5h31r40r.pdf). | Alta |
+| **L11. Estado de la bandera de Apolo 11.** No está confirmada en pie; NASA recoge el testimonio de Aldrin de que cayó durante el despegue. No mostrarla erguida hoy como hecho comprobado. | **1 bandera histórica** de estado incierto. | [NASA, evaluación de las banderas](https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/). | Alta para la incertidumbre |
+| **L12. Etapa de descenso.** Permaneció en la Luna; sirvió de plataforma para despegar con la etapa de ascenso. El módulo lunar completo no regresó a la Tierra. | Módulo lunar con **2 etapas**. | [NASA, cronología de Apolo 11](https://www.nasa.gov/wp-content/uploads/static/history/ap11ann/apollo11_log/log.htm). | Alta |
+| **L13. Regreso.** Tras reunirse en órbita lunar, la tripulación volvió en el conjunto de mando y servicio. El módulo de mando se separó, reentró protegido por su escudo térmico y amerizó con paracaídas. | Apolo 11: **24-07-1969**, océano Pacífico; recuperación por **USS Hornet**. | [NASA, dossier original: retorno y recuperación](https://science.nasa.gov/wp-content/uploads/2023/09/Apollo_11.pdf); [resumen de misión](https://www.nasa.gov/missions/apollo/apollo-11/apollo-11-mission-overview/). | Alta |
+
+**4. Reglas jurídicas y de representación**
+
+| Dato | Cifra | Fuente | Confianza |
+|---|---|---|---|
+| **R1. Una bandera no concede territorio.** El tratado prohíbe la apropiación nacional mediante soberanía, uso, ocupación u otros medios. La misión debe expresar cooperación. | Tratado abierto a firma el **27-01-1967**; vigente desde **10-10-1967**; **art. II**. | [ONU, texto auténtico del tratado](https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf). | Alta |
+| **R2. Los objetos conservan propietario.** Que una pieza esté en la Luna no la convierte en objeto libre para llevarse. El tratado también exige consideración por actividades ajenas y evitar interferencias perjudiciales. | **Arts. VIII y IX**. | [ONU, tratado](https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf). | Alta |
+| **R3. Protección de Apolo 11 y 17.** NASA recomienda límites para la movilidad de vehículos visitantes alrededor de las etapas de descenso. Aplicarlos a la protagonista sería una decisión educativa conservadora. | Radios: **75 m** en Apolo 11 y **225 m** en Apolo 17. | [NASA, recomendaciones de 2011, sección A3-2](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf). | Alta; son recomendaciones |
+| **R4. Descenso y otros artefactos.** Recomienda evitar sobrevuelos durante la aproximación y mantener el aterrizaje fuera del límite correspondiente. Para Apolo 12 y 14–16 hay separaciones específicas. | Descenso: **2 km**; etapa de descenso: **3 m**; rover y otros artefactos: **1 m**, en los sitios indicados. | [NASA, secciones A2 y A3-3](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf). | Alta |
+| **R5. One Small Step.** Obliga a NASA a incorporar las recomendaciones en contratos, acuerdos y otras colaboraciones de actividades lunares, con excepciones previstas. No convierte esos radios en una prohibición mundial ni regula directamente un videojuego. | Ley estadounidense **116-275**, aprobada el **31-12-2020**, sección **3**. | [Texto legal oficial](https://www.govinfo.gov/content/pkg/PLAW-116publ275/pdf/PLAW-116publ275.pdf). | Alta |
+| **R6. Insignia NASA en videojuegos.** NASA exige revisión del uso de su marca. El juego debe representar correctamente a la agencia y cumplir sus criterios de contenido. La finalidad educativa no sustituye la aprobación. | Procedimiento específico para **videojuegos y mundos virtuales**. | [NASA, Merchandise Approvals, apartado correspondiente](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/). | Alta |
+| **R7. Nombre NASA y uso comercial.** La mención factual y el uso de imágenes tienen condiciones distintas del uso de identificadores como marca del producto. NASA prohíbe sugerir respaldo y restringe emplear su nombre en títulos de productos. «Proyecto NASA-Ecuador» debe seguir como nombre de trabajo mientras se verifica el título comercial. | No utilizar afirmaciones como **«oficial»** o **«aprobado por NASA»**. | [NASA, nomenclatura y respaldo comercial](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/); [uso de imágenes y medios](https://www.nasa.gov/nasa-brand-center/images-and-media/). | Alta para las reglas; aplicación al título requiere revisión |
+| **R8. Bandera ecuatoriana.** La Constitución reconoce bandera, escudo e himno como símbolos patrios. No encontré una ley especial verificada que autorice o prohíba específicamente representarlos en videojuegos comerciales. | Constitución, **art. 2**. | [Asamblea Nacional, Constitución](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf). | Alta para reconocimiento; **sin verificar** regulación específica |
+| **R9. Bandera como marca comercial.** El Código Ingenios impide registrar determinados signos que reproduzcan banderas o emblemas estatales sin permiso. Su alcance es el registro de marcas; no demuestra por sí solo una prohibición de mostrarlos dentro de una escena. | **Art. 360, numeral 12** del texto oficial consultado. | [Código Orgánico de los Conocimientos](https://www.creatividad.gob.ec/wp-content/uploads/2021/02/Codigo-Organico-de-los-Conocimientos.pdf). | Alta para el texto; no equivale a autorización integral |
+
+**10 ideas de misión o diálogo — objetivo de 70 minutos**
+
+Propuesta ficticia: completar con Órbita un cuaderno de exploración. Se desbloquean **habitación → telescopio → Luna**; después del telescopio se vuelve a la cama para iniciar el sueño. Las duraciones son estimaciones de diseño, pendientes de prueba. Los códigos remiten a los datos y fuentes anteriores.
+
+1. **«Desde Guayaquil» — 6 min, habitación.** Examinar un folleto del Planetario y resolver un globo con referencias de altura. Órbita: «¡El Chimborazo gana si medimos desde el centro!». **Respaldo: E7–E8**, 6 384 415,98 m y planetario inaugurado en 1984.
+
+2. **«Un satélite cabe aquí» — 5 min, habitación.** Montar una maqueta de Pegaso y conectar sus subsistemas mediante un pequeño circuito. **Respaldo: E3–E4**, cuerpo de 10 cm y equipo dirigido por Nader.
+
+3. **«La Luna de esta noche» — 8 min, telescopio.** Observar la Luna con la prueba existente y dibujar sus zonas iluminadas. Órbita anticipa cómo cambiaría la vista desde allí. **Respaldo: L9**, fases terrestres y geometría Tierra-Luna.
+
+4. **«Ecuador ya dejó un mensaje» — 7 min, telescopio.** Ordenar tarjetas históricas de Quito, el disco y Artemisa. La recompensa es leer una paráfrasis del mensaje ecuatoriano. **Respaldo: A1–A4 y E1**, 1957, 1969, 1975 y firma de 2023.
+
+5. **«Seis veces más ligera» — 3 min, cama → sueño lunar.** Al acostarse comienza el sueño. Un recorrido corto enseña a frenar y saltar. Órbita: «Tu masa sigue contigo; cambió tu peso». **Respaldo: L6**, gravedad aproximada de 1/6.
+
+6. **«La herramienta correcta» — 10 min, Luna.** Explorar libremente y escoger pinzas, cucharón, rastrillo o tubo para 4 objetivos distintos. Equipo inspirado en misiones tardías, explicado en el cuaderno. **Respaldo: L1–L3**.
+
+7. **«Una roca necesita una historia» — 8 min, Luna.** Fotografiar antes, recoger, embolsar y fotografiar después. Un número incorrecto obliga a revisar el registro, sin perder la muestra. **Respaldo: L4**, documentación y bolsas identificadas.
+
+8. **«Mirar sin borrar» — 7 min, Luna.** Encontrar la etapa de descenso de Apolo 11 y observarla con zoom desde fuera del perímetro. No recoger piezas ni pisar las huellas históricas. **Respaldo: L12 y R2–R3**, etapa conservada y radio recomendado de 75 m.
+
+9. **«Dos banderas, un cielo» — 7 min, Luna.** Colocar juntas **2 banderas nuevas**, Estados Unidos y Ecuador, en una zona ficticia exterior al sitio protegido. Construir sus barras horizontales. Órbita: «Representan nuestros sueños; no nos hacen dueños». **Respaldo: L10 y R1–R3**. No modificar la bandera histórica.
+
+10. **«Volver con conocimiento» — 9 min, Luna → despertar.** Cerrar el inventario, mirar la Tierra y ordenar una secuencia de ascenso, encuentro orbital, reentrada y amerizaje. Despertar con el cuaderno completo y una nueva meta de ingeniería. **Respaldo: L5, L9 y L12–L13**; comparación final con los kg reales de las 6 misiones.
+tokens used
+211.529
+**Proyecto NASA-Ecuador — investigación para Fase 2**
+
+**Consulta de todas las fuentes: 12-11-2026.** Alta = respaldo primario explícito; media = declaración del equipo responsable; **sin verificar** = falta confirmación primaria. Las misiones finales son propuestas ficticias.
+
+**1. Ecuador y Apolo**
+
+| Dato | Cifra | Fuente | Confianza |
+|---|---|---|---|
+| **A1. Estación Quito**, situada cerca del Cotopaxi. Comenzó como estación Minitrack; después integró STADAN y STDN. STADAN atendía satélites científicos; STDN significa *Spaceflight Tracking and Data Network*. | **1957–1981**; antena de **12 m**. | [NASA, historia de las redes, pp. 42, 56 y 228–231](https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf). | Alta |
+| **A2. Misiones apoyadas.** Quito aparece expresamente entre las estaciones de Apolo-Soyuz. NASA también documenta su posterior apoyo al transbordador y su cierre durante STS-2. | Apolo-Soyuz: **1975**; STS-2: **noviembre de 1981**. | [NASA, dossier original de Apolo-Soyuz, p. 87](https://www.nasa.gov/wp-content/uploads/static/history/astp/documents/astp%20press%20kit%20%28us%29.pdf); [historia NASA, pp. 228–229](https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf). | Alta |
+| **A3. ¿Apoyó Apolo 11?** No encontré confirmación primaria específica. La historia NASA sitúa la ampliación de Quito hacia vuelos tripulados en Apolo-Soyuz. No atribuirle la transmisión del primer alunizaje. | Apolo 11: **1969**; Apolo-Soyuz: **1975**. | [NASA, p. 229](https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf). | **Sin verificar** el apoyo a Apolo 11 |
+| **A4. Mensaje ecuatoriano en el disco de buena voluntad.** José María Velasco Ibarra deseó éxito a los astronautas y destacó el entendimiento humano y la buena voluntad. Es una paráfrasis del texto publicado en inglés. | Ecuador figura entre **73 países**; mensajes reducidos **200 veces**. | [NASA, comunicado original 69-83F, pp. 2 y 18](https://www.nasa.gov/wp-content/uploads/2024/05/apollo-11-goodwill-messages.pdf). | Alta |
+| **A5. Obsequio de Apolo 11 atribuido a Ecuador.** No localicé acta primaria de entrega, inventario de custodia ni ubicación actual. No afirmar que fue robado, vendido o recuperado. | Recepción y paradero: **sin verificar**. | [NASA, testimonio institucional sobre las placas de Apolo 11 y 17](https://www.nasa.gov/wp-content/uploads/2025/08/parkerla-12-6-11.pdf): confirma el programa general, **no la cadena de custodia ecuatoriana**. | **Sin verificar** |
+| **A6. Obsequio de Apolo 17 atribuido a Ecuador.** Está confirmado el reparto internacional de fragmentos de la roca 70017; no confirmé documentalmente la recepción ni el destino del ejemplar ecuatoriano. NASA explica que no rastrea estos regalos. | Reparto en **1973** a **135 jefes de Estado extranjeros**; roca **70017**. | [NASA, reparto de la roca](https://www.nasa.gov/history/50-years-ago-apollo-17-post-mission-activities/); [NASA OIG, p. 7](https://oig.nasa.gov/wp-content/uploads/2024/02/ig-12-007.pdf). | Alta para el reparto; **sin verificar** para Ecuador |
+
+**2. Ecuador y el espacio**
+
+| Dato | Cifra | Fuente | Confianza |
+|---|---|---|---|
+| **E1. Acuerdos Artemisa.** Gustavo Manrique firmó por Ecuador en su embajada en Washington. La firma no constituye una asignación de vuelo lunar. | **21-06-2023**; país firmante **n.º 26**. | [NASA, anuncio oficial](https://www.nasa.gov/news-release/nasa-welcomes-ecuador-as-26th-artemis-accords-signatory/). | Alta |
+| **E2. EXA.** La Agencia Espacial Civil Ecuatoriana se describe como una ONG civil que administra y ejecuta su programa espacial. No confundirla con una dependencia de NASA. | Creada en **2007**, según sus responsables. | [Nader, Carrión y Urigüen, artículo técnico de 2014, introducción](https://www.researchgate.net/publication/317265125_THE_ECUADORIAN_EXPERIENCE_IN_SPACE_The_NEE_ALPHA_Satellite_Constellation). | Media: fuente primaria del equipo |
+| **E3. NEE-01 Pegaso.** Primer satélite ecuatoriano, desarrollado por EXA; lanzamiento desde Jiuquan, China, en un cohete LM-2D. La fecha indicada por sus autores es la utilizada en Ecuador. | **25-04-2013**; cuerpo de **10 × 10 × 10 cm**; identificador **2013-018B**. | [Artículo técnico del equipo](https://www.researchgate.net/publication/317265125_THE_ECUADORIAN_EXPERIENCE_IN_SPACE_The_NEE_ALPHA_Satellite_Constellation); [NASA, boletín de residuos orbitales, julio de 2013](https://orbitaldebris.jsc.nasa.gov/quarterly-news/pdfs/odqnv17i3.pdf). | Alta; fecha según equipo |
+| **E4. Ronnie Nader.** Dirigió el equipo de Pegaso. La FAE documenta su formación ASA/T; esa formación, por sí sola, no acredita un viaje orbital ni lunar. | Proyecto aprobado en **2010**; satélite lanzado en **2013**. | [Artículo del equipo, sección del proyecto](https://www.researchgate.net/publication/317265125_THE_ECUADORIAN_EXPERIENCE_IN_SPACE_The_NEE_ALPHA_Satellite_Constellation); [FAE, revista Sobrevuelo 2011](https://www.fae.mil.ec/wp-content/uploads/2020/07/Sobrevuelo-2011.pdf). | Alta para liderazgo y formación |
+| **E5. Pegaso y el supuesto choque.** NASA documentó una anomalía tras un acercamiento orbital, pero no confirmó una colisión con el cuerpo del cohete. Evitar convertir la hipótesis en certeza. | Incidente: **23-05-2013**. | [NASA, análisis contemporáneo, pp. 1–2](https://orbitaldebris.jsc.nasa.gov/quarterly-news/pdfs/odqnv17i3.pdf). | Alta para la incertidumbre |
+| **E6. Observatorio Astronómico de Quito.** Pertenece a la Escuela Politécnica Nacional y realiza investigación y divulgación astronómica. | Fundado en **1873**; celebró **150 años** en 2023. | [OAQ-EPN, boletín institucional](https://oaq.epn.edu.ec/index.php/noticias-2023/584-boletin-de-prensa-150-anos-de-fundacion-del-observatorio-astronomico-de-quito). | Alta |
+| **E7. Chimborazo.** Su cumbre es el punto de la superficie más alejado del centro terrestre. La medida depende de esa referencia, distinta del nivel del mar. | **6 384 415,98 m** desde el centro; medición de **2016**. | [Ministerio de Turismo, memoria oficial](https://www.turismo.gob.ec/wp-content/uploads/2016/09/AM-RECORD-GUINNESS-1.pdf). | Alta |
+| **E8. Planetario de la Armada, Guayaquil.** Centro real de divulgación astronómica situado en la avenida 25 de Julio, frente a la Base Naval Sur. Puede inspirar un folleto o recuerdo de la protagonista. | Inaugurado el **24-07-1984**; guía institucional **2026**. | [INOCAR, historia](https://www.inocar.mil.ec/web/index.php/planetario-de-la-armada/177-historia-del-planetario-de-la-armada); [guía 2026](https://inocar.mil.ec/web/index.php/planetario-de-la-armada/2662-guia-informativa-del-planetario-de-la-armada-2026). | Alta |
+
+**3. Superficie lunar y operaciones Apolo**
+
+| Dato | Cifra | Fuente | Confianza |
+|---|---|---|---|
+| **L1. Pinzas y pala/cucharón.** Las pinzas sujetaban rocas; el cucharón recogía suelo y fragmentos pequeños. Mangos extensores permitían trabajar de pie. | **2 funciones** diferenciadas. | [NASA, herramientas de exploración](https://www.nasa.gov/suits-and-rovers/spacewalking-tools/). | Alta |
+| **L2. Rastrillo.** Separaba pequeños fragmentos del material fino. No corresponde al equipo histórico de Apolo 11. | Utilizado en Apolo **15–17**. | [NASA, catálogo técnico de herramientas](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf). | Alta |
+| **L3. Tubos de núcleo.** Se introducían en el suelo para obtener una columna que conservara información de las capas; podían hincarse con martillo. | **1 columna** por extracción. | [NASA, herramientas](https://www.nasa.gov/suits-and-rovers/spacewalking-tools/). | Alta |
+| **L4. Bolsas y documentación.** Las bolsas numeradas vinculaban muestras y registros. Para muestras documentadas se fotografiaba el lugar antes y después; el gnomon aportaba referencias visuales. El procedimiento no se completó uniformemente en todas las misiones. | Protocolo Apolo 16: **3 fotos previas**, **1 posterior** y fotografía de localización. | [NASA, memorando original reproducido en apéndice P, p. 274](https://www.nasa.gov/wp-content/uploads/static/history/alsj/PhinneySP-2015-626.pdf); [informe Apolo 11, equipo y bolsas](https://www.nasa.gov/wp-content/uploads/static/apollo50th/pdf/A11_MissionReport.pdf). | Alta |
+| **L5. Masa de muestras devueltas por misión.** Valores redondeados; no confundir masa con peso lunar. | Apolo **11: 21,6 kg; 12: 34,3 kg; 14: 42,3 kg; 15: 77,3 kg; 16: 95,7 kg; 17: 110,5 kg**. | [NASA NTRS, tabla 1 de recursos lunares](https://ntrs.nasa.gov/api/citations/19910019908/downloads/19910019908.pdf). | Alta |
+| **L6. Gravedad.** Disminuye el peso; la masa transportada sigue siendo la misma. | **1,624 m/s²**, aproximadamente **1/6** de la terrestre. | [NASA, comparación Tierra-Luna](https://science.nasa.gov/moon/by-the-numbers/). | Alta |
+| **L7. Temperaturas.** Son extremos aproximados de la superficie según iluminación, no cambios instantáneos al cruzar una sombra. | Aproximadamente **+127 °C** al Sol y **−173 °C** en oscuridad. | [NASA, hechos lunares](https://science.nasa.gov/moon/facts/). | Alta |
+| **L8. Regolito.** Capa de polvo y fragmentos rocosos producidos por impactos; incluye material fino y rocas. | Formación por impactos durante **miles de millones de años**. | [NASA, superficie lunar](https://science.nasa.gov/moon/facts/). | Alta |
+| **L9. Tierra desde la Luna.** En los lugares Apolo permanece aproximadamente en la misma región del cielo. Presenta fases y pequeñas variaciones por libración; no debe recorrer rápidamente el cielo. | Ciclo de fases de aproximadamente **1 mes lunar**. | [NASA Goddard, explicación geométrica](https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question58.html). | Alta |
+| **L10. Lunar Flag Assembly.** Una barra horizontal sostenía la bandera. Las arrugas y la extensión incompleta de la barra explican su apariencia ondulada; no había viento que la mantuviera flameando. | Bandera nominal de **3 × 5 pies**, aproximadamente **0,91 × 1,52 m**. | [NASA, historia del conjunto](https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/); [Platoff, estudio histórico con documentación original](https://escholarship.org/content/qt5h31r40r/qt5h31r40r.pdf). | Alta |
+| **L11. Estado de la bandera de Apolo 11.** No está confirmada en pie; NASA recoge el testimonio de Aldrin de que cayó durante el despegue. No mostrarla erguida hoy como hecho comprobado. | **1 bandera histórica** de estado incierto. | [NASA, evaluación de las banderas](https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/). | Alta para la incertidumbre |
+| **L12. Etapa de descenso.** Permaneció en la Luna; sirvió de plataforma para despegar con la etapa de ascenso. El módulo lunar completo no regresó a la Tierra. | Módulo lunar con **2 etapas**. | [NASA, cronología de Apolo 11](https://www.nasa.gov/wp-content/uploads/static/history/ap11ann/apollo11_log/log.htm). | Alta |
+| **L13. Regreso.** Tras reunirse en órbita lunar, la tripulación volvió en el conjunto de mando y servicio. El módulo de mando se separó, reentró protegido por su escudo térmico y amerizó con paracaídas. | Apolo 11: **24-07-1969**, océano Pacífico; recuperación por **USS Hornet**. | [NASA, dossier original: retorno y recuperación](https://science.nasa.gov/wp-content/uploads/2023/09/Apollo_11.pdf); [resumen de misión](https://www.nasa.gov/missions/apollo/apollo-11/apollo-11-mission-overview/). | Alta |
+
+**4. Reglas jurídicas y de representación**
+
+| Dato | Cifra | Fuente | Confianza |
+|---|---|---|---|
+| **R1. Una bandera no concede territorio.** El tratado prohíbe la apropiación nacional mediante soberanía, uso, ocupación u otros medios. La misión debe expresar cooperación. | Tratado abierto a firma el **27-01-1967**; vigente desde **10-10-1967**; **art. II**. | [ONU, texto auténtico del tratado](https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf). | Alta |
+| **R2. Los objetos conservan propietario.** Que una pieza esté en la Luna no la convierte en objeto libre para llevarse. El tratado también exige consideración por actividades ajenas y evitar interferencias perjudiciales. | **Arts. VIII y IX**. | [ONU, tratado](https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf). | Alta |
+| **R3. Protección de Apolo 11 y 17.** NASA recomienda límites para la movilidad de vehículos visitantes alrededor de las etapas de descenso. Aplicarlos a la protagonista sería una decisión educativa conservadora. | Radios: **75 m** en Apolo 11 y **225 m** en Apolo 17. | [NASA, recomendaciones de 2011, sección A3-2](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf). | Alta; son recomendaciones |
+| **R4. Descenso y otros artefactos.** Recomienda evitar sobrevuelos durante la aproximación y mantener el aterrizaje fuera del límite correspondiente. Para Apolo 12 y 14–16 hay separaciones específicas. | Descenso: **2 km**; etapa de descenso: **3 m**; rover y otros artefactos: **1 m**, en los sitios indicados. | [NASA, secciones A2 y A3-3](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf). | Alta |
+| **R5. One Small Step.** Obliga a NASA a incorporar las recomendaciones en contratos, acuerdos y otras colaboraciones de actividades lunares, con excepciones previstas. No convierte esos radios en una prohibición mundial ni regula directamente un videojuego. | Ley estadounidense **116-275**, aprobada el **31-12-2020**, sección **3**. | [Texto legal oficial](https://www.govinfo.gov/content/pkg/PLAW-116publ275/pdf/PLAW-116publ275.pdf). | Alta |
+| **R6. Insignia NASA en videojuegos.** NASA exige revisión del uso de su marca. El juego debe representar correctamente a la agencia y cumplir sus criterios de contenido. La finalidad educativa no sustituye la aprobación. | Procedimiento específico para **videojuegos y mundos virtuales**. | [NASA, Merchandise Approvals, apartado correspondiente](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/). | Alta |
+| **R7. Nombre NASA y uso comercial.** La mención factual y el uso de imágenes tienen condiciones distintas del uso de identificadores como marca del producto. NASA prohíbe sugerir respaldo y restringe emplear su nombre en títulos de productos. «Proyecto NASA-Ecuador» debe seguir como nombre de trabajo mientras se verifica el título comercial. | No utilizar afirmaciones como **«oficial»** o **«aprobado por NASA»**. | [NASA, nomenclatura y respaldo comercial](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/); [uso de imágenes y medios](https://www.nasa.gov/nasa-brand-center/images-and-media/). | Alta para las reglas; aplicación al título requiere revisión |
+| **R8. Bandera ecuatoriana.** La Constitución reconoce bandera, escudo e himno como símbolos patrios. No encontré una ley especial verificada que autorice o prohíba específicamente representarlos en videojuegos comerciales. | Constitución, **art. 2**. | [Asamblea Nacional, Constitución](https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf). | Alta para reconocimiento; **sin verificar** regulación específica |
+| **R9. Bandera como marca comercial.** El Código Ingenios impide registrar determinados signos que reproduzcan banderas o emblemas estatales sin permiso. Su alcance es el registro de marcas; no demuestra por sí solo una prohibición de mostrarlos dentro de una escena. | **Art. 360, numeral 12** del texto oficial consultado. | [Código Orgánico de los Conocimientos](https://www.creatividad.gob.ec/wp-content/uploads/2021/02/Codigo-Organico-de-los-Conocimientos.pdf). | Alta para el texto; no equivale a autorización integral |
+
+**10 ideas de misión o diálogo — objetivo de 70 minutos**
+
+Propuesta ficticia: completar con Órbita un cuaderno de exploración. Se desbloquean **habitación → telescopio → Luna**; después del telescopio se vuelve a la cama para iniciar el sueño. Las duraciones son estimaciones de diseño, pendientes de prueba. Los códigos remiten a los datos y fuentes anteriores.
+
+1. **«Desde Guayaquil» — 6 min, habitación.** Examinar un folleto del Planetario y resolver un globo con referencias de altura. Órbita: «¡El Chimborazo gana si medimos desde el centro!». **Respaldo: E7–E8**, 6 384 415,98 m y planetario inaugurado en 1984.
+
+2. **«Un satélite cabe aquí» — 5 min, habitación.** Montar una maqueta de Pegaso y conectar sus subsistemas mediante un pequeño circuito. **Respaldo: E3–E4**, cuerpo de 10 cm y equipo dirigido por Nader.
+
+3. **«La Luna de esta noche» — 8 min, telescopio.** Observar la Luna con la prueba existente y dibujar sus zonas iluminadas. Órbita anticipa cómo cambiaría la vista desde allí. **Respaldo: L9**, fases terrestres y geometría Tierra-Luna.
+
+4. **«Ecuador ya dejó un mensaje» — 7 min, telescopio.** Ordenar tarjetas históricas de Quito, el disco y Artemisa. La recompensa es leer una paráfrasis del mensaje ecuatoriano. **Respaldo: A1–A4 y E1**, 1957, 1969, 1975 y firma de 2023.
+
+5. **«Seis veces más ligera» — 3 min, cama → sueño lunar.** Al acostarse comienza el sueño. Un recorrido corto enseña a frenar y saltar. Órbita: «Tu masa sigue contigo; cambió tu peso». **Respaldo: L6**, gravedad aproximada de 1/6.
+
+6. **«La herramienta correcta» — 10 min, Luna.** Explorar libremente y escoger pinzas, cucharón, rastrillo o tubo para 4 objetivos distintos. Equipo inspirado en misiones tardías, explicado en el cuaderno. **Respaldo: L1–L3**.
+
+7. **«Una roca necesita una historia» — 8 min, Luna.** Fotografiar antes, recoger, embolsar y fotografiar después. Un número incorrecto obliga a revisar el registro, sin perder la muestra. **Respaldo: L4**, documentación y bolsas identificadas.
+
+8. **«Mirar sin borrar» — 7 min, Luna.** Encontrar la etapa de descenso de Apolo 11 y observarla con zoom desde fuera del perímetro. No recoger piezas ni pisar las huellas históricas. **Respaldo: L12 y R2–R3**, etapa conservada y radio recomendado de 75 m.
+
+9. **«Dos banderas, un cielo» — 7 min, Luna.** Colocar juntas **2 banderas nuevas**, Estados Unidos y Ecuador, en una zona ficticia exterior al sitio protegido. Construir sus barras horizontales. Órbita: «Representan nuestros sueños; no nos hacen dueños». **Respaldo: L10 y R1–R3**. No modificar la bandera histórica.
+
+10. **«Volver con conocimiento» — 9 min, Luna → despertar.** Cerrar el inventario, mirar la Tierra y ordenar una secuencia de ascenso, encuentro orbital, reentrada y amerizaje. Despertar con el cuaderno completo y una nueva meta de ingeniería. **Respaldo: L5, L9 y L12–L13**; comparación final con los kg reales de las 6 misiones.

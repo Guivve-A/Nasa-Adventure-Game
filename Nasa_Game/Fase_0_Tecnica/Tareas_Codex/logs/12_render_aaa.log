@@ -1,0 +1,1316 @@
+OpenAI Codex v0.167.0-alpha.3.2
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1cea5-31e2-77c0-83a2-d83deaef4e48
+--------
+user
+# Brief común — Fase 0, revisión B (objetivo AAA con PC en la nube)
+
+Fecha: 2026-11-12. Idioma de los informes: español.
+
+## Proyecto
+
+RPG de aventura, simulación y exploración educativa en Godot 4.7.2 (nombre de trabajo: «Proyecto NASA-Ecuador»). Un estudiante de ingeniería de control en Guayaquil en su viaje para llegar a la NASA, con un gato científico de compañero. Cámara alta 3/4 en exploración y hub lateral tipo diorama. El tablero de referencia del usuario está en `Nasa_Game/Referencias/Tablero_usuario/` y su análisis en `Analisis del tablero.md`. Referentes de estilo: RPG de Nintendo, Monster Hunter, Pokémon, Zelda Ocarina of Time 3D y la saga Bravely. El juego debe ser original.
+
+## Qué cambió
+
+El usuario corrigió la restricción principal de la Fase 0 anterior (`Nasa_Game/Fase_0_Tecnica/Fase 0 - Analisis.md`), que limitaba todo a lo que rinde su portátil y proponía el renderizador Mobile a 720p. Sus palabras: «quiero que el sistema sea totalmente AAA, no quiero que te enfoques en que voy a renderizar todo aquí. Puedo alquilar PC en la nube. Valida esa opción para un videojuego totalmente impresionante, con texturas y arte innovador». También pidió un mundo que se sienta vivo: interacción con todo el entorno, movimiento ambiental sutil, sonido coherente y paleta consistente.
+
+## Datos medidos hoy
+
+- **Portátil local:** Intel i5-7200U (2 núcleos), 8 GB de RAM, Intel HD Graphics 620, Windows 10, conexión por Wi-Fi. Pasa a ser un terminal: edición ligera, asistentes de IA y streaming del PC en la nube.
+- **Latencia desde Guayaquil** (conexión TCP, 02:22 hora local): Miami 62 ms, Atlanta 74, Chicago 93, Virginia 94, Nueva Jersey 96, Dallas 99, Ohio 118, Ciudad de México 121, Santiago de Chile 131, Los Ángeles 132, São Paulo de 153 a 193 y Oregón 164.
+- **Ancho de banda:** 106 Mbps de bajada y 45 Mbps de subida contra un nodo cercano. En una sola conexión TCP, 46 Mbps desde Atlanta y 10 Mbps desde Miami.
+- **Rendimiento del portátil:** `Nasa_Game/Fase_0_Tecnica/Datos/bench_render_resultados.md`. Sirve como perfil mínimo de compatibilidad.
+- **Higgsfield:** 1000 créditos de suscripción que caducan al cierre del periodo (hacia el 2026-12-12). Costos en `Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md`. Ofrece imagen, video, audio, sprites y 3D (Tripo, Hunyuan3D y Meshy) por créditos.
+- **Equipo humano:** un desarrollador con asistentes de IA (Claude Code y Codex). El asistente puede operar un equipo remoto por SSH.
+- **Presupuesto en dinero para la nube:** sin definir. Da escenarios.
+
+## Reglas para ti
+
+1. No instales nada, no descargues ejecutables y no modifiques archivos: trabajas en solo lectura y tu respuesta final es el informe.
+2. No crees cuentas, no contrates servicios y no ejecutes comandos que gasten créditos de Higgsfield.
+3. En las búsquedas web usa consultas técnicas genéricas: no incluyas nombres de personas ni datos del proyecto.
+4. Cita la fuente de cada precio, especificación y licencia con su URL y la fecha consultada. Distingue **[doc]** (página oficial del proveedor o documentación primaria), **[sec]** (fuente secundaria) e **[inf]** (inferencia tuya). Si no pudiste verificar algo, escribe «sin verificar». No inventes precios, regiones, versiones ni licencias.
+5. No reproduzcas texto con derechos de autor: resume con tus palabras.
+6. No añadas al informe avisos de herramientas, mensajes de facturación ni enlaces de pago.
+
+## Formato de tu respuesta final (Markdown compatible con Obsidian)
+
+Usa exactamente estas secciones, en este orden:
+
+```
+# <título del informe>
+## Resumen ejecutivo            (máximo 180 palabras)
+## Decisiones recomendadas       (tabla: Decisión | Recomendación | Alternativa descartada y por qué | Confianza alta/media/baja)
+## Afirmaciones que sostienen las decisiones   (máximo 14, numeradas, cada una con URL y etiqueta [doc]/[sec]/[inf])
+## Riesgos y cómo mitigarlos
+## Preguntas que debe decidir el usuario
+## Desarrollo                    (el análisis completo, con subtítulos)
+## Fuentes
+```
+
+---
+
+# TU TAREA
+
+Define la pila de renderizado y de producción visual para un acabado AAA estilizado en Godot 4.7 Forward+, suponiendo que se desarrolla con una GPU dedicada.
+
+1. Qué significa «AAA» en un RPG estilizado con cámara 3/4 y hub lateral: lista concreta de rasgos técnicos observables en los referentes (iluminación global, sombras suaves, volumetría, posproceso, densidad de vegetación, animación, VFX, agua, clima, hora del día, interfaz). Di cuáles dependen del arte y cuáles de la GPU.
+2. Pila en Godot 4.7 Forward+: iluminación global (SDFGI, VoxelGI, LightmapGI con sondas: cuándo conviene cada una), niebla volumétrica, SSAO, SSIL y SSR, calidad de sombras, TAA, FSR 2 y MSAA, decals, partículas en GPU con colisión y estelas, sondas de reflexión, AreaLight3D y salida HDR. Límites conocidos de Godot frente a Unreal y Unity (sé honesto) y cómo se compensan en un juego estilizado.
+3. Técnicas de arte innovador en tiempo real con implementación viable en Godot (CompositorEffect, shaders espaciales, búfer de normales): render pictórico (Kuwahara y variantes, trazos de pincel), contornos de tinta por profundidad y normales, sombreado toon con rampas y función de luz propia, tramas y medios tonos, acuarela o gouache, tilt-shift de diorama, cielos y nubes estilizados, agua estilizada, hierba interactiva densa, viento global y materiales pintados a mano que responden a la luz. Cita implementaciones públicas, charlas (GDC, SIGGRAPH) y juegos que las usan.
+4. Juegos hechos en Godot 4 con acabado visual alto, y qué técnica usa cada uno.
+5. Especificaciones objetivo para el jugador: propone perfil mínimo, recomendado y alto con GPU concretas, y cómo escalar con ajustes de calidad sin tocar la lógica (desde el perfil Mobile medido en una Intel HD 620 hasta Forward+ completo). Presupuestos por perfil: triángulos, texturas, luces y vegetación.
+6. Qué cambia en el pipeline de recursos al subir el listón: resolución y densidad de téxel, mapas (normal, ORM, emisivo), polígonos por personaje, LOD, colisiones y formatos.
+7. Novedades de Godot 4.5 a 4.7 que ayudan.
+
+Entrega la pila recomendada por perfil de calidad y una lista de 8 a 12 «firmas visuales» candidatas para que el usuario elija en la Fase 1, cada una con su costo de GPU y de producción.
+codex
+Voy a contrastar las capacidades de Godot con su documentación y revisar los datos locales para proponer una pila visual escalable, con presupuestos de producción y GPU explícitos.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -Force; rg --files -g AGENTS.md -g '*Analisis*' -g '*bench_render*' -g '*hf_costos*' -g '*Análisis*'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 1016ms:
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+d-----        12/11/2026      2:22                herramientas                                                         
+d-----        12/11/2026      2:15                Nasa_Game                                                            
+d-----        12/11/2026      1:41                pruebas                                                              
+-a----        12/11/2026      1:40           3531 CLAUDE.md                                                            
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 23
++ Get-ChildItem -Force; rg --files -g AGENTS.md -g '*Analisis*' -g '*be ...
++                       ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -Path . -Filter AGENTS.md -Recurse -Force | Select-Object FullName; Get-Content -LiteralPath 'CLAUDE.md' -Encoding UTF8; Get-ChildItem -LiteralPath 'Nasa_Game/Fase_0_Tecnica' -Recurse -File | Select-Object FullName; Get-ChildItem -LiteralPath 'Nasa_Game/Referencias/Tablero_usuario' -Recurse -File | Select-Object FullName" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 4101ms:
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_4pi1rfpl'.
+En l�nea: 2 Car�cter: 1
++ Get-ChildItem -Path . -Filter AGENTS.md -Recurse -Force | Select-Obje ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_4pi1rfpl:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_kz4ist6c'.
+En l�nea: 2 Car�cter: 1
++ Get-ChildItem -Path . -Filter AGENTS.md -Recurse -Force | Select-Obje ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_kz4ist6c:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+# CLAUDE.md - Proyecto NASA-Ecuador
+
+Juego RPG de aventura, simulaci�n y exploraci�n educativa en Godot 4. Un estudiante de ingenier�a de control de Guayaquil en su viaje hacia la NASA, con un gato cient�fico de compa�ero. Nombre de trabajo: �Proyecto NASA-Ecuador�.
+
+## Rol
+
+Director de videojuegos AAA, arquitecto t�cnico principal en Godot 4 y director de arte y sonido, seg�n el plan maestro (`Nasa_Game/00_Plan_Maestro/`). Responde en espa�ol.
+
+## Antes de trabajar
+
+1. Lee `Nasa_Game/Memory.md`: decisiones, datos del equipo y lecciones.
+2. Lee `Nasa_Game/trabajos.md`: avances, pendientes y registro de cr�ditos.
+3. Si la tarea toca una fase, lee su carpeta `Nasa_Game/Fase_N_*/`.
+
+@Nasa_Game/Memory.md
+@Nasa_Game/trabajos.md
+
+## Regla maestra: puertas de validaci�n
+
+- El plan tiene 8 fases estrictas (0 a 7). Se presenta el an�lisis de **una sola fase** y se detiene. No se avanza sin la aprobaci�n expl�cita de Guillermo.
+- Cada recurso se valida con �l antes del paso siguiente: concepto  hoja de referencia  producci�n  integraci�n en el motor. Esto incluye personajes, escenas, luz, c�mara, proporciones, interfaz y audio.
+- Nada se da por validado sin evidencia: la imagen, una captura en el motor con la c�mara real, una medici�n o una prueba.
+- Se trabaja como un estudio: biblia de arte, hojas de referencia, manifiesto de recursos y listas de comprobaci�n por puerta.
+
+## Cr�ditos de Higgsfield
+
+- El presupuesto es de 1000 cr�ditos, sin recarga prevista.
+- No se gasta ning�n cr�dito fuera de una partida aprobada por Guillermo.
+- Antes de generar, cotiza con `higgsfield.cmd generate cost` y anota la partida en `trabajos.md`.
+- Los borradores van con modelos baratos. La calidad final se usa solo despu�s de aprobar el borrador.
+- Registra cada generaci�n: modelo, par�metros, prompt, referencias, costo y veredicto.
+
+## Estilo
+
+- La meta visual es el tablero `Nasa_Game/Referencias/Tablero_usuario/` y los referentes de mercado: RPG de Nintendo, Monster Hunter, Pok�mon, Ocarina of Time 3D y Bravely.
+- El juego es original. Se toman principios y t�cnicas. No se toman personajes, arte, nombres ni dise�os ajenos.
+- El p�xel-art de la b�veda anterior (`Desktop\Juego\Juego_2d-hd`) qued� descartado el 2026-11-12.
+
+## Equipo y herramientas
+
+- Objetivo de calidad: **AAA**. El 2026-11-12 Guillermo pidi� no limitar el juego a lo que rinde su port�til. El desarrollo gr�fico puede hacerse en un PC en la nube alquilado.
+- Port�til local: Intel i5-7200U, 8 GB de RAM e Intel HD Graphics 620. Sirve de terminal y define el perfil m�nimo de compatibilidad, no el techo del juego.
+- PowerShell bloquea los `.ps1`: usa `npm.cmd`, `npx.cmd` y `higgsfield.cmd`.
+- Godot 4.7.2: `C:\Users\guill\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe`.
+- Higgsfield: `herramientas/hf_catalogo.py`, `hf_costos_matriz.py` y `hf_params.py` consultan modelos y costos sin gastar cr�ditos.
+- Codex: `herramientas/codex_lote.py` le env�a tareas en lote. Guillermo pidi� delegarle la investigaci�n y el trabajo mec�nico para ahorrar tokens. Lo que entregue se verifica antes de usarlo.
+- El modo autom�tico bloquea las instalaciones de software externo: dale el comando a Guillermo para que lo ejecute.
+
+## B�veda de Obsidian
+
+- `Nasa_Game/` es la memoria del proyecto. Los documentos van en Markdown compatible con Obsidian: enlaces `[[...]]`, im�genes `![[...]]` y nombres de archivo sin tildes.
+- Al terminar una tarea, actualiza `trabajos.md` (avance, pendientes y cr�ditos) y `Memory.md` (decisiones y lecciones).
+
+## Convenciones
+
+- En el c�digo, comentarios sin tildes. En documentos y conversaci�n, con tildes.
+- Texto corto y con cifras concretas.
+
+FullName                                                                                                         
+--------                                                                                                         
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Fase 0 - Analisis.md                                 
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\bench_render_resultados.md                     
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_animaciones_3d.json                         
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_default.md                           
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_matriz.json                          
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_costos_matriz.md                            
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\hf_modelos.json                                
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\placeholder_costos.png                         
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Datos\red_latencias.md                               
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\01_motor_render.md                     
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\02_pipeline_personajes.md              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\03_higgsfield_arte2d.md                
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\04_caso_after_the_wind.md              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\05_referencias_aaa.md                  
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\06_arquitectura_godot.md               
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\07_proceso_estudio.md                  
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\08_antecedentes_boveda_anterior.md     
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\09_bench_render_instrucciones.md       
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Investigacion\10_mundo_vivo.md                       
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\tareas_fase0.md                         
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\tareas_fase0_revB.md                    
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\01_motor_render.log                
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\02_pipeline_personajes.log         
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\03_higgsfield_arte2d.log           
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\04_caso_after_the_wind.log         
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\05_referencias_aaa.log             
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\06_arquitectura_godot.log          
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\06_arquitectura_godot_reanudado.log
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\07_proceso_estudio.log             
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\08_antecedentes.log                
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\09_bench_render.log                
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\10_mundo_vivo.log                  
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\11_pc_en_la_nube.log               
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\12_render_aaa.log                  
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\13_arte_generativo_gpu.log         
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_0_Tecnica\Tareas_Codex\logs\estado.json                        
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\Analisis del tablero.md                 
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_01.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_02.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_03.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_04.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_05.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_06.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_07.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_08.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_09.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_10.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_11.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_12.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_13.jpg                              
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Referencias\Tablero_usuario\ref_14.jpg                              
+
+
+
+web search: 
+web search: site.godotengine.org releases 4.7 Godot 4.6 4.5 rendering AreaLight3D HDR ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command '[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; $paths = @('"'Nasa_Game/Memory.md','Nasa_Game/trabajos.md','Nasa_Game/Referencias/Tablero_usuario/Analisis del tablero.md','Nasa_Game/Fase_0_Tecnica/Datos/bench_render_resultados.md','Nasa_Game/Fase_0_Tecnica/Fase 0 - Analisis.md','Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md'); foreach ("'$p in $paths) { Write-Output $p; Get-Content -LiteralPath $p -Encoding UTF8 }' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 2096ms:
+No se puede establecer la propiedad. En este modo de leguaje la configuraci�n de propiedades solo se admite en tipos 
+b�sicos.
+En l�nea: 2 Car�cter: 1
++ [Console]::OutputEncoding = [System.Text.Encoding]::UTF8; $paths = @( ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertySetterNotSupportedInConstrainedLanguage
+ 
+Nasa_Game/Memory.md
+---
+tipo: memoria
+actualizado: 2026-11-12
+---
+
+# Memoria del Proyecto NASA-Ecuador
+
+> Se carga en cada sesi�n desde `CLAUDE.md` (ra�z del repositorio). Aqu� van las directivas de Guillermo, las decisiones con fecha, los datos medidos y las lecciones. El avance y los pendientes van en [[trabajos]].
+
+## 1. Directivas de Guillermo
+
+| Fecha | Directiva |
+|---|---|
+| 2026-11-12 | Crear un juego totalmente �nico con aires de AAA. Pulir cada aspecto y validar juntos cada recurso: escena, luz, isometr�a, ajustes y proporciones. |
+| 2026-11-12 | Trabajar como un estudio profesional, con hojas de referencia y las t�cnicas habituales de los estudios AAA. Referentes: RPG de Nintendo, Monster Hunter, Pok�mon, Ocarina of Time 3D y Bravely. |
+| 2026-11-12 | Sacar el m�ximo provecho de los 1000 cr�ditos de Higgsfield (plan Plus). |
+| 2026-11-12 | Seguir el plan maestro de 8 fases: se presenta una fase y se espera su aprobaci�n. |
+| 2026-11-12 | La b�veda de Obsidian `Nasa_Game/` guarda el contexto. Mantener `CLAUDE.md`, `Memory.md` y `trabajos.md`. |
+| 2026-11-12 | Delegar tareas a Codex para trabajar con eficiencia y gastar menos tokens. |
+| 2026-11-12 | El estilo de la b�veda anterior (p�xel-art) queda descartado: �muy superficial, carece de estilo art�stico v�lido para un juego AAA�. |
+| 2026-11-12 | Pilar �mundo vivo�: interacciones de alto nivel con todo el entorno, movimientos sutiles del ambiente, sonidos coherentes y paleta de colores consistente. |
+| 2026-11-12 | �Quiero que el sistema sea totalmente AAA, no quiero que te enfoques en que voy a renderizar todo aqu�. Puedo alquilar PC en la nube.� Meta: un videojuego totalmente impresionante, con texturas y arte innovador. Corrige la primera versi�n de la Fase 0, que lo limitaba todo al port�til. |
+
+## 2. Decisiones
+
+Las decisiones t�cnicas de la Fase 0 est�n propuestas en [[Fase 0 - Analisis]] y esperan la aprobaci�n de Guillermo. Al aprobarse se copian aqu� con su fecha.
+
+| ID | Fecha | Decisi�n | Estado |
+|---|---|---|---|
+| D-000 | 2026-11-12 | El p�xel-art de la b�veda anterior no se usa. La meta visual es el tablero de referencia y los referentes de mercado. | Decidido por Guillermo |
+
+## 3. Datos medidos (2026-11-12)
+
+**Equipo de desarrollo**
+- Intel Core i5-7200U (2 n�cleos, 4 hilos), 7,9 GB de RAM y gr�fica integrada Intel HD Graphics 620 (controlador 31.0.101.2140).
+- Pantalla de 1920�1080, Windows 10 Home, 27 GB libres en C:.
+- Instalado: Git, Git LFS, Python 3.13, ffmpeg 9, ImageMagick 7, .NET, VS Code, GitHub CLI y Node 24.
+- No instalado: Blender ni editores de imagen.
+
+**Red desde Guayaquil (02:22 del 2026-11-12, Wi-Fi)**
+- Latencia de conexi�n TCP: Miami 62 ms, Atlanta 74, Chicago 93, Virginia 94, Nueva Jersey 96, Dallas 99, Ohio 118, Ciudad de M�xico 121, Santiago 131, Los �ngeles 132, S�o Paulo de 153 a 193 y Oreg�n 164.
+- Ancho de banda: 106 Mbps de bajada y 45 Mbps de subida contra un nodo cercano; 46 Mbps desde Atlanta y 10 Mbps desde Miami en una sola conexi�n.
+- Se repite con `python herramientas/red_nube.py`.
+
+**Godot**
+- Godot 4.7.2-stable con firma v�lida (Prehensile Tales B.V.), en `C:\Users\guill\Downloads\Godot_v4.7.2-stable_win64.exe\`.
+- En la HD 620 arrancan los cuatro modos: Forward+ con Vulkan 1.3.215, Forward+ con D3D12 (nivel 12_0), Mobile con Vulkan, y Compatibility. Compatibility cambia solo a ANGLE (OpenGL ES 3.0 sobre Direct3D 11) porque el OpenGL del controlador es de baja calidad.
+- Medici�n con `pruebas/bench_render/` (29 corridas, fps medios a 1280�720): Mobile 90 en la escena base, 43 con 40 000 briznas de hierba y 75 con 200 sprites; Compatibility 73, 42 y 41; Forward+ 68, 35 y 58. Forward+ con SDFGI, SSAO y glow da 20 fps con ca�das a 9.
+- A 1920�1080 con hierba densa todos rondan los 30 fps: el l�mite es el relleno de p�xeles.
+- El primer arranque de Forward+ tard� m�s de 90 s por la compilaci�n de shaders.
+
+**Higgsfield**
+- Plan Plus, espacio de trabajo �Private�, CLI 1.2.2. Saldo: 1006,25 cr�ditos, sin ning�n trabajo de generaci�n creado en este proyecto.
+- Los 1000 cr�ditos de suscripci�n se acreditaron el 2026-11-12. **No se acumulan:** caducan al cierre del periodo de facturaci�n (t�rminos de Higgsfield, apartado 9.4). Los comprados aparte duran 90 d�as (apartado 9.6). Falta confirmar la fecha de renovaci�n.
+- Los t�rminos permiten el uso comercial de los resultados (apartado 4.4), pero rigen las condiciones m�s restrictivas de cada proveedor (apartado 8). Las licencias de m�sica v�a Higgsfield no est�n verificadas para publicar.
+- 119 modelos: imagen, video, audio y 3D. El 3D incluye imagenmalla (Tripo, Hunyuan3D, Meshy), remesh, retexturizado y rigging con biblioteca de animaciones. `autosprite` genera animaciones de sprites con direcciones isom�tricas.
+- Cat�logo, par�metros y 169 cotizaciones en `Fase_0_Tecnica/Datos/`.
+
+**Codex**
+- App de escritorio 26.1103 con sesi�n de ChatGPT. La l�nea de comandos utilizable es `%LOCALAPPDATA%\OpenAI\Codex\bin\<hash>\codex.exe` (codex-cli 0.167). Modelo configurado: gpt-6.1-sol.
+
+**Trabajo anterior**
+- B�veda y repositorio �Gravedad 2D-HD� en `C:\Users\guill\Desktop\Juego\Juego_2d-hd` (remoto `Guivve-A/Juego_Godot_repo1_agentes`), del 8 y 9 de noviembre de 2026. Naci� para el NASA Space Apps Challenge de Guayaquil, con el reto �Space Mission Design Game�. Resumen en [[08_antecedentes_boveda_anterior]].
+
+## 4. Costos medidos de Higgsfield (cr�ditos)
+
+| Recurso | Opci�n | Cr�ditos |
+|---|---|---|
+| Imagen de borrador | `gpt_image_2_6` calidad low, 1k | 0,25 |
+| Imagen de borrador | `text2image_soul_v2`, `soul_location` | 0,12 |
+| Imagen final | `gpt_image_2_6` calidad high, 1k / 2k | 1,5 / 2,75 |
+| Imagen final con referencias | `nano_banana_pro` 2k (hasta 14 referencias) | 2 |
+| Vistas nuevas de un sujeto | `3d_jutsu_angles` 1k / 2k | 1,25 / 2,5 |
+| Animaci�n de sprite | `autosprite` turbo / pro / max | 2 / 3 / 14 |
+| Imagen  malla 3D | `tripo_h3_1_image_to_3d` (sin textura 6, quads 10,5) | 9 |
+| Imagen  malla 3D | `hunyuan3d_v3_image_to_3d` (solo geometr�a 7) | 11 |
+| Imagen  malla 3D | `meshy_v7_image_to_3d` (con rig 44, rig y animaci�n 47,5) | 38 |
+| Retopolog�a | `meshy_v5_remesh` | 6 |
+| Retexturizado | `meshy_v5_retexture` | 9,5 |
+| Quitar fondo | `image_background_remover` | 1 |
+| M�sica | `sonilo_music` / `elevenlabs_music_v2_5` por minuto | 3,75 / 8,72 |
+| Efecto de sonido | `mirelo_text_to_audio` por segundo | 0,25 |
+| Video | de `seedance1_5` a `seedance_2_5` por clip | 4,8 a 35 |
+
+Las referencias de imagen no cambian el costo. `generate cost` no cotiza `image_to_3d`, `multi_image_to_3d`, `3d_rigging`, `sam_3_3d` ni `topaz_image`.
+
+## 5. Lecciones
+
+- **PowerShell bloquea los `.ps1`.** Usar `npm.cmd`, `npx.cmd` y `higgsfield.cmd`.
+- **Instalaciones.** El modo autom�tico bloquea instalar software externo. Se le da el comando a Guillermo.
+- **Modelos 3D ocultos.** `higgsfield model list` en tabla no muestra los modelos 3D; `model list --json` s�. Usar `herramientas/hf_catalogo.py`.
+- **Cotizar es gratis.** `generate cost` no crea trabajos. Para los modelos que exigen imagen se usa un marcador gris ya subido.
+- **Codex por lotes.** El `codex.exe` de `WindowsApps` da �Acceso denegado�. Funciona el de `%LOCALAPPDATA%\OpenAI\Codex\bin`, con el prompt por la entrada est�ndar en UTF-8, `-s read-only`, `-c web_search="live"` y `-o informe.md`.
+- **Verificar lo delegado.** Los informes de Codex se contrastan con mediciones propias y con una revisi�n independiente antes de decidir. En la Fase 0, casi todos los informes recomendaban Compatibility sin haberlo medido; la medici�n favoreci� a Mobile.
+- **Codex y Firecrawl.** Codex usa el conector de Firecrawl de la cuenta de Guillermo. Nueve tareas en paralelo agotaron los cr�ditos diarios, que se renuevan solos. Para lotes grandes, repartir las tareas o avisar antes.
+- **Tiempo de las tareas de Codex.** Con esfuerzo alto tardan de 14 a 23 minutos. Dar 45 minutos de l�mite. Si una se corta, se reanuda con `codex exec resume <id de sesi�n>`; el id est� al inicio de su log.
+- **Meshy se retira.** El proveedor retir� `lowpoly` el 30-10-2026 y retira Meshy 7 para geometr�a el 31-12-2026. No basar la producci�n en `meshy_v7_image_to_3d`.
+- **Mixamo** solo acepta FBX, OBJ o ZIP y solo hace rig de b�pedos. Su licencia permite el uso comercial dentro del juego, sin redistribuir los archivos crudos.
+- **Medir a 1080p.** Una ventana de 1920�1080 no cabe en esta pantalla: para medir esa resoluci�n hay que usar `--fullscreen`.
+
+## 6. �ndice de la b�veda
+
+- [[Inicio]]: mapa de la b�veda.
+- [[trabajos]]: avances, pendientes y registro de cr�ditos.
+- `00_Plan_Maestro/`: PDF del plan maestro.
+- `Fase_0_Tecnica/`: [[Fase 0 - Analisis]], `Investigacion/`, `Datos/` y `Tareas_Codex/`.
+- `Referencias/Tablero_usuario/`: 14 capturas y [[Analisis del tablero]].
+Nasa_Game/trabajos.md
+---
+tipo: seguimiento
+actualizado: 2026-11-12
+---
+
+# Trabajos: avances y pendientes
+
+> Qu� se hizo, qu� falta y en qu� se gastaron los cr�ditos. Las decisiones y las lecciones van en [[Memory]].
+
+## Estado por fase
+
+| Fase | Tema | Estado |
+|---|---|---|
+| 0 | Investigaci�n t�cnica, arquitectura y pipeline | **En revisi�n: espera la aprobaci�n de Guillermo** |
+| 1 | Direcci�n de arte visual y cinematograf�a | Espera a la Fase 0 |
+| 2 | Estructura narrativa y dise�o de misiones | Pendiente |
+| 3 | Personajes, animaci�n y entidades | Pendiente |
+| 4 | Dise�o ac�stico espacial y banda sonora | Pendiente |
+| 5 | Dise�o de niveles y generaci�n masiva | Pendiente |
+| 6 | Mec�nicas, f�sicas y game feel | Pendiente |
+| 7 | UI/UX, tipograf�a y accesibilidad | Pendiente |
+
+## Hecho
+
+### 2026-11-12
+
+- [x] Higgsfield listo: CLI 1.2.2, sesi�n iniciada, espacio de trabajo �Private� y 9 skills instaladas.
+- [x] Inventario del equipo y de las herramientas instaladas.
+- [x] Cat�logo de 119 modelos de Higgsfield y 169 cotizaciones, sin gastar cr�ditos (`Fase_0_Tecnica/Datos/`).
+- [x] Plan maestro y 14 referencias guardados en la b�veda. [[Analisis del tablero]] escrito.
+- [x] Conexi�n con Codex por l�nea de comandos (`herramientas/codex_lote.py` y `codex_reanudar.py`).
+- [x] `CLAUDE.md`, [[Memory]], [[Inicio]] y este archivo creados.
+- [x] Nueve informes de investigaci�n de Codex en `Fase_0_Tecnica/Investigacion/`. El de arquitectura se cort� a los 30 minutos y se recuper� reanudando la sesi�n.
+- [x] Prueba de rendimiento en `pruebas/bench_render/`: 29 corridas en la HD 620. Mobile es el renderizador m�s r�pido y estable; SDFGI no es viable.
+- [x] Verificaci�n independiente de los informes: 76 afirmaciones confirmadas, 16 imprecisas, 4 sin poder verificar y ninguna refutada.
+- [x] [[Fase 0 - Analisis]] redactado, con 10 decisiones propuestas.
+
+## Pendiente
+
+### De Guillermo
+
+- [ ] Aprobar o corregir la Fase 0: [[Fase 0 - Analisis]].
+- [ ] Confirmar la fecha de renovaci�n del plan de Higgsfield. Los cr�ditos de suscripci�n caducan al cierre del periodo.
+- [ ] Decidir si instala Blender 4.5 LTS y si usa una cuenta de Adobe para Mixamo.
+- [ ] Decidir el repositorio remoto y si hay fecha l�mite.
+- [ ] Confirmar en Git el trabajo sin versionar de la b�veda anterior (`Desktop\Juego\Juego_2d-hd`).
+
+### De Claude, despu�s de la aprobaci�n
+
+- [ ] Prueba de pipeline con tope de 60 cr�ditos.
+- [ ] Probar el horneado de un lightmap en la HD 620.
+- [ ] Probar DotGothic16 con texto en espa�ol a tama�o de juego.
+- [ ] Inicializar Git y Git LFS y crear la estructura del proyecto de Godot.
+- [ ] Fase 1: direcci�n de arte.
+
+## Registro de cr�ditos de Higgsfield
+
+| Fecha | Partida | Modelo | Cantidad | Cr�ditos | Saldo | Aprob� |
+|---|---|---|---|---|---|---|
+| 2026-11-12 | Saldo inicial (1000 de suscripci�n acreditados ese d�a) | - | - | - | 1006,25 | - |
+| 2026-11-12 | Cotizaciones y marcador gris de prueba | `generate cost` | 169 | 0 | 1006,25 | - |
+Nasa_Game/Referencias/Tablero_usuario/Analisis del tablero.md
+---
+tipo: referencia
+fase: 0
+fecha: 2026-11-12
+estado: borrador para validar en la Fase 1
+---
+
+# An�lisis del tablero de referencia
+
+Son 14 capturas que Guillermo adjunt� el 2026-11-12. Vienen de un video de YouTube del canal @stefan_3d_ai sobre �After the Wind�, un juego hecho con IA (marca r/TopologyAI).
+
+**Uso:** fijan el nivel de acabado y el cat�logo de pantallas. No se copian el nombre, el logotipo, los personajes, las criaturas, el mapa ni la ambientaci�n.
+
+## Qu� muestra cada captura
+
+| Captura | Pantalla | Lo que interesa |
+|---|---|---|
+| ![[ref_03.jpg\|220]] | T�tulo | Logotipo ilustrado sobre un diorama lateral. Men� en un panel de papel. La opci�n activa se marca con un trazo de pincel. Ayudas de tecla abajo a la derecha. |
+| ![[ref_14.jpg\|220]] | Creador de personaje, cuerpo completo | Chibi de 2,5 a 3 cabezas. Opciones: nombre, cuerpo, piel, peinado, color de pelo, barba, bigote, ojos y color de ojos. Muestras de color en fila. Girar, restablecer, color libre y �sorpr�ndeme�. |
+| ![[ref_01.jpg\|220]] | Creador de personaje, rostro | Primer plano para pelo y cara. Rostro plano de anime con ojos simples: la expresi�n cabe en una textura. |
+| ![[ref_09.jpg\|220]] | Hub lateral | Diorama 2.5D en capas: hierba delante, tiendas y forja en el plano de juego, monta�as con perspectiva atmosf�rica y cielo saturado. Aviso de interacci�n sobre el objeto. |
+| ![[ref_12.jpg\|220]] | Hub con un NPC | Aviso de misi�n en una banda de tinta centrada. El NPC se distingue por su silueta (cuernos, pelo largo). |
+| ![[ref_08.jpg\|220]] | Exploraci�n 3/4 | C�mara alta de 50 a 60�. Suelo pintado con trazo visible, sendero de tierra, rocas facetadas con musgo y sombras suaves. |
+| ![[ref_05.jpg\|220]] | HUD de exploraci�n | Retrato enmarcado, barra de vida verde, barra de energ�a amarilla y contador de pociones. Misi�n arriba a la derecha con hora del d�a. Controles abajo a la derecha. |
+| ![[ref_06.jpg\|220]] | Combate | N�mero de da�o sobre el enemigo. La lista de combos cambia seg�n el ataque en curso. |
+| ![[ref_10.jpg\|220]] | Recolecci�n | Aviso �Obtenido� en una banda de tinta, con el total en la bolsa. El toc�n queda cortado: el mundo cambia al recolectar. |
+| ![[ref_04.jpg\|220]] | Mapa | Ilustraci�n sobre papel con zonas rotuladas, iconos dibujados, filtros arriba, leyenda abajo y un panel �Est�s aqu��. |
+| ![[ref_13.jpg\|220]] | Carga | Dos vi�etas tipo c�mic que cuentan una escena del mundo, con el nombre de la zona. |
+| ![[ref_02.jpg\|220]] | Exploraci�n | Rocas gigantes como hitos. El r�tulo anuncia un sistema de clima din�mico. |
+| ![[ref_07.jpg\|220]] ![[ref_11.jpg\|220]] | Exploraci�n | El mismo encuadre en movimiento: la c�mara no cambia de �ngulo dentro de un modo. |
+
+## Por qu� se ve profesional
+
+1. **Un solo lenguaje de material.** Suelo, roca, tela e interfaz parecen pintados con el mismo pincel: trazo visible, planos facetados y nada de ruido fotogr�fico.
+2. **Estructura de valores.** El personaje lleva el mayor contraste y el color m�s saturado (la capa roja) sobre un suelo de valor medio. Las rocas claras marcan hitos.
+3. **Proporci�n constante.** Cabeza grande, manos y pies simplificados. El personaje se lee aunque mida unos 50 px de alto en pantalla.
+4. **C�mara disciplinada.** 3/4 alta en exploraci�n y lateral por capas en el hub. No se mezclan �ngulos dentro de un modo.
+5. **Luz sencilla y coherente.** Una luz principal c�lida con sombra suave y relleno fr�o. No hay negros puros. El fondo del hub se aclara con la distancia.
+6. **Interfaz como objeto f�sico.** Papel, tinta y trazos de pincel sirven de estados (selecci�n, avisos). Una tipograf�a rotulada para t�tulos y otra muy legible para datos.
+7. **Detalle graduado.** Los mechones de hierba se concentran junto a senderos y rocas. Quedan zonas amplias de descanso visual.
+8. **Continuidad.** T�tulo, carga, mapa y HUD comparten paleta y trazo.
+
+## Hip�tesis de traducci�n a nuestro juego
+
+Se validan en la Fase 1, una por una.
+
+| Del tablero | En el Proyecto NASA-Ecuador |
+|---|---|
+| Hub lateral del campamento | Cuarto y barrio de Guayaquil al atardecer |
+| Exploraci�n 3/4 del valle | Campus, malec�n, laboratorio y centro de simulaci�n |
+| Mapa de pergamino | Cuaderno de ingenier�a con papel milimetrado |
+| Pergamino y pincel | Papel t�cnico, cinta, sellos y telemetr�a con DotGothic16 |
+| Vi�etas de carga | Apuntes ilustrados con el gato cient�fico |
+| Capa roja como acento | Un acento propio del protagonista, por definir |
+Nasa_Game/Fase_0_Tecnica/Datos/bench_render_resultados.md
+---
+tipo: datos
+fase: 0
+fecha: 2026-11-12
+---
+
+# Rendimiento de los renderizadores de Godot 4.7.2 en la Intel HD 620
+
+Medido con `pruebas/bench_render/` (escrito por Codex, revisado y ejecutado por Claude). Cada corrida calienta 3 s y mide de 10 a 12 s con vsync desactivado. Los JSON de cada corrida est�n en `pruebas/bench_render/corridas/`.
+
+- **base:** 150 mallas con sombreado toon, suelo con textura, una luz direccional con sombra.
+- **hierba:** la base m�s 40 000 briznas en un `MultiMesh` con viento.
+- **sprites:** la base m�s 200 `Sprite3D` en billboard, con recorte alfa y sombra.
+- **sdfgi:** la base con SDFGI, SSAO y glow.
+
+## Corrida principal
+
+| M�todo | Controlador | Escena | Resoluci�n | FPS medio | FPS 1 % | Cuadro m�x. ms | Llamadas | Primitivas | Memoria MiB |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| forward_plus | vulkan | base | 1280�720 | 68,1 | 54,8 | 19 | 305 | 93 321 | 117 |
+| forward_plus | vulkan | base | 1920�1066 | 38,6 | 32,4 | 31 | 305 | 93 429 | 149 |
+| forward_plus | vulkan | hierba | 1280�720 | 34,5 | 29,9 | 34 | 309 | 573 452 | 121 |
+| forward_plus | vulkan | hierba | 1920�1066 | 22,9 | 19,1 | 55 | 308 | 573 429 | 152 |
+| forward_plus | vulkan | sdfgi | 1280�720 | 19,7 | 8,7 | 119 | 306 | 93 468 | 481 |
+| forward_plus | vulkan | sdfgi | 1920�1066 | 12,9 | 7,4 | 135 | 306 | 93 437 | 556 |
+| forward_plus | vulkan | sprites | 1280�720 | 58,4 | 32,8 | 50 | 707 | 94 205 | 118 |
+| forward_plus | vulkan | sprites | 1920�1066 | 35,5 | 27,8 | 38 | 707 | 94 228 | 149 |
+| gl_compatibility | opengl3_angle | base | 1280�720 | 73,3 | 48,5 | 21 | 306 | 93 497 | 15 |
+| gl_compatibility | opengl3_angle | base | 1920�1066 | 61,5 | 36,4 | 30 | 306 | 93 476 | 24 |
+| gl_compatibility | opengl3_angle | hierba | 1280�720 | 41,7 | 27,7 | 37 | 309 | 573 452 | 17 |
+| gl_compatibility | opengl3_angle | hierba | 1920�1066 | 30,0 | 21,7 | 48 | 308 | 573 413 | 26 |
+| gl_compatibility | opengl3_angle | sprites | 1280�720 | 40,5 | 24,1 | 44 | 707 | 94 325 | 15 |
+| gl_compatibility | opengl3_angle | sprites | 1920�1066 | 40,2 | 23,7 | 44 | 707 | 94 204 | 24 |
+| mobile | vulkan | base | 1280�720 | 90,2 | 71,5 | 14 | 297 | 93 417 | 82 |
+| mobile | vulkan | base | 1920�1066 | 56,4 | 44,5 | 24 | 297 | 93 423 | 97 |
+| mobile | vulkan | hierba | 1280�720 | 42,5 | 35,7 | 29 | 299 | 573 444 | 85 |
+| mobile | vulkan | hierba | 1920�1066 | 29,9 | 24,9 | 41 | 299 | 573 403 | 100 |
+| mobile | vulkan | sprites | 1280�720 | 74,8 | 56,5 | 19 | 679 | 94 234 | 82 |
+| mobile | vulkan | sprites | 1920�1066 | 49,7 | 28,3 | 78 | 679 | 94 207 | 97 |
+
+Las corridas de �1920�1066� se pidieron a 1920�1080 en ventana; la ventana no cabe en la pantalla y Godot la recorta.
+
+## Corridas extra: D3D12 y 1080p a pantalla completa
+
+| M�todo | Controlador | Escena | Resoluci�n | FPS medio | FPS 1 % | Cuadro m�x. ms | Llamadas | Primitivas | Memoria MiB |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| mobile | d3d12 | base | 1280�720 | 114,4 | 50,8 | 33 | 297 | 93 515 | 95 |
+| mobile | d3d12 | hierba | 1280�720 | 42,9 | 35,7 | 28 | 299 | 573 331 | 99 |
+| mobile | d3d12 | sprites | 1280�720 | 98,3 | 60,8 | 18 | 679 | 94 089 | 145 |
+| mobile | d3d12 | hierba | 1920�1080 | 31,4 | 28,6 | 36 | 299 | 573 281 | 114 |
+| mobile | vulkan | base | 1920�1080 | 56,6 | 32,6 | 44 | 297 | 93 305 | 97 |
+| mobile | vulkan | hierba | 1920�1080 | 32,0 | 28,2 | 36 | 299 | 573 293 | 100 |
+| gl_compatibility | opengl3_angle | base | 1920�1080 | 71,3 | 46,1 | 24 | 305 | 93 312 | 24 |
+| gl_compatibility | opengl3_angle | hierba | 1920�1080 | 32,1 | 28,5 | 35 | 308 | 573 330 | 26 |
+| forward_plus | d3d12 | hierba | 1280�720 | 366,7 | 167,0 | 13 | 310 | 574 447 | 136 |
+
+La �ltima fila es an�mala: 367 fps con 574 000 primitivas no es cre�ble en esta gr�fica. No se usa.
+
+## L�mites
+
+- Las escenas son sint�ticas. No representan el juego.
+- Durante la corrida principal hab�a tareas de Codex activas. Una corrida r�pida anterior dio cifras casi iguales en Mobile (90,8 / 43,2 / 75,0).
+- La primera corrida de Forward+ super� el l�mite de 90 s, por la compilaci�n de shaders del primer arranque.
+- La memoria es la contabilidad del motor, no la memoria dedicada de video.
+Nasa_Game/Fase_0_Tecnica/Fase 0 - Analisis.md
+---
+tipo: fase
+fase: 0
+titulo: Investigaci�n t�cnica, arquitectura y pipeline
+estado: en revisi�n, espera la aprobaci�n de Guillermo
+fecha: 2026-11-12
+---
+
+# Fase 0 - Investigaci�n t�cnica, arquitectura y pipeline
+
+> Documento de decisi�n. El detalle est� en los informes de `Investigacion/` y en los datos de `Datos/`. Nada de aqu� se ejecuta hasta que Guillermo lo apruebe.
+
+## 0. Qu� se decide en esta puerta
+
+| ID | Decisi�n propuesta | Evidencia | �Cambia el plan maestro? |
+|---|---|---|---|
+| D-001 | Renderizador **Mobile**. Mundo 3D a 1280�720 escalado e interfaz a resoluci�n nativa. Meta: 30 fps estables en este port�til. Compatibility queda como perfil de respaldo y Forward+ como perfil opcional para equipos potentes. | Medici�n propia, �2.1 | S�: el plan ped�a Forward+ |
+| D-002 | Sin iluminaci�n global en tiempo real. Una luz direccional con sombra corta, ambiente y relleno. Lightmaps horneados solo en interiores y despu�s de probar el horneado aqu�. | Medici�n y documentaci�n, �2.3 | Responde a �SDFGI vs lightmaps� |
+| D-003 | Personajes principales en **3D chibi**. El gato va en sprites, salvo que la prueba encuentre una v�a de rig viable para cuadr�pedos. | Informe 02 verificado, �3 | No |
+| D-004 | Pipeline: concepto barato  hoja de modelo  imagen a malla con Tripo H3.1  inspecci�n en Godot  rig  GLB. | Informes 02 y 03, �3 | Lo concreta |
+| D-005 | Prueba de pipeline con **tope de 60 cr�ditos** antes de la Fase 1. | �3.4 | La a�ade |
+| D-006 | Presupuesto de los 1000 cr�ditos por partidas, con reglas de gasto. | �4 | La a�ade |
+| D-007 | Arquitectura con nodos, se�ales y `Resource`, sin ECS. Git LFS y CI con GitHub Actions. | �5 | Responde a �ECS vs OOP� |
+| D-008 | Proceso de estudio: tres aprobaciones por recurso, manifiesto y l�mite de reintentos. | Informe 07, �6 | Lo concreta |
+| D-009 | El pilar �mundo vivo� reserva contratos de interacci�n, tiempo, persistencia, audio y paleta desde ya. | Informe 10 verificado, �7 | Lo a�ade |
+| D-010 | Del trabajo anterior se conservan la historia, los datos y la l�gica de misi�n. La presentaci�n visual se rehace. | Informe 08, �8 | No |
+
+## 1. Punto de partida
+
+- **Equipo:** Intel i5-7200U (2 n�cleos), 7,9 GB de RAM e Intel HD Graphics 620. No hay GPU dedicada.
+- **Motor:** Godot 4.7.2-stable. Arranca aqu� con Forward+ (Vulkan 1.3 y D3D12), Mobile y Compatibility. Compatibility no usa el OpenGL de Intel: cae a ANGLE (OpenGL ES 3.0 sobre Direct3D 11).
+- **Higgsfield:** plan Plus con 1006,25 cr�ditos; 1000 son de suscripci�n y se acreditaron el 2026-11-12. Ofrece imagen, video, audio, sprites animados y 3D: imagen a malla, retopolog�a, retexturizado y rig.
+- **Meta visual:** el tablero de [[Analisis del tablero]]. Seg�n el informe [[04_caso_after_the_wind]], ese juego se hizo en Godot con Tripo, Blender y Cascadeur, en unas seis semanas y con mucha direcci�n humana. Estos datos vienen de publicaciones que la verificaci�n no pudo abrir: sirven de orientaci�n, no de presupuesto.
+
+## 2. Motor y renderizado
+
+### 2.1 Medici�n en tu equipo
+
+Fotogramas por segundo: media y, entre par�ntesis, el 1 % m�s lento. Son 29 corridas de 10 a 12 s con `pruebas/bench_render/`.
+
+| Renderizador | Base 720p | Hierba 720p | Sprites 720p | Base 1080p | Hierba 1080p |
+|---|---|---|---|---|---|
+| Mobile (Vulkan) | 90 (72) | 43 (36) | 75 (57) | 57 (33) | 32 (28) |
+| Mobile (D3D12) | 114 (51) | 43 (36) | 98 (61) | sin medir | 31 (29) |
+| Compatibility (ANGLE) | 73 (49) | 42 (28) | 41 (24) | 71 (46) | 32 (29) |
+| Forward+ (Vulkan) | 68 (55) | 35 (30) | 58 (33) | 39 (32)* | 23 (19)* |
+| Forward+ con SDFGI, SSAO y glow | 20 (9) | - | - | 13 (7)* | - |
+
+\* Medido en ventana a 1920�1066.
+
+- **Base:** 150 mallas con sombreado toon, unos 93 000 tri�ngulos, 300 llamadas de dibujo y una luz con sombra.
+- **Hierba:** la base m�s 40 000 briznas con viento (573 000 tri�ngulos).
+- **Sprites:** la base m�s 200 `Sprite3D` que proyectan sombra (700 llamadas de dibujo).
+
+Lo que dicen los n�meros:
+
+1. **SDFGI no es viable aqu�:** 20 fps con ca�das a 9.
+2. **Mobile es el m�s r�pido a 720p y el m�s estable.** Con 700 llamadas de dibujo mantiene de 75 a 98 fps; Compatibility baja a 41.
+3. **A 1080p con hierba densa todos rondan los 30 fps.** El l�mite es el relleno de p�xeles. Por eso el 3D va a 720p y la interfaz a resoluci�n nativa.
+4. **Compatibility rinde parecido en escenas simples** y usa menos memoria de video (de 15 a 26 MiB frente a 82 a 145).
+
+L�mites de la medici�n: las escenas son sint�ticas, no el juego. La corrida de Forward+ con D3D12 dio una cifra an�mala (367 fps) y se descart�. El primer arranque de Forward+ tard� m�s de 90 s.
+
+### 2.2 Qu� ofrece cada renderizador
+
+Datos de la documentaci�n de Godot 4.7, verificados de forma independiente.
+
+| Funci�n | Forward+ | Mobile | Compatibility |
+|---|---|---|---|
+| SDFGI, VoxelGI, niebla volum�trica, FSR | S� | No | No |
+| Mostrar lightmaps horneados | S� | S� | S� |
+| Desenfoque de profundidad (tilt-shift) | S� | S� | No |
+| Decals y proyectores de luz | S� | S� | No |
+| FXAA y SMAA | S� | S� | No |
+| Estelas de part�culas | S� | S� | No |
+| SSAO | S� | No | S�, simplificado |
+| Glow, niebla de altura y MSAA 3D | S� | S� | S� |
+| B�fer de color | - | 10 bits con debanding | 8 bits |
+
+Mobile conserva lo que el pilar �mundo vivo� necesita: desenfoque, decals, estelas y degradados de cielo sin bandas. Pierde el SSAO, que se sustituye por oclusi�n pintada en las texturas.
+
+### 2.3 Iluminaci�n global: SDFGI frente a lightmaps
+
+- **SDFGI queda descartado** por la medici�n y porque solo existe en Forward+.
+- **Los lightmaps horneados son viables en principio.** El horneado necesita una GPU con `RenderingDevice`, y la HD 620 la tiene. Falta medir cu�nto tarda y cu�nta memoria usa: se prueba con un interior peque�o en la prueba de pipeline.
+- **Durante la iteraci�n no hay GI.** Luz direccional, ambiente, un relleno y oclusi�n pintada. Los objetos m�viles reciben luz indirecta por sondas si se hornea.
+
+### 2.4 Sombras 3D sobre sprites 2D
+
+- `Sprite3D` proyecta sombra con recorte alfa (`alpha_cut` en `discard`). El sombreado (`shaded`) viene apagado por defecto.
+- Con billboard, la sombra gira con la c�mara y con varias c�maras el resultado no est� definido. Soluci�n: un plano fijo �solo sombra� orientado a la luz, o una sombra de contacto redonda.
+- Medido: 200 sprites con sombra a 75 fps en Mobile a 720p.
+
+### 2.5 Sombreado estilizado
+
+- `StandardMaterial3D` con difuso toon y rim en personajes. Shader propio solo donde haga falta.
+- Contorno por casco invertido solo en personajes y objetos interactivos. El contorno por posproceso necesita un b�fer que solo tiene Forward+.
+- Textura pintada en el albedo, rugosidad constante y pocos materiales.
+- Hierba en `MultiMesh` por parcelas, con viento en el shader.
+
+### 2.6 Presupuesto inicial de rendimiento
+
+Se calibra en la escena de la prueba de pipeline.
+
+| Recurso | Tri�ngulos | Textura | Materiales |
+|---|---|---|---|
+| Protagonista | 4000 a 6000 | 1024� | 1 o 2 |
+| Gato | 2000 a 3000 | 512� | 1 |
+| NPC cercano | 1500 a 3500 | 512� | 1 o 2 |
+| Prop singular | 500 a 2000 | 512� | 1 |
+| Escena visible | hasta 100 000 | atlas compartidos | hasta 300 llamadas de dibujo |
+
+Hierba: hasta 20 000 briznas visibles, la mitad de lo que dio 43 fps.
+
+### 2.7 C�maras de partida
+
+Son hip�tesis para la prueba de pipeline. La decisi�n final es de la Fase 1.
+
+- **Exploraci�n:** perspectiva con campo de visi�n de 30� e inclinaci�n de 55� hacia abajo, comparada con una c�mara ortogonal en el mismo encuadre.
+- **Hub lateral:** ortogonal, con pocas capas de profundidad y fondo ilustrado.
+- **Desenfoque tilt-shift:** existe en Mobile. Su costo en este equipo est� sin medir.
+
+## 3. Pipeline de arte con IA
+
+### 3.1 Flujo
+
+```mermaid
+flowchart LR
+  A[Ficha del recurso] --> B[Borrador de concepto]
+  B --> C{Puerta de dise�o}
+  C --> D[Hoja de modelo]
+  D --> E[Imagen a malla]
+  E --> F{Inspecci�n en Godot}
+  F --> G[Rig y animaci�n]
+  G --> H[GLB en Godot]
+  H --> I{Puerta en contexto}
+  I --> J[Aprobado en el manifiesto]
+```
+
+En cada rombo decide Guillermo. La puerta en contexto se juzga con la c�mara real y con los fps medidos.
+
+### 3.2 Modelo por tarea
+
+Costos medidos con `generate cost`.
+
+| Tarea | Modelo | Cr�ditos |
+|---|---|---|
+| Borrador de estilo o de concepto | `gpt_image_2_6`, calidad low, 1k | 0,25 |
+| Final de concepto, textura o icono | `gpt_image_2_6`, calidad high, 1k / 2k | 1,5 / 2,75 |
+| Maestro de personaje con referencias | `nano_banana_pro`, 2k | 2 |
+| Vista adicional de un personaje | `3d_jutsu_angles`, 1k | 1,25 |
+| Imagen a malla | `tripo_h3_1_image_to_3d` | 9 |
+| Retopolog�a / retexturizado | `meshy_v5_remesh` / `meshy_v5_retexture` | 6 / 9,5 |
+| Animaci�n de sprite | `autosprite`, turbo / pro | 2 / 3 |
+| M�sica de 2 minutos | `sonilo_music` | 7,5 |
+| Efecto de 3 segundos | `mirelo_text_to_audio` | 0,75 |
+
+### 3.3 Riesgos comprobados
+
+1. **Meshy se retira.** El proveedor retir� `lowpoly` el 30-10-2026 y retira Meshy 7 para geometr�a el 31-12-2026. La producci�n no se apoya en `meshy_v7_image_to_3d`.
+2. **Mixamo solo acepta FBX, OBJ o ZIP.** Si Tripo entrega GLB hace falta convertirlo. Opciones: Blender por script (hay que instalarlo) o el rig de Higgsfield, `3d_rigging`, cuyo costo no se puede cotizar.
+3. **El gato no tiene rig autom�tico** dentro de Higgsfield. Plan seguro: sprites con `autosprite`.
+4. **Cuatro modelos no se pueden cotizar:** `image_to_3d`, `multi_image_to_3d`, `3d_rigging` y `sam_3_3d`. Solo se prueban una vez y con permiso.
+5. **Blender pide 4 n�cleos** y este equipo tiene 2. Servir�a por script, sin garant�a de fluidez.
+6. **La m�sica generada tiene licencias por proveedor** que no est�n verificadas para publicar a trav�s de Higgsfield.
+7. **El rig es la mayor inc�gnita de costo.** Ocho personajes con rig por la �nica v�a cotizada (Meshy 7) costar�an de 352 a 380 cr�ditos. La v�a barata es Tripo a 9 cr�ditos m�s un rig gratuito o sin cotizar: la prueba de pipeline existe para validarla.
+8. **Los cr�ditos del plan no se acumulan.** Seg�n el apartado 9.4 de los t�rminos de Higgsfield, los cr�ditos de suscripci�n caducan al cierre de cada periodo de facturaci�n. Los comprados aparte duran 90 d�as (apartado 9.6).
+
+### 3.4 Prueba de pipeline
+
+Usa un estudiante y un gato de prueba, no los dise�os finales. Se detiene en el primer paso que falle.
+
+| Paso | Qu� se hace | Cr�ditos |
+|---|---|---|
+| 1 | Referencias de prueba: 4 borradores, 2 finales y 2 vistas en pose A | 7 |
+| 2 | Malla del protagonista con Tripo H3.1 (9). Malla del gato (9) solo si hay una v�a de rig para cuadr�pedos. | 18 |
+| 3 | Rig del protagonista: Mixamo (0 cr�ditos) o una ejecuci�n de `3d_rigging` | sin cotizar |
+| 4 | Sprites del gato: caminar en 5 direcciones, reposo y una comparaci�n en pro | 15 |
+| 5 | Un sprite de control del protagonista y una textura de suelo | 3,5 |
+| 6 | Escena en Godot con c�mara 3/4 y c�mara lateral, y horneado de un lightmap | 0 |
+| | **Total cotizado / tope** | **43,5 / 60** |
+
+Puerta de aceptaci�n:
+
+- Percentil 95 del tiempo de cuadro de 33 ms o menos, en un recorrido de 60 s a 720p.
+- Ning�n cambio de ropa, proporci�n o marcas entre direcciones.
+- Lectura correcta en la c�mara alta y en la lateral.
+- Minutos de reparaci�n manual anotados.
+- Veredicto de Guillermo sobre una l�mina comparativa y un video corto.
+
+## 4. Presupuesto de cr�ditos
+
+| Partida | Cr�ditos |
+|---|---|
+| Prueba de pipeline | 60 |
+| Exploraci�n y biblia visual | 20 |
+| 8 personajes: maestros, vistas, expresiones y retratos | 110 |
+| Hub, zona de exploraci�n, materiales, cielos y capas | 70 |
+| 40 props (dise�o 2D) | 85 |
+| Interfaz, iconos, logotipo, mapa y vi�etas de carga | 87 |
+| Utilidades: alfa, ediciones y ampliaci�n | 25 |
+| 5 pistas de m�sica y 30 efectos | 115 |
+| Voz y video, opcionales | 25 |
+| Mallas 3D, retopolog�a y rig | 160 |
+| **Subtotal** | **757** |
+| **Contingencia** | **243** |
+
+Los 160 cr�ditos de 3D alcanzan para unas 17 mallas de Tripo H3.1 sin rig de pago. No alcanzan para 40 props en malla: los props simples se construyen con geometr�a sencilla y textura pintada.
+
+**Caducidad.** Los 1000 cr�ditos se acreditaron el 2026-11-12 y caducan al cierre del periodo de facturaci�n. Si el plan es mensual, eso ocurre hacia el 2026-12-12; la fecha exacta est� por confirmar. Consecuencias:
+
+- Las fases que generan arte (1, 3 y 5) tendr�an que pasar sus puertas dentro de ese periodo, o se pierde el saldo sin usar.
+- La contingencia que siga libre una semana antes del cierre se convierte en recursos ya aprobados: versiones finales, m�sica y props.
+- Si mantienes el plan, cada periodo trae otros 1000 cr�ditos y el presupuesto se reparte por meses.
+
+Reglas de gasto:
+
+1. No se genera nada fuera de una partida aprobada.
+2. Primero el borrador de 0,25 cr�ditos; el final solo sobre un borrador aprobado.
+3. M�ximo 3 intentos por recurso y etapa. El cuarto exige cambiar de enfoque.
+4. Lotes de 25 cr�ditos como m�ximo, con revisi�n entre lotes.
+5. Se vuelve a cotizar antes de cada lote y cada generaci�n queda en el registro de [[trabajos]].
+
+## 5. Arquitectura y estructura de datos
+
+Detalle en [[06_arquitectura_godot]].
+
+**ECS frente a nodos.** Se propone composici�n con nodos, datos en `Resource` y l�gica en GDScript tipado, sin ECS. Con unos cientos de entidades no hay un cuello de botella que lo justifique. Cuatro informes llegaron por separado a la misma conclusi�n, y el trabajo anterior ya funcionaba as�.
+
+| Tema | Decisi�n |
+|---|---|
+| Entidades | Escenas compuestas por nodos. Las definiciones van en `Resource` y el estado de cada partida va aparte, para que dos instancias no compartan vida ni inventario. |
+| Dependencias | Un `Main` persistente conecta los servicios y cambia las escenas del mundo. Pocos autoloads. |
+| Comunicaci�n | Se�ales locales y un bus peque�o de eventos de dominio. |
+| Estados | M�quinas de estado propias y peque�as. Godot State Charts 0.22.5 queda de reserva. |
+| Lenguaje | GDScript tipado, con `gdlint` y `gdformat`. C# exige otra edici�n de Godot y otra cadena de exportaci�n. |
+| Guardado | JSON validado, con versi�n y migraciones, y dos generaciones de respaldo. Cargar un `Resource` de una partida puede ejecutar c�digo. |
+| Di�logos | Dialogue Manager 4.2.0 detr�s de un adaptador propio. Dialogic 2 sigue en alfa. |
+| Idiomas | gettext (`.po`), con espa�ol e ingl�s desde el inicio. |
+| C�mara | `Camera3D` con un director propio. Phantom Camera 0.11.0.4 queda como opci�n: su autor avisa de errores pendientes del lado de Godot. |
+| Gato | `NavigationAgent3D`, igual en la vista alta y en la lateral. |
+| Audio | Nativo: buses, zonas y `AudioStreamInteractive`. |
+| Pruebas | GUT 9.7.1 y ejecuci�n sin ventana. |
+| Tipograf�a | DotGothic16 tiene licencia SIL OFL 1.1 y declara el repertorio �GF Latin Core�, que incluye tildes, �, �, � y �. Falta probar el archivo en Godot a tama�o de juego. |
+
+Ning�n complemento se ha ejecutado todav�a en Godot 4.7.2. Cada uno pasa una prueba de aceptaci�n antes de entrar.
+
+**Repositorio propuesto**
+
+```text
+Juego 2d-hd/
+��� juego/              proyecto de Godot: app, core, features, world, presentation, ui, content, assets, shaders y tests
+��� arte_fuente/        originales generados y manifiestos
+��� herramientas/       scripts de Higgsfield, Codex, validaci�n y CI
+��� Nasa_Game/          b�veda de Obsidian
+��� pruebas/            pruebas t�cnicas, como bench_render
+��� .github/workflows/  integraci�n continua
+```
+
+- **Git LFS** para los binarios: im�genes, audio, modelos y fuentes. GitHub Free incluye 10 GiB de almacenamiento y 10 GiB de descarga por ciclo, con 2 GB por archivo. Cada versi�n de un binario ocupa su tama�o completo.
+- **CI con GitHub Actions:** importaci�n sin ventana, pruebas con GUT y exportaci�n para Windows.
+- **Accesibilidad desde la arquitectura:** remapeo de controles, escala de texto, paleta por datos para los modos de daltonismo y opci�n de reducir el movimiento.
+
+## 6. Proceso de estudio
+
+Detalle y plantillas en [[07_proceso_estudio]].
+
+- **Tres aprobaciones por recurso:** de dise�o (la hoja), t�cnica (tri�ngulos, textura, rig) y en contexto (en el motor, con la c�mara real).
+- **Entregables de la Fase 1:** biblia de arte breve, hoja de modelo, hoja de expresiones, lineup de escala, color script y marcos de estilo de interfaz.
+- **Comprobaciones objetivas por puerta:** silueta, lectura en grises, paleta, proporci�n en cabezas, legibilidad a la distancia de c�mara y presupuesto t�cnico.
+- **Manifiesto de recursos:** ID, estado, modelo, prompt, referencias, costo, archivo fuente, archivo en el motor y veredicto con fecha.
+- **Consistencia con IA:** bloques de prompt fijos y versionados, im�genes ancla propias y un solo cambio por intento.
+
+## 7. Pilar �mundo vivo�
+
+Detalle en [[10_mundo_vivo]].
+
+| Qu� da vida | C�mo se resuelve | Costo en este equipo |
+|---|---|---|
+| Vegetaci�n, telas y cables en movimiento | Viento por shader con par�metros globales | Bajo |
+| Hierba que se dobla al pasar | Dos posiciones globales: protagonista y gato | Bajo |
+| Polvo, hojas e insectos | Emisores de part�culas peque�os y por proximidad | Bajo |
+| Objetos que responden | Componente de interacci�n com�n, con aviso y resaltado | Bajo |
+| El mundo recuerda | Identificadores estables y estados guardados | Nulo |
+| NPC con rutinas | Horarios escritos, sin simular a toda la poblaci�n | Bajo |
+| Sonido coherente | Buses, capas de ambiente por zona, pasos por superficie y m�sica adaptativa nativa | Bajo |
+| Paleta consistente | Paleta maestra como dato, rampas compartidas y comprobaci�n autom�tica por recurso | Nulo |
+
+Desde ya se reservan: se�ales globales, capas de colisi�n, grupos, par�metros globales de shader, buses de audio y el formato de datos de zona. El audio usa el sistema nativo de Godot, sin FMOD ni Wwise.
+
+## 8. Trabajo anterior
+
+Detalle en [[08_antecedentes_boveda_anterior]].
+
+- **Se conserva:** la historia (Guayaquil, formaci�n, misi�n y transmisi�n del conocimiento), las clases de datos, el cat�logo de misiones, la mec�nica orbital con sus pruebas y el esquema de personalizaci�n y guardado.
+- **Se rehace:** avatar, gato, muebles, c�mara, escala e interfaz.
+- **Se descarta:** el p�xel-art y la resoluci�n de 384�216.
+- **Aviso:** en esa carpeta hay trabajo sin confirmar en Git (pr�logo, creador de avatar y guardado). Conviene confirmarlo antes de tocar nada.
+
+## 9. Preguntas para Guillermo
+
+1. �Aceptas Mobile como renderizador base en lugar de Forward+?
+2. �Autorizas la prueba de pipeline con tope de 60 cr�ditos y personajes de prueba?
+3. �Cu�ndo se renueva tu plan de Higgsfield y piensas mantenerlo?
+4. �Instalas Blender 4.5 LTS y tienes cuenta de Adobe para Mixamo, o prefieres pagar el rig con cr�ditos?
+5. �Hay fecha l�mite y cu�l es la plataforma objetivo?
+6. �Inicializo Git y Git LFS aqu�, y en qu� repositorio remoto?
+
+## 10. Evidencia
+
+| Fuente | Qu� aporta | Estado |
+|---|---|---|
+| `pruebas/bench_render/` | 29 corridas en este equipo | Medido |
+| `Datos/hf_costos_matriz.md` | 169 cotizaciones de Higgsfield | Medido, sin gastar cr�ditos |
+| Informes 01 a 10 de Codex | Investigaci�n con fuentes | Revisados |
+| Verificaci�n independiente | Contraste de las afirmaciones clave con fuentes primarias | Ver tabla |
+
+| Informe | Confirmadas | Imprecisas | Sin poder verificar | Refutadas |
+|---|---|---|---|---|
+| 01 Motor y render | 13 | 2 | 1 | 0 |
+| 02 Pipeline de personajes | 13 | 3 | 0 | 0 |
+| 03 Arte 2D y presupuesto | 12 | 3 | 0 | 0 |
+| 04 y 07 (muestreo) | 7 | 3 | 2 | 0 |
+| 05 Referentes (muestreo) | 9 | 1 | 0 | 0 |
+| 06 Arquitectura | 12 | 2 | 0 | 0 |
+| 10 Mundo vivo | 10 | 2 | 1 | 0 |
+
+En total: 76 afirmaciones confirmadas, 16 imprecisas, 4 sin poder verificar y ninguna refutada.
+
+La correcci�n m�s importante de la verificaci�n: los informes de Codex recomendaban Compatibility sin medirlo. La medici�n favorece a Mobile, y eso es lo que propone este documento.
+
+Sin verificar todav�a: el horneado de lightmaps en este equipo, la ejecuci�n de los complementos en Godot 4.7.2, DotGothic16 dentro de Godot, el costo de `3d_rigging` y los datos de c�mo se hizo el juego del tablero.
+Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md
+# Higgsfield: matriz de costos para arte de videojuego
+
+Generado con `herramientas/hf_costos_matriz.py`. Solo `generate cost`: no se creo ningun trabajo ni se gasto ningun credito.
+Las cotizaciones con imagen usan un marcador gris; las de `model_url` usan una URL ficticia.
+
+| Grupo | Caso | Creditos | Error |
+|---|---|---|---|
+| imagen | gpt_image_2_6 calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_6 calidad=low 2k | 0.5 |  |
+| imagen | gpt_image_2_6 calidad=low 4k | 0.75 |  |
+| imagen | gpt_image_2_6 calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_6 calidad=medium 2k | 1 |  |
+| imagen | gpt_image_2_6 calidad=medium 4k | 1.25 |  |
+| imagen | gpt_image_2_6 calidad=high 1k | 1.5 |  |
+| imagen | gpt_image_2_6 calidad=high 2k | 2.75 |  |
+| imagen | gpt_image_2_6 calidad=high 4k | 4.25 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 1k | 2.5 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 2k | 4.5 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 4k | 7 |  |
+| imagen | gpt_image_2_6 calidad=max 1k | 5 |  |
+| imagen | gpt_image_2_6 calidad=max 2k | 9 |  |
+| imagen | gpt_image_2_6 calidad=max 4k | 15 |  |
+| imagen | gpt_image_2_6 high 1k fondo transparente | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k con 1 referencia | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k con 4 referencias | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k lote de 4 | 6 |  |
+| imagen | gpt_image_2_6_flare calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_5 calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_6_flare calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_5 calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_6_flare calidad=high 1k | 1.5 |  |
+| imagen | gpt_image_2_5 calidad=high 1k | 1.5 |  |
+| imagen | nano_banana_pro 1k | 2 |  |
+| imagen | nano_banana_flash (NB2) 1k | 1.5 |  |
+| imagen | nano_banana_2_1 1k | 1.5 |  |
+| imagen | nano_banana_pro 2k | 2 |  |
+| imagen | nano_banana_flash (NB2) 2k | 2 |  |
+| imagen | nano_banana_2_1 2k | 2 |  |
+| imagen | nano_banana_pro 4k | 4 |  |
+| imagen | nano_banana_flash (NB2) 4k | 3 |  |
+| imagen | nano_banana_2_1 4k | 3 |  |
+| imagen | nano_banana_pro 2k con 4 referencias | 2 |  |
+| imagen | seedream_5_5 1k | 2.5 |  |
+| imagen | 3d_jutsu_angles 1k | 1.25 |  |
+| imagen | seedream_5_5 1.5k | 2.5 |  |
+| imagen | 3d_jutsu_angles 1.5k | 1.25 |  |
+| imagen | seedream_5_5 2k | 3.5 |  |
+| imagen | 3d_jutsu_angles 2k | 2.5 |  |
+| imagen | 3d_jutsu_angles 2k con 1 referencia | 2.5 |  |
+| imagen | seedream_5_5 2k con 4 referencias | 3.5 |  |
+| imagen | seedream_v5_pro (defecto) | 2.5 |  |
+| imagen | seedream_v5_lite (defecto) | 1 |  |
+| imagen | seedream_5_0_flash (defecto) | 0.5 |  |
+| imagen | seedream_v4_5 (defecto) | 1 |  |
+| imagen | flux_3_image (defecto) | 2 |  |
+| imagen | flux_2 (defecto) | 1 |  |
+| imagen | flux_kontext (defecto) | 1.5 |  |
+| imagen | z_image (defecto) | 0.15 |  |
+| imagen | text2image_soul_v2 (defecto) | 0.12 |  |
+| imagen | soul_location (defecto) | 0.12 |  |
+| imagen | recraft_v4_1 (defecto) | 1.25 |  |
+| imagen | ideogram_4_5 (defecto) | 6.25 |  |
+| imagen | kling_omni_image (defecto) | 0.5 |  |
+| imagen | image_auto (defecto) | 2 |  |
+| imagen | nano_banana (defecto) | 1 |  |
+| imagen | nano_banana_2_lite (defecto) | 1 |  |
+| imagen | grok_image_2_0 (defecto) | 2 |  |
+| imagen | minimax_h3_image (defecto) | 4 |  |
+| imagen | flux_kontext con 1 referencia | 1.5 |  |
+| imagen | ideogram_vector generate calidad=low | 4 |  |
+| imagen | ideogram_vector generate calidad=medium | 5 |  |
+| imagen | ideogram_vector generate calidad=high | 6.5 |  |
+| imagen | ideogram_vector vectorize | 3 |  |
+| utilidad | image_background_remover | 1 |  |
+| utilidad | bytedance_image_upscale 2k | 2 |  |
+| utilidad | bytedance_image_upscale 4k | 2 |  |
+| utilidad | topaz_image 2048x2048 | - | Error: job_type 'topaz_image' does not support alpha v2 cost estimation |
+| utilidad | topaz_image 4096x4096 | - | Error: job_type 'topaz_image' does not support alpha v2 cost estimation |
+| utilidad | nano_banana_2_relight | 2 |  |
+| utilidad | nano_banana_2_shots | 4 |  |
+| utilidad | outpaint | 2 |  |
+| utilidad | flux_2_pro_outpaint | - | Error: at least one expand side must be non-zero | Hint: Run: hf model get flux_2_pro_outpaint |
+| autosprite | autosprite iso_walk_down tier=turbo 25f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down tier=pro 25f 256px | 3 |  |
+| autosprite | autosprite iso_walk_down tier=max 25f 256px | 14 |  |
+| autosprite | autosprite idle turbo 25f 256px | 2 |  |
+| autosprite | autosprite walk turbo 25f 256px | 2 |  |
+| autosprite | autosprite attack turbo 25f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 8f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 12f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 16f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 49f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 128px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 512px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 1024px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo remove_bg=ultra | 2 |  |
+| autosprite | autosprite custom turbo | 2 |  |
+| autosprite | autosprite no humanoide (gato) iso_walk_down turbo | 2 |  |
+| 3d | tripo_3d texto (defecto) | 5 |  |
+| 3d | tripo_3d texto sin textura | 2.5 |  |
+| 3d | tripo_3d texto detallado | 12.5 |  |
+| 3d | hunyuan3d_v3_1_text_to_3d std | 7 |  |
+| 3d | hunyuan3d_v3_1_text_to_3d pro | 12 |  |
+| 3d | meshy_v6_text_to_3d full | 25 |  |
+| 3d | meshy_v6_text_to_3d preview | 25 |  |
+| 3d | meshy_v6_text_to_3d lowpoly | 25 |  |
+| 3d | image_to_3d (defecto: sin textura) | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d con textura | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + remesh | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + rig | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + rig + animacion | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas (defecto) | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas con textura | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas textura + rig | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | meshy_v7_image_to_3d (defecto: textura + remesh) | 38 |  |
+| 3d | meshy_v7_image_to_3d lowpoly | 38 |  |
+| 3d | meshy_v7_image_to_3d sin textura | 25 |  |
+| 3d | meshy_v7_image_to_3d + rig | 44 |  |
+| 3d | meshy_v7_image_to_3d + rig + animacion | 47.5 |  |
+| 3d | meshy_v7_image_to_3d ultra | 44 |  |
+| 3d | hunyuan3d_v3_image_to_3d Normal | 11 |  |
+| 3d | hunyuan3d_v3_image_to_3d LowPoly quads | - | Error: face_count: Input should be greater than or equal to 40000 |
+| 3d | hunyuan3d_v3_image_to_3d Geometry (sin textura) | 7 |  |
+| 3d | hunyuan3d_v3_image_to_3d Normal + PBR | 15 |  |
+| 3d | tripo_h3_1_image_to_3d (defecto) | 9 |  |
+| 3d | tripo_h3_1_image_to_3d sin textura | 6 |  |
+| 3d | tripo_h3_1_image_to_3d quads 8000 caras | 10.5 |  |
+| 3d | tripo_h3_1_image_to_3d detallado | 18 |  |
+| 3d | tripo_h3_1_multiview_to_3d 4 vistas | 9 |  |
+| 3d | tripo_p2_image_to_3d (defecto) | 34 |  |
+| 3d | tripo_p2_image_to_3d quads 8000 caras | 34 |  |
+| 3d | tripo_p2_image_to_3d textura=fast | 34 |  |
+| 3d | tripo_p2_image_to_3d textura=detailed | 37 |  |
+| 3d | tripo_p2_image_to_3d textura=extreme | 40 |  |
+| 3d | sam_3_3d (objetos desde foto) | - | Error: job_type 'sam_3_3d' does not support alpha v2 cost estimation |
+| 3d | sam_3_3d_body | 1 |  |
+| 3d | 3d_rigging (solo rig) | - | Error: job_type '3d_rigging' does not support alpha v2 cost estimation |
+| 3d | 3d_rigging + animacion | - | Error: job_type '3d_rigging' does not support alpha v2 cost estimation |
+| 3d | meshy_v5_remesh quads 8000 | 6 |  |
+| 3d | meshy_v5_retexture por texto | 9.5 |  |
+| 3d | meshy_v5_retexture por imagen | 9.5 |  |
+| audio | elevenlabs_music_v2_5 15s instrumental | 2.18 |  |
+| audio | sonilo_music 15s | 0.94 |  |
+| audio | elevenlabs_music_v2_5 30s instrumental | 4.36 |  |
+| audio | sonilo_music 30s | 1.88 |  |
+| audio | elevenlabs_music_v2_5 60s instrumental | 8.72 |  |
+| audio | sonilo_music 60s | 3.75 |  |
+| audio | elevenlabs_music_v2_5 120s instrumental | 17.44 |  |
+| audio | sonilo_music 120s | 7.5 |  |
+| audio | elevenlabs_music_v2_5 180s instrumental | 26.16 |  |
+| audio | sonilo_music 180s | 11.25 |  |
+| audio | elevenlabs_music_v2 30s | 1.92 |  |
+| audio | elevenlabs_music_v2 120s | 7.68 |  |
+| audio | mirelo_text_to_audio (SFX) 1s | 0.25 |  |
+| audio | mirelo_text_to_audio (SFX) 3s | 0.75 |  |
+| audio | mirelo_text_to_audio (SFX) 5s | 1.25 |  |
+| audio | mirelo_text_to_audio (SFX) 10s | 2.5 |  |
+| audio | seed_audio (defecto) | 0.1 |  |
+| video | seedance_2_0_mini texto (defecto) | 5 |  |
+| video | seedance_2_0_mini imagen->video (defecto) | 5 |  |
+| video | seedance1_5 texto (defecto) | 4.8 |  |
+| video | seedance1_5 imagen->video (defecto) | 4.8 |  |
+| video | grok_video_v15_lite texto (defecto) | 5 |  |
+| video | grok_video_v15_lite imagen->video (defecto) | 5 |  |
+| video | kling3_0_turbo texto (defecto) | 7.5 |  |
+| video | kling3_0_turbo imagen->video (defecto) | 7.5 |  |
+| video | wan3_0 texto (defecto) | 8.75 |  |
+| video | wan3_0 imagen->video (defecto) | 8.75 |  |
+| video | kling_o3_flf texto (defecto) | 6.25 |  |
+| video | kling_o3_flf imagen->video (defecto) | 6.25 |  |
+| video | veo3_1_lite texto (defecto) | 12 |  |
+| video | veo3_1_lite imagen->video (defecto) | 12 |  |
+| video | kling4_0 texto (defecto) | 32.5 |  |
+| video | kling4_0 imagen->video (defecto) | - | Error: Text-to-video does not accept reference inputs. | Hint: Run: hf model get kling4_0 |
+| video | seedance_2_5 texto (defecto) | 35 |  |
+| video | seedance_2_5 imagen->video (defecto) | - | Error: mode 't2v' does not accept reference media | Hint: Run: hf model get seedance_2_5 |
+
+web search: 
+web search: https://godotengine.org/releases/4.7/
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Datos/bench_render_resultados.md' -Encoding UTF8; Get-Content -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Fase 0 - Analisis.md' -Encoding UTF8 -TotalCount 190; Get-ChildItem -LiteralPath 'Nasa_Game' -Filter AGENTS.md -Recurse -ErrorAction SilentlyContinue | Select-Object FullName" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1498ms:
+---
+tipo: datos
+fase: 0
+fecha: 2026-11-12
+---
+
+# Rendimiento de los renderizadores de Godot 4.7.2 en la Intel HD 620
+
+Medido con `pruebas/bench_render/` (escrito por Codex, revisado y ejecutado por Claude). Cada corrida calienta 3 s y mide de 10 a 12 s con vsync desactivado. Los JSON de cada corrida est�n en `pruebas/bench_render/corridas/`.
+
+- **base:** 150 mallas con sombreado toon, suelo con textura, una luz direccional con sombra.
+- **hierba:** la base m�s 40 000 briznas en un `MultiMesh` con viento.
+- **sprites:** la base m�s 200 `Sprite3D` en billboard, con recorte alfa y sombra.
+- **sdfgi:** la base con SDFGI, SSAO y glow.
+
+## Corrida principal
+
+| M�todo | Controlador | Escena | Resoluci�n | FPS medio | FPS 1 % | Cuadro m�x. ms | Llamadas | Primitivas | Memoria MiB |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| forward_plus | vulkan | base | 1280�720 | 68,1 | 54,8 | 19 | 305 | 93 321 | 117 |
+| forward_plus | vulkan | base | 1920�1066 | 38,6 | 32,4 | 31 | 305 | 93 429 | 149 |
+| forward_plus | vulkan | hierba | 1280�720 | 34,5 | 29,9 | 34 | 309 | 573 452 | 121 |
+| forward_plus | vulkan | hierba | 1920�1066 | 22,9 | 19,1 | 55 | 308 | 573 429 | 152 |
+| forward_plus | vulkan | sdfgi | 1280�720 | 19,7 | 8,7 | 119 | 306 | 93 468 | 481 |
+| forward_plus | vulkan | sdfgi | 1920�1066 | 12,9 | 7,4 | 135 | 306 | 93 437 | 556 |
+| forward_plus | vulkan | sprites | 1280�720 | 58,4 | 32,8 | 50 | 707 | 94 205 | 118 |
+| forward_plus | vulkan | sprites | 1920�1066 | 35,5 | 27,8 | 38 | 707 | 94 228 | 149 |
+| gl_compatibility | opengl3_angle | base | 1280�720 | 73,3 | 48,5 | 21 | 306 | 93 497 | 15 |
+| gl_compatibility | opengl3_angle | base | 1920�1066 | 61,5 | 36,4 | 30 | 306 | 93 476 | 24 |
+| gl_compatibility | opengl3_angle | hierba | 1280�720 | 41,7 | 27,7 | 37 | 309 | 573 452 | 17 |
+| gl_compatibility | opengl3_angle | hierba | 1920�1066 | 30,0 | 21,7 | 48 | 308 | 573 413 | 26 |
+| gl_compatibility | opengl3_angle | sprites | 1280�720 | 40,5 | 24,1 | 44 | 707 | 94 325 | 15 |
+| gl_compatibility | opengl3_angle | sprites | 1920�1066 | 40,2 | 23,7 | 44 | 707 | 94 204 | 24 |
+| mobile | vulkan | base | 1280�720 | 90,2 | 71,5 | 14 | 297 | 93 417 | 82 |
+| mobile | vulkan | base | 1920�1066 | 56,4 | 44,5 | 24 | 297 | 93 423 | 97 |
+| mobile | vulkan | hierba | 1280�720 | 42,5 | 35,7 | 29 | 299 | 573 444 | 85 |
+| mobile | vulkan | hierba | 1920�1066 | 29,9 | 24,9 | 41 | 299 | 573 403 | 100 |
+| mobile | vulkan | sprites | 1280�720 | 74,8 | 56,5 | 19 | 679 | 94 234 | 82 |
+| mobile | vulkan | sprites | 1920�1066 | 49,7 | 28,3 | 78 | 679 | 94 207 | 97 |
+
+Las corridas de �1920�1066� se pidieron a 1920�1080 en ventana; la ventana no cabe en la pantalla y Godot la recorta.
+
+## Corridas extra: D3D12 y 1080p a pantalla completa
+
+| M�todo | Controlador | Escena | Resoluci�n | FPS medio | FPS 1 % | Cuadro m�x. ms | Llamadas | Primitivas | Memoria MiB |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| mobile | d3d12 | base | 1280�720 | 114,4 | 50,8 | 33 | 297 | 93 515 | 95 |
+| mobile | d3d12 | hierba | 1280�720 | 42,9 | 35,7 | 28 | 299 | 573 331 | 99 |
+| mobile | d3d12 | sprites | 1280�720 | 98,3 | 60,8 | 18 | 679 | 94 089 | 145 |
+| mobile | d3d12 | hierba | 1920�1080 | 31,4 | 28,6 | 36 | 299 | 573 281 | 114 |
+| mobile | vulkan | base | 1920�1080 | 56,6 | 32,6 | 44 | 297 | 93 305 | 97 |
+| mobile | vulkan | hierba | 1920�1080 | 32,0 | 28,2 | 36 | 299 | 573 293 | 100 |
+| gl_compatibility | opengl3_angle | base | 1920�1080 | 71,3 | 46,1 | 24 | 305 | 93 312 | 24 |
+| gl_compatibility | opengl3_angle | hierba | 1920�1080 | 32,1 | 28,5 | 35 | 308 | 573 330 | 26 |
+| forward_plus | d3d12 | hierba | 1280�720 | 366,7 | 167,0 | 13 | 310 | 574 447 | 136 |
+
+La �ltima fila es an�mala: 367 fps con 574 000 primitivas no es cre�ble en esta gr�fica. No se usa.
+
+## L�mites
+
+- Las escenas son sint�ticas. No representan el juego.
+- Durante la corrida principal hab�a tareas de Codex activas. Una corrida r�pida anterior dio cifras casi iguales en Mobile (90,8 / 43,2 / 75,0).
+- La primera corrida de Forward+ super� el l�mite de 90 s, por la compilaci�n de shaders del primer arranque.
+- La memoria es la contabilidad del motor, no la memoria dedicada de video.
+---
+tipo: fase
+fase: 0
+titulo: Investigaci�n t�cnica, arquitectura y pipeline
+estado: en revisi�n, espera la aprobaci�n de Guillermo
+fecha: 2026-11-12
+---
+
+# Fase 0 - Investigaci�n t�cnica, arquitectura y pipeline
+
+> Documento de decisi�n. El detalle est� en los informes de `Investigacion/` y en los datos de `Datos/`. Nada de aqu� se ejecuta hasta que Guillermo lo apruebe.
+
+## 0. Qu� se decide en esta puerta
+
+| ID | Decisi�n propuesta | Evidencia | �Cambia el plan maestro? |
+|---|---|---|---|
+| D-001 | Renderizador **Mobile**. Mundo 3D a 1280�720 escalado e interfaz a resoluci�n nativa. Meta: 30 fps estables en este port�til. Compatibility queda como perfil de respaldo y Forward+ como perfil opcional para equipos potentes. | Medici�n propia, �2.1 | S�: el plan ped�a Forward+ |
+| D-002 | Sin iluminaci�n global en tiempo real. Una luz direccional con sombra corta, ambiente y relleno. Lightmaps horneados solo en interiores y despu�s de probar el horneado aqu�. | Medici�n y documentaci�n, �2.3 | Responde a �SDFGI vs lightmaps� |
+| D-003 | Personajes principales en **3D chibi**. El gato va en sprites, salvo que la prueba encuentre una v�a de rig viable para cuadr�pedos. | Informe 02 verificado, �3 | No |
+| D-004 | Pipeline: concepto barato  hoja de modelo  imagen a malla con Tripo H3.1  inspecci�n en Godot  rig  GLB. | Informes 02 y 03, �3 | Lo concreta |
+| D-005 | Prueba de pipeline con **tope de 60 cr�ditos** antes de la Fase 1. | �3.4 | La a�ade |
+| D-006 | Presupuesto de los 1000 cr�ditos por partidas, con reglas de gasto. | �4 | La a�ade |
+| D-007 | Arquitectura con nodos, se�ales y `Resource`, sin ECS. Git LFS y CI con GitHub Actions. | �5 | Responde a �ECS vs OOP� |
+| D-008 | Proceso de estudio: tres aprobaciones por recurso, manifiesto y l�mite de reintentos. | Informe 07, �6 | Lo concreta |
+| D-009 | El pilar �mundo vivo� reserva contratos de interacci�n, tiempo, persistencia, audio y paleta desde ya. | Informe 10 verificado, �7 | Lo a�ade |
+| D-010 | Del trabajo anterior se conservan la historia, los datos y la l�gica de misi�n. La presentaci�n visual se rehace. | Informe 08, �8 | No |
+
+## 1. Punto de partida
+
+- **Equipo:** Intel i5-7200U (2 n�cleos), 7,9 GB de RAM e Intel HD Graphics 620. No hay GPU dedicada.
+- **Motor:** Godot 4.7.2-stable. Arranca aqu� con Forward+ (Vulkan 1.3 y D3D12), Mobile y Compatibility. Compatibility no usa el OpenGL de Intel: cae a ANGLE (OpenGL ES 3.0 sobre Direct3D 11).
+- **Higgsfield:** plan Plus con 1006,25 cr�ditos; 1000 son de suscripci�n y se acreditaron el 2026-11-12. Ofrece imagen, video, audio, sprites animados y 3D: imagen a malla, retopolog�a, retexturizado y rig.
+- **Meta visual:** el tablero de [[Analisis del tablero]]. Seg�n el informe [[04_caso_after_the_wind]], ese juego se hizo en Godot con Tripo, Blender y Cascadeur, en unas seis semanas y con mucha direcci�n humana. Estos datos vienen de publicaciones que la verificaci�n no pudo abrir: sirven de orientaci�n, no de presupuesto.
+
+## 2. Motor y renderizado
+
+### 2.1 Medici�n en tu equipo
+
+Fotogramas por segundo: media y, entre par�ntesis, el 1 % m�s lento. Son 29 corridas de 10 a 12 s con `pruebas/bench_render/`.
+
+| Renderizador | Base 720p | Hierba 720p | Sprites 720p | Base 1080p | Hierba 1080p |
+|---|---|---|---|---|---|
+| Mobile (Vulkan) | 90 (72) | 43 (36) | 75 (57) | 57 (33) | 32 (28) |
+| Mobile (D3D12) | 114 (51) | 43 (36) | 98 (61) | sin medir | 31 (29) |
+| Compatibility (ANGLE) | 73 (49) | 42 (28) | 41 (24) | 71 (46) | 32 (29) |
+| Forward+ (Vulkan) | 68 (55) | 35 (30) | 58 (33) | 39 (32)* | 23 (19)* |
+| Forward+ con SDFGI, SSAO y glow | 20 (9) | - | - | 13 (7)* | - |
+
+\* Medido en ventana a 1920�1066.
+
+- **Base:** 150 mallas con sombreado toon, unos 93 000 tri�ngulos, 300 llamadas de dibujo y una luz con sombra.
+- **Hierba:** la base m�s 40 000 briznas con viento (573 000 tri�ngulos).
+- **Sprites:** la base m�s 200 `Sprite3D` que proyectan sombra (700 llamadas de dibujo).
+
+Lo que dicen los n�meros:
+
+1. **SDFGI no es viable aqu�:** 20 fps con ca�das a 9.
+2. **Mobile es el m�s r�pido a 720p y el m�s estable.** Con 700 llamadas de dibujo mantiene de 75 a 98 fps; Compatibility baja a 41.
+3. **A 1080p con hierba densa todos rondan los 30 fps.** El l�mite es el relleno de p�xeles. Por eso el 3D va a 720p y la interfaz a resoluci�n nativa.
+4. **Compatibility rinde parecido en escenas simples** y usa menos memoria de video (de 15 a 26 MiB frente a 82 a 145).
+
+L�mites de la medici�n: las escenas son sint�ticas, no el juego. La corrida de Forward+ con D3D12 dio una cifra an�mala (367 fps) y se descart�. El primer arranque de Forward+ tard� m�s de 90 s.
+
+### 2.2 Qu� ofrece cada renderizador
+
+Datos de la documentaci�n de Godot 4.7, verificados de forma independiente.
+
+| Funci�n | Forward+ | Mobile | Compatibility |
+|---|---|---|---|
+| SDFGI, VoxelGI, niebla volum�trica, FSR | S� | No | No |
+| Mostrar lightmaps horneados | S� | S� | S� |
+| Desenfoque de profundidad (tilt-shift) | S� | S� | No |
+| Decals y proyectores de luz | S� | S� | No |
+| FXAA y SMAA | S� | S� | No |
+| Estelas de part�culas | S� | S� | No |
+| SSAO | S� | No | S�, simplificado |
+| Glow, niebla de altura y MSAA 3D | S� | S� | S� |
+| B�fer de color | - | 10 bits con debanding | 8 bits |
+
+Mobile conserva lo que el pilar �mundo vivo� necesita: desenfoque, decals, estelas y degradados de cielo sin bandas. Pierde el SSAO, que se sustituye por oclusi�n pintada en las texturas.
+
+### 2.3 Iluminaci�n global: SDFGI frente a lightmaps
+
+- **SDFGI queda descartado** por la medici�n y porque solo existe en Forward+.
+- **Los lightmaps horneados son viables en principio.** El horneado necesita una GPU con `RenderingDevice`, y la HD 620 la tiene. Falta medir cu�nto tarda y cu�nta memoria usa: se prueba con un interior peque�o en la prueba de pipeline.
+- **Durante la iteraci�n no hay GI.** Luz direccional, ambiente, un relleno y oclusi�n pintada. Los objetos m�viles reciben luz indirecta por sondas si se hornea.
+
+### 2.4 Sombras 3D sobre sprites 2D
+
+- `Sprite3D` proyecta sombra con recorte alfa (`alpha_cut` en `discard`). El sombreado (`shaded`) viene apagado por defecto.
+- Con billboard, la sombra gira con la c�mara y con varias c�maras el resultado no est� definido. Soluci�n: un plano fijo �solo sombra� orientado a la luz, o una sombra de contacto redonda.
+- Medido: 200 sprites con sombra a 75 fps en Mobile a 720p.
+
+### 2.5 Sombreado estilizado
+
+- `StandardMaterial3D` con difuso toon y rim en personajes. Shader propio solo donde haga falta.
+- Contorno por casco invertido solo en personajes y objetos interactivos. El contorno por posproceso necesita un b�fer que solo tiene Forward+.
+- Textura pintada en el albedo, rugosidad constante y pocos materiales.
+- Hierba en `MultiMesh` por parcelas, con viento en el shader.
+
+### 2.6 Presupuesto inicial de rendimiento
+
+Se calibra en la escena de la prueba de pipeline.
+
+| Recurso | Tri�ngulos | Textura | Materiales |
+|---|---|---|---|
+| Protagonista | 4000 a 6000 | 1024� | 1 o 2 |
+| Gato | 2000 a 3000 | 512� | 1 |
+| NPC cercano | 1500 a 3500 | 512� | 1 o 2 |
+| Prop singular | 500 a 2000 | 512� | 1 |
+| Escena visible | hasta 100 000 | atlas compartidos | hasta 300 llamadas de dibujo |
+
+Hierba: hasta 20 000 briznas visibles, la mitad de lo que dio 43 fps.
+
+### 2.7 C�maras de partida
+
+Son hip�tesis para la prueba de pipeline. La decisi�n final es de la Fase 1.
+
+- **Exploraci�n:** perspectiva con campo de visi�n de 30� e inclinaci�n de 55� hacia abajo, comparada con una c�mara ortogonal en el mismo encuadre.
+- **Hub lateral:** ortogonal, con pocas capas de profundidad y fondo ilustrado.
+- **Desenfoque tilt-shift:** existe en Mobile. Su costo en este equipo est� sin medir.
+
+## 3. Pipeline de arte con IA
+
+### 3.1 Flujo
+
+```mermaid
+flowchart LR
+  A[Ficha del recurso] --> B[Borrador de concepto]
+  B --> C{Puerta de dise�o}
+  C --> D[Hoja de modelo]
+  D --> E[Imagen a malla]
+  E --> F{Inspecci�n en Godot}
+  F --> G[Rig y animaci�n]
+  G --> H[GLB en Godot]
+  H --> I{Puerta en contexto}
+  I --> J[Aprobado en el manifiesto]
+```
+
+En cada rombo decide Guillermo. La puerta en contexto se juzga con la c�mara real y con los fps medidos.
+
+### 3.2 Modelo por tarea
+
+Costos medidos con `generate cost`.
+
+| Tarea | Modelo | Cr�ditos |
+|---|---|---|
+| Borrador de estilo o de concepto | `gpt_image_2_6`, calidad low, 1k | 0,25 |
+| Final de concepto, textura o icono | `gpt_image_2_6`, calidad high, 1k / 2k | 1,5 / 2,75 |
+| Maestro de personaje con referencias | `nano_banana_pro`, 2k | 2 |
+| Vista adicional de un personaje | `3d_jutsu_angles`, 1k | 1,25 |
+| Imagen a malla | `tripo_h3_1_image_to_3d` | 9 |
+| Retopolog�a / retexturizado | `meshy_v5_remesh` / `meshy_v5_retexture` | 6 / 9,5 |
+| Animaci�n de sprite | `autosprite`, turbo / pro | 2 / 3 |
+| M�sica de 2 minutos | `sonilo_music` | 7,5 |
+| Efecto de 3 segundos | `mirelo_text_to_audio` | 0,75 |
+
+### 3.3 Riesgos comprobados
+
+1. **Meshy se retira.** El proveedor retir� `lowpoly` el 30-10-2026 y retira Meshy 7 para geometr�a el 31-12-2026. La producci�n no se apoya en `meshy_v7_image_to_3d`.
+2. **Mixamo solo acepta FBX, OBJ o ZIP.** Si Tripo entrega GLB hace falta convertirlo. Opciones: Blender por script (hay que instalarlo) o el rig de Higgsfield, `3d_rigging`, cuyo costo no se puede cotizar.
+3. **El gato no tiene rig autom�tico** dentro de Higgsfield. Plan seguro: sprites con `autosprite`.
+4. **Cuatro modelos no se pueden cotizar:** `image_to_3d`, `multi_image_to_3d`, `3d_rigging` y `sam_3_3d`. Solo se prueban una vez y con permiso.
+5. **Blender pide 4 n�cleos** y este equipo tiene 2. Servir�a por script, sin garant�a de fluidez.
+6. **La m�sica generada tiene licencias por proveedor** que no est�n verificadas para publicar a trav�s de Higgsfield.
+7. **El rig es la mayor inc�gnita de costo.** Ocho personajes con rig por la �nica v�a cotizada (Meshy 7) costar�an de 352 a 380 cr�ditos. La v�a barata es Tripo a 9 cr�ditos m�s un rig gratuito o sin cotizar: la prueba de pipeline existe para validarla.
+8. **Los cr�ditos del plan no se acumulan.** Seg�n el apartado 9.4 de los t�rminos de Higgsfield, los cr�ditos de suscripci�n caducan al cierre de cada periodo de facturaci�n. Los comprados aparte duran 90 d�as (apartado 9.6).
+
+### 3.4 Prueba de pipeline
+
+Usa un estudiante y un gato de prueba, no los dise�os finales. Se detiene en el primer paso que falle.
+
+| Paso | Qu� se hace | Cr�ditos |
+|---|---|---|
+| 1 | Referencias de prueba: 4 borradores, 2 finales y 2 vistas en pose A | 7 |
+| 2 | Malla del protagonista con Tripo H3.1 (9). Malla del gato (9) solo si hay una v�a de rig para cuadr�pedos. | 18 |
+| 3 | Rig del protagonista: Mixamo (0 cr�ditos) o una ejecuci�n de `3d_rigging` | sin cotizar |
+| 4 | Sprites del gato: caminar en 5 direcciones, reposo y una comparaci�n en pro | 15 |
+| 5 | Un sprite de control del protagonista y una textura de suelo | 3,5 |
+| 6 | Escena en Godot con c�mara 3/4 y c�mara lateral, y horneado de un lightmap | 0 |
+| | **Total cotizado / tope** | **43,5 / 60** |
+
+Puerta de aceptaci�n:
+
+- Percentil 95 del tiempo de cuadro de 33 ms o menos, en un recorrido de 60 s a 720p.
+- Ning�n cambio de ropa, proporci�n o marcas entre direcciones.
+- Lectura correcta en la c�mara alta y en la lateral.
+- Minutos de reparaci�n manual anotados.
+- Veredicto de Guillermo sobre una l�mina comparativa y un video corto.
+
+
+web search: 
+web search: site.docs.godotengine.org/en/4.7 AreaLight3D shadows SDFGI VoxelGI ...
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:27 AM.
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:27 AM.
+tokens used
+43.205

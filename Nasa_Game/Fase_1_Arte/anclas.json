@@ -1,0 +1,37 @@
+{
+ "ANC_HUB": {
+  "id": "4412c12c-6589-45e4-9453-f695ac27ccbc",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/_vista/L01_A_lowpoly_hub_gpt26.jpg",
+  "subida": "2026-11-12"
+ },
+ "ANC_EXPLORACION": {
+  "id": "233d88a5-03cd-49c1-bbf6-b0509f27cad8",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/_vista/L01_A_lowpoly_exploracion_gpt26.jpg",
+  "subida": "2026-11-12"
+ },
+ "ANC_VISTA_JUEGO": {
+  "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_vista/L02_exploracion_camara_alta.jpg",
+  "subida": "2026-11-12"
+ },
+ "ANC_MAPA": {
+  "id": "bcf5a507-65b1-4f85-89b7-797f35e59f9a",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_vista/L02_mapa_region.jpg",
+  "subida": "2026-11-12"
+ },
+ "ANC_PROTA_1": {
+  "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_vista/L02_protagonista_tipo1_hoja.jpg",
+  "subida": "2026-11-12"
+ },
+ "ANC_PROTA_2": {
+  "id": "03aded2d-85b3-4421-b35f-f75b9d74fe96",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_vista/L02_protagonista_tipo2_hoja.jpg",
+  "subida": "2026-11-12"
+ },
+ "ANC_GATO": {
+  "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_vista/L02_gato_orbita_hoja.jpg",
+  "subida": "2026-11-12"
+ }
+}

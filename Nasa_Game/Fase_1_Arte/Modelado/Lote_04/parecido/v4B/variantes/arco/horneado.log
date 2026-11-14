@@ -1,0 +1,49 @@
+Alineando y deformando frente...
+  frente: lambda 0, det min -1.979, p1 -0.724, max 3.701, residuo medio 0.00 px
+  frente: lambda 1e-05, det min -1.937, p1 -0.703, max 3.673, residuo medio 0.14 px
+  frente: lambda 0.0001, det min -1.604, p1 -0.585, max 3.535, residuo medio 1.28 px
+  frente: lambda 0.001, det min -0.527, p1 -0.084, max 2.798, residuo medio 7.30 px
+  frente: lambda 0.01, det min 0.251, p1 0.479, max 1.959, residuo medio 18.82 px
+  IoU global 0.8499, contorno 100 + fijos 41, desplazamiento medio 16.8 px
+Alineando y deformando perfil...
+  perfil: lambda 0, det min -2.399, p1 -0.297, max 2.554, residuo medio 0.00 px
+  perfil: lambda 1e-05, det min -2.249, p1 -0.287, max 2.541, residuo medio 0.09 px
+  perfil: lambda 0.0001, det min -1.333, p1 -0.196, max 2.442, residuo medio 0.77 px
+  perfil: lambda 0.001, det min -0.212, p1 0.200, max 2.156, residuo medio 3.55 px
+  perfil: lambda 0.01, det min 0.456, p1 0.615, max 1.657, residuo medio 8.67 px
+  IoU global 0.8696, contorno 100 + fijos 30, desplazamiento medio 15.2 px
+Alineando y deformando espalda...
+  espalda: lambda 0, det min -1.429, p1 -0.213, max 3.228, residuo medio 0.00 px
+  espalda: lambda 1e-05, det min -1.376, p1 -0.197, max 3.176, residuo medio 0.11 px
+  espalda: lambda 0.0001, det min -0.993, p1 -0.093, max 2.792, residuo medio 0.99 px
+  espalda: lambda 0.001, det min -0.091, p1 0.332, max 1.902, residuo medio 5.40 px
+  espalda: lambda 0.01, det min 0.509, p1 0.655, max 1.475, residuo medio 12.65 px
+  IoU global 0.8709, contorno 100 + fijos 42, desplazamiento medio 9.8 px
+Horneando triangulo 300/7522
+Horneando triangulo 600/7522
+Horneando triangulo 900/7522
+Horneando triangulo 1200/7522
+Horneando triangulo 1500/7522
+Horneando triangulo 1800/7522
+Horneando triangulo 2100/7522
+Horneando triangulo 2400/7522
+Horneando triangulo 2700/7522
+Horneando triangulo 3000/7522
+Horneando triangulo 3300/7522
+Horneando triangulo 3600/7522
+Horneando triangulo 3900/7522
+Horneando triangulo 4200/7522
+Horneando triangulo 4500/7522
+Horneando triangulo 4800/7522
+Horneando triangulo 5100/7522
+Horneando triangulo 5400/7522
+Horneando triangulo 5700/7522
+Horneando triangulo 6000/7522
+Horneando triangulo 6300/7522
+Horneando triangulo 6600/7522
+Horneando triangulo 6900/7522
+Horneando triangulo 7200/7522
+Horneando triangulo 7500/7522
+Horneando triangulo 7522/7522
+Rellenando bordes UV...
+{"texels_con_hoja_pct_superficie": 75.38903127113569, "segundos": 267.3}

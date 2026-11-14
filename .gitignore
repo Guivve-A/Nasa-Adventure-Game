@@ -1,0 +1,22 @@
+# Godot
+.godot/
+*.import
+juego/capturas/
+juego/.candado_godot
+
+# Locales de cada equipo
+herramientas/godot_local.txt
+__pycache__/
+*.pyc
+.claude/
+.mcp.json
+
+# Descargas externas grandes (se bajan con herramientas/descargar_nasa.py)
+externos/
+
+# Obsidian
+.obsidian/workspace*.json
+
+# Trabajo de Blender
+*.blend1
+herramientas/blender/salidas/

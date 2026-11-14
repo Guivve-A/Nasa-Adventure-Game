@@ -1,0 +1,31 @@
+{
+  "lote": "L01b",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01",
+  "tope": 11.5,
+  "trabajos": [
+    {
+      "id": "L01_B_gouache_hub_gpt26",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: hand-painted gouache diorama in real-time 3D, soft rounded forms, visible opaque brush strokes on every surface, matte finish, painterly color variation on walls and fabric, sunlit surfaces with cool shadows, storybook warmth, palette of cream, terracotta, tropical green, petrol blue and a cyan accent. No text, no logos, no interface."
+    },
+    {
+      "id": "L01_C_maqueta_hub_gpt26",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: handcrafted miniature tabletop model, characters like glazed painted ceramic figurines, props of satin anodized aluminum, painted wood and matte fabric, tiny specular glints, tilt-shift shallow depth of field like macro photography of a museum diorama, palette of ivory, coral, ochre, sage green and a cyan accent. No text, no logos, no interface."
+    },
+    {
+      "id": "L01_D_atlas_papel_hub_gpt26",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: layered papercraft and ink, scenery built from cut textured paper layers with deckled edges and soft drop shadows, flat gouache fills, fine ink-line engineering sketches and star-chart diagrams as wall decoration, matte 3D characters with graphic silhouettes, palette of warm paper, clay red, dark ink teal, gray-green and a turquoise accent. No text, no logos, no interface."
+    },
+    {
+      "id": "L01_A_lowpoly_exploracion_gpt26",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "prompt": "In-game screenshot of a stylized 3D adventure RPG seen from a high three-quarter top-down gameplay camera, about 55 degrees. A small chibi engineering student with dark curly hair, utility jacket, cargo pants and a crossbody tool bag walks up a stair street with a small cat wearing a glowing cyan collar tag beside them; both are small in frame, about one tenth of the image height. Hillside neighborhood of colorful houses in Guayaquil, Ecuador, late afternoon: tin roofs, hanging power lines, laundry lines, potted tropical plants, a large ceibo tree, an iguana sunbathing on a wall, a street lamp, mosaic stairs, a glimpse of the wide river below. Long warm sunlight, cool teal shadows. Art style: stylized low-poly 3D, crisp faceted geometry with flat-shaded planes, hand-painted gradient texture on each facet, cel-shaded light with a bright rim light, chunky simplified forms, clean silhouettes, matte materials, cohesive palette of cream, terracotta, tropical green, petrol blue and a cyan accent. No text, no logos, no interface."
+    }
+  ]
+}

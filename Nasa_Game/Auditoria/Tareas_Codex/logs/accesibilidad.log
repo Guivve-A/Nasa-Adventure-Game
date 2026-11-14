@@ -1,0 +1,391 @@
+OpenAI Codex v0.167.0-alpha.4.1
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a1d0d9-91ff-7242-ada1-3ab2ba97f60d
+--------
+user
+@@TAREA
+
+Proyecto: RPG educativo de exploracion en Godot 4.7.2 (low-poly pintado, acabado 2.5D, camara alta), protagonista estudiante de Guayaquil y su gato cientifico Orbita. Se prepara la auditoria de pantallas de carga, menus, botones, jugabilidad, escenarios, caminos y texturas (plan en Nasa_Game/Auditoria/Plan de auditoria.md, seccion 3). Responde en espanol, texto corto y con cifras; cada dato con su fuente primaria (URL) y fecha de consulta; marca «sin verificar» lo que no confirmes. Usa la busqueda web integrada; NO uses Firecrawl. No escribas fuera del archivo de salida.
+
+---
+
+# TU TAREA
+
+Reune pautas de accesibilidad para videojuegos con cifras citables, para fijar los umbrales de la auditoria: tamano minimo de texto a 720p y 1080p (Game Accessibility Guidelines, Xbox Accessibility Guidelines, Ubisoft, AbleGamers), contraste (WCAG 2.2: 1.4.3 y 1.4.11), area minima de botones (WCAG 2.5.5 y 2.5.8), subtitulos (tamano, fondo, caracteres por linea, velocidad de lectura), opciones de daltonismo, remapeo de controles, reduccion de movimiento y destellos (WCAG 2.3.1: 3 destellos por segundo), tiempos de lectura y de respuesta de menus. Entrega una tabla: criterio | umbral | fuente | aplica a (carga, menu, boton, HUD, dialogo, jugabilidad).
+codex
+Revisaré el plan y buscaré las cifras en fuentes primarias con la búsqueda web integrada. Marcaré «sin verificar» lo que no pueda confirmar y limitaré la entrega a un único archivo si el entorno permite escribirlo.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Auditoria/Plan de auditoria.md'" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 14559ms:
+---
+tipo: plan de auditor��a
+fecha: 2026-11-12
+estado: borrador �� espera la aprobaci��n de Guillermo
+fases: 1 (arte), 2 (narrativa), 5 (niveles), 6 (mecǭnicas) y 7 (interfaz)
+fuentes: "[[Escena de exploracion v1]], [[Mirador del Faro - Luna con datos reales]], [[Biblia de arte]], [[Catalogo de recursos]], [[Fase 0 - Analisis]], [[Propuesta_A]], [[Propuesta_B]], [[02_historia_existente]]"
+---
+
+# Plan de auditor��a de construcci��n
+
+> **Pedido de Guillermo (2026-11-12):** ��empezar la auditor��a de la construcci��n de pantallas de carga, menǧs, botones, jugabilidad, escenarios, caminos y texturas en orden. Por ejemplo, escenario 1) Habitaci��n, 2) Telescopio, 3) Luna, y que se pueda llegar como un mundo abierto entre cada uno��.
+> **QuǸ es este documento:** el inventario de lo que existe, la lista de lo que falta, los criterios con los que se va a auditar cada elemento y el orden de trabajo. **No se construy�� nada.** Ningǧn paso gasta crǸditos de Higgsfield.
+
+## En cifras
+
+| Medida | Valor |
+|---|---|
+| Escenarios pedidos | 3: Habitaci��n, Telescopio y Luna, mǭs 3 tramos que los unen (casa, Las Escalinatas y sendero) |
+| Escenarios con algo jugable en el motor | **0**. Hay 2 pruebas tǸcnicas: el sendero (vista fija con cǭmara libre) y el telescopio (pantalla fija) |
+| Elementos transversales pedidos (carga, menǧs, botones, HUD, diǭlogos, guardado, transiciones, audio) | 0 en el proyecto nuevo; 6 en el prototipo descartado de la b��veda anterior, solo como l��gica reutilizable |
+| Recursos con ID en el catǭlogo | 104 conceptos v1 en 9 hojas, todos ��espera veredicto��. **0 para la Luna** |
+| Mallas en el motor | 27 GLB por script y 8 de Tripo en `pruebas/escena_exploracion/` |
+| Rendimiento medido en la HD 620 | Sendero: 48,3 fps a 720p (307 000 triǭngulos). Telescopio: 0,74 ms de GPU |
+| Etapas de trabajo propuestas | 9, con 5 puertas de validaci��n de Guillermo |
+| Carriles de agentes en paralelo | 7 |
+
+---
+
+## 0. Decisiones que bloquean la construcci��n
+
+La auditor��a de lo existente puede empezar ya. Construir no, hasta que Guillermo decida esto:
+
+| # | Decisi��n | Opciones | QuǸ bloquea |
+|---|---|---|---|
+| B1 | Aprobar la Fase 0, sobre todo D-001 (renderizador Mobile, 3D a 1280�-720) | Aprobar o corregir | El esqueleto del juego y todas las cifras de rendimiento |
+| B2 | **Meta de fps en la HD 620** | D-001 dice 30 fps estables; las propuestas A y B dicen 60 a 720p | Los umbrales de la secci��n 3 |
+| B3 | Propuesta narrativa | A ��Luz cenicienta�� (88 min) o B ��La bitǭcora de una noche�� (85 min), o una mezcla | Las escenas, misiones y desbloqueos que se auditan en cada escenario |
+| B4 | La frase ��siendo vista con el Apolo que lleg�� a la Tierra�� | A: verla junto a la etapa de descenso que sigue en la Luna. B: ser testigo en 1969 del regreso a la Tierra. C: ser vista desde la Tierra por su familia. D: ver la cǭpsula que volvi��, fuera del sue��o | QuǸ se construye en la Luna y si hace falta una cinemǭtica de regreso |
+| B5 | Tama��o del personaje | 12,5 % del alto (biblia) o 20,9 % (medido en el ancla) | Cǭmara, caminos, HUD y legibilidad |
+| B6 | Inclinaci��n de la cǭmara | La biblia dice unos 60��; la escena v1 usa 48�� y 40�� de campo, medidos contra el ancla | Todos los exteriores |
+| B7 | Protagonista fija o creador de personaje | PER-01 fija, o PER-01 y PER-02 elegibles | Menǧ principal y guardado |
+| B8 | Corte vertical | Propuesta A: unos 45 min primero (Habitaci��n ��' Telescopio ��' sue��o) | El alcance de las etapas 4 a 7 |
+
+---
+
+## 1. Inventario de lo que existe
+
+**Estados usados**
+
+- **Prueba:** demuestra una tǸcnica; no es jugable.
+- **Prototipo:** jugable de punta a punta, sin arte final.
+- **Concepto:** imagen u hoja de referencia, sin nada en el motor.
+- **Ausente:** no existe nada.
+
+### 1.1 Por escenario
+
+| Escenario | QuǸ hay | D��nde | Estado |
+|---|---|---|---|
+| **1 Habitaci��n-taller** | Ancla de interiores `ANC_HUB` (diorama lateral en corte) | `Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png` | Concepto aprobado (D-011) |
+| | Hoja del taller: TAL-01 a TAL-14 (banco, osciloscopio, mult��metro, maqueta de satǸlite, telescopio peque��o�?�) | `HR_TAL_v1.png` | Concepto �� espera veredicto |
+| | Cuarto 3D con jugador, cama, puerta y estanter��a, de la b��veda anterior | `Desktop\Juego\Juego_2d-hd\1_Mecanicas_y_Codigo\godot\scenes\bedroom.tscn` | Prototipo **con estilo descartado** (D-000). Sirve solo como l��gica |
+| | Malla, rig o escena del cuarto en el proyecto nuevo | �?" | **Ausente** |
+| **1b Casa y E Las Escalinatas** | Hojas ARQ-01 a 12 y URB-01 a 12; mapa de la regi��n | `HR_ARQ_v1.png`, `HR_URB_v1.png`, `L02_mapa_region.png` | Concepto |
+| | Escena en el motor | �?" | **Ausente** |
+| **S Sendero del arroyo** | Escena v1: terreno, arroyo, puente, escalinata, flamboyǭn, rocas, 28 000 briznas, 352 entradas en `layout.json` | `pruebas/escena_exploracion/` | **Prueba**. Cǭmara libre con flechas; no hay personaje controlable, colisiones ni interacci��n |
+| | Bucle de 19 vueltas contra el ancla: �"E de 27,96 a 19,36 | `capturas/iteraciones/BUCLE.md` | Cerrado; espera el veredicto de Guillermo |
+| | Protagonista (Tripo, niveles de 1 500 y 3 000 triǭngulos) y �"rbita con rig, `reposo` y `caminar` | `pruebas/escena_exploracion/tripo/` | Prueba. �"rbita camina en el sitio |
+| **2 Mirador y telescopio** | Luna real de JPL Horizons con texturas de LRO: fase y borde iluminado iguales a Horizons (12,15 % contra 12,2 %; 192,6��) | `pruebas/luna_telescopio/` | **Prueba**. Pantalla fija de una fecha; sin enfoque, zoom ni entrada salvo Esc |
+| | Escena de noche del Mirador y maqueta de la interfaz del telescopio | `L03_mirador_noche_vista_juego.png`, `L03_ui_telescopio_luna.png` | Concepto �� espera veredicto |
+| | Hoja MIR-01 a 08 (faro, plataforma, telescopio, atril, guirnalda, cǧpula) | `HR_MIR_v1.png` | Concepto |
+| | Mirador 3D caminable | �?" | **Ausente** |
+| **3 Luna del sue��o** | Datos verificados del Apolo y del sitio (L1 a L13, R1 a R8) | `Fase_2_Narrativa/Investigacion/` | Investigaci��n |
+| | Hoja de referencia, terreno, etapa de descenso, herramientas, banderas o trajes | �?" | **Ausente**. No hay ni concepto |
+| | Shader de la Luna del telescopio (reutilizable para la Tierra en el cielo) | `pruebas/luna_telescopio/luna.gdshader` | Prueba |
+
+### 1.2 Transversal
+
+| Elemento | QuǸ hay | Estado |
+|---|---|---|
+| Proyecto de Godot del juego (`juego/`), Git y Git LFS | Solo propuesto en la Fase 0, ��5 | **Ausente** |
+| Pantalla de carga | Idea: una pǭgina del cuaderno con un dato y su fuente (propuestas A y B) | **Ausente** |
+| Menǧ principal, opciones, crǸditos, pausa | Prototipo de la b��veda anterior: t��tulo, continuar, creador, opciones, crǸditos y pausa en `scripts/main.gd` (477 l��neas) | L��gica reutilizable; **estilo descartado** |
+| Botones y tema de interfaz | Estilo ��cuaderno de ingenier��a�� en la biblia, ��6. El panel del telescopio usa papel `#F3E6CB`, tinta `#2F2A24` y cian `#62E4E0` | Prueba (solo el telescopio) |
+| HUD de exploraci��n | R��tulo de depuraci��n en la escena v1 | **Ausente** |
+| Diǭlogos | Decisi��n propuesta: Dialogue Manager 4.2.0 tras un adaptador propio (Fase 0, ��5). Frases de �"rbita fijas en el telescopio | **Ausente**; el complemento no se ha probado en 4.7.2 |
+| Cuaderno, inventario, mapa y viaje rǭpido | Maqueta del mapa `ANC_MAPA` | Concepto |
+| Guardado | JSON con versi��n (`journey_v1.json`) y `preferences.cfg` en la b��veda anterior. Propuesto: JSON validado con migraciones y 2 respaldos | L��gica reutilizable |
+| Transiciones entre zonas | Propuestas: 3 a 5 umbrales con carga de 1 a 3 s | **Ausente** |
+| Controlador del personaje, colisiones, interacci��n | `player.gd` (CharacterBody3D, 2,05 m/s al caminar y 3,45 al correr) en la b��veda anterior | L��gica reutilizable; nada en el proyecto nuevo |
+| Audio | Nada: ni buses, ni ambiente, ni pasos, ni mǧsica | **Ausente** |
+| Idiomas | Decisi��n propuesta: gettext con espa��ol e inglǸs. Los textos de las pruebas estǭn escritos en el c��digo | **Ausente** |
+| Tipograf��a | DotGothic16 propuesta, sin probar. Atkinson (OFL) y Cinzel en la b��veda anterior | Sin decidir |
+| Texturas pintadas 2D-HD | Ninguna: el acabado sale del color por vǸrtice y de los shaders `facetado`, `follaje`, `agua` y `personaje` | Prueba; las pinceladas por shader ��casi no se notan�� (vuelta 12) |
+
+### 1.3 Herramientas que ya sirven para auditar
+
+| Herramienta | QuǸ mide |
+|---|---|
+| `herramientas/godot_captura.py` | Captura o medici��n sin cuelgues en la HD 620 |
+| `escena.gd --medir=<s>` | fps medios, ms por cuadro (media y p95), primitivas y llamadas de dibujo |
+| `pruebas/bench_render/` | Comparaci��n de renderizadores con escenas sintǸticas |
+| `herramientas/comparar_ancla.py` y `color_zonas.py` | �"E por bloques y por zona contra un ancla |
+| `herramientas/paleta.py comparar` | QuǸ parte del color cae en la paleta maestra (detecta desv��os de familia, no de estilo) |
+| `herramientas/camara_ancla.py` | Punto del mundo que el ancla pinta en un p��xel |
+| `herramientas/luna_medir.py` | Fracci��n iluminada, ǭngulo del borde y orientaci��n de la textura de la Luna |
+| `herramientas/mallas/revisar_textura_glb.py` | Texturas grises fallidas de Tripo |
+
+---
+
+## 2. Lo que falta
+
+### 2.1 Por escenario
+
+| Escenario | Jugabilidad | Escenario y caminos | Texturas y luz |
+|---|---|---|---|
+| **1 Habitaci��n** | Caminar, mirar e interactuar con 5 a 8 objetos; rompecabezas del seguidor (osciloscopio TAL-02); circuito de Pegaso (B); cama con ��Dormir�� y ��So��ar otra vez��; escalera a la casa | Diorama del cuarto-taller con cǭmara lateral (`ANC_HUB`); la cǭmara y el paso a la vista alta del exterior | Luz de ma��ana y de noche (biblia, ��7); lǭmpara TAL-09; ventana con la Luna |
+| **1b / E Casa y barrio** | Desayuno y diǭlogo; recolecci��n (COL-03, 05, 06, 07); kiosco de Lidia; puesto de Sam | Planta baja, puerta, Las Escalinatas con escalones numerados (ARQ-12), Plaza de las Iguanas y Mercado | Tarde y noche; faroles y guirnaldas |
+| **S Sendero** | Personaje controlable, colisiones, �"rbita que lo sigue, fauna, recolectables con destello cian | Unir la escena v1 con la plaza y con el Mirador; versi��n de noche | Texturas pintadas del suelo y la hierba (pendiente 2 del bucle); copa del flamboyǭn; versi��n de noche |
+| **2 Telescopio** | Buscar, enfocar y marcar terminador, mares y luz cenicienta; seguimiento manual (A) o montura ecuatorial (B); tarjetas o diapositivas; entrar y salir del ocular | Mirador 3D (MIR-01 a 08), subida desde el sendero, atajo (B) | Noche con luz fr��a (biblia, ��7); **ǭngulo paralǭctico en cada instante** (pendiente de la prueba) |
+| **3 Luna** | Caminar a 1/6 g con inercia; 4 herramientas; protocolo de foto con gnomon; anillo de 75 m alrededor del sitio del Apolo 11; dos banderas; regreso en 5 o 7 pasos | Llegada, campo de crǭteres, anillo y loma; unos 450 �- 450 m segǧn A | **Paleta y luz lunar sin definir en la biblia**; regolito; Tierra en el cielo; trajes originales sin insignias |
+
+### 2.2 Transversal
+
+| Elemento | QuǸ falta |
+|---|---|
+| Pantalla de carga | Dise��o (pǭgina del cuaderno con dato y fuente), precompilaci��n de shaders en la primera, medici��n del tiempo |
+| Menǧ principal | Nuevo, Continuar, Opciones, CrǸditos y Salir; creador si B7 lo pide; fondo vivo |
+| Pausa y opciones | Volumen por bus, escala de texto, remapeo, reducir movimiento, modos de daltonismo, calidad grǭfica (perfil HD 620) |
+| HUD | Objetivo actual, aviso de interacci��n, �"rbita, reloj del cielo (B) |
+| Botones | Tema ǧnico de interfaz: estados normal, foco, pulsado y desactivado; teclado, rat��n y mando |
+| Diǭlogos | Burbujas de 2 renglones, elecciones, voz de �"rbita (cuaderno despierto, radio en el sue��o) |
+| Cuaderno | Inventario, bitǭcora con sellos ��Dato��, ��Simulaci��n�� y ��Sue��o��, mapa y viaje rǭpido |
+| Guardado | Partida con versi��n, migraciones y 2 respaldos; estado del mundo (banderas plantadas, objetos recogidos) |
+| Transiciones | Escalera, puerta, curva del camino, cama ��' Luna (6 a 40 s segǧn la propuesta) y Luna ��' cama |
+| Caminos | Trazado continuo entre los 6 nodos, se��alizaci��n para el jugador y bloqueos con motivo en la historia |
+| Audio | Buses, ambiente por zona, pasos por superficie, mǧsica adaptativa y silencio del vac��o lunar (solo traje, respiraci��n y radio) |
+| Accesibilidad | Subt��tulos, contraste, tama��o de texto, sin dependencia del color cian para informaci��n cr��tica |
+| CrǸditos de datos | Atribuci��n de NASA, JPL y LRO en crǸditos y en las fichas; sin logotipos ni nada que sugiera respaldo |
+
+---
+
+## 3. Criterios de la auditor��a
+
+Cada elemento recibe una ficha con ID `AUD-NNN`, la evidencia (captura con la cǭmara real del juego o una medici��n), el veredicto (��cumple��, ��no cumple�� o ��no aplica��) y quiǸn lo revis��. **Nada se marca ��cumple�� sin evidencia.** Las cifras marcadas *(propuesta)* son metas a aprobar por Guillermo.
+
+### 3.1 Comprobaciones comunes a todo elemento
+
+| Eje | Comprobaci��n | Umbral | C��mo se mide |
+|---|---|---|---|
+| **Legibilidad** | Se entiende en 2 s a la distancia de juego | Silueta reconocible al tama��o de encuadre elegido en B5 | Captura con la cǭmara real; prueba en escala de grises |
+| | Texto legible | �%� 24 px de alto de letra a 1080p y �%� 16 px a 720p *(propuesta)* | Captura a 720p y en pantalla completa a 1080p |
+| | Contraste del texto | �%� 4,5:1 (WCAG 1.4.3) | Muestreo de color en la captura |
+| **Biblia de arte** | Paleta | �%� 90 % del color dentro de la paleta maestra *(propuesta)*; la Luna y la Tierra de NASA quedan exentas | `paleta.py comparar` |
+| | Cian | Solo tecnolog��a, datos, interacci��n y recolectables | Revisi��n de la captura |
+| | Facetas y materiales | Facetas con degradado pintado, mates, sin texturas fotogrǭficas | Revisi��n de la captura |
+| | Luz | La del momento del d��a (biblia, ��7) | Revisi��n de la captura |
+| | Reglas fijas | Sin insignias, logotipos ni emblemas de la NASA ni de misiones; banderas con trato respetuoso | Lista de comprobaci��n |
+| **Rendimiento (HD 620, Mobile, 1280�-720)** | fps | Media �%� 60 o �%� 30 segǧn B2; **p95 �%� 33,3 ms siempre** | `--medir=6` tras 2 s de calentamiento, sin sincron��a vertical |
+| | Geometr��a | �%� 100 000 triǭngulos visibles y �%� 300 llamadas de dibujo (Fase 0, ��2.6) | Monitores de Godot |
+| | Memoria | �%� 2 GB de RAM del proceso *(propuesta, el equipo tiene 7,9 GB)* | Administrador de tareas o `Performance` |
+| | 1080p | Se mide tambiǸn en pantalla completa | `--fullscreen` (lecci��n de Memory) |
+| **Accesibilidad** | Entrada | Todo se usa con teclado, rat��n y mando; controles remapeables | Prueba manual |
+| | Informaci��n | Nada cr��tico solo por color; nada cr��tico solo por sonido | Prueba en escala de grises y sin audio |
+| | Movimiento | Opci��n para reducir el movimiento de cǭmara y los destellos | Prueba manual |
+| | Tiempo | Sin l��mites de tiempo que castiguen; el reloj del cielo de B nunca causa derrota | Revisi��n del dise��o |
+| **Historia** | Lugar en el guion | Cada elemento cita su escena de la propuesta elegida en B3 | Tabla de trazabilidad |
+| | Datos | Cada cifra en pantalla lleva su c��digo de fuente (A, E, L, R) o el sello ��Sue��o�� | Revisi��n del texto |
+| | Sin examen | Fallar muestra la consecuencia y deja reintentar | Prueba manual |
+
+### 3.2 Comprobaciones por tipo de elemento
+
+| Elemento | Comprobaciones propias | Umbral |
+|---|---|---|
+| **Pantalla de carga** | Tiempo desde la acci��n hasta el primer cuadro jugable | �%� 3 s en la HD 620 (propuesta A); �%� 2 s en umbrales de puerta (propuesta B) |
+| | Cuadro negro o congelado | �%� 0,5 s *(propuesta)* |
+| | Contenido | Un dato real con fuente o una ficha del cuaderno; se puede leer completo en el tiempo de carga |
+| | Primer arranque | Shaders precompilados en la carga inicial; sin tirones al entrar a cada zona (p95 del primer minuto) |
+| **Menǧs** | Respuesta | El foco reacciona en �%� 100 ms *(propuesta)* |
+| | Navegaci��n | Foco visible siempre; Esc o B vuelve un nivel; ningǧn callej��n sin salida |
+| | Estado | ��Continuar�� desactivado sin partida; la opci��n cambiada se guarda al salir |
+| **Botones** | �?rea | �%� 44 �- 44 px a 1080p (WCAG 2.5.5) |
+| | Estados | Normal, foco, pulsado y desactivado distinguibles en escala de grises |
+| | Coherencia | Un solo tema de interfaz para todo el juego |
+| **HUD** | Ocupaci��n | �%� 10 % de la pantalla en exploraci��n *(propuesta)* |
+| | Conflicto | No tapa al personaje en ninguno de los dos encuadres de B5 |
+| **Diǭlogos** | Formato | �%� 2 renglones por burbuja; texto v��a gettext (`.po`) |
+| | Ritmo | Avance manual; opci��n de texto instantǭneo |
+| **Guardado** | Integridad | Guardar, cerrar a la fuerza y cargar: el estado coincide; el archivo da��ado recurre al respaldo |
+| | Versi��n | Una partida de la versi��n anterior carga con su migraci��n |
+| **Jugabilidad** | Control | Personaje responde en �%� 1 cuadro; velocidad de 3 m/s en la Tierra y unos 4 m/s a saltos en la Luna (supuestos de A) |
+| | Duraci��n | Cada escena dura lo que dice su tabla, ��30 %; la ruta principal �%� 60 min con 3 jugadores cronometrados |
+| | F��sica lunar | Gravedad de 1,624 m/s�� (L6); la inercia exige frenar con anticipaci��n |
+| **Escenarios** | Encuadre | Captura con la cǭmara real comparada con su ancla: �"E de `comparar_ancla.py` como orientaci��n, veredicto de Guillermo como criterio |
+| | Escala | Proporciones de la biblia: estudiantes de 3 cabezas, gato a la rodilla |
+| **Caminos** | Continuidad | Se llega a pie de cada nodo al siguiente sin carga salvo en los umbrales aprobados |
+| | Lectura | El camino se distingue de la hierba en escala de grises desde la cǭmara alta |
+| | Medidas | Ancho del sendero de 1,05 a 1,5 m (medido en el ancla); recorrido coherente con los minutos de la tabla (por ejemplo, 350 m de subida en 2.1 de A) |
+| | Bloqueos | Todo camino cerrado tiene un motivo dicho en la historia (por ejemplo, �"rbita: ��Con tanto sol no vas a ver la Luna��) |
+| **Texturas** | Tama��o | Protagonista 1024��; gato, NPC y props 512�� (Fase 0, ��2.6); atlas compartidos en escenarios |
+| | Calidad | Desviaci��n de color > 3 en cada textura de Tripo (detecta el gris plano) |
+| | Origen | Solo datos de NASA son fotogrǭficos; cada textura externa con su SHA-256 y crǸdito |
+| **Audio** | Mezcla | Buses separados (mǧsica, ambiente, efectos, voz) con volumen en opciones |
+| | Coherencia | Pasos por superficie; en la Luna no hay sonido exterior |
+| | Licencia | Ninguna pista con derechos de terceros; las de NASA SVS con mǧsica quedan excluidas |
+
+### 3.3 Hallazgos que ya se ven sin auditar
+
+| Hallazgo | Evidencia | Peso |
+|---|---|---|
+| El sendero supera el presupuesto de la Fase 0: 307 000 triǭngulos frente a 100 000, y 28 000 briznas frente a 20 000 | `BUCLE.md`, vuelta 15; [[Escena de exploracion v1]] | Alto si B2 fija 60 fps: hoy da 48,3 y 44,2 fps |
+| No hay personaje controlable, colisiones ni interacci��n en ningǧn proyecto nuevo | Bǧsqueda de `CharacterBody`, `CollisionShape` y `NavigationAgent3D` en `pruebas/`: 0 resultados | Bloquea la auditor��a de jugabilidad y caminos |
+| No hay nada de audio | Bǧsqueda de `AudioStream` en `pruebas/`: 0 resultados | Bloquea la auditor��a de audio |
+| La Luna no tiene hoja de referencia ni paleta | [[Catalogo de recursos]] y [[Biblia de arte]] | Bloquea el escenario 3 |
+| La biblia y la escena v1 no coinciden en la cǭmara (60�� frente a 48��) ni en el tama��o del personaje (12,5 % frente a 20,9 %) | [[Biblia de arte]] ��5, `layout.json` | Medio |
+| El texto de las pruebas estǭ escrito en el c��digo, sin gettext | `telescopio.gd`, `escena.gd` | Bajo hoy, alto al traducir |
+| La escena v1 no define modo de estiramiento de ventana; el telescopio s�� (`canvas_items`) | `project.godot` de cada prueba | Bajo: se resuelve en el esqueleto |
+
+---
+
+## 4. Orden de trabajo
+
+El orden sigue el pedido: primero lo que se ve antes de jugar (carga, menǧs, botones), luego la jugabilidad y los escenarios en orden 1, 2 y 3, y al final los caminos y las texturas que los unen.
+
+| Etapa | QuǸ | Depende de | CrǸditos | Puerta de Guillermo |
+|---|---|---|---:|---|
+| **0** | Decisiones B1 a B8 | �?" | 0 | S��: sin ellas no se construye |
+| **1** | Auditor��a de lo existente: medir y capturar el sendero y el telescopio a 720p y 1080p, revisar el prototipo anterior, llenar las fichas `AUD-` | Puede empezar ya | 0 | No: informe |
+| **2** | Esqueleto `juego/`: Git y LFS, `Main` persistente, gestor de zonas, entrada remapeable, guardado JSON, gettext, perfil grǭfico de la HD 620 | B1, B2 | 0 | No: pruebas automǭticas con GUT |
+| **3** | Transversal, en el orden pedido: pantalla de carga ��' menǧ principal ��' pausa y opciones ��' tema de botones ��' HUD ��' diǭlogos ��' cuaderno | 2; B7 para el menǧ | 0 | **Puerta 1:** capturas de carga, menǧs y botones |
+| **4** | Escenario 1 Habitaci��n: volumen gris ��' jugabilidad (interactuables, seguidor, cama) ��' arte por script con TAL ��' luz de ma��ana y noche ��' audio | 2, 3; B3; veredicto de `HR_TAL_v1` | 0 | **Puerta 2:** recorrido grabado del cuarto |
+| **5** | Tramos 1b, E y S: casa, Las Escalinatas, plaza y sendero v1 con personaje y colisiones; recorte del sendero al presupuesto de B2 | 4; veredicto de la escena v1 | 0 | Incluida en la puerta 3 |
+| **6** | Escenario 2 Telescopio: Mirador 3D con MIR, entrada al ocular desde el mundo, interacci��n del telescopio, ǭngulo paralǭctico | 5; B3 | 0 | **Puerta 3:** del cuarto al ocular a pie |
+| **7** | Escenario 3 Luna: hoja de referencia lunar ��' volumen gris ��' caminar a 1/6 g ��' muestras ��' anillo de 75 m ��' banderas ��' regreso | 4 (cama); B3, B4; partida aprobada para la hoja y los trajes | Partida aparte | **Puerta 4:** el sue��o completo |
+| **8** | Mundo abierto: transiciones, viaje rǭpido, d��a y noche, persistencia, recorrido cronometrado �%� 60 min con 3 jugadores, texturas pintadas finales | 4 a 7 | Segǧn partida de texturas | **Puerta 5:** recorrido completo |
+
+```
+B1-B8 �"?�"��"?> 2 Esqueleto �"?> 3 Carga/menǧs/botones �"?> 4 Habitaci��n �"?�"��"?> 5 Tramos �"?> 6 Telescopio �"?�"?
+       �"'                                                         �""�"?> 7 Luna (cama) �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"��"?> 8 Mundo abierto
+1 Auditor��a de lo existente (ya) �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"~
+```
+
+**Corte vertical (si B8 lo aprueba):** las etapas 4, 6 y 7 se hacen primero solo con las escenas del corte (en A: 1.1, 1.2, 2.2, 2.3 y de 3.1 a 3.5), y la etapa 5 se reduce a un tramo del sendero.
+
+### 4.1 Agentes en paralelo
+
+Cada carril entrega archivos y capturas; otro agente revisa antes de que se usen (lecci��n ��verificar lo delegado��). Ninguno gasta crǸditos de Higgsfield. Para la web, WebSearch y WebFetch; Firecrawl no.
+
+| Carril | Agente | Trabajo | Puede empezar | Entrega |
+|---|---|---|---|---|
+| **C1 Medici��n** | Claude (subagente) | Etapa 1: `--medir` y capturas del sendero y del telescopio a 720p y 1080p; tiempos de arranque; fichas `AUD-001` en adelante | Ya | `Auditoria/` con capturas y cifras |
+| **C2 Interfaz** | Claude (subagente) | Etapa 3: maquetas en Godot de carga, menǧs y botones sobre el tema del cuaderno; contraste y tama��os medidos | Tras B1 y B7 | Escena de interfaz y capturas |
+| **C3 Esqueleto** | Claude (subagente) | Etapa 2: proyecto `juego/`, gestor de zonas, guardado, entrada y gettext, reutilizando la l��gica de `main.gd` y `player.gd` de la b��veda anterior | Tras B1 | Proyecto y pruebas GUT |
+| **C4 Habitaci��n** | Claude (subagente) | Etapa 4: volumen gris del diorama y props TAL por script sobre `herramientas/mallas/nucleo.py` | Tras C3 y el veredicto de `HR_TAL_v1` | Escena y capturas con la cǭmara real |
+| **C5 Luna** | Claude (subagente) | Etapa 7: volumen gris del terreno lunar, etapa de descenso sin insignias y prueba de rendimiento con rocas en MultiMesh | Tras B4; la prueba de rendimiento puede ir ya | Escena de prueba y cifras |
+| **C6 Investigaci��n** | Codex (`codex_lote.py`, pocas tareas a la vez) | Gu��as de accesibilidad con cifras citables; verificar los datos pendientes (bandera de Ecuador, disco del Apolo 11, Luna del 13-11-2026) | Ya, si queda cupo de Codex | Informes en `Auditoria/Investigacion/` |
+| **C7 Revisi��n** | Claude (subagente independiente) | Revisa cada entrega contra la secci��n 3 antes de mostrarla a Guillermo | Desde la primera entrega | Veredicto por ficha |
+
+**L��mites:** como mǭximo 3 carriles con Godot a la vez, porque la HD 620 mide mal con varios procesos (la medici��n de la escena v1 fue un piso por tener Blender abierto). C1 mide con el equipo libre.
+
+---
+
+## 5. Preguntas para Guillermo
+
+1. ��Apruebas la Fase 0 y quǸ meta de fps quieres en la HD 620: 30 o 60 a 720p? (B1, B2)
+2. ��Propuesta A, B o una mezcla? (B3)
+3. ��QuǸ quisiste decir con ��siendo vista con el Apolo que lleg�� a la Tierra��: A, B, C, D o una mezcla? La propuesta A recomienda A como jugabilidad y C como cierre. (B4)
+4. ��Personaje al 12,5 % o al 20,9 % del alto, y cǭmara a 48�� o a 60��? (B5, B6)
+5. ��Protagonista fija o creador de personaje? (B7)
+6. ��Primero el corte vertical de unos 45 min? (B8)
+7. ��Arranco ya la etapa 1 (auditor��a de lo existente, 0 crǸditos) con los carriles C1 y C6?
+
+web search: 
+web search: site.learn.microsoft.com gaming accessibility xag 101 text 1080 26 720 18 ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "rg --files -g AGENTS.md -g '*accesib*' -g '*Accesib*' -g '*salida*' -g '*Salida*' -g '*TAREA*'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 7710ms:
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 1
++ rg --files -g AGENTS.md -g '*accesib*' -g '*Accesib*' -g '*salida*' - ...
++ ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+web search: 
+web search: site.ubisoft.com "accessibility" "font" "pixels" ...
+codex
+Las fuentes distinguen texto general y subtítulos: XAG 101 indica 18 px a 1080p para PC y 26 px para consola; GAG pide subtítulos de al menos 46 px a 1080p, por defecto o mediante opciones. También separaré los píxeles CSS de WCAG de los píxeles medidos en capturas del juego.
+web search: 
+web search: 
+web search: 
+web search: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+web search: site.ablegamers.org "Includification" text ...
+web search: 
+web search: 
+web search: https://accessible.games/includification/
+web search: 
+web search: site.gameaccessibilityguidelines.com "motion" "sickness" ...
+web search: 
+web search: 
+codex
+GAG recomienda 28 px a 1080p para texto general, por encima de los 24 px propuestos en el plan. Ubisoft documenta un caso de unos 36 px sin indicar resolución; AbleGamers recomienda personalización, sin un mínimo universal en píxeles en la página consultada. El entorno es de solo lectura, así que no puedo guardar el archivo de salida; entregaré la tabla aquí.
+web search: 
+web search: https://gameaccessibilityguidelines.com/allow-controls-to-be-remapped/
+web search: 
+web search: site.bbc.github.io subtitle guidelines 160 180 children 140 ...
+codex
+Consulta de todas las fuentes: **12-11-2026**, mediante búsqueda web integrada, sin Firecrawl. No guardé un archivo: el entorno permite únicamente lectura.
+
+**Propuesta para la auditoría:** texto general ≥19 px a 720p / ≥28 px a 1080p; subtítulos configurables hasta ≥31/46 px. Las conversiones a 720p son cálculos propios: valor a 1080p × ⅔, redondeado hacia arriba; no cifras publicadas por esas fuentes.
+
+| Criterio | Umbral | Fuente primaria y consulta | Aplica a |
+|---|---|---|---|
+| Texto general: GAG | **≥28 px a 1080p**; recomienda superarlo y permitir ajustar tamaño. **19 px a 720p: derivado**. | [GAG: tamaño predeterminado](https://gameaccessibilityguidelines.com/use-an-easily-readable-default-font-size/) · 12-11-2026 | carga, menú, botón, HUD, diálogo |
+| Texto general: Xbox | XAG 101: PC **≥18 px a 1080p**; consola **≥26 px**. A 720p: **12/18 px derivados**, respectivamente. Escalado hasta **200 %** sin perder contenido ni funciones. | [XAG 101](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/101) · 12-11-2026 | carga, menú, botón, HUD, diálogo |
+| Medición del texto | Medir altura visible desde ascendentes hasta descendentes en captura final; no equiparar directamente al tamaño configurado de fuente. | [XAG 101: medición](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/101) · 12-11-2026 | carga, menú, botón, HUD, diálogo |
+| Texto: Ubisoft | Documenta aumento a **≈36 px** en *Assassin’s Creed Origins*. Resolución y mínimo universal 720p/1080p: **sin verificar**; es un ejemplo de implementación. | [Ubisoft: accesibilidad](https://news.ubisoft.com/en-us/article/1etr8zW1Vo6XCeh0UM5KJO/how-ubisoft-is-putting-the-spotlight-on-accessibility) · 12-11-2026 | diálogo |
+| Texto: AbleGamers | Permitir cambiar tamaño, contraste, fuente y colores. Mínimo universal en px para 720p/1080p: **sin verificar**; APX *Clear Text* no lo establece. | [AbleGamers: Clear Text](https://accessible.games/accessible-player-experiences/access-patterns/clear-text/) · 12-11-2026 | menú, botón, HUD, diálogo |
+| Contraste del texto | WCAG 1.4.3, AA: **≥4,5:1**; texto grande **≥3:1**. Grande: ≥18 pt normal o ≥14 pt negrita. Excepciones: decoración, texto incidental y logotipos. | [W3C: 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) · 12-11-2026 | carga, menú, botón, HUD, diálogo |
+| Contraste de controles y gráficos | WCAG 1.4.11, AA: **≥3:1** frente a colores adyacentes para información necesaria que identifica controles, estados y gráficos. Excluye controles inactivos y ciertas presentaciones esenciales. | [W3C: 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html) · 12-11-2026 | menú, botón, HUD, jugabilidad |
+| Botón: mínimo AA | WCAG 2.5.8: área activable **≥24 × 24 px CSS**. Admite excepción de separación: círculos de **24 px CSS de diámetro**, centrados en objetivos pequeños, sin intersecciones con otros objetivos/círculos. También hay otras excepciones. | [W3C: 2.5.8](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) · 12-11-2026 | menú, botón, HUD, diálogo |
+| Botón: objetivo reforzado | WCAG 2.5.5, AAA: **≥44 × 44 px CSS** de área activable; excepciones por control equivalente, texto en línea, control del navegador o presentación esencial. | [W3C: 2.5.5](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html) · 12-11-2026 | menú, botón, HUD, diálogo |
+| Subtítulos: tamaño | GAG: disponer de **≥46 px a 1080p**, por defecto o mediante opciones. **31 px a 720p: derivado**. XAG remite al mínimo de XAG 101 y pide escalado hasta **200 %**. | [GAG: subtítulos legibles](https://gameaccessibilityguidelines.com/if-any-subtitles-captions-are-used-present-them-in-a-clear-easy-to-read-way/), [XAG 104](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/104) · 12-11-2026 | diálogo, jugabilidad |
+| Subtítulos: fondo | Fondo sólido disponible, color configurable y opacidad ajustable **0–100 %**; comprobar contraste con la imagen real detrás. | [XAG 104](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/104) · 12-11-2026 | diálogo, jugabilidad |
+| Subtítulos: longitud | **≤40 caracteres por línea**, **≤2 líneas** simultáneas; **3** solo excepcionalmente. | [GAG: subtítulos legibles](https://gameaccessibilityguidelines.com/if-any-subtitles-captions-are-used-present-them-in-a-clear-easy-to-read-way/) · 12-11-2026 | diálogo, jugabilidad |
+| Subtítulos: velocidad | Referencia audiovisual de Ofcom: normalmente no superar **160–180 palabras/minuto** en contenido pregrabado; menor velocidad para niños. GAG exige adecuarla a la edad, sin cifra universal. Umbral validado para escolares hispanohablantes: **sin verificar**. | [Ofcom, A1.19](https://www.ofcom.org.uk/siteassets/resources/documents/tv-radio-and-on-demand/broadcast-codes/other-codes/access-service-code-jan-2017.pdf), [GAG: velocidad](https://gameaccessibilityguidelines.com/ensure-that-subtitles-captions-are-cut-down-to-and-presented-at-an-appropriate-words-per-minute-for-the-target-age-group/) · 12-11-2026 | diálogo |
+| Daltonismo | Información crítica acompañada de texto, forma, símbolo o patrón. Ofrecer **3 presets** —protanopia, deuteranopia, tritanopia— y personalización de colores de elementos relevantes. | [GAG: independencia del color](https://gameaccessibilityguidelines.com/ensure-no-essential-information-is-conveyed-by-a-fixed-colour-alone/) · 12-11-2026 | menú, botón, HUD, diálogo, jugabilidad |
+| Remapeo | Permitir reasignar todos los controles dentro del juego y actualizar indicaciones según la asignación. Con teclado compatible, permitir iniciar, configurar, jugar y salir usando solo teclado. | [XAG 107](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/107) · 12-11-2026 | menú, botón, diálogo, jugabilidad |
+| Reducción de movimiento | Permitir desactivar sacudidas, balanceo y desenfoque de movimiento; controlar movimientos automáticos de cámara. Permitir pausar o detener contenido que se desplaza, parpadea o actualiza automáticamente. | [XAG 117](https://learn.microsoft.com/en-in/gaming/accessibility/xbox-accessibility-guidelines/117) · 12-11-2026 | carga, menú, HUD, jugabilidad |
+| Destellos | WCAG 2.3.1, A: **≤3 destellos en cualquier intervalo de 1 s**, o estar por debajo de los umbrales de destello general y rojo. Propuesta: aplicar directamente el límite ≤3; un interruptor posterior no sustituye cumplirlo. | [W3C: 2.3.1](https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html) · 12-11-2026 | carga, menú, botón, HUD, diálogo, jugabilidad |
+| Tiempo de lectura | Ofrecer avance manual y posibilidad de releer. Propuesta: datos educativos de carga y diálogos permanecen hasta confirmar. Duración universal de **2 s** para comprenderlos: **sin verificar**. | [AbleGamers: Clear Text, avance y registro](https://accessible.games/accessible-player-experiences/access-patterns/clear-text/) · 12-11-2026 | carga, diálogo |
+| Tiempo para responder en menús | Preferir ausencia de límite. Si existe: desactivarlo; o ajustar hasta **≥10×**; o avisar y dar **≥20 s** para ampliarlo, al menos **10 veces**. XAG 116 excluye mecánicas centrales de juego. | [XAG 116](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/116), [W3C: 2.2.1](https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html) · 12-11-2026 | menú, botón, HUD, diálogo |
+
+WCAG aporta referencias web: sus **px CSS no equivalen automáticamente a píxeles de Godot o de una captura**. La auditoría debe documentar esa adaptación antes de evaluar botones. Una cifra universal de latencia de respuesta del menú en milisegundos queda **sin verificar**.
+tokens used
+88.728
+Consulta de todas las fuentes: **12-11-2026**, mediante búsqueda web integrada, sin Firecrawl. No guardé un archivo: el entorno permite únicamente lectura.
+
+**Propuesta para la auditoría:** texto general ≥19 px a 720p / ≥28 px a 1080p; subtítulos configurables hasta ≥31/46 px. Las conversiones a 720p son cálculos propios: valor a 1080p × ⅔, redondeado hacia arriba; no cifras publicadas por esas fuentes.
+
+| Criterio | Umbral | Fuente primaria y consulta | Aplica a |
+|---|---|---|---|
+| Texto general: GAG | **≥28 px a 1080p**; recomienda superarlo y permitir ajustar tamaño. **19 px a 720p: derivado**. | [GAG: tamaño predeterminado](https://gameaccessibilityguidelines.com/use-an-easily-readable-default-font-size/) · 12-11-2026 | carga, menú, botón, HUD, diálogo |
+| Texto general: Xbox | XAG 101: PC **≥18 px a 1080p**; consola **≥26 px**. A 720p: **12/18 px derivados**, respectivamente. Escalado hasta **200 %** sin perder contenido ni funciones. | [XAG 101](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/101) · 12-11-2026 | carga, menú, botón, HUD, diálogo |
+| Medición del texto | Medir altura visible desde ascendentes hasta descendentes en captura final; no equiparar directamente al tamaño configurado de fuente. | [XAG 101: medición](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/101) · 12-11-2026 | carga, menú, botón, HUD, diálogo |
+| Texto: Ubisoft | Documenta aumento a **≈36 px** en *Assassin’s Creed Origins*. Resolución y mínimo universal 720p/1080p: **sin verificar**; es un ejemplo de implementación. | [Ubisoft: accesibilidad](https://news.ubisoft.com/en-us/article/1etr8zW1Vo6XCeh0UM5KJO/how-ubisoft-is-putting-the-spotlight-on-accessibility) · 12-11-2026 | diálogo |
+| Texto: AbleGamers | Permitir cambiar tamaño, contraste, fuente y colores. Mínimo universal en px para 720p/1080p: **sin verificar**; APX *Clear Text* no lo establece. | [AbleGamers: Clear Text](https://accessible.games/accessible-player-experiences/access-patterns/clear-text/) · 12-11-2026 | menú, botón, HUD, diálogo |
+| Contraste del texto | WCAG 1.4.3, AA: **≥4,5:1**; texto grande **≥3:1**. Grande: ≥18 pt normal o ≥14 pt negrita. Excepciones: decoración, texto incidental y logotipos. | [W3C: 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) · 12-11-2026 | carga, menú, botón, HUD, diálogo |
+| Contraste de controles y gráficos | WCAG 1.4.11, AA: **≥3:1** frente a colores adyacentes para información necesaria que identifica controles, estados y gráficos. Excluye controles inactivos y ciertas presentaciones esenciales. | [W3C: 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html) · 12-11-2026 | menú, botón, HUD, jugabilidad |
+| Botón: mínimo AA | WCAG 2.5.8: área activable **≥24 × 24 px CSS**. Admite excepción de separación: círculos de **24 px CSS de diámetro**, centrados en objetivos pequeños, sin intersecciones con otros objetivos/círculos. También hay otras excepciones. | [W3C: 2.5.8](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) · 12-11-2026 | menú, botón, HUD, diálogo |
+| Botón: objetivo reforzado | WCAG 2.5.5, AAA: **≥44 × 44 px CSS** de área activable; excepciones por control equivalente, texto en línea, control del navegador o presentación esencial. | [W3C: 2.5.5](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html) · 12-11-2026 | menú, botón, HUD, diálogo |
+| Subtítulos: tamaño | GAG: disponer de **≥46 px a 1080p**, por defecto o mediante opciones. **31 px a 720p: derivado**. XAG remite al mínimo de XAG 101 y pide escalado hasta **200 %**. | [GAG: subtítulos legibles](https://gameaccessibilityguidelines.com/if-any-subtitles-captions-are-used-present-them-in-a-clear-easy-to-read-way/), [XAG 104](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/104) · 12-11-2026 | diálogo, jugabilidad |
+| Subtítulos: fondo | Fondo sólido disponible, color configurable y opacidad ajustable **0–100 %**; comprobar contraste con la imagen real detrás. | [XAG 104](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/104) · 12-11-2026 | diálogo, jugabilidad |
+| Subtítulos: longitud | **≤40 caracteres por línea**, **≤2 líneas** simultáneas; **3** solo excepcionalmente. | [GAG: subtítulos legibles](https://gameaccessibilityguidelines.com/if-any-subtitles-captions-are-used-present-them-in-a-clear-easy-to-read-way/) · 12-11-2026 | diálogo, jugabilidad |
+| Subtítulos: velocidad | Referencia audiovisual de Ofcom: normalmente no superar **160–180 palabras/minuto** en contenido pregrabado; menor velocidad para niños. GAG exige adecuarla a la edad, sin cifra universal. Umbral validado para escolares hispanohablantes: **sin verificar**. | [Ofcom, A1.19](https://www.ofcom.org.uk/siteassets/resources/documents/tv-radio-and-on-demand/broadcast-codes/other-codes/access-service-code-jan-2017.pdf), [GAG: velocidad](https://gameaccessibilityguidelines.com/ensure-that-subtitles-captions-are-cut-down-to-and-presented-at-an-appropriate-words-per-minute-for-the-target-age-group/) · 12-11-2026 | diálogo |
+| Daltonismo | Información crítica acompañada de texto, forma, símbolo o patrón. Ofrecer **3 presets** —protanopia, deuteranopia, tritanopia— y personalización de colores de elementos relevantes. | [GAG: independencia del color](https://gameaccessibilityguidelines.com/ensure-no-essential-information-is-conveyed-by-a-fixed-colour-alone/) · 12-11-2026 | menú, botón, HUD, diálogo, jugabilidad |
+| Remapeo | Permitir reasignar todos los controles dentro del juego y actualizar indicaciones según la asignación. Con teclado compatible, permitir iniciar, configurar, jugar y salir usando solo teclado. | [XAG 107](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/107) · 12-11-2026 | menú, botón, diálogo, jugabilidad |
+| Reducción de movimiento | Permitir desactivar sacudidas, balanceo y desenfoque de movimiento; controlar movimientos automáticos de cámara. Permitir pausar o detener contenido que se desplaza, parpadea o actualiza automáticamente. | [XAG 117](https://learn.microsoft.com/en-in/gaming/accessibility/xbox-accessibility-guidelines/117) · 12-11-2026 | carga, menú, HUD, jugabilidad |
+| Destellos | WCAG 2.3.1, A: **≤3 destellos en cualquier intervalo de 1 s**, o estar por debajo de los umbrales de destello general y rojo. Propuesta: aplicar directamente el límite ≤3; un interruptor posterior no sustituye cumplirlo. | [W3C: 2.3.1](https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html) · 12-11-2026 | carga, menú, botón, HUD, diálogo, jugabilidad |
+| Tiempo de lectura | Ofrecer avance manual y posibilidad de releer. Propuesta: datos educativos de carga y diálogos permanecen hasta confirmar. Duración universal de **2 s** para comprenderlos: **sin verificar**. | [AbleGamers: Clear Text, avance y registro](https://accessible.games/accessible-player-experiences/access-patterns/clear-text/) · 12-11-2026 | carga, diálogo |
+| Tiempo para responder en menús | Preferir ausencia de límite. Si existe: desactivarlo; o ajustar hasta **≥10×**; o avisar y dar **≥20 s** para ampliarlo, al menos **10 veces**. XAG 116 excluye mecánicas centrales de juego. | [XAG 116](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/116), [W3C: 2.2.1](https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html) · 12-11-2026 | menú, botón, HUD, diálogo |
+
+WCAG aporta referencias web: sus **px CSS no equivalen automáticamente a píxeles de Godot o de una captura**. La auditoría debe documentar esa adaptación antes de evaluar botones. Una cifra universal de latencia de respuesta del menú en milisegundos queda **sin verificar**.

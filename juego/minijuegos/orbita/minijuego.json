@@ -1,0 +1,19 @@
+{
+  "titulo": "Ni se cae ni se escapa",
+  "resumen": "Ajusta la velocidad tangencial para rodear la Tierra a una altura casi constante.",
+  "instrucciones": [
+    "Consulta la altura de partida y la velocidad circular calculada.",
+    "Ajusta el deslizador en km/s y pulsa Lanzar.",
+    "Completa 1 vuelta: la diferencia entre alturas debe ser menor que 150, 80 o 40 km según el nivel.",
+    "Si cae o se alarga, reintenta: el trazo anterior queda tenue y discontinuo."
+  ],
+  "controles": "A/D o ←/→: velocidad. E, Intro o Espacio: lanzar. Ratón: arrastrar el deslizador y pulsar Lanzar.",
+  "pistas": [
+    "Órbita mira la flecha tangente y luego las alturas mínima y máxima.",
+    "Con poca velocidad baja; con demasiada, la elipse se alarga. Busca v = √(μ / r).",
+    "A 627 km usa 7,547 km/s; a 654 km, 7,533 km/s. Son cálculos propios: ajusta el deslizador y lanza."
+  ],
+  "ficha": "pegaso",
+  "escena": "secundaria",
+  "orden": 8
+}

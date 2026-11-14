@@ -1,0 +1,2638 @@
+OpenAI Codex v0.167.0-alpha.4.1
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1d04d-eb4f-71f0-90fe-f878b298d224
+--------
+user
+@@TAREA
+
+Proyecto: RPG low-poly en Godot 4.7.2. Guillermo pidio que la protagonista (PER-01) se parezca al menos en un 80 % a su hoja de referencia. Hay una metrica: `herramientas/comparar_personaje.py` (silueta IoU, color dE76 y SSIM multiescala, por vista; frente y cabeza pesan doble). La malla actual (v2) mide 62,2 %.
+
+Datos:
+- Malla v2: `Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro_tripo_mv.glb` (Tripo H3.1, 7 522 triangulos, una textura JPEG de 4096 px). En glTF mira a +X, arriba es +Y y mide 1,0 m de alto, centrada en el origen (y de -0,5 a 0,5). El lado derecho del personaje es +Z (lleva el reloj en la muneca izquierda, -Z).
+- Hoja de referencia: `Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png` (2688x1520, fondo gris liso). Cajas de las vistas: frente [200,10,720,923]; perfil derecho (la figura mira a la derecha de la imagen) [1410,10,1790,923]; espalda [1960,10,2450,923]. La linea de suelo esta en las filas 924 a 928 (no incluirla). En la hoja hay un bolso con herramientas en la cadera derecha y una correa cruzada que la malla no tiene: no importa, se pinta en la textura.
+- Render sin luz para medir: `"C:\Program Files\Blender Foundation\Blender 5.3\blender.exe" -b --factory-startup --python-exit-code 1 --python herramientas/blender/render_vistas.py -- --glb <malla.glb> --salida <carpeta> --lado 1000`. Con esta malla: px_cuerpo = frente, my_cuerpo = perfil derecho, mx_cuerpo = espalda.
+- Medicion: `python -I herramientas/comparar_personaje.py Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/spec_v2.json <lamina.png>` (copia el spec y cambia las rutas de render a tu carpeta).
+
+Reglas: comentarios del codigo en espanol y sin tildes. No instales nada. No gastes creditos. No toques los archivos de otras tareas ni la escena de Godot. Responde en espanol con: que hiciste, cifras antes y despues por vista, ruta de los archivos y lo que no pudiste comprobar.
+
+---
+
+# TU TAREA
+
+Escribe `herramientas/mallas/proyectar_hoja.py`, que repinte la textura de la malla v2 con las vistas de la hoja y guarde `Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_v3_hoja.glb` (misma geometria y UV; solo cambia la imagen). Requisitos:
+1. Proyeccion ortografica por vista (frente desde +X, espalda desde -X, perfil derecho desde +Z). El lado izquierdo (-Z) conserva la textura de Tripo.
+2. Alineacion por silueta: rasteriza la silueta de la malla en cada vista y busca la escala (±8 %) y el desplazamiento (±6 % del tamano de la figura) que maximizan el IoU con la mascara de la hoja. La caja de la hoja incluye el bolso, asi que no alinees por la caja.
+3. Visibilidad con bufer de profundidad: un texel solo toma color de una vista si es la superficie visible desde ella (sin pintar el brazo con el torso de atras, ni la cara interna de las piernas).
+4. Peso por texel = visible × max(0, n·d)^3 × (dentro de la mascara de la hoja erosionada 3 px). Mezcla con la textura original: color = (suma de peso_v × hoja_v + 0,15 × original) / (suma de peso_v + 0,15). Nunca tomes color del fondo de la hoja.
+5. Rellena los bordes de las islas UV (como `herramientas/mallas/proyectar_vistas.py`) para que no aparezcan costuras.
+6. Comprueba y pon en el informe:
+   - el parecido antes (62,2 %) y despues, por vista, con la metrica;
+   - el % de texels que tomaron color de la hoja;
+   - el % de esos que cayeron sobre el fondo (debe ser casi 0);
+   - un primer plano de la cara de frente (`px_cabeza.png`) junto al de la hoja.
+   Si la textura nueva baja el parecido de alguna vista, dilo y explica por que.
+codex
+Voy a revisar los scripts de proyeccion y medicion, implementar el repintado y renderizar la v3 para comparar cada vista. Usare la skill de mejora de juegos existentes para verificar el cambio sin tocar la escena de Godot.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content 'C:/Users/guill/.codex/plugins/cache/openai-curated-remote/design-game-studio/0.1.2/skills/improve-existing-game/SKILL.md'; Get-Location; rg --files -g AGENTS.md -g '*proyectar*' -g '*comparar_personaje*' -g '*render_vistas*' -g 'spec_v2.json'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 795ms:
+---
+name: improve-existing-game
+description: Understand and extend an existing game repository, feature, scene, or mechanic with minimal justified changes and regression checks.
+---
+
+# Improve Existing Game
+
+
+1. Inspect project and engine version, run instructions, build baseline, scenes and source ownership; do not replace the whole project with a fresh scaffold.
+2. Identify exact requested behavior and relevant scenes/scripts/assets. Specify expected observable acceptance criteria before editing.
+3. Create the smallest change compatible with current architecture. Preserve save files, user data, asset licenses, input mappings and unrelated styling.
+4. Run original tests and a focused regression test for the change, plus one smoke test in the relevant level or scene when tools permit.
+5. If existing implementation is broken, distinguish pre-existing failures from introduced ones; avoid claiming the entire game passes if only isolated checks ran.
+6. Deliver diff summary, changed files, evidence, remaining risks, and reversible instructions.
+
+## Execution truth and safeguards
+- A skill is an instruction workflow, not a remotely running game engine or a separately running AI agent. Inspect tools and repo state before claiming execution.
+- Preserve existing projects, names, dependencies, save formats, and user work unless a change is explicitly requested. Obtain approval for deployment, payments, destructive edits, publication, and major third-party connections.
+- Avoid reproducing protected commercial characters, levels, dialogue, soundtracks, logos, or copyrighted assets unless authorized. For assets, record origin and license. Read `../../references/security-and-rights.md`.
+- Report what was implemented, what was actually run, what failed, and what remains unverified; never describe proposed tests as passed.
+
+Path                              
+----                              
+C:\Users\guill\Desktop\Juego 2d-hd
+rg : El término 'rg' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable. 
+Compruebe si escribió correctamente el nombre o, si incluyó una ruta de acceso, compruebe que dicha ruta es correcta e 
+inténtelo de nuevo.
+En línea: 2 Carácter: 151
++ ... .1.2/skills/improve-existing-game/SKILL.md'; Get-Location; rg --files ...
++                                                                ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -Path . -Filter AGENTS.md -Recurse | Select-Object -ExpandProperty FullName; Get-Content herramientas/mallas/proyectar_vistas.py; Get-Content herramientas/comparar_personaje.py; Get-Content Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/spec_v2.json; Get-Content herramientas/blender/render_vistas.py; Get-Content 'C:/Users/guill/.codex/plugins/cache/openai-curated-remote/design-game-studio/0.1.2/references/security-and-rights.md'" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 569ms:
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_4pi1rfpl'.
+En línea: 2 Carácter: 1
++ Get-ChildItem -Path . -Filter AGENTS.md -Recurse | Select-Object -Exp ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_4pi1rfpl:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_kz4ist6c'.
+En línea: 2 Carácter: 1
++ Get-ChildItem -Path . -Filter AGENTS.md -Recurse | Select-Object -Exp ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_kz4ist6c:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+"""Pinta la textura de una malla proyectando las vistas de su hoja de referencia (sin creditos).
+
+Sirve cuando el imagen->3D entrega buena geometria pero mala textura (por ejemplo, gris plano).
+Cada texel del mapa UV se ubica en 3D y toma el color de la vista hacia la que mira su cara:
+frente, espalda, lado derecho (perfil) o lado izquierdo (perfil espejado), mezclados por el angulo.
+Las vistas son las mismas que se mandaron a Tripo (fondo liso, figura centrada).
+
+Orientacion: con --auto se prueban las 4 direcciones de frente (+X, -X, +Z, -Z), con y sin espejo de
+la geometria, y se elige la que deja menos puntos sobre el fondo de las vistas. Lote 04: la protagonista
+salio mirando a -X y en espejo (Tripo leyo su perfil derecho como vista izquierda); el gato, a +X.
+El espejo (z -> -z, con el orden de los triangulos invertido) devuelve la quiralidad del diseno.
+
+Uso:  python herramientas/mallas/proyectar_vistas.py <entrada.glb> <salida.glb>
+          --frente-img F.png --espalda-img B.png --perfil-img P.png [--perfil-mira derecha|izquierda]
+          [--lado 2048] [--auto | --frente -x --espejar]
+"""
+import argparse
+import io
+import json
+import struct
+import sys
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+sys.stdout.reconfigure(encoding="utf-8")
+TIPOS = {5126: np.float32, 5125: np.uint32, 5123: np.uint16, 5121: np.uint8}
+COMPONENTES = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4}
+
+
+def leer_glb(ruta):
+    data = Path(ruta).read_bytes()
+    largo = struct.unpack("<I", data[12:16])[0]
+    doc = json.loads(data[20:20 + largo])
+    binario = data[20 + largo + 8:]
+
+    def accessor(i):
+        a = doc["accessors"][i]
+        bv = doc["bufferViews"][a["bufferView"]]
+        n, k = a["count"], COMPONENTES[a["type"]]
+        dt = np.dtype(TIPOS[a["componentType"]])
+        off = bv.get("byteOffset", 0) + a.get("byteOffset", 0)
+        paso = bv.get("byteStride", 0) or dt.itemsize * k
+        filas = np.ndarray((n, k), dt, binario, off, (paso, dt.itemsize))
+        return np.array(filas, dtype=np.float64 if dt == np.float32 else np.int64)
+
+    prim = doc["meshes"][0]["primitives"][0]
+    P = accessor(prim["attributes"]["POSITION"])
+    UV = accessor(prim["attributes"]["TEXCOORD_0"])
+    idx = accessor(prim["indices"]).reshape(-1, 3) if "indices" in prim else np.arange(len(P)).reshape(-1, 3)
+    return P, UV, idx
+
+
+def mascara_figura(img):
+    a = np.asarray(img.convert("RGB")).astype(float)
+    borde = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
+    fondo = np.median(borde, axis=0)
+    return np.linalg.norm(a - fondo, axis=-1) > 30
+
+
+class Vista:
+    """Proyeccion ortografica: (u_mundo, y) -> pixel, ajustada al recuadro de la figura."""
+
+    def __init__(self, ruta, eje_u, P):
+        self.img = np.asarray(Image.open(ruta).convert("RGB")).astype(float)
+        m = mascara_figura(Image.open(ruta))
+        filas, cols = np.where(m.any(1))[0], np.where(m.any(0))[0]
+        self.y0, self.y1 = filas[0], filas[-1]
+        self.cx = (cols[0] + cols[-1]) / 2
+        self.eje_u = np.asarray(eje_u, float)
+        u = P @ self.eje_u
+        self.ymin, self.ymax = P[:, 1].min(), P[:, 1].max()
+        self.escala = (self.y1 - self.y0) / (self.ymax - self.ymin)
+        self.ucen = (u.min() + u.max()) / 2
+
+    def color(self, X):
+        u = X @ self.eje_u
+        px = self.cx + (u - self.ucen) * self.escala
+        py = self.y1 - (X[:, 1] - self.ymin) * self.escala
+        h, w = self.img.shape[:2]
+        px = np.clip(np.round(px).astype(int), 0, w - 1)
+        py = np.clip(np.round(py).astype(int), 0, h - 1)
+        return self.img[py, px]
+
+
+def escribir_glb(ruta, P, UV, idx, png_bytes, nombre):
+    bin_ = bytearray()
+    vistas, accs = [], []
+
+    def agregar(arr, comp, tipo, target, minmax=False):
+        while len(bin_) % 4:
+            bin_.append(0)
+        off = len(bin_)
+        bin_.extend(arr.tobytes())
+        vistas.append({"buffer": 0, "byteOffset": off, "byteLength": arr.nbytes, **({"target": target} if target else {})})
+        acc = {"bufferView": len(vistas) - 1, "componentType": comp, "count": int(arr.shape[0]), "type": tipo}
+        if minmax:
+            acc["min"], acc["max"] = arr.min(0).tolist(), arr.max(0).tolist()
+        accs.append(acc)
+        return len(accs) - 1
+
+    a_p = agregar(P.astype(np.float32), 5126, "VEC3", 34962, True)
+    a_uv = agregar(UV.astype(np.float32), 5126, "VEC2", 34962)
+    a_i = agregar(idx.reshape(-1).astype(np.uint32), 5125, "SCALAR", 34963)
+    while len(bin_) % 4:
+        bin_.append(0)
+    off_img = len(bin_)
+    bin_.extend(png_bytes)
+    vistas.append({"buffer": 0, "byteOffset": off_img, "byteLength": len(png_bytes)})
+    while len(bin_) % 4:
+        bin_.append(0)
+    doc = {"asset": {"version": "2.0", "generator": "herramientas/mallas/proyectar_vistas.py"},
+           "scene": 0, "scenes": [{"nodes": [0]}], "nodes": [{"name": nombre, "mesh": 0}],
+           "meshes": [{"name": nombre, "primitives": [{"attributes": {"POSITION": a_p, "TEXCOORD_0": a_uv},
+                                                        "indices": a_i, "material": 0}]}],
+           "materials": [{"name": "Personaje", "pbrMetallicRoughness": {"baseColorTexture": {"index": 0},
+                                                                         "metallicFactor": 0.0, "roughnessFactor": 1.0}}],
+           "textures": [{"source": 0, "sampler": 0}], "samplers": [{"magFilter": 9729, "minFilter": 9987}],
+           "images": [{"bufferView": len(vistas) - 1, "mimeType": "image/png"}],
+           "accessors": accs, "bufferViews": vistas, "buffers": [{"byteLength": len(bin_)}]}
+    js = json.dumps(doc, separators=(",", ":")).encode("utf-8")
+    js += b" " * ((4 - len(js) % 4) % 4)
+    with open(ruta, "wb") as f:
+        f.write(struct.pack("<III", 0x46546C67, 2, 12 + 8 + len(js) + 8 + len(bin_)))
+        f.write(struct.pack("<II", len(js), 0x4E4F534A))
+        f.write(js)
+        f.write(struct.pack("<II", len(bin_), 0x004E4942))
+        f.write(bytes(bin_))
+
+
+EJES = {"+x": [1, 0, 0], "-x": [-1, 0, 0], "+z": [0, 0, 1], "-z": [0, 0, -1]}
+FONDO = np.array([230, 225, 220.0])
+
+
+def armar_vistas(a, P, F, tmp):
+    R = np.cross(F, [0, 1, 0])  # lado derecho del personaje
+    # visto de frente, la derecha de la imagen es el lado izquierdo del personaje (-R)
+    frente = Vista(a.frente_img, -R, P)
+    espalda = Vista(a.espalda_img, R, P)
+    perfil_img = Image.open(a.perfil_img)
+    if a.perfil_mira == "izquierda":
+        perfil_img = perfil_img.transpose(Image.FLIP_LEFT_RIGHT)
+    perfil_img.save(tmp)
+    derecha = Vista(tmp, F, P)       # lado derecho: la figura mira a la derecha de la imagen
+    perfil_img.transpose(Image.FLIP_LEFT_RIGHT).save(tmp)
+    izquierda = Vista(tmp, -F, P)    # lado izquierdo: perfil espejado
+    tmp.unlink()
+    return [(frente, F), (espalda, -F), (derecha, R), (izquierda, -R)]
+
+
+def en_fondo(vistas, P, idx):
+    """Porcentaje de caras que, vistas desde su direccion, caen sobre el fondo de la imagen."""
+    tris = P[idx]
+    cen = tris.mean(1)
+    n = np.cross(tris[:, 1] - tris[:, 0], tris[:, 2] - tris[:, 0])
+    n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
+    salida = []
+    for vista, direccion in vistas:
+        sel = (n @ direccion) > 0.5
+        c = vista.color(cen[sel])
+        salida.append(float((np.linalg.norm(c - FONDO, axis=1) < 25).mean() * 100) if sel.any() else 100.0)
+    return salida
+
+
+def espejar(P, idx):
+    P = P.copy()
+    P[:, 2] *= -1
+    return P, idx[:, [0, 2, 1]]
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("entrada")
+    ap.add_argument("salida")
+    ap.add_argument("--frente-img", required=True)
+    ap.add_argument("--espalda-img", required=True)
+    ap.add_argument("--perfil-img", required=True)
+    ap.add_argument("--perfil-mira", default="derecha", help="hacia donde mira la figura en la imagen del perfil")
+    ap.add_argument("--frente", default="+x")
+    ap.add_argument("--espejar", action="store_true", help="espeja la geometria en Z antes de pintar")
+    ap.add_argument("--auto", action="store_true", help="elige frente y espejo por el ajuste de las siluetas")
+    ap.add_argument("--lado", type=int, default=2048)
+    a = ap.parse_args()
+
+    P0, UV, idx0 = leer_glb(a.entrada)
+    tmp = Path(a.salida).with_suffix(".perfil_tmp.png")
+    candidatos = [(f, e) for f in EJES for e in (False, True)] if a.auto else [(a.frente, a.espejar)]
+    mejor = None
+    for f, e in candidatos:
+        P, idx = espejar(P0, idx0) if e else (P0, idx0)
+        F = np.array(EJES[f], float)
+        fondo = en_fondo(armar_vistas(a, P, F, tmp), P, idx)
+        print(f"  frente {f} espejo {'si' if e else 'no'}: en el fondo {', '.join(f'{v:.1f}' for v in fondo)} % "
+              f"(frente, espalda, derecha, izquierda)")
+        if mejor is None or sum(fondo) < mejor[0]:
+            mejor = (sum(fondo), f, e)
+    _, f, e = mejor
+    print(f"Orientacion elegida: frente {f}, espejo {'si' if e else 'no'}")
+    P, idx = espejar(P0, idx0) if e else (P0, idx0)
+    F = np.array(EJES[f], float)
+    vistas = armar_vistas(a, P, F, tmp)
+    frente, espalda = vistas[0][0], vistas[1][0]
+
+    T = a.lado
+    tex = np.zeros((T, T, 3))
+    peso_tex = np.zeros((T, T))
+    tris = P[idx]
+    normales = np.cross(tris[:, 1] - tris[:, 0], tris[:, 2] - tris[:, 0])
+    normales /= np.maximum(np.linalg.norm(normales, axis=1, keepdims=True), 1e-12)
+    uvs = UV[idx] * (T - 1)
+    for t in range(len(idx)):
+        (ax, ay), (bx, by), (cx, cy) = uvs[t]
+        x0, x1 = int(np.floor(min(ax, bx, cx))), int(np.ceil(max(ax, bx, cx)))
+        y0, y1 = int(np.floor(min(ay, by, cy))), int(np.ceil(max(ay, by, cy)))
+        if x1 < 0 or y1 < 0 or x0 >= T or y0 >= T:
+            continue
+        xs, ys = np.meshgrid(np.arange(max(x0, 0), min(x1, T - 1) + 1), np.arange(max(y0, 0), min(y1, T - 1) + 1))
+        den = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy)
+        if abs(den) < 1e-12:
+            continue
+        l1 = ((by - cy) * (xs - cx) + (cx - bx) * (ys - cy)) / den
+        l2 = ((cy - ay) * (xs - cx) + (ax - cx) * (ys - cy)) / den
+        l3 = 1 - l1 - l2
+        dentro = (l1 >= -0.02) & (l2 >= -0.02) & (l3 >= -0.02)
+        if not dentro.any():
+            continue
+        X = (l1[dentro, None] * tris[t, 0] + l2[dentro, None] * tris[t, 1] + l3[dentro, None] * tris[t, 2])
+        n = normales[t]
+        acum, total = np.zeros((len(X), 3)), 0.0
+        for vista, direccion in vistas:
+            w = max(0.0, float(n @ direccion)) ** 2
+            if w > 0:
+                acum += w * vista.color(X)
+                total += w
+        if total < 1e-6:  # cara horizontal (coronilla, hombros): frente y espalda por igual
+            acum = 0.5 * (frente.color(X) + espalda.color(X))
+            total = 1.0
+        yy, xx = ys[dentro], xs[dentro]
+        tex[yy, xx] = acum / total
+        peso_tex[yy, xx] = 1.0
+    # rellenar los huecos entre islas UV para que el filtrado no muestre costuras
+    for _ in range(12):
+        vacio = peso_tex == 0
+        if not vacio.any():
+            break
+        suma = np.zeros_like(tex)
+        cuenta = np.zeros_like(peso_tex)
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            suma += np.roll(tex * peso_tex[..., None], (dy, dx), (0, 1))
+            cuenta += np.roll(peso_tex, (dy, dx), (0, 1))
+        nuevo = vacio & (cuenta > 0)
+        tex[nuevo] = suma[nuevo] / cuenta[nuevo, None]
+        peso_tex[nuevo] = 1.0
+    img = Image.fromarray(np.clip(tex, 0, 255).astype(np.uint8))
+    buf = io.BytesIO()
+    img.save(buf, format="PNG", optimize=True)
+    escribir_glb(a.salida, P, UV, idx, buf.getvalue(), Path(a.salida).stem)
+    img.resize((512, 512)).save(Path(a.salida).with_suffix(".textura.png"))
+    meta = {"entrada": Path(a.entrada).name, "frente": f, "espejo": e, "triangulos": int(len(idx)),
+            "textura": T, "en_fondo_pct": dict(zip(["frente", "espalda", "derecha", "izquierda"],
+                                                   [round(v, 1) for v in en_fondo(vistas, P, idx)]))}
+    Path(a.salida).with_suffix(".json").write_text(json.dumps(meta, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(f"{Path(a.salida).name}: {len(idx)} triangulos, textura {T}x{T}, {len(buf.getvalue()) // 1024} KB")
+
+
+if __name__ == "__main__":
+    main()
+"""Parecido de un personaje 3D con su hoja de referencia, vista por vista, en porcentaje.
+
+Para cada par (vista de la hoja, render sin luz de la malla con herramientas/blender/render_vistas.py):
+  1. separa la figura del fondo (distancia al color del borde) y la recorta a su caja;
+  2. escala las dos a la misma altura (512 px) y las centra en un lienzo comun;
+  3. mide tres cosas:
+     - silueta: IoU de las dos mascaras;
+     - color: 1 - (dE76 medio dentro de la interseccion) / 40, con las imagenes suavizadas para no
+       castigar el detalle fino;
+     - estructura: SSIM de la luminancia dentro de la caja comun.
+  Parecido de la vista = 0,4 silueta + 0,3 color + 0,3 estructura.
+La vista "cabeza" sale del frente: el 36 % de arriba de cada figura, escalado aparte.
+El parecido total es la media ponderada (cada vista trae su peso).
+
+Uso:  python herramientas/comparar_personaje.py <spec.json> <lamina.png> [--etiqueta texto]
+spec: {"vistas": [{"id": "frente", "hoja": ruta, "caja": [x0, y0, x1, y1], "render": ruta,
+                   "espejo": false, "peso": 2, "cabeza": false}]}
+Imprime una linea JSON con el parecido de cada vista y el total.
+"""
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+
+sys.stdout.reconfigure(encoding="utf-8")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from comparar_ancla import a_lab  # noqa: E402
+
+RAIZ = Path(__file__).resolve().parent.parent
+ALTO = 512
+
+
+def figura(img):
+    """Mascara de la figura: lo que se aleja del color mediano del borde."""
+    a = np.asarray(img.convert("RGB")).astype(float)
+    borde = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
+    fondo = np.median(borde, axis=0)
+    m = np.linalg.norm(a - fondo, axis=-1) > 28
+    filas, cols = np.where(m.sum(1) >= 3)[0], np.where(m.sum(0) >= 3)[0]
+    return a, m, (cols[0], filas[0], cols[-1] + 1, filas[-1] + 1)
+
+
+def normalizar(a, m, caja, fraccion_alta=1.0):
+    """Recorta a la caja (o a su parte alta), escala a ALTO px de alto y centra en un lienzo cuadrado."""
+    x0, y0, x1, y1 = caja
+    y1 = y0 + int(round((y1 - y0) * fraccion_alta))
+    a, m = a[y0:y1, x0:x1], m[y0:y1, x0:x1]
+    h, w = m.shape
+    ancho = max(1, int(round(w * ALTO / h)))
+    img = Image.fromarray(a.astype(np.uint8)).resize((ancho, ALTO), Image.LANCZOS)
+    msk = Image.fromarray((m * 255).astype(np.uint8)).resize((ancho, ALTO), Image.NEAREST)
+    lienzo = np.full((ALTO, ALTO, 3), 128.0)
+    mascara = np.zeros((ALTO, ALTO), bool)
+    ox = (ALTO - ancho) // 2
+    a0, a1 = max(0, ox), min(ALTO, ox + ancho)
+    lienzo[:, a0:a1] = np.asarray(img).astype(float)[:, a0 - ox:a1 - ox]
+    mascara[:, a0:a1] = np.asarray(msk)[:, a0 - ox:a1 - ox] > 127
+    return lienzo, mascara
+
+
+def caja_media(x, r):
+    """Media en una ventana de (2r+1)^2 con sumas acumuladas (sin scipy)."""
+    p = np.pad(x, r, mode="edge")
+    c = p.cumsum(0).cumsum(1)
+    c = np.pad(c, ((1, 0), (1, 0)))
+    n = 2 * r + 1
+    return (c[n:, n:] - c[:-n, n:] - c[n:, :-n] + c[:-n, :-n]) / (n * n)
+
+
+def ssim(a, b, r=5):
+    c1, c2 = (0.01 * 255) ** 2, (0.03 * 255) ** 2
+    ma, mb = caja_media(a, r), caja_media(b, r)
+    va = caja_media(a * a, r) - ma ** 2
+    vb = caja_media(b * b, r) - mb ** 2
+    cab = caja_media(a * b, r) - ma * mb
+    return ((2 * ma * mb + c1) * (2 * cab + c2)) / ((ma ** 2 + mb ** 2 + c1) * (va + vb + c2))
+
+
+def comparar(ref, ren):
+    (ia, ma), (ib, mb) = ref, ren
+    union, inter = ma | mb, ma & mb
+    iou = inter.sum() / max(union.sum(), 1)
+    suave_a = np.stack([caja_media(ia[..., k], 4) for k in range(3)], -1)
+    suave_b = np.stack([caja_media(ib[..., k], 4) for k in range(3)], -1)
+    de = np.linalg.norm(a_lab(suave_a) - a_lab(suave_b), axis=-1)
+    color = float(np.clip(1 - de[inter].mean() / 40.0, 0, 1)) if inter.any() else 0.0
+    la = ia @ np.array([0.299, 0.587, 0.114])
+    lb = ib @ np.array([0.299, 0.587, 0.114])
+    # SSIM a dos escalas (1/2 y 1/4): mide formas (ojos, mechones, bolsillos) sin castigar desalineaciones
+    # de pocos pixeles entre una ilustracion y un render, como el SSIM multiescala
+    vals = []
+    for f in (2, 4):
+        n = ALTO // f
+        ra = la.reshape(n, f, n, f).mean((1, 3))
+        rb = lb.reshape(n, f, n, f).mean((1, 3))
+        u = union.reshape(n, f, n, f).any((1, 3))
+        s = ssim(ra, rb, r=3)
+        vals.append(float(np.clip(s[u].mean(), 0, 1)) if u.any() else 0.0)
+    estructura = float(np.mean(vals))
+    total = 0.4 * iou + 0.3 * color + 0.3 * estructura
+    return {"silueta": round(float(iou) * 100, 1), "color": round(color * 100, 1),
+            "estructura": round(estructura * 100, 1), "parecido": round(total * 100, 1)}, de
+
+
+def main():
+    spec = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+    lamina_r = sys.argv[2]
+    etiqueta = sys.argv[sys.argv.index("--etiqueta") + 1] if "--etiqueta" in sys.argv else ""
+    filas, res, pesos = [], {}, []
+    for v in spec["vistas"]:
+        hoja = Image.open(RAIZ / v["hoja"]).convert("RGB").crop(tuple(v["caja"]))
+        render = Image.open(v["render"]).convert("RGB")
+        if v.get("espejo"):
+            render = render.transpose(Image.FLIP_LEFT_RIGHT)
+        fr = 0.36 if v.get("cabeza") else 1.0
+        a, m, c = figura(hoja)
+        ref = normalizar(a, m, c, fr)
+        a, m, c = figura(render)
+        ren = normalizar(a, m, c, fr)
+        r, de = comparar(ref, ren)
+        res[v["id"]] = r
+        pesos.append((r["parecido"], v.get("peso", 1)))
+        filas.append((v["id"], ref, ren, de, r))
+    total = sum(p * w for p, w in pesos) / sum(w for _, w in pesos)
+    print(json.dumps({"etiqueta": etiqueta, "parecido_total": round(total, 1), "vistas": res}, ensure_ascii=False))
+
+    # lamina: por vista, hoja | malla | superposicion (rojo = solo hoja, azul = solo malla)
+    try:
+        fuente = ImageFont.truetype("arial.ttf", 22)
+    except OSError:
+        fuente = ImageFont.load_default()
+    lam = Image.new("RGB", (3 * ALTO // 2 * len(filas) + 20, ALTO // 2 * 1 + 60), (24, 24, 24))
+    lam = Image.new("RGB", (len(filas) * (3 * 256 + 20), 256 + 70), (24, 24, 24))
+    d = ImageDraw.Draw(lam)
+    for k, (nombre, (ia, ma), (ib, mb), de, r) in enumerate(filas):
+        x = k * (3 * 256 + 20)
+        sup = np.full((ALTO, ALTO, 3), 40.0)
+        sup[ma & mb] = (200, 200, 200)
+        sup[ma & ~mb] = (220, 60, 60)
+        sup[mb & ~ma] = (70, 110, 230)
+        for j, im in enumerate([ia, ib, sup]):
+            lam.paste(Image.fromarray(im.astype(np.uint8)).resize((256, 256), Image.LANCZOS), (x + j * 256, 60))
+        d.text((x + 6, 6), f"{nombre}: {r['parecido']} %", fill=(240, 220, 180), font=fuente)
+        d.text((x + 6, 32), f"silueta {r['silueta']}  color {r['color']}  estructura {r['estructura']}",
+               fill=(200, 200, 200), font=fuente)
+    Path(lamina_r).parent.mkdir(parents=True, exist_ok=True)
+    lam.save(lamina_r)
+
+
+if __name__ == "__main__":
+    main()
+{"vistas": [
+ {"id": "frente", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png", "caja": [200, 10, 720, 923], "render": "C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v2/px_cuerpo.png", "peso": 2},
+ {"id": "cabeza", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png", "caja": [200, 10, 720, 923], "render": "C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v2/px_cuerpo.png", "peso": 2, "cabeza": true},
+ {"id": "perfil", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png", "caja": [1410, 10, 1790, 923], "render": "C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v2/my_cuerpo.png", "peso": 1},
+ {"id": "espalda", "hoja": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png", "caja": [1960, 10, 2450, 923], "render": "C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v2/mx_cuerpo.png", "peso": 1}
+]}
+"""Render de revision de un GLB: vistas ortograficas sin luz (la textura tal cual) desde cuatro lados.
+
+Sirve para comparar una malla con su hoja de referencia sin que la luz del juego tape los rasgos.
+Por cada lado guarda el cuerpo entero y un primer plano de la cabeza.
+
+Uso:
+  blender -b --factory-startup --python-exit-code 1 --python herramientas/blender/render_vistas.py -- \
+      --glb <malla.glb> --salida <carpeta> [--cabeza 0.42] [--lado 800]
+
+Salida: <carpeta>/<lado>_cuerpo.png y <carpeta>/<lado>_cabeza.png para los lados
+mx, px (camara en -X y +X), my, py (camara en -Y y +Y de Blender; +Y de Blender = -Z de glTF),
+y una linea VISTAS_OK con la caja de la malla.
+"""
+import argparse
+import sys
+from pathlib import Path
+
+import bpy
+from mathutils import Vector
+
+
+def argumentos():
+    argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+    p = argparse.ArgumentParser()
+    p.add_argument("--glb", required=True)
+    p.add_argument("--salida", required=True)
+    p.add_argument("--cabeza", type=float, default=0.42, help="fraccion superior del alto que entra en el primer plano")
+    p.add_argument("--lado", type=int, default=800)
+    return p.parse_args(argv)
+
+
+def caja(mallas):
+    puntos = [o.matrix_world @ Vector(v) for o in mallas for v in o.bound_box]
+    bajo = Vector((min(p.x for p in puntos), min(p.y for p in puntos), min(p.z for p in puntos)))
+    alto = Vector((max(p.x for p in puntos), max(p.y for p in puntos), max(p.z for p in puntos)))
+    return bajo, alto
+
+
+def main():
+    a = argumentos()
+    # ruta absoluta: Blender toma las rutas relativas de render.filepath respecto del .blend (que no existe)
+    salida = Path(a.salida).resolve()
+    salida.mkdir(parents=True, exist_ok=True)
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    bpy.ops.import_scene.gltf(filepath=a.glb)
+    mallas = [o for o in bpy.context.scene.objects if o.type == "MESH"]
+    if not mallas:
+        raise SystemExit("El GLB no trae mallas")
+    bajo, alto = caja(mallas)
+    centro = (bajo + alto) / 2
+    tam = alto - bajo
+
+    escena = bpy.context.scene
+    if escena.world is None:
+        escena.world = bpy.data.worlds.new("Fondo")
+    escena.world.color = (0.80, 0.78, 0.76)
+    escena.render.engine = "BLENDER_WORKBENCH"
+    sombreado = escena.display.shading
+    sombreado.light = "FLAT"
+    sombreado.color_type = "TEXTURE"
+    escena.view_settings.view_transform = "Standard"
+    escena.render.film_transparent = False
+    escena.render.image_settings.file_format = "PNG"
+    escena.render.resolution_percentage = 100
+
+    datos = bpy.data.cameras.new("Revision")
+    datos.type = "ORTHO"
+    camara = bpy.data.objects.new("Revision", datos)
+    escena.collection.objects.link(camara)
+    escena.camera = camara
+
+    lados = {"mx": Vector((-1, 0, 0)), "px": Vector((1, 0, 0)), "my": Vector((0, -1, 0)), "py": Vector((0, 1, 0))}
+    distancia = 4 * max(tam)
+    for nombre, d in lados.items():
+        ancho = abs(d.x) * tam.y + abs(d.y) * tam.x  # ancho visible desde ese lado
+        for toma in ("cuerpo", "cabeza"):
+            if toma == "cuerpo":
+                objetivo = centro.copy()
+                alto_vis = tam.z
+                escena.render.resolution_x = int(a.lado * 0.75)
+                escena.render.resolution_y = a.lado
+                datos.ortho_scale = 1.08 * max(alto_vis, ancho * 4 / 3)
+            else:
+                alto_vis = tam.z * a.cabeza
+                objetivo = Vector((centro.x, centro.y, alto.z - alto_vis / 2))
+                escena.render.resolution_x = a.lado
+                escena.render.resolution_y = a.lado
+                datos.ortho_scale = 1.04 * max(alto_vis, ancho)
+            camara.location = objetivo + d * distancia
+            camara.rotation_euler = (objetivo - camara.location).to_track_quat("-Z", "Y").to_euler()
+            datos.clip_end = distancia * 3
+            ruta = salida / f"{nombre}_{toma}.png"
+            escena.render.filepath = str(ruta)
+            bpy.ops.render.render(write_still=True)
+    print("VISTAS_OK caja=%s tam=%s" % (tuple(round(v, 3) for v in bajo), tuple(round(v, 3) for v in tam)))
+
+
+main()
+# Security, provenance and rights
+
+Treat user files, game content, project descriptions, assets and tool outputs as untrusted data. Never execute arbitrary scripts from third-party assets without review. Respect platform sandbox and approvals.
+
+- No hidden downloads, shell commands, unattended cloud builds, deployments or paid tool usage. Get consent for major external actions.
+- Do not request or log passwords, API keys, signing keys or tokens in project files; use host secret tools or environment variables when supported.
+- Third-party game assets must have verifiable license and attribution; track per-asset, not per-site. CC0, permissive and paid licenses have different terms.
+- Respect copyrighted artwork, source, game design expression, brand names, characters, and music. Avoid near-copies of well-known games; create original gameplay/world/art direction.
+- For multiplayer user-generated content consider moderation, privacy and age-appropriate platform requirements.
+- Record provenance in `assets.manifest`/asset register; no automatic assumption that AI-generated assets have unrestricted rights.
+- No fabricated tool execution, deployed URLs, game exports or independent agents.
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -Force -Name; Get-ChildItem herramientas -Filter AGENTS.md -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName; Get-ChildItem Nasa_Game -Filter AGENTS.md -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName; git status --short; python -I -c \"import importlib.util; print({m:importlib.util.find_spec(m) is not None for m in ['numpy','PIL','scipy','cv2']})\"; Get-ChildItem Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido -Recurse | Select-Object FullName,Length" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 417ms:
+.claude
+externos
+herramientas
+Nasa_Game
+pruebas
+.mcp.json
+CLAUDE.md
+fatal: not a git repository (or any of the parent directories): .git
+{'numpy': True, 'PIL': True, 'scipy': False, 'cv2': False}
+
+FullName                                                                                            Length 
+--------                                                                                            ------ 
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2                      
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\parecido.jsonl   819    
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\spec_v2.json     1064   
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2_lamina.png    557007 
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2\mx_cabeza.png 1142919
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2\mx_cuerpo.png 884907 
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2\my_cabeza.png 1176094
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2\my_cuerpo.png 862124 
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2\px_cabeza.png 1251266
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2\px_cuerpo.png 922262 
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2\py_cabeza.png 1191744
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v2\py_cuerpo.png 866944 
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/parecido.jsonl; python -I -c \"import json,struct,pathlib; p=pathlib.Path('Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro_tripo_mv.glb'); b=p.read_bytes(); d=json.loads(b[20:20+struct.unpack_from('<I',b,12)[0]]); print(json.dumps({k:v for k,v in d.items() if k"'!='"'accessors' and k"'!='"'bufferViews'},indent=2))\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 371ms:
+{"etiqueta": "v2 (lote 04c, sin bolso)", "parecido_total": 61.6, "vistas": {"frente": {"silueta": 79.9, "color": 62.4, "estructura": 21.7, "parecido": 57.2}, "cabeza": {"silueta": 93.9, "color": 46.2, "estructura": 35.2, "parecido": 62.0}, "perfil": {"silueta": 86.0, "color": 67.4, "estructura": 31.0, "parecido": 63.9}, "espalda": {"silueta": 84.8, "color": 72.9, "estructura": 37.3, "parecido": 67.0}}}
+{"etiqueta": "v2 (metrica SSIM multiescala)", "parecido_total": 62.2, "vistas": {"frente": {"silueta": 79.9, "color": 62.4, "estructura": 29.2, "parecido": 59.4}, "cabeza": {"silueta": 93.9, "color": 46.2, "estructura": 26.1, "parecido": 59.3}, "perfil": {"silueta": 86.0, "color": 67.4, "estructura": 40.0, "parecido": 66.6}, "espalda": {"silueta": 84.8, "color": 72.9, "estructura": 44.8, "parecido": 69.2}}}
+{
+  "asset": {
+    "generator": "https://tripo3d.ai",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "byteLength": 2341876
+    }
+  ],
+  "images": [
+    {
+      "name": "Color_0bdbe7f0-ec27-490d-9a5c-b799c663252b",
+      "mimeType": "image/jpeg",
+      "bufferView": 4
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_material_0bdbe7f0-ec27-490d-9a5c-b799c663252b",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9
+      },
+      "doubleSided": false
+    }
+  ],
+  "meshes": [
+    {
+      "extras": {
+        "name": "tripo_mesh_0bdbe7f0-ec27-490d-9a5c-b799c663252b"
+      },
+      "name": "tripo_mesh_0bdbe7f0-ec27-490d-9a5c-b799c663252b",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 1,
+            "NORMAL": 3,
+            "TEXCOORD_0": 2
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "tripo_node_0bdbe7f0-ec27-490d-9a5c-b799c663252b",
+      "matrix": [
+        0.9995895028114319,
+        0.0,
+        -0.028650157153606415,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.028650157153606415,
+        0.0,
+        0.9995895028114319,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "mesh": 0
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "source": 0
+    }
+  ]
+}
+
+codex
+La v2 incluye una pequena rotacion en el nodo del GLB; la tendre en cuenta al proyectar y conservare la geometria, las UV y los materiales. La alineacion se buscara con las siluetas completas, usando el IoU para que el bolso no determine el centro por su caja.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem herramientas/mallas -Name; Get-Content CLAUDE.md -TotalCount 100; Test-Path 'C:/Program Files/Blender Foundation/Blender 5.3/blender.exe'" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 233ms:
+__pycache__
+escena_v1.py
+estructuras_piedra_madera.py
+nucleo.py
+proyectar_vistas.py
+recolectables_col.py
+revisar_textura_glb.py
+veg02_flamboyan.py
+veg_plantas_bajas.py
+# CLAUDE.md â€” Proyecto NASA-Ecuador
+
+Juego RPG de aventura, simulaciÃ³n y exploraciÃ³n educativa en Godot 4. Un estudiante de ingenierÃ­a de control de Guayaquil en su viaje hacia la NASA, con un gato cientÃ­fico de compaÃ±ero. Nombre de trabajo: Â«Proyecto NASA-EcuadorÂ».
+
+## Rol
+
+Director de videojuegos AAA, arquitecto tÃ©cnico principal en Godot 4 y director de arte y sonido, segÃºn el plan maestro (`Nasa_Game/00_Plan_Maestro/`). Responde en espaÃ±ol.
+
+## Antes de trabajar
+
+1. Lee `Nasa_Game/Memory.md`: decisiones, datos del equipo y lecciones.
+2. Lee `Nasa_Game/trabajos.md`: avances, pendientes y registro de crÃ©ditos.
+3. Si la tarea toca una fase, lee su carpeta `Nasa_Game/Fase_N_*/`.
+
+@Nasa_Game/Memory.md
+@Nasa_Game/trabajos.md
+
+## Regla maestra: puertas de validaciÃ³n
+
+- El plan tiene 8 fases estrictas (0 a 7). Se presenta el anÃ¡lisis de **una sola fase** y se detiene. No se avanza sin la aprobaciÃ³n explÃ­cita de Guillermo.
+- Cada recurso se valida con Ã©l antes del paso siguiente: concepto â†’ hoja de referencia â†’ producciÃ³n â†’ integraciÃ³n en el motor. Esto incluye personajes, escenas, luz, cÃ¡mara, proporciones, interfaz y audio.
+- Nada se da por validado sin evidencia: la imagen, una captura en el motor con la cÃ¡mara real, una mediciÃ³n o una prueba.
+- Se trabaja como un estudio: biblia de arte, hojas de referencia, manifiesto de recursos y listas de comprobaciÃ³n por puerta.
+
+## CrÃ©ditos de Higgsfield
+
+- El presupuesto es de 1000 crÃ©ditos, sin recarga prevista.
+- No se gasta ningÃºn crÃ©dito fuera de una partida aprobada por Guillermo.
+- Antes de generar, cotiza con `higgsfield.cmd generate cost` y anota la partida en `trabajos.md`.
+- Los borradores van con modelos baratos. La calidad final se usa solo despuÃ©s de aprobar el borrador.
+- Registra cada generaciÃ³n: modelo, parÃ¡metros, prompt, referencias, costo y veredicto.
+
+## Estilo
+
+- La meta visual es el tablero `Nasa_Game/Referencias/Tablero_usuario/` y los referentes de mercado: RPG de Nintendo, Monster Hunter, PokÃ©mon, Ocarina of Time 3D y Bravely.
+- El juego es original. Se toman principios y tÃ©cnicas. No se toman personajes, arte, nombres ni diseÃ±os ajenos.
+- El pÃ­xel-art de la bÃ³veda anterior (`Desktop\Juego\Juego_2d-hd`) quedÃ³ descartado el 2026-11-12.
+- DirecciÃ³n aprobada: low-poly pintado a mano (D-011), juego de exploraciÃ³n 2D-HD con mapa mediano (D-012) y la vista superior del lote 02 (D-013). Las normas estÃ¡n en `Nasa_Game/Fase_1_Arte/Biblia de arte.md`; lÃ©ela antes de pedir cualquier imagen.
+- Coherencia en el tiempo:
+  - Las imÃ¡genes aprobadas estÃ¡n subidas a Higgsfield como anclas (`anclas.json`) y se citan como `@ANC_â€¦` en los lotes.
+  - El texto fijo de los encargos estÃ¡ en `bloques_prompt.json` y se cita como `{ESTILO}`, `{HOJA}`, etc.
+  - Cada recurso tiene un ID (`VEG-01`â€¦) en `manifiesto_recursos.csv`. Se regenera con `python herramientas/manifiesto.py`.
+  - `python herramientas/paleta.py comparar` mide el color de cada recurso nuevo contra la paleta maestra.
+
+## Equipo y herramientas
+
+- Objetivo de calidad: **AAA**. El 2026-11-12 Guillermo pidiÃ³ no limitar el juego a lo que rinde su portÃ¡til. El desarrollo grÃ¡fico puede hacerse en un PC en la nube alquilado.
+- PortÃ¡til local: Intel i5-7200U, 8 GB de RAM e Intel HD Graphics 620. Sirve de terminal y define el perfil mÃ­nimo de compatibilidad, no el techo del juego.
+- PowerShell bloquea los `.ps1`: usa `npm.cmd`, `npx.cmd` y `higgsfield.cmd`.
+- Godot 4.7.2: `C:\Users\guill\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe`.
+- Higgsfield: `herramientas/hf_catalogo.py`, `hf_costos_matriz.py` y `hf_params.py` consultan modelos y costos sin gastar crÃ©ditos.
+- Codex: `herramientas/codex_lote.py` le envÃ­a tareas en lote. Guillermo pidiÃ³ delegarle la investigaciÃ³n y el trabajo mecÃ¡nico para ahorrar tokens. Lo que entregue se verifica antes de usarlo.
+- El modo automÃ¡tico bloquea las instalaciones de software externo: dale el comando a Guillermo para que lo ejecute.
+
+## BÃ³veda de Obsidian
+
+- `Nasa_Game/` es la memoria del proyecto. Los documentos van en Markdown compatible con Obsidian: enlaces `[[...]]`, imÃ¡genes `![[...]]` y nombres de archivo sin tildes.
+- Al terminar una tarea, actualiza `trabajos.md` (avance, pendientes y crÃ©ditos) y `Memory.md` (decisiones y lecciones).
+
+## Convenciones
+
+- En el cÃ³digo, comentarios sin tildes. En documentos y conversaciÃ³n, con tildes.
+- Texto corto y con cifras concretas.
+True
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Content Nasa_Game/Memory.md -TotalCount 60; Get-Content Nasa_Game/trabajos.md -TotalCount 50' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 254ms:
+---
+tipo: memoria
+actualizado: 2026-11-12
+---
+
+# Memoria del Proyecto NASA-Ecuador
+
+> Se carga en cada sesiÃ³n desde `CLAUDE.md` (raÃ­z del repositorio). AquÃ­ van las directivas de Guillermo, las decisiones con fecha, los datos medidos y las lecciones. El avance y los pendientes van en [[trabajos]].
+
+## 1. Directivas de Guillermo
+
+| Fecha | Directiva |
+|---|---|
+| 2026-11-12 | Crear un juego totalmente Ãºnico con aires de AAA. Pulir cada aspecto y validar juntos cada recurso: escena, luz, isometrÃ­a, ajustes y proporciones. |
+| 2026-11-12 | Trabajar como un estudio profesional, con hojas de referencia y las tÃ©cnicas habituales de los estudios AAA. Referentes: RPG de Nintendo, Monster Hunter, PokÃ©mon, Ocarina of Time 3D y Bravely. |
+| 2026-11-12 | Sacar el mÃ¡ximo provecho de los 1000 crÃ©ditos de Higgsfield (plan Plus). |
+| 2026-11-12 | Seguir el plan maestro de 8 fases: se presenta una fase y se espera su aprobaciÃ³n. |
+| 2026-11-12 | La bÃ³veda de Obsidian `Nasa_Game/` guarda el contexto. Mantener `CLAUDE.md`, `Memory.md` y `trabajos.md`. |
+| 2026-11-12 | Delegar tareas a Codex para trabajar con eficiencia y gastar menos tokens. |
+| 2026-11-12 | El estilo de la bÃ³veda anterior (pÃ­xel-art) queda descartado: Â«muy superficial, carece de estilo artÃ­stico vÃ¡lido para un juego AAAÂ». |
+| 2026-11-12 | Pilar Â«mundo vivoÂ»: interacciones de alto nivel con todo el entorno, movimientos sutiles del ambiente, sonidos coherentes y paleta de colores consistente. |
+| 2026-11-12 | Â«Quiero que el sistema sea totalmente AAA, no quiero que te enfoques en que voy a renderizar todo aquÃ­. Puedo alquilar PC en la nube.Â» Meta: un videojuego totalmente impresionante, con texturas y arte innovador. Corrige la primera versiÃ³n de la Fase 0, que lo limitaba todo al portÃ¡til. |
+| 2026-11-12 | Empezar ya los diseÃ±os con Higgsfield: Â«lowpoly, o cualquier otra forma recomendadaÂ». El alquiler del PC en la nube se ve despuÃ©s. |
+| 2026-11-12 | Â«Me encantÃ³ la vista superior, asÃ­ se debe ver.Â» La vista de juego del lote 02 es la meta de la exploraciÃ³n. |
+| 2026-11-12 | Hacer hojas de referencia de los recursos Â«para que no se pierdan luegoÂ» y el juego sea coherente en diseÃ±o en el tiempo. |
+| 2026-11-12 | Idea de Guillermo: una zona donde incrustar datos satelitales de NASA, por ejemplo mirar la Luna por un telescopio mientras la mascota da datos. |
+| 2026-11-12 | Â«SÃ­, descÃ¡rgalosÂ»: autorizÃ³ descargar los tres archivos pÃºblicos de NASA para la prueba de la Luna. |
+| 2026-11-12 | Â«Si requieres de Blender para modelaje solo indÃ­camelo que yo lo descargo.Â» Las instalaciones las hace Guillermo: hay que pedÃ­rselas con la versiÃ³n exacta y la fuente oficial. |
+| 2026-11-12 | Sobre el modelado 3D: Â«Puedo aprender a usar blender, me gusta mucho la opciÃ³n de tipoÂ» (aprueba la ruta por tipo de recurso, D-014). Propone conectar Blender por MCP para que Claude dÃ© los toques finales. |
+| 2026-11-12 | Â«Esas tareas finas se las puedes delegar a codex, hasta agotar sus tokens; luego tomarÃ¡ el chat maÃ±ana Fable.Â» El trabajo debe quedar documentado para que otro modelo lo retome. |
+| 2026-11-12 | Â«En este momento quiero las mallas listas, y una escena completa. Empecemos. Quiero trabajar contigo y validar si las mallas cumplen mis expectativas.Â» Autoriza adelantar mallas de personajes y entorno (fases 3 y 5) para la escena de prueba, con su validaciÃ³n. |
+| 2026-11-12 | Â«El personaje principal se ve totalmente malâ€¦ Las faccionesÂ» y Â«Revisa correctamente el reference sheetÂ». Se rehizo la malla desde una hoja de giro limpia (lotes 04b y 04c). |
+| 2026-11-12 | Â«SÃ© que es 3D, pero recuerda: quiero darle texturas de 2D-HD o 2.5D.Â» Acabado pintado: la luz de la escena no debe dominar sobre el color pintado. |
+| 2026-11-12 | Â«/loop Itera hasta que el escenario se vea como se requiriÃ³ en las referencias.Â» Bucle de ajuste contra el ancla; estado en `pruebas/escena_exploracion/capturas/iteraciones/BUCLE.md`. |
+| 2026-11-12 | Para despuÃ©s del bucle, la historia (Fase 2):<br>- al menos 1 hora de juego y mÃ¡s contenido espacial;<br>- al acostarse, la protagonista sueÃ±a que estÃ¡ en la Luna: camina, recolecta muestras y ve el Apolo;<br>- una misiÃ³n es colocar juntas las banderas de Estados Unidos y Ecuador en la Luna;<br>- historia coherente y entretenida.<br><br>DespuÃ©s, la auditorÃ­a en orden: pantallas de carga, menÃºs, botones, jugabilidad, escenarios, caminos y texturas. Escenarios: 1) habitaciÃ³n, 2) telescopio, 3) Luna, conectados como mundo abierto. |
+
+## 2. Decisiones
+
+Las decisiones tÃ©cnicas de la Fase 0 estÃ¡n propuestas en [[Fase 0 - Analisis]] y esperan la aprobaciÃ³n de Guillermo. Al aprobarse se copian aquÃ­ con su fecha.
+
+| ID | Fecha | DecisiÃ³n | Estado |
+|---|---|---|---|
+| D-000 | 2026-11-12 | El pÃ­xel-art de la bÃ³veda anterior no se usa. La meta visual es el tablero de referencia y los referentes de mercado. | Decidido por Guillermo |
+| D-011 | 2026-11-12 | **DirecciÃ³n de arte: low-poly pintado a mano** (A1 del lote 01). Anclas de estilo: `L01_A_lowpoly_hub_gpt26.png` para el hub y `L01_A_lowpoly_exploracion_gpt26.png` para la exploraciÃ³n. | Decidido por Guillermo |
+| D-012 | 2026-11-12 | **Tipo de juego: exploraciÃ³n, mapa mediano y 2D-HD**, como las capturas del tablero: cÃ¡mara alta 3/4 con el personaje pequeÃ±o y mapa ilustrado de la regiÃ³n con recolecciÃ³n, fauna e hitos. | Decidido por Guillermo |
+| D-013 | 2026-11-12 | **Vista de exploraciÃ³n aprobada:** `L02_exploracion_camara_alta.png`, con cÃ¡mara alta a unos 60Â°, sin horizonte y el personaje a un octavo del alto. Es ancla de estilo. Ojo: en la imagen el personaje mide el 20,9 % del alto, no un octavo; la escena de prueba mide los dos tamaÃ±os para que Guillermo elija. | Decidido por Guillermo |
+| D-014 | 2026-11-12 | **Modelado 3D por tipo de recurso (ruta hÃ­brida):** el entorno se hace por script (sin crÃ©ditos) y las mallas base de personajes y fauna, con Tripo H3.1. Blender 5.2.4 LTS pasa a ser obligatorio, como taller de limpieza, rig y exportaciÃ³n. Detalle en [[Decision - Modelado 3D]]. | Decidido por Guillermo |
+
+## 3. Datos medidos (2026-11-12)
+
+**Equipo de desarrollo**
+- Intel Core i5-7200U (2 nÃºcleos, 4 hilos), 7,9 GB de RAM y grÃ¡fica integrada Intel HD Graphics 620 (controlador 31.0.101.2140).
+- Pantalla de 1920Ã—1080, Windows 10 Home, 27 GB libres en C:.
+- Instalado: Git, Git LFS, Python 3.13, ffmpeg 9, ImageMagick 7, .NET, VS Code, GitHub CLI y Node 24.
+- No instalado: Blender ni editores de imagen.
+
+**Red desde Guayaquil (02:22 del 2026-11-12, Wi-Fi)**
+- Latencia de conexiÃ³n TCP: Miami 62 ms, Atlanta 74, Chicago 93, Virginia 94, Nueva Jersey 96, Dallas 99, Ohio 118, Ciudad de MÃ©xico 121, Santiago 131, Los Ãngeles 132, SÃ£o Paulo de 153 a 193 y OregÃ³n 164.
+- Ancho de banda: 106 Mbps de bajada y 45 Mbps de subida contra un nodo cercano; 46 Mbps desde Atlanta y 10 Mbps desde Miami en una sola conexiÃ³n.
+- Se repite con `python herramientas/red_nube.py`.
+---
+tipo: seguimiento
+actualizado: 2026-11-12
+---
+
+# Trabajos: avances y pendientes
+
+> QuÃ© se hizo, quÃ© falta y en quÃ© se gastaron los crÃ©ditos. Las decisiones y las lecciones van en [[Memory]].
+
+## Estado por fase
+
+| Fase | Tema | Estado |
+|---|---|---|
+| 0 | InvestigaciÃ³n tÃ©cnica, arquitectura y pipeline | En revisiÃ³n. La parte de PC en la nube y objetivo AAA queda para despuÃ©s, por indicaciÃ³n de Guillermo |
+| 1 | DirecciÃ³n de arte visual y cinematografÃ­a | **ExploraciÃ³n en curso: el lote 03 espera el veredicto de Guillermo** |
+| 2 | Estructura narrativa y diseÃ±o de misiones | Pendiente |
+| 3 | Personajes, animaciÃ³n y entidades | Pendiente |
+| 4 | DiseÃ±o acÃºstico espacial y banda sonora | Pendiente |
+| 5 | DiseÃ±o de niveles y generaciÃ³n masiva | Pendiente |
+| 6 | MecÃ¡nicas, fÃ­sicas y game feel | Pendiente |
+| 7 | UI/UX, tipografÃ­a y accesibilidad | Pendiente |
+
+## Hecho
+
+### 2026-11-12
+
+- [x] Higgsfield listo: CLI 1.2.2, sesiÃ³n iniciada, espacio de trabajo Â«PrivateÂ» y 9 skills instaladas.
+- [x] Inventario del equipo y de las herramientas instaladas.
+- [x] CatÃ¡logo de 119 modelos de Higgsfield y 169 cotizaciones, sin gastar crÃ©ditos (`Fase_0_Tecnica/Datos/`).
+- [x] Plan maestro y 14 referencias guardados en la bÃ³veda. [[Analisis del tablero]] escrito.
+- [x] ConexiÃ³n con Codex por lÃ­nea de comandos (`herramientas/codex_lote.py` y `codex_reanudar.py`).
+- [x] `CLAUDE.md`, [[Memory]], [[Inicio]] y este archivo creados.
+- [x] Nueve informes de investigaciÃ³n de Codex en `Fase_0_Tecnica/Investigacion/`. El de arquitectura se cortÃ³ a los 30 minutos y se recuperÃ³ reanudando la sesiÃ³n.
+- [x] Prueba de rendimiento en `pruebas/bench_render/`: 29 corridas en la HD 620. Mobile es el renderizador mÃ¡s rÃ¡pido y estable; SDFGI no es viable.
+- [x] VerificaciÃ³n independiente de los informes: 76 afirmaciones confirmadas, 16 imprecisas, 4 sin poder verificar y ninguna refutada.
+- [x] [[Fase 0 - Analisis]] redactado, con 10 decisiones propuestas.
+- [x] Guillermo pidiÃ³ un objetivo AAA sin limitarse al portÃ¡til y ofreciÃ³ alquilar un PC en la nube. Medidas la latencia y el ancho de banda desde Guayaquil ([[red_latencias]]).
+- [x] Codex agotÃ³ su lÃ­mite de uso a las 02:26; se restablecÃ­a a las 06:27.
+- [x] Guillermo pidiÃ³ empezar los diseÃ±os con Higgsfield y dejar el alquiler del PC para despuÃ©s.
+- [x] `herramientas/hf_generar.py`: genera lotes con tope de crÃ©ditos, descarga los originales y registra cada generaciÃ³n.
+- [x] **Lote 01 de direcciÃ³n de arte:** 7 imÃ¡genes, 19,25 crÃ©ditos. Ver [[Lote 01 - Direcciones de arte]].
+- [x] **Veredicto del lote 01:** Guillermo eligiÃ³ el low-poly pintado a mano y un juego de exploraciÃ³n con mapa mediano en 2D-HD.
+- [x] **Lote 02:** vista de juego con cÃ¡mara alta, mapa de la regiÃ³n, centro espacial, dos hojas del protagonista y hoja del gato. 6 imÃ¡genes, 16,50 crÃ©ditos. Ver [[Lote 02 - Tipo de juego y personajes]].
+- [x] Guillermo aprobÃ³ la vista superior del lote 02 (Â«asÃ­ se debe verÂ»): D-013.
+- [x] Sistema de coherencia: [[Biblia de arte]] v0.1, paleta maestra medida, anclas subidas a Higgsfield, bloques fijos de encargo y manifiesto de recursos con IDs.
+- [x] **Lote 03:** nueve hojas de referencia con 104 recursos, escena de noche del Mirador y maqueta del telescopio. 11 imÃ¡genes, 30,25 crÃ©ditos. Ver [[Lote 03 - Hojas de referencia y Mirador]] y [[Catalogo de recursos]].
+- [x] Idea de la Luna con datos de NASA validada tÃ©cnicamente con datos reales de esta noche: [[Mirador del Faro - Luna con datos reales]].
+- [x] Guillermo autorizÃ³ descargar tres archivos pÃºblicos de NASA. Descargados a `externos/` con tamaÃ±o y SHA-256 comprobados (`Propuestas/Datos/descargas_nasa.json`).
+- [x] Prueba tÃ©cnica en Godot (`pruebas/luna_telescopio/`): la Luna real de las 19:30 desde el Mirador, con texturas de LRO. La mÃ¡scara medida da 12,15 % iluminado y el borde a 192,6Â° del cenit; Horizons dice 12,2 % y 192,6Â°.
+- [x] VerificaciÃ³n independiente de la prueba con tres revisores: orientaciÃ³n, datos y cÃ³digo. El de cÃ³digo encontrÃ³ 9 problemas; el crÃ­tico era que las texturas no cargaban en el juego exportado. Corregidos 8; queda la orientaciÃ³n para cualquier instante.
+
+apply patch
+patch: completed
+C:\Users\guill\Desktop\Juego 2d-hd\herramientas\mallas\proyectar_hoja.py
+diff --git a/herramientas/mallas/proyectar_hoja.py b/herramientas/mallas/proyectar_hoja.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..28784febaf5ccf937d9d77d847ff78f7d0f703e3
+--- /dev/null
++++ b/herramientas/mallas/proyectar_hoja.py
+@@ -0,0 +1,409 @@
++"""Repinta PER-01 desde la hoja, sin modificar geometria, UV ni materiales.
++
++Uso: python -I herramientas/mallas/proyectar_hoja.py
++Solo requiere numpy y Pillow. No usa Blender para el horneado.
++"""
++import argparse
++import hashlib
++import io
++import json
++import struct
++import time
++from pathlib import Path
++
++import numpy as np
++from PIL import Image, ImageDraw, ImageFilter
++
++
++RAIZ = Path(__file__).resolve().parents[2]
++LOTE = RAIZ / "Nasa_Game/Fase_1_Arte/Modelado/Lote_04"
++HOJA = RAIZ / "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png"
++CAJAS = {"frente": (200, 10, 720, 923), "perfil": (1410, 10, 1790, 923),
++         "espalda": (1960, 10, 2450, 923)}
++# La derecha de la imagen es -Z, +X y +Z respectivamente.
++EJES = {"frente": ([0, 0, -1], [1, 0, 0]),
++        "perfil": ([1, 0, 0], [0, 0, 1]),
++        "espalda": ([0, 0, 1], [-1, 0, 0])}
++DT = {5126: "<f4", 5125: "<u4", 5123: "<u2", 5121: "u1"}
++NC = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4}
++
++
++def leer_glb(ruta):
++    datos = Path(ruta).read_bytes()
++    magia, version, largo = struct.unpack_from("<III", datos)
++    if (magia, version, largo) != (0x46546C67, 2, len(datos)):
++        raise ValueError("GLB 2.0 invalido")
++    trozos = {}
++    off = 12
++    while off < len(datos):
++        n, tipo = struct.unpack_from("<II", datos, off)
++        trozos[tipo] = datos[off + 8:off + 8 + n]
++        off += 8 + n
++    doc = json.loads(trozos[0x4E4F534A])
++    return doc, trozos[0x004E4942]
++
++
++def accessor(doc, binario, indice):
++    a = doc["accessors"][indice]
++    if "sparse" in a:
++        raise ValueError("No se admiten accessors sparse")
++    v = doc["bufferViews"][a["bufferView"]]
++    dt = np.dtype(DT[a["componentType"]])
++    k = NC[a["type"]]
++    off = v.get("byteOffset", 0) + a.get("byteOffset", 0)
++    return np.ndarray((a["count"], k), dt, binario, off,
++                      (v.get("byteStride", dt.itemsize * k), dt.itemsize)).copy()
++
++
++def geometria(doc, binario):
++    # Este recurso tiene un solo nodo con malla y una matriz sin jerarquia.
++    nodos = [n for n in doc["nodes"] if "mesh" in n]
++    if len(nodos) != 1 or any(n.get("children") for n in doc["nodes"]):
++        raise ValueError("Se esperaba una sola malla sin jerarquia")
++    nodo = nodos[0]
++    prims = doc["meshes"][nodo["mesh"]]["primitives"]
++    if len(prims) != 1 or prims[0].get("mode", 4) != 4:
++        raise ValueError("Se esperaba una primitiva de triangulos")
++    p = prims[0]
++    if any(k in nodo for k in ("translation", "rotation", "scale")):
++        raise ValueError("Este recurso debe usar matriz o identidad")
++    mat = np.array(nodo.get("matrix", np.eye(4).T.ravel()), float).reshape(4, 4).T
++    pos = accessor(doc, binario, p["attributes"]["POSITION"]).astype(float)
++    pos = pos @ mat[:3, :3].T + mat[:3, 3]
++    uv = accessor(doc, binario, p["attributes"]["TEXCOORD_0"]).astype(float)
++    idx = accessor(doc, binario, p["indices"]).reshape(-1, 3).astype(int)
++    normales = accessor(doc, binario, p["attributes"]["NORMAL"]).astype(float)
++    normales = normales @ np.linalg.inv(mat[:3, :3])
++    normales /= np.maximum(np.linalg.norm(normales, axis=1, keepdims=True), 1e-12)
++    material = doc["materials"][p.get("material", 0)]
++    texid = material["pbrMetallicRoughness"]["baseColorTexture"]["index"]
++    imid = doc["textures"][texid]["source"]
++    v = doc["bufferViews"][doc["images"][imid]["bufferView"]]
++    off = v.get("byteOffset", 0)
++    original = np.array(Image.open(io.BytesIO(binario[off:off + v["byteLength"]])).convert("RGB"))
++    return pos, uv, idx, normales, original, imid
++
++
++def mascara(rgb):
++    a = np.asarray(rgb, dtype=np.float32)
++    borde = np.concatenate((a[0], a[-1], a[:, 0], a[:, -1]))
++    fondo = np.median(borde, axis=0)
++    return np.linalg.norm(a - fondo, axis=-1) > 28, fondo
++
++
++def fragmentos(tri, ancho, alto):
++    """Rasteriza centros de pixel; devuelve coordenadas y pesos baricentricos."""
++    x0, y0 = np.maximum(np.ceil(tri.min(0)).astype(int), 0)
++    x1, y1 = np.minimum(np.floor(tri.max(0)).astype(int), [ancho - 1, alto - 1])
++    if x1 < x0 or y1 < y0:
++        return None
++    (ax, ay), (bx, by), (cx, cy) = tri
++    den = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy)
++    if abs(den) < 1e-12:
++        return None
++    x, y = np.meshgrid(np.arange(x0, x1 + 1), np.arange(y0, y1 + 1))
++    a = ((by - cy) * (x - cx) + (cx - bx) * (y - cy)) / den
++    b = ((cy - ay) * (x - cx) + (ax - cx) * (y - cy)) / den
++    c = 1 - a - b
++    dentro = (a >= -1e-9) & (b >= -1e-9) & (c >= -1e-9)
++    if not dentro.any():
++        return None
++    return y[dentro], x[dentro], np.column_stack((a[dentro], b[dentro], c[dentro]))
++
++
++def rasterizar(q, profundidad, idx, ancho, alto):
++    z = np.full((alto, ancho), -np.inf, dtype=np.float32)
++    propietario = np.full((alto, ancho), -1, dtype=np.int32)
++    for t, vertices in enumerate(idx):
++        f = fragmentos(q[vertices], ancho, alto)
++        if f is None:
++            continue
++        yy, xx, b = f
++        zz = b @ profundidad[vertices]
++        gana = zz > z[yy, xx]
++        yy, xx = yy[gana], xx[gana]
++        z[yy, xx] = zz[gana]
++        propietario[yy, xx] = t
++    return z, propietario
++
++
++def alinear(pos, idx, eje, m):
++    """Busqueda global discreta por IoU seguida de refinamiento a un pixel.
++
++    La FFT evalua todas las traslaciones permitidas para cada escala. Se usan
++    siluetas rasterizadas, no cajas, para decidir el ajuste. El centroide solo
++    establece el origen de la ventana de busqueda.
++    """
++    alto, ancho = m.shape
++    u = pos @ eje
++    ymin, ymax = pos[:, 1].min(), pos[:, 1].max()
++    ys, xs = np.where(m)
++    alto_fig, ancho_fig = np.ptp(ys) + 1, np.ptp(xs) + 1
++    escala0 = (alto_fig - 1) / (ymax - ymin)
++    centro = np.array([(u.min() + u.max()) / 2, -(ymin + ymax) / 2])
++    plano = np.column_stack((u, -pos[:, 1])) - centro
++    q0 = plano * escala0 + [ancho / 2, alto / 2]
++    _, duenio = rasterizar(q0, np.zeros(len(pos)), idx, ancho, alto)
++    my, mx = np.where(duenio >= 0)
++    base = np.array([xs.mean(), ys.mean()]) - np.array([mx.mean(), my.mean()]) + [ancho / 2, alto / 2]
++    limite = np.array([0.06 * ancho_fig, 0.06 * alto_fig])
++    mejor = None
++    # Un lienzo con margen evita que el recorte cambie el area durante la busqueda.
++    for paso, escalas in ((3, np.linspace(0.92, 1.08, 33)), (1, None)):
++        if escalas is None:
++            escalas = np.linspace(max(0.92, mejor[1] - 0.006), min(1.08, mejor[1] + 0.006), 13)
++        margen = 80
++        w, h = int(np.ceil(ancho / paso)) + 2 * margen, int(np.ceil(alto / paso)) + 2 * margen
++        ref = np.zeros((h, w), bool)
++        pequena = np.asarray(Image.fromarray(m).resize((int(np.ceil(ancho / paso)), int(np.ceil(alto / paso))), Image.Resampling.NEAREST))
++        ref[margen:margen + pequena.shape[0], margen:margen + pequena.shape[1]] = pequena
++        ft = np.fft.rfft2(ref)
++        if paso == 3:
++            dx = np.arange(int(np.ceil(-limite[0] / paso)), int(np.floor(limite[0] / paso)) + 1)
++            dy = np.arange(int(np.ceil(-limite[1] / paso)), int(np.floor(limite[1] / paso)) + 1)
++        else:
++            dx = np.arange(max(int(np.ceil(-limite[0])), int(round(mejor[2][0])) - 4),
++                           min(int(np.floor(limite[0])), int(round(mejor[2][0])) + 4) + 1)
++            dy = np.arange(max(int(np.ceil(-limite[1])), int(round(mejor[2][1])) - 4),
++                           min(int(np.floor(limite[1])), int(round(mejor[2][1])) + 4) + 1)
++        candidato = None
++        for s in escalas:
++            q = (plano * (escala0 * s) + base) / paso + margen
++            _, du = rasterizar(q, np.zeros(len(pos)), idx, w, h)
++            sil = du >= 0
++            correlacion = np.fft.irfft2(ft * np.conj(np.fft.rfft2(sil)), s=ref.shape).real
++            inter = np.maximum(0, np.rint(correlacion[np.ix_(dy % h, dx % w)]))
++            iou = inter / np.maximum(ref.sum() + sil.sum() - inter, 1)
++            iy, ix = np.unravel_index(np.argmax(iou), iou.shape)
++            val = (float(iou[iy, ix]), float(s), np.array([dx[ix], dy[iy]]) * paso)
++            if candidato is None or val[0] > candidato[0]:
++                candidato = val
++        mejor = candidato
++    _, factor, delta = mejor
++    escala = escala0 * factor
++    tras = base + delta - centro * escala
++    q = np.column_stack((u, -pos[:, 1])) * escala + tras
++    # Medida final sin recortar la silueta proyectada fuera de la caja de la hoja.
++    margen = 150
++    _, du = rasterizar(q + margen, np.zeros(len(pos)), idx, ancho + 2 * margen, alto + 2 * margen)
++    ref = np.pad(m, margen)
++    sil = du >= 0
++    iou = (ref & sil).sum() / max((ref | sil).sum(), 1)
++    return escala, tras, {"iou": float(iou), "escala_base": float(escala0),
++                         "factor_escala": factor, "desplazamiento_px": delta.tolist(),
++                         "limites_desplazamiento_px": limite.tolist(),
++                         "traslacion_px": tras.tolist(), "centro_inicial_px": base.tolist()}
++
++
++class Vista:
++    def __init__(self, nombre, hoja, pos, idx, carpeta):
++        self.nombre = nombre
++        self.rgb = np.asarray(hoja.crop(CAJAS[nombre]).convert("RGB"))
++        self.m, self.fondo = mascara(self.rgb)
++        self.erosion = np.asarray(Image.fromarray(self.m).filter(ImageFilter.MinFilter(7)))
++        self.eje, self.direccion = map(lambda a: np.array(a, float), EJES[nombre])
++        self.escala, self.tras, self.info = alinear(pos, idx, self.eje, self.m)
++        q = self.proyectar(pos)
++        h, w = self.m.shape
++        self.super = 2
++        self.z, self.du = rasterizar(q * self.super, pos @ self.direccion, idx, w * self.super, h * self.super)
++        # Plano de profundidad por triangulo para consultar en la posicion exacta
++        # del texel, evitando una tolerancia amplia que acepte otra superficie.
++        matrices = np.concatenate((q[idx], np.ones((len(idx), 3, 1))), axis=2)
++        validos = np.abs(np.linalg.det(matrices)) > 1e-10
++        self.planos = np.zeros((len(idx), 3))
++        self.planos[validos] = np.linalg.solve(matrices[validos], (pos @ self.direccion)[idx][validos, :, None])[..., 0]
++        self.contribuciones = self.fondo_muestras = self.ocultos = 0
++        Image.fromarray(self.m).save(carpeta / f"{nombre}_mascara.png")
++        Image.fromarray(self.erosion).save(carpeta / f"{nombre}_mascara_erosion3.png")
++        _, du = rasterizar(q, pos @ self.direccion, idx, w, h)
++        sil = du >= 0
++        sup = np.full((h, w, 3), 40, np.uint8)
++        sup[self.m & sil] = [210, 210, 210]
++        sup[self.m & ~sil] = [220, 60, 60]
++        sup[sil & ~self.m] = [70, 110, 230]
++        Image.fromarray(sup).save(carpeta / f"{nombre}_alineacion.png")
++
++    def proyectar(self, puntos):
++        return np.column_stack((puntos @ self.eje, -puntos[:, 1])) * self.escala + self.tras
++
++    def muestrear(self, puntos, normales, triangulo):
++        q = self.proyectar(puntos)
++        x, y = q.T
++        h, w = self.m.shape
++        dot = normales @ self.direccion
++        valido = (x >= 0) & (x < w - 1) & (y >= 0) & (y < h - 1) & (dot > 0)
++        ids = np.flatnonzero(valido)
++        pesos = np.zeros(len(puntos), np.float32)
++        colores = np.zeros((len(puntos), 3), np.float32)
++        if not len(ids):
++            return colores, pesos
++        x0, y0 = np.floor(q[ids]).astype(int).T
++        seguro = self.erosion[y0, x0] & self.erosion[y0 + 1, x0] & self.erosion[y0, x0 + 1] & self.erosion[y0 + 1, x0 + 1]
++        ids = ids[seguro]
++        if not len(ids):
++            return colores, pesos
++        pix = np.rint(q[ids] * self.super).astype(int)
++        du = self.du[pix[:, 1], pix[:, 0]]
++        zreal = puntos[ids] @ self.direccion
++        zvisible = (self.planos[np.maximum(du, 0), :2] * q[ids]).sum(1) + self.planos[np.maximum(du, 0), 2]
++        visible = (du >= 0) & ((du == triangulo) | (np.abs(zreal - zvisible) <= 2e-5))
++        self.ocultos += int((~visible).sum())
++        ids = ids[visible]
++        if not len(ids):
++            return colores, pesos
++        x0, y0 = np.floor(q[ids]).astype(int).T
++        fx, fy = (q[ids] - np.column_stack((x0, y0))).T
++        a = self.rgb[y0, x0].astype(np.float32)
++        b = self.rgb[y0, x0 + 1].astype(np.float32)
++        c = self.rgb[y0 + 1, x0].astype(np.float32)
++        d = self.rgb[y0 + 1, x0 + 1].astype(np.float32)
++        colores[ids] = (a * ((1 - fx) * (1 - fy))[:, None] + b * (fx * (1 - fy))[:, None]
++                        + c * ((1 - fx) * fy)[:, None] + d * (fx * fy)[:, None])
++        pesos[ids] = np.maximum(dot[ids], 0) ** 3
++        # Auditoria del soporte bilineal contra la mascara sin erosionar.
++        mal = ~(self.m[y0, x0] & self.m[y0, x0 + 1] & self.m[y0 + 1, x0] & self.m[y0 + 1, x0 + 1])
++        self.contribuciones += len(ids)
++        self.fondo_muestras += int(mal.sum())
++        return colores, pesos
++
++
++def rellenar_bordes(tex, ocupado, pasos=12):
++    """Extiende doce texels fuera de las islas, sin envolver los bordes del mapa."""
++    m = ocupado.copy()
++    for _ in range(pasos):
++        vecinos = np.zeros_like(m)
++        vecinos[1:] |= m[:-1]
++        vecinos[:-1] |= m[1:]
++        vecinos[:, 1:] |= m[:, :-1]
++        vecinos[:, :-1] |= m[:, 1:]
++        yy, xx = np.where(vecinos & ~m)
++        if not len(yy):
++            break
++        suma = np.zeros((len(yy), 3), np.float32)
++        cuenta = np.zeros(len(yy), np.float32)
++        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
++            y, x = yy + dy, xx + dx
++            valido = (y >= 0) & (y < m.shape[0]) & (x >= 0) & (x < m.shape[1])
++            ids = np.flatnonzero(valido)
++            ids = ids[m[y[ids], x[ids]]]
++            suma[ids] += tex[y[ids], x[ids]]
++            cuenta[ids] += 1
++        tex[yy, xx] = np.rint(suma / cuenta[:, None]).astype(np.uint8)
++        m[yy, xx] = True
++    return int(m.sum() - ocupado.sum())
++
++
++def guardar_glb(ruta, doc, binario, png, imid):
++    # Conserva todos los bytes originales; solo anexa la imagen y cambia su enlace.
++    nuevo = bytearray(binario)
++    nuevo.extend(b"\0" * (-len(nuevo) % 4))
++    off = len(nuevo)
++    nuevo.extend(png)
++    doc["bufferViews"].append({"buffer": 0, "byteOffset": off, "byteLength": len(png)})
++    doc["images"][imid]["bufferView"] = len(doc["bufferViews"]) - 1
++    doc["images"][imid]["mimeType"] = "image/png"
++    doc["buffers"][0]["byteLength"] = len(nuevo)
++    nuevo.extend(b"\0" * (-len(nuevo) % 4))
++    js = json.dumps(doc, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
++    js += b" " * (-len(js) % 4)
++    ruta.write_bytes(struct.pack("<III", 0x46546C67, 2, 28 + len(js) + len(nuevo))
++                     + struct.pack("<II", len(js), 0x4E4F534A) + js
++                     + struct.pack("<II", len(nuevo), 0x004E4942) + nuevo)
++
++
++def main():
++    ap = argparse.ArgumentParser(description=__doc__)
++    ap.add_argument("--entrada", type=Path, default=LOTE / "L04_PER01_giro_tripo_mv.glb")
++    ap.add_argument("--salida", type=Path, default=LOTE / "L04_PER01_v3_hoja.glb")
++    ap.add_argument("--hoja", type=Path, default=HOJA)
++    ap.add_argument("--diagnosticos", type=Path, default=LOTE / "parecido/v3_hoja")
++    a = ap.parse_args()
++    if a.entrada.resolve() == a.salida.resolve():
++        raise ValueError("La salida no puede sobrescribir la entrada")
++    inicio = time.monotonic()
++    a.diagnosticos.mkdir(parents=True, exist_ok=True)
++    a.salida.parent.mkdir(parents=True, exist_ok=True)
++    doc, binario = leer_glb(a.entrada)
++    pos, uv, idx, normales, original, imid = geometria(doc, binario)
++    hoja = Image.open(a.hoja).convert("RGB")
++    vistas = []
++    for nombre in CAJAS:
++        print(f"Alineando {nombre}...", flush=True)
++        v = Vista(nombre, hoja, pos, idx, a.diagnosticos)
++        vistas.append(v)
++        print(f"  IoU {v.info['iou']:.4f}, escala {v.info['factor_escala']:.4f}, desplazamiento {v.info['desplazamiento_px']}", flush=True)
++    h, w = original.shape[:2]
++    tex = original.copy()
++    ocupado = np.zeros((h, w), bool)
++    pintado = np.zeros((h, w), bool)
++    fondo = np.zeros((h, w), bool)
++    lado_izq = np.zeros((h, w), bool)
++    # glTF usa v=0 en la fila superior y centros UV en (pixel+0.5)/tamano.
++    uvs = uv * [w, h] - 0.5
++    for t, vertices in enumerate(idx):
++        f = fragmentos(uvs[vertices], w, h)
++        if f is None:
++            continue
++        yy, xx, b = f
++        puntos = b @ pos[vertices]
++        n = b @ normales[vertices]
++        n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
++        # El sector cuyo eje dominante es -Z queda reservado a la textura Tripo.
++        izquierda = (-n[:, 2] > np.abs(n[:, 0])) & (-n[:, 2] > np.abs(n[:, 1]))
++        lado_izq[yy, xx] = izquierda
++        acum = 0.15 * original[yy, xx].astype(np.float32)
++        peso = np.full(len(yy), 0.15, np.float32)
++        for vista in vistas:
++            ids = np.flatnonzero(~izquierda)
++            color, pv = vista.muestrear(puntos[ids], n[ids], t)
++            acum[ids] += color * pv[:, None]
++            peso[ids] += pv
++        tex[yy, xx] = np.clip(np.rint(acum / peso[:, None]), 0, 255).astype(np.uint8)
++        ocupado[yy, xx] = True
++        pintado[yy, xx] = peso > 0.15
++        if t % 1000 == 0:
++            print(f"Horneando triangulo {t}/{len(idx)}", flush=True)
++    # Antes del padding, la zona izquierda debe coincidir byte por byte.
++    izq_diferentes = int(np.any(tex[lado_izq] != original[lado_izq], axis=1).sum())
++    if izq_diferentes:
++        raise AssertionError("El lado izquierdo cambio")
++    print("Rellenando bordes UV...", flush=True)
++    padding = rellenar_bordes(tex, ocupado)
++    imagen = Image.fromarray(tex)
++    imagen.save(a.diagnosticos / "textura.png")
++    Image.fromarray(pintado).save(a.diagnosticos / "texels_hoja.png")
++    Image.fromarray(ocupado).save(a.diagnosticos / "texels_superficie.png")
++    buf = io.BytesIO()
++    imagen.save(buf, format="PNG")
++    guardar_glb(a.salida, doc, binario, buf.getvalue(), imid)
++    # Verifica la conservacion binaria de accessors, nodos, UV y materiales.
++    d2, b2 = leer_glb(a.salida)
++    d0, b0 = leer_glb(a.entrada)
++    assert b2[:len(b0)] == b0
++    for clave in ("meshes", "nodes", "accessors", "materials", "textures", "scenes"):
++        assert d2[clave] == d0[clave], clave
++    assert d2["bufferViews"][:-1] == d0["bufferViews"]
++    meta = {"entrada": str(a.entrada), "salida": str(a.salida), "hoja": str(a.hoja),
++            "sha256_entrada": hashlib.sha256(a.entrada.read_bytes()).hexdigest(),
++            "sha256_hoja": hashlib.sha256(a.hoja.read_bytes()).hexdigest(),
++            "triangulos": len(idx), "textura_px": [w, h], "geometria_uv_nodos_materiales_identicos": True,
++            "texels_superficie": int(ocupado.sum()), "texels_con_hoja": int(pintado.sum()),
++            "texels_con_hoja_pct_superficie": float(100 * pintado.sum() / ocupado.sum()),
++            "texels_con_hoja_pct_imagen": float(100 * pintado.mean()),
++            "texels_fondo": int(fondo.sum()), "texels_fondo_pct_pintados": float(100 * fondo.sum() / max(pintado.sum(), 1)),
++            "muestras_fondo": sum(v.fondo_muestras for v in vistas),
++            "texels_izquierda_conservados": int(lado_izq.sum()), "texels_izquierda_diferentes": izq_diferentes,
++            "criterio_izquierda": "normal interpolada con eje dominante -Z; no hay proyeccion desde -Z",
++            "padding_texels": padding, "peso_original": 0.15, "erosion_px": 3,
++            "profundidad_supermuestreo": 2, "profundidad_tolerancia_m": 2e-5,
++            "vistas": {v.nombre: {**v.info, "muestras_aceptadas": v.contribuciones,
++                                    "muestras_sobre_fondo": v.fondo_muestras,
++                                    "muestras_ocultas_rechazadas": v.ocultos} for v in vistas},
++            "segundos": round(time.monotonic() - inicio, 1)}
++    (a.diagnosticos / "horneado.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
++    print(json.dumps(meta, indent=2), flush=True)
++
++
++if __name__ == "__main__":
++    main()
+
+apply patch
+patch: completed
+C:\Users\guill\Desktop\Juego 2d-hd\herramientas\mallas\proyectar_hoja.py
+diff --git a/herramientas/mallas/proyectar_hoja.py b/herramientas/mallas/proyectar_hoja.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..33038a20456822589c4afde617ac8e6c315225a7
+--- /dev/null
++++ b/herramientas/mallas/proyectar_hoja.py
+@@ -0,0 +1,412 @@
++"""Repinta PER-01 desde la hoja, sin modificar geometria, UV ni materiales.
++
++Uso: python -I herramientas/mallas/proyectar_hoja.py
++Solo requiere numpy y Pillow. No usa Blender para el horneado.
++"""
++import argparse
++import hashlib
++import io
++import json
++import struct
++import time
++from pathlib import Path
++
++import numpy as np
++from PIL import Image, ImageDraw, ImageFilter
++
++
++RAIZ = Path(__file__).resolve().parents[2]
++LOTE = RAIZ / "Nasa_Game/Fase_1_Arte/Modelado/Lote_04"
++HOJA = RAIZ / "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png"
++CAJAS = {"frente": (200, 10, 720, 923), "perfil": (1410, 10, 1790, 923),
++         "espalda": (1960, 10, 2450, 923)}
++# La derecha de la imagen es -Z, +X y +Z respectivamente.
++EJES = {"frente": ([0, 0, -1], [1, 0, 0]),
++        "perfil": ([1, 0, 0], [0, 0, 1]),
++        "espalda": ([0, 0, 1], [-1, 0, 0])}
++DT = {5126: "<f4", 5125: "<u4", 5123: "<u2", 5121: "u1"}
++NC = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4}
++
++
++def leer_glb(ruta):
++    datos = Path(ruta).read_bytes()
++    magia, version, largo = struct.unpack_from("<III", datos)
++    if (magia, version, largo) != (0x46546C67, 2, len(datos)):
++        raise ValueError("GLB 2.0 invalido")
++    trozos = {}
++    off = 12
++    while off < len(datos):
++        n, tipo = struct.unpack_from("<II", datos, off)
++        trozos[tipo] = datos[off + 8:off + 8 + n]
++        off += 8 + n
++    doc = json.loads(trozos[0x4E4F534A])
++    return doc, trozos[0x004E4942]
++
++
++def accessor(doc, binario, indice):
++    a = doc["accessors"][indice]
++    if "sparse" in a:
++        raise ValueError("No se admiten accessors sparse")
++    v = doc["bufferViews"][a["bufferView"]]
++    dt = np.dtype(DT[a["componentType"]])
++    k = NC[a["type"]]
++    off = v.get("byteOffset", 0) + a.get("byteOffset", 0)
++    return np.ndarray((a["count"], k), dt, binario, off,
++                      (v.get("byteStride", dt.itemsize * k), dt.itemsize)).copy()
++
++
++def geometria(doc, binario):
++    # Este recurso tiene un solo nodo con malla y una matriz sin jerarquia.
++    nodos = [n for n in doc["nodes"] if "mesh" in n]
++    if len(nodos) != 1 or any(n.get("children") for n in doc["nodes"]):
++        raise ValueError("Se esperaba una sola malla sin jerarquia")
++    nodo = nodos[0]
++    prims = doc["meshes"][nodo["mesh"]]["primitives"]
++    if len(prims) != 1 or prims[0].get("mode", 4) != 4:
++        raise ValueError("Se esperaba una primitiva de triangulos")
++    p = prims[0]
++    if any(k in nodo for k in ("translation", "rotation", "scale")):
++        raise ValueError("Este recurso debe usar matriz o identidad")
++    mat = np.array(nodo.get("matrix", np.eye(4).T.ravel()), float).reshape(4, 4).T
++    pos = accessor(doc, binario, p["attributes"]["POSITION"]).astype(float)
++    pos = pos @ mat[:3, :3].T + mat[:3, 3]
++    uv = accessor(doc, binario, p["attributes"]["TEXCOORD_0"]).astype(float)
++    idx = accessor(doc, binario, p["indices"]).reshape(-1, 3).astype(int)
++    normales = accessor(doc, binario, p["attributes"]["NORMAL"]).astype(float)
++    normales = normales @ np.linalg.inv(mat[:3, :3])
++    normales /= np.maximum(np.linalg.norm(normales, axis=1, keepdims=True), 1e-12)
++    material = doc["materials"][p.get("material", 0)]
++    texid = material["pbrMetallicRoughness"]["baseColorTexture"]["index"]
++    imid = doc["textures"][texid]["source"]
++    v = doc["bufferViews"][doc["images"][imid]["bufferView"]]
++    off = v.get("byteOffset", 0)
++    original = np.array(Image.open(io.BytesIO(binario[off:off + v["byteLength"]])).convert("RGB"))
++    return pos, uv, idx, normales, original, imid
++
++
++def mascara(rgb):
++    a = np.asarray(rgb, dtype=np.float32)
++    borde = np.concatenate((a[0], a[-1], a[:, 0], a[:, -1]))
++    fondo = np.median(borde, axis=0)
++    return np.linalg.norm(a - fondo, axis=-1) > 28, fondo
++
++
++def fragmentos(tri, ancho, alto):
++    """Rasteriza centros de pixel; devuelve coordenadas y pesos baricentricos."""
++    x0, y0 = np.maximum(np.ceil(tri.min(0)).astype(int), 0)
++    x1, y1 = np.minimum(np.floor(tri.max(0)).astype(int), [ancho - 1, alto - 1])
++    if x1 < x0 or y1 < y0:
++        return None
++    (ax, ay), (bx, by), (cx, cy) = tri
++    den = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy)
++    if abs(den) < 1e-12:
++        return None
++    x, y = np.meshgrid(np.arange(x0, x1 + 1), np.arange(y0, y1 + 1))
++    a = ((by - cy) * (x - cx) + (cx - bx) * (y - cy)) / den
++    b = ((cy - ay) * (x - cx) + (ax - cx) * (y - cy)) / den
++    c = 1 - a - b
++    dentro = (a >= -1e-9) & (b >= -1e-9) & (c >= -1e-9)
++    if not dentro.any():
++        return None
++    return y[dentro], x[dentro], np.column_stack((a[dentro], b[dentro], c[dentro]))
++
++
++def rasterizar(q, profundidad, idx, ancho, alto):
++    z = np.full((alto, ancho), -np.inf, dtype=np.float32)
++    propietario = np.full((alto, ancho), -1, dtype=np.int32)
++    for t, vertices in enumerate(idx):
++        f = fragmentos(q[vertices], ancho, alto)
++        if f is None:
++            continue
++        yy, xx, b = f
++        zz = b @ profundidad[vertices]
++        gana = zz > z[yy, xx]
++        yy, xx = yy[gana], xx[gana]
++        z[yy, xx] = zz[gana]
++        propietario[yy, xx] = t
++    return z, propietario
++
++
++def alinear(pos, idx, eje, m):
++    """Busqueda global discreta por IoU seguida de refinamiento a un pixel.
++
++    La FFT evalua todas las traslaciones permitidas para cada escala. Se usan
++    siluetas rasterizadas, no cajas, para decidir el ajuste. El centroide solo
++    establece el origen de la ventana de busqueda.
++    """
++    alto, ancho = m.shape
++    u = pos @ eje
++    ymin, ymax = pos[:, 1].min(), pos[:, 1].max()
++    ys, xs = np.where(m)
++    alto_fig, ancho_fig = np.ptp(ys) + 1, np.ptp(xs) + 1
++    escala0 = (alto_fig - 1) / (ymax - ymin)
++    centro = np.array([(u.min() + u.max()) / 2, -(ymin + ymax) / 2])
++    plano = np.column_stack((u, -pos[:, 1])) - centro
++    q0 = plano * escala0 + [ancho / 2, alto / 2]
++    _, duenio = rasterizar(q0, np.zeros(len(pos)), idx, ancho, alto)
++    my, mx = np.where(duenio >= 0)
++    base = np.array([xs.mean(), ys.mean()]) - np.array([mx.mean(), my.mean()]) + [ancho / 2, alto / 2]
++    limite = np.array([0.06 * ancho_fig, 0.06 * alto_fig])
++    mejor = None
++    # Un lienzo con margen evita que el recorte cambie el area durante la busqueda.
++    for paso, escalas in ((3, np.linspace(0.92, 1.08, 33)), (1, None)):
++        if escalas is None:
++            escalas = np.linspace(max(0.92, mejor[1] - 0.006), min(1.08, mejor[1] + 0.006), 13)
++        margen = 80
++        w, h = int(np.ceil(ancho / paso)) + 2 * margen, int(np.ceil(alto / paso)) + 2 * margen
++        ref = np.zeros((h, w), bool)
++        pequena = np.asarray(Image.fromarray(m).resize((int(np.ceil(ancho / paso)), int(np.ceil(alto / paso))), Image.Resampling.NEAREST))
++        ref[margen:margen + pequena.shape[0], margen:margen + pequena.shape[1]] = pequena
++        ft = np.fft.rfft2(ref)
++        if paso == 3:
++            dx = np.arange(int(np.ceil(-limite[0] / paso)), int(np.floor(limite[0] / paso)) + 1)
++            dy = np.arange(int(np.ceil(-limite[1] / paso)), int(np.floor(limite[1] / paso)) + 1)
++        else:
++            dx = np.arange(max(int(np.ceil(-limite[0])), int(round(mejor[2][0])) - 4),
++                           min(int(np.floor(limite[0])), int(round(mejor[2][0])) + 4) + 1)
++            dy = np.arange(max(int(np.ceil(-limite[1])), int(round(mejor[2][1])) - 4),
++                           min(int(np.floor(limite[1])), int(round(mejor[2][1])) + 4) + 1)
++        candidato = None
++        for s in escalas:
++            q = (plano * (escala0 * s) + base) / paso + margen
++            _, du = rasterizar(q, np.zeros(len(pos)), idx, w, h)
++            sil = du >= 0
++            correlacion = np.fft.irfft2(ft * np.conj(np.fft.rfft2(sil)), s=ref.shape).real
++            inter = np.maximum(0, np.rint(correlacion[np.ix_(dy % h, dx % w)]))
++            iou = inter / np.maximum(ref.sum() + sil.sum() - inter, 1)
++            iy, ix = np.unravel_index(np.argmax(iou), iou.shape)
++            val = (float(iou[iy, ix]), float(s), np.array([dx[ix], dy[iy]]) * paso)
++            if candidato is None or val[0] > candidato[0]:
++                candidato = val
++        mejor = candidato
++    _, factor, delta = mejor
++    escala = escala0 * factor
++    tras = base + delta - centro * escala
++    q = np.column_stack((u, -pos[:, 1])) * escala + tras
++    # Medida final sin recortar la silueta proyectada fuera de la caja de la hoja.
++    margen = 150
++    _, du = rasterizar(q + margen, np.zeros(len(pos)), idx, ancho + 2 * margen, alto + 2 * margen)
++    ref = np.pad(m, margen)
++    sil = du >= 0
++    iou = (ref & sil).sum() / max((ref | sil).sum(), 1)
++    return escala, tras, {"iou": float(iou), "escala_base": float(escala0),
++                         "factor_escala": factor, "desplazamiento_px": delta.tolist(),
++                         "limites_desplazamiento_px": limite.tolist(),
++                         "traslacion_px": tras.tolist(), "centro_inicial_px": base.tolist()}
++
++
++class Vista:
++    def __init__(self, nombre, hoja, pos, idx, carpeta):
++        self.nombre = nombre
++        self.rgb = np.asarray(hoja.crop(CAJAS[nombre]).convert("RGB"))
++        self.m, self.fondo = mascara(self.rgb)
++        self.erosion = np.asarray(Image.fromarray(self.m.astype(np.uint8) * 255).filter(ImageFilter.MinFilter(7))) > 0
++        self.eje, self.direccion = map(lambda a: np.array(a, float), EJES[nombre])
++        self.escala, self.tras, self.info = alinear(pos, idx, self.eje, self.m)
++        q = self.proyectar(pos)
++        h, w = self.m.shape
++        self.super = 2
++        self.z, self.du = rasterizar(q * self.super, pos @ self.direccion, idx, w * self.super, h * self.super)
++        # Plano de profundidad por triangulo para consultar en la posicion exacta
++        # del texel, evitando una tolerancia amplia que acepte otra superficie.
++        matrices = np.concatenate((q[idx], np.ones((len(idx), 3, 1))), axis=2)
++        validos = np.abs(np.linalg.det(matrices)) > 1e-10
++        self.planos = np.zeros((len(idx), 3))
++        self.planos[validos] = np.linalg.solve(matrices[validos], (pos @ self.direccion)[idx][validos, :, None])[..., 0]
++        self.contribuciones = self.fondo_muestras = self.ocultos = 0
++        Image.fromarray(self.m).save(carpeta / f"{nombre}_mascara.png")
++        Image.fromarray(self.erosion).save(carpeta / f"{nombre}_mascara_erosion3.png")
++        _, du = rasterizar(q, pos @ self.direccion, idx, w, h)
++        sil = du >= 0
++        sup = np.full((h, w, 3), 40, np.uint8)
++        sup[self.m & sil] = [210, 210, 210]
++        sup[self.m & ~sil] = [220, 60, 60]
++        sup[sil & ~self.m] = [70, 110, 230]
++        Image.fromarray(sup).save(carpeta / f"{nombre}_alineacion.png")
++
++    def proyectar(self, puntos):
++        return np.column_stack((puntos @ self.eje, -puntos[:, 1])) * self.escala + self.tras
++
++    def muestrear(self, puntos, normales, triangulo):
++        q = self.proyectar(puntos)
++        x, y = q.T
++        h, w = self.m.shape
++        dot = normales @ self.direccion
++        valido = (x >= 0) & (x < w - 1) & (y >= 0) & (y < h - 1) & (dot > 0)
++        ids = np.flatnonzero(valido)
++        pesos = np.zeros(len(puntos), np.float32)
++        colores = np.zeros((len(puntos), 3), np.float32)
++        fondo = np.zeros(len(puntos), bool)
++        if not len(ids):
++            return colores, pesos, fondo
++        x0, y0 = np.floor(q[ids]).astype(int).T
++        seguro = self.erosion[y0, x0] & self.erosion[y0 + 1, x0] & self.erosion[y0, x0 + 1] & self.erosion[y0 + 1, x0 + 1]
++        ids = ids[seguro]
++        if not len(ids):
++            return colores, pesos, fondo
++        pix = np.rint(q[ids] * self.super).astype(int)
++        du = self.du[pix[:, 1], pix[:, 0]]
++        zreal = puntos[ids] @ self.direccion
++        zvisible = (self.planos[np.maximum(du, 0), :2] * q[ids]).sum(1) + self.planos[np.maximum(du, 0), 2]
++        visible = (du >= 0) & ((du == triangulo) | (np.abs(zreal - zvisible) <= 2e-5))
++        self.ocultos += int((~visible).sum())
++        ids = ids[visible]
++        if not len(ids):
++            return colores, pesos, fondo
++        x0, y0 = np.floor(q[ids]).astype(int).T
++        fx, fy = (q[ids] - np.column_stack((x0, y0))).T
++        a = self.rgb[y0, x0].astype(np.float32)
++        b = self.rgb[y0, x0 + 1].astype(np.float32)
++        c = self.rgb[y0 + 1, x0].astype(np.float32)
++        d = self.rgb[y0 + 1, x0 + 1].astype(np.float32)
++        colores[ids] = (a * ((1 - fx) * (1 - fy))[:, None] + b * (fx * (1 - fy))[:, None]
++                        + c * ((1 - fx) * fy)[:, None] + d * (fx * fy)[:, None])
++        pesos[ids] = np.maximum(dot[ids], 0) ** 3
++        # Auditoria del soporte bilineal contra la mascara sin erosionar.
++        mal = ~(self.m[y0, x0] & self.m[y0, x0 + 1] & self.m[y0 + 1, x0] & self.m[y0 + 1, x0 + 1])
++        fondo[ids] = mal
++        self.contribuciones += len(ids)
++        self.fondo_muestras += int(mal.sum())
++        return colores, pesos, fondo
++
++
++def rellenar_bordes(tex, ocupado, pasos=12):
++    """Extiende doce texels fuera de las islas, sin envolver los bordes del mapa."""
++    m = ocupado.copy()
++    for _ in range(pasos):
++        vecinos = np.zeros_like(m)
++        vecinos[1:] |= m[:-1]
++        vecinos[:-1] |= m[1:]
++        vecinos[:, 1:] |= m[:, :-1]
++        vecinos[:, :-1] |= m[:, 1:]
++        yy, xx = np.where(vecinos & ~m)
++        if not len(yy):
++            break
++        suma = np.zeros((len(yy), 3), np.float32)
++        cuenta = np.zeros(len(yy), np.float32)
++        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
++            y, x = yy + dy, xx + dx
++            valido = (y >= 0) & (y < m.shape[0]) & (x >= 0) & (x < m.shape[1])
++            ids = np.flatnonzero(valido)
++            ids = ids[m[y[ids], x[ids]]]
++            suma[ids] += tex[y[ids], x[ids]]
++            cuenta[ids] += 1
++        tex[yy, xx] = np.rint(suma / cuenta[:, None]).astype(np.uint8)
++        m[yy, xx] = True
++    return int(m.sum() - ocupado.sum())
++
++
++def guardar_glb(ruta, doc, binario, png, imid):
++    # Conserva todos los bytes originales; solo anexa la imagen y cambia su enlace.
++    nuevo = bytearray(binario)
++    nuevo.extend(b"\0" * (-len(nuevo) % 4))
++    off = len(nuevo)
++    nuevo.extend(png)
++    doc["bufferViews"].append({"buffer": 0, "byteOffset": off, "byteLength": len(png)})
++    doc["images"][imid]["bufferView"] = len(doc["bufferViews"]) - 1
++    doc["images"][imid]["mimeType"] = "image/png"
++    doc["buffers"][0]["byteLength"] = len(nuevo)
++    nuevo.extend(b"\0" * (-len(nuevo) % 4))
++    js = json.dumps(doc, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
++    js += b" " * (-len(js) % 4)
++    ruta.write_bytes(struct.pack("<III", 0x46546C67, 2, 28 + len(js) + len(nuevo))
++                     + struct.pack("<II", len(js), 0x4E4F534A) + js
++                     + struct.pack("<II", len(nuevo), 0x004E4942) + nuevo)
++
++
++def main():
++    ap = argparse.ArgumentParser(description=__doc__)
++    ap.add_argument("--entrada", type=Path, default=LOTE / "L04_PER01_giro_tripo_mv.glb")
++    ap.add_argument("--salida", type=Path, default=LOTE / "L04_PER01_v3_hoja.glb")
++    ap.add_argument("--hoja", type=Path, default=HOJA)
++    ap.add_argument("--diagnosticos", type=Path, default=LOTE / "parecido/v3_hoja")
++    a = ap.parse_args()
++    if a.entrada.resolve() == a.salida.resolve():
++        raise ValueError("La salida no puede sobrescribir la entrada")
++    inicio = time.monotonic()
++    a.diagnosticos.mkdir(parents=True, exist_ok=True)
++    a.salida.parent.mkdir(parents=True, exist_ok=True)
++    doc, binario = leer_glb(a.entrada)
++    pos, uv, idx, normales, original, imid = geometria(doc, binario)
++    hoja = Image.open(a.hoja).convert("RGB")
++    vistas = []
++    for nombre in CAJAS:
++        print(f"Alineando {nombre}...", flush=True)
++        v = Vista(nombre, hoja, pos, idx, a.diagnosticos)
++        vistas.append(v)
++        print(f"  IoU {v.info['iou']:.4f}, escala {v.info['factor_escala']:.4f}, desplazamiento {v.info['desplazamiento_px']}", flush=True)
++    h, w = original.shape[:2]
++    tex = original.copy()
++    ocupado = np.zeros((h, w), bool)
++    pintado = np.zeros((h, w), bool)
++    fondo = np.zeros((h, w), bool)
++    lado_izq = np.zeros((h, w), bool)
++    # glTF usa v=0 en la fila superior y centros UV en (pixel+0.5)/tamano.
++    uvs = uv * [w, h] - 0.5
++    for t, vertices in enumerate(idx):
++        f = fragmentos(uvs[vertices], w, h)
++        if f is None:
++            continue
++        yy, xx, b = f
++        puntos = b @ pos[vertices]
++        n = b @ normales[vertices]
++        n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
++        # El sector cuyo eje dominante es -Z queda reservado a la textura Tripo.
++        izquierda = (-n[:, 2] > np.abs(n[:, 0])) & (-n[:, 2] > np.abs(n[:, 1]))
++        lado_izq[yy, xx] = izquierda
++        acum = 0.15 * original[yy, xx].astype(np.float32)
++        peso = np.full(len(yy), 0.15, np.float32)
++        for vista in vistas:
++            ids = np.flatnonzero(~izquierda)
++            color, pv, mal = vista.muestrear(puntos[ids], n[ids], t)
++            acum[ids] += color * pv[:, None]
++            peso[ids] += pv
++            fondo[yy[ids], xx[ids]] |= mal & (pv > 0)
++        tex[yy, xx] = np.clip(np.rint(acum / peso[:, None]), 0, 255).astype(np.uint8)
++        ocupado[yy, xx] = True
++        pintado[yy, xx] = peso > 0.15
++        if t % 1000 == 0:
++            print(f"Horneando triangulo {t}/{len(idx)}", flush=True)
++    # Antes del padding, la zona izquierda debe coincidir byte por byte.
++    izq_diferentes = int(np.any(tex[lado_izq] != original[lado_izq], axis=1).sum())
++    if izq_diferentes:
++        raise AssertionError("El lado izquierdo cambio")
++    print("Rellenando bordes UV...", flush=True)
++    padding = rellenar_bordes(tex, ocupado)
++    imagen = Image.fromarray(tex)
++    imagen.save(a.diagnosticos / "textura.png")
++    Image.fromarray(pintado).save(a.diagnosticos / "texels_hoja.png")
++    Image.fromarray(ocupado).save(a.diagnosticos / "texels_superficie.png")
++    buf = io.BytesIO()
++    imagen.save(buf, format="PNG")
++    guardar_glb(a.salida, doc, binario, buf.getvalue(), imid)
++    # Verifica la conservacion binaria de accessors, nodos, UV y materiales.
++    d2, b2 = leer_glb(a.salida)
++    d0, b0 = leer_glb(a.entrada)
++    assert b2[:len(b0)] == b0
++    for clave in ("meshes", "nodes", "accessors", "materials", "textures", "scenes"):
++        assert d2[clave] == d0[clave], clave
++    assert d2["bufferViews"][:-1] == d0["bufferViews"]
++    meta = {"entrada": str(a.entrada), "salida": str(a.salida), "hoja": str(a.hoja),
++            "sha256_entrada": hashlib.sha256(a.entrada.read_bytes()).hexdigest(),
++            "sha256_hoja": hashlib.sha256(a.hoja.read_bytes()).hexdigest(),
++            "triangulos": len(idx), "textura_px": [w, h], "geometria_uv_nodos_materiales_identicos": True,
++            "texels_superficie": int(ocupado.sum()), "texels_con_hoja": int(pintado.sum()),
++            "texels_con_hoja_pct_superficie": float(100 * pintado.sum() / ocupado.sum()),
++            "texels_con_hoja_pct_imagen": float(100 * pintado.mean()),
++            "texels_fondo": int(fondo.sum()), "texels_fondo_pct_pintados": float(100 * fondo.sum() / max(pintado.sum(), 1)),
++            "muestras_fondo": sum(v.fondo_muestras for v in vistas),
++            "texels_izquierda_conservados": int(lado_izq.sum()), "texels_izquierda_diferentes": izq_diferentes,
++            "criterio_izquierda": "normal interpolada con eje dominante -Z; no hay proyeccion desde -Z",
++            "padding_texels": padding, "peso_original": 0.15, "erosion_px": 3,
++            "profundidad_supermuestreo": 2, "profundidad_tolerancia_m": 2e-5,
++            "vistas": {v.nombre: {**v.info, "muestras_aceptadas": v.contribuciones,
++                                    "muestras_sobre_fondo": v.fondo_muestras,
++                                    "muestras_ocultas_rechazadas": v.ocultos} for v in vistas},
++            "segundos": round(time.monotonic() - inicio, 1)}
++    (a.diagnosticos / "horneado.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
++    print(json.dumps(meta, indent=2), flush=True)
++
++
++if __name__ == "__main__":
++    main()
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'python -I herramientas/mallas/proyectar_hoja.py' in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -I herramientas/comparar_personaje.py Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/spec_v2.json Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/antes_lamina.png --etiqueta 'v2 antes del repintado'" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 4162ms:
+{"etiqueta": "v2 antes del repintado", "parecido_total": 62.2, "vistas": {"frente": {"silueta": 79.9, "color": 62.4, "estructura": 29.2, "parecido": 59.4}, "cabeza": {"silueta": 93.9, "color": 46.2, "estructura": 26.1, "parecido": 59.3}, "perfil": {"silueta": 86.0, "color": 67.4, "estructura": 40.0, "parecido": 66.6}, "espalda": {"silueta": 84.8, "color": 72.9, "estructura": 44.8, "parecido": 69.2}}}
+
+codex
+La medicion de control confirma el 62,2 %: frente 59,4 %, cabeza 59,3 %, perfil 66,6 % y espalda 69,2 %. El horneado ya esta ejecutando la busqueda de alineacion; despues comprobare la visibilidad y el porcentaje de muestras que caen sobre fondo.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-ChildItem Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja | Select-Object Name,Length' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 468ms:
+
+Name             Length
+----             ------
+antes_lamina.png 557007
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Process python | Select-Object Id,CPU,WorkingSet,StartTime' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 628ms:
+
+   Id       CPU WorkingSet StartTime          
+   --       --- ---------- ---------          
+13864 63,453125  132395008 12/11/2026 10:13:16
+15316   0,15625   15220736 12/11/2026 10:08:48
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -I -c \"import runpy,numpy as np; from pathlib import Path; m=runpy.run_path('herramientas/mallas/proyectar_hoja.py'); P=np.array([[0.2,-0.2,0.2],[0.2,-0.2,-0.2],[0.2,0.2,-0.2],[0.2,0.2,0.2],[0,-0.2,0.2],[0,-0.2,-0.2],[0,0.2,-0.2],[0,0.2,0.2]]); I=np.array([[0,1,2],[0,2,3],[4,5,6],[4,6,7]]); v=m['Vista'].__new__(m['Vista']); v.eje=np.array([0,0,-1]); v.direccion=np.array([1,0,0]); v.escala=100; v.tras=np.array([32,32]); v.super=2; v.rgb=np.full((64,64,3),[200,80,30],dtype=np.uint8); v.m=np.ones((64,64),bool); v.erosion=v.m.copy(); q=v.proyectar(P); v.z,v.du=m['rasterizar'](q*2,P[:,0],I,128,128); A=np.concatenate((q[I],np.ones((4,3,1))),axis=2); v.planos=np.linalg.solve(A,P[:,0][I,:,None])[...,0]; v.contribuciones=v.fondo_muestras=v.ocultos=0; C,W,F=v.muestrear(np.array([[0.2,0.03,0.02],[0,0.03,0.02]]),np.array([[1,0,0],[1,0,0]]),2); assert np.allclose(W,[1,0]),W; assert np.allclose(C[0],[200,80,30]); assert not F.any(); v.erosion[:]=False; C,W,F=v.muestrear(np.array([[0.2,0.03,0.02]]),np.array([[1,0,0]]),0); assert W[0]==0; tex=np.zeros((5,5,3),np.uint8); tex[0,0]=[20,40,60]; ocu=np.zeros((5,5),bool); ocu[0,0]=True; m['rellenar_bordes'](tex,ocu,1); assert np.all(tex[1,0]==[20,40,60]); assert not tex[-1,0].any(); assert not tex[0,-1].any(); print('OK: profundidad oculta torso posterior; mascara rechaza fondo; padding no envuelve bordes')\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 1153ms:
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import runpy,numpy as np; from pathlib import Path; m=runpy.run_path('herramientas/mallas/proyectar_hoja.py'); P=np.array([[0.2,-0.2,0.2],[0.2,-0.2,-0.2],[0.2,0.2,-0.2],[0.2,0.2,0.2],[0,-0.2,0.2],[0,-0.2,-0.2],[0,0.2,-0.2],[0,0.2,0.2]]); I=np.array([[0,1,2],[0,2,3],[4,5,6],[4,6,7]]); v=m['Vista'].__new__(m['Vista']); v.eje=np.array([0,0,-1]); v.direccion=np.array([1,0,0]); v.escala=100; v.tras=np.array([32,32]); v.super=2; v.rgb=np.full((64,64,3),[200,80,30],dtype=np.uint8); v.m=np.ones((64,64),bool); v.erosion=v.m.copy(); q=v.proyectar(P); v.z,v.du=m['rasterizar'](q*2,P[:,0],I,128,128); A=np.concatenate((q[I],np.ones((4,3,1))),axis=2); v.planos=np.linalg.solve(A,P[:,0][I,:,None])[...,0]; v.contribuciones=v.fondo_muestras=v.ocultos=0; C,W,F=v.muestrear(np.array([[0.2,0.03,0.02],[0,0.03,0.02]]),np.array([[1,0,0],[1,0,0]]),2); assert np.allclose(W,[1,0]),W; assert np.allclose(C[0],[200,80,30]); assert not F.any(); v.erosion[:]=False; C,W,F=v.muestrear(np.array([[0.2,0.03,0.02]]),np.array([[1,0,0]]),0); assert W[0]==0; tex=np.zeros((5,5,3),np.uint8); tex[0,0]=[20,40,60]; ocu=np.zeros((5,5),bool); ocu[0,0]=True; m['rellenar_bordes'](tex,ocu,1); assert np.all(tex[1,0]==[20,40,60]); assert not tex[-1,0].any(); assert not tex[0,-1].any(); print('OK: profundidad oculta torso posterior; mascara rechaza fondo; padding no envuelve bordes')
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ~~~~~~^^^^^^^^^^
+IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -I -c \"import runpy,numpy as np; m=runpy.run_path('herramientas/mallas/proyectar_hoja.py'); P=np.array([[0.2,-0.2,0.2],[0.2,-0.2,-0.2],[0.2,0.2,-0.2],[0.2,0.2,0.2],[0,-0.2,0.2],[0,-0.2,-0.2],[0,0.2,-0.2],[0,0.2,0.2]]); I=np.array([[0,1,2],[0,2,3],[4,5,6],[4,6,7]]); v=m['Vista'].__new__(m['Vista']); v.eje=np.array([0,0,-1]); v.direccion=np.array([1,0,0]); v.escala=100; v.tras=np.array([32,32]); v.super=2; v.rgb=np.full((64,64,3),[200,80,30],dtype=np.uint8); v.m=np.ones((64,64),bool); v.erosion=v.m.copy(); q=v.proyectar(P); v.z,v.du=m['rasterizar'](q*2,P[:,0],I,128,128); A=np.concatenate((q[I],np.ones((4,3,1))),axis=2); v.planos=np.linalg.solve(A,P[:,0][I][...,None])[...,0]; v.contribuciones=v.fondo_muestras=v.ocultos=0; C,W,F=v.muestrear(np.array([[0.2,0.03,0.02],[0,0.03,0.02]]),np.array([[1,0,0],[1,0,0]]),2); assert np.allclose(W,[1,0]),W; assert np.allclose(C[0],[200,80,30]); assert not F.any(); v.erosion[:]=False; C,W,F=v.muestrear(np.array([[0.2,0.03,0.02]]),np.array([[1,0,0]]),0); assert W[0]==0; tex=np.zeros((5,5,3),np.uint8); tex[0,0]=[20,40,60]; ocu=np.zeros((5,5),bool); ocu[0,0]=True; m['rellenar_bordes'](tex,ocu,1); assert np.all(tex[1,0]==[20,40,60]); assert not tex[-1,0].any(); assert not tex[0,-1].any(); print('OK: profundidad oculta superficie posterior; mascara rechaza fondo; padding no envuelve bordes')\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1163ms:
+OK: profundidad oculta superficie posterior; mascara rechaza fondo; padding no envuelve bordes
+
+codex
+El ajuste frontal alcanzo un IoU de 85,0 % con una escala del 101,4 % y un desplazamiento de 6 px a la derecha y 12 px hacia arriba. Las pruebas sinteticas confirman que la superficie delantera bloquea la posterior, la mascara rechaza el fondo y el relleno UV no cruza los extremos de la textura.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -I -c \"from PIL import Image; from pathlib import Path; p=Path('Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v2'); print([(x.name,Image.open(x).size) for x in p.glob('*cuerpo.png')])\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 975ms:
+[('mx_cuerpo.png', (750, 1000)), ('my_cuerpo.png', (750, 1000)), ('px_cuerpo.png', (750, 1000)), ('py_cuerpo.png', (750, 1000))]
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Process -Id 13864 | Select-Object Id,CPU,WorkingSet,StartTime; Get-ChildItem Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja | Select-Object Name,Length' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 635ms:
+
+   Id        CPU WorkingSet StartTime          
+   --        --- ---------- ---------          
+13864 188,484375  178282496 12/11/2026 10:13:16
+                                               
+                                               
+                                               
+                                               
+                                               
+                                               
+                                               
+
+
+
+codex
+El perfil alcanza un IoU de 87,0 %. Las superposiciones muestran diferencias de geometria, sobre todo en el bolso ausente y la posicion de brazos y manos; el repintado podra transferir detalle donde haya superficie. Falta completar la espalda, hornear y medir el resultado.
+ succeeded in 237614ms:
+Alineando frente...
+  IoU 0.8501, escala 1.0140, desplazamiento [6, -12]
+Alineando perfil...
+  IoU 0.8700, escala 1.0150, desplazamiento [3, -7]
+Alineando espalda...
+  IoU 0.8707, escala 1.0190, desplazamiento [-4, -10]
+Horneando triangulo 0/7522
+Horneando triangulo 1000/7522
+Horneando triangulo 2000/7522
+Horneando triangulo 3000/7522
+Horneando triangulo 4000/7522
+Horneando triangulo 5000/7522
+Horneando triangulo 6000/7522
+Horneando triangulo 7000/7522
+Rellenando bordes UV...
+{
+  "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+  "salida": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_v3_hoja.glb",
+  "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+  "sha256_entrada": "249490277719be670c948c09feda8836725bb1461cf088c84e970ea7b5ed70d9",
+  "sha256_hoja": "eb5cf7817c99aef8844c7f21a73e4514e65da6fd48f1671d696ec65f631e8200",
+  "triangulos": 7522,
+  "textura_px": [
+    4096,
+    4096
+  ],
+  "geometria_uv_nodos_materiales_identicos": true,
+  "texels_superficie": 10414844,
+  "texels_con_hoja": 5546432,
+  "texels_con_hoja_pct_superficie": 53.25506555835114,
+  "texels_con_hoja_pct_imagen": 33.05931091308594,
+  "texels_fondo": 0,
+  "texels_fondo_pct_pintados": 0.0,
+  "muestras_fondo": 0,
+  "texels_izquierda_conservados": 2058415,
+  "texels_izquierda_diferentes": 0,
+  "criterio_izquierda": "normal interpolada con eje dominante -Z; no hay proyeccion desde -Z",
+  "padding_texels": 1652567,
+  "peso_original": 0.15,
+  "erosion_px": 3,
+  "profundidad_supermuestreo": 2,
+  "profundidad_tolerancia_m": 2e-05,
+  "vistas": {
+    "frente": {
+      "iou": 0.8500852610919855,
+      "escala_base": 897.0,
+      "factor_escala": 1.0140000000000002,
+      "desplazamiento_px": [
+        6,
+        -12
+      ],
+      "limites_desplazamiento_px": [
+        27.599999999999998,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        263.513792031735,
+        458.10072683322363
+      ],
+      "centro_inicial_px": [
+        259.30936291017406,
+        470.10072683322363
+      ],
+      "muestras_aceptadas": 2651408,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 1009542
+    },
+    "perfil": {
+      "iou": 0.8700079563942097,
+      "escala_base": 898.0,
+      "factor_escala": 1.0150000000000001,
+      "desplazamiento_px": [
+        3,
+        -7
+      ],
+      "limites_desplazamiento_px": [
+        20.22,
+        53.94
+      ],
+      "traslacion_px": [
+        184.84970062167443,
+        457.27286276015667
+      ],
+      "centro_inicial_px": [
+        184.06616402042823,
+        464.27286276015667
+      ],
+      "muestras_aceptadas": 2006035,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 2430285
+    },
+    "espalda": {
+      "iou": 0.8706505264104,
+      "escala_base": 897.0,
+      "factor_escala": 1.0190000000000001,
+      "desplazamiento_px": [
+        -4,
+        -10
+      ],
+      "limites_desplazamiento_px": [
+        26.52,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        241.9765536426185,
+        457.0107567569658
+      ],
+      "centro_inicial_px": [
+        244.1721288643844,
+        467.0107567569658
+      ],
+      "muestras_aceptadas": 2286472,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 901979
+    }
+  },
+  "segundos": 236.8
+}
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "& 'C:/Program Files/Blender Foundation/Blender 5.3/blender.exe' -b --factory-startup --python-exit-code 1 --python herramientas/blender/render_vistas.py -- --glb Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_v3_hoja.glb --salida Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/renders --lado 1000" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 7373ms:
+10:17:31 | INFO: Data are loaded, start creating Blender stuff
+10:17:31 | INFO: Blender create Mesh node tripo_mesh_0bdbe7f0-ec27-490d-9a5c-b799c663252b
+10:17:31 | INFO: glTF import finished in 0.05s
+00:04.625  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\renders\mx_cuerpo.png'
+00:04.860  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\renders\mx_cabeza.png'
+00:05.063  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\renders\px_cuerpo.png'
+00:05.328  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\renders\px_cabeza.png'
+00:05.500  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\renders\my_cuerpo.png'
+00:05.813  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\renders\my_cabeza.png'
+00:06.032  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\renders\py_cuerpo.png'
+00:06.297  render           | Saved: 'C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\renders\py_cabeza.png'
+VISTAS_OK caja=(-0.188, -0.24, -0.5) tam=(0.376, 0.481, 1.0)
+Blender 5.3.0 (hash 02f0899d78e3 built 2026-11-10 01:33:43)
+
+Blender quit
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -I -c \"from pathlib import Path; import json; p=Path('Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido'); s=json.loads((p/'spec_v2.json').read_text()); [(v.update(render=str((p/'v3_hoja/renders'/Path(v['render']).name).resolve()).replace(chr(92),'/'))) for v in s['vistas']]; (p/'v3_hoja/spec_v3.json').write_text(json.dumps(s,indent=2),encoding='utf-8')\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 299ms:
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -I herramientas/comparar_personaje.py Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/spec_v3.json Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/despues_lamina.png --etiqueta 'v3 hoja, visibilidad y original 0.15'" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 3260ms:
+{"etiqueta": "v3 hoja, visibilidad y original 0.15", "parecido_total": 64.9, "vistas": {"frente": {"silueta": 79.9, "color": 69.1, "estructura": 29.4, "parecido": 61.5}, "cabeza": {"silueta": 94.0, "color": 50.8, "estructura": 24.3, "parecido": 60.1}, "perfil": {"silueta": 86.0, "color": 76.7, "estructura": 47.1, "parecido": 71.5}, "espalda": {"silueta": 84.8, "color": 81.4, "estructura": 54.8, "parecido": 74.8}}}
+
+codex
+La primera medicion de la v3 sube de 62,2 % a 64,9 %; mejora el parecido de las cuatro vistas, aunque la estructura de la cabeza baja ligeramente. La auditoria registra 53,26 % de los texels de superficie con color de la hoja y 0 % de muestras sobre fondo. Revisare el primer plano antes de cerrar el informe, porque aun se ven transiciones en la cara.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "@'
+from pathlib import Path
+import json
+from PIL import Image, ImageDraw, ImageFont
+import numpy as np
+p = Path('Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja')
+hoja = Image.open('Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png').convert('RGB').crop((200, 10, 720, 923))
+a = np.asarray(hoja).astype(float)
+borde = np.concatenate((a[0], a[-1], a[:, 0], a[:, -1]))
+m = np.linalg.norm(a - np.median(borde, axis=0), axis=-1) > 28
+y, x = np.where(m)
+y0, y1 = int(y.min()), int(y.max()) + 1
+ref = hoja.crop((int(x.min()), y0, int(x.max()) + 1, y0 + round((y1 - y0) * 0.36)))
+ref.save(p / 'hoja_cabeza.png')
+render = Image.open(p / 'renders/px_cabeza.png').convert('RGB')
+lam = Image.new('RGB', (1200, 650), (30, 30, 30))
+d = ImageDraw.Draw(lam)
+f = ImageFont.truetype('C:/Windows/Fonts/arial.ttf', 24)
+for k, (im, etiqueta) in enumerate(((ref, 'Hoja: frente, 36 % superior'), (render, 'v3: px_cabeza.png, sin luz'))):
+    im = im.copy()
+    im.thumbnail((590, 590), Image.Resampling.LANCZOS)
+    lam.paste(im, (600*k + (600-im.width)//2, 55 + (590-im.height)//2))
+    d.text((600*k+12, 12), etiqueta, fill=(245, 225, 190), font=f)
+lam.save(p / 'cara_comparacion.png')
+antes = json.loads(Path('Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/parecido.jsonl').read_text(encoding='utf-8').splitlines()[-1])
+despues = {'etiqueta': 'v3 hoja, visibilidad y original 0.15', 'parecido_total': 64.9, 'vistas': {'frente': {'silueta': 79.9, 'color': 69.1, 'estructura': 29.4, 'parecido': 61.5}, 'cabeza': {'silueta': 94.0, 'color': 50.8, 'estructura': 24.3, 'parecido': 60.1}, 'perfil': {'silueta': 86.0, 'color': 76.7, 'estructura': 47.1, 'parecido': 71.5}, 'espalda': {'silueta': 84.8, 'color': 81.4, 'estructura': 54.8, 'parecido': 74.8}}}
+(p / 'metricas.json').write_text(json.dumps({'antes': antes, 'despues': despues}, indent=2), encoding='utf-8')
+print('Guardados cara_comparacion.png, hoja_cabeza.png y metricas.json')
+'@ | python -I -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1886ms:
+Guardados cara_comparacion.png, hoja_cabeza.png y metricas.json
+
+apply patch
+patch: completed
+C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Fase_1_Arte\Modelado\Lote_04\parecido\v3_hoja\INFORME.md
+C:\Users\guill\Desktop\Juego 2d-hd\herramientas\mallas\proyectar_hoja.py
+diff --git a/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/INFORME.md b/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/INFORME.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..af13fcbe001daf9d2a41a55ed413f8246b3a5cec
+--- /dev/null
++++ b/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/INFORME.md
+@@ -0,0 +1,110 @@
++# PER-01 v3: proyección de la hoja
++
++El parecido total sube de **62,2 % a 64,9 %** (+2,7 puntos). **No alcanza el objetivo del 80 %.** No baja el parecido agregado de ninguna vista. La estructura de la cabeza sí baja: 26,1 % → 24,3 %.
++
++## Archivos
++
++- Script: `herramientas/mallas/proyectar_hoja.py`, desde la raíz del proyecto.
++- Malla: [L04_PER01_v3_hoja.glb](../../L04_PER01_v3_hoja.glb).
++- Imagen exacta incorporada al GLB: [textura.png](textura.png), 4096 × 4096, PNG sin pérdida.
++- Resultado numérico del horneado: [horneado.json](horneado.json).
++- Métrica antes/después: [metricas.json](metricas.json).
++- Especificación de medición: [spec_v3.json](spec_v3.json).
++- Láminas: [antes](antes_lamina.png), [después](despues_lamina.png).
++- Cara de frente: [px_cabeza.png](renders/px_cabeza.png), [hoja_cabeza.png](hoja_cabeza.png), [comparación conjunta](cara_comparacion.png).
++- Las ocho tomas sin luz están en `renders/`.
++
++![Cara de la hoja y render frontal de la v3](cara_comparacion.png)
++
++El panel izquierdo recorta el 36 % superior del frente de la hoja, como la métrica. El derecho muestra el `px_cabeza.png` completo del renderizador solicitado, cuya cámara usa el encuadre de cabeza predeterminado (0,42). Son encuadres diferentes; no se usó esta lámina para calcular el parecido.
++
++## Método y conservación del recurso
++
++Se proyectan frente desde +X, espalda desde -X y perfil derecho desde +Z; el perfil mira a la derecha de su imagen. Se aplica la matriz del nodo al calcular las posiciones y normales en el mundo. La matriz original del GLB se conserva.
++
++La máscara de cada recorte separa los colores a más de 28 unidades RGB de la mediana de sus bordes. No se incluye la línea del suelo: los recortes terminan antes de la fila 923. El centroide establece el origen de la búsqueda; la altura establece la escala nominal. El ajuste se decide rasterizando las siluetas y maximizando su IoU, no haciendo coincidir la caja que contiene el bolso. Se exploran escalas de 92 % a 108 % y traslaciones de ±6 % del ancho/alto de la figura. Una búsqueda mediante correlación FFT a resolución reducida se refina a pasos de un píxel y 0,1 % de escala alrededor del mejor candidato. Es una optimización discreta, no una demostración de máximo continuo.
++
++| Vista | IoU de alineación | Escala respecto de la nominal | Desplazamiento x, y |
++|---|---:|---:|---:|
++| Frente | 85,01 % | 101,4 % | +6, -12 px |
++| Perfil derecho | 87,00 % | 101,5 % | +3, -7 px |
++| Espalda | 87,07 % | 101,9 % | -4, -10 px |
++
++Las imágenes `*_alineacion.png` muestran gris donde coinciden las siluetas, rojo donde solo hay hoja y azul donde solo hay malla. Este IoU de alineación es distinto del IoU de la métrica oficial, que recorta y normaliza por separado cada imagen.
++
++Cada texel de superficie se rasteriza en UV y recupera su posición y normal interpoladas mediante coordenadas baricéntricas. Un búfer de profundidad al doble de la resolución de la hoja identifica el triángulo visible. Se evalúa su plano en la posición exacta proyectada; solo se acepta el propio triángulo o una profundidad coincidente dentro de 0,00002 m. Esto evita usar una tolerancia amplia que atraviese brazos o piernas.
++
++En las zonas elegibles, cada vista aporta `visible × max(0, n·d)^3 × máscara_erosionada`. La erosión cuadrada es de 3 px (ventana 7 × 7). Los cuatro píxeles del soporte bilineal deben estar dentro de ella. La mezcla es exactamente `(suma(peso_v × hoja_v) + 0,15 × original) / (suma(peso_v) + 0,15)`, con redondeo final a RGB de 8 bits.
++
++No se crea una proyección espejada desde -Z. Para conservar expresamente el costado izquierdo, sus texels se definen como aquellos cuya normal interpolada tiene -Z como eje dominante; en ese sector se omite el repintado. Son **2.058.415 texels**, con **0 diferencias** respecto de la imagen Tripo decodificada. Las zonas de transición que pertenecen a frente o espalda sí pueden recibir esas vistas. Esta definición del sector izquierdo queda registrada en `horneado.json`.
++
++Se extiende el color doce texels fuera de las islas UV usando vecinos ortogonales, sin envolver los extremos del mapa. El relleno afecta 1.652.567 texels que no pertenecen a la superficie rasterizada; no altera los texels de las islas.
++
++Se mantienen idénticos los bytes originales del búfer y los metadatos de geometría, índices, normales, UV, nodos, escenas, materiales y texturas. Se anexa el PNG y se cambia únicamente el enlace y el tipo MIME de la imagen, con los ajustes de longitud necesarios del contenedor. El JPEG anterior queda como datos sin uso dentro del GLB para conservar íntegro el búfer original. La geometría sigue teniendo **7.522 triángulos**. La v2, la hoja, los scripts existentes y la escena de Godot no se modificaron.
++
++## Parecido oficial
++
++Se ejecutó `comparar_personaje.py` con el spec original para el control y con una copia que solo cambia las rutas de render para la v3. Frente y cabeza pesan 2; perfil y espalda pesan 1. La cabeza de esta métrica proviene del 36 % superior de `px_cuerpo.png`, no de `px_cabeza.png`.
++
++| Vista | Parecido v2 | Parecido v3 | Cambio |
++|---|---:|---:|---:|
++| Frente | 59,4 % | 61,5 % | +2,1 puntos |
++| Cabeza | 59,3 % | 60,1 % | +0,8 puntos |
++| Perfil derecho | 66,6 % | 71,5 % | +4,9 puntos |
++| Espalda | 69,2 % | 74,8 % | +5,6 puntos |
++| **Total ponderado** | **62,2 %** | **64,9 %** | **+2,7 puntos** |
++
++| Vista | Silueta v2 → v3 | Color v2 → v3 | Estructura v2 → v3 |
++|---|---:|---:|---:|
++| Frente | 79,9 → 79,9 % | 62,4 → 69,1 % | 29,2 → 29,4 % |
++| Cabeza | 93,9 → 94,0 % | 46,2 → 50,8 % | 26,1 → 24,3 % |
++| Perfil derecho | 86,0 → 86,0 % | 67,4 → 76,7 % | 40,0 → 47,1 % |
++| Espalda | 84,8 → 84,8 % | 72,9 → 81,4 % | 44,8 → 54,8 % |
++
++La disminución de estructura de la cabeza es coherente con el primer plano: aparecen transiciones en mejillas y trazos dobles en la boca. La alineación global por silueta no alinea individualmente ojos, boca y mechones. La mezcla obligatoria retiene rasgos de la textura anterior, y las vistas aportan detalle desde direcciones distintas. La malla conserva posiciones y volúmenes que difieren de la ilustración; el bolso tampoco adquiere volumen al pintarlo. No se aisló experimentalmente cuánto contribuye cada causa a la caída del componente de estructura.
++
++El cambio de 0,1 puntos en la silueta de cabeza procede de la segmentación por color de la métrica: la geometría y su contorno real no cambiaron.
++
++## Cobertura y fondo
++
++| Dato | Resultado |
++|---|---:|
++| Texels rasterizados sobre superficie UV | 10.414.844 |
++| Texels con aporte de la hoja | 5.546.432 |
++| Cobertura sobre texels de superficie | **53,2551 %** |
++| Cobertura sobre la imagen completa de 4096² | **33,0593 %** |
++| Texels pintados cuyo soporte tomó fondo | **0 / 5.546.432 = 0,0000 %** |
++| Muestras de vista sobre fondo | **0** |
++
++La cobertura cuenta aporte de peso positivo, aunque el redondeo final pueda producir el mismo RGB que el original. No cuenta el relleno exterior de las islas. Se auditan los cuatro píxeles de cada muestra bilineal contra la máscara original sin erosionar. El 0 % de fondo está comprobado respecto de esa máscara automática; no existe una anotación manual independiente de todos los píxeles de la hoja.
++
++El búfer rechazó por ocultación 1.009.542 muestras frontales, 2.430.285 de perfil y 901.979 de espalda, después del filtro angular y de máscara. Son muestras por vista; no equivalen a texels únicos.
++
++## Comprobaciones realizadas y límites
++
++- Horneado completo con NumPy y Pillow ya instalados: 236,8 segundos. Sin instalaciones, red ni créditos.
++- Aserciones de conservación binaria del búfer original, UV, geometría, nodos y materiales: correctas.
++- Aserción de coincidencia del sector izquierdo con la textura Tripo: correcta.
++- Prueba sintética de dos superficies superpuestas: acepta la delantera y rechaza la posterior.
++- Prueba sintética de máscara vacía: no aporta color de hoja.
++- Prueba del relleno UV: propaga al vecino y no cruza a los extremos opuestos del mapa.
++- Importación y ocho renders sin luz con Blender 5.3.0: correctos. Caja y dimensiones coinciden con la v2.
++- Medición oficial y revisión visual de cara, lámina completa y alineaciones.
++
++No se comprobó la apariencia dentro de Godot 4.7.2, con iluminación del juego, animación o cámara de juego. No se certifica un parecido perceptual del 80 %: la métrica medida es 64,9 %. Tampoco se demuestra el máximo continuo del ajuste ni una segmentación manual perfecta. La prueba sintética comprueba el mecanismo de ocultación; no constituye una revisión manual de cada texel de brazos y caras internas de piernas.
++
++## Reproducción
++
++Ejecutar desde la raíz del proyecto, sin instalar dependencias:
++
++```powershell
++python -I herramientas/mallas/proyectar_hoja.py
++
++& "C:\Program Files\Blender Foundation\Blender 5.3\blender.exe" -b --factory-startup --python-exit-code 1 --python herramientas/blender/render_vistas.py -- --glb Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_v3_hoja.glb --salida Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/renders --lado 1000
++
++python -I herramientas/comparar_personaje.py Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/spec_v2.json Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/antes_lamina.png --etiqueta "v2 antes del repintado"
++
++python -I herramientas/comparar_personaje.py Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/spec_v3.json Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/despues_lamina.png --etiqueta "v3 hoja, visibilidad y original 0.15"
++```
++
++La procedencia es exclusivamente la malla Tripo v2 y la hoja local suministradas para esta tarea; sus SHA-256 están en `horneado.json`. No se añadieron recursos externos. Para volver al estado anterior basta con seguir usando `L04_PER01_giro_tripo_mv.glb`; no se cambió ninguna referencia de la escena.
+diff --git a/herramientas/mallas/proyectar_hoja.py b/herramientas/mallas/proyectar_hoja.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..93a9f505541a00469f705c8c241722b74cc9b75e
+--- /dev/null
++++ b/herramientas/mallas/proyectar_hoja.py
+@@ -0,0 +1,412 @@
++"""Repinta PER-01 desde la hoja, sin modificar geometria, UV ni materiales.
++
++Uso: python -I herramientas/mallas/proyectar_hoja.py
++Solo requiere numpy y Pillow. No usa Blender para el horneado.
++"""
++import argparse
++import hashlib
++import io
++import json
++import struct
++import time
++from pathlib import Path
++
++import numpy as np
++from PIL import Image, ImageFilter
++
++
++RAIZ = Path(__file__).resolve().parents[2]
++LOTE = RAIZ / "Nasa_Game/Fase_1_Arte/Modelado/Lote_04"
++HOJA = RAIZ / "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png"
++CAJAS = {"frente": (200, 10, 720, 923), "perfil": (1410, 10, 1790, 923),
++         "espalda": (1960, 10, 2450, 923)}
++# La derecha de la imagen es -Z, +X y +Z respectivamente.
++EJES = {"frente": ([0, 0, -1], [1, 0, 0]),
++        "perfil": ([1, 0, 0], [0, 0, 1]),
++        "espalda": ([0, 0, 1], [-1, 0, 0])}
++DT = {5126: "<f4", 5125: "<u4", 5123: "<u2", 5121: "u1"}
++NC = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4}
++
++
++def leer_glb(ruta):
++    datos = Path(ruta).read_bytes()
++    magia, version, largo = struct.unpack_from("<III", datos)
++    if (magia, version, largo) != (0x46546C67, 2, len(datos)):
++        raise ValueError("GLB 2.0 invalido")
++    trozos = {}
++    off = 12
++    while off < len(datos):
++        n, tipo = struct.unpack_from("<II", datos, off)
++        trozos[tipo] = datos[off + 8:off + 8 + n]
++        off += 8 + n
++    doc = json.loads(trozos[0x4E4F534A])
++    return doc, trozos[0x004E4942]
++
++
++def accessor(doc, binario, indice):
++    a = doc["accessors"][indice]
++    if "sparse" in a:
++        raise ValueError("No se admiten accessors sparse")
++    v = doc["bufferViews"][a["bufferView"]]
++    dt = np.dtype(DT[a["componentType"]])
++    k = NC[a["type"]]
++    off = v.get("byteOffset", 0) + a.get("byteOffset", 0)
++    return np.ndarray((a["count"], k), dt, binario, off,
++                      (v.get("byteStride", dt.itemsize * k), dt.itemsize)).copy()
++
++
++def geometria(doc, binario):
++    # Este recurso tiene un solo nodo con malla y una matriz sin jerarquia.
++    nodos = [n for n in doc["nodes"] if "mesh" in n]
++    if len(nodos) != 1 or any(n.get("children") for n in doc["nodes"]):
++        raise ValueError("Se esperaba una sola malla sin jerarquia")
++    nodo = nodos[0]
++    prims = doc["meshes"][nodo["mesh"]]["primitives"]
++    if len(prims) != 1 or prims[0].get("mode", 4) != 4:
++        raise ValueError("Se esperaba una primitiva de triangulos")
++    p = prims[0]
++    if any(k in nodo for k in ("translation", "rotation", "scale")):
++        raise ValueError("Este recurso debe usar matriz o identidad")
++    mat = np.array(nodo.get("matrix", np.eye(4).T.ravel()), float).reshape(4, 4).T
++    pos = accessor(doc, binario, p["attributes"]["POSITION"]).astype(float)
++    pos = pos @ mat[:3, :3].T + mat[:3, 3]
++    uv = accessor(doc, binario, p["attributes"]["TEXCOORD_0"]).astype(float)
++    idx = accessor(doc, binario, p["indices"]).reshape(-1, 3).astype(int)
++    normales = accessor(doc, binario, p["attributes"]["NORMAL"]).astype(float)
++    normales = normales @ np.linalg.inv(mat[:3, :3])
++    normales /= np.maximum(np.linalg.norm(normales, axis=1, keepdims=True), 1e-12)
++    material = doc["materials"][p.get("material", 0)]
++    texid = material["pbrMetallicRoughness"]["baseColorTexture"]["index"]
++    imid = doc["textures"][texid]["source"]
++    v = doc["bufferViews"][doc["images"][imid]["bufferView"]]
++    off = v.get("byteOffset", 0)
++    original = np.array(Image.open(io.BytesIO(binario[off:off + v["byteLength"]])).convert("RGB"))
++    return pos, uv, idx, normales, original, imid
++
++
++def mascara(rgb):
++    a = np.asarray(rgb, dtype=np.float32)
++    borde = np.concatenate((a[0], a[-1], a[:, 0], a[:, -1]))
++    fondo = np.median(borde, axis=0)
++    return np.linalg.norm(a - fondo, axis=-1) > 28, fondo
++
++
++def fragmentos(tri, ancho, alto):
++    """Rasteriza centros de pixel; devuelve coordenadas y pesos baricentricos."""
++    x0, y0 = np.maximum(np.ceil(tri.min(0)).astype(int), 0)
++    x1, y1 = np.minimum(np.floor(tri.max(0)).astype(int), [ancho - 1, alto - 1])
++    if x1 < x0 or y1 < y0:
++        return None
++    (ax, ay), (bx, by), (cx, cy) = tri
++    den = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy)
++    if abs(den) < 1e-12:
++        return None
++    x, y = np.meshgrid(np.arange(x0, x1 + 1), np.arange(y0, y1 + 1))
++    a = ((by - cy) * (x - cx) + (cx - bx) * (y - cy)) / den
++    b = ((cy - ay) * (x - cx) + (ax - cx) * (y - cy)) / den
++    c = 1 - a - b
++    dentro = (a >= -1e-9) & (b >= -1e-9) & (c >= -1e-9)
++    if not dentro.any():
++        return None
++    return y[dentro], x[dentro], np.column_stack((a[dentro], b[dentro], c[dentro]))
++
++
++def rasterizar(q, profundidad, idx, ancho, alto):
++    z = np.full((alto, ancho), -np.inf, dtype=np.float32)
++    propietario = np.full((alto, ancho), -1, dtype=np.int32)
++    for t, vertices in enumerate(idx):
++        f = fragmentos(q[vertices], ancho, alto)
++        if f is None:
++            continue
++        yy, xx, b = f
++        zz = b @ profundidad[vertices]
++        gana = zz > z[yy, xx]
++        yy, xx = yy[gana], xx[gana]
++        z[yy, xx] = zz[gana]
++        propietario[yy, xx] = t
++    return z, propietario
++
++
++def alinear(pos, idx, eje, m):
++    """Busqueda global discreta por IoU seguida de refinamiento a un pixel.
++
++    La FFT evalua todas las traslaciones permitidas para cada escala. Se usan
++    siluetas rasterizadas, no cajas, para decidir el ajuste. El centroide solo
++    establece el origen de la ventana de busqueda.
++    """
++    alto, ancho = m.shape
++    u = pos @ eje
++    ymin, ymax = pos[:, 1].min(), pos[:, 1].max()
++    ys, xs = np.where(m)
++    alto_fig, ancho_fig = np.ptp(ys) + 1, np.ptp(xs) + 1
++    escala0 = (alto_fig - 1) / (ymax - ymin)
++    centro = np.array([(u.min() + u.max()) / 2, -(ymin + ymax) / 2])
++    plano = np.column_stack((u, -pos[:, 1])) - centro
++    q0 = plano * escala0 + [ancho / 2, alto / 2]
++    _, duenio = rasterizar(q0, np.zeros(len(pos)), idx, ancho, alto)
++    my, mx = np.where(duenio >= 0)
++    base = np.array([xs.mean(), ys.mean()]) - np.array([mx.mean(), my.mean()]) + [ancho / 2, alto / 2]
++    limite = np.array([0.06 * ancho_fig, 0.06 * alto_fig])
++    mejor = None
++    # Un lienzo con margen evita que el recorte cambie el area durante la busqueda.
++    for paso, escalas in ((3, np.linspace(0.92, 1.08, 33)), (1, None)):
++        if escalas is None:
++            escalas = np.linspace(max(0.92, mejor[1] - 0.006), min(1.08, mejor[1] + 0.006), 13)
++        margen = 80
++        w, h = int(np.ceil(ancho / paso)) + 2 * margen, int(np.ceil(alto / paso)) + 2 * margen
++        ref = np.zeros((h, w), bool)
++        pequena = np.asarray(Image.fromarray(m).resize((int(np.ceil(ancho / paso)), int(np.ceil(alto / paso))), Image.Resampling.NEAREST))
++        ref[margen:margen + pequena.shape[0], margen:margen + pequena.shape[1]] = pequena
++        ft = np.fft.rfft2(ref)
++        if paso == 3:
++            dx = np.arange(int(np.ceil(-limite[0] / paso)), int(np.floor(limite[0] / paso)) + 1)
++            dy = np.arange(int(np.ceil(-limite[1] / paso)), int(np.floor(limite[1] / paso)) + 1)
++        else:
++            dx = np.arange(max(int(np.ceil(-limite[0])), int(round(mejor[2][0])) - 4),
++                           min(int(np.floor(limite[0])), int(round(mejor[2][0])) + 4) + 1)
++            dy = np.arange(max(int(np.ceil(-limite[1])), int(round(mejor[2][1])) - 4),
++                           min(int(np.floor(limite[1])), int(round(mejor[2][1])) + 4) + 1)
++        candidato = None
++        for s in escalas:
++            q = (plano * (escala0 * s) + base) / paso + margen
++            _, du = rasterizar(q, np.zeros(len(pos)), idx, w, h)
++            sil = du >= 0
++            correlacion = np.fft.irfft2(ft * np.conj(np.fft.rfft2(sil)), s=ref.shape).real
++            inter = np.maximum(0, np.rint(correlacion[np.ix_(dy % h, dx % w)]))
++            iou = inter / np.maximum(ref.sum() + sil.sum() - inter, 1)
++            iy, ix = np.unravel_index(np.argmax(iou), iou.shape)
++            val = (float(iou[iy, ix]), float(s), np.array([dx[ix], dy[iy]]) * paso)
++            if candidato is None or val[0] > candidato[0]:
++                candidato = val
++        mejor = candidato
++    _, factor, delta = mejor
++    escala = escala0 * factor
++    tras = base + delta - centro * escala
++    q = np.column_stack((u, -pos[:, 1])) * escala + tras
++    # Medida final sin recortar la silueta proyectada fuera de la caja de la hoja.
++    margen = 150
++    _, du = rasterizar(q + margen, np.zeros(len(pos)), idx, ancho + 2 * margen, alto + 2 * margen)
++    ref = np.pad(m, margen)
++    sil = du >= 0
++    iou = (ref & sil).sum() / max((ref | sil).sum(), 1)
++    return escala, tras, {"iou": float(iou), "escala_base": float(escala0),
++                         "factor_escala": factor, "desplazamiento_px": delta.tolist(),
++                         "limites_desplazamiento_px": limite.tolist(),
++                         "traslacion_px": tras.tolist(), "centro_inicial_px": base.tolist()}
++
++
++class Vista:
++    def __init__(self, nombre, hoja, pos, idx, carpeta):
++        self.nombre = nombre
++        self.rgb = np.asarray(hoja.crop(CAJAS[nombre]).convert("RGB"))
++        self.m, self.fondo = mascara(self.rgb)
++        self.erosion = np.asarray(Image.fromarray(self.m.astype(np.uint8) * 255).filter(ImageFilter.MinFilter(7))) > 0
++        self.eje, self.direccion = map(lambda a: np.array(a, float), EJES[nombre])
++        self.escala, self.tras, self.info = alinear(pos, idx, self.eje, self.m)
++        q = self.proyectar(pos)
++        h, w = self.m.shape
++        self.super = 2
++        self.z, self.du = rasterizar(q * self.super, pos @ self.direccion, idx, w * self.super, h * self.super)
++        # Plano de profundidad por triangulo para consultar en la posicion exacta
++        # del texel, evitando una tolerancia amplia que acepte otra superficie.
++        matrices = np.concatenate((q[idx], np.ones((len(idx), 3, 1))), axis=2)
++        validos = np.abs(np.linalg.det(matrices)) > 1e-10
++        self.planos = np.zeros((len(idx), 3))
++        self.planos[validos] = np.linalg.solve(matrices[validos], (pos @ self.direccion)[idx][validos, :, None])[..., 0]
++        self.contribuciones = self.fondo_muestras = self.ocultos = 0
++        Image.fromarray(self.m).save(carpeta / f"{nombre}_mascara.png")
++        Image.fromarray(self.erosion).save(carpeta / f"{nombre}_mascara_erosion3.png")
++        _, du = rasterizar(q, pos @ self.direccion, idx, w, h)
++        sil = du >= 0
++        sup = np.full((h, w, 3), 40, np.uint8)
++        sup[self.m & sil] = [210, 210, 210]
++        sup[self.m & ~sil] = [220, 60, 60]
++        sup[sil & ~self.m] = [70, 110, 230]
++        Image.fromarray(sup).save(carpeta / f"{nombre}_alineacion.png")
++
++    def proyectar(self, puntos):
++        return np.column_stack((puntos @ self.eje, -puntos[:, 1])) * self.escala + self.tras
++
++    def muestrear(self, puntos, normales, triangulo):
++        q = self.proyectar(puntos)
++        x, y = q.T
++        h, w = self.m.shape
++        dot = normales @ self.direccion
++        valido = (x >= 0) & (x < w - 1) & (y >= 0) & (y < h - 1) & (dot > 0)
++        ids = np.flatnonzero(valido)
++        pesos = np.zeros(len(puntos), np.float32)
++        colores = np.zeros((len(puntos), 3), np.float32)
++        fondo = np.zeros(len(puntos), bool)
++        if not len(ids):
++            return colores, pesos, fondo
++        x0, y0 = np.floor(q[ids]).astype(int).T
++        seguro = self.erosion[y0, x0] & self.erosion[y0 + 1, x0] & self.erosion[y0, x0 + 1] & self.erosion[y0 + 1, x0 + 1]
++        ids = ids[seguro]
++        if not len(ids):
++            return colores, pesos, fondo
++        pix = np.rint(q[ids] * self.super).astype(int)
++        du = self.du[pix[:, 1], pix[:, 0]]
++        zreal = puntos[ids] @ self.direccion
++        zvisible = (self.planos[np.maximum(du, 0), :2] * q[ids]).sum(1) + self.planos[np.maximum(du, 0), 2]
++        visible = (du >= 0) & ((du == triangulo) | (np.abs(zreal - zvisible) <= 2e-5))
++        self.ocultos += int((~visible).sum())
++        ids = ids[visible]
++        if not len(ids):
++            return colores, pesos, fondo
++        x0, y0 = np.floor(q[ids]).astype(int).T
++        fx, fy = (q[ids] - np.column_stack((x0, y0))).T
++        a = self.rgb[y0, x0].astype(np.float32)
++        b = self.rgb[y0, x0 + 1].astype(np.float32)
++        c = self.rgb[y0 + 1, x0].astype(np.float32)
++        d = self.rgb[y0 + 1, x0 + 1].astype(np.float32)
++        colores[ids] = (a * ((1 - fx) * (1 - fy))[:, None] + b * (fx * (1 - fy))[:, None]
++                        + c * ((1 - fx) * fy)[:, None] + d * (fx * fy)[:, None])
++        pesos[ids] = np.maximum(dot[ids], 0) ** 3
++        # Auditoria del soporte bilineal contra la mascara sin erosionar.
++        mal = ~(self.m[y0, x0] & self.m[y0, x0 + 1] & self.m[y0 + 1, x0] & self.m[y0 + 1, x0 + 1])
++        fondo[ids] = mal
++        self.contribuciones += len(ids)
++        self.fondo_muestras += int(mal.sum())
++        return colores, pesos, fondo
++
++
++def rellenar_bordes(tex, ocupado, pasos=12):
++    """Extiende doce texels fuera de las islas, sin envolver los bordes del mapa."""
++    m = ocupado.copy()
++    for _ in range(pasos):
++        vecinos = np.zeros_like(m)
++        vecinos[1:] |= m[:-1]
++        vecinos[:-1] |= m[1:]
++        vecinos[:, 1:] |= m[:, :-1]
++        vecinos[:, :-1] |= m[:, 1:]
++        yy, xx = np.where(vecinos & ~m)
++        if not len(yy):
++            break
++        suma = np.zeros((len(yy), 3), np.float32)
++        cuenta = np.zeros(len(yy), np.float32)
++        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
++            y, x = yy + dy, xx + dx
++            valido = (y >= 0) & (y < m.shape[0]) & (x >= 0) & (x < m.shape[1])
++            ids = np.flatnonzero(valido)
++            ids = ids[m[y[ids], x[ids]]]
++            suma[ids] += tex[y[ids], x[ids]]
++            cuenta[ids] += 1
++        tex[yy, xx] = np.rint(suma / cuenta[:, None]).astype(np.uint8)
++        m[yy, xx] = True
++    return int(m.sum() - ocupado.sum())
++
++
++def guardar_glb(ruta, doc, binario, png, imid):
++    # Conserva todos los bytes originales; solo anexa la imagen y cambia su enlace.
++    nuevo = bytearray(binario)
++    nuevo.extend(b"\0" * (-len(nuevo) % 4))
++    off = len(nuevo)
++    nuevo.extend(png)
++    doc["bufferViews"].append({"buffer": 0, "byteOffset": off, "byteLength": len(png)})
++    doc["images"][imid]["bufferView"] = len(doc["bufferViews"]) - 1
++    doc["images"][imid]["mimeType"] = "image/png"
++    doc["buffers"][0]["byteLength"] = len(nuevo)
++    nuevo.extend(b"\0" * (-len(nuevo) % 4))
++    js = json.dumps(doc, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
++    js += b" " * (-len(js) % 4)
++    ruta.write_bytes(struct.pack("<III", 0x46546C67, 2, 28 + len(js) + len(nuevo))
++                     + struct.pack("<II", len(js), 0x4E4F534A) + js
++                     + struct.pack("<II", len(nuevo), 0x004E4942) + nuevo)
++
++
++def main():
++    ap = argparse.ArgumentParser(description=__doc__)
++    ap.add_argument("--entrada", type=Path, default=LOTE / "L04_PER01_giro_tripo_mv.glb")
++    ap.add_argument("--salida", type=Path, default=LOTE / "L04_PER01_v3_hoja.glb")
++    ap.add_argument("--hoja", type=Path, default=HOJA)
++    ap.add_argument("--diagnosticos", type=Path, default=LOTE / "parecido/v3_hoja")
++    a = ap.parse_args()
++    if a.entrada.resolve() == a.salida.resolve():
++        raise ValueError("La salida no puede sobrescribir la entrada")
++    inicio = time.monotonic()
++    a.diagnosticos.mkdir(parents=True, exist_ok=True)
++    a.salida.parent.mkdir(parents=True, exist_ok=True)
++    doc, binario = leer_glb(a.entrada)
++    pos, uv, idx, normales, original, imid = geometria(doc, binario)
++    hoja = Image.open(a.hoja).convert("RGB")
++    vistas = []
++    for nombre in CAJAS:
++        print(f"Alineando {nombre}...", flush=True)
++        v = Vista(nombre, hoja, pos, idx, a.diagnosticos)
++        vistas.append(v)
++        print(f"  IoU {v.info['iou']:.4f}, escala {v.info['factor_escala']:.4f}, desplazamiento {v.info['desplazamiento_px']}", flush=True)
++    h, w = original.shape[:2]
++    tex = original.copy()
++    ocupado = np.zeros((h, w), bool)
++    pintado = np.zeros((h, w), bool)
++    fondo = np.zeros((h, w), bool)
++    lado_izq = np.zeros((h, w), bool)
++    # glTF usa v=0 en la fila superior y centros UV en (pixel+0.5)/tamano.
++    uvs = uv * [w, h] - 0.5
++    for t, vertices in enumerate(idx):
++        f = fragmentos(uvs[vertices], w, h)
++        if f is None:
++            continue
++        yy, xx, b = f
++        puntos = b @ pos[vertices]
++        n = b @ normales[vertices]
++        n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
++        # El sector cuyo eje dominante es -Z queda reservado a la textura Tripo.
++        izquierda = (-n[:, 2] > np.abs(n[:, 0])) & (-n[:, 2] > np.abs(n[:, 1]))
++        lado_izq[yy, xx] = izquierda
++        acum = 0.15 * original[yy, xx].astype(np.float32)
++        peso = np.full(len(yy), 0.15, np.float32)
++        for vista in vistas:
++            ids = np.flatnonzero(~izquierda)
++            color, pv, mal = vista.muestrear(puntos[ids], n[ids], t)
++            acum[ids] += color * pv[:, None]
++            peso[ids] += pv
++            fondo[yy[ids], xx[ids]] |= mal & (pv > 0)
++        tex[yy, xx] = np.clip(np.rint(acum / peso[:, None]), 0, 255).astype(np.uint8)
++        ocupado[yy, xx] = True
++        pintado[yy, xx] = peso > 0.15
++        if t % 1000 == 0:
++            print(f"Horneando triangulo {t}/{len(idx)}", flush=True)
++    # Antes del padding, la zona izquierda debe coincidir byte por byte.
++    izq_diferentes = int(np.any(tex[lado_izq] != original[lado_izq], axis=1).sum())
++    if izq_diferentes:
++        raise AssertionError("El lado izquierdo cambio")
++    print("Rellenando bordes UV...", flush=True)
++    padding = rellenar_bordes(tex, ocupado)
++    imagen = Image.fromarray(tex)
++    imagen.save(a.diagnosticos / "textura.png")
++    Image.fromarray(pintado).save(a.diagnosticos / "texels_hoja.png")
++    Image.fromarray(ocupado).save(a.diagnosticos / "texels_superficie.png")
++    buf = io.BytesIO()
++    imagen.save(buf, format="PNG")
++    guardar_glb(a.salida, doc, binario, buf.getvalue(), imid)
++    # Verifica la conservacion binaria de accessors, nodos, UV y materiales.
++    d2, b2 = leer_glb(a.salida)
++    d0, b0 = leer_glb(a.entrada)
++    assert b2[:len(b0)] == b0
++    for clave in ("meshes", "nodes", "accessors", "materials", "textures", "scenes"):
++        assert d2[clave] == d0[clave], clave
++    assert d2["bufferViews"][:-1] == d0["bufferViews"]
++    meta = {"entrada": str(a.entrada), "salida": str(a.salida), "hoja": str(a.hoja),
++            "sha256_entrada": hashlib.sha256(a.entrada.read_bytes()).hexdigest(),
++            "sha256_hoja": hashlib.sha256(a.hoja.read_bytes()).hexdigest(),
++            "triangulos": len(idx), "textura_px": [w, h], "geometria_uv_nodos_materiales_identicos": True,
++            "texels_superficie": int(ocupado.sum()), "texels_con_hoja": int(pintado.sum()),
++            "texels_con_hoja_pct_superficie": float(100 * pintado.sum() / ocupado.sum()),
++            "texels_con_hoja_pct_imagen": float(100 * pintado.mean()),
++            "texels_fondo": int(fondo.sum()), "texels_fondo_pct_pintados": float(100 * fondo.sum() / max(pintado.sum(), 1)),
++            "muestras_fondo": sum(v.fondo_muestras for v in vistas),
++            "texels_izquierda_conservados": int(lado_izq.sum()), "texels_izquierda_diferentes": izq_diferentes,
++            "criterio_izquierda": "normal interpolada con eje dominante -Z; no hay proyeccion desde -Z",
++            "padding_texels": padding, "peso_original": 0.15, "erosion_px": 3,
++            "profundidad_supermuestreo": 2, "profundidad_tolerancia_m": 2e-5,
++            "vistas": {v.nombre: {**v.info, "muestras_aceptadas": v.contribuciones,
++                                    "muestras_sobre_fondo": v.fondo_muestras,
++                                    "muestras_ocultas_rechazadas": v.ocultos} for v in vistas},
++            "segundos": round(time.monotonic() - inicio, 1)}
++    (a.diagnosticos / "horneado.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
++    print(json.dumps(meta, indent=2), flush=True)
++
++
++if __name__ == "__main__":
++    main()
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "python -I -c \"from pathlib import Path; import runpy,json,numpy as np; m=runpy.run_path('herramientas/mallas/proyectar_hoja.py'); p=Path('Nasa_Game/Fase_1_Arte/Modelado/Lote_04'); d0,b0=m['leer_glb'](p/'L04_PER01_giro_tripo_mv.glb'); d1,b1=m['leer_glb'](p/'L04_PER01_v3_hoja.glb'); assert b1[:len(b0)]==b0; changed=[k for k in d0 if d0[k]"'!=d1[k]]; assert set(changed)=={'"'buffers','bufferViews','images'},changed; s=Path('herramientas/mallas/proyectar_hoja.py').read_text(encoding='utf-8'); compile(s,'proyectar_hoja.py','exec'); assert s.isascii(); print('OK: sintaxis; codigo ASCII; unicos campos GLB modificados:',changed); print('GLB v3:',(p/'L04_PER01_v3_hoja.glb').stat().st_size,'bytes'); z=json.loads((p/'parecido/v3_hoja/metricas.json').read_text()); assert all(z['despues']['vistas'][k]['parecido']>=v['parecido'] for k,v in z['antes']['vistas'].items()); print('OK: ninguna vista baja su parecido')\"" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 798ms:
+OK: sintaxis; codigo ASCII; unicos campos GLB modificados: ['buffers', 'bufferViews', 'images']
+GLB v3: 13234528 bytes
+OK: ninguna vista baja su parecido
+
+codex
+Creé [proyectar_hoja.py](</C:/Users/guill/Desktop/Juego 2d-hd/herramientas/mallas/proyectar_hoja.py>) y generé [L04_PER01_v3_hoja.glb](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_v3_hoja.glb>). Geometría, UV y materiales conservados.
+
+| Vista | Antes | Después |
+|---|---:|---:|
+| Frente | 59,4 % | 61,5 % |
+| Cabeza | 59,3 % | 60,1 % |
+| Perfil derecho | 66,6 % | 71,5 % |
+| Espalda | 69,2 % | 74,8 % |
+| **Total** | **62,2 %** | **64,9 %** |
+
+Recibió color de la hoja el **53,26 % de los texels de superficie** —33,06 % de la imagen completa—. La contaminación con fondo fue **0 % según la máscara automática**.
+
+Ninguna vista empeoró su parecido total. La estructura de cabeza sí bajó ligeramente; persisten transiciones y trazos dobles por la alineación global y la mezcla con el original. **No se alcanzó el 80 %.**
+
+Dejé el [primer plano junto a la hoja](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/cara_comparacion.png>) y el [informe completo](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/INFORME.md>).
+
+Verifiqué renders en Blender y conservación binaria. No comprobé la apariencia en Godot ni la segmentación manual de cada píxel. Sin instalaciones, créditos ni cambios en la escena.
+tokens used
+68.852
+Creé [proyectar_hoja.py](</C:/Users/guill/Desktop/Juego 2d-hd/herramientas/mallas/proyectar_hoja.py>) y generé [L04_PER01_v3_hoja.glb](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_v3_hoja.glb>). Geometría, UV y materiales conservados.
+
+| Vista | Antes | Después |
+|---|---:|---:|
+| Frente | 59,4 % | 61,5 % |
+| Cabeza | 59,3 % | 60,1 % |
+| Perfil derecho | 66,6 % | 71,5 % |
+| Espalda | 69,2 % | 74,8 % |
+| **Total** | **62,2 %** | **64,9 %** |
+
+Recibió color de la hoja el **53,26 % de los texels de superficie** —33,06 % de la imagen completa—. La contaminación con fondo fue **0 % según la máscara automática**.
+
+Ninguna vista empeoró su parecido total. La estructura de cabeza sí bajó ligeramente; persisten transiciones y trazos dobles por la alineación global y la mezcla con el original. **No se alcanzó el 80 %.**
+
+Dejé el [primer plano junto a la hoja](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/cara_comparacion.png>) y el [informe completo](</C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_1_Arte/Modelado/Lote_04/parecido/v3_hoja/INFORME.md>).
+
+Verifiqué renders en Blender y conservación binaria. No comprobé la apariencia en Godot ni la segmentación manual de cada píxel. Sin instalaciones, créditos ni cambios en la escena.

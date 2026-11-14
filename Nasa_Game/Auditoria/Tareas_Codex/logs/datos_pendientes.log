@@ -1,0 +1,1386 @@
+OpenAI Codex v0.167.0-alpha.4.1
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a1d0d9-9230-7202-a314-e0053d9f797a
+--------
+user
+@@TAREA
+
+Proyecto: RPG educativo de exploracion en Godot 4.7.2 (low-poly pintado, acabado 2.5D, camara alta), protagonista estudiante de Guayaquil y su gato cientifico Orbita. Se prepara la auditoria de pantallas de carga, menus, botones, jugabilidad, escenarios, caminos y texturas (plan en Nasa_Game/Auditoria/Plan de auditoria.md, seccion 3). Responde en espanol, texto corto y con cifras; cada dato con su fuente primaria (URL) y fecha de consulta; marca «sin verificar» lo que no confirmes. Usa la busqueda web integrada; NO uses Firecrawl. No escribas fuera del archivo de salida.
+
+---
+
+# TU TAREA
+
+Verifica con fuentes primarias tres datos que quedaron pendientes para la historia (ver Nasa_Game/Fase_2_Narrativa/Investigacion/03a_verificacion_ecuador.md y 03b_verificacion_apolo.md):
+1. Bandera de Ecuador: proporciones oficiales, uso del escudo en la bandera civil frente a la de los organismos del Estado, y normas vigentes sobre su uso por particulares en obras (busca la Ley de Simbolos Patrios o el reglamento vigente y la Resolucion 24-047 del R. O. 45 de 2003). Bandera de Estados Unidos: el Flag Code (4 U.S.C.) sobre su representacion en obras.
+2. El disco de buena voluntad del Apolo 11: texto exacto del mensaje de Ecuador (presidente Velasco Ibarra) segun la transcripcion de NASA, y donde esta el disco.
+3. La Luna desde Guayaquil (lat -2,1894, lon -79,8891) el 13-11-2026 a las 19:30 hora local (UTC-5): fraccion iluminada, altura y azimut, y hora de la puesta, con JPL Horizons (API publica https://ssd.jpl.nasa.gov/api/horizons.api). Compara con lo que dice Nasa_Game/Fase_2_Narrativa/Fase 2 - Analisis.md (F2-02: 19,0 % de fase y 31,0 grados a las 19:30, puesta hacia las 21:50).
+codex
+Revisaré los archivos citados y contrastaré los 3 puntos con fuentes primarias mediante la búsqueda web integrada, sin Firecrawl. El entorno permite solo lectura; podré verificar los datos, pero no guardar el informe.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Auditoria/Plan de auditoria.md'; Get-Content -LiteralPath 'Nasa_Game/Fase_2_Narrativa/Investigacion/03a_verificacion_ecuador.md'; Get-Content -LiteralPath 'Nasa_Game/Fase_2_Narrativa/Investigacion/03b_verificacion_apolo.md'; Get-Content -LiteralPath 'Nasa_Game/Fase_2_Narrativa/Fase 2 - Analisis.md'" in C:\Users\guill\Desktop\Juego 2d-hd
+web search: 
+web search: site.nasa.gov Apollo 11 goodwill messages Ecuador Velasco Ibarra silicon disc ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -Encoding UTF8 -LiteralPath 'Nasa_Game/Fase_2_Narrativa/Investigacion/03a_verificacion_ecuador.md'; Get-Content -Encoding UTF8 -LiteralPath 'Nasa_Game/Fase_2_Narrativa/Investigacion/03b_verificacion_apolo.md'; rg -n 'F2-02|19,0|31,0|21:50|salida' 'Nasa_Game/Fase_2_Narrativa/Fase 2 - Analisis.md'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 13241ms:
+# 03a � Verificaci�n de los datos de Ecuador y el espacio
+
+> Revisi�n esc�ptica del informe [[01_datos_espaciales_ecuador]] (Codex), secciones 1, 2 y R8-R9. Consulta: 12-11-2026, con WebSearch, WebFetch y lectura directa de los PDF. Regla: si la fuente primaria no se pudo leer o no lo dice, el dato queda **sin verificar**.
+
+**Resultado: 26 datos revisados. 18 confirmados, 3 corregidos y 5 sin verificar.**
+
+## 1. Tabla de verificaci�n
+
+| # | Dato | Dice el informe | Fuente primaria (URL) | Veredicto |
+|---|---|---|---|---|
+| 1 | Estaci�n de Quito: nombre y lugar | Estaci�n Quito, cerca del Cotopaxi | NASA SP-4233, *Read You Loud and Clear!*, pp. 228-230: https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf. Se llamaba �Quito Station� (indicativo QUI). Estaba al pie del Cotopaxi, a 3 650 m de altura y 56 km al sur de la capital. Ecuador la llama �estaci�n Cotopaxi�: cable del Departamento de Estado de 2007, https://www.scoop.co.nz/stories/WL0710/S01113.htm | **Confirmado** |
+| 2 | Redes | Minitrack  STADAN  STDN | SP-4233, pp. 16-19, 42 y 229: fue una de las 7 estaciones Minitrack de 1957, pas� a STADAN entre 1960 y 1963 y despu�s a STDN | **Confirmado** |
+| 3 | A�os de servicio | 1957-1981 | SP-4233, pp. 220 y 228-231. Oper� desde 1957. Dej� de operar el **14-11-1981**, durante el STS-2. El acuerdo con Ecuador se extendi� 6 meses para el desmontaje, y la instalaci�n pas� a Ecuador (CLIRSEN) el **01-07-1982**. La tabla de la p. 220 pone 1982 como a�o de cierre | **Corregido:** oper� de 1957 a 1981 y se entreg� a Ecuador en 1982 |
+| 4 | Antena | 12 m | SP-4233, pp. 56 y 230: antenas de 12 m (40 pies), instaladas entre 1960 y 1963 | **Confirmado** |
+| 5 | Apolo-Soyuz | 1975 | SP-4233, pp. 192-193: Quito (QUI) figura entre las estaciones del ASTP. Lo repite el cable de 2007 | **Confirmado** |
+| 6 | STS-2 y cierre | Noviembre de 1981 | SP-4233, p. 230: Engle y Truly se despidieron de los 75 empleados a las 07:04, hora local, del 14-11-1981 | **Confirmado** |
+| 7 | �Apoy� al Apolo 11? | Sin confirmaci�n primaria | SP-4233, p. 229: Quito pas� de sat�lites de aplicaci�n a vuelos tripulados �en el ASTP�, es decir, en 1975. El cable de 2007 solo cita el ASTP y el STS-2. No hall� el informe de red del Apolo 11: la copia de NASA da error 404 y el espejo de la UNT falla por certificado | **Sin verificar.** No decir que Quito rastre� el alunizaje |
+| 8 | Disco de buena voluntad | 73 pa�ses; mensajes reducidos 200 veces | Comunicado de NASA 69-83F, pp. 1-3: https://www.nasa.gov/wp-content/uploads/2024/05/apollo-11-goodwill-messages.pdf. Disco de silicio del tama�o de una moneda de 50 centavos; cada mensaje mide 0,0425 � 0,055 pulgadas | **Confirmado** |
+| 9 | Mensaje de Ecuador | Velasco Ibarra dese� �xito y destac� el entendimiento humano y la buena voluntad | 69-83F, p. 18: firmado por �Jose Maria Velasco Ibarra, President�. Desea �xito a los astronautas y habla de la �grandeur of human understanding and goodwill� | **Confirmado.** La par�frasis es fiel |
+| 10 | Roca del Apolo 11 entregada a Ecuador | Sin acta ni paradero | No hay registro primario. collectSPACE (secundario) deja la fila de Ecuador en blanco: https://www.collectspace.com/resources/moonrocks_apollo11.html. En 2009, El Universo, con datos de AP, dijo que las autoridades ecuatorianas �no tienen noticia� de la roca: https://www.eluniverso.com/2009/09/16/1/1430/adonde-fueron-parar-piedras-lunares-apolo.html | **Sin verificar.** No afirmar que se perdi�, que se rob� ni d�nde est� |
+| 11 | Reparto del Apolo 17 | 1973; 135 jefes de Estado; roca 70017 | NASA History: https://www.nasa.gov/history/50-years-ago-apollo-17-post-mission-activities/. Fragmentos de la muestra 70017 a �135 foreign heads of state� en marzo de 1973 | **Confirmado** |
+| 12 | NASA no rastrea los obsequios | NASA no los rastrea | NASA OIG, IG-12-007, p. 7 del informe: https://oig.nasa.gov/wp-content/uploads/2024/02/ig-12-007.pdf. NASA conserva cerca del 80 % de la roca; los fragmentos regalados �are not tracked by NASA� | **Confirmado** |
+| 13 | Roca del Apolo 17 entregada a Ecuador | Recepci�n y destino sin confirmar | collectSPACE, fila 312, en blanco: https://www.collectspace.com/resources/moonrocks_goodwill.html. Ninguna fuente de NASA ni de Ecuador nombra el ejemplar ecuatoriano | **Sin verificar** |
+| 14 | Acuerdos Artemisa | 21-06-2023, pa�s n.� 26, firm� Gustavo Manrique en la embajada en Washington | NASA: https://www.nasa.gov/news-release/nasa-welcomes-ecuador-as-26th-artemis-accords-signatory/. Firm� el canciller Gustavo Manrique Miranda | **Confirmado** |
+| 15 | EXA | ONG civil creada en 2007 | Revista *Sobrevuelo* de la FAE, 27-10-2011, p. 24: https://www.fae.mil.ec/wp-content/uploads/2020/07/Sobrevuelo-2011.pdf. EXA es una �organizaci�n no gubernamental sin fines de lucro�. Se present� el 29-08-2007 e inici� actividades el 01-11-2007 | **Confirmado** |
+| 16 | NEE-01 Pegaso: identidad | Primer sat�lite ecuatoriano, cuerpo de 10 cm, 2013-018B | NASA, *Orbital Debris Quarterly News* 17-3, pp. 1-2 y 8: https://orbitaldebris.jsc.nasa.gov/quarterly-news/pdfs/odqnv17i3.pdf. Cubo de 10 cm, dos paneles de 27 cm, �rbita de 627 � 654 km y n.� de cat�logo 39151 | **Confirmado** |
+| 17 | Pegaso: fecha y lugar | 25-04-2013, Jiuquan | Resumen IAC-14 de Nader, Carri�n y Urig�en (fuente del equipo): https://iafastro.directory/iac/archive/browse/IAC-14/B4/1/21927/. Otro resumen IAC-14 (Nader y Kelso) da el 25-04-2013, Jiuquan, e inicio de operaciones el 05-05-2013: https://iafastro.directory/iac/archive/browse/IAC-14/A6/7/21921/ | **Confirmado**, seg�n el equipo. La fecha en UTC (26-04) no tiene fuente primaria |
+| 18 | Pegaso: cohete | LM-2D | Ni NASA ni los res�menes IAC lo nombran. NSSDCA no respondi� (p�gina de error) | **Sin verificar** |
+| 19 | Pegaso: incidente | 23-05-2013; NASA no confirm� una colisi�n | ODQN 17-3, pp. 1-2. El objeto era un cuerpo de cohete sovi�tico de 1985 (1985-058B). NASA concluye que pas� por debajo �at a safe distance� y que no aparecieron escombros nuevos. Contacto recuperado el 25-01-2014 (resumen IAC-14 A6.7) | **Confirmado** |
+| 20 | Ronnie Nader | Dirigi� Pegaso; formaci�n ASA/T | *Sobrevuelo* 2011, pp. 23-25: ASA/T (*Advanced Suborbital Astronaut / Trained*) del centro Gagarin de Mosc�; lo llama �primer cosmonauta ecuatoriano�. El liderazgo de Pegaso lo confirman los res�menes IAC-14. No consta ning�n vuelo espacial | **Confirmado.** Lo del vuelo es correcto: no vol� al espacio |
+| 21 | Pegaso: inicio | Proyecto aprobado en 2010 | *Sobrevuelo* 2011, p. 24 (Nader): �La primera fase la inici� la agencia en el 2010�. No habla de aprobaci�n | **Corregido:** se inici� en 2010 |
+| 22 | Observatorio Astron�mico de Quito | Escuela Polit�cnica Nacional; fundado en 1873; 150 a�os en 2023 | OAQ-EPN, �Introducci�n�: https://oaq.epn.edu.ec/index.php/nosotros/introduccion. Fundado en 1873, durante la presidencia de Garc�a Moreno; es Patrimonio Monumental de la Naci�n. Su primer director fue Juan Bautista Menten, de 1870 a 1883: https://oaq.epn.edu.ec/index.php/joomla/directores-oaq. El bolet�n de los 150 a�os que cita el informe da error 403 | **Confirmado.** Los 150 a�os salen de 1873 + 150 |
+| 23 | Chimborazo | 6 384 415,98 m desde el centro, medidos en 2016 | El PDF del Ministerio de Turismo no carga (el dominio no resuelve). La fuente t�cnica disponible es Merizalde, Leiva (ESPE) y Enr�quez (IGM), bolet�n SIRGAS de 2019: https://www.sirgas.org/fileadmin/docs/Boletines/Bol24/69_Merizalde_et_al_2019_Alturas_cumbres_ecuatorianas.pdf. Da **6 384 418,505 m** para el Chimborazo, 6 382 306,772 m para el Everest (2 111,7 m menos) y 6 384 361,5 m para el Huascar�n (57 m menos). La cifra de 2016 solo aparece en prensa (El Universo, 07-04-2016) | **Corregido:** usar �unos 6 384,4 km� o la cifra del IGM de 2019. El r�cord est� confirmado; los 6 384 415,98 m quedan sin fuente primaria |
+| 24 | S�mbolos patrios | Constituci�n, art. 2 | Constituci�n de 2008, art. 2: https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf. �La bandera, el escudo y el himno nacional, establecidos por la ley, son los s�mbolos de la patria� | **Confirmado** |
+| 25 | Ley sobre la bandera en obras y videojuegos | No hay ley especial verificada | No encontr� ninguna ley que regule mostrar la bandera en una obra. El *Instructivo de uso de los S�mbolos Patrios* de la Presidencia (noviembre de 2009) cita la Resoluci�n 24-047 del Congreso (R. O. 45, 21-03-2003), cuyo texto no pude leer: https://cdn.fotw.info/misc/ec_2009.pdf (copia; no hall� el original en presidencia.gob.ec). El instructivo regula el uso oficial del escudo y proh�be a los particulares usarlo �en su documentaci�n�; no habla de obras | **Sin verificar.** Pedir la opini�n de un abogado antes de publicar |
+| 26 | Bandera como marca | C�digo Ingenios, art. 360, num. 12 | Texto consultado: https://www.creatividad.gob.ec/wp-content/uploads/2021/02/Codigo-Organico-de-los-Conocimientos.pdf. Proh�be registrar como marca banderas y escudos de Estados sin permiso, salvo que no induzcan a confusi�n sobre un v�nculo con el Estado. Se refiere al registro de marcas, no a mostrarlos dentro de una escena | **Confirmado** |
+
+## 2. Correcciones para el informe 01
+
+- **A1:** las fechas son 1957-1981 de operaci�n y 1982 de entrega a Ecuador, no un cierre en 1981 a secas.
+- **A3:** se mantiene **sin verificar**. Ninguna fuente primaria pone a Quito en el Apolo 11; la historia de NASA lo sit�a en vuelos tripulados solo desde 1975.
+- **E3:** el cohete LM-2D queda sin verificar. La fecha del 25-04-2013 es la que da el equipo, en hora de Ecuador.
+- **E4:** el proyecto se **inici�** en 2010; no consta que se �aprobara� ese a�o.
+- **E7:** cambiar 6 384 415,98 m por �unos 6 384,4 km� o por 6 384 418,5 m (IGM-ESPE, 2019).
+- **A5 y A6:** se mantienen sin verificar. En 2009, seg�n El Universo con datos de AP, las autoridades ecuatorianas no ten�an noticia de su roca. Que se perdiera tampoco est� confirmado: no usarlo en el guion.
+
+## 3. Hallazgos �tiles para la historia (con fuente)
+
+- **La estaci�n del Cotopaxi** (SP-4233, pp. 228-231):
+  - una manada de llamas pastaba junto a la antena de 12 m (foto de 1973);
+  - hizo 578 160 horas de apoyo a misiones en 22 a�os;
+  - el personal ecuatoriano pas� de 50 a 220 personas;
+  - el STS-2 se despidi� de ella en el aire.
+
+  Es un buen escenario con datos reales para la habitaci�n o el telescopio.
+- **Una bandera ecuatoriana en la Luna ya fue una meta real.** En 2011, Nader dijo que el programa espacial de diez a�os de EXA terminar�a �en el 2020 poniendo nuestra bandera en la luna� (*Sobrevuelo* 2011, p. 25). Sirve de motivaci�n para la misi�n de las dos banderas, presentada como un sue�o y no como un hecho.
+- **Bandera nacional.** Seg�n el instructivo de 2009, la bandera nacional lleva el escudo en el centro y sus lados guardan la proporci�n 3:2. El escudo tiene restricciones de uso oficial. Al modelarla hay que decidir con Guillermo si se usa la bandera con escudo o el tricolor sin escudo, y revisarlo con un abogado.
+- **Tono.** La NASA no rastrea las rocas regaladas (OIG). Un misterio sobre �la roca perdida de Ecuador� solo puede ser ficci�n declarada, nunca un hecho.
+
+## 4. L�mites de esta verificaci�n
+
+- No se us� Firecrawl.
+- No cargaron: el PDF del Ministerio de Turismo (DNS), el bolet�n de 150 a�os del OAQ (403), NSSDCA (p�gina de error), web.archive.org (bloqueado) ni el informe de red del Apolo 11 (404 y certificado).
+- Quedan fuera de esta tarea los puntos E8 (Planetario de la Armada), L1-L13 y R1-R7: ver [[03b_verificacion_apolo]].
+# Verificaci�n del informe 01: superficie lunar y Apolo
+
+> Verificador esc�ptico, 2026-11-12. Revisa las secciones 3 y 4 de [[01_datos_espaciales_ecuador]] (L1-L13 y R1-R7) contra fuentes primarias: NASA, JSC, Smithsonian, ONU y leyes de EE. UU. R8 y R9 (derecho ecuatoriano) quedan fuera de este encargo.
+> Se usaron WebSearch y WebFetch; los PDF se leyeron con `pdftotext`. Sin Firecrawl y sin cr�ditos de Higgsfield.
+
+## Resumen
+
+| Veredicto | Datos |
+|---|---|
+| Confirmado | 17 (L1-L3, L6-L13, R1-R6) |
+| Corregido | 3 (L4, L5, R7) |
+| Sin verificar | 0 datos completos; 2 matices sueltos (ver al final) |
+
+**Correcciones clave**
+1. **L5. Masas por misi�n:** la tabla de NTRS que cita el informe est� mal alineada por el OCR. El Centro Espacial Johnson da **21,5 kg** para el Apolo 11 y **34,4 kg** para el Apolo 12, no 21,6 y 34,3. Total: **382 kg** y **2196 muestras**.
+2. **L4. Fotos de documentaci�n:** el protocolo de 3 fotos previas, 1 posterior y 1 de localizaci�n no es un �protocolo del Apolo 16� de la p. 274. Es la descripci�n del Servicio Geol�gico de EE. UU. (USGS) para el Apolo 17 y las tres �ltimas misiones, citada en la **p. 159** de Phinney. El ap�ndice P (pp. 274-282) son solo im�genes. El enlace del informe da error 404.
+3. **R7. Nombre NASA:** la conclusi�n se endurece. NASA dice que los comerciantes **no pueden usar su identificador para nombrar productos**. �Proyecto NASA-Ecuador� sirve como nombre interno, no como t�tulo comercial.
+
+## 3. Superficie lunar y operaciones Apolo
+
+| Dato | Cifra | Fuente | Confianza | Veredicto |
+|---|---|---|---|---|
+| **L1. Pinzas y cuchar�n.** Las pinzas recog�an rocas sueltas; el cuchar�n, suelo. Los mangos extensores permit�an trabajar de pie. | 2 funciones. El Apolo 11 llev� un cuchar�n de caja y unas pinzas peque�as; del 15 al 17 se usaron unas pinzas m�s grandes. | [NASA, herramientas](https://www.nasa.gov/suits-and-rovers/spacewalking-tools/); [Allton, JSC](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf) | Alta | **Confirmado.** La p�gina de NASA presenta el juego de herramientas del Apolo 17. |
+| **L2. Rastrillo.** Separaba los fragmentos peque�os del material fino. No es equipo del Apolo 11. | Apolo 15-17. | [Allton, JSC](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf); [NASA, herramientas](https://www.nasa.gov/suits-and-rovers/spacewalking-tools/) | Alta | **Confirmado.** |
+| **L3. Tubos de n�cleo.** Se clavaban en el suelo para sacar una columna; se hincaban con martillo. | Apolo 11-14: 2 cm de di�metro, de pared gruesa. Apolo 15-17: 4 cm, de pared delgada, m�s un taladro de n�cleo. El n�cleo m�s largo, del Apolo 17, midi� 2,86 m. | [Allton, JSC](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf) (�martillo. para golpear tubos de n�cleo�); [JSC, The Lunar Sample Collection](https://astromaterials.jsc.nasa.gov/education/_documents/The%20Lunar%20Sample%20Collection.pdf) | Alta | **Confirmado**, con datos a�adidos. |
+| **L4. Bolsas y documentaci�n.** Las bolsas numeradas ligaban cada muestra a su registro. El gnomon daba la escala, el color, la vertical y el �ngulo del Sol. Si faltaba tiempo, se omit�an fotos. | Antes: 1 foto hacia el Sol de espaldas y 1 par est�reo de lado (**3 fotos**). Despu�s: **1 foto** desde el mismo sitio. M�s **1 foto de localizaci�n** con el rover. | [Phinney, NASA SP-2015-626, p. 159](https://ntrs.nasa.gov/api/citations/20190026783/downloads/20190026783.pdf), que cita el informe USGS PP 1080 del Apolo 17; p. 96 (Muehlberger, bolsas numeradas de tefl�n); [Smithsonian, gnomon](https://airandspace.si.edu/collection-objects/gnomon-lunar-apollo/nasm_A19750046000) | Alta | **Corregido en la atribuci�n.** El protocolo es de las tres �ltimas misiones (15-17); en el Apolo 11 fue �bastante simple� (p. 159). No es �Apolo 16, p. 274�. |
+| **L5. Masa de muestras por misi�n.** Es masa, no peso lunar. | Apolo **11: 21,5 kg; 12: 34,4; 14: 42,3; 15: 77,3; 16: 95,7; 17: 110,5**. Total: **382 kg** y **2196 muestras**. El Apolo 11 trajo 58 muestras y el 17, 741. | [JSC, The Lunar Sample Collection](https://astromaterials.jsc.nasa.gov/education/_documents/The%20Lunar%20Sample%20Collection.pdf); [Allton, JSC](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf); [NASA Curation](https://curator.jsc.nasa.gov/lunar/) (total de 382 kg) | Alta | **Corregido.** El informe daba 21,6 y 34,3 kg. En el OCR de la tabla 1 de NTRS, las masas aparecen junto a misiones Luna y Surveyor. Usar las cifras del JSC. |
+| **L6. Gravedad.** Baja el peso; la masa no cambia. | **1,624 m/s�** en el ecuador lunar, frente a 9,807 en la Tierra: 0,166, aproximadamente **1/6**. | [NASA, Moon by the numbers](https://science.nasa.gov/moon/by-the-numbers/); [NASA, Moon facts](https://science.nasa.gov/moon/facts/) | Alta | **Confirmado.** |
+| **L7. Temperaturas.** Son los extremos de la superficie. | Unos **127 �C** a pleno Sol y unos **-173 �C** en la oscuridad. | [NASA, Moon facts](https://science.nasa.gov/moon/facts/) | Alta | **Confirmado.** |
+| **L8. Regolito.** Polvo y escombros rocosos que dejaron los impactos. | Formado durante **miles de millones de a�os**; va desde pe�ascos hasta polvo. | [NASA, Moon facts](https://science.nasa.gov/moon/facts/) | Alta | **Confirmado.** |
+| **L9. La Tierra vista desde la Luna.** Se queda m�s o menos en el mismo punto del cielo y oscila poco por la libraci�n. | Pasa por todas sus fases cada mes lunar, opuestas a las de la Luna: Tierra llena con luna nueva. Su tama�o aparente var�a. En algunos lugares sale y se pone despacio, a lo largo de un mes. | [NASA Goddard, StarChild](https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question58.html) | Alta | **Confirmado.** La fuente no habla de los sitios Apolo; que en ellos la Tierra no se ponga es una deducci�n, porque todos est�n en la cara visible. |
+| **L10. Lunar Flag Assembly.** Una barra horizontal pasa por un dobladillo en el borde superior. Parece ondear por la barra, por las arrugas del empaque y porque la barra telesc�pica no se extendi� del todo. No hab�a viento. | Bandera de nailon de **3 � 5 pies** (0,91 � 1,52 m) y m�stil de **8 pies** (2,44 m). | [NASA, Flag Day](https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/); [Platoff, estudio hist�rico](https://escholarship.org/content/qt5h31r40r/qt5h31r40r.pdf) | Alta | **Confirmado.** Seg�n Platoff, la tripulaci�n del Apolo 11 no logr� extender la barra entera, y algunas tripulaciones posteriores imitaron la �ondulaci�n� a prop�sito. |
+| **L11. Estado de la bandera del Apolo 11.** Seg�n Aldrin, la derrib� el despegue. NASA presume que ya no est� en pie. | Las de los Apolo 12, 16 y 17 parecen seguir en pie (im�genes del LRO). La del 14 parece muy da�ada por el escape del motor; las del 14 y el 15 no se pueden determinar. | [NASA, Flag Day](https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/) | Alta | **Confirmado.** |
+| **L12. Etapa de descenso.** Sirvi� de plataforma de lanzamiento y qued� en la Luna con la placa conmemorativa. | Es �el objeto m�s grande que se dej��. El despegue del Apolo 11 fue el 21-07-1969 a las 13:54 (EDT). | [NASA, cronolog�a del Apolo 11](https://www.nasa.gov/wp-content/uploads/static/history/ap11ann/apollo11_log/log.htm) | Alta | **Confirmado.** |
+| **L13. Regreso.** El m�dulo de mando se separ� del de servicio, reentr� con el escudo t�rmico por delante y ameriz� con paraca�das. | **24-07-1969**, en el Pac�fico, a 825 millas n�uticas al suroeste de Honolulu y a unas 13 del **USS Hornet**. | [NASA, cronolog�a](https://www.nasa.gov/wp-content/uploads/static/history/ap11ann/apollo11_log/log.htm); [NASA, resumen de la misi�n](https://www.nasa.gov/missions/apollo/apollo-11/apollo-11-mission-overview/) | Alta | **Confirmado.** |
+
+## 4. Reglas jur�dicas y de representaci�n
+
+| Dato | Cifra | Fuente | Confianza | Veredicto |
+|---|---|---|---|---|
+| **R1. Una bandera no da territorio.** El espacio, incluida la Luna, no puede ser objeto de apropiaci�n nacional por soberan�a, uso, ocupaci�n ni ning�n otro medio. | Abierto a la firma el **27-01-1967**; vigente desde el **10-10-1967**; **art. II**. | [ONU, UNTS vol. 610, n.� 8843](https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf) | Alta | **Confirmado** con el texto aut�ntico. |
+| **R2. Los objetos siguen teniendo due�o.** La propiedad no cambia porque un objeto est� en la Luna. Se exige la debida consideraci�n y consultar antes de una interferencia perjudicial. | **Art. VIII** (propiedad y jurisdicci�n) y **art. IX** (debida consideraci�n, contaminaci�n e interferencia). | [ONU, tratado](https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf); [NASA 2011, marco legal](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf) (el Gobierno de EE. UU. conserva la propiedad de los objetos del Apolo) | Alta | **Confirmado.** |
+| **R3. Protecci�n de los sitios del Apolo 11 y el 17.** Zonas de exclusi�n para los sistemas rob�ticos visitantes, medidas desde la etapa de descenso. | **75 m** en el Apolo 11, para abarcar �todo el equipo y la actividad humana�; **225 m** en el Apolo 17. Secci�n **A3-2**. | [NASA, recomendaciones del 20-07-2011, rev. A del 28-10-2011](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf) | Alta | **Confirmado.** El documento dice que �no son requisitos legales�, sino recomendaciones t�cnicas. |
+| **R4. Descenso y otros objetos.** No sobrevolar ni aterrizar dentro del l�mite de descenso. Zonas por objeto en los Apolo 12 y 14-16. | Descenso: **2,0 km** (0,5 km en sitios de impacto; secciones A1-3 y A2). Etapa de descenso: **3 m**. Rover, experimentos ALSEP, puntos de muestreo, bandera y herramientas: **1 m**. Retrorreflectores: 1 m de exclusi�n total y aproximaci�n lenta dentro de 10 m (A3-3). | [NASA 2011](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf) | Alta | **Confirmado.** Fuera de esas zonas, las huellas y las rodadas no tienen restricci�n. |
+| **R5. Ley One Small Step.** NASA debe poner las recomendaciones de 2011 como condici�n en contratos, subvenciones y acuerdos de actividades lunares, propias o con terceros. | **Ley p�blica 116-275**, del **31-12-2020**, secci�n 3. El administrador puede dispensar caso por caso, avisando al Congreso **30 d�as** antes. | [Texto oficial, govinfo](https://www.govinfo.gov/content/pkg/PLAW-116publ275/html/PLAW-116publ275.htm) | Alta | **Confirmado.** Que no regule un videojuego es una lectura correcta: solo obliga a acuerdos con NASA. |
+| **R6. Marca NASA en videojuegos.** Hay un apartado para videojuegos y mundos virtuales y la aprobaci�n es por escrito. | Requisitos: contar historias o temas de NASA o inspirar inter�s por la ciencia; proyecto financiado, en desarrollo y con plan de distribuci�n; sin nombre ni imagen de empleados o astronautas en activo. La insignia y el logotipo **no son de dominio p�blico**. | [NASA, Merchandise Approvals](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/) | Alta | **Confirmado**, con requisitos a�adidos. Adem�s, el logotipo antiguo (�worm�) no puede ir con im�genes de Mercury, Gemini ni Apolo. |
+| **R7. Nombre NASA y respaldo.** Prohibido �aprobado por NASA�, �NASA oficial� y �NASA X (marca)�. El uso comercial no puede transmitir respaldo, ni expl�cito ni impl�cito. | Los comerciantes �no pueden usar nuestro identificador para nombrar sus productos�. NASA no hace marcas conjuntas ni concede licencias. | [NASA, Merchandise Approvals](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/); [NASA, Images and Media](https://www.nasa.gov/nasa-brand-center/images-and-media/) | Alta | **Corregido (m�s estricto).** El informe dejaba el t�tulo comercial �a revisi�n�. Seg�n la norma, el t�tulo comercial no puede llevar �NASA�. |
+
+## Matices que quedan sin verificar
+
+- **Fuentes del informe que no se abrieron:** el informe de misi�n del Apolo 11 (bolsas) y su dossier de prensa (retorno). Los datos se confirmaron con otras fuentes primarias.
+- **La Tierra fija en el cielo de los sitios Apolo:** StarChild no menciona esos sitios. Es una deducci�n geom�trica, no una cita.
+
+## Consecuencias para la historia
+
+- **Sue�o lunar en el sitio del Apolo 11:** si la misi�n transcurre ah�, solo hay cuchar�n de caja, pinzas peque�as y tubos de 2 cm. El rastrillo y el rover son de los Apolo 15-17. Ubicar la exploraci�n en un sitio de esas misiones, o explicar el cambio en el cuaderno.
+- **Bandera hist�rica del Apolo 11:** no mostrarla en pie como hecho. Las del 12, 16 y 17 s� aparecen en pie en las im�genes del LRO.
+- **Las dos banderas:** usar una barra horizontal, sin viento. Plantarlas fuera de los 75 m del Apolo 11 (o de los 225 m del Apolo 17) refuerza el mensaje del art. II: cooperaci�n, no posesi�n.
+- **�Siendo vista con el Apolo que lleg� a la Tierra�** (la pregunta sigue abierta para Guillermo). Datos que sirven para cualquier interpretaci�n:
+  - en la Luna quedaron la etapa de descenso, con su placa, y la bandera;
+  - a la Tierra solo volvi� el m�dulo de mando, que ameriz� en el Pac�fico;
+  - desde el sitio, la Tierra se ve casi fija en el cielo y con fases.
+- **T�tulo:** buscar un nombre comercial sin �NASA� antes de cualquier material p�blico.
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 223
++ ... Fase_2_Narrativa/Investigacion/03b_verificacion_apolo.md'; rg -n 'F2- ...
++                                                                ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+ succeeded in 45363ms:
+---
+tipo: plan de auditor��a
+fecha: 2026-11-12
+estado: borrador �� espera la aprobaci��n de Guillermo
+fases: 1 (arte), 2 (narrativa), 5 (niveles), 6 (mecǭnicas) y 7 (interfaz)
+fuentes: "[[Escena de exploracion v1]], [[Mirador del Faro - Luna con datos reales]], [[Biblia de arte]], [[Catalogo de recursos]], [[Fase 0 - Analisis]], [[Propuesta_A]], [[Propuesta_B]], [[02_historia_existente]]"
+---
+
+# Plan de auditor��a de construcci��n
+
+> **Pedido de Guillermo (2026-11-12):** ��empezar la auditor��a de la construcci��n de pantallas de carga, menǧs, botones, jugabilidad, escenarios, caminos y texturas en orden. Por ejemplo, escenario 1) Habitaci��n, 2) Telescopio, 3) Luna, y que se pueda llegar como un mundo abierto entre cada uno��.
+> **QuǸ es este documento:** el inventario de lo que existe, la lista de lo que falta, los criterios con los que se va a auditar cada elemento y el orden de trabajo. **No se construy�� nada.** Ningǧn paso gasta crǸditos de Higgsfield.
+
+## En cifras
+
+| Medida | Valor |
+|---|---|
+| Escenarios pedidos | 3: Habitaci��n, Telescopio y Luna, mǭs 3 tramos que los unen (casa, Las Escalinatas y sendero) |
+| Escenarios con algo jugable en el motor | **0**. Hay 2 pruebas tǸcnicas: el sendero (vista fija con cǭmara libre) y el telescopio (pantalla fija) |
+| Elementos transversales pedidos (carga, menǧs, botones, HUD, diǭlogos, guardado, transiciones, audio) | 0 en el proyecto nuevo; 6 en el prototipo descartado de la b��veda anterior, solo como l��gica reutilizable |
+| Recursos con ID en el catǭlogo | 104 conceptos v1 en 9 hojas, todos ��espera veredicto��. **0 para la Luna** |
+| Mallas en el motor | 27 GLB por script y 8 de Tripo en `pruebas/escena_exploracion/` |
+| Rendimiento medido en la HD 620 | Sendero: 48,3 fps a 720p (307 000 triǭngulos). Telescopio: 0,74 ms de GPU |
+| Etapas de trabajo propuestas | 9, con 5 puertas de validaci��n de Guillermo |
+| Carriles de agentes en paralelo | 7 |
+
+---
+
+## 0. Decisiones que bloquean la construcci��n
+
+La auditor��a de lo existente puede empezar ya. Construir no, hasta que Guillermo decida esto:
+
+| # | Decisi��n | Opciones | QuǸ bloquea |
+|---|---|---|---|
+| B1 | Aprobar la Fase 0, sobre todo D-001 (renderizador Mobile, 3D a 1280�-720) | Aprobar o corregir | El esqueleto del juego y todas las cifras de rendimiento |
+| B2 | **Meta de fps en la HD 620** | D-001 dice 30 fps estables; las propuestas A y B dicen 60 a 720p | Los umbrales de la secci��n 3 |
+| B3 | Propuesta narrativa | A ��Luz cenicienta�� (88 min) o B ��La bitǭcora de una noche�� (85 min), o una mezcla | Las escenas, misiones y desbloqueos que se auditan en cada escenario |
+| B4 | La frase ��siendo vista con el Apolo que lleg�� a la Tierra�� | A: verla junto a la etapa de descenso que sigue en la Luna. B: ser testigo en 1969 del regreso a la Tierra. C: ser vista desde la Tierra por su familia. D: ver la cǭpsula que volvi��, fuera del sue��o | QuǸ se construye en la Luna y si hace falta una cinemǭtica de regreso |
+| B5 | Tama��o del personaje | 12,5 % del alto (biblia) o 20,9 % (medido en el ancla) | Cǭmara, caminos, HUD y legibilidad |
+| B6 | Inclinaci��n de la cǭmara | La biblia dice unos 60��; la escena v1 usa 48�� y 40�� de campo, medidos contra el ancla | Todos los exteriores |
+| B7 | Protagonista fija o creador de personaje | PER-01 fija, o PER-01 y PER-02 elegibles | Menǧ principal y guardado |
+| B8 | Corte vertical | Propuesta A: unos 45 min primero (Habitaci��n ��' Telescopio ��' sue��o) | El alcance de las etapas 4 a 7 |
+
+---
+
+## 1. Inventario de lo que existe
+
+**Estados usados**
+
+- **Prueba:** demuestra una tǸcnica; no es jugable.
+- **Prototipo:** jugable de punta a punta, sin arte final.
+- **Concepto:** imagen u hoja de referencia, sin nada en el motor.
+- **Ausente:** no existe nada.
+
+### 1.1 Por escenario
+
+| Escenario | QuǸ hay | D��nde | Estado |
+|---|---|---|---|
+| **1 Habitaci��n-taller** | Ancla de interiores `ANC_HUB` (diorama lateral en corte) | `Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png` | Concepto aprobado (D-011) |
+| | Hoja del taller: TAL-01 a TAL-14 (banco, osciloscopio, mult��metro, maqueta de satǸlite, telescopio peque��o�?�) | `HR_TAL_v1.png` | Concepto �� espera veredicto |
+| | Cuarto 3D con jugador, cama, puerta y estanter��a, de la b��veda anterior | `Desktop\Juego\Juego_2d-hd\1_Mecanicas_y_Codigo\godot\scenes\bedroom.tscn` | Prototipo **con estilo descartado** (D-000). Sirve solo como l��gica |
+| | Malla, rig o escena del cuarto en el proyecto nuevo | �?" | **Ausente** |
+| **1b Casa y E Las Escalinatas** | Hojas ARQ-01 a 12 y URB-01 a 12; mapa de la regi��n | `HR_ARQ_v1.png`, `HR_URB_v1.png`, `L02_mapa_region.png` | Concepto |
+| | Escena en el motor | �?" | **Ausente** |
+| **S Sendero del arroyo** | Escena v1: terreno, arroyo, puente, escalinata, flamboyǭn, rocas, 28 000 briznas, 352 entradas en `layout.json` | `pruebas/escena_exploracion/` | **Prueba**. Cǭmara libre con flechas; no hay personaje controlable, colisiones ni interacci��n |
+| | Bucle de 19 vueltas contra el ancla: �"E de 27,96 a 19,36 | `capturas/iteraciones/BUCLE.md` | Cerrado; espera el veredicto de Guillermo |
+| | Protagonista (Tripo, niveles de 1 500 y 3 000 triǭngulos) y �"rbita con rig, `reposo` y `caminar` | `pruebas/escena_exploracion/tripo/` | Prueba. �"rbita camina en el sitio |
+| **2 Mirador y telescopio** | Luna real de JPL Horizons con texturas de LRO: fase y borde iluminado iguales a Horizons (12,15 % contra 12,2 %; 192,6��) | `pruebas/luna_telescopio/` | **Prueba**. Pantalla fija de una fecha; sin enfoque, zoom ni entrada salvo Esc |
+| | Escena de noche del Mirador y maqueta de la interfaz del telescopio | `L03_mirador_noche_vista_juego.png`, `L03_ui_telescopio_luna.png` | Concepto �� espera veredicto |
+| | Hoja MIR-01 a 08 (faro, plataforma, telescopio, atril, guirnalda, cǧpula) | `HR_MIR_v1.png` | Concepto |
+| | Mirador 3D caminable | �?" | **Ausente** |
+| **3 Luna del sue��o** | Datos verificados del Apolo y del sitio (L1 a L13, R1 a R8) | `Fase_2_Narrativa/Investigacion/` | Investigaci��n |
+| | Hoja de referencia, terreno, etapa de descenso, herramientas, banderas o trajes | �?" | **Ausente**. No hay ni concepto |
+| | Shader de la Luna del telescopio (reutilizable para la Tierra en el cielo) | `pruebas/luna_telescopio/luna.gdshader` | Prueba |
+
+### 1.2 Transversal
+
+| Elemento | QuǸ hay | Estado |
+|---|---|---|
+| Proyecto de Godot del juego (`juego/`), Git y Git LFS | Solo propuesto en la Fase 0, ��5 | **Ausente** |
+| Pantalla de carga | Idea: una pǭgina del cuaderno con un dato y su fuente (propuestas A y B) | **Ausente** |
+| Menǧ principal, opciones, crǸditos, pausa | Prototipo de la b��veda anterior: t��tulo, continuar, creador, opciones, crǸditos y pausa en `scripts/main.gd` (477 l��neas) | L��gica reutilizable; **estilo descartado** |
+| Botones y tema de interfaz | Estilo ��cuaderno de ingenier��a�� en la biblia, ��6. El panel del telescopio usa papel `#F3E6CB`, tinta `#2F2A24` y cian `#62E4E0` | Prueba (solo el telescopio) |
+| HUD de exploraci��n | R��tulo de depuraci��n en la escena v1 | **Ausente** |
+| Diǭlogos | Decisi��n propuesta: Dialogue Manager 4.2.0 tras un adaptador propio (Fase 0, ��5). Frases de �"rbita fijas en el telescopio | **Ausente**; el complemento no se ha probado en 4.7.2 |
+| Cuaderno, inventario, mapa y viaje rǭpido | Maqueta del mapa `ANC_MAPA` | Concepto |
+| Guardado | JSON con versi��n (`journey_v1.json`) y `preferences.cfg` en la b��veda anterior. Propuesto: JSON validado con migraciones y 2 respaldos | L��gica reutilizable |
+| Transiciones entre zonas | Propuestas: 3 a 5 umbrales con carga de 1 a 3 s | **Ausente** |
+| Controlador del personaje, colisiones, interacci��n | `player.gd` (CharacterBody3D, 2,05 m/s al caminar y 3,45 al correr) en la b��veda anterior | L��gica reutilizable; nada en el proyecto nuevo |
+| Audio | Nada: ni buses, ni ambiente, ni pasos, ni mǧsica | **Ausente** |
+| Idiomas | Decisi��n propuesta: gettext con espa��ol e inglǸs. Los textos de las pruebas estǭn escritos en el c��digo | **Ausente** |
+| Tipograf��a | DotGothic16 propuesta, sin probar. Atkinson (OFL) y Cinzel en la b��veda anterior | Sin decidir |
+| Texturas pintadas 2D-HD | Ninguna: el acabado sale del color por vǸrtice y de los shaders `facetado`, `follaje`, `agua` y `personaje` | Prueba; las pinceladas por shader ��casi no se notan�� (vuelta 12) |
+
+### 1.3 Herramientas que ya sirven para auditar
+
+| Herramienta | QuǸ mide |
+|---|---|
+| `herramientas/godot_captura.py` | Captura o medici��n sin cuelgues en la HD 620 |
+| `escena.gd --medir=<s>` | fps medios, ms por cuadro (media y p95), primitivas y llamadas de dibujo |
+| `pruebas/bench_render/` | Comparaci��n de renderizadores con escenas sintǸticas |
+| `herramientas/comparar_ancla.py` y `color_zonas.py` | �"E por bloques y por zona contra un ancla |
+| `herramientas/paleta.py comparar` | QuǸ parte del color cae en la paleta maestra (detecta desv��os de familia, no de estilo) |
+| `herramientas/camara_ancla.py` | Punto del mundo que el ancla pinta en un p��xel |
+| `herramientas/luna_medir.py` | Fracci��n iluminada, ǭngulo del borde y orientaci��n de la textura de la Luna |
+| `herramientas/mallas/revisar_textura_glb.py` | Texturas grises fallidas de Tripo |
+
+---
+
+## 2. Lo que falta
+
+### 2.1 Por escenario
+
+| Escenario | Jugabilidad | Escenario y caminos | Texturas y luz |
+|---|---|---|---|
+| **1 Habitaci��n** | Caminar, mirar e interactuar con 5 a 8 objetos; rompecabezas del seguidor (osciloscopio TAL-02); circuito de Pegaso (B); cama con ��Dormir�� y ��So��ar otra vez��; escalera a la casa | Diorama del cuarto-taller con cǭmara lateral (`ANC_HUB`); la cǭmara y el paso a la vista alta del exterior | Luz de ma��ana y de noche (biblia, ��7); lǭmpara TAL-09; ventana con la Luna |
+| **1b / E Casa y barrio** | Desayuno y diǭlogo; recolecci��n (COL-03, 05, 06, 07); kiosco de Lidia; puesto de Sam | Planta baja, puerta, Las Escalinatas con escalones numerados (ARQ-12), Plaza de las Iguanas y Mercado | Tarde y noche; faroles y guirnaldas |
+| **S Sendero** | Personaje controlable, colisiones, �"rbita que lo sigue, fauna, recolectables con destello cian | Unir la escena v1 con la plaza y con el Mirador; versi��n de noche | Texturas pintadas del suelo y la hierba (pendiente 2 del bucle); copa del flamboyǭn; versi��n de noche |
+| **2 Telescopio** | Buscar, enfocar y marcar terminador, mares y luz cenicienta; seguimiento manual (A) o montura ecuatorial (B); tarjetas o diapositivas; entrar y salir del ocular | Mirador 3D (MIR-01 a 08), subida desde el sendero, atajo (B) | Noche con luz fr��a (biblia, ��7); **ǭngulo paralǭctico en cada instante** (pendiente de la prueba) |
+| **3 Luna** | Caminar a 1/6 g con inercia; 4 herramientas; protocolo de foto con gnomon; anillo de 75 m alrededor del sitio del Apolo 11; dos banderas; regreso en 5 o 7 pasos | Llegada, campo de crǭteres, anillo y loma; unos 450 �- 450 m segǧn A | **Paleta y luz lunar sin definir en la biblia**; regolito; Tierra en el cielo; trajes originales sin insignias |
+
+### 2.2 Transversal
+
+| Elemento | QuǸ falta |
+|---|---|
+| Pantalla de carga | Dise��o (pǭgina del cuaderno con dato y fuente), precompilaci��n de shaders en la primera, medici��n del tiempo |
+| Menǧ principal | Nuevo, Continuar, Opciones, CrǸditos y Salir; creador si B7 lo pide; fondo vivo |
+| Pausa y opciones | Volumen por bus, escala de texto, remapeo, reducir movimiento, modos de daltonismo, calidad grǭfica (perfil HD 620) |
+| HUD | Objetivo actual, aviso de interacci��n, �"rbita, reloj del cielo (B) |
+| Botones | Tema ǧnico de interfaz: estados normal, foco, pulsado y desactivado; teclado, rat��n y mando |
+| Diǭlogos | Burbujas de 2 renglones, elecciones, voz de �"rbita (cuaderno despierto, radio en el sue��o) |
+| Cuaderno | Inventario, bitǭcora con sellos ��Dato��, ��Simulaci��n�� y ��Sue��o��, mapa y viaje rǭpido |
+| Guardado | Partida con versi��n, migraciones y 2 respaldos; estado del mundo (banderas plantadas, objetos recogidos) |
+| Transiciones | Escalera, puerta, curva del camino, cama ��' Luna (6 a 40 s segǧn la propuesta) y Luna ��' cama |
+| Caminos | Trazado continuo entre los 6 nodos, se��alizaci��n para el jugador y bloqueos con motivo en la historia |
+| Audio | Buses, ambiente por zona, pasos por superficie, mǧsica adaptativa y silencio del vac��o lunar (solo traje, respiraci��n y radio) |
+| Accesibilidad | Subt��tulos, contraste, tama��o de texto, sin dependencia del color cian para informaci��n cr��tica |
+| CrǸditos de datos | Atribuci��n de NASA, JPL y LRO en crǸditos y en las fichas; sin logotipos ni nada que sugiera respaldo |
+
+---
+
+## 3. Criterios de la auditor��a
+
+Cada elemento recibe una ficha con ID `AUD-NNN`, la evidencia (captura con la cǭmara real del juego o una medici��n), el veredicto (��cumple��, ��no cumple�� o ��no aplica��) y quiǸn lo revis��. **Nada se marca ��cumple�� sin evidencia.** Las cifras marcadas *(propuesta)* son metas a aprobar por Guillermo.
+
+### 3.1 Comprobaciones comunes a todo elemento
+
+| Eje | Comprobaci��n | Umbral | C��mo se mide |
+|---|---|---|---|
+| **Legibilidad** | Se entiende en 2 s a la distancia de juego | Silueta reconocible al tama��o de encuadre elegido en B5 | Captura con la cǭmara real; prueba en escala de grises |
+| | Texto legible | �%� 24 px de alto de letra a 1080p y �%� 16 px a 720p *(propuesta)* | Captura a 720p y en pantalla completa a 1080p |
+| | Contraste del texto | �%� 4,5:1 (WCAG 1.4.3) | Muestreo de color en la captura |
+| **Biblia de arte** | Paleta | �%� 90 % del color dentro de la paleta maestra *(propuesta)*; la Luna y la Tierra de NASA quedan exentas | `paleta.py comparar` |
+| | Cian | Solo tecnolog��a, datos, interacci��n y recolectables | Revisi��n de la captura |
+| | Facetas y materiales | Facetas con degradado pintado, mates, sin texturas fotogrǭficas | Revisi��n de la captura |
+| | Luz | La del momento del d��a (biblia, ��7) | Revisi��n de la captura |
+| | Reglas fijas | Sin insignias, logotipos ni emblemas de la NASA ni de misiones; banderas con trato respetuoso | Lista de comprobaci��n |
+| **Rendimiento (HD 620, Mobile, 1280�-720)** | fps | Media �%� 60 o �%� 30 segǧn B2; **p95 �%� 33,3 ms siempre** | `--medir=6` tras 2 s de calentamiento, sin sincron��a vertical |
+| | Geometr��a | �%� 100 000 triǭngulos visibles y �%� 300 llamadas de dibujo (Fase 0, ��2.6) | Monitores de Godot |
+| | Memoria | �%� 2 GB de RAM del proceso *(propuesta, el equipo tiene 7,9 GB)* | Administrador de tareas o `Performance` |
+| | 1080p | Se mide tambiǸn en pantalla completa | `--fullscreen` (lecci��n de Memory) |
+| **Accesibilidad** | Entrada | Todo se usa con teclado, rat��n y mando; controles remapeables | Prueba manual |
+| | Informaci��n | Nada cr��tico solo por color; nada cr��tico solo por sonido | Prueba en escala de grises y sin audio |
+| | Movimiento | Opci��n para reducir el movimiento de cǭmara y los destellos | Prueba manual |
+| | Tiempo | Sin l��mites de tiempo que castiguen; el reloj del cielo de B nunca causa derrota | Revisi��n del dise��o |
+| **Historia** | Lugar en el guion | Cada elemento cita su escena de la propuesta elegida en B3 | Tabla de trazabilidad |
+| | Datos | Cada cifra en pantalla lleva su c��digo de fuente (A, E, L, R) o el sello ��Sue��o�� | Revisi��n del texto |
+| | Sin examen | Fallar muestra la consecuencia y deja reintentar | Prueba manual |
+
+### 3.2 Comprobaciones por tipo de elemento
+
+| Elemento | Comprobaciones propias | Umbral |
+|---|---|---|
+| **Pantalla de carga** | Tiempo desde la acci��n hasta el primer cuadro jugable | �%� 3 s en la HD 620 (propuesta A); �%� 2 s en umbrales de puerta (propuesta B) |
+| | Cuadro negro o congelado | �%� 0,5 s *(propuesta)* |
+| | Contenido | Un dato real con fuente o una ficha del cuaderno; se puede leer completo en el tiempo de carga |
+| | Primer arranque | Shaders precompilados en la carga inicial; sin tirones al entrar a cada zona (p95 del primer minuto) |
+| **Menǧs** | Respuesta | El foco reacciona en �%� 100 ms *(propuesta)* |
+| | Navegaci��n | Foco visible siempre; Esc o B vuelve un nivel; ningǧn callej��n sin salida |
+| | Estado | ��Continuar�� desactivado sin partida; la opci��n cambiada se guarda al salir |
+| **Botones** | �?rea | �%� 44 �- 44 px a 1080p (WCAG 2.5.5) |
+| | Estados | Normal, foco, pulsado y desactivado distinguibles en escala de grises |
+| | Coherencia | Un solo tema de interfaz para todo el juego |
+| **HUD** | Ocupaci��n | �%� 10 % de la pantalla en exploraci��n *(propuesta)* |
+| | Conflicto | No tapa al personaje en ninguno de los dos encuadres de B5 |
+| **Diǭlogos** | Formato | �%� 2 renglones por burbuja; texto v��a gettext (`.po`) |
+| | Ritmo | Avance manual; opci��n de texto instantǭneo |
+| **Guardado** | Integridad | Guardar, cerrar a la fuerza y cargar: el estado coincide; el archivo da��ado recurre al respaldo |
+| | Versi��n | Una partida de la versi��n anterior carga con su migraci��n |
+| **Jugabilidad** | Control | Personaje responde en �%� 1 cuadro; velocidad de 3 m/s en la Tierra y unos 4 m/s a saltos en la Luna (supuestos de A) |
+| | Duraci��n | Cada escena dura lo que dice su tabla, ��30 %; la ruta principal �%� 60 min con 3 jugadores cronometrados |
+| | F��sica lunar | Gravedad de 1,624 m/s�� (L6); la inercia exige frenar con anticipaci��n |
+| **Escenarios** | Encuadre | Captura con la cǭmara real comparada con su ancla: �"E de `comparar_ancla.py` como orientaci��n, veredicto de Guillermo como criterio |
+| | Escala | Proporciones de la biblia: estudiantes de 3 cabezas, gato a la rodilla |
+| **Caminos** | Continuidad | Se llega a pie de cada nodo al siguiente sin carga salvo en los umbrales aprobados |
+| | Lectura | El camino se distingue de la hierba en escala de grises desde la cǭmara alta |
+| | Medidas | Ancho del sendero de 1,05 a 1,5 m (medido en el ancla); recorrido coherente con los minutos de la tabla (por ejemplo, 350 m de subida en 2.1 de A) |
+| | Bloqueos | Todo camino cerrado tiene un motivo dicho en la historia (por ejemplo, �"rbita: ��Con tanto sol no vas a ver la Luna��) |
+| **Texturas** | Tama��o | Protagonista 1024��; gato, NPC y props 512�� (Fase 0, ��2.6); atlas compartidos en escenarios |
+| | Calidad | Desviaci��n de color > 3 en cada textura de Tripo (detecta el gris plano) |
+| | Origen | Solo datos de NASA son fotogrǭficos; cada textura externa con su SHA-256 y crǸdito |
+| **Audio** | Mezcla | Buses separados (mǧsica, ambiente, efectos, voz) con volumen en opciones |
+| | Coherencia | Pasos por superficie; en la Luna no hay sonido exterior |
+| | Licencia | Ninguna pista con derechos de terceros; las de NASA SVS con mǧsica quedan excluidas |
+
+### 3.3 Hallazgos que ya se ven sin auditar
+
+| Hallazgo | Evidencia | Peso |
+|---|---|---|
+| El sendero supera el presupuesto de la Fase 0: 307 000 triǭngulos frente a 100 000, y 28 000 briznas frente a 20 000 | `BUCLE.md`, vuelta 15; [[Escena de exploracion v1]] | Alto si B2 fija 60 fps: hoy da 48,3 y 44,2 fps |
+| No hay personaje controlable, colisiones ni interacci��n en ningǧn proyecto nuevo | Bǧsqueda de `CharacterBody`, `CollisionShape` y `NavigationAgent3D` en `pruebas/`: 0 resultados | Bloquea la auditor��a de jugabilidad y caminos |
+| No hay nada de audio | Bǧsqueda de `AudioStream` en `pruebas/`: 0 resultados | Bloquea la auditor��a de audio |
+| La Luna no tiene hoja de referencia ni paleta | [[Catalogo de recursos]] y [[Biblia de arte]] | Bloquea el escenario 3 |
+| La biblia y la escena v1 no coinciden en la cǭmara (60�� frente a 48��) ni en el tama��o del personaje (12,5 % frente a 20,9 %) | [[Biblia de arte]] ��5, `layout.json` | Medio |
+| El texto de las pruebas estǭ escrito en el c��digo, sin gettext | `telescopio.gd`, `escena.gd` | Bajo hoy, alto al traducir |
+| La escena v1 no define modo de estiramiento de ventana; el telescopio s�� (`canvas_items`) | `project.godot` de cada prueba | Bajo: se resuelve en el esqueleto |
+
+---
+
+## 4. Orden de trabajo
+
+El orden sigue el pedido: primero lo que se ve antes de jugar (carga, menǧs, botones), luego la jugabilidad y los escenarios en orden 1, 2 y 3, y al final los caminos y las texturas que los unen.
+
+| Etapa | QuǸ | Depende de | CrǸditos | Puerta de Guillermo |
+|---|---|---|---:|---|
+| **0** | Decisiones B1 a B8 | �?" | 0 | S��: sin ellas no se construye |
+| **1** | Auditor��a de lo existente: medir y capturar el sendero y el telescopio a 720p y 1080p, revisar el prototipo anterior, llenar las fichas `AUD-` | Puede empezar ya | 0 | No: informe |
+| **2** | Esqueleto `juego/`: Git y LFS, `Main` persistente, gestor de zonas, entrada remapeable, guardado JSON, gettext, perfil grǭfico de la HD 620 | B1, B2 | 0 | No: pruebas automǭticas con GUT |
+| **3** | Transversal, en el orden pedido: pantalla de carga ��' menǧ principal ��' pausa y opciones ��' tema de botones ��' HUD ��' diǭlogos ��' cuaderno | 2; B7 para el menǧ | 0 | **Puerta 1:** capturas de carga, menǧs y botones |
+| **4** | Escenario 1 Habitaci��n: volumen gris ��' jugabilidad (interactuables, seguidor, cama) ��' arte por script con TAL ��' luz de ma��ana y noche ��' audio | 2, 3; B3; veredicto de `HR_TAL_v1` | 0 | **Puerta 2:** recorrido grabado del cuarto |
+| **5** | Tramos 1b, E y S: casa, Las Escalinatas, plaza y sendero v1 con personaje y colisiones; recorte del sendero al presupuesto de B2 | 4; veredicto de la escena v1 | 0 | Incluida en la puerta 3 |
+| **6** | Escenario 2 Telescopio: Mirador 3D con MIR, entrada al ocular desde el mundo, interacci��n del telescopio, ǭngulo paralǭctico | 5; B3 | 0 | **Puerta 3:** del cuarto al ocular a pie |
+| **7** | Escenario 3 Luna: hoja de referencia lunar ��' volumen gris ��' caminar a 1/6 g ��' muestras ��' anillo de 75 m ��' banderas ��' regreso | 4 (cama); B3, B4; partida aprobada para la hoja y los trajes | Partida aparte | **Puerta 4:** el sue��o completo |
+| **8** | Mundo abierto: transiciones, viaje rǭpido, d��a y noche, persistencia, recorrido cronometrado �%� 60 min con 3 jugadores, texturas pintadas finales | 4 a 7 | Segǧn partida de texturas | **Puerta 5:** recorrido completo |
+
+```
+B1-B8 �"?�"��"?> 2 Esqueleto �"?> 3 Carga/menǧs/botones �"?> 4 Habitaci��n �"?�"��"?> 5 Tramos �"?> 6 Telescopio �"?�"?
+       �"'                                                         �""�"?> 7 Luna (cama) �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"��"?> 8 Mundo abierto
+1 Auditor��a de lo existente (ya) �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"~
+```
+
+**Corte vertical (si B8 lo aprueba):** las etapas 4, 6 y 7 se hacen primero solo con las escenas del corte (en A: 1.1, 1.2, 2.2, 2.3 y de 3.1 a 3.5), y la etapa 5 se reduce a un tramo del sendero.
+
+### 4.1 Agentes en paralelo
+
+Cada carril entrega archivos y capturas; otro agente revisa antes de que se usen (lecci��n ��verificar lo delegado��). Ninguno gasta crǸditos de Higgsfield. Para la web, WebSearch y WebFetch; Firecrawl no.
+
+| Carril | Agente | Trabajo | Puede empezar | Entrega |
+|---|---|---|---|---|
+| **C1 Medici��n** | Claude (subagente) | Etapa 1: `--medir` y capturas del sendero y del telescopio a 720p y 1080p; tiempos de arranque; fichas `AUD-001` en adelante | Ya | `Auditoria/` con capturas y cifras |
+| **C2 Interfaz** | Claude (subagente) | Etapa 3: maquetas en Godot de carga, menǧs y botones sobre el tema del cuaderno; contraste y tama��os medidos | Tras B1 y B7 | Escena de interfaz y capturas |
+| **C3 Esqueleto** | Claude (subagente) | Etapa 2: proyecto `juego/`, gestor de zonas, guardado, entrada y gettext, reutilizando la l��gica de `main.gd` y `player.gd` de la b��veda anterior | Tras B1 | Proyecto y pruebas GUT |
+| **C4 Habitaci��n** | Claude (subagente) | Etapa 4: volumen gris del diorama y props TAL por script sobre `herramientas/mallas/nucleo.py` | Tras C3 y el veredicto de `HR_TAL_v1` | Escena y capturas con la cǭmara real |
+| **C5 Luna** | Claude (subagente) | Etapa 7: volumen gris del terreno lunar, etapa de descenso sin insignias y prueba de rendimiento con rocas en MultiMesh | Tras B4; la prueba de rendimiento puede ir ya | Escena de prueba y cifras |
+| **C6 Investigaci��n** | Codex (`codex_lote.py`, pocas tareas a la vez) | Gu��as de accesibilidad con cifras citables; verificar los datos pendientes (bandera de Ecuador, disco del Apolo 11, Luna del 13-11-2026) | Ya, si queda cupo de Codex | Informes en `Auditoria/Investigacion/` |
+| **C7 Revisi��n** | Claude (subagente independiente) | Revisa cada entrega contra la secci��n 3 antes de mostrarla a Guillermo | Desde la primera entrega | Veredicto por ficha |
+
+**L��mites:** como mǭximo 3 carriles con Godot a la vez, porque la HD 620 mide mal con varios procesos (la medici��n de la escena v1 fue un piso por tener Blender abierto). C1 mide con el equipo libre.
+
+---
+
+## 5. Preguntas para Guillermo
+
+1. ��Apruebas la Fase 0 y quǸ meta de fps quieres en la HD 620: 30 o 60 a 720p? (B1, B2)
+2. ��Propuesta A, B o una mezcla? (B3)
+3. ��QuǸ quisiste decir con ��siendo vista con el Apolo que lleg�� a la Tierra��: A, B, C, D o una mezcla? La propuesta A recomienda A como jugabilidad y C como cierre. (B4)
+4. ��Personaje al 12,5 % o al 20,9 % del alto, y cǭmara a 48�� o a 60��? (B5, B6)
+5. ��Protagonista fija o creador de personaje? (B7)
+6. ��Primero el corte vertical de unos 45 min? (B8)
+7. ��Arranco ya la etapa 1 (auditor��a de lo existente, 0 crǸditos) con los carriles C1 y C6?
+# 03a �� Verificaci��n de los datos de Ecuador y el espacio
+
+> Revisi��n escǸptica del informe [[01_datos_espaciales_ecuador]] (Codex), secciones 1, 2 y R8�?"R9. Consulta: 12-11-2026, con WebSearch, WebFetch y lectura directa de los PDF. Regla: si la fuente primaria no se pudo leer o no lo dice, el dato queda **sin verificar**.
+
+**Resultado: 26 datos revisados. 18 confirmados, 3 corregidos y 5 sin verificar.**
+
+## 1. Tabla de verificaci��n
+
+| # | Dato | Dice el informe | Fuente primaria (URL) | Veredicto |
+|---|---|---|---|---|
+| 1 | Estaci��n de Quito: nombre y lugar | Estaci��n Quito, cerca del Cotopaxi | NASA SP-4233, *Read You Loud and Clear!*, pp. 228�?"230: https://www.nasa.gov/wp-content/uploads/2023/03/sp-4233.pdf. Se llamaba ��Quito Station�� (indicativo QUI). Estaba al pie del Cotopaxi, a 3 650 m de altura y 56 km al sur de la capital. Ecuador la llama ��estaci��n Cotopaxi��: cable del Departamento de Estado de 2007, https://www.scoop.co.nz/stories/WL0710/S01113.htm | **Confirmado** |
+| 2 | Redes | Minitrack ��' STADAN ��' STDN | SP-4233, pp. 16�?"19, 42 y 229: fue una de las 7 estaciones Minitrack de 1957, pas�� a STADAN entre 1960 y 1963 y despuǸs a STDN | **Confirmado** |
+| 3 | A��os de servicio | 1957�?"1981 | SP-4233, pp. 220 y 228�?"231. Oper�� desde 1957. Dej�� de operar el **14-11-1981**, durante el STS-2. El acuerdo con Ecuador se extendi�� 6 meses para el desmontaje, y la instalaci��n pas�� a Ecuador (CLIRSEN) el **01-07-1982**. La tabla de la p. 220 pone 1982 como a��o de cierre | **Corregido:** oper�� de 1957 a 1981 y se entreg�� a Ecuador en 1982 |
+| 4 | Antena | 12 m | SP-4233, pp. 56 y 230: antenas de 12 m (40 pies), instaladas entre 1960 y 1963 | **Confirmado** |
+| 5 | Apolo-Soyuz | 1975 | SP-4233, pp. 192�?"193: Quito (QUI) figura entre las estaciones del ASTP. Lo repite el cable de 2007 | **Confirmado** |
+| 6 | STS-2 y cierre | Noviembre de 1981 | SP-4233, p. 230: Engle y Truly se despidieron de los 75 empleados a las 07:04, hora local, del 14-11-1981 | **Confirmado** |
+| 7 | ��Apoy�� al Apolo 11? | Sin confirmaci��n primaria | SP-4233, p. 229: Quito pas�� de satǸlites de aplicaci��n a vuelos tripulados ��en el ASTP��, es decir, en 1975. El cable de 2007 solo cita el ASTP y el STS-2. No hallǸ el informe de red del Apolo 11: la copia de NASA da error 404 y el espejo de la UNT falla por certificado | **Sin verificar.** No decir que Quito rastre�� el alunizaje |
+| 8 | Disco de buena voluntad | 73 pa��ses; mensajes reducidos 200 veces | Comunicado de NASA 69-83F, pp. 1�?"3: https://www.nasa.gov/wp-content/uploads/2024/05/apollo-11-goodwill-messages.pdf. Disco de silicio del tama��o de una moneda de 50 centavos; cada mensaje mide 0,0425 �- 0,055 pulgadas | **Confirmado** |
+| 9 | Mensaje de Ecuador | Velasco Ibarra dese�� Ǹxito y destac�� el entendimiento humano y la buena voluntad | 69-83F, p. 18: firmado por ��Jose Maria Velasco Ibarra, President��. Desea Ǹxito a los astronautas y habla de la ��grandeur of human understanding and goodwill�� | **Confirmado.** La parǭfrasis es fiel |
+| 10 | Roca del Apolo 11 entregada a Ecuador | Sin acta ni paradero | No hay registro primario. collectSPACE (secundario) deja la fila de Ecuador en blanco: https://www.collectspace.com/resources/moonrocks_apollo11.html. En 2009, El Universo, con datos de AP, dijo que las autoridades ecuatorianas ��no tienen noticia�� de la roca: https://www.eluniverso.com/2009/09/16/1/1430/adonde-fueron-parar-piedras-lunares-apolo.html | **Sin verificar.** No afirmar que se perdi��, que se rob�� ni d��nde estǭ |
+| 11 | Reparto del Apolo 17 | 1973; 135 jefes de Estado; roca 70017 | NASA History: https://www.nasa.gov/history/50-years-ago-apollo-17-post-mission-activities/. Fragmentos de la muestra 70017 a ��135 foreign heads of state�� en marzo de 1973 | **Confirmado** |
+| 12 | NASA no rastrea los obsequios | NASA no los rastrea | NASA OIG, IG-12-007, p. 7 del informe: https://oig.nasa.gov/wp-content/uploads/2024/02/ig-12-007.pdf. NASA conserva cerca del 80 % de la roca; los fragmentos regalados ��are not tracked by NASA�� | **Confirmado** |
+| 13 | Roca del Apolo 17 entregada a Ecuador | Recepci��n y destino sin confirmar | collectSPACE, fila 312, en blanco: https://www.collectspace.com/resources/moonrocks_goodwill.html. Ninguna fuente de NASA ni de Ecuador nombra el ejemplar ecuatoriano | **Sin verificar** |
+| 14 | Acuerdos Artemisa | 21-06-2023, pa��s n.�� 26, firm�� Gustavo Manrique en la embajada en Washington | NASA: https://www.nasa.gov/news-release/nasa-welcomes-ecuador-as-26th-artemis-accords-signatory/. Firm�� el canciller Gustavo Manrique Miranda | **Confirmado** |
+| 15 | EXA | ONG civil creada en 2007 | Revista *Sobrevuelo* de la FAE, 27-10-2011, p. 24: https://www.fae.mil.ec/wp-content/uploads/2020/07/Sobrevuelo-2011.pdf. EXA es una ��organizaci��n no gubernamental sin fines de lucro��. Se present�� el 29-08-2007 e inici�� actividades el 01-11-2007 | **Confirmado** |
+| 16 | NEE-01 Pegaso: identidad | Primer satǸlite ecuatoriano, cuerpo de 10 cm, 2013-018B | NASA, *Orbital Debris Quarterly News* 17-3, pp. 1�?"2 y 8: https://orbitaldebris.jsc.nasa.gov/quarterly-news/pdfs/odqnv17i3.pdf. Cubo de 10 cm, dos paneles de 27 cm, ��rbita de 627 �- 654 km y n.�� de catǭlogo 39151 | **Confirmado** |
+| 17 | Pegaso: fecha y lugar | 25-04-2013, Jiuquan | Resumen IAC-14 de Nader, Carri��n y UrigǬen (fuente del equipo): https://iafastro.directory/iac/archive/browse/IAC-14/B4/1/21927/. Otro resumen IAC-14 (Nader y Kelso) da el 25-04-2013, Jiuquan, e inicio de operaciones el 05-05-2013: https://iafastro.directory/iac/archive/browse/IAC-14/A6/7/21921/ | **Confirmado**, segǧn el equipo. La fecha en UTC (26-04) no tiene fuente primaria |
+| 18 | Pegaso: cohete | LM-2D | Ni NASA ni los resǧmenes IAC lo nombran. NSSDCA no respondi�� (pǭgina de error) | **Sin verificar** |
+| 19 | Pegaso: incidente | 23-05-2013; NASA no confirm�� una colisi��n | ODQN 17-3, pp. 1�?"2. El objeto era un cuerpo de cohete soviǸtico de 1985 (1985-058B). NASA concluye que pas�� por debajo ��at a safe distance�� y que no aparecieron escombros nuevos. Contacto recuperado el 25-01-2014 (resumen IAC-14 A6.7) | **Confirmado** |
+| 20 | Ronnie Nader | Dirigi�� Pegaso; formaci��n ASA/T | *Sobrevuelo* 2011, pp. 23�?"25: ASA/T (*Advanced Suborbital Astronaut / Trained*) del centro Gagarin de Moscǧ; lo llama ��primer cosmonauta ecuatoriano��. El liderazgo de Pegaso lo confirman los resǧmenes IAC-14. No consta ningǧn vuelo espacial | **Confirmado.** Lo del vuelo es correcto: no vol�� al espacio |
+| 21 | Pegaso: inicio | Proyecto aprobado en 2010 | *Sobrevuelo* 2011, p. 24 (Nader): ��La primera fase la inici�� la agencia en el 2010��. No habla de aprobaci��n | **Corregido:** se inici�� en 2010 |
+| 22 | Observatorio Astron��mico de Quito | Escuela PolitǸcnica Nacional; fundado en 1873; 150 a��os en 2023 | OAQ-EPN, ��Introducci��n��: https://oaq.epn.edu.ec/index.php/nosotros/introduccion. Fundado en 1873, durante la presidencia de Garc��a Moreno; es Patrimonio Monumental de la Naci��n. Su primer director fue Juan Bautista Menten, de 1870 a 1883: https://oaq.epn.edu.ec/index.php/joomla/directores-oaq. El bolet��n de los 150 a��os que cita el informe da error 403 | **Confirmado.** Los 150 a��os salen de 1873 + 150 |
+| 23 | Chimborazo | 6 384 415,98 m desde el centro, medidos en 2016 | El PDF del Ministerio de Turismo no carga (el dominio no resuelve). La fuente tǸcnica disponible es Merizalde, Leiva (ESPE) y Enr��quez (IGM), bolet��n SIRGAS de 2019: https://www.sirgas.org/fileadmin/docs/Boletines/Bol24/69_Merizalde_et_al_2019_Alturas_cumbres_ecuatorianas.pdf. Da **6 384 418,505 m** para el Chimborazo, 6 382 306,772 m para el Everest (2 111,7 m menos) y 6 384 361,5 m para el Huascarǭn (57 m menos). La cifra de 2016 solo aparece en prensa (El Universo, 07-04-2016) | **Corregido:** usar ��unos 6 384,4 km�� o la cifra del IGM de 2019. El rǸcord estǭ confirmado; los 6 384 415,98 m quedan sin fuente primaria |
+| 24 | S��mbolos patrios | Constituci��n, art. 2 | Constituci��n de 2008, art. 2: https://www.asambleanacional.gob.ec/sites/default/files/documents/old/constitucion_de_bolsillo.pdf. ��La bandera, el escudo y el himno nacional, establecidos por la ley, son los s��mbolos de la patria�� | **Confirmado** |
+| 25 | Ley sobre la bandera en obras y videojuegos | No hay ley especial verificada | No encontrǸ ninguna ley que regule mostrar la bandera en una obra. El *Instructivo de uso de los S��mbolos Patrios* de la Presidencia (noviembre de 2009) cita la Resoluci��n 24-047 del Congreso (R. O. 45, 21-03-2003), cuyo texto no pude leer: https://cdn.fotw.info/misc/ec_2009.pdf (copia; no hallǸ el original en presidencia.gob.ec). El instructivo regula el uso oficial del escudo y proh��be a los particulares usarlo ��en su documentaci��n��; no habla de obras | **Sin verificar.** Pedir la opini��n de un abogado antes de publicar |
+| 26 | Bandera como marca | C��digo Ingenios, art. 360, num. 12 | Texto consultado: https://www.creatividad.gob.ec/wp-content/uploads/2021/02/Codigo-Organico-de-los-Conocimientos.pdf. Proh��be registrar como marca banderas y escudos de Estados sin permiso, salvo que no induzcan a confusi��n sobre un v��nculo con el Estado. Se refiere al registro de marcas, no a mostrarlos dentro de una escena | **Confirmado** |
+
+## 2. Correcciones para el informe 01
+
+- **A1:** las fechas son 1957�?"1981 de operaci��n y 1982 de entrega a Ecuador, no un cierre en 1981 a secas.
+- **A3:** se mantiene **sin verificar**. Ninguna fuente primaria pone a Quito en el Apolo 11; la historia de NASA lo sitǧa en vuelos tripulados solo desde 1975.
+- **E3:** el cohete LM-2D queda sin verificar. La fecha del 25-04-2013 es la que da el equipo, en hora de Ecuador.
+- **E4:** el proyecto se **inici��** en 2010; no consta que se ��aprobara�� ese a��o.
+- **E7:** cambiar 6 384 415,98 m por ��unos 6 384,4 km�� o por 6 384 418,5 m (IGM-ESPE, 2019).
+- **A5 y A6:** se mantienen sin verificar. En 2009, segǧn El Universo con datos de AP, las autoridades ecuatorianas no ten��an noticia de su roca. Que se perdiera tampoco estǭ confirmado: no usarlo en el guion.
+
+## 3. Hallazgos ǧtiles para la historia (con fuente)
+
+- **La estaci��n del Cotopaxi** (SP-4233, pp. 228�?"231):
+  - una manada de llamas pastaba junto a la antena de 12 m (foto de 1973);
+  - hizo 578 160 horas de apoyo a misiones en 22 a��os;
+  - el personal ecuatoriano pas�� de 50 a 220 personas;
+  - el STS-2 se despidi�� de ella en el aire.
+
+  Es un buen escenario con datos reales para la habitaci��n o el telescopio.
+- **Una bandera ecuatoriana en la Luna ya fue una meta real.** En 2011, Nader dijo que el programa espacial de diez a��os de EXA terminar��a ��en el 2020 poniendo nuestra bandera en la luna�� (*Sobrevuelo* 2011, p. 25). Sirve de motivaci��n para la misi��n de las dos banderas, presentada como un sue��o y no como un hecho.
+- **Bandera nacional.** Segǧn el instructivo de 2009, la bandera nacional lleva el escudo en el centro y sus lados guardan la proporci��n 3:2. El escudo tiene restricciones de uso oficial. Al modelarla hay que decidir con Guillermo si se usa la bandera con escudo o el tricolor sin escudo, y revisarlo con un abogado.
+- **Tono.** La NASA no rastrea las rocas regaladas (OIG). Un misterio sobre ��la roca perdida de Ecuador�� solo puede ser ficci��n declarada, nunca un hecho.
+
+## 4. L��mites de esta verificaci��n
+
+- No se us�� Firecrawl.
+- No cargaron: el PDF del Ministerio de Turismo (DNS), el bolet��n de 150 a��os del OAQ (403), NSSDCA (pǭgina de error), web.archive.org (bloqueado) ni el informe de red del Apolo 11 (404 y certificado).
+- Quedan fuera de esta tarea los puntos E8 (Planetario de la Armada), L1�?"L13 y R1�?"R7: ver [[03b_verificacion_apolo]].
+# Verificaci��n del informe 01: superficie lunar y Apolo
+
+> Verificador escǸptico, 2026-11-12. Revisa las secciones 3 y 4 de [[01_datos_espaciales_ecuador]] (L1�?"L13 y R1�?"R7) contra fuentes primarias: NASA, JSC, Smithsonian, ONU y leyes de EE. UU. R8 y R9 (derecho ecuatoriano) quedan fuera de este encargo.
+> Se usaron WebSearch y WebFetch; los PDF se leyeron con `pdftotext`. Sin Firecrawl y sin crǸditos de Higgsfield.
+
+## Resumen
+
+| Veredicto | Datos |
+|---|---|
+| Confirmado | 17 (L1�?"L3, L6�?"L13, R1�?"R6) |
+| Corregido | 3 (L4, L5, R7) |
+| Sin verificar | 0 datos completos; 2 matices sueltos (ver al final) |
+
+**Correcciones clave**
+1. **L5. Masas por misi��n:** la tabla de NTRS que cita el informe estǭ mal alineada por el OCR. El Centro Espacial Johnson da **21,5 kg** para el Apolo 11 y **34,4 kg** para el Apolo 12, no 21,6 y 34,3. Total: **382 kg** y **2196 muestras**.
+2. **L4. Fotos de documentaci��n:** el protocolo de 3 fotos previas, 1 posterior y 1 de localizaci��n no es un ��protocolo del Apolo 16�� de la p. 274. Es la descripci��n del Servicio Geol��gico de EE. UU. (USGS) para el Apolo 17 y las tres ǧltimas misiones, citada en la **p. 159** de Phinney. El apǸndice P (pp. 274�?"282) son solo imǭgenes. El enlace del informe da error 404.
+3. **R7. Nombre NASA:** la conclusi��n se endurece. NASA dice que los comerciantes **no pueden usar su identificador para nombrar productos**. ��Proyecto NASA-Ecuador�� sirve como nombre interno, no como t��tulo comercial.
+
+## 3. Superficie lunar y operaciones Apolo
+
+| Dato | Cifra | Fuente | Confianza | Veredicto |
+|---|---|---|---|---|
+| **L1. Pinzas y cuchar��n.** Las pinzas recog��an rocas sueltas; el cuchar��n, suelo. Los mangos extensores permit��an trabajar de pie. | 2 funciones. El Apolo 11 llev�� un cuchar��n de caja y unas pinzas peque��as; del 15 al 17 se usaron unas pinzas mǭs grandes. | [NASA, herramientas](https://www.nasa.gov/suits-and-rovers/spacewalking-tools/); [Allton, JSC](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf) | Alta | **Confirmado.** La pǭgina de NASA presenta el juego de herramientas del Apolo 17. |
+| **L2. Rastrillo.** Separaba los fragmentos peque��os del material fino. No es equipo del Apolo 11. | Apolo 15�?"17. | [Allton, JSC](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf); [NASA, herramientas](https://www.nasa.gov/suits-and-rovers/spacewalking-tools/) | Alta | **Confirmado.** |
+| **L3. Tubos de nǧcleo.** Se clavaban en el suelo para sacar una columna; se hincaban con martillo. | Apolo 11�?"14: 2 cm de diǭmetro, de pared gruesa. Apolo 15�?"17: 4 cm, de pared delgada, mǭs un taladro de nǧcleo. El nǧcleo mǭs largo, del Apolo 17, midi�� 2,86 m. | [Allton, JSC](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf) (��martillo�?� para golpear tubos de nǧcleo��); [JSC, The Lunar Sample Collection](https://astromaterials.jsc.nasa.gov/education/_documents/The%20Lunar%20Sample%20Collection.pdf) | Alta | **Confirmado**, con datos a��adidos. |
+| **L4. Bolsas y documentaci��n.** Las bolsas numeradas ligaban cada muestra a su registro. El gnomon daba la escala, el color, la vertical y el ǭngulo del Sol. Si faltaba tiempo, se omit��an fotos. | Antes: 1 foto hacia el Sol de espaldas y 1 par estǸreo de lado (**3 fotos**). DespuǸs: **1 foto** desde el mismo sitio. Mǭs **1 foto de localizaci��n** con el rover. | [Phinney, NASA SP-2015-626, p. 159](https://ntrs.nasa.gov/api/citations/20190026783/downloads/20190026783.pdf), que cita el informe USGS PP 1080 del Apolo 17; p. 96 (Muehlberger, bolsas numeradas de tefl��n); [Smithsonian, gnomon](https://airandspace.si.edu/collection-objects/gnomon-lunar-apollo/nasm_A19750046000) | Alta | **Corregido en la atribuci��n.** El protocolo es de las tres ǧltimas misiones (15�?"17); en el Apolo 11 fue ��bastante simple�� (p. 159). No es ��Apolo 16, p. 274��. |
+| **L5. Masa de muestras por misi��n.** Es masa, no peso lunar. | Apolo **11: 21,5 kg; 12: 34,4; 14: 42,3; 15: 77,3; 16: 95,7; 17: 110,5**. Total: **382 kg** y **2196 muestras**. El Apolo 11 trajo 58 muestras y el 17, 741. | [JSC, The Lunar Sample Collection](https://astromaterials.jsc.nasa.gov/education/_documents/The%20Lunar%20Sample%20Collection.pdf); [Allton, JSC](https://www.nasa.gov/wp-content/uploads/2019/04/02_allton_corrected_apollo.pdf); [NASA Curation](https://curator.jsc.nasa.gov/lunar/) (total de 382 kg) | Alta | **Corregido.** El informe daba 21,6 y 34,3 kg. En el OCR de la tabla 1 de NTRS, las masas aparecen junto a misiones Luna y Surveyor. Usar las cifras del JSC. |
+| **L6. Gravedad.** Baja el peso; la masa no cambia. | **1,624 m/s��** en el ecuador lunar, frente a 9,807 en la Tierra: 0,166, aproximadamente **1/6**. | [NASA, Moon by the numbers](https://science.nasa.gov/moon/by-the-numbers/); [NASA, Moon facts](https://science.nasa.gov/moon/facts/) | Alta | **Confirmado.** |
+| **L7. Temperaturas.** Son los extremos de la superficie. | Unos **127 ��C** a pleno Sol y unos **�^'173 ��C** en la oscuridad. | [NASA, Moon facts](https://science.nasa.gov/moon/facts/) | Alta | **Confirmado.** |
+| **L8. Regolito.** Polvo y escombros rocosos que dejaron los impactos. | Formado durante **miles de millones de a��os**; va desde pe��ascos hasta polvo. | [NASA, Moon facts](https://science.nasa.gov/moon/facts/) | Alta | **Confirmado.** |
+| **L9. La Tierra vista desde la Luna.** Se queda mǭs o menos en el mismo punto del cielo y oscila poco por la libraci��n. | Pasa por todas sus fases cada mes lunar, opuestas a las de la Luna: Tierra llena con luna nueva. Su tama��o aparente var��a. En algunos lugares sale y se pone despacio, a lo largo de un mes. | [NASA Goddard, StarChild](https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question58.html) | Alta | **Confirmado.** La fuente no habla de los sitios Apolo; que en ellos la Tierra no se ponga es una deducci��n, porque todos estǭn en la cara visible. |
+| **L10. Lunar Flag Assembly.** Una barra horizontal pasa por un dobladillo en el borde superior. Parece ondear por la barra, por las arrugas del empaque y porque la barra telesc��pica no se extendi�� del todo. No hab��a viento. | Bandera de nailon de **3 �- 5 pies** (0,91 �- 1,52 m) y mǭstil de **8 pies** (2,44 m). | [NASA, Flag Day](https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/); [Platoff, estudio hist��rico](https://escholarship.org/content/qt5h31r40r/qt5h31r40r.pdf) | Alta | **Confirmado.** Segǧn Platoff, la tripulaci��n del Apolo 11 no logr�� extender la barra entera, y algunas tripulaciones posteriores imitaron la ��ondulaci��n�� a prop��sito. |
+| **L11. Estado de la bandera del Apolo 11.** Segǧn Aldrin, la derrib�� el despegue. NASA presume que ya no estǭ en pie. | Las de los Apolo 12, 16 y 17 parecen seguir en pie (imǭgenes del LRO). La del 14 parece muy da��ada por el escape del motor; las del 14 y el 15 no se pueden determinar. | [NASA, Flag Day](https://www.nasa.gov/history/flag-day-flying-high-the-stars-and-stripes-in-space/) | Alta | **Confirmado.** |
+| **L12. Etapa de descenso.** Sirvi�� de plataforma de lanzamiento y qued�� en la Luna con la placa conmemorativa. | Es ��el objeto mǭs grande que se dej����. El despegue del Apolo 11 fue el 21-07-1969 a las 13:54 (EDT). | [NASA, cronolog��a del Apolo 11](https://www.nasa.gov/wp-content/uploads/static/history/ap11ann/apollo11_log/log.htm) | Alta | **Confirmado.** |
+| **L13. Regreso.** El m��dulo de mando se separ�� del de servicio, reentr�� con el escudo tǸrmico por delante y ameriz�� con paraca��das. | **24-07-1969**, en el Pac��fico, a 825 millas nǭuticas al suroeste de Honolulu y a unas 13 del **USS Hornet**. | [NASA, cronolog��a](https://www.nasa.gov/wp-content/uploads/static/history/ap11ann/apollo11_log/log.htm); [NASA, resumen de la misi��n](https://www.nasa.gov/missions/apollo/apollo-11/apollo-11-mission-overview/) | Alta | **Confirmado.** |
+
+## 4. Reglas jur��dicas y de representaci��n
+
+| Dato | Cifra | Fuente | Confianza | Veredicto |
+|---|---|---|---|---|
+| **R1. Una bandera no da territorio.** El espacio, incluida la Luna, no puede ser objeto de apropiaci��n nacional por soberan��a, uso, ocupaci��n ni ningǧn otro medio. | Abierto a la firma el **27-01-1967**; vigente desde el **10-10-1967**; **art. II**. | [ONU, UNTS vol. 610, n.�� 8843](https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf) | Alta | **Confirmado** con el texto autǸntico. |
+| **R2. Los objetos siguen teniendo due��o.** La propiedad no cambia porque un objeto estǸ en la Luna. Se exige la debida consideraci��n y consultar antes de una interferencia perjudicial. | **Art. VIII** (propiedad y jurisdicci��n) y **art. IX** (debida consideraci��n, contaminaci��n e interferencia). | [ONU, tratado](https://treaties.un.org/doc/Publication/UNTS/Volume%20610/volume-610-I-8843-English.pdf); [NASA 2011, marco legal](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf) (el Gobierno de EE. UU. conserva la propiedad de los objetos del Apolo) | Alta | **Confirmado.** |
+| **R3. Protecci��n de los sitios del Apolo 11 y el 17.** Zonas de exclusi��n para los sistemas rob��ticos visitantes, medidas desde la etapa de descenso. | **75 m** en el Apolo 11, para abarcar ��todo el equipo y la actividad humana��; **225 m** en el Apolo 17. Secci��n **A3-2**. | [NASA, recomendaciones del 20-07-2011, rev. A del 28-10-2011](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf) | Alta | **Confirmado.** El documento dice que ��no son requisitos legales��, sino recomendaciones tǸcnicas. |
+| **R4. Descenso y otros objetos.** No sobrevolar ni aterrizar dentro del l��mite de descenso. Zonas por objeto en los Apolo 12 y 14�?"16. | Descenso: **2,0 km** (0,5 km en sitios de impacto; secciones A1-3 y A2). Etapa de descenso: **3 m**. Rover, experimentos ALSEP, puntos de muestreo, bandera y herramientas: **1 m**. Retrorreflectores: 1 m de exclusi��n total y aproximaci��n lenta dentro de 10 m (A3-3). | [NASA 2011](https://www.nasa.gov/wp-content/uploads/2023/12/nasa-usg-lunar-historic-sites-reva.pdf) | Alta | **Confirmado.** Fuera de esas zonas, las huellas y las rodadas no tienen restricci��n. |
+| **R5. Ley One Small Step.** NASA debe poner las recomendaciones de 2011 como condici��n en contratos, subvenciones y acuerdos de actividades lunares, propias o con terceros. | **Ley pǧblica 116-275**, del **31-12-2020**, secci��n 3. El administrador puede dispensar caso por caso, avisando al Congreso **30 d��as** antes. | [Texto oficial, govinfo](https://www.govinfo.gov/content/pkg/PLAW-116publ275/html/PLAW-116publ275.htm) | Alta | **Confirmado.** Que no regule un videojuego es una lectura correcta: solo obliga a acuerdos con NASA. |
+| **R6. Marca NASA en videojuegos.** Hay un apartado para videojuegos y mundos virtuales y la aprobaci��n es por escrito. | Requisitos: contar historias o temas de NASA o inspirar interǸs por la ciencia; proyecto financiado, en desarrollo y con plan de distribuci��n; sin nombre ni imagen de empleados o astronautas en activo. La insignia y el logotipo **no son de dominio pǧblico**. | [NASA, Merchandise Approvals](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/) | Alta | **Confirmado**, con requisitos a��adidos. Ademǭs, el logotipo antiguo (��worm��) no puede ir con imǭgenes de Mercury, Gemini ni Apolo. |
+| **R7. Nombre NASA y respaldo.** Prohibido ��aprobado por NASA��, ��NASA oficial�� y ��NASA X (marca)��. El uso comercial no puede transmitir respaldo, ni expl��cito ni impl��cito. | Los comerciantes ��no pueden usar nuestro identificador para nombrar sus productos��. NASA no hace marcas conjuntas ni concede licencias. | [NASA, Merchandise Approvals](https://www.nasa.gov/nasa-brand-center/merchandise-approvals/); [NASA, Images and Media](https://www.nasa.gov/nasa-brand-center/images-and-media/) | Alta | **Corregido (mǭs estricto).** El informe dejaba el t��tulo comercial ��a revisi��n��. Segǧn la norma, el t��tulo comercial no puede llevar ��NASA��. |
+
+## Matices que quedan sin verificar
+
+- **Fuentes del informe que no se abrieron:** el informe de misi��n del Apolo 11 (bolsas) y su dossier de prensa (retorno). Los datos se confirmaron con otras fuentes primarias.
+- **La Tierra fija en el cielo de los sitios Apolo:** StarChild no menciona esos sitios. Es una deducci��n geomǸtrica, no una cita.
+
+## Consecuencias para la historia
+
+- **Sue��o lunar en el sitio del Apolo 11:** si la misi��n transcurre ah��, solo hay cuchar��n de caja, pinzas peque��as y tubos de 2 cm. El rastrillo y el rover son de los Apolo 15�?"17. Ubicar la exploraci��n en un sitio de esas misiones, o explicar el cambio en el cuaderno.
+- **Bandera hist��rica del Apolo 11:** no mostrarla en pie como hecho. Las del 12, 16 y 17 s�� aparecen en pie en las imǭgenes del LRO.
+- **Las dos banderas:** usar una barra horizontal, sin viento. Plantarlas fuera de los 75 m del Apolo 11 (o de los 225 m del Apolo 17) refuerza el mensaje del art. II: cooperaci��n, no posesi��n.
+- **��Siendo vista con el Apolo que lleg�� a la Tierra��** (la pregunta sigue abierta para Guillermo). Datos que sirven para cualquier interpretaci��n:
+  - en la Luna quedaron la etapa de descenso, con su placa, y la bandera;
+  - a la Tierra solo volvi�� el m��dulo de mando, que ameriz�� en el Pac��fico;
+  - desde el sitio, la Tierra se ve casi fija en el cielo y con fases.
+- **T��tulo:** buscar un nombre comercial sin ��NASA�� antes de cualquier material pǧblico.
+---
+tipo: fase
+fase: 2
+titulo: Estructura narrativa y dise��o de misiones
+estado: borrador para aprobaci��n de Guillermo
+fecha: 2026-11-12
+base: "[[Propuesta_A]]"
+injertos: "[[Propuesta_B]], [[Propuesta_C]]"
+verificaciones: "[[03a_verificacion_ecuador]], [[03b_verificacion_apolo]]"
+auditoria: "[[Plan de auditoria]]"
+---
+
+# Fase 2 �?" Estructura narrativa y misiones
+
+> **Estado: borrador para aprobaci��n de Guillermo.** Nada de aqu�� se escribe en diǭlogo final ni se construye hasta que Guillermo apruebe o corrija las decisiones F2-01 a F2-16.
+> **Pedido de Guillermo (2026-11-12):** validar la historia; al menos 1 h; mǭs contenido espacial; que la protagonista, al acostarse, sue��e que camina por la Luna, recoge muestras y es ��vista con el Apolo que lleg�� a la Tierra��; una misi��n para colocar juntas las banderas de Estados Unidos y Ecuador; una historia coherente y entretenida; y la auditor��a de carga, menǧs, botones, jugabilidad, escenarios, caminos y texturas en orden (1 Habitaci��n, 2 Telescopio, 3 Luna), unidos como mundo abierto.
+> **QuǸ es este documento:** la s��ntesis del director creativo. Parte de [[Propuesta_A]] (��Luz cenicienta��, la mejor puntuada) e injerta las mejores ideas de [[Propuesta_B]] y [[Propuesta_C]]. Solo usa datos confirmados en [[03a_verificacion_ecuador]] y [[03b_verificacion_apolo]] o medidos por nosotros; el resto va marcado. La auditor��a de construcci��n vive aparte, en [[Plan de auditoria]]; la secci��n 9 dice quǸ le pide esta historia.
+
+**Marcas:** **(pv)** pendiente de verificar �� **(cǭlculo propio)** deducci��n nuestra con datos de NASA o JPL, a revisar �� **(corr.)** dato corregido en 03a o 03b �� **(ficci��n)** inventado y declarado como tal.
+
+## En cifras
+
+| Medida | Valor |
+|---|---|
+| Escenas de la ruta principal | 22, en un pr��logo y 4 actos |
+| Ruta principal, jugador medio | **94 min** (estimaci��n de dise��o; falta la prueba cronometrada) |
+| Jugador rǭpido (�-0,7) | unos **66 min**: el m��nimo de 1 h se cumple incluso as�� |
+| Contenido espacial en la ruta principal | 78 de 94 min (**83 %**; en A era el 78 %) |
+| El sue��o lunar | 32 min, el acto mǭs largo |
+| Misiones secundarias | 10, unos 51 min en dos lotes: **145 min** para quien lo haga todo |
+| Tiempo de la historia | 12 y 13 de noviembre de 2026: 2 d��as, 2 noches y 1 sue��o |
+| Escenarios | 1 Habitaci��n ��' 1b Casa ��' E Barrio ��' S Sendero ��' 2 Mirador y telescopio ��' 3 Luna del sue��o |
+| CrǸditos de Higgsfield gastados en esta fase | **0** |
+
+---
+
+## 0. QuǸ se decide en esta puerta
+
+| ID | Decisi��n propuesta | De d��nde sale | Secci��n |
+|---|---|---|---|
+| **F2-01** | **Base narrativa: A ��Luz cenicienta��**, con injertos de B y C. Arco con causa y efecto: el seguidor oscila ��' apag��n y toma temblorosa ��' duda ��' sue��o ��' arreglo con prealimentaci��n y realimentaci��n ��' la Luna compartida. | Puntajes de los jueces: A 8,15 �� B 7,95 �� C 7,55 | 1, 2 |
+| **F2-02** | **Calendario fijo:** d��a 1 y noche 1 el 12-11-2026, sue��o, d��a 2 y noche 2 el 13-11-2026, con la Luna real de esas noches (Horizons). La Luna de la fecha real del jugador se abre despuǸs del final. | A y B; datos del [[Mirador del Faro - Luna con datos reales]] y consulta de hoy | 2, 4 |
+| **F2-03** | **Duraci��n:** ruta principal de 94 min de dise��o. Prueba cronometrada con 3 a 5 personas; si la mediana baja de 70 min, se alarga el sue��o (secundarias S8 y S10 a la ruta), no el diǭlogo. | MǸtodo de A; margen de B | 3.2 |
+| **F2-04** | **El sue��o ocurre en el sitio del Apolo 11** (Mar de la Tranquilidad) con su equipo real: cuchar��n de caja, pinzas peque��as y tubos de 2 cm. El rastrillo, los tubos de 4 cm y el protocolo de 3 fotos antes y 1 despuǸs van en la secundaria S8, declarados como ��de otro tiempo�� (Apolo 15 a 17). | 03b, L1�?"L4; jueces | 4 |
+| **F2-05** | **Luz del sue��o:** se llega de noche, bajo la Tierra casi llena (la misma luz cenicienta vista por el telescopio), y amanece con licencia de sue��o en la ceremonia de las banderas. �"rbita aclara que de verdad faltar��an unos 2 d��as. | A; opci��n B de C; cǭlculo propio con `mooninfo_2026.json` | 4.2 |
+| **F2-06** | **Respeto del sitio hist��rico:** anillo cian de 75 m que no castiga; aterrizaje a mǭs de 2 km (mapa a escala 1:4, declarado); la bandera del Apolo 11 no se muestra en pie; sin astronautas reconocibles; de la Luna no se lleva nada: las bolsas vuelven como pǭginas. | R2�?"R4, L11; A, B y C | 4.3 |
+| **F2-07** | **Dos banderas nuevas,** Estados Unidos y Ecuador, del mismo tama��o y a la misma altura, con barra horizontal y **malla fija** (no hay viento). No se pueden soltar, tirar, da��ar ni usar como premio o chiste. La de Ecuador, con escudo (a confirmar con Guillermo y con un abogado). | L10, R1, R8; B | 4.3 |
+| **F2-08** | **Lectura recomendada de la frase ambigua:** A + B + C de la tabla 4.5 (la foto junto a la etapa de descenso, el regreso como el m��dulo de mando con un lazo de control y el montaje de Elena mirando la Luna). **Queda abierta para Guillermo.** | A y C | 4.5 |
+| **F2-09** | **Mundo abierto por nodos** con reloj por hitos (la Luna no se puede perder), 3 estados de luz horneados (ma��ana, tarde y noche) y cargas solo en 3 umbrales mǭs el ocular. | C (reloj y mundo vivo); A (umbrales) | 5 |
+| **F2-10** | **Sellos del cuaderno:** ��Dato medido��, ��Simulaci��n�� y ��Sue��o��. La Luna del telescopio es fotogrǭfica (datos de NASA); la del sue��o, low-poly pintada. | B y C; [[Biblia de arte]] ��3 | 2.4 |
+| **F2-11** | **Arco de ingenier��a de control** en 3 pasos: ganancia (seguidor y antena) ��' l��mites (apag��n, seguimiento a mano) ��' prealimentaci��n mǭs realimentaci��n. Se aprende con mecǭnica y pistas en 3 niveles, nunca con examen. | A (seguidor) y B (antena) | 3, 6 |
+| **F2-12** | **Reparto con arco propio** (A) y un abuelo que trabaj�� en la estaci��n del Cotopaxi como **ficci��n declarada** (C). �"rbita habla por el cuaderno estando despierta la protagonista y en voz alta, por la radio del casco, en el sue��o. | A y C | 6 |
+| **F2-13** | **Secundarias en 2 lotes:** lote 1 (23 min) con la ruta principal; lote 2 (28 min) despuǸs. Mundo vivo acotado: 4 vecinos con rutina, 6 especies por hito y 6 cambios que persisten. | Contenci��n de B; ideas de C | 7 |
+| **F2-14** | **Corte vertical primero:** unos 50 min, de la Habitaci��n al telescopio y al sue��o hasta las banderas. | A; [[Plan de auditoria]] B8 | 10 |
+| **F2-15** | **Pol��tica de datos:** solo cifras confirmadas en 03a o 03b, o medidas con Horizons y la tabla de NASA. Lo pendiente no entra al diǭlogo final. Lista de datos que no se usan. | B; jueces | 8 |
+| **F2-16** | **Nombres:** ��Proyecto NASA-Ecuador�� es solo interno; ningǧn t��tulo comercial lleva ��NASA�� (R7). La convocatoria ��Ventana Lunar�� y su centro espacial son ficticios y provisionales; sin logotipos ni nada que sugiera respaldo (R6). | 03b, R6�?"R7 | 6, 11 |
+
+---
+
+## 1. C��mo se eligi�� la base
+
+**Puntajes de los dos jueces** (coherencia, entretenimiento, valor educativo, fidelidad al pedido y viabilidad):
+
+| Propuesta | Juez 1 | Juez 2 | Media | Fuerte | DǸbil |
+|---|---:|---:|---:|---|---|
+| [[Propuesta_A]] ��Luz cenicienta�� (aventura emotiva) | 8,1 | 8,2 | **8,15** | El mejor arco: fracaso, duda, sue��o como giro y cierre colectivo | Chimborazo sin corregir; E8 sin marcar; 2 d��as exigen mǭs luz horneada |
+| [[Propuesta_B]] ��La bitǭcora de una noche�� (misi��n cient��fica) | 7,8 | 8,1 | 7,95 | La mǭs rigurosa y la mǭs barata: 6 sistemas para 19 escenas | Conflicto de plazo, sin punto bajo; herramientas de 15�?"17 en el sitio del 11 |
+| [[Propuesta_C]] ��Barrio con vista a la Luna�� (mundo abierto vivo) | 7,7 | 7,4 | 7,55 | El mejor mundo abierto; cǭpsula de cart��n; reentrada como lazo de control | Sin conflicto; alcance alto (11 secundarias, 47 coleccionables) |
+
+**QuǸ se toma de cada una**
+
+| De | Se toma | D��nde queda |
+|---|---|---|
+| A | Columna vertebral, arcos del reparto, desglose de minutos, ficha ��Luz cenicienta�� como carga del sue��o, montaje de Elena, final colectivo ��La Luna de todos��, corte vertical | Todo el documento |
+| B | Antena del Cotopaxi con control proporcional, carrusel de 9 diapositivas verificadas, cita de Nader de 2011, sellos del cuaderno, banderas de malla fija, 6 sistemas reutilizables, lista de datos excluidos | 2.1, 2.4, 3.5, F2-10, 7, 8 |
+| C | Caja de cart��n de Rafael como cǭpsula, aterrizaje a mǭs de 2 km, reentrada con el escudo tǸrmico, reloj por hitos, barrio que recuerda, regla ��mirar sin espantar��, chapa cian de �"rbita, atajo de los faroles, abuelo de la estaci��n (ficci��n) | 3.1, 3.6, 5, 6, 7 |
+
+**QuǸ se corrige respecto de A:** el Chimborazo pasa a ��unos 6 384,4 km�� (IGM-ESPE, 2019); el folleto del Planetario (E8) sale de la ruta principal porque no estǭ verificado; el protocolo de 3 fotos sale del sitio del Apolo 11; la Luna de la noche 2 ya estǭ calculada; el amanecer en Tranquilidad llega a unas 50 h, no a 42 h.
+
+---
+
+## 2. Premisa, tono y arco
+
+### 2.1 Premisa en tres l��neas
+
+1. Una estudiante de ingenier��a de control de Las Escalinatas, en Guayaquil, tiene dos noches para grabar 60 s de la Luna con el seguidor motorizado que construy�� y postular a ��Ventana Lunar��, una convocatoria ficticia que la acerca a su sue��o de trabajar algǧn d��a en la NASA.
+2. La primera noche, un controlador que oscila y un corte de luz le arruinan la toma, y se pregunta si la Luna es para gente de su barrio.
+3. Esa noche sue��a que camina por la Luna, junto al sitio del Apolo 11, y vuelve con lo que le faltaba: una referencia fija, un registro honesto y gente con quien compartir el cielo.
+
+### 2.2 Tema: ��Lo lejos depende de d��nde mides��
+
+| Prueba del tema | Dato | Estado |
+|---|---|---|
+| Desde el centro de la Tierra, la cumbre mǭs alejada es la del Chimborazo: unos 6 384,4 km, unos 2,1 km mǭs que la del Everest | E7, IGM-ESPE 2019 | **corr.** (no usar 6 384 415,98 m) |
+| Desde el Mirador, la Luna se aleja casi 4 000 km entre las 18:00 y las 21:00 del 12-11 por el giro de la Tierra | Horizons, medido | Confirmado |
+| Ecuador ya estǭ en la Luna: el mensaje de Velasco Ibarra viaj�� en el disco de buena voluntad del Apolo 11, con los de 73 pa��ses | A4 | Confirmado |
+| La creciente de Guayaquil se ve ��acostada��: el borde iluminado apunta hacia abajo (192,6�� desde el cenit a las 19:30) | Horizons, medido | Confirmado |
+
+### 2.3 Tono
+
+- **Guayaquil:** cǭlido y costumbrista; humor de barrio, comida de casa, vecinos que opinan de todo.
+- **Taller y telescopio:** preciso; cada cifra lleva unidad y fuente en el cuaderno.
+- **Luna:** asombro sereno; silencio exterior, solo traje, respiraci��n y la voz de �"rbita por la radio.
+- **Siempre:** se aprende probando, fallando y anotando quǸ cambi��. Nunca un examen.
+
+### 2.4 Reglas de coherencia
+
+| Regla | C��mo se aplica |
+|---|---|
+| Un solo calendario | 12-11-2026 (d��a 1 y noche 1), sue��o, 13-11-2026 (d��a 2 y noche 2). La fecha real del jugador solo se usa en el telescopio libre del final. |
+| El sue��o es ficci��n con datos reales | Los sucesos son inventados; las cifras no. �"rbita lo dice al llegar: ��Esto es un sue��o. La Luna, no��. |
+| Sellos del cuaderno | ��Dato medido�� (con fuente y hora), ��Simulaci��n�� (mecǭnica) y ��Sue��o��. |
+| Dos lunas, dos estilos | Telescopio: fotogrǭfica, texturas de LRO (excepci��n de la biblia). Sue��o: low-poly pintada. Se distingue el dato de la ficci��n a simple vista. |
+| La NASA como meta, no como marca | Se nombra como aspiraci��n, de forma factual. Convocatoria y centro espacial ficticios. Sin logotipos, insignias ni emblemas de misiones (R6, R7). |
+| Banderas con respeto | Ver F2-07. |
+| Sin astronautas reconocibles | El sitio del Apolo 11 se ve vac��o, como hoy. Nadie con rostro o nombre de un astronauta. |
+
+### 2.5 Arco de la protagonista
+
+| Acto | Deseo | Lo que pasa | C��mo queda ella |
+|---|---|---|---|
+| I �� La convocatoria | Postular | El seguidor oscila; Sam piensa dejar la carrera; Elena teme que se vaya lejos | Ilusionada, pero sola con el problema |
+| II �� La Luna que se escapa | Grabar esa noche | Antena y montura listas, pero se va la luz: toma temblorosa; la Luna se pone a las 21:07 | **Duda:** ��A lo mejor la Luna no es para gente de Las Escalinatas�� |
+| III �� Tranquilidad | �?" (estǭ so��ando) | Camina, registra, ve que Ecuador ya lleg�� en un disco, planta dos banderas juntas y vuelve como un m��dulo de mando | **Giro:** la distancia era una idea, no un muro |
+| IV �� Una referencia fija | Volver a intentarlo, ya no sola | Arregla el control; la familia y el barrio suben al Mirador | Lista para la siguiente ronda (cap��tulo 2) |
+
+**L��neas de muestra** (borrador; cada una cabe en dos renglones):
+
+| Momento | QuiǸn | Texto |
+|---|---|---|
+| 1.2, tercer fallo | Dra. Vega (video) | ��Cambia un parǭmetro. Si cambias tres, no sabrǭs cuǭl arregl�� el problema.�� |
+| 1.3 | Elena | ��La NASA queda lej��simos, mija. Pero llǸvate la libreta.�� |
+| 2.3, apag��n | �"rbita | ��Se fue la luz�?� y mira: ahora se ve la parte oscura.�� |
+| 2.4, duda | Protagonista | ��A lo mejor la Luna no es para gente de Las Escalinatas.�� |
+| 2.4 | Ari | ��Ecuador mand�� un mensaje en 1969. Lleg�� antes que tǧ.�� |
+| 3.1 | �"rbita | ��Tu masa sigue contigo. Lo que cambi�� es tu peso.�� |
+| 3.5 | �"rbita | ��Representan nuestros sue��os. No nos hacen due��os.�� |
+| 4.2 | Elena | ��Ahora entiendo por quǸ la miras tanto.�� |
+
+---
+
+## 3. Tabla de escenas
+
+**Escenarios:** **1** Habitaci��n-taller �� **1b** Casa (planta baja y cocina) �� **E** Barrio: Las Escalinatas, Plaza de las Iguanas y Mercado �� **S** Sendero del arroyo ([[Escena de exploracion v1]]) �� **2** Mirador del Faro y telescopio �� **3** Luna del sue��o.
+
+**Columna ��Verificaci��n��:** 03a = [[03a_verificacion_ecuador]]; 03b = [[03b_verificacion_apolo]]; Hz = JPL Horizons medido; SVS = tabla `mooninfo_2026.json` de NASA SVS 5587.
+
+### 3.1 Escenas
+
+| # | Escena | Esc. | Objetivo | Mecǭnica | Dato real | Verificaci��n | Min |
+|---|---|---|---|---|---|---|---:|
+| **P.0** | T��tulo | 1 | Empezar | Menǧ; la cǭmara baja de la Luna a la ventana del cuarto; creador solo si Guillermo lo pide | �?" | �?" | 2 |
+| | **Acto I �� ��La convocatoria��** (d��a 1, ma��ana) | | | | | | **22** |
+| 1.1 | Despertar con �"rbita | 1 | Conocer el taller y leer la convocatoria: grabar 60 s de la Luna con un instrumento propio antes de la medianoche del d��a 2 | Caminar, mirar, 5 objetos; el cuaderno se abre por primera vez | P��ster del Observatorio Astron��mico de Quito, fundado en 1873 | E6, 03a: confirmado | 4 |
+| 1.2 | El seguidor que tiembla | 1 | Que el motor siga un punto de luz que cruza la pared | Rompecabezas de control en el osciloscopio (TAL-02): ganancia y amortiguaci��n, un parǭmetro por prueba, con la grǭfica anterior al lado | El cielo gira unos 15�� por hora (360�� en 24 h) | cǭlculo propio | 6 |
+| 1.3 | Desayuno | 1b | Hablar con Elena y Rafael; recibir la libreta | Diǭlogo con 2 elecciones; globo de la cocina; la foto del abuelo con llamas junto a una antena | Chimborazo a unos 6 384,4 km del centro, 2,1 km mǭs que el Everest. La estaci��n del Cotopaxi ten��a llamas junto a su antena de 12 m (foto de 1973). El abuelo es **ficci��n** | E7 **corr.** y A1, 03a | 3 |
+| 1.4 | Bajar Las Escalinatas | E | Llegar al Mercado | Exploraci��n libre; recolectar piezas (COL-03, COL-05); saludar a Lidia; ver la primera placa pintada (abre S5) | �?" (mundo y ritmo) | �?" | 4 |
+| 1.5 | El puesto de Sam | E | Conseguir un codificador para el motor | Armar la maqueta de un satǸlite de 10 cm: energ��a, radio, antena y computadora. Sam cuenta que piensa dejar la carrera | Pegaso: primer satǸlite ecuatoriano, cubo de 10 cm con dos paneles de 27 cm, de la EXA (ONG civil de 2007), lanzado el 25-04-2013 (hora de Ecuador, segǧn el equipo); el proyecto se inici�� en 2010 | E2�?"E4, 03a (E4 **corr.**) | 5 |
+| | **Acto II �� ��La Luna que se escapa��** (d��a 1, tarde y noche 1) | | | | | | **25** |
+| 2.1 | Rastrear como en el Cotopaxi | S | Subir al Mirador; levantar la antena ca��da (COL-01) | Reapuntar la antena con un control proporcional: con poca ganancia se atrasa, con mucha oscila | La estaci��n Quito, al pie del Cotopaxi a 3 650 m, rastre�� naves de 1957 a 1981 con antenas de 12 m y apoy�� al Apolo-Soyuz en 1975 | A1 **corr.** y A2, 03a | 5 |
+| 2.2 | La Luna sonriente | 2 | Montar el seguidor y encontrar la Luna | Alinear la montura ecuatorial con el eje polar casi acostado; buscar, enfocar y marcar terminador, luz cenicienta y Mare Crisium. �"rbita se��ala el Mar de la Tranquilidad en la parte oscura | A las 19:30: 12,2 % iluminada, a 403 151 km, a 20,0�� de altura, borde iluminado a 192,6�� del cenit. El polo sur celeste estǭ a unos 2,2�� sobre el horizonte (latitud del Mirador, 2,18�� S). Tranquilidad estǭ de noche: el Sol, 25�� bajo su horizonte | Hz (prueba medida: 12,15 % y 192,6��); polo y Tranquilidad: cǭlculo propio con SVS | 7 |
+| 2.3 | La se��al se cae | 2 | Grabar 60 s | Corte de luz: el seguidor se detiene y ella sigue la Luna a mano con 2 perillas. La toma sale temblorosa; con el barrio a oscuras, la luz cenicienta se ve mejor | La Luna recorre su propio diǭmetro (29,6�?�) en unos 2 min | cǭlculo propio | 5 |
+| 2.4 | Ecuador ya dej�� un mensaje | 2 | Superar la duda | Diǭlogo de duda con �"rbita (3 respuestas, ninguna castiga); Ari y ella ordenan 9 diapositivas en el atril (MIR-05) por pistas visibles en cada foto | 1873 Observatorio de Quito �� 1957 estaci��n Quito �� 1969 disco con el mensaje de Velasco Ibarra (73 pa��ses) �� 1975 Apolo-Soyuz �� 14-11-1981 despedida del STS-2 �� 01-07-1982 entrega a Ecuador �� 2007 EXA �� 2013 Pegaso �� 21-06-2023 Acuerdos Artemisa, firmante n.�� 26 | A1, A2, A4, E1, E2, E3, E6; 03a | 5 |
+| 2.5 | Bajada de los faroles | 2 ��' E ��' 1 | Volver a casa y dormir | Atajo de los faroles, que abre Ari; barrio de noche; la Luna se pone a las 21:07; Elena mira el cielo en el patio; la caja de cart��n de Rafael espera junto a la cama | Puesta de la Luna a las 21:07, con el borde superior en el horizonte y la refracci��n | Hz y `luna_parametros.py` | 3 |
+| | **Acto III �� ��Tranquilidad��** (el sue��o) | | | | | | **32** |
+| 3.1 | Alunizaje de cart��n | 3 | Llegar y aprender a moverse | La caja de Rafael aterriza con un golpe sordo; pista corta: caminar a saltos, frenar con anticipaci��n, saltar una zanja | Gravedad de 1,624 m/s��, cerca de 1/6 de la terrestre: baja el peso, no la masa. Se aterriza fuera del l��mite de 2 km del sitio | L6 y R4, 03b | 4 |
+| 3.2 | La herramienta correcta | 3 | Recoger 4 muestras distintas | Elegir cuchar��n de caja, pinzas peque��as o tubo de nǧcleo con martillo; una mala elecci��n muestra por quǸ falla | Herramientas del Apolo 11: cuchar��n de caja, pinzas peque��as y tubos de 2 cm hincados con martillo. Regolito: polvo y roca de impactos de miles de millones de a��os | L1, L3, L8; 03b | 7 |
+| 3.3 | Una roca necesita su registro | 3 | Registrar 3 muestras | Bolsa numerada, croquis del lugar y ficha. Un nǧmero equivocado se corrige en el registro sin perder la muestra | Las bolsas numeradas ligaban cada muestra a su registro. En el Apolo 11 la documentaci��n fue ��bastante simple��; el protocolo completo lleg�� despuǸs (S8) | L4 **corr.**, 03b | 4 |
+| 3.4 | Mirar sin borrar | 3 | Ver el sitio del Apolo 11 sin entrar | Rodear el anillo cian de 75 m; zoom a la etapa de descenso, sus patas y las huellas; foto ��vista con el Apolo�� con la Tierra arriba | La etapa de descenso se qued�� en la Luna. Recomendaci��n de 75 m de exclusi��n. Los objetos conservan due��o. La bandera hist��rica no estǭ confirmada en pie. La Tierra, casi fija a unos 66�� de altura | L11, L12, R2, R3; 03b. Altura de la Tierra: cǭlculo propio con SVS | 6 |
+| 3.5 | Dos banderas, un cielo | 3 | Colocar juntas las banderas de Estados Unidos y Ecuador | Elegir sitio fuera del anillo, armar los 2 conjuntos, hincar con ritmo, extender las barras, igualar alturas; amanece en el sue��o | Banderas de 0,91 �- 1,52 m con mǭstil de 2,44 m y barra horizontal: no hay viento. Una bandera no da territorio (art. II). Ecuador firm�� los Acuerdos Artemisa. En 2011, Nader dijo que la EXA quer��a poner la bandera ecuatoriana en la Luna | L10, R1, E1; 03b y 03a | 6 |
+| 3.6 | Volver como el m��dulo de mando | 3 ��' 1 | Regresar | Ordenar 6 pasos del regreso; mantener el escudo tǸrmico de la caja dentro de un margen de ǭngulo (lazo de control); despertar | Solo volvi�� el m��dulo de mando: reentr�� con el escudo por delante y ameriz�� en el Pac��fico el 24-07-1969, junto al USS Hornet. El Apolo 11 trajo 21,5 kg en 58 muestras; las 6 misiones, 382 kg | L12, L13, L5 **corr.**; 03b | 5 |
+| | **Acto IV �� ��Una referencia fija��** (d��a 2 y noche 2) | | | | | | **13** |
+| 4.1 | El arreglo | 1 | Que el seguidor funcione solo | Rompecabezas final: darle al motor la velocidad conocida del cielo (prealimentaci��n) y dejar que el control corrija solo el error; bater��a contra los cortes (mǭs fǭcil con S4) | Prealimentaci��n mǭs realimentaci��n: el control solo corrige lo que la referencia no predice | Concepto de la carrera; 15�� por hora, cǭlculo propio | 5 |
+| 4.2 | La Luna de todos | E ��' S ��' 2 | Grabar y enviar los 60 s | Todos suben al Mirador: Rafael con la bater��a, Sam con el codificador, Lidia con jugos; Elena y Rafael miran por primera vez; elegir la mejor toma | Noche 2 a las 19:30: 19,0 % iluminada, a 31,0�� de altura y 402 285 km. Se pone hacia las 21:50�?"22:00 | Hz, consulta del 12-11-2026; hora exacta de la puesta pv (falta la refracci��n) | 5 |
+| 4.3 | La primera pǭgina | 2 ��' 1 | Cerrar el cap��tulo | Elegir quǸ observaci��n va en la primera pǭgina; Ari recibe el turno del telescopio; llamada de la Dra. Vega; gancho del cap��tulo 2 | Ma��ana, 14-11-2026, se cumplen 45 a��os de la despedida del STS-2 a los 75 empleados de la estaci��n Quito (07:04, hora local) | A2, 03a | 3 |
+| | **Total de la ruta principal** | | | | | | **94** |
+
+### 3.2 Por quǸ dura eso cada escena
+
+MǸtodo de A. Supuestos: 3 m/s caminando en la Tierra; unos 4 m/s a saltos en la Luna; una l��nea de diǭlogo cada 4 s (15 por minuto); rompecabezas de 3 o 4 intentos de unos 50 s, con el fallo aparte.
+
+| # | Recorrido | Diǭlogo | Mecǭnica | Fallo y reintento | Total |
+|---|---:|---:|---:|---:|---:|
+| P.0 | 0 | 0 | 1,5 | 0,5 | 2 |
+| 1.1 | 1 | 1 | 1,5 | 0,5 | 4 |
+| 1.2 | 0 | 1 | 3,5 | 1,5 | 6 |
+| 1.3 | 0,5 | 1,5 | 1 | 0 | 3 |
+| 1.4 | 2 (unos 300 m) | 0,5 | 1 | 0,5 | 4 |
+| 1.5 | 0,5 | 1,5 | 2,5 | 0,5 | 5 |
+| 2.1 | 1,5 (subida) | 1 | 2 (antena) | 0,5 | 5 |
+| 2.2 | 0,5 | 1,5 | 4 (eje, buscar, enfocar, 3 rasgos) | 1 | 7 |
+| 2.3 | 0 | 1 | 3 (2 tomas de 60 s) | 1 | 5 |
+| 2.4 | 0,5 | 2 (la duda) | 2 (9 diapositivas) | 0,5 | 5 |
+| 2.5 | 2 (unos 350 m) | 1 | 0 | 0 | 3 |
+| 3.1 | 1 | 0,5 | 2 | 0,5 | 4 |
+| 3.2 | 2 | 0,5 | 3,5 (4 objetivos) | 1 | 7 |
+| 3.3 | 0,5 | 0,5 | 2,5 (3 registros) | 0,5 | 4 |
+| 3.4 | 2 (medio anillo, unos 240 m) | 1 | 2,5 (zoom y foto) | 0,5 | 6 |
+| 3.5 | 1 | 1 | 3 | 1 | 6 |
+| 3.6 | 0,5 | 1 | 3 (orden y escudo) | 0,5 | 5 |
+| 4.1 | 0,5 | 1 | 3 | 0,5 | 5 |
+| 4.2 | 1,5 | 1,5 | 2 | 0 | 5 |
+| 4.3 | 0,5 | 1,5 | 1 | 0 | 3 |
+| **Suma** | **18** | **20,5** | **44,5** | **11** | **94** |
+
+- **Lectura:** el 47 % es mecǭnica y el 22 % diǭlogo (unas 310 l��neas). Es un juego, no una novela visual.
+- **Piso de 60 min:** el jugador rǭpido queda en unos 66 min (�-0,7).
+- **Prueba obligatoria** (F2-03): cronometrar a 3�?"5 personas que no conozcan el juego con el primer prototipo de punta a punta.
+
+### 3.3 Contenido espacial por acto
+
+| Acto | Min | Espaciales | Escenas espaciales |
+|---|---:|---:|---|
+| Pr��logo y I | 24 | 11 | 1.2 y 1.5 |
+| II | 25 | 22 | 2.1 a 2.4 |
+| III | 32 | 32 | todas |
+| IV | 13 | 13 | todas |
+| **Total** | **94** | **78 (83 %)** | |
+
+---
+
+## 4. El sue��o lunar
+
+### 4.1 C��mo se llega
+
+1. Al final de 2.5, la cama brilla con un borde cian. Junto a ella, la caja de cart��n de los adornos de Navidad que Rafael dej�� ��por si necesitas guardar algo��, con el dibujo de la Luna que ella hizo en el cuaderno.
+2. Transici��n en el motor, saltable: el ventilador baja de giro, el barrio se apaga, las estrellas pegadas del techo se encienden, la sǭbana se vuelve regolito y la ventana, la Tierra. La transici��n **esconde la carga**: sin pantalla negra.
+3. Si la carga tarda mǭs, la pantalla es la pǭgina del cuaderno con la ficha ��Luz cenicienta�� que ella marc�� en 2.2: el puente visual entre el escenario 2 y el 3.
+
+### 4.2 D��nde y cuǭndo
+
+| Pregunta | Respuesta | Verificaci��n |
+|---|---|---|
+| Lugar | Cerca del sitio del Apolo 11, Mar de la Tranquilidad (unos 0,67�� N y 23,47�� E) | Coordenadas: pv |
+| Por quǸ ah�� | Es donde viaj�� el mensaje de Ecuador (A4) y el ��Apolo�� que todos conocen | A4: confirmado |
+| Momento | La misma noche del 12-11-2026 | F2-02 |
+| Luz al llegar | **De noche.** A las 19:30 de Guayaquil (00:30 UT del 13-11), el Sol estǭ unos 25�� bajo el horizonte de Tranquilidad | cǭlculo propio con SVS |
+| La Tierra en el cielo | Casi llena, cerca del **87 %** (fases opuestas: complemento del 12,6 % de la Luna). A unos **66�� de altura**; durante el mes oscila entre 59�� y 73�� | L9 (03b) y cǭlculo propio con SVS |
+| Amanecer real | Hacia el 15-11-2026 a las 02:00 UT (21:00 del 14-11 en Guayaquil): **unas 50 h** despuǸs | cǭlculo propio con SVS |
+| Licencia del sue��o | El sue��o comprime el tiempo y amanece sobre las banderas (3.5). �"rbita: ��Aqu��, de verdad, faltar��an unos dos d��as�� | Declarado como ��Sue��o�� |
+
+**Consecuencia de dise��o:** la protagonista camina bajo la Tierra casi llena, la misma luz que vio como luz cenicienta desde el Mirador. Encaja con la luz de noche de la [[Biblia de arte]] ��7 (principal azul fr��a, sombra azul profunda). La cǭmara alta no ve el cielo, as�� que hay 4 tomas con cǭmara baja: llegada, foto con el sitio, banderas y despedida.
+
+**C��mo se calcul��:** distancia angular entre el sitio y los puntos subsolar y subterrestre de `externos/nasa_svs_5587_tabla/mooninfo_2026.json`, hora por hora. Hay que repetirlo con Horizons antes del texto final (F2-15).
+
+### 4.3 QuǸ se hace
+
+**Caminar a 1/6 g (3.1)**
+- 1,624 m/s�� (L6). Al acelerar y frenar se nota la inercia: frenar exige anticipaci��n. El paso a saltos es el mǭs eficiente.
+- Sin sonido exterior: solo traje, respiraci��n y la voz de �"rbita por la radio del casco.
+- La caja de cart��n aterriza **fuera del l��mite de descenso de 2 km** (R4). El mapa lunar estǭ a escala 1:4 y el cuaderno lo dice: los 2 km se recorren en unos 500 m de juego.
+- �"rbita lleva un casco de burbuja y flota un poco mǭs porque pesa menos; sus huellas son las ǧnicas de gato en la Luna (chiste recurrente de C).
+
+**Recolectar muestras con las herramientas del Apolo 11 (3.2 y 3.3)**
+
+| Herramienta | Para quǸ | Objetivo en el juego | Dato |
+|---|---|---|---|
+| Cuchar��n de caja | Suelo y fragmentos peque��os | Regolito fino junto a un crǭter peque��o | L1 |
+| Pinzas peque��as | Rocas sueltas | Una roca oscura de basalto | L1 |
+| Tubo de nǧcleo de 2 cm y martillo | Una columna que conserva las capas | Dos golpes de mǭs rompen el ritmo; uno de menos deja el tubo corto | L3 |
+| Bolsa numerada, croquis y ficha | Ligar la muestra a su registro | 3 muestras registradas | L4 |
+
+- **Bolsa equivocada:** la muestra no se pierde; se corrige el registro, igual que en el taller se anota quǸ cambi��.
+- **Nadie se lleva nada de la Luna:** al despertar, las bolsas vuelven como pǭginas del cuaderno, no como rocas (B).
+- **Lo que no es del Apolo 11** (rastrillo, tubos de 4 cm, gnomon con 3 fotos antes y 1 despuǸs) va en la secundaria S8, declarado como equipo de los Apolo 15 a 17 (L2, L3, L4).
+
+**Ver el Apolo respetando su sitio (3.4)**
+- Anillo de luz cian tenue a 75 m de la etapa de descenso (R3). El cian es interacci��n segǧn la biblia; aqu�� significa ��mira, no toques��. Cruzarlo no castiga: la protagonista se detiene sola y �"rbita dice por quǸ. El juego lo presenta como buena costumbre, no como ley (R3 son recomendaciones; R5 solo obliga a acuerdos con NASA).
+- Con zoom se ven la etapa de descenso, sus patas y las huellas de 1969. La placa se ve sin texto legible; su contenido no se cita (pv).
+- **La bandera del Apolo 11 no se muestra en pie** (L11). �"rbita cuenta que, segǧn Aldrin, la derrib�� el despegue.
+- **Momento emocional:** �"rbita recuerda que el mensaje de Ecuador viaj�� en un disco del tama��o de una moneda de 50 centavos (A4). Que el disco quedara en el sitio es **pv**: hasta verificarlo, el texto dice ��viaj�� hasta aqu��, no ��estǭ aqu��.
+- **Foto ��vista con el Apolo��:** la protagonista y �"rbita en primer plano, la etapa de descenso al fondo y la Tierra arriba. Es la recompensa de la misi��n y la imagen del cap��tulo.
+
+**Colocar juntas las banderas de Estados Unidos y Ecuador (3.5)**
+
+1. **Elegir el sitio:** la ��Loma de las Dos Banderas�� (ficci��n), a unos 150 m de la etapa de descenso: el doble del radio de protecci��n y sin huellas hist��ricas.
+2. **Armar los conjuntos:** dos banderas nuevas del mismo tama��o, 0,91 �- 1,52 m, con mǭstil de 2,44 m y barra horizontal (L10). Malla fija con pliegues modelados (B).
+3. **Hincar el mǭstil:** golpear con ritmo, no con fuerza. La profundidad real del Apolo 11 es pv; la mecǭnica no depende de la cifra.
+4. **Extender la barra:** si no se extiende del todo, la tela queda ondulada, como le pas�� a la tripulaci��n del Apolo 11 (L10, Platoff). No hay viento.
+5. **Igualar alturas:** las dos a la misma altura, separadas lo justo para que ninguna tape a la otra.
+6. **Ceremonia:** la protagonista recuerda que en 2011 Ronnie Nader dijo que la EXA quer��a poner la bandera ecuatoriana en la Luna (*Sobrevuelo* 2011, p. 25; 03a). Se presenta como un sue��o dicho en voz alta, no como un hecho.
+7. **Amanece:** la luz del Sol entra rasante y la escena queda 10 s en silencio, sin interfaz.
+
+- **Dato:** el art. II del Tratado del Espacio proh��be la apropiaci��n nacional (R1). Ecuador es el firmante n.�� 26 de los Acuerdos Artemisa (E1), lo que no le da un vuelo lunar. La misi��n expresa cooperaci��n.
+- **Bandera de Ecuador:** con escudo, para que no se confunda con la de Colombia; proporci��n 3:2 segǧn el instructivo de 2009 (copia no oficial, pv contra el original). La Constituci��n la reconoce como s��mbolo patrio (R8). Antes de publicar, opini��n de un abogado (03a, #25).
+- **Reglas fijas:** no se pueden soltar, tirar ni da��ar; no hay animaci��n de ca��da; no se toca la bandera hist��rica; no son premio ni chiste.
+
+### 4.4 C��mo se vuelve (3.6)
+
+1. **Orden del regreso** en el cuaderno, 6 pasos: despegue de la etapa de ascenso, encuentro en ��rbita lunar, separaci��n del m��dulo de servicio, reentrada con el escudo tǸrmico, paraca��das y amerizaje (L12, L13).
+2. **Reentrada jugable (C):** la caja de cart��n cae hacia la Tierra y el jugador mantiene el escudo por delante, dentro de un margen de ǭngulo. Es un lazo de control, el oficio de la protagonista.
+3. **Sensaciones (A):** el calor de la reentrada se vuelve el sol de la ma��ana en la cara; los paraca��das, la cortina que abre Elena.
+4. **Montaje cruzado:** antes de despertar, 8 s de Elena en el patio, de noche, mirando la Luna acostada (lectura C de la frase).
+5. **Amerizaje:** �"rbita vuelca el vaso de agua de la mesita. Ella despierta mojada y riǸndose a las 06:30.
+6. **Cierre:** el cuaderno muestra las fichas del sue��o con el sello ��Sue��o�� y los datos con ��Dato medido��. El Apolo 11 trajo 21,5 kg; el 17, 110,5 kg; las 6 misiones, 382 kg (L5 corr.). Ella trajo 4 bolsas que pesan cero, y una idea.
+
+**Volver a so��ar:** desde el final del acto III, la cama ofrece ��So��ar otra vez�� cualquier noche. Las banderas siguen donde se plantaron. ��Despertar�� estǭ siempre en el menǧ del cuaderno: no hay muerte en el sue��o.
+
+### 4.5 La frase ambigua: ��siendo vista con el Apolo que lleg�� a la Tierra��
+
+| Lectura | QuǸ significar��a | C��mo se juega | A favor | En contra |
+|---|---|---|---|---|
+| **A** | Verla **junto al m��dulo lunar del Apolo 11**, que sigue en la Luna | Foto de 3.4 con la etapa de descenso al fondo | Fiel a L12 y R3; barata; ya estǭ en la ruta | La etapa de descenso nunca ��lleg�� a la Tierra�� |
+| **B** | El Apolo que **s�� volvi��**: el m��dulo de mando | Regreso de 3.6 con sus 6 pasos y el lazo de control del escudo, con la caja de cart��n en vez de la cǭpsula real | Cumple ��lleg�� a la Tierra�� al pie de la letra (L13) | No muestra la cǭpsula real, para evitar insignias |
+| **C** | Ser **vista desde la Tierra** | Montaje de 8 s de Elena mirando la Luna desde el patio | Cierra el arco familiar | No muestra ningǧn Apolo |
+| **D** | **Testigo en 1969** o vista por un astronauta | El sue��o ocurre en 1969, o una silueta la saluda | Muy emotiva | Mostrar��a astronautas reales o lo parecer��a; 2 cinemǭticas caras. **No se recomienda** |
+
+**Recomendaci��n (F2-08):** A + B + C, como estǭ en la ruta. D, descartada.
+
+> **Pregunta abierta para Guillermo:** ��quǸ quisiste decir con ��siendo vista con el Apolo que lleg�� a la Tierra��? ��A, B, C, D, una mezcla u otra cosa?
+
+---
+
+## 5. Mapa de mundo abierto
+
+### 5.1 Nodos y rutas
+
+```
+[1 Habitaci��n] �"?escalera�"? [1b Casa] �"?puerta�"? [E Las Escalinatas] �"? [E Plaza de las Iguanas] �"? [E Mercado]
+      �"'                                            �-�                       �"'
+      �"' cama (dormir / despertar)                  �"'                [S Sendero del arroyo]
+      �-�                                            �"'                  arroyo, puente, antena
+[3 Luna: llegada de la caja] �"? [campo de muestras] �"'                       �"'
+      �"? [anillo de 75 m] �"? [Loma de las Dos Banderas]                [2 Mirador del Faro] �"?ocular�"? [telescopio]
+                                                   �"'                       �"'
+                                                   �""�"?�"?�"?�"? atajo de los faroles (desde 2.4) �"?�"~
+```
+
+**Distancias de dise��o:** casa 60 m de recorrido; Las Escalinatas unos 160 m de subida; plaza y Mercado 120 �- 80 m; sendero unos 300 m; Mirador 40 �- 30 m; atajo de bajada unos 350 m; Luna unos 600 �- 450 m a escala 1:4.
+
+### 5.2 Desbloqueos
+
+| Tramo | C��mo se pasa | Se abre | Motivo en la historia |
+|---|---|---|---|
+| Habitaci��n ��" casa | Escalera interior, sin carga | Desde el inicio | El cuarto es el tutorial |
+| Casa ��" Las Escalinatas | Puerta de la calle | Al terminar 1.3: Elena entrega la libreta | La familia ��da permiso�� para salir al mundo |
+| Escalinatas ��" Plaza ��" Mercado | A pie, continuo | Con la puerta | Barrio abierto; secundarias del lote 1 |
+| Plaza ��" sendero ��" Mirador | A pie, continuo | Tras el codificador (1.5). Antes, �"rbita: ��Con tanto sol no vas a ver la Luna�� | El reloj pasa a la tarde |
+| Mirador ��' barrio (atajo de los faroles) | Port��n del cerro | Ari lo abre tras 2.4; primero de bajada, luego en los dos sentidos | Volver antes de las 21:30, como pidi�� Elena (sin castigo) |
+| Mirador ��" telescopio | Acercarse al ocular | Desde 2.2 | La carga se esconde en el acercamiento |
+| Cama ��' Luna | Dormir | Tras 2.5 (la primera vez es obligatoria) | El sue��o es la ǧnica ��nave�� |
+| Dentro de la Luna | A pie, a saltos | Llegada ��' muestras (tras 3.1) ��' anillo (tras 3.3) ��' Loma (tras 3.4) | Cada zona ense��a lo que necesita la siguiente |
+| Luna ��' cama | Terminar 3.6; despuǸs, ��Despertar�� desde el cuaderno | Siempre | Salida clara |
+| D��a 2 | Todo el mapa abierto; el Mirador se activa al anochecer (4.2) | Tras 4.1 | �sltimo paseo libre antes del cl��max |
+| Viaje rǭpido | Mapa del cuaderno (`ANC_MAPA`) entre nodos visitados | Desde el d��a 2; el primer recorrido siempre a pie | �?" |
+| DespuǸs del final | Todo abierto; telescopio con la fecha real del jugador; ��So��ar otra vez�� | Tras 4.3 | Juego libre y secundarias |
+
+### 5.3 Reloj por hitos (F2-09)
+
+El reloj avanza por hitos, no por minutos reales: **la Luna no se puede perder.**
+
+| Hito | Escenas | Luz | QuǸ cambia en el barrio |
+|---|---|---|---|
+| Ma��ana, d��a 1 | 1.1�?"1.5 | Ma��ana (nueva en la biblia) | Lidia abre el kiosco; Sam en el Mercado |
+| Tarde | 2.1 | Tarde (luz base de la biblia) | Iguanas en los muros; periquitos |
+| Noche con Luna | 2.2�?"2.4 | Noche | Faroles y guirnalda del Mirador |
+| Noche sin Luna | 2.5 | Noche | Vecinos en las puertas; Elena en el patio |
+| Sue��o | 3.1�?"3.6 | Noche lunar ��' amanecer | �?" |
+| Ma��ana, d��a 2 | 4.1 | Ma��ana | Cambios persistentes visibles |
+| Tarde y noche 2 | 4.2�?"4.3 | Tarde ��' noche | Todos suben al Mirador |
+
+**3 estados de luz horneados** (ma��ana, tarde y noche) en lugar de un ciclo continuo: la tarde y la noche del d��a 2 reutilizan las del d��a 1.
+
+### 5.4 Cargas
+
+| Umbral | QuǸ la esconde | Meta |
+|---|---|---|
+| Casa ��" calle | Abrir la puerta (fundido de 1 s) | �%� 3 s en la HD 620 |
+| Plaza ��" sendero | Curva del camino; el cerro tapa la vista (solo si la memoria lo exige) | �%� 3 s |
+| Mirador ��" ocular | El acercamiento al telescopio | �%� 3 s |
+| Cama ��" Luna | La transici��n del sue��o; si no alcanza, la ficha ��Luz cenicienta�� | Sin pantalla negra |
+
+Cada pantalla de carga es una pǭgina del cuaderno con un dato real y su fuente (A y B). Los umbrales y su medici��n estǭn en [[Plan de auditoria]] ��3.2.
+
+---
+
+## 6. Reparto y �"rbita
+
+Segǧn la hoja [[Catalogo de recursos#Reparto �� v1]] (`HR_PER_v1.png`). Los nombres vienen del guion anterior y siguen siendo propuestas.
+
+| ID | Personaje | Papel | Arco | Escenas |
+|---|---|---|---|---|
+| PER-01 | **Protagonista** (nombre por decidir) | Estudiante de ingenier��a de control; vive en Las Escalinatas; construy�� un seguidor motorizado. Habla de la NASA solo como sue��o personal | Del ��es demasiado lejos�� al ��depende de d��nde mido�� | Todas |
+| PER-02 | Protagonista B | Si hay creador de personaje, segundo cuerpo. Si la protagonista es fija, **un primo del colegio tǸcnico** que ayuda en S4 | Ninguno propio | P.0 o S4 |
+| PER-03 | **Elena**, la madre | Vende almuerzos en el barrio y entrega la libreta. Su miedo: que su hija se vaya lejos | De ��queda lej��simos�� a mirar por el telescopio en 4.2 | 1.3, 2.5, 3.6, 4.2 |
+| PER-04 | **Rafael**, el padre | Repara electrodomǸsticos; de Ǹl viene el gusto por los circuitos. Su caja de cart��n se vuelve la cǭpsula del sue��o | Apoyo callado: en 4.2 trae la bater��a que faltaba | 1.3, 2.5, 4.2 |
+| �?" | **El abuelo** (padre de Rafael, **ficci��n**) | Trabaj�� en la estaci��n del Cotopaxi: un homenaje al personal ecuatoriano, que pas�� de 50 a 220 personas (03a). Solo en foto y recuerdos. **Nunca se dice que siguiera al Apolo 11** (A3) | �?" | 1.3, S6 |
+| PER-05 | **Lidia** | Kiosco de jugos de la Plaza de las Iguanas; la voz del barrio | Ancla de humor; sube jugos al Mirador en 4.2 | 1.4, S2, 4.2 |
+| PER-06 | **Sam** | Compa��ero de carrera con un puesto de piezas en el Mercado; piensa dejar los estudios para trabajar | Su duda refleja la de ella. En 4.2 sube con el codificador nuevo y decide terminar el semestre | 1.5, S7, 4.2 |
+| PER-07 | **Dra. Vega** | Ingeniera ecuatoriana de un centro espacial internacional **ficticio**; aparece en el video de la convocatoria. Su regla, ��un parǭmetro a la vez��, es la del juego | Modelo a seguir; en 4.3 llama para anunciar la siguiente ronda | 1.2, 4.3 |
+| PER-08 | **Ari** | Colegiala del club de observaci��n del Mirador. Le recuerda que Ecuador ya lleg�� a la Luna y abre el atajo | Recibe el turno del telescopio en 4.3: el relevo | 2.4, S1, S3, 4.2, 4.3 |
+| PER-09 | **�"rbita** | Gato cient��fico y compa��ero | Ver abajo | Todas |
+
+### 6.1 �"rbita, cinco funciones
+
+| Funci��n | C��mo se juega |
+|---|---|
+| Gu��a de datos | Da las fichas con fuente y hora, como ya hace en la prueba del telescopio |
+| Pistas en 3 niveles | Una mirada, luego una frase, luego la respuesta. Nunca dice ��incorrecto��: explica la causa |
+| Se��al de interacci��n | Su chapa cian brilla cerca de lo que se puede tocar: la ǧnica pista visual (pilar ��el cian es tecnolog��a��). Huele recolectables a menos de 8 m |
+| Se cuela | Entra por huecos y trae piezas (COL) o abre un pestillo |
+| Compa����a | En la duda (2.4) se le sube al regazo. No discute: se queda |
+
+- **Despierta la protagonista:** las frases de �"rbita salen en el globo del cuaderno; la familia solo oye maullidos (chiste recurrente).
+- **En el sue��o:** casco de burbuja, traje peque��o original sin insignias y voz por la radio del casco. Es la primera vez que ella lo oye hablar en voz alta.
+
+---
+
+## 7. Misiones
+
+### 7.1 Principales
+
+| ID | Misi��n | Escenas | Recompensa |
+|---|---|---|---|
+| M1 | La convocatoria | 1.1�?"1.2 | Seguidor v1 y pǭgina ��Realimentaci��n�� |
+| M2 | Piezas del cerro | 1.3�?"1.5 | Libreta, codificador y ficha ��Pegaso�� |
+| M3 | Rastrear como en el Cotopaxi | 2.1 | Antena operativa y pǭgina ��Ganancia�� |
+| M4 | La Luna de esta noche | 2.2�?"2.3 | Pǭgina ��Luna sonriente�� (fase 1 de S1), ficha ��Luz cenicienta�� y la toma temblorosa |
+| M5 | Ecuador ya dej�� un mensaje | 2.4�?"2.5 | L��nea de tiempo, parǭfrasis del mensaje ecuatoriano y atajo de los faroles |
+| M6 | Seis veces mǭs ligera | 3.1 | Salto lunar y ficha ��Masa y peso�� |
+| M7 | Muestras con registro | 3.2�?"3.3 | 4 muestras registradas y pǭgina ��Regolito�� |
+| M8 | Mirar sin borrar | 3.4 | Foto con el Apolo y ficha ��Etapa de descenso�� |
+| M9 | Dos banderas, un cielo | 3.5 | Foto al amanecer y pǭgina ��Cooperaci��n�� |
+| M10 | Volver como el m��dulo de mando | 3.6 | Comparaci��n con los 382 kg y ��So��ar otra vez�� |
+| M11 | Una referencia fija | 4.1 | Seguidor v2 |
+| M12 | La Luna de todos | 4.2�?"4.3 | Video enviado, fase 2 de S1 y gancho del cap��tulo 2 |
+
+**Seis sistemas para todo el juego** (B): circuito y mult��metro (1.5, S2, S4) �� control y grǭfica (1.2, 2.1, 4.1, 3.6) �� telescopio (2.2, 2.3, 4.2, S1) �� ordenar tarjetas (2.4, 3.6) �� cǭmara y registro (3.3, 3.4, S3, S8, S9) �� herramientas y bolsas (3.2, S8).
+
+### 7.2 Secundarias
+
+**Lote 1, con la ruta principal (23 min)**
+
+| ID | Misi��n | D��nde | Se abre | QuǸ se aprende | Verificaci��n | Min | Recompensa |
+|---|---|---|---|---|---|---:|---|
+| S1 | Bitǭcora lunar | 2 | 2.2 | 3 fases: noche 1 (12,2 %), noche 2 (19,0 %) y la fecha real del jugador despuǸs del final | Hz | 6 | Carta estelar COL-12 |
+| S3 | Mirar sin espantar | E, S | 1.4 | Fotografiar 6 especies (FAU) para el club de Ari; si el animal huye, la ficha no cuenta. La misma regla que en la Luna | �?" | 6 | Pegatinas; los animales se asoman a la ventana por la ma��ana |
+| S4 | Chatarra ǧtil | E, S | 1.4 | Bater��a (COL-07) y panel (COL-02): energ��a para no depender de la red | �?" | 5 | 4.1 mǭs fǭcil: el seguidor resiste los cortes |
+| S8 | Otro tiempo, otras herramientas | 3 | Al volver a so��ar | Rastrillo, tubos de 4 cm, gnomon y protocolo de 3 fotos antes y 1 despuǸs: equipo y mǸtodo de los Apolo 15 a 17, no de 1969 | L2�?"L4, 03b | 6 | 2 muestras mǭs y ficha ��Herramientas por misi��n�� |
+
+**Lote 2, despuǸs (28 min)**
+
+| ID | Misi��n | D��nde | QuǸ se aprende | Verificaci��n | Min | Recompensa |
+|---|---|---|---|---|---:|---|
+| S2 | La radio de Lidia | E | Reparar una radio (COL-04): continuidad con el mult��metro | �?" | 5 | La radio suena en el kiosco (cambio persistente) |
+| S5 | La escalinata del tiempo | E | 9 placas pintadas en los escalones, con los mismos hitos de 2.4 y detalles: llamas junto a la antena (1973), 578 160 horas de apoyo en 22 a��os, personal de 50 a 220, despedida del STS-2 a las 07:04 | 03a | 6 | P��ster de la l��nea de tiempo en la Habitaci��n |
+| S6 | La foto del abuelo | 1b | 3 recuerdos (credencial sin logotipos, carta y foto). La estaci��n pas�� a Ecuador el 01-07-1982. Ficci��n declarada; nunca el Apolo 11 | A1 **corr.**, 03a | 5 | Escena con los padres; la foto se cuelga en el cuarto |
+| S7 | Pegaso, la historia completa | E | Anomal��a del 23-05-2013 tras acercarse a un cuerpo de cohete de 1985; NASA no confirm�� un choque; contacto recuperado el 25-01-2014; ��rbita de 627 �- 654 km. Ense��a a no convertir una hip��tesis en certeza | E5, 03a | 4 | Pǭgina de Sam; chapa del satǸlite para el collar de �"rbita, sin logotipos |
+| S9 | Postales de la Tierra | 3 ��' E | Fotografiar la Tierra en distintos sue��os: fases opuestas a las de la Luna | L9, 03b | 4 | Postales en las puertas de los vecinos (cambio persistente) |
+| S10 | Noche lunar | 3 | 5 puntos de interǸs: unos �^'173 ��C en la oscuridad y +127 ��C a pleno Sol; crǭteres y regolito; la Tierra que no se pone | L7�?"L9, 03b | 4 | Pǭgina ��Noche lunar�� |
+
+**Total de secundarias: 51 min. Con todo: 145 min.**
+
+### 7.3 Mundo vivo acotado (F2-13)
+
+- **Rutinas por hito** de 4 vecinos: Elena, Rafael, Lidia y Sam. El resto, quietos o de paso.
+- **Fauna por hito:** 6 especies del catǭlogo FAU (iguanas y periquitos de tarde; garzas al anochecer; cangrejos y gato callejero de noche).
+- **El barrio recuerda, 6 cambios:** la radio de Lidia suena; la antena del sendero sigue apuntando; la guirnalda del Mirador queda encendida; la l��nea de tiempo cuelga en el cuarto; las banderas siguen en cada sue��o; las postales de la Tierra aparecen en las puertas.
+- **Movimiento sutil:** ropa tendida, cables que se mecen, hojas del flamboyǭn, ondas del arroyo y polvo lunar que cae despacio.
+
+---
+
+## 8. Datos: quǸ se usa y con quǸ verificaci��n (F2-15)
+
+### 8.1 Confirmados y usados
+
+| C��digo | Dato usado | Verificaci��n |
+|---|---|---|
+| A1 | Estaci��n Quito al pie del Cotopaxi, 3 650 m; oper�� de 1957 a 1981 y pas�� a Ecuador el 01-07-1982; antenas de 12 m | 03a, **corr.** |
+| A2 | Apolo-Soyuz en 1975; despedida del STS-2 el 14-11-1981 a las 07:04 a 75 empleados | 03a |
+| A4 | Disco de buena voluntad: 73 pa��ses, mensajes reducidos 200 veces, del tama��o de una moneda de 50 centavos; mensaje de Velasco Ibarra (parǭfrasis fiel) | 03a |
+| E1 | Acuerdos Artemisa: Ecuador, n.�� 26, el 21-06-2023 | 03a |
+| E2�?"E4 | EXA, ONG de 2007; Pegaso: cubo de 10 cm, paneles de 27 cm, 25-04-2013 (segǧn el equipo); iniciado en 2010 | 03a, E4 **corr.** |
+| E5 | Anomal��a de 2013 sin colisi��n confirmada; contacto el 25-01-2014 | 03a |
+| E6 | Observatorio Astron��mico de Quito, 1873 | 03a |
+| E7 | Chimborazo: unos 6 384,4 km del centro; 2,1 km mǭs que el Everest | 03a, **corr.** (IGM-ESPE 2019) |
+| Nader 2011 | Meta dicha de poner la bandera ecuatoriana en la Luna | 03a, *Sobrevuelo* p. 25 |
+| L1�?"L13 | Herramientas, gravedad, temperaturas, regolito, Tierra en el cielo, banderas, etapa de descenso, regreso y masas | 03b (L4 y L5 **corr.**) |
+| R1�?"R4 | Art. II; propiedad (arts. VIII y IX); 75 m; 2 km | 03b |
+| R6�?"R7 | Sin insignias; sin ��NASA�� en el t��tulo comercial | 03b (R7 **corr.**, mǭs estricto) |
+| R8 | Bandera, escudo e himno: s��mbolos patrios (Constituci��n, art. 2) | 03a |
+| Hz | Luna del 12-11 (12,2 %, 403 151 km, 192,6��, puesta 21:07) y del 13-11 (19,0 %, 31,0��, 402 285 km a las 19:30) | Medido con `luna_efemerides.py` |
+
+### 8.2 Cǭlculos propios (comprobar con Horizons antes del diǭlogo final)
+
+| Cǭlculo | Valor | Con quǸ |
+|---|---|---|
+| Giro aparente del cielo | Unos 15�� por hora | 360�� / 24 h |
+| La Luna recorre su diǭmetro | Unos 2 min | 29,6�?� a unos 14,5�� por hora |
+| Polo sur celeste desde el Mirador | Unos 2,2�� sobre el horizonte | Latitud del script, 2,18�� S |
+| Tranquilidad de noche el 12-11 a las 19:30 | Sol unos 25�� bajo el horizonte | `mooninfo_2026.json` |
+| Tierra vista desde Tranquilidad | Cerca del 87 %, a unos 66�� (entre 59�� y 73�� en el mes) | `mooninfo_2026.json` |
+| Amanecer real en Tranquilidad | Unas 50 h despuǸs (15-11-2026, 02:00 UT) | `mooninfo_2026.json` |
+
+### 8.3 Pendientes de verificar (no entran al diǭlogo final)
+
+| Dato | D��nde | QuǸ hacer |
+|---|---|---|
+| Que el disco quedara en el sitio del Apolo 11 | 3.4 | Fuente primaria (informe de misi��n) |
+| Coordenadas del sitio del Apolo 11 | 4.2 | Fuente primaria de NASA |
+| Hora exacta de la puesta del 13-11 con refracci��n | 4.2 | `luna_parametros.py` sobre la consulta de hoy |
+| Profundidad del mǭstil en el Apolo 11 | 3.5 | ALSJ o informe de misi��n |
+| Bandera de Ecuador: proporci��n y escudo en la norma oficial; uso en una obra | 3.5 | Original del instructivo y la Resoluci��n 24-047; abogado |
+| Nombre ��Columbia�� del m��dulo de mando | �?" | Por eso ninguna misi��n lleva ese nombre |
+| Planetario de la Armada, 24-07-1984 (E8) | Fuera de la ruta | Fuente de INOCAR; podr��a volver como objeto opcional |
+| ��Ventana Lunar�� no coincide con un programa real | Toda la historia | Bǧsqueda antes de fijar el nombre |
+| Licencia y crǸdito de una textura de la Tierra de NASA | 3.4, S9 | Gu��a de imǭgenes de NASA; la descarga necesita el permiso de Guillermo |
+| Cortes de luz como contexto del pa��s | 2.3 | Solo ambiente; ninguna cifra sin fuente |
+
+### 8.4 No se usan, por falta de fuente
+
+- Que la estaci��n Quito rastreara el Apolo 11 (A3).
+- El paradero de las rocas lunares regaladas a Ecuador, ni que se perdieran (A5, A6).
+- El cohete de Pegaso (LM-2D) y la fecha en UTC.
+- Los 6 384 415,98 m del Chimborazo.
+- Los 444 escalones del cerro Santa Ana y las mareas del Guayas sin la tabla de INOCAR.
+
+---
+
+## 9. Lo que esta historia le pide a la auditor��a
+
+La auditor��a de pantallas de carga, menǧs, botones, jugabilidad, escenarios, caminos y texturas estǭ en [[Plan de auditoria]]. Este documento responde su bloqueo **B3** (propuesta narrativa), propone **B4** (frase ambigua, sigue abierta) y **B8** (corte vertical). Lista de comprobaci��n narrativa, en el orden pedido:
+
+| Orden | Escenario | Escenas | QuǸ debe auditarse por la historia |
+|---|---|---|---|
+| 0 | Transversal | P.0, todas | Menǧ con la cǭmara que baja de la Luna a la ventana; cuaderno con sellos y mapa; ��Despertar�� y ��So��ar otra vez��; pantallas de carga con dato y fuente; botones del tema ��cuaderno��; diǭlogos de 2 renglones; guardado de banderas, placas y cambios del barrio |
+| 1 | Habitaci��n | 1.1, 1.2, 2.5, 3.6, 4.1, 4.3 | 5 interactuables; rompecabezas del seguidor con grǭfica; cama con borde cian; transici��n sin pantalla negra; luz de ma��ana y de noche |
+| 1b�?"E�?"S | Casa, barrio y sendero | 1.3�?"1.5, 2.1, 2.5, 4.2 | Puerta con motivo (la libreta); bloqueo del sendero con motivo (��con tanto sol�?ݶ�); atajo de los faroles; antena COL-01 jugable; 3 estados de luz; rutinas de 4 vecinos |
+| 2 | Mirador y telescopio | 2.2�?"2.4, 4.2 | Entrada al ocular desde el mundo; montura, enfoque y marcas; apag��n y 2 perillas; atril con 9 diapositivas; Luna del 12-11 y del 13-11 |
+| 3 | Luna | 3.1�?"3.6 | Caminar a 1,624 m/s��; 3 herramientas del Apolo 11; anillo de 75 m que no castiga; banderas iguales y fijas; reentrada con margen de ǭngulo; paleta lunar propia (no existe aǧn en la biblia) |
+| Caminos | Todo el mapa | �?" | Se llega a pie de cada nodo al siguiente; minutos de recorrido coherentes con la tabla 3.2 |
+
+---
+
+## 10. Corte vertical (F2-14)
+
+Unos **50 min**, para validar el tono y el ritmo antes de producir todo:
+
+| Escenas | Min |
+|---|---:|
+| 1.1 y 1.2 (Habitaci��n y seguidor) | 10 |
+| 2.2 y 2.3 (telescopio y apag��n), con un solo tramo del sendero | 12 |
+| Cama y transici��n | 1 |
+| 3.1 a 3.5 (del alunizaje a las banderas) | 27 |
+| **Total** | **50** |
+
+DespuǸs: el barrio, la antena, el acto IV y las secundarias del lote 1.
+
+---
+
+## 11. QuǸ se reutiliza y quǸ es nuevo
+
+### 11.1 Se reutiliza
+
+| Recurso | Estado | Uso |
+|---|---|---|
+| [[Escena de exploracion v1]]: terreno, arroyo, puente, flamboyǭn, hierba, iguana y antena COL-01 | Prueba; espera veredicto | Tramo S de d��a y de noche; antena de 2.1 |
+| Protagonista de Tripo con niveles de 1 500 y 3 000 triǭngulos | Hecha | Todas las escenas |
+| �"rbita con rig, `reposo` y `caminar` | Verificada en Godot | Todas; faltan saltar y sentarse |
+| Telescopio con la Luna real (shader, LRO, Horizons, `luna_medir.py`) | Probado; falta el ǭngulo paralǭctico en cada instante | 2.2, 2.3, 4.2 y S1 |
+| `luna_efemerides.py`, `luna_parametros.py` y `mooninfo_2026.json` | Funcionan | Noches 1 y 2, cǭlculos del sue��o y S1 |
+| Catǭlogo: TAL, MIR, COL, URB, ARQ, TER, VEG, FAU y PER | Concepto v1, espera veredicto | Habitaci��n, barrio y Mirador |
+| Mapa de la regi��n del lote 02 (`ANC_MAPA`) | Maqueta | Nodos, mapa del cuaderno y viaje rǭpido |
+| Guion anterior: libreta de Elena, regla de la Dra. Vega, kiosco de Lidia, cierre con Ari, vi��eta 02 al revǸs | Propuesta | Adaptados al nuevo arco ([[02_historia_existente]]) |
+| Ideas de misi��n 5 a 10 de [[01_datos_espaciales_ecuador]] | Propuesta de Codex | Base del acto III, con las correcciones de 03b |
+| L��gica de `main.gd` y `player.gd` de la b��veda anterior | Estilo descartado | Menǧs y controlador (ver [[Plan de auditoria]]) |
+
+### 11.2 Es nuevo
+
+| Recurso | C��mo se har��a | CrǸditos |
+|---|---|---:|
+| Habitaci��n-taller y casa (diorama `ANC_HUB`) | Script con piezas TAL y ARQ | 0 |
+| Las Escalinatas, Plaza de las Iguanas y Mercado | Script con URB y ARQ | 0 |
+| Mirador del Faro en 3D | Script con MIR | 0 |
+| Luna del sue��o: regolito low-poly pintado, crǭteres y rocas | Script (heightmap y MultiMesh) | 0 |
+| Etapa de descenso (recreaci��n sin insignias ni texto legible), herramientas, bolsas y caja de cart��n | Script con fotos pǧblicas de referencia | 0 |
+| 2 conjuntos de bandera con barra horizontal | Malla fija con pliegues modelados | 0 |
+| Hoja de referencia y paleta de la Luna del sue��o | Lote de imagen nuevo | Partida por aprobar |
+| Traje de la protagonista y casco de �"rbita | Script sobre su malla, o Tripo H3.1 | 0 por script; unos 9 por malla con Tripo (partida por aprobar) |
+| PER-03 a PER-08 en 3D | Tripo multivista desde hojas nuevas | Unos 54 (6 �- 9), partida por aprobar |
+| Tierra en el cielo lunar con fase | El shader de la Luna con textura terrestre de NASA | 0; la descarga necesita permiso |
+| Mecǭnicas: control, seguimiento manual, tarjetas, registro, herramientas, banderas, reentrada | GDScript, en 6 sistemas | 0 |
+| Unas 310 l��neas de ruta principal, mǭs unas 150 de secundarias | Guion | 0 |
+
+---
+
+## 12. Riesgos para el portǭtil m��nimo (Intel HD 620)
+
+| Riesgo | Cifra de referencia | C��mo se reduce | C��mo se controla |
+|---|---|---|---|
+| Exteriores pesados | El sendero da 48,3 fps a 720p con 307 000 triǭngulos, frente a un presupuesto de 100 000 ([[Plan de auditoria]] ��3.3) | MultiMesh para mechones y flores; niveles de detalle; hierba solo en sendero y jardines; suelo pintado en el barrio | `--medir=6` a 720p y 1080p; meta segǧn B2 (30 o 60 fps) |
+| Mundo abierto continuo | 8 GB de RAM; Mobile | Nodos con 3 umbrales y el ocular; solo la zona actual y la vecina en memoria | Tiempo de carga �%� 3 s medido en el portǭtil |
+| Luz de ma��ana, tarde y noche | Un ciclo dinǭmico cuesta luz y sombras | 3 estados horneados; lightmap solo tras probar el horneado | Captura de cada estado con la cǭmara real |
+| Barrio de noche con muchas luces | Mobile limita las luces por objeto | Faroles y guirnaldas con emisi��n y luz pintada en los vǸrtices; pocas luces reales | Contar luces y llamadas de dibujo |
+| 7 personajes en 4.2 | Personajes de 1 500 triǭngulos | Mǭximo 6 esqueletos animados; el resto quieto; animaciones simples (reposo, hablar, se��alar) | Llamadas de dibujo y p95 |
+| Terreno lunar abierto | Unos 600 �- 450 m | Heightmap de 512 �- 512 con niveles de detalle, rocas en MultiMesh, sin hierba; 1 luz direccional | Es la zona mǭs barata; medir igual |
+| Polvo lunar | Las part��culas en GPU rinden poco en la HD 620 | Part��culas en CPU, como mǭximo 64 por salto | Perfil de GPU |
+| Compilaci��n de shaders | Forward+ tard�� mǭs de 90 s en el primer arranque | Mobile y precompilaci��n en la carga inicial | p95 del primer minuto en cada zona |
+| Telescopio | 0,74 ms de GPU; 2,2 a 2,5 ms con la Luna a pantalla completa | Sin cambios | Ya medido |
+| Duraci��n < 60 min | Estimaci��n de dise��o | Prueba cronometrada; alargar el sue��o si falta | Mediana �%� 70 min |
+| Alcance de producci��n | 94 min, 22 escenas, 10 secundarias | Corte vertical de 50 min; secundarias en 2 lotes; 6 sistemas reutilizables | Veredicto de Guillermo por puerta |
+| Datos y s��mbolos | Juego educativo; banderas; sitio hist��rico | F2-15; reglas de F2-06 y F2-07; abogado antes de publicar | Revisi��n del guion contra R1�?"R8 |
+
+---
+
+## 13. Preguntas para Guillermo
+
+1. **La frase del Apolo:** ��quǸ quisiste decir con ��siendo vista con el Apolo que lleg�� a la Tierra��? ��A, B, C, D, una mezcla u otra cosa? (4.5; la recomendaci��n es A + B + C).
+2. **Protagonista:** ��fija o con creador de personaje? ��QuǸ nombre lleva? De eso depende PER-02.
+3. **Bandera de Ecuador:** ��con escudo (recomendado, para no confundirla con la de Colombia) o tricolor?
+4. **Duraci��n:** ��apruebas 94 min de ruta principal, o prefieres acercarte a 75 y ganar tiempo de producci��n?
+5. **Sitio del sue��o:** ��Apolo 11 (recomendado, por el mensaje de Ecuador) o Apolo 17, donde el rastrillo s�� es hist��rico?
+6. **El abuelo de la estaci��n del Cotopaxi** como ficci��n declarada: ��te gusta?
+7. **�"rbita:** ��habla por el cuaderno despierta la protagonista y en voz alta solo en el sue��o?
+8. **Corte vertical:** ��aprobar primero los 50 min, de la Habitaci��n al telescopio y al sue��o?
+9. **Nombres:** ����Ventana Lunar�� para la convocatoria? ��QuǸ nombre para el centro espacial ficticio y para el t��tulo comercial sin ��NASA��?
+
+---
+
+## 14. Fuentes
+
+- Propuestas: [[Propuesta_A]], [[Propuesta_B]] y [[Propuesta_C]].
+- Verificaciones: [[03a_verificacion_ecuador]] y [[03b_verificacion_apolo]].
+- Investigaci��n de Codex: [[01_datos_espaciales_ecuador]] y [[02_historia_existente]].
+- Proyecto: [[Memory]], [[Biblia de arte]], [[Catalogo de recursos]], [[Escena de exploracion v1]], [[Mirador del Faro - Luna con datos reales]], [[Fase 0 - Analisis]] y [[Plan de auditoria]].
+- Consulta nueva de hoy: JPL Horizons para el Mirador, 13-11-2026 de 18:00 a 23:00 cada 10 min, con `herramientas/luna_efemerides.py --inicio "2026-11-13 23:00" --fin "2026-11-14 04:00" --paso "10 m"`. La respuesta qued�� fuera de la b��veda; para guardarla en `Propuestas/Datos/`, repetir el comando sin `--salida`.
+- Cǭlculos del sue��o: `externos/nasa_svs_5587_tabla/mooninfo_2026.json` (NASA SVS 5587), puntos subsolar y subterrestre hora por hora.
+
+web search: 
+web search: "24-047" "2003" símbolos ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "rg -n 'F2-02|19,0|31,0|21:50|salida' 'Nasa_Game/Fase_2_Narrativa/Fase 2 - Analisis.md'; rg --files -g AGENTS.md -g '*verific*' -g '*TAREA*'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 3405ms:
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 1
++ rg -n 'F2-02|19,0|31,0|21:50|salida' 'Nasa_Game/Fase_2_Narrativa/Fase ...
++ ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 89
++ ... salida' 'Nasa_Game/Fase_2_Narrativa/Fase 2 - Analisis.md'; rg --files ...
++                                                                ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+codex
+Localicé la transcripción de NASA y la ficha original de la resolución 24-047 en la Asamblea. Falta leer su texto completo y comprobar la vigencia de las reglas ecuatorianas. Para Horizons usaré las 00:30 UTC del 14-11-2026, equivalentes a las 19:30 de Guayaquil del día 13.
+web search: 
+web search: site.gob.ec "bandera" "2.20" "1.47" ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Select-String -LiteralPath 'Nasa_Game/Fase_2_Narrativa/Fase 2 - Analisis.md' -Pattern 'F2-02','19,0','31,0','21:50' -Context 1,3; Get-ChildItem -Filter AGENTS.md; "'$p = @{format='"'text';COMMAND=\"'301'\";EPHEM_TYPE=\"'OBSERVER'\";CENTER=\"'coord@399'\";COORD_TYPE=\"'GEODETIC'\";SITE_COORD=\"'-79.8891,-2.1894,0'\";START_TIME=\"'2026-11-14 00:30'\";STOP_TIME=\"'2026-11-14 03:30'\";STEP_SIZE=\"'1 m'\";QUANTITIES=\"'4,10'\"}; (Invoke-WebRequest -UseBasicParsing -Uri 'https://ssd.jpl.nasa.gov/api/horizons.api' -Body "'$p).Content' in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 1722ms:
+
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:41:| **F2-01** | **Base narrativa: A �Luz cenicienta�**, con 
+injertos de B y C. Arco con causa y efecto: el seguidor oscila  apag�n y toma temblorosa  duda  sue�o  arreglo con 
+prealimentaci�n y realimentaci�n  la Luna compartida. | Puntajes de los jueces: A 8,15 � B 7,95 � C 7,55 | 1, 2 |
+> Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:42:| **F2-02** | **Calendario fijo:** d�a 1 y noche 1 el 12-11-2026, 
+sue�o, d�a 2 y noche 2 el 13-11-2026, con la Luna real de esas noches (Horizons). La Luna de la fecha real del jugador 
+se abre despu�s del final. | A y B; datos del [[Mirador del Faro - Luna con datos reales]] y consulta de hoy | 2, 4 |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:43:| **F2-03** | **Duraci�n:** ruta principal de 94 min de dise�o. 
+Prueba cronometrada con 3 a 5 personas; si la mediana baja de 70 min, se alarga el sue�o (secundarias S8 y S10 a la 
+ruta), no el di�logo. | M�todo de A; margen de B | 3.2 |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:44:| **F2-04** | **El sue�o ocurre en el sitio del Apolo 11** (Mar 
+de la Tranquilidad) con su equipo real: cuchar�n de caja, pinzas peque�as y tubos de 2 cm. El rastrillo, los tubos de 
+4 cm y el protocolo de 3 fotos antes y 1 despu�s van en la secundaria S8, declarados como �de otro tiempo� (Apolo 15 a 
+17). | 03b, L1-L4; jueces | 4 |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:45:| **F2-05** | **Luz del sue�o:** se llega de noche, bajo la 
+Tierra casi llena (la misma luz cenicienta vista por el telescopio), y amanece con licencia de sue�o en la ceremonia 
+de las banderas. �rbita aclara que de verdad faltar�an unos 2 d�as. | A; opci�n B de C; c�lculo propio con 
+`mooninfo_2026.json` | 4.2 |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:173:| 4.1 | El arreglo | 1 | Que el seguidor funcione solo | 
+Rompecabezas final: darle al motor la velocidad conocida del cielo (prealimentaci�n) y dejar que el control corrija 
+solo el error; bater�a contra los cortes (m�s f�cil con S4) | Prealimentaci�n m�s realimentaci�n: el control solo 
+corrige lo que la referencia no predice | Concepto de la carrera; 15� por hora, c�lculo propio | 5 |
+> Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:174:| 4.2 | La Luna de todos | E  S  2 | Grabar y enviar los 60 s 
+| Todos suben al Mirador: Rafael con la bater�a, Sam con el codificador, Lidia con jugos; Elena y Rafael miran por 
+primera vez; elegir la mejor toma | Noche 2 a las 19:30: 19,0 % iluminada, a 31,0� de altura y 402 285 km. Se pone 
+hacia las 21:50-22:00 | Hz, consulta del 12-11-2026; hora exacta de la puesta pv (falta la refracci�n) | 5 |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:175:| 4.3 | La primera p�gina | 2  1 | Cerrar el cap�tulo | Elegir 
+qu� observaci�n va en la primera p�gina; Ari recibe el turno del telescopio; llamada de la Dra. Vega; gancho del 
+cap�tulo 2 | Ma�ana, 14-11-2026, se cumplen 45 a�os de la despedida del STS-2 a los 75 empleados de la estaci�n Quito 
+(07:04, hora local) | A2, 03a | 3 |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:176:| | **Total de la ruta principal** | | | | | | **94** |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:177:
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:235:| Por qu� ah� | Es donde viaj� el mensaje de Ecuador (A4) y el 
+�Apolo� que todos conocen | A4: confirmado |
+> Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:236:| Momento | La misma noche del 12-11-2026 | F2-02 |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:237:| Luz al llegar | **De noche.** A las 19:30 de Guayaquil (00:30 
+UT del 13-11), el Sol est� unos 25� bajo el horizonte de Tranquilidad | c�lculo propio con SVS |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:238:| La Tierra en el cielo | Casi llena, cerca del **87 %** (fases 
+opuestas: complemento del 12,6 % de la Luna). A unos **66� de altura**; durante el mes oscila entre 59� y 73� | L9 
+(03b) y c�lculo propio con SVS |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:239:| Amanecer real | Hacia el 15-11-2026 a las 02:00 UT (21:00 del 
+14-11 en Guayaquil): **unas 50 h** despu�s | c�lculo propio con SVS |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:435:|---|---|---|---|---|---|---:|---|
+> Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:436:| S1 | Bit�cora lunar | 2 | 2.2 | 3 fases: noche 1 (12,2 %), 
+noche 2 (19,0 %) y la fecha real del jugador despu�s del final | Hz | 6 | Carta estelar COL-12 |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:437:| S3 | Mirar sin espantar | E, S | 1.4 | Fotografiar 6 especies 
+(FAU) para el club de Ari; si el animal huye, la ficha no cuenta. La misma regla que en la Luna | - | 6 | Pegatinas; 
+los animales se asoman a la ventana por la ma�ana |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:438:| S4 | Chatarra �til | E, S | 1.4 | Bater�a (COL-07) y panel 
+(COL-02): energ�a para no depender de la red | - | 5 | 4.1 m�s f�cil: el seguidor resiste los cortes |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:439:| S8 | Otro tiempo, otras herramientas | 3 | Al volver a so�ar | 
+Rastrillo, tubos de 4 cm, gnomon y protocolo de 3 fotos antes y 1 despu�s: equipo y m�todo de los Apolo 15 a 17, no de 
+1969 | L2-L4, 03b | 6 | 2 muestras m�s y ficha �Herramientas por misi�n� |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:481:| R8 | Bandera, escudo e himno: s�mbolos patrios (Constituci�n, 
+art. 2) | 03a |
+> Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:482:| Hz | Luna del 12-11 (12,2 %, 403 151 km, 192,6�, puesta 21:07) 
+y del 13-11 (19,0 %, 31,0�, 402 285 km a las 19:30) | Medido con `luna_efemerides.py` |
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:483:
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:484:### 8.2 C�lculos propios (comprobar con Horizons antes del 
+di�logo final)
+  Nasa_Game\Fase_2_Narrativa\Fase 2 - Analisis.md:485:
+Invoke-WebRequest : No es posible conectar con el servidor remoto
+En l�nea: 2 Car�cter: 408
++ ... "'4,10'"}; (Invoke-WebRequest -UseBasicParsing -Uri 'https://ssd.jpl. ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebExc 
+   eption
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+ 
+
+
+
+web search: 
+web search: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=301&EPHEM_TYPE=OBSERVER&CENTER=coord%40399&COORD_TYPE=GEODETIC&SITE_COORD=%27-79.8891,-2.1894,0%27&START_TIME=%272026-11-14%27&STOP_TIME=%272026-11-15%27&STEP_SIZE=30m&QUANTITIES=%274,10%27
+mcp: node_repl/js started
+mcp: node_repl/js (failed)
+web search: 
+web search: 
+web search: 
+web search: site.gob.ec "bandera" "Art. 3" "escudo" "1900" ...
+web search: 
+web search: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=301
+codex
+El instructivo de Presidencia de 2009 indica una proporción de 3:2 (largo:alto) y bandera con escudo también para instituciones privadas. La distinción civil sin escudo aparece en el decreto de 1900; aún no puedo confirmar cómo se concilian hoy. Horizons está rechazando las consultas con parámetros: las cifras de F2-02 siguen sin verificar.
+mcp: codex_apps/search_service.web_run started
+mcp: codex_apps/search_service.web_run (completed)
+web search: 
+web search: 
+web search: 
+web search: https://ssd.jpl.nasa.gov/api/horizons.api?COMMAND=%27301%27&MAKE_EPHEM=NO
+web search: 
+web search: site.biblioteca.ucuenca.edu.ec "01beb7e24d02380470ab3dfe4ca56fbf1f4d5bc9" "Art. 3" ...
+codex
+**Consulta de todas las fuentes: 12-11-2026.** Verificación parcial: quedan pendientes la vigencia jurídica ecuatoriana y los resultados de Horizons. No guardé archivos: el entorno permite solo lectura.
+
+1. **Banderas**
+
+- **Ecuador:** el instructivo de Presidencia de noviembre de 2009 establece **3:2 (largo:alto)**, con medidas de **2,20 × 1,47 m**, y escudo en ambas caras. Incluye instituciones públicas y privadas. Documento primario conservado en [copia externa, §§1.1–1.2](https://www.fotw.info/misc/ec_2009.pdf). **Vigencia normativa actual: sin verificar.**
+- El decreto de **1900**, arts. **2, 3 y 6**, distingue el tricolor civil y mercante **sin escudo** del pabellón con escudo para edificios nacionales, buques de guerra, fortalezas y representación diplomática. [Texto del decreto reproducido en la Biblioteca de la Universidad de Cuenca](https://biblioteca.ucuenca.edu.ec/digital/files/original/01beb7e24d02380470ab3dfe4ca56fbf1f4d5bc9.pdf). **Su conciliación jurídica actual con el instructivo de 2009: sin verificar.**
+- **Resolución R-24-047:** publicada en el **R. O. 45, 21-03-2003**; el texto está fechado **25-02-2003**, no 13-03-2003. Declara oficial e intangible el diseño del escudo y obligatorio en documentos y actos públicos. **No contiene una prohibición específica de representarlo en videojuegos.** [Registro Oficial, p. 4, copia del documento primario](https://esilecstorage.s3.amazonaws.com/biblioteca_silec/REGOFORIGINAL/2003/4AEB3E0773AEBE73DA86E23431C0C30DA783ACC7.pdf).
+- La restricción a particulares del instructivo, §2.3, se refiere a **documentación y tarjetas**. Extenderla a obras sería una inferencia. **Ley de Símbolos Patrios vigente y régimen específico para obras: sin verificar.** [Instructivo](https://www.fotw.info/misc/ec_2009.pdf).
+- **Estados Unidos:** **4 U.S.C. §8** recomienda trato respetuoso, sin añadidos sobre la bandera ni uso publicitario; no establece una licencia específica para representarla en obras. El CRS explica que la mayoría de estas disposiciones son orientativas y carecen de mecanismos sancionadores. [Código oficial](https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title4-section8&num=0&edition=prelim), [CRS R45945](https://www.congress.gov/crs-product/R45945).
+
+2. **Disco del Apolo 11**
+
+Texto de Ecuador atribuido a **Jose Maria Velasco Ibarra, President**, en la transcripción inglesa de NASA:
+
+> “I express my sincere wishes for the success of the heroic young astronauts who, with sublime valor, will set foot on the Moon, dominating the laws of outer space and consecrating the grandeur of human understanding and goodwill. Best regards.”
+
+[NASA, comunicado 69-83F, 13-07-1969, p. 18](https://www.nasa.gov/wp-content/uploads/2024/05/apollo-11-goodwill-messages.pdf).
+
+El disco original quedó **en la superficie lunar**, en el sitio del Apolo 11, transportado en una cápsula de aluminio. **Posición exacta y estado actual: sin verificar.** [NASA, Memorial Items](https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11memorials.html).
+
+3. **Luna desde Guayaquil**
+
+**13-11-2026, 19:30 UTC−5 = 14-11-2026, 00:30 UTC.** Las consultas parametrizadas a Horizons fallaron por web y por conexión directa; no obtuve efemérides.
+
+| Magnitud | Documento F2-02 / escena 4.2 | Veredicto |
+|---|---:|---|
+| Fracción iluminada | 19,0 % | **Sin verificar** |
+| Altura | 31,0° | **Sin verificar** |
+| Azimut | No indicado | **Sin verificar** |
+| Puesta local | 21:50–22:00 | **Sin verificar** |
+
+La consulta reproducible debe usar **COMMAND=301**, **CENTER=coord@399**, **SITE_COORD=−79.8891,−2.1894,0** —altitud asumida: **0 km**— y cantidades **4 y 10**. La puesta exige declarar horizonte, refracción y criterio de limbo. **No corresponde aprobar ni corregir las cifras existentes todavía.** [API y parámetros oficiales de JPL](https://ssd-api.jpl.nasa.gov/doc/horizons.html), [manual de Horizons](https://ssd.jpl.nasa.gov/horizons/manual.html).
+tokens used
+102.843
+**Consulta de todas las fuentes: 12-11-2026.** Verificación parcial: quedan pendientes la vigencia jurídica ecuatoriana y los resultados de Horizons. No guardé archivos: el entorno permite solo lectura.
+
+1. **Banderas**
+
+- **Ecuador:** el instructivo de Presidencia de noviembre de 2009 establece **3:2 (largo:alto)**, con medidas de **2,20 × 1,47 m**, y escudo en ambas caras. Incluye instituciones públicas y privadas. Documento primario conservado en [copia externa, §§1.1–1.2](https://www.fotw.info/misc/ec_2009.pdf). **Vigencia normativa actual: sin verificar.**
+- El decreto de **1900**, arts. **2, 3 y 6**, distingue el tricolor civil y mercante **sin escudo** del pabellón con escudo para edificios nacionales, buques de guerra, fortalezas y representación diplomática. [Texto del decreto reproducido en la Biblioteca de la Universidad de Cuenca](https://biblioteca.ucuenca.edu.ec/digital/files/original/01beb7e24d02380470ab3dfe4ca56fbf1f4d5bc9.pdf). **Su conciliación jurídica actual con el instructivo de 2009: sin verificar.**
+- **Resolución R-24-047:** publicada en el **R. O. 45, 21-03-2003**; el texto está fechado **25-02-2003**, no 13-03-2003. Declara oficial e intangible el diseño del escudo y obligatorio en documentos y actos públicos. **No contiene una prohibición específica de representarlo en videojuegos.** [Registro Oficial, p. 4, copia del documento primario](https://esilecstorage.s3.amazonaws.com/biblioteca_silec/REGOFORIGINAL/2003/4AEB3E0773AEBE73DA86E23431C0C30DA783ACC7.pdf).
+- La restricción a particulares del instructivo, §2.3, se refiere a **documentación y tarjetas**. Extenderla a obras sería una inferencia. **Ley de Símbolos Patrios vigente y régimen específico para obras: sin verificar.** [Instructivo](https://www.fotw.info/misc/ec_2009.pdf).
+- **Estados Unidos:** **4 U.S.C. §8** recomienda trato respetuoso, sin añadidos sobre la bandera ni uso publicitario; no establece una licencia específica para representarla en obras. El CRS explica que la mayoría de estas disposiciones son orientativas y carecen de mecanismos sancionadores. [Código oficial](https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title4-section8&num=0&edition=prelim), [CRS R45945](https://www.congress.gov/crs-product/R45945).
+
+2. **Disco del Apolo 11**
+
+Texto de Ecuador atribuido a **Jose Maria Velasco Ibarra, President**, en la transcripción inglesa de NASA:
+
+> “I express my sincere wishes for the success of the heroic young astronauts who, with sublime valor, will set foot on the Moon, dominating the laws of outer space and consecrating the grandeur of human understanding and goodwill. Best regards.”
+
+[NASA, comunicado 69-83F, 13-07-1969, p. 18](https://www.nasa.gov/wp-content/uploads/2024/05/apollo-11-goodwill-messages.pdf).
+
+El disco original quedó **en la superficie lunar**, en el sitio del Apolo 11, transportado en una cápsula de aluminio. **Posición exacta y estado actual: sin verificar.** [NASA, Memorial Items](https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11memorials.html).
+
+3. **Luna desde Guayaquil**
+
+**13-11-2026, 19:30 UTC−5 = 14-11-2026, 00:30 UTC.** Las consultas parametrizadas a Horizons fallaron por web y por conexión directa; no obtuve efemérides.
+
+| Magnitud | Documento F2-02 / escena 4.2 | Veredicto |
+|---|---:|---|
+| Fracción iluminada | 19,0 % | **Sin verificar** |
+| Altura | 31,0° | **Sin verificar** |
+| Azimut | No indicado | **Sin verificar** |
+| Puesta local | 21:50–22:00 | **Sin verificar** |
+
+La consulta reproducible debe usar **COMMAND=301**, **CENTER=coord@399**, **SITE_COORD=−79.8891,−2.1894,0** —altitud asumida: **0 km**— y cantidades **4 y 10**. La puesta exige declarar horizonte, refracción y criterio de limbo. **No corresponde aprobar ni corregir las cifras existentes todavía.** [API y parámetros oficiales de JPL](https://ssd-api.jpl.nasa.gov/doc/horizons.html), [manual de Horizons](https://ssd.jpl.nasa.gov/horizons/manual.html).

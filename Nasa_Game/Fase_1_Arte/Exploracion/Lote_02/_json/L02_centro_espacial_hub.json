@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-11-12T17:23:25.528425Z",
+    "display_name": "GPT Image 2.6",
+    "id": "e8f453d7-fec9-4d0b-9761-ff9b00c934be",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172325_e8f453d7-fec9-4d0b-9761-ff9b00c934be_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "e691fce8-8a98-4054-95a7-acfee72f4652",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/e691fce8-8a98-4054-95a7-acfee72f4652_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Use the exact art style of the reference image. In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a mission training room inside a fictional space research center at night. Center: the same chibi engineering student from the reference (voluminous dark curly hair, khaki utility jacket, cargo pants, brown crossbody tool bag) stands at a mission console; the same small gray-and-cream cat with the glowing cyan collar tag sits on the console beside a cyan hologram of a satellite orbiting a planet. Rows of telemetry monitors with simple waveforms, a capsule simulator on a motion platform, mainframe server racks, a satellite engineering model hanging from the ceiling, a pressurized suit in a glass case, cable trays, and a large window showing a rocket on a distant launch pad under a starry sky. Layered depth with foreground equipment. Cool aseptic palette: deep blue, titanium gray and off-white, with gold accents and the cyan glow; soft cold key light and small warm gold practical lights. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded light with rim light, matte materials. No text, no logos, no interface.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172325_e8f453d7-fec9-4d0b-9761-ff9b00c934be.png",
+    "status": "completed"
+  }
+]

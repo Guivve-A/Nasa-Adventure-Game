@@ -1,0 +1,11 @@
+{
+ "_version": "v1 · 2026-11-12",
+ "_nota": "Bloques de texto fijos para los encargos de imagen. herramientas/hf_generar.py reemplaza {NOMBRE} por su texto. Un bloque aprobado no se edita: se crea uno nuevo (por ejemplo ESTILO_V2) y se anota en la Biblia de arte.",
+ "ESTILO": "Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+ "HOJA": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference.",
+ "ROTULOS": "Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks.",
+ "CAMARA_JUEGO": "seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height.",
+ "SIN_TEXTO": "No text, no logos, no interface.",
+ "PROTAGONISTA": "the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag",
+ "GATO": "the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag"
+}

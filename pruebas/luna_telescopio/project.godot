@@ -1,0 +1,20 @@
+; Prueba tecnica: la Luna real vista por el telescopio del Mirador del Faro.
+config_version=5
+
+[application]
+
+config/name="Luna del telescopio"
+run/main_scene="res://telescopio.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+
+renderer/rendering_method="mobile"

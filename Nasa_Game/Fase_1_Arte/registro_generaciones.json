@@ -1,0 +1,879 @@
+[
+ {
+  "lote": "L01a",
+  "fecha": "2026-11-12 02:44",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [],
+  "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: stylized low-poly 3D, crisp faceted geometry with flat-shaded planes, hand-painted gradient texture on each facet, cel-shaded light with a bright rim light, chunky simplified forms, clean silhouettes, matte materials, cohesive palette of cream, terracotta, tropical green, petrol blue and a cyan accent. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L01_A_lowpoly_hub_gpt26",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170403_a0d5e0f1-2587-407d-bf85-e4651f77fd1a.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png",
+  "job_id": "a0d5e0f1-2587-407d-bf85-e4651f77fd1a",
+  "detalle": null
+ },
+ {
+  "lote": "L01a",
+  "fecha": "2026-11-12 02:44",
+  "modelo": "nano_banana_pro",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k"
+  },
+  "referencias": [],
+  "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: stylized low-poly 3D, crisp faceted geometry with flat-shaded planes, hand-painted gradient texture on each facet, cel-shaded light with a bright rim light, chunky simplified forms, clean silhouettes, matte materials, cohesive palette of cream, terracotta, tropical green, petrol blue and a cyan accent. No text, no logos, no interface.",
+  "costo_cotizado": 2.0,
+  "veredicto": "pendiente",
+  "id": "L01_A_lowpoly_hub_nbpro",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170402_c7d53ab4-1094-4dfc-bce0-d208a7379891.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_nbpro.png",
+  "job_id": "c7d53ab4-1094-4dfc-bce0-d208a7379891",
+  "detalle": null
+ },
+ {
+  "lote": "L01a",
+  "fecha": "2026-11-12 02:44",
+  "modelo": "seedream_5_5",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k"
+  },
+  "referencias": [],
+  "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: stylized low-poly 3D, crisp faceted geometry with flat-shaded planes, hand-painted gradient texture on each facet, cel-shaded light with a bright rim light, chunky simplified forms, clean silhouettes, matte materials, cohesive palette of cream, terracotta, tropical green, petrol blue and a cyan accent. No text, no logos, no interface.",
+  "costo_cotizado": 3.5,
+  "veredicto": "pendiente",
+  "id": "L01_A_lowpoly_hub_seedream55",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170403_c318a1ef-a4a7-44f4-a7f7-32560dfa86ed.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_seedream55.png",
+  "job_id": "c318a1ef-a4a7-44f4-a7f7-32560dfa86ed",
+  "detalle": null
+ },
+ {
+  "lote": "L01b",
+  "fecha": "2026-11-12 02:49",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [],
+  "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: hand-painted gouache diorama in real-time 3D, soft rounded forms, visible opaque brush strokes on every surface, matte finish, painterly color variation on walls and fabric, sunlit surfaces with cool shadows, storybook warmth, palette of cream, terracotta, tropical green, petrol blue and a cyan accent. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L01_B_gouache_hub_gpt26",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170718_aee1680a-99cd-497c-b47e-3cb8d32b6ee9.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_B_gouache_hub_gpt26.png",
+  "job_id": "aee1680a-99cd-497c-b47e-3cb8d32b6ee9",
+  "detalle": null
+ },
+ {
+  "lote": "L01b",
+  "fecha": "2026-11-12 02:49",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [],
+  "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: handcrafted miniature tabletop model, characters like glazed painted ceramic figurines, props of satin anodized aluminum, painted wood and matte fabric, tiny specular glints, tilt-shift shallow depth of field like macro photography of a museum diorama, palette of ivory, coral, ochre, sage green and a cyan accent. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L01_C_maqueta_hub_gpt26",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170718_f5e9fca9-5ebe-4609-898b-e2e144fa289c.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_C_maqueta_hub_gpt26.png",
+  "job_id": "f5e9fca9-5ebe-4609-898b-e2e144fa289c",
+  "detalle": null
+ },
+ {
+  "lote": "L01b",
+  "fecha": "2026-11-12 02:49",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [],
+  "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: layered papercraft and ink, scenery built from cut textured paper layers with deckled edges and soft drop shadows, flat gouache fills, fine ink-line engineering sketches and star-chart diagrams as wall decoration, matte 3D characters with graphic silhouettes, palette of warm paper, clay red, dark ink teal, gray-green and a turquoise accent. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L01_D_atlas_papel_hub_gpt26",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170718_fdb1f3dd-1276-45ac-88c4-f1caf04f64f5.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_D_atlas_papel_hub_gpt26.png",
+  "job_id": "fdb1f3dd-1276-45ac-88c4-f1caf04f64f5",
+  "detalle": null
+ },
+ {
+  "lote": "L01b",
+  "fecha": "2026-11-12 02:49",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [],
+  "prompt": "In-game screenshot of a stylized 3D adventure RPG seen from a high three-quarter top-down gameplay camera, about 55 degrees. A small chibi engineering student with dark curly hair, utility jacket, cargo pants and a crossbody tool bag walks up a stair street with a small cat wearing a glowing cyan collar tag beside them; both are small in frame, about one tenth of the image height. Hillside neighborhood of colorful houses in Guayaquil, Ecuador, late afternoon: tin roofs, hanging power lines, laundry lines, potted tropical plants, a large ceibo tree, an iguana sunbathing on a wall, a street lamp, mosaic stairs, a glimpse of the wide river below. Long warm sunlight, cool teal shadows. Art style: stylized low-poly 3D, crisp faceted geometry with flat-shaded planes, hand-painted gradient texture on each facet, cel-shaded light with a bright rim light, chunky simplified forms, clean silhouettes, matte materials, cohesive palette of cream, terracotta, tropical green, petrol blue and a cyan accent. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L01_A_lowpoly_exploracion_gpt26",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170833_17fc1491-2f20-409b-972c-89c76893cfb8.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_exploracion_gpt26.png",
+  "job_id": "17fc1491-2f20-409b-972c-89c76893cfb8",
+  "detalle": null
+ },
+ {
+  "lote": "L02",
+  "fecha": "2026-11-12 03:03",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_exploracion_gpt26.png",
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+  ],
+  "prompt": "Use the exact art style of the reference images. In-game screenshot of a stylized 3D exploration RPG seen from a fixed high top-down three-quarter camera pitched steeply down about 60 degrees: no horizon and no sky, the ground fills the entire frame. In the center, small, about one eighth of the image height: a chibi engineering student with voluminous dark curly hair, khaki utility jacket, cargo pants and a brown crossbody tool bag walks along a winding dirt footpath, with a small gray-and-cream cat wearing a glowing cyan collar tag at their side. Setting: a grassy clearing of a tropical dry-forest park at the foot of a hill, late afternoon. Tufts of tall grass, wildflowers, mossy faceted boulders, the wide canopy of a ceibo tree, a green iguana basking on a rock, a small stream crossed by a plank bridge, the first steps of a mosaic stair in one corner. A rusty fallen satellite dish and an old solar panel lie half hidden in the grass, each with a faint cyan sparkle marking it as collectible. Long soft shadows, warm light, cool teal shade. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded light with rim light, matte materials. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L02_exploracion_camara_alta",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172211_68ce37d6-dfef-464e-9c2e-b7fc3d149945.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_exploracion_camara_alta.png",
+  "job_id": "68ce37d6-dfef-464e-9c2e-b7fc3d149945",
+  "detalle": null
+ },
+ {
+  "lote": "L02",
+  "fecha": "2026-11-12 03:03",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [],
+  "prompt": "Game interface mockup, full screen: the region map screen of an exploration RPG, designed as a page of an engineer's field notebook. Background: cream graph paper with a faint blue grid and small ink doodles of circuit symbols in the margins. Center-left: a hand-illustrated map with an irregular torn-edge outline, flat gouache fills and ink outlines, showing a medium-sized riverside district of a tropical port city seen from above: a hill crowned by a lighthouse, a stair neighborhood of colorful houses, a riverfront promenade with a Ferris wheel, a covered electronics market, a plaza with iguanas, a university campus beside a small lake, a patch of dry forest with a giant ceibo tree, a mangrove estuary with a boardwalk, and docks with cranes. Winding cream paths connect every zone; tiny icons mark collectible parts, wildlife and landmarks. Hand-lettered zone labels in Spanish: \"MIRADOR DEL FARO\", \"LAS ESCALINATAS\", \"MALECÓN\", \"MERCADO\", \"PLAZA DE LAS IGUANAS\", \"CAMPUS DEL LAGO\", \"BOSQUE SECO\", \"MANGLAR\", \"ASTILLERO\". A small red triangle marker labeled \"Tú\". Top left title \"Cerro del Faro\" beside a small lighthouse emblem. Top right filter tabs: \"Todo\", \"Componentes\", \"Fauna\", \"Hitos\". Right panel on torn paper with a compass rose and the heading \"Estás aquí\". Bottom legend row with small icons: \"Chatarra\", \"Componentes\", \"Muestras\", \"Fauna\", \"Hitos\". Palette of cream, terracotta, tropical green, petrol blue and cyan accents. Clean, legible, charming, no brand logos.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L02_mapa_region",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172200_4b7e046c-f67c-41b8-a6f1-0d588cb3c17b.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_mapa_region.png",
+  "job_id": "4b7e046c-f67c-41b8-a6f1-0d588cb3c17b",
+  "detalle": null
+ },
+ {
+  "lote": "L02",
+  "fecha": "2026-11-12 03:03",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_refs/ancla_protagonista.png",
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+  ],
+  "prompt": "Character model sheet of the chibi engineering student shown in the first reference image, keeping exactly the same design and the same art style: three heads tall, voluminous dark curly hair, warm brown skin, khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants gathered at the ankle, chunky navy-and-white sneakers, brown crossbody tool bag with pliers and a screwdriver, black wristwatch. Top row: four full-body turnaround views standing on the same baseline, evenly spaced: front view in a relaxed A-pose with the arms slightly away from the body, three-quarter front view, side profile, back view. Bottom row: four head close-ups with different expressions: neutral, happy, focused, surprised. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L02_protagonista_tipo1_hoja",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172207_3c76e16b-3452-4869-bf3a-4d0957258d95.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo1_hoja.png",
+  "job_id": "3c76e16b-3452-4869-bf3a-4d0957258d95",
+  "detalle": null
+ },
+ {
+  "lote": "L02",
+  "fecha": "2026-11-12 03:03",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_refs/ancla_protagonista.png",
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+  ],
+  "prompt": "Character model sheet for a second body type of the playable chibi engineering student, in exactly the same art style and wearing the same outfit as the character in the first reference image: khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants gathered at the ankle, chunky navy-and-white sneakers, brown crossbody tool bag with pliers and a screwdriver, black wristwatch. This version has a masculine build and short dark curly hair with faded sides, the same warm brown skin, three heads tall. Top row: four full-body turnaround views standing on the same baseline, evenly spaced: front view in a relaxed A-pose with the arms slightly away from the body, three-quarter front view, side profile, back view. Bottom row: four head close-ups with different expressions: neutral, happy, focused, surprised. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L02_protagonista_tipo2_hoja",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172315_ecce237a-0287-43e3-a890-de26c04e6e14.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_protagonista_tipo2_hoja.png",
+  "job_id": "ecce237a-0287-43e3-a890-de26c04e6e14",
+  "detalle": null
+ },
+ {
+  "lote": "L02",
+  "fecha": "2026-11-12 03:03",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_refs/ancla_gato.png",
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+  ],
+  "prompt": "Character model sheet of the companion cat shown in the first reference image, keeping exactly the same design and the same art style: a small gray-taupe cat with a cream face mask, cream chest and paws, pink inner ears, dark tail tip, big curious eyes, blue collar with a glowing cyan round tag, chibi proportions with a large head. Top row: four turnaround views standing on four legs on the same baseline, evenly spaced: front, three-quarter front, side profile, back. Bottom row: four poses: sitting and looking up, walking, alert with the tail raised and one paw pointing forward, curled up asleep. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L02_gato_orbita_hoja",
+  "estado": "error",
+  "url": null,
+  "archivo": null,
+  "job_id": null,
+  "detalle": "Error: Higgsfield API error (HTTP 520). failed to PUT media bytes to upload_url: 520"
+ },
+ {
+  "lote": "L02",
+  "fecha": "2026-11-12 03:03",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+  ],
+  "prompt": "Use the exact art style of the reference image. In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a mission training room inside a fictional space research center at night. Center: the same chibi engineering student from the reference (voluminous dark curly hair, khaki utility jacket, cargo pants, brown crossbody tool bag) stands at a mission console; the same small gray-and-cream cat with the glowing cyan collar tag sits on the console beside a cyan hologram of a satellite orbiting a planet. Rows of telemetry monitors with simple waveforms, a capsule simulator on a motion platform, mainframe server racks, a satellite engineering model hanging from the ceiling, a pressurized suit in a glass case, cable trays, and a large window showing a rocket on a distant launch pad under a starry sky. Layered depth with foreground equipment. Cool aseptic palette: deep blue, titanium gray and off-white, with gold accents and the cyan glow; soft cold key light and small warm gold practical lights. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded light with rim light, matte materials. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L02_centro_espacial_hub",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172325_e8f453d7-fec9-4d0b-9761-ff9b00c934be.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_centro_espacial_hub.png",
+  "job_id": "e8f453d7-fec9-4d0b-9761-ff9b00c934be",
+  "detalle": null
+ },
+ {
+  "lote": "L02",
+  "fecha": "2026-11-12 03:05",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_refs/ancla_gato.png",
+   "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+  ],
+  "prompt": "Character model sheet of the companion cat shown in the first reference image, keeping exactly the same design and the same art style: a small gray-taupe cat with a cream face mask, cream chest and paws, pink inner ears, dark tail tip, big curious eyes, blue collar with a glowing cyan round tag, chibi proportions with a large head. Top row: four turnaround views standing on four legs on the same baseline, evenly spaced: front, three-quarter front, side profile, back. Bottom row: four poses: sitting and looking up, walking, alert with the tail raised and one paw pointing forward, curled up asleep. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L02_gato_orbita_hoja",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172506_15736a92-c2aa-42f1-87b5-355f5851ad42.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/L02_gato_orbita_hoja.png",
+  "job_id": "15736a92-c2aa-42f1-87b5-355f5851ad42",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_HUB",
+   "@ANC_VISTA_JUEGO"
+  ],
+  "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Vegetación · v1\". Fourteen plants of a tropical port city and its dry forest. Top row, the trees: \"VEG-01 Ceibo\" a large ceiba tree with a swollen bottle-shaped gray-green trunk, buttress roots, a wide flat crown and a few white cotton pods; \"VEG-02 Flamboyán\" a broad umbrella-shaped tree covered in red-orange flowers; \"VEG-03 Guayacán\" a slender leafless tree in full bloom with bright yellow flowers; \"VEG-04 Cocotero\" a leaning coconut palm with a cluster of coconuts; \"VEG-05 Mangle rojo\" a red mangrove tree standing on arching stilt roots. Middle row, the shrubs: \"VEG-06 Platanera\" a banana plant with wide torn leaves and a green bunch; \"VEG-07 Ave del paraíso\" a bird-of-paradise plant with orange and blue flowers; \"VEG-08 Buganvilla\" a bougainvillea shrub with magenta bracts; \"VEG-09 Cayena\" a hibiscus shrub with red flowers; \"VEG-10 Costilla de Adán\" a monstera with split leaves; \"VEG-11 Cactus del bosque seco\" a tall columnar cactus. Bottom row, the ground cover: \"VEG-12 Helecho\" a fern clump; \"VEG-13 Mechones de hierba\" three grass tufts in small, medium and large sizes; \"VEG-14 Flores silvestres\" small clusters of white, pink and yellow wildflowers. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_VEG_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175405_5505a63c-6d24-4b00-a733-c2680cddc78b.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_VEG_v1.png",
+  "job_id": "5505a63c-6d24-4b00-a733-c2680cddc78b",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_HUB",
+   "@ANC_VISTA_JUEGO"
+  ],
+  "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Rocas y terreno · v1\". Twelve modular terrain pieces for a top-down exploration game. Top row: \"TER-01 Roca grande\" a large faceted boulder with moss on top; \"TER-02 Roca mediana\" a medium boulder; \"TER-03 Piedras sueltas\" a cluster of small stones; \"TER-04 Saliente rocoso\" a cliff ledge piece with layered strata; \"TER-05 Piedras de río\" smooth rounded river stones; \"TER-06 Tronco caído\" a fallen mossy log. Bottom row: \"TER-07 Sendero de tierra\" a straight and a curved dirt path tile with pebbles; \"TER-08 Borde de hierba\" a grass edge strip; \"TER-09 Orilla de arroyo\" a stream bank piece with shallow turquoise water; \"TER-10 Puente de tablones\" a small plank bridge with rope rails; \"TER-11 Escalinata de mosaico\" a stair segment with colorful mosaic risers; \"TER-12 Muro de piedra\" a low stone wall segment. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_TER_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175403_84ca26a4-bec0-4ca6-8e0a-5fa2f047ca89.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TER_v1.png",
+  "job_id": "84ca26a4-bec0-4ca6-8e0a-5fa2f047ca89",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_HUB",
+   "@ANC_VISTA_JUEGO"
+  ],
+  "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Arquitectura de Las Escalinatas · v1\". A modular building kit for a hillside neighborhood of colorful houses in a tropical port city. Top row: \"ARQ-01 Casa amarilla\" a two-story house facade painted yellow with a covered wooden balcony; \"ARQ-02 Casa azul\" a one-story house facade painted blue; \"ARQ-03 Techo de zinc\" corrugated tin roof panels, slightly rusty; \"ARQ-04 Ventana con reja\" a window with an ornamental iron grille; \"ARQ-05 Puerta de madera\" a painted wooden double door; \"ARQ-06 Balcón de madera\" a wooden balcony with turned balusters. Bottom row: \"ARQ-07 Baranda metálica\" a painted metal railing segment; \"ARQ-08 Poste de luz\" a wooden utility pole with sagging cables and a small transformer; \"ARQ-09 Farol\" a classic black street lamp; \"ARQ-10 Tendedero\" a laundry line with colorful clothes; \"ARQ-11 Tanque de agua\" a rooftop water tank on a small stand; \"ARQ-12 Escalón numerado\" a single stone step with a painted number on its riser. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_ARQ_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175403_caaa84dd-d8d5-413f-86f1-1bb8114011ee.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_ARQ_v1.png",
+  "job_id": "caaa84dd-d8d5-413f-86f1-1bb8114011ee",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_HUB",
+   "@ANC_VISTA_JUEGO"
+  ],
+  "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Plaza y malecón · v1\". Twelve pieces of street furniture for a central plaza and a riverfront promenade. Top row: \"URB-01 Banca\" a wood-and-iron park bench; \"URB-02 Fuente\" a small round stone fountain; \"URB-03 Kiosco de jugos\" a small juice stand with a striped awning and crates of tropical fruit; \"URB-04 Glorieta\" a white iron gazebo; \"URB-05 Farol doble\" a double-arm street lamp; \"URB-06 Basurero\" a park trash bin. Bottom row: \"URB-07 Jardinera\" a raised planter with tropical plants; \"URB-08 Estatua de iguana\" a stone statue of an iguana on a pedestal; \"URB-09 Baranda del malecón\" a riverfront railing segment; \"URB-10 Poste indicador\" a wooden direction signpost with blank arrow boards; \"URB-11 Bicicletero\" a bike rack with one bicycle; \"URB-12 Puesto de electrónica\" a covered market stall selling used electronic parts. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_URB_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175510_0292c983-522b-4e23-95b9-dd5e8d1afaf7.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_URB_v1.png",
+  "job_id": "0292c983-522b-4e23-95b9-dd5e8d1afaf7",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_HUB",
+   "@ANC_VISTA_JUEGO"
+  ],
+  "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Recolectables · v1\". Twelve collectible objects found while exploring, each lying on a small round patch of grass or dirt with a faint cyan sparkle above it that marks it as collectible. Top row: \"COL-01 Antena parabólica\" a rusty fallen satellite dish; \"COL-02 Panel solar\" a cracked old solar panel; \"COL-03 Placa de circuito\" a green printed circuit board; \"COL-04 Radio antigua\" a transistor radio; \"COL-05 Motor\" a small electric motor; \"COL-06 Cable de cobre\" a coil of copper wire. Bottom row: \"COL-07 Batería\" a battery pack; \"COL-08 Antena de varilla\" a telescopic rod antenna; \"COL-09 Muestra de agua\" a capped sample vial with brown estuary water; \"COL-10 Vaina de ceibo\" a ceiba seed pod bursting with white cotton; \"COL-11 Muestra de roca\" a rock sample with a shiny mineral vein; \"COL-12 Carta estelar\" a folded star chart page. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_COL_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175514_547655ed-3a8f-4949-84f1-0814747cc5d3.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_COL_v1.png",
+  "job_id": "547655ed-3a8f-4949-84f1-0814747cc5d3",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_HUB",
+   "@ANC_VISTA_JUEGO"
+  ],
+  "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Taller de electrónica · v1\". The props of the student's rooftop workshop, matching the first reference image. Top row: \"TAL-01 Banco de trabajo\" a wooden workbench with drawers; \"TAL-02 Osciloscopio\" a vintage oscilloscope showing a cyan sine wave; \"TAL-03 Estación de soldadura\" a soldering iron in its stand with a solder spool; \"TAL-04 Multímetro\" a yellow handheld multimeter; \"TAL-05 Fuente de poder\" a bench power supply; \"TAL-06 Protoboard\" a breadboard with jumper wires and components; \"TAL-07 Caja de herramientas\" a metal toolbox. Bottom row: \"TAL-08 Tablero de herramientas\" a pegboard with pliers, screwdrivers and a cable coil; \"TAL-09 Lámpara\" an articulated desk lamp; \"TAL-10 Taburete\" a wooden stool; \"TAL-11 Maqueta de satélite\" a small hanging model satellite; \"TAL-12 Libro cerrado\" the old science book, closed; \"TAL-13 Libro con holograma\" the same book open, projecting a cyan hologram of a ringed planet; \"TAL-14 Telescopio pequeño\" a small white refractor telescope on a tripod. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_TAL_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175516_71173bf0-b73f-47aa-9755-13b36ec0983b.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_TAL_v1.png",
+  "job_id": "71173bf0-b73f-47aa-9755-13b36ec0983b",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_HUB",
+   "@ANC_VISTA_JUEGO"
+  ],
+  "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Fauna · v1\". Eleven animals of a tropical port city, its mangroves and its dry forest, with slightly chibi proportions but anatomically recognizable, each shown in side view with a small front view beside it. Top row: \"FAU-01 Iguana verde\" a green iguana with a crest of spines; \"FAU-02 Ardilla de Guayaquil\" a gray-brown squirrel with a bushy tail; \"FAU-03 Pelícano pardo\" a brown pelican; \"FAU-04 Fragata\" a black frigatebird with a red throat pouch; \"FAU-05 Garza blanca\" a great egret; \"FAU-06 Cangrejo rojo\" a red mangrove crab. Bottom row: \"FAU-07 Colibrí\" a green hummingbird; \"FAU-08 Periquito del Pacífico\" a tiny green parrotlet; \"FAU-09 Mariposa\" a blue butterfly; \"FAU-10 Perro callejero\" a friendly mixed-breed street dog; \"FAU-11 Gato callejero\" an orange tabby street cat, clearly different from the companion cat. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_FAU_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175620_74f29a99-632c-4004-bf94-a7aab419cdf8.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_FAU_v1.png",
+  "job_id": "74f29a99-632c-4004-bf94-a7aab419cdf8",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_PROTA_2",
+   "@ANC_GATO",
+   "@ANC_HUB"
+  ],
+  "prompt": "Professional character lineup sheet for a game: plain light warm-gray background with faint horizontal height guide lines, even neutral studio lighting, all characters standing in one row on the same baseline in a relaxed front three-quarter pose, consistent scale. Title: \"Reparto · v1\". From left to right: \"PER-01 Protagonista A\" and \"PER-02 Protagonista B\" exactly as the two student designs in the first two reference images; \"PER-03 Elena\" the mother, round silhouette, hair tied up, bottle-green apron (#386653) over a simple dress, drying her hands with a dish towel; \"PER-04 Rafael\" the father, straight shoulders, sand-colored shirt (#BA8A5B), holding a small cardboard box; \"PER-05 Lidia\" a juice vendor, short-brim straw hat, terracotta apron (#A14F3F), holding a silver thermos; \"PER-06 Sam\" a fellow student, petrol-green jacket (#315E63), tall quiff, holding a yellow folder (#E1AE53); \"PER-07 Dra. Vega\" a mission mentor, tall upright silhouette, dark headset, ink-blue jacket (#283B5B); \"PER-08 Ari\" a younger student, low ponytail, holding a square notebook with a coral spine (#D47762); \"PER-09 Órbita\" the companion cat from the third reference image, sitting at the feet of the first student. Students are three heads tall, adults about three and a half heads tall. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_PER_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175621_f88dec41-ca3b-4ff3-944a-cee25458d437.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_PER_v1.png",
+  "job_id": "f88dec41-ca3b-4ff3-944a-cee25458d437",
+  "detalle": null
+ },
+ {
+  "lote": "L03a",
+  "fecha": "2026-11-12 03:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_HUB",
+   "@ANC_VISTA_JUEGO"
+  ],
+  "prompt": "Professional game-art reference sheet: plain light warm-gray background, even neutral studio lighting, every item isolated and fully visible with a soft contact shadow, consistent scale across items, generous spacing, clean grid layout. At the far left stands a flat gray silhouette of the chibi student, three heads tall, as a scale reference. Title: \"Mirador del Faro · v1\". The props of a hilltop lookout with a lighthouse, where the player observes the sky. Top row: \"MIR-01 Faro\" a white lighthouse with terracotta bands and a glass lantern room; \"MIR-02 Plataforma del mirador\" a stone viewing deck with a railing; \"MIR-03 Telescopio del mirador\" a large white refractor telescope on an equatorial mount and a sturdy tripod, with a faint cyan glow on its eyepiece that marks it as interactive; \"MIR-04 Binoculares de moneda\" coin-operated viewing binoculars on a post. Bottom row: \"MIR-05 Atril con carta estelar\" a lectern holding a star chart; \"MIR-06 Banca\" a stone bench; \"MIR-07 Guirnalda de luces\" warm string lights between two wooden posts; \"MIR-08 Cúpula de observación\" a small white observatory dome with its slit open. Under each item, a small neat hand-lettered label in Spanish exactly as written above, and a short title at the top left. No other text, no logos, no watermarks. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "HR_MIR_v1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175622_aa5ed102-6ef6-4709-88a9-154a59d5fef1.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Hojas_de_referencia/HR_MIR_v1.png",
+  "job_id": "aa5ed102-6ef6-4709-88a9-154a59d5fef1",
+  "detalle": null
+ },
+ {
+  "lote": "L03b",
+  "fecha": "2026-11-12 03:38",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_VISTA_JUEGO",
+   "@ANC_HUB"
+  ],
+  "prompt": "Use the exact art style of the reference images. In-game screenshot seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. Night on the hilltop lookout beside a lighthouse: the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag looks through a large white refractor telescope on a stone viewing deck, and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag sits on the stone railing beside them, looking up at the sky. The base of a white lighthouse with terracotta bands sends a soft sweeping beam across the deck. Warm string lights between wooden posts, a stone bench, coin-operated binoculars, potted plants, the mosaic stair path climbing up the hill, rooftops of colorful houses far below with warm windows. Cool blue moonlight from a thin crescent Moon low in the west, out of frame, warm practical lights, long soft shadows, a few fireflies. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L03_mirador_noche_vista_juego",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175744_e02f85be-06ea-496c-943f-f5b7e6111746.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_03/L03_mirador_noche_vista_juego.png",
+  "job_id": "e02f85be-06ea-496c-943f-f5b7e6111746",
+  "detalle": null
+ },
+ {
+  "lote": "L03b",
+  "fecha": "2026-11-12 03:38",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_GATO",
+   "@ANC_MAPA",
+   "@ANC_HUB"
+  ],
+  "prompt": "Game interface mockup, full screen: the telescope view of a stylized exploration RPG at a hilltop lookout at night. Left two thirds: a large circular telescope eyepiece view with a soft dark vignette and a thin cyan crosshair reticle. Inside it, a photorealistic grayscale Moon as seen tonight from the equator: a thin waxing crescent about 12 percent illuminated, lying almost horizontally like a smile, with the bright curved edge along the bottom of the disk, tilted very slightly to the right, and the rest of the disk faintly visible in soft gray earthshine against a starry sky. Two small cyan callout lines with tiny labels: one pointing at the line between lunar day and night labeled \"Terminador\", one pointing at the dim part of the disk labeled \"Luz cenicienta\". Bottom-left, overlapping the edge of the eyepiece: the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag, exactly like the first reference image, sitting upright with one paw raised like a presenter, with a speech bubble of torn notebook paper that reads \"¿Ves la sonrisa? Cerca del ecuador, la Luna creciente se ve acostada.\" Right third: a column of data cards on torn cream graph paper with ink lettering, headed \"Luna · esta noche\", listing \"Fase: creciente\", \"Iluminada: 12 %\", \"Distancia: 403 151 km\", \"Tamaño aparente: 29,6′\", \"Altura: 20°\", \"Se pone: 21:05\", and a small footer \"Fuente: JPL Horizons · 12 nov 2026 · 19:30 · Guayaquil\". Top-left title \"Mirador del Faro · Telescopio\" beside a small lighthouse emblem. Bottom bar with small key caps and hints: \"E Enfocar\", \"Q Acercar\", \"R Marcar\", \"Esc Salir\". The interface follows the engineer's field-notebook style of the second reference image: cream graph paper, ink lines, torn paper edges, petrol blue and cyan accents. The Moon is photographic; the interface and the cat are stylized like the game. No logos.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L03_ui_telescopio_luna",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_175744_ed769115-02f1-45dc-878a-4623f219f30c.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_03/L03_ui_telescopio_luna.png",
+  "job_id": "ed769115-02f1-45dc-878a-4623f219f30c",
+  "detalle": null
+ },
+ {
+  "lote": "L04a",
+  "fecha": "2026-11-12 06:26",
+  "modelo": "tripo_h3_1_multiview_to_3d",
+  "params": {
+   "texture": true,
+   "pbr": false,
+   "face_limit": 5000,
+   "orientation": "align_image"
+  },
+  "referencias": [
+   "d736e2b9-2cce-4b9b-8546-5be1f73cf156",
+   "19c12620-ce6f-46b8-864a-516c61955a03",
+   "710cb3cb-2307-4e44-9b50-bb5a000d5af0"
+  ],
+  "prompt": "",
+  "costo_cotizado": 9.0,
+  "veredicto": "pendiente",
+  "id": "L04_PER01_tripo_mv",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_204335_bc08d56c-0bc8-40e6-a351-e1b6dd1ed3bd.glb",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_tripo_mv.glb",
+  "job_id": "bc08d56c-0bc8-40e6-a351-e1b6dd1ed3bd",
+  "detalle": null,
+  "nota": "Geometria buena (4 930 triangulos); textura gris plana (media 102, desviacion 3): Tripo no pinto el color. Malla en espejo y mirando a -X: el perfil (lado derecho, mira a la derecha) se leyo como vista izquierda. Color proyectado desde la hoja y geometria espejada con herramientas/mallas/proyectar_vistas.py --auto (L04_PER01_proyectada.glb).",
+  "costo_real": 9.0
+ },
+ {
+  "lote": "L04a",
+  "fecha": "2026-11-12 06:26",
+  "modelo": "tripo_h3_1_multiview_to_3d",
+  "params": {
+   "texture": true,
+   "pbr": false,
+   "face_limit": 3000,
+   "orientation": "align_image"
+  },
+  "referencias": [
+   "b1faa263-98fe-40d9-8deb-0919756d028a",
+   "17bf8af8-125b-43c8-b03e-294991836f73",
+   "4663bda8-b70f-4c89-80a3-e53c6fdb8545",
+   "7d0cb245-5587-4a4a-b6c5-2d9eac29e8a8"
+  ],
+  "prompt": "",
+  "costo_cotizado": 9.0,
+  "veredicto": "pendiente",
+  "id": "L04_PER09_tripo_mv",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_204315_335cc638-69ff-426c-a6d6-52d0fc63cdfb.glb",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER09_tripo_mv.glb",
+  "job_id": "335cc638-69ff-426c-a6d6-52d0fc63cdfb",
+  "detalle": null,
+  "nota": "Bien: textura completa, medalla cian del collar. Mira a +X. 2 733 triangulos.",
+  "costo_real": 9.0
+ },
+ {
+  "lote": "L04a",
+  "fecha": "2026-11-12 06:26",
+  "modelo": "tripo_h3_1_multiview_to_3d",
+  "params": {
+   "texture": true,
+   "pbr": false,
+   "face_limit": 2500,
+   "orientation": "align_image"
+  },
+  "referencias": [
+   "96197841-db32-4496-b5b4-e67f0d4303fe",
+   "96e1650d-01d5-4a3f-947c-a7e7d87037da"
+  ],
+  "prompt": "",
+  "costo_cotizado": 9.0,
+  "veredicto": "pendiente",
+  "id": "L04_FAU01_tripo_mv",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_204254_3ca25a7c-c353-448b-b5ef-2ecc3386efae.glb",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_FAU01_tripo_mv.glb",
+  "job_id": "3ca25a7c-c353-448b-b5ef-2ecc3386efae",
+  "detalle": null,
+  "nota": "Bien con dos vistas de la hoja (frente y lado ampliados). Mira a -X. 2 376 triangulos.",
+  "costo_real": 9.0
+ },
+ {
+  "lote": "L04a",
+  "fecha": "2026-11-12 06:26",
+  "modelo": "tripo_h3_1_image_to_3d",
+  "params": {
+   "texture": true,
+   "pbr": false,
+   "face_limit": 2500,
+   "orientation": "align_image"
+  },
+  "referencias": [
+   "c1c218b4-d591-4643-9572-87fcc8b9fa06"
+  ],
+  "prompt": "",
+  "costo_cotizado": 9.0,
+  "veredicto": "pendiente",
+  "id": "L04_COL01_tripo",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_204438_ef09053a-2b2c-443e-bc1f-11aa0b685e13.glb",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_COL01_tripo.glb",
+  "job_id": "ef09053a-2b2c-443e-bc1f-11aa0b685e13",
+  "detalle": null,
+  "nota": "Antena con el parche de hierba, rocas y enredadera de la hoja fundidos en la malla (sesgo frente a la version por script). 2 305 triangulos.",
+  "costo_real": 9.0
+ },
+ {
+  "lote": "L04b",
+  "fecha": "2026-11-12 08:54",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "d736e2b9-2cce-4b9b-8546-5be1f73cf156"
+  ],
+  "prompt": "Character turnaround sheet for 3D modeling. Draw EXACTLY the same girl as in the reference images (the protagonist): same face shape, same large round warm-brown eyes with white highlights, same thick dark eyebrows, small nose, gentle closed-mouth smile, small stud earrings, warm tan skin; same voluminous dark-brown curly hair made of chunky faceted curls forming a rounded crown that frames the face and leaves the whole face, forehead and ears clearly visible; same khaki short-sleeve shirt with rolled sleeves, two chest pockets and small shoulder patches over a dark charcoal t-shirt; brown belt with a square buckle; brown cargo pants with side pockets, gathered at the ankles; white and navy high-top sneakers; black wristwatch on her left wrist. Chibi proportions, about 3 heads tall, exactly like the references. Four full-body orthographic views side by side in one row, from left to right: 1 FRONT view facing the viewer; 2 LEFT SIDE view showing the character's left side, the character facing the left edge of the image; 3 BACK view; 4 RIGHT SIDE view showing the character's right side, the character facing the right edge of the image. The same relaxed A-pose in all four views: arms straight down and slightly away from the body at about 25 degrees, hands open with fingers together, legs straight and slightly apart, feet flat on the ground. NO bag, NO shoulder strap, NO tools, nothing in the hands, nothing covering the body. Same height and same ground line for all four figures, generous empty space between them, nothing overlapping. Flat even neutral studio lighting with no cast shadows, no rim light, no glow; plain uniform light gray background. Low-poly hand-painted 3D style with crisp flat facets and soft painted gradients, matching the references. No text, no labels, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L04_PER01_giro",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_231520_fae4f9b1-b2e8-4fed-8507-9c87e2c20074.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro.png",
+  "job_id": "fae4f9b1-b2e8-4fed-8507-9c87e2c20074",
+  "detalle": null
+ },
+ {
+  "lote": "L04c",
+  "fecha": "2026-11-12 09:00",
+  "modelo": "tripo_h3_1_multiview_to_3d",
+  "params": {
+   "texture": true,
+   "texture_quality": "detailed",
+   "texture_alignment": "original_image",
+   "pbr": false,
+   "face_limit": 8000,
+   "orientation": "align_image"
+  },
+  "referencias": [
+   "1e3dd21f-3d0e-490d-9932-8f6cf49beb27",
+   "064dae45-83bf-4a0b-92f0-89b2f0740b48",
+   "b60847ac-9ae7-448e-9e1a-7e354edf70e7",
+   "a0a14843-e260-49f8-93f7-390f94e0f9bb"
+  ],
+  "prompt": "",
+  "costo_cotizado": 12.0,
+  "veredicto": "pendiente",
+  "id": "L04_PER01_giro_tripo_mv",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_232133_f9a8da20-7364-4dae-8edb-59c89877bf4a.glb",
+  "archivo": "Nasa_Game/Fase_1_Arte/Modelado/Lote_04/L04_PER01_giro_tripo_mv.glb",
+  "job_id": "f9a8da20-7364-4dae-8edb-59c89877bf4a",
+  "detalle": null
+ },
+ {
+  "lote": "L05",
+  "fecha": "2026-11-12 14:11",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of the protagonist's small bedroom-workshop in a hillside house of a tropical port city, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. Night, just before sleeping: the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag sits on the edge of the bed looking toward the open window; the thin crescent Moon itself stays outside the frame, and its cool light pours through the window as a pale beam across the floor and the bed, with the crescent reflected small and bright in the window glass, and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag is curled up on the pillow. The bed has a faint glowing cyan outline that marks it as interactive, and a cardboard box with a drawing of the Moon taped on it waits beside the bed. A sturdy wooden workbench holds the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires) under a warm desk lamp, next to a vintage oscilloscope with a dim cyan trace and an open engineering notebook with ink sketches; a small white refractor telescope on a tripod stands by the window; a wooden door ajar shows the top of the stairs going down to the house. Cool blue moonlight falls through the window in a soft shaft across the floor, warm lamp light and a string of small warm lights along the wall, deep blue shadows. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, gentle bloom on the lamp and the moonlit window, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L05_B_noche_luna",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_043252_5dd1c1e8-f48e-4998-8ec5-5f1e249f31af.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/L05_B_noche_luna.png",
+  "job_id": "5dd1c1e8-f48e-4998-8ec5-5f1e249f31af",
+  "detalle": null
+ },
+ {
+  "lote": "L05",
+  "fecha": "2026-11-12 14:11",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of the protagonist's small bedroom-workshop in a hillside house of a tropical port city, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. Early morning: the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag has just got out of bed and stretches in the middle of the room, while the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag sits on the windowsill. Layout: an unmade single bed in the back-left corner with a cardboard box beside it; a window in the back wall with a view of the colorful houses of the hillside stair neighborhood; a small white refractor telescope on a tripod beside the window; along the right wall a sturdy wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires) next to a vintage oscilloscope with a wobbly cyan trace; an open engineering notebook with ink sketches on the bench; a framed poster of a historic white observatory dome among trees; terracotta floor tiles, a woven rug, a ceiling-fan shadow, potted plants; in the front-right corner a wooden staircase goes down through an opening in the floor to the rest of the house. Warm golden sunrise light streams through the window in long diagonal shafts across the floor, cool petrol-blue shade in the corners. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts with floating dust motes, gentle bloom on light sources, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L05_A_manana_calida",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_043252_f3d06a36-cc6b-41f9-a768-40d18919aa96.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/L05_A_manana_calida.png",
+  "job_id": "f3d06a36-cc6b-41f9-a768-40d18919aa96",
+  "detalle": null
+ },
+ {
+  "lote": "L05",
+  "fecha": "2026-11-12 14:11",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of a small rooftop bedroom-workshop with a wide open terrace, on top of a hillside house of a tropical port city, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. The left half of the frame is the room interior with its roof removed: a single bed with a cardboard box beside it, shelves of parts, a back-wall window framed by bougainvillea with the hillside houses beyond, a small white refractor telescope on a tripod beside it, and a narrow interior staircase going down to the rest of the house. A wide doorway opens to the right half: a flat concrete rooftop terrace where the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires) stands on a weathered wooden workbench aimed at the sky, next to a vintage oscilloscope with a wobbly cyan trace and an open engineering notebook with ink sketches. the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag adjusts the tracker while the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag watches from the low parapet. A water tank, a clothesline with colorful laundry, potted plants, bougainvillea and a corrugated zinc awning; beyond the parapet the rooftops and stairs of the colorful hillside neighborhood drop away below, seen from above. Late afternoon: warm low sun, long soft shadows, cool petrol-blue shade under the awning. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest edge and the far rooftops and keeps the middle crisp, soft light shafts, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L05_C_azotea_terraza",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_043253_69326b85-1fda-49fd-aa6e-1eedd8a1b5ca.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/L05_C_azotea_terraza.png",
+  "job_id": "69326b85-1fda-49fd-aa6e-1eedd8a1b5ca",
+  "detalle": null
+ },
+ {
+  "lote": "L05",
+  "fecha": "2026-11-12 14:11",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of a compact, cozy bedroom-workshop in a hillside house of a tropical port city, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. A loft bed on a sturdy wooden frame with a short ladder sits along the back wall, and under it the workshop: a wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires), a vintage oscilloscope with a wobbly cyan trace, an open engineering notebook with ink sketches, a pegboard of tools and drawers of parts. the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag sits on a stool at the bench, small in the frame, and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag peeks over the edge of the loft bed. A cardboard box under the ladder, a small white refractor telescope on a tripod beside a louvred window that shows the colorful houses of the hillside stair neighborhood, a hammock rolled in a corner, potted plants, terracotta floor tiles; a wooden door in the side wall opens onto the stair landing that leads down to the house. Warm afternoon light through the louvres in striped shafts plus a warm desk lamp, cool petrol-blue shade under the loft. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts with floating dust motes, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L05_D_cama_alta",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_043334_aa9f6ee9-af99-4730-a9e2-611370b21c20.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/L05_D_cama_alta.png",
+  "job_id": "aa9f6ee9-af99-4730-a9e2-611370b21c20",
+  "detalle": null
+ },
+ {
+  "lote": "L05",
+  "fecha": "2026-11-12 14:11",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of the upper floor of a hillside house in a tropical port city, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. Dollhouse cutaway: the roof is removed and every wall is cut down to waist height with clean cut tops, so the whole floor plan reads clearly from above. The bedroom-workshop fills most of the frame: a single bed with a cardboard box beside it, a window opening toward the colorful hillside stair neighborhood, a small white refractor telescope on a tripod, and a wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires), a vintage oscilloscope with a wobbly cyan trace and an open engineering notebook with ink sketches. A doorway leads to a short hallway with family photos and the top of a wooden staircase that descends toward the ground-floor kitchen, partly visible below through the stairwell. the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag walks from the bed toward the workbench and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag trots ahead of her. Terracotta floor tiles, woven rugs, potted plants, a ceiling fan seen from above. Warm morning sun from the windows casts long shafts across the floor, cool petrol-blue shade along the cut walls. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L05_E_casa_munecas",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_043338_9b010ed1-1a44-4f56-9f2f-bdda3a3b6eff.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/L05_E_casa_munecas.png",
+  "job_id": "9b010ed1-1a44-4f56-9f2f-bdda3a3b6eff",
+  "detalle": null
+ },
+ {
+  "lote": "L05",
+  "fecha": "2026-11-12 14:11",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of the protagonist's bedroom-workshop in a hillside house of a tropical port city, designed as a clear first playable room, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. Readable L-shaped layout with open floor space for walking: the path flows from the single bed with a cardboard box beside it in the top-left, past the open window and a small white refractor telescope on a tripod, to a long wooden workbench on the right with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires), a vintage oscilloscope with a wobbly cyan trace and an open engineering notebook with ink sketches, and ends at a wooden door and the stairs going down to the house in the bottom-right. Each interactive object (bed, window, telescope, tracker, notebook) is spaced apart and marked by a tiny cyan sparkle. A framed poster of a historic white observatory dome among trees, shelves of parts and books, a woven rug, potted plants and bougainvillea at the window, which shows the colorful houses of the hillside stair neighborhood. the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag stands near the center and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag sits beside her, both small in the frame. Golden late-afternoon sun through the window in long warm shafts, cool petrol-blue shade in the corners. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, floating dust motes, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L05_F_recorrido_tutorial",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_043338_a12543c5-ccbc-4e67-a8f8-c5b440143844.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/L05_F_recorrido_tutorial.png",
+  "job_id": "a12543c5-ccbc-4e67-a8f8-c5b440143844",
+  "detalle": null
+ },
+ {
+  "lote": "L05b",
+  "fecha": "2026-11-13 11:52",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO",
+   "0f6a3d7c-2b98-4a34-a7cd-8d31c9132f38"
+  ],
+  "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. Keep the room layout, furniture placement and morning mood of the fourth reference image, and refine it into a clean final concept. In-game screenshot of the protagonist's small bedroom-workshop in a hillside house of a tropical port city, seen from the fixed high top-down three-quarter gameplay camera pitched steeply down about 60 degrees, exactly like the gameplay reference image: no horizon and no sky, the ground fills the entire frame, characters about one eighth of the image height. The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. Early morning: the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag has just got out of bed and stretches in the middle of the room, while the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag sits on the windowsill. Layout: an unmade single bed in the back-left corner with a cardboard box beside it; a window in the back wall with a view of the colorful houses of the hillside stair neighborhood; a small white refractor telescope on a tripod beside the window; along the right wall a sturdy wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires) next to a vintage oscilloscope with a wobbly cyan trace; an open engineering notebook with ink sketches on the bench; a framed poster of a historic white observatory dome among trees; terracotta floor tiles, a woven rug, potted plants. Entrance and exit: in the front-right corner a wooden staircase goes down through an opening in the floor to the rest of the house, and in front of it a clear, completely uncluttered arrival landing about two meters wide, with a small woven doormat, a low wooden railing with an open gate and a warm lantern, so the way in and out of the room reads at a glance; a subtle soft cyan glow on the floor of the landing marks the transition point. Leave open walking space between the bed, the window, the workbench and the landing. Warm golden sunrise light streams through the window in long diagonal shafts across the floor, cool petrol-blue shade in the corners. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts with floating dust motes, gentle bloom on light sources, a subtle vignette; painted light where the shade stays soft and colored, never black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L05_A_manana_calida_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261113_165207_b1bd2602-56d5-4a4a-9498-aa56e9f1dbf3.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/L05_A_manana_calida_final.png",
+  "job_id": "b1bd2602-56d5-4a4a-9498-aa56e9f1dbf3",
+  "detalle": null
+ }
+]

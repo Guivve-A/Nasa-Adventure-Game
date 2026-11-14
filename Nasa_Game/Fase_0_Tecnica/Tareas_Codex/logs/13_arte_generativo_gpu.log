@@ -1,0 +1,1294 @@
+OpenAI Codex v0.167.0-alpha.3.2
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1cea5-31d8-7f91-8c9b-2f3567fdbbe5
+--------
+user
+# Brief común — Fase 0, revisión B (objetivo AAA con PC en la nube)
+
+Fecha: 2026-11-12. Idioma de los informes: español.
+
+## Proyecto
+
+RPG de aventura, simulación y exploración educativa en Godot 4.7.2 (nombre de trabajo: «Proyecto NASA-Ecuador»). Un estudiante de ingeniería de control en Guayaquil en su viaje para llegar a la NASA, con un gato científico de compañero. Cámara alta 3/4 en exploración y hub lateral tipo diorama. El tablero de referencia del usuario está en `Nasa_Game/Referencias/Tablero_usuario/` y su análisis en `Analisis del tablero.md`. Referentes de estilo: RPG de Nintendo, Monster Hunter, Pokémon, Zelda Ocarina of Time 3D y la saga Bravely. El juego debe ser original.
+
+## Qué cambió
+
+El usuario corrigió la restricción principal de la Fase 0 anterior (`Nasa_Game/Fase_0_Tecnica/Fase 0 - Analisis.md`), que limitaba todo a lo que rinde su portátil y proponía el renderizador Mobile a 720p. Sus palabras: «quiero que el sistema sea totalmente AAA, no quiero que te enfoques en que voy a renderizar todo aquí. Puedo alquilar PC en la nube. Valida esa opción para un videojuego totalmente impresionante, con texturas y arte innovador». También pidió un mundo que se sienta vivo: interacción con todo el entorno, movimiento ambiental sutil, sonido coherente y paleta consistente.
+
+## Datos medidos hoy
+
+- **Portátil local:** Intel i5-7200U (2 núcleos), 8 GB de RAM, Intel HD Graphics 620, Windows 10, conexión por Wi-Fi. Pasa a ser un terminal: edición ligera, asistentes de IA y streaming del PC en la nube.
+- **Latencia desde Guayaquil** (conexión TCP, 02:22 hora local): Miami 62 ms, Atlanta 74, Chicago 93, Virginia 94, Nueva Jersey 96, Dallas 99, Ohio 118, Ciudad de México 121, Santiago de Chile 131, Los Ángeles 132, São Paulo de 153 a 193 y Oregón 164.
+- **Ancho de banda:** 106 Mbps de bajada y 45 Mbps de subida contra un nodo cercano. En una sola conexión TCP, 46 Mbps desde Atlanta y 10 Mbps desde Miami.
+- **Rendimiento del portátil:** `Nasa_Game/Fase_0_Tecnica/Datos/bench_render_resultados.md`. Sirve como perfil mínimo de compatibilidad.
+- **Higgsfield:** 1000 créditos de suscripción que caducan al cierre del periodo (hacia el 2026-12-12). Costos en `Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md`. Ofrece imagen, video, audio, sprites y 3D (Tripo, Hunyuan3D y Meshy) por créditos.
+- **Equipo humano:** un desarrollador con asistentes de IA (Claude Code y Codex). El asistente puede operar un equipo remoto por SSH.
+- **Presupuesto en dinero para la nube:** sin definir. Da escenarios.
+
+## Reglas para ti
+
+1. No instales nada, no descargues ejecutables y no modifiques archivos: trabajas en solo lectura y tu respuesta final es el informe.
+2. No crees cuentas, no contrates servicios y no ejecutes comandos que gasten créditos de Higgsfield.
+3. En las búsquedas web usa consultas técnicas genéricas: no incluyas nombres de personas ni datos del proyecto.
+4. Cita la fuente de cada precio, especificación y licencia con su URL y la fecha consultada. Distingue **[doc]** (página oficial del proveedor o documentación primaria), **[sec]** (fuente secundaria) e **[inf]** (inferencia tuya). Si no pudiste verificar algo, escribe «sin verificar». No inventes precios, regiones, versiones ni licencias.
+5. No reproduzcas texto con derechos de autor: resume con tus palabras.
+6. No añadas al informe avisos de herramientas, mensajes de facturación ni enlaces de pago.
+
+## Formato de tu respuesta final (Markdown compatible con Obsidian)
+
+Usa exactamente estas secciones, en este orden:
+
+```
+# <título del informe>
+## Resumen ejecutivo            (máximo 180 palabras)
+## Decisiones recomendadas       (tabla: Decisión | Recomendación | Alternativa descartada y por qué | Confianza alta/media/baja)
+## Afirmaciones que sostienen las decisiones   (máximo 14, numeradas, cada una con URL y etiqueta [doc]/[sec]/[inf])
+## Riesgos y cómo mitigarlos
+## Preguntas que debe decidir el usuario
+## Desarrollo                    (el análisis completo, con subtítulos)
+## Fuentes
+```
+
+---
+
+# TU TAREA
+
+Diseña el pipeline de texturas y arte con una GPU alquilada, combinado con los créditos de Higgsfield.
+
+1. Modelos abiertos ejecutables hoy en una GPU de 16 a 48 GB para: imagen (concepto y texturas), materiales PBR repetibles (albedo, normal, rugosidad y altura), imagen a malla 3D con textura, retopología y UV automáticas, rig automático de bípedos y de cuadrúpedos, animación (texto o video a movimiento), ampliación de resolución, y música y efectos de sonido. Para cada uno: VRAM necesaria, calidad y licencia (¿permite el uso comercial de los resultados?). Distingue lo verificado de lo que no.
+2. ComfyUI u otra orquestación: flujos concretos para (a) entrenar un LoRA de estilo con el arte aprobado del proyecto, para fijar un estilo propio y consistente; (b) texturas pintadas repetibles; (c) hojas de modelo multivista coherentes; (d) imagen → malla → textura → Godot. Da tiempos por paso y costo en horas de GPU.
+3. Reparto óptimo entre Higgsfield (créditos que caducan) y la GPU alquilada (pago por hora): qué conviene hacer con cada uno y en qué orden.
+4. Herramientas de acabado: Blender por script (limpieza, retopología, horneado de mapas y exportación), pintura de texturas (Blender, ArmorPaint, Material Maker) y animación (Cascadeur o similares). Di cuáles necesitan GPU.
+5. Cómo lograr texturas y arte innovador de forma reproducible: dirección de estilo propia (sin imitar juegos existentes), biblioteca de materiales maestros, hojas de trim, densidad de téxel, control de valores y paleta, y validación automática.
+6. Riesgos: licencias, consistencia, artefactos de las mallas generadas, tiempo de limpieza, tamaño de las descargas de modelos y almacenamiento.
+
+Entrega un pipeline paso a paso con la herramienta, el tiempo y el costo por recurso tipo (personaje, criatura, prop, material y entorno), y la lista de modelos recomendada con su licencia.
+codex
+Voy a revisar las referencias y los datos locales, y contrastar modelos, licencias y opciones de GPU con fuentes oficiales. El informe distinguirá las capacidades verificadas de las estimaciones de tiempo y coste.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Location; rg --files -g '*AGENTS.md' -g '*Analisis*' -g '*costos*' -g '*bench*' -g '*Tablero*' -g '*SKILL.md'" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 991ms:
+
+Path                              
+----                              
+C:\Users\guill\Desktop\Juego 2d-hd
+rg : El t�rmino 'rg' no se reconoce como nombre de un cmdlet, funci�n, archivo de script o programa ejecutable. 
+Compruebe si escribi� correctamente el nombre o, si incluy� una ruta de acceso, compruebe que dicha ruta es correcta e 
+int�ntelo de nuevo.
+En l�nea: 2 Car�cter: 15
++ Get-Location; rg --files -g '*AGENTS.md' -g '*Analisis*' -g '*costos* ...
++               ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -LiteralPath . -Force | Select-Object Mode,Name; Get-ChildItem -LiteralPath . -Filter AGENTS.md -Recurse | Select-Object FullName; Get-ChildItem -LiteralPath 'Nasa_Game/Fase_0_Tecnica' -Recurse -File | Select-Object FullName; Get-ChildItem -LiteralPath 'Nasa_Game/Referencias/Tablero_usuario' -File | Select-Object Name" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 2539ms:
+
+Mode   Name        
+----   ----        
+d----- herramientas
+d----- Nasa_Game   
+d----- pruebas     
+-a---- CLAUDE.md   
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_4pi1rfpl'.
+En l�nea: 2 Car�cter: 64
++ ...  Mode,Name; Get-ChildItem -LiteralPath . -Filter AGENTS.md -Recurse | ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_4pi1rfpl:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_kz4ist6c'.
+En l�nea: 2 Car�cter: 64
++ ...  Mode,Name; Get-ChildItem -LiteralPath . -Filter AGENTS.md -Recurse | ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_kz4ist6c:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+       Analisis ...
+       ref_01.jpg  
+       ref_02.jpg  
+       ref_03.jpg  
+       ref_04.jpg  
+       ref_05.jpg  
+       ref_06.jpg  
+       ref_07.jpg  
+       ref_08.jpg  
+       ref_09.jpg  
+       ref_10.jpg  
+       ref_11.jpg  
+       ref_12.jpg  
+       ref_13.jpg  
+       ref_14.jpg  
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'C:/Users/guill/.agents/skills/higgsfield-generate/SKILL.md' -Raw" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 365ms:
+---
+version: 0.14.0
+name: higgsfield-generate
+description: |
+  Generate images/videos/3D assets/audio via Higgsfield AI. Defaults:
+  GPT Image 2.6 for images, animated GIFs and SVG, Seedance 2.5 for
+  video, Nano Banana 2 for cartoon characters, Marketing
+  Studio for ads, Seed Audio 1.0 for audio.
+  Use when: "generate an image", "make a video", "animate
+  this photo", "image-to-video", "edit/stylize/remix this
+  image", "reframe this video", "edit this video from a
+  sketch", "create a 3D model/GLB", "create a sound effect",
+  "make music", "text-to-audio", "create an ad", "make a UGC
+  video", "unboxing", "presenter video", "import product from
+  URL", or "analyze video virality". Supports generic generation,
+  workflows, Marketing Studio, and Virality Predictor.
+  Chain with higgsfield-soul-id for face/identity consistency.
+  NOT for: Soul training, brand systems/brandbooks (use
+  higgsfield-brandkit), photoshoots, cards, YouTube thumbnails
+  (use higgsfield-youtube-thumbnail), explainers (use
+  higgsfield-video-explainer), playable games/assets (use
+  higgsfield-websites), or TTS.
+argument-hint: "[prompt-or-analysis-request] [--model <name>] [--image|--video <path-or-id>]"
+allowed-tools: Bash
+---
+
+# Higgsfield Generate
+
+Submit jobs to any Higgsfield model. Wraps the `higgsfield` CLI. Covers generic image/video/3D/audio generation, Marketing Studio (branded ads, avatars, products, hooks, settings), and, secondarily, Virality Predictor video scoring.
+
+## Step 0 �?" Bootstrap
+
+Before any other command:
+
+1. If `higgsfield` is not on `$PATH`, install it:
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/higgsfield-ai/cli/main/install.sh | sh
+   ```
+2. If `higgsfield account status` fails with `Session expired` / `Not authenticated`, ask the user to run `higgsfield auth login` (interactive) and wait for confirmation.
+
+
+## UX Rules
+
+1. Be concise. No raw IDs, no JSON dumps in chat. Return the media URL from the CLI unchanged for generated assets, or the text summary for Virality Predictor.
+2. No internal jargon. Don't narrate "calling higgsfield cost", "polling job".
+3. Detect the user's language from the first message and reply in it. Technical args (`--aspect_ratio 16:9`) stay English.
+4. Don't batch-ask. Pick a sane default model and ask one thing at a time only if genuinely missing.
+5. Don't pre-estimate cost or optimize for cheaper models unless the user asks. Prefer the quality default first.
+6. Pass `--wait` to `generate create` so the command blocks until done and prints the result URL itself. Avoid the two-step `create` ��' `wait` pattern.
+7. Prompt-only or explanation-only requests return text without submitting a job.
+
+## Discovery guardrail
+
+When looking for a Higgsfield feature/model, do not rely only on semantic search or CLI `--help`. First run an unfiltered model list, then inspect likely `job_set_type` names. If the user says a model exists but search returns no results, trust that signal and verify with the full model list before answering.
+
+Workflows are separate from models. Discover them with `higgsfield workflow list` and inspect params with `higgsfield workflow get <workflow_name>`.
+
+Virality Predictor is exposed as:
+
+- Customer-facing name: Virality Predictor
+- Technical `job_set_type`: `brain_activity`
+- Category/output: text report. This is video-in/text-out analysis, not a text/chat generation model.
+- Input: uploaded video
+- Purpose: finished-video hook, attention, retention, and virality analysis
+
+If the user says "analyze this video", "score this ad", "evaluate the hook", or similar, route to `brain_activity` even though it appears under text/analysis models. Classify by task intent and required input, not by output category alone.
+
+## Workflow �?" generic generation
+
+1. **Pick a model.** Start with the core defaults:
+
+   - **GPT Image 2.6 Sunburst** (`gpt_image_2_6`) ��' default image model for high-fidelity general generation, graphic design, UI, banners, typography, and on-image text. Flare is the separate model `gpt_image_2_6_flare`, not a `variant` parameter.
+   - **Seedance 2.5** (`seedance_2_5`) ��' SOTA default video model for serious motion, cinematic clips, multi-shot work, and image-to-video. Supports 4�?"30s output up to 1080p; use Seedance 2.0 when native 4K is required.
+   - **Nano Banana 2** (`nano_banana_flash`) ��' cartoon and illustrated characters.
+   - **Marketing Studio** ��' default for ads, UGC, product demos, unboxing, TV spots, presenter videos, and brand/product workflows.
+   - **Seed Audio 1.0** ��' default audio model for text-to-audio, voice, sound effects, ambience, foley, and music-like audio unless the user names Sonilo/Mirelo.
+
+   Only the models below are picked without being asked. Any other model is used only when the user names it or explicitly asks for what it offers (cheaper, faster, a specific look); see `references/model-catalog.md`. A model the user names stays in use for follow-ups on the same work.
+
+   **Image:**
+   - Complete brand identity, logo system, palette, typography, brandbook, packaging system, signage, or coordinated branded asset suite ��' use `higgsfield-brandkit` instead.
+   - YouTube thumbnail, Shorts cover, or Instagram video cover ��' use `higgsfield-youtube-thumbnail` instead.
+   - Brand product visual (Pinterest pin, lifestyle, hero banner, ad pack, virtual try-on) ��' use `higgsfield-product-photoshoot` instead. NOT this skill.
+   - Branded ad image with avatar + product (Marketing Studio shape) ��' Marketing Studio Image (see Marketing Studio below)
+   - Standalone animated GIF or SVG ��' GPT Image 2.6, before subject/style auto-picks. Set `--output_format gif` or `--output_format svg` **before the first submission**; mentioning GIF/SVG in the prompt does not select the format. A GIF request is not a video/conversion workflow. SVG accepts no reference images. Preserve explicit model choices and specialized workflow pins; check the named model's format support instead of silently changing it. See `references/model-catalog.md` for frame controls and examples.
+   - Soul Character (reference id from `higgsfield-soul-id`) ��' Soul 2.0 for stills, Soul Cinema (`soul_cinematic`) for cinematic
+   - New original person �?" UGC, editorial, fashion, lifestyle ��' Soul 2.0
+   - Cinematic still frame ��' Soul Cinema (`soul_cinematic`)
+   - Character sheet, one-shot face from reference photos, or face edit on a real photo ��' Seedream 5.0 Pro (`seedream_v5_pro`)
+   - Locations / environments / no-people scenes ��' Soul Location
+   - Logo, icon, vector-like illustration, brand mark, controlled-palette graphic ��' Recraft V4.1 (`recraft_v4_1`, often with `--model_type vector`)
+   - Cartoon or illustrated characters, heavily textured photos ��' Nano Banana 2 (`nano_banana_flash`). The id `nano_banana_2` is an alias for Nano Banana Pro, not Nano Banana 2
+   - **Default for everything else ��' GPT Image 2.6 Sunburst** (`gpt_image_2_6`). Graphic design, UI, banners, typography, product concepts, editing, and high-fidelity general generation.
+   - User asks for cheaper or faster ��' Nano Banana 2 Lite (`nano_banana_2_lite`) for reference edits, Z Image for drafts.
+
+   **Video:**
+   - Complete narrated explainer from a topic, story, or document ��' use `higgsfield-video-explainer`, not generic video generation.
+   - All advertising / commercial / branded ad video ��' Marketing Studio (see Marketing Studio below)
+   - Edit existing video from sketch/timestamp, or reframe to another aspect ratio ��' workflow (`draw_to_video` or `reframe`), not a model. See `references/workflows.md`.
+   - **Default for everything else ��' Seedance 2.5** (`seedance_2_5`): multi-shot, consistent identity, motion-heavy, image-to-video, editing, extension, 4�?"30s. Modes `t2v` / `omni_reference` / `video_edit` / `video_extension`; use `omni_reference` for reference inputs, including start/end frames; `t2v` accepts no media. Up to 1080p. Do not downgrade because another model's schema looks simpler.
+   - User asks for 4K ��' Seedance 2.0 (`seedance_2_0`); say why you switched.
+   - User asks for cheaper or faster ��' Kling 3.0 Turbo (`kling3_0_turbo`), Veo 3.1 Lite, or Seedance 1.5 Pro.
+   - Named by the user ��' use it, e.g. Cinema Studio 4.0 (`cinematic_studio_video_4_0`), Kling 3.0, Veo 3.1, Gemini Omni Flash 1.1 (`gemini_omni_flash_1_1`), or Grok Video 1.5 (`grok_video_v15`: one `--start-image` or `--image`, duration 2�?"15s, up to `1080p` without reference media).
+
+   **Video analysis:**
+   - Rate a finished video's hook, virality potential, attention, retention, or distraction risk ��' Virality Predictor (`brain_activity`). This is a video analysis model that returns a text score/report, not a generated media asset.
+
+   **3D:**
+   - A 3D asset within a playable game or game-wide asset system ��' use `higgsfield-websites` (game product type).
+   - Create an actual 3D mesh/model/GLB from one or more object/product reference images ��' Multi-Image to 3D (`multi_image_to_3d`). Pass 1�?"4 images with repeated `--image`; use `--should_texture true` when the asset needs texture. If the user only asks for a 3D-rendered picture, use an image model instead.
+
+   **Audio:**
+   - **Default for audio generation ��' Seed Audio 1.0 (`seed_audio`).** Use for text-to-audio, sound effects, ambience, foley, impacts, environmental audio, voice-style generations, and music-like audio. It requires `--prompt`; use optional `--audio-references`/`--image-references` only when the user provides references.
+   - Use Sonilo Music (`sonilo_music`) only when the user explicitly asks for Sonilo or you need that specialist music model. It requires `--prompt` and `--duration`, and returns audio.
+   - Use Mirelo Text to Audio (`mirelo_text_to_audio`) only when the user explicitly asks for Mirelo or you need that legacy SFX model. It requires `--prompt` and `--duration`, and returns audio.
+
+   For the actual `--model` ID to pass to `higgsfield generate create`, run `higgsfield model list --json | jq` to map display names to IDs. See `references/model-catalog.md` for the full table.
+
+2. **Pass media inputs straight to flags.** Media flags accept a local file path **or** a UUID. CLI auto-uploads paths and auto-detects job vs upload for UUIDs. No need to pre-upload. Each model declares accepted media roles or `*_references` params �?" see `references/media-inputs.md`.
+3. **Validate quickly.** If unsure of params, run `higgsfield model get <jst> --json` once and pass only what's needed. Validate the preferred model before falling back to an older one. Use schema defaults otherwise. The server returns `adjustments` for non-fatal coercions (e.g. `aspect_ratio=99:99` ��' closest match) and a structured error for invalid declared-param values.
+4. **Submit and wait in one shot.** `higgsfield generate create <jst> [--prompt "..."] [media flags] [param flags] --wait`. Blocks until terminal status and prints the result on stdout. Tunables: `--wait-timeout 20m` (default 10m), `--wait-interval 5s` (default 3s). Virality Predictor does not need a prompt; pass `--video`.
+5. **Deliver.** For generated media and 3D assets, send the primary result URL plus a one-line summary (model, duration if video; GLB/asset URL for 3D). For Virality Predictor, deliver the scores, business interpretation, and the Open report link. Do not surface Virality Predictor `.glb`, `.bin`, or region-table internals in normal chat output.
+
+To inspect or rerun later, `higgsfield generate list --json` and `higgsfield generate get <id> --json` work for retrospection. `higgsfield generate wait <id>` is still available if you ever need to rejoin a job started without `--wait`.
+
+For workflow jobs, use `higgsfield generate workflow <workflow_name> ... --wait`. Cost syntax is `higgsfield generate cost workflow <workflow_name> ...`. See `references/workflows.md`.
+
+## Media flags
+
+| Flag | Purpose | Models that accept it |
+|---|---|---|
+| `--image <path-or-id>` | reference image | most image models, `grok_video_v15`, `multi_image_to_3d`, `seedance_2_0`, `seedance_2_5`, `veo3_1`, `marketing_studio_video` |
+| `--start-image <path-or-id>` | first frame for image-to-video transitions | `grok_video_v15`, `kling3_0`, `kling3_0_turbo`, `kling2_6`, `veo3_1`, `seedance_2_0`, `seedance_2_5`, `marketing_studio_video` |
+| `--end-image <path-or-id>` | last frame for transitions | `kling3_0`, `seedance_2_0`, `seedance_2_5`, `marketing_studio_video` |
+| `--video <path-or-id>` | reference or analyzed video | `seedance_2_0`, `seedance_2_5`, `brain_activity` |
+| `--audio <path-or-id>` | reference audio (lipsync, soundtrack match) | `seedance_2_0`, `seedance_2_5` (reference input; distinct from generating output audio) |
+
+For reference-array models, the explicit flags are `--image-references`, `--video-references`, and `--audio-references`; `--image`, `--video`, and `--audio` are short aliases when the schema exposes those params.
+
+Each flag accepts either a local file path (auto-uploaded) or a UUID (upload id from `higgsfield upload create`, or a previous job id). Each model declares its own media roles or `*_references` params. See `references/media-inputs.md` for the full table.
+
+## Common params
+
+Flags pass through to model schema. Use `higgsfield model get <jst>` to discover.
+
+```bash
+higgsfield generate create gpt_image_2_6 --prompt "neon city at dusk" --aspect_ratio 16:9 --resolution 2k --wait
+higgsfield generate create nano_banana_flash --prompt "anime character concept, expressive pose" --image ./ref.png --wait
+higgsfield generate create seedance_2_5 --prompt "camera dollies in" --mode omni_reference --start-image ./first.png --duration 12 --resolution 1080p --wait
+higgsfield generate create grok_video_v15 --prompt "cinematic handheld shot, neon rainy street" --start-image ./image.png --duration 5 --resolution 720p --wait
+higgsfield generate create text2image_soul_v2 --prompt "..." --soul-id <soul_ref_id> --quality 2k --wait
+higgsfield generate create multi_image_to_3d --image ./front.png --image ./side.png --should_texture true --wait
+higgsfield generate create seed_audio --prompt "cinematic rain ambience with distant thunder" --wait
+higgsfield generate create sonilo_music --prompt "cinematic synthwave track" --duration 12 --wait
+higgsfield generate create mirelo_text_to_audio --prompt "glass breaking in a large hall" --duration 4 --wait
+higgsfield generate create brain_activity --video ./ad.mp4 --wait
+```
+
+For machine-readable output (chained pipelines, agent context), add `--json`. With `--wait --json` you get the final job object array. Without `--wait`, you get the job IDs. Virality Predictor stores raw analysis and render artifacts in the job params, but the default text output should stay to scores plus Open report.
+
+Stdin prompt: `echo "..." | higgsfield generate create z_image --wait`.
+
+Soul image quality: for `text2image_soul_v2` and `soul_cinematic`, pass `--quality 1.5k` or `--quality 2k`. These are UI-facing tiers; the backend maps them to `720p`/`1080p` and model-specific dimensions from the selected `--aspect_ratio`. `soul_location` has no quality selector; it uses fixed dimensions per aspect ratio.
+
+Soul style presets: `text2image_soul_v2` accepts `--style_id <uuid>`; list curated styles with `higgsfield preset list soul-v2` and pass the chosen id. `--style_id` combines with `--soul-id` but not with an image reference. `soul_cinema_studio` also accepts `--style_id`.
+
+## Marketing Studio
+
+Branded image/video gen: avatars + products + optional setup hooks/settings + ad-style modes. Use models `marketing_studio_video` and `marketing_studio_image`.
+
+### Concepts
+
+- **Avatar** �?" presenter face. Curated `preset` (browse `higgsfield marketing-studio avatars list`) or `custom` (uploaded photos via `higgsfield marketing-studio avatars create`). For UGC modes, an avatar is optional if the brief clearly mentions a person; the backend can create a Soul Character automatically. Pass an avatar when the user wants a specific presenter.
+- **Product** �?" brand item with title + reference images. Imported from URL (`higgsfield marketing-studio products fetch --url ...`) or created from uploaded images (`higgsfield marketing-studio products create`).
+- **Webproduct** �?" App Store / web page version. Auto-routes when fetching App Store URLs.
+- **Hook** �?" reusable opening angle / ad hook. Browse with `higgsfield marketing-studio hooks list`. Hook text is prepended to the user's prompt; it does not replace `--prompt`.
+- **Setting** �?" reusable environment / scene context. Browse with `higgsfield marketing-studio settings list`.
+- **Ad reference** �?" reusable inspiration video that can be bound to an avatar and/or product. Created from an uploaded video (`--video-input <upload_id>`) or a previous generation job (`--job <job_id>`). Browse with `higgsfield marketing-studio ad-references list`. See `references/marketing-ad-references.md`.
+- **Brand kit** �?" captures a brand's identity (name, logo, hero images, colours, fonts, tone) for reuse across image generations. Created by handing in a website URL (`higgsfield marketing-studio brand-kits fetch --url https://�?� --wait`). See `references/marketing-brand-kits.md`.
+- **Ad format** �?" presets that drives the visual structure of a generated image (`headline`, `bullet-points`, etc.). Read-only, browse with `higgsfield marketing-studio ad-formats list`. Required input for `dtc-ads generate`.
+
+### Discovery commands
+
+Use these exact list commands when the user asks what already exists:
+
+```bash
+higgsfield marketing-studio avatars list --json
+higgsfield marketing-studio products list --json
+higgsfield marketing-studio hooks list --json
+higgsfield marketing-studio settings list --json
+higgsfield marketing-studio ad-references list --json
+higgsfield marketing-studio brand-kits list --json
+higgsfield marketing-studio ad-formats list --json
+```
+
+`--hook_id` and `--setting_id` are supported by `marketing_studio_video` only; do not pass them to `marketing_studio_image`.
+
+### UX rules (additional)
+
+- One question per phase. Don't ask product+avatar+mode upfront.
+- **Two ad approaches are mutually exclusive.** Either the user gives an ad reference video (reference-driven) **or** picks hook/setting blocks (composed-from-blocks) �?" never both. If the user has an ad reference selected, do not offer hook/setting; if hook/setting are picked, do not offer to attach an ad reference.
+- **Ad reference source.** The only valid inputs are a local video file (uploaded via `higgsfield upload create ... --video`) or a prior video job. If the user provides anything else, ask for a local file.
+- **`dtc-ads` ad format is mandatory.** Always ask the user to pick from `ad-formats list`. There is no auto-default �?" both the CLI and server reject calls without `--format-id`.
+- **`dtc-ads` optional inputs.** Suggest avatars, products, and reference media when the brief calls for them; only attach what the user picks.
+
+### Workflow �?" quick ad video
+
+1. **Get product.**
+   - Existing product ��' `higgsfield marketing-studio products list --json`
+   - URL ��' `higgsfield marketing-studio products fetch --url <url> --wait` (polls until import done)
+   - Local images ��' `higgsfield upload create <photo>...` then `higgsfield marketing-studio products create --title "..." --image <id>...`
+   Capture product id. When using `--hook_id`, strongly prefer passing `--product_ids`; hooks are designed to pivot into a product and work poorly without product context.
+2. **Pick avatar if needed.**
+   - Default: `higgsfield marketing-studio avatars list` and pick a preset matching the brand voice.
+   - Custom: `higgsfield marketing-studio avatars create --name "..." --image <upload_id>`.
+   For UGC modes, you may omit `--avatars` when no specific presenter is required and the brief mentions a person; the backend can synthesize a Soul Character.
+3. **Optionally pick setup items.**
+   - Hook: `higgsfield marketing-studio hooks list --json`
+   - Setting: `higgsfield marketing-studio settings list --json`
+   Pass selected IDs as `--hook_id <hook_id>` and `--setting_id <setting_id>` for `marketing_studio_video` only. Do not copy the hook's prompt into `--prompt` unless the user explicitly wants to reinforce the same wording.
+4. **Pick mode if needed.** Default is `ugc`; `--mode` is not required just because `--hook_id` is present. Other current slugs: `ugc_how_to`, `ugc_unboxing`, `product_showcase`, `product_review`, `tv_spot`, `wild_card`, `ugc_virtual_try_on`, `virtual_try_on`. **Hook/setting are valid only for `ugc`, `ugc_how_to`, `ugc_unboxing`, `product_review`, `ugc_virtual_try_on`** �?" do not pass `--hook_id` / `--setting_id` with the other modes. See `references/marketing-modes.md`.
+5. **Generate (one-shot).**
+   ```bash
+   PRODUCT_IDS_JSON=$(mktemp)
+   AVATARS_JSON=$(mktemp)
+   printf '["<product_id>"]' > "$PRODUCT_IDS_JSON"
+   printf '[{"id":"<avatar_id>","type":"preset"}]' > "$AVATARS_JSON"
+
+   higgsfield generate create marketing_studio_video \
+     --prompt "..." \
+     --avatars @"$AVATARS_JSON" \
+     --product_ids @"$PRODUCT_IDS_JSON" \
+     --mode ugc \
+     --duration 15 \
+     --resolution 720p \
+     --aspect_ratio 9:16 \
+     --wait
+   ```
+   Add `--hook_id <hook_id>` and/or `--setting_id <setting_id>` when a setup hook/setting was selected.
+   `product_ids` and `avatars` are JSON arrays; pass them via `@/path/to/file.json`. Do not pass a bare UUID to `--product_ids`.
+   Resolution is `480p`, `720p`, or `1080p`. Aspect ratio is one of `auto`/`21:9`/`16:9`/`4:3`/`1:1`/`3:4`/`9:16`. `--generate-audio true` is supported here (default `false`). `--wait` blocks until done; bump `--wait-timeout 30m` for longer ad runs.
+6. **Deliver.** URL + one-line summary (mode, duration).
+
+### Click-to-Ad shortcut (URL-driven)
+
+When the user gives a product URL and wants a marketing video in one go:
+
+```bash
+# 1. Trigger fetch (returns the product id, import runs in the background)
+higgsfield marketing-studio products fetch --url https://shop.example.com/sneakers --wait
+
+# 2. Generate the marketing video against the same URL �?" backend reuses the entity
+higgsfield generate create marketing_studio_video \
+  --url https://shop.example.com/sneakers \
+  --mode ugc \
+  --duration 15 \
+  --aspect_ratio 9:16 \
+  --wait
+```
+
+Backend dedupes by URL, so repeated runs reuse the existing entity instead of re-fetching.
+
+### Workflow �?" marketing image
+
+Same as above but use `marketing_studio_image` model:
+
+```bash
+higgsfield generate create marketing_studio_image \
+  --prompt "..." \
+  --aspect_ratio 1:1 \
+  --resolution 2k \
+  --wait
+```
+
+## Virality Predictor video scoring
+
+Use Virality Predictor (`brain_activity`) when the user wants to evaluate a finished video as a business creative: hook strength, virality potential, attention, retention, or how well the content/product holds focus and minimizes distraction. Treat "Virality Predictor" as the customer-facing feature name; `brain_activity` is only the CLI/job_set_type.
+
+```bash
+higgsfield generate create brain_activity --video ./creative.mp4 --wait
+```
+
+The result is text, not a generated image/video. Report the overall score, peak hook second, sustain score, strongest/weakest regions, and report URL if present. Interpret it as an objective attention proxy for creative testing: higher Visual/Auditory/Language/Attention scores suggest stronger stimulus and focus; lower Default Mode is better because it suggests less mind-wandering.
+
+The CLI prints an Open report URL like `https://<app-domain>/apps/virality-predictor?resultJobId=<job_id>`. Send that URL for the visual report. Raw artifact URLs such as `brain_example_url`, `vertexMapBinaryUrl`, and `vertexMapUrl` are implementation details; mention them only when the user asks for raw data or implementation details.
+
+Good final shape:
+
+```text
+Overall score: 44/100
+Peak hook: 49% at 1s
+Sustain: 89%
+Strongest region: Visual Cortex
+Risk: Default Mode is high, which can indicate mind-wandering.
+
+Open report: <report_url>
+```
+
+## Errors
+
+- `Missing required params: prompt` ��' user gave no prompt; ask for it.
+- `Missing required params: medias` on `brain_activity` / Virality Predictor ��' pass exactly one video via `--video <path-or-id>`.
+- `Invalid values: aspect_ratio=99:99 (allowed: ...)` ��' bad enum; pick from allowed.
+- `Unknown params: foo` ��' schema doesn't accept that flag; check `higgsfield model get <jst>`. If this happens for `hook_id` or `setting_id`, the selected model/job_set_type does not support Marketing Studio setup items.
+- `Session expired` ��' `higgsfield auth login`.
+
+See `references/troubleshooting.md` for more.
+
+## Reference docs
+
+Load on demand:
+
+- `references/model-catalog.md` �?" picking the right model for the task
+- `references/workflows.md` �?" `draw_to_video` and `reframe` workflow generation
+- `references/prompt-engineering.md` �?" writing prompts that work
+- `references/media-inputs.md` �?" image/video/audio reference flows and Virality Predictor video analysis
+- `references/troubleshooting.md` �?" common errors and fixes
+- `references/marketing-avatars.md` �?" preset vs custom avatars
+- `references/marketing-products.md` �?" URL fetch vs manual product create
+- `references/marketing-setup-items.md` �?" hooks/settings discovery and usage
+- `references/marketing-ad-references.md` �?" ad reference videos (create/list/get)
+- `references/marketing-brand-kits.md` �?" brand kits (fetch from URL, list, get)
+- `references/marketing-dtc-ads.md` �?" DTC Ads Engine (`dtc-ads generate`)
+- `references/marketing-modes.md` �?" every Marketing Studio mode
+
+
+web search: 
+web search: site.runpod.io gpu pricing RTX 4090 A40 A6000 storage pricing ...
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Datos/hf_costos_matriz.md' -Raw -Encoding UTF8; Get-Content -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Datos/bench_render_resultados.md' -Raw -Encoding UTF8" in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Referencias/Tablero_usuario/Analisis del tablero.md' -Raw -Encoding UTF8; Get-Content -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Fase 0 - Analisis.md' -Raw -Encoding UTF8" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1137ms:
+# Higgsfield: matriz de costos para arte de videojuego
+
+Generado con `herramientas/hf_costos_matriz.py`. Solo `generate cost`: no se creo ningun trabajo ni se gasto ningun credito.
+Las cotizaciones con imagen usan un marcador gris; las de `model_url` usan una URL ficticia.
+
+| Grupo | Caso | Creditos | Error |
+|---|---|---|---|
+| imagen | gpt_image_2_6 calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_6 calidad=low 2k | 0.5 |  |
+| imagen | gpt_image_2_6 calidad=low 4k | 0.75 |  |
+| imagen | gpt_image_2_6 calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_6 calidad=medium 2k | 1 |  |
+| imagen | gpt_image_2_6 calidad=medium 4k | 1.25 |  |
+| imagen | gpt_image_2_6 calidad=high 1k | 1.5 |  |
+| imagen | gpt_image_2_6 calidad=high 2k | 2.75 |  |
+| imagen | gpt_image_2_6 calidad=high 4k | 4.25 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 1k | 2.5 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 2k | 4.5 |  |
+| imagen | gpt_image_2_6 calidad=xhigh 4k | 7 |  |
+| imagen | gpt_image_2_6 calidad=max 1k | 5 |  |
+| imagen | gpt_image_2_6 calidad=max 2k | 9 |  |
+| imagen | gpt_image_2_6 calidad=max 4k | 15 |  |
+| imagen | gpt_image_2_6 high 1k fondo transparente | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k con 1 referencia | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k con 4 referencias | 1.5 |  |
+| imagen | gpt_image_2_6 high 1k lote de 4 | 6 |  |
+| imagen | gpt_image_2_6_flare calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_5 calidad=low 1k | 0.25 |  |
+| imagen | gpt_image_2_6_flare calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_5 calidad=medium 1k | 0.5 |  |
+| imagen | gpt_image_2_6_flare calidad=high 1k | 1.5 |  |
+| imagen | gpt_image_2_5 calidad=high 1k | 1.5 |  |
+| imagen | nano_banana_pro 1k | 2 |  |
+| imagen | nano_banana_flash (NB2) 1k | 1.5 |  |
+| imagen | nano_banana_2_1 1k | 1.5 |  |
+| imagen | nano_banana_pro 2k | 2 |  |
+| imagen | nano_banana_flash (NB2) 2k | 2 |  |
+| imagen | nano_banana_2_1 2k | 2 |  |
+| imagen | nano_banana_pro 4k | 4 |  |
+| imagen | nano_banana_flash (NB2) 4k | 3 |  |
+| imagen | nano_banana_2_1 4k | 3 |  |
+| imagen | nano_banana_pro 2k con 4 referencias | 2 |  |
+| imagen | seedream_5_5 1k | 2.5 |  |
+| imagen | 3d_jutsu_angles 1k | 1.25 |  |
+| imagen | seedream_5_5 1.5k | 2.5 |  |
+| imagen | 3d_jutsu_angles 1.5k | 1.25 |  |
+| imagen | seedream_5_5 2k | 3.5 |  |
+| imagen | 3d_jutsu_angles 2k | 2.5 |  |
+| imagen | 3d_jutsu_angles 2k con 1 referencia | 2.5 |  |
+| imagen | seedream_5_5 2k con 4 referencias | 3.5 |  |
+| imagen | seedream_v5_pro (defecto) | 2.5 |  |
+| imagen | seedream_v5_lite (defecto) | 1 |  |
+| imagen | seedream_5_0_flash (defecto) | 0.5 |  |
+| imagen | seedream_v4_5 (defecto) | 1 |  |
+| imagen | flux_3_image (defecto) | 2 |  |
+| imagen | flux_2 (defecto) | 1 |  |
+| imagen | flux_kontext (defecto) | 1.5 |  |
+| imagen | z_image (defecto) | 0.15 |  |
+| imagen | text2image_soul_v2 (defecto) | 0.12 |  |
+| imagen | soul_location (defecto) | 0.12 |  |
+| imagen | recraft_v4_1 (defecto) | 1.25 |  |
+| imagen | ideogram_4_5 (defecto) | 6.25 |  |
+| imagen | kling_omni_image (defecto) | 0.5 |  |
+| imagen | image_auto (defecto) | 2 |  |
+| imagen | nano_banana (defecto) | 1 |  |
+| imagen | nano_banana_2_lite (defecto) | 1 |  |
+| imagen | grok_image_2_0 (defecto) | 2 |  |
+| imagen | minimax_h3_image (defecto) | 4 |  |
+| imagen | flux_kontext con 1 referencia | 1.5 |  |
+| imagen | ideogram_vector generate calidad=low | 4 |  |
+| imagen | ideogram_vector generate calidad=medium | 5 |  |
+| imagen | ideogram_vector generate calidad=high | 6.5 |  |
+| imagen | ideogram_vector vectorize | 3 |  |
+| utilidad | image_background_remover | 1 |  |
+| utilidad | bytedance_image_upscale 2k | 2 |  |
+| utilidad | bytedance_image_upscale 4k | 2 |  |
+| utilidad | topaz_image 2048x2048 | - | Error: job_type 'topaz_image' does not support alpha v2 cost estimation |
+| utilidad | topaz_image 4096x4096 | - | Error: job_type 'topaz_image' does not support alpha v2 cost estimation |
+| utilidad | nano_banana_2_relight | 2 |  |
+| utilidad | nano_banana_2_shots | 4 |  |
+| utilidad | outpaint | 2 |  |
+| utilidad | flux_2_pro_outpaint | - | Error: at least one expand side must be non-zero | Hint: Run: hf model get flux_2_pro_outpaint |
+| autosprite | autosprite iso_walk_down tier=turbo 25f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down tier=pro 25f 256px | 3 |  |
+| autosprite | autosprite iso_walk_down tier=max 25f 256px | 14 |  |
+| autosprite | autosprite idle turbo 25f 256px | 2 |  |
+| autosprite | autosprite walk turbo 25f 256px | 2 |  |
+| autosprite | autosprite attack turbo 25f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 8f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 12f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 16f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 49f 256px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 128px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 512px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo 25f 1024px | 2 |  |
+| autosprite | autosprite iso_walk_down turbo remove_bg=ultra | 2 |  |
+| autosprite | autosprite custom turbo | 2 |  |
+| autosprite | autosprite no humanoide (gato) iso_walk_down turbo | 2 |  |
+| 3d | tripo_3d texto (defecto) | 5 |  |
+| 3d | tripo_3d texto sin textura | 2.5 |  |
+| 3d | tripo_3d texto detallado | 12.5 |  |
+| 3d | hunyuan3d_v3_1_text_to_3d std | 7 |  |
+| 3d | hunyuan3d_v3_1_text_to_3d pro | 12 |  |
+| 3d | meshy_v6_text_to_3d full | 25 |  |
+| 3d | meshy_v6_text_to_3d preview | 25 |  |
+| 3d | meshy_v6_text_to_3d lowpoly | 25 |  |
+| 3d | image_to_3d (defecto: sin textura) | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d con textura | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + remesh | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + rig | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | image_to_3d textura + rig + animacion | - | Error: job_type 'image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas (defecto) | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas con textura | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | multi_image_to_3d 4 vistas textura + rig | - | Error: job_type 'multi_image_to_3d' does not support alpha v2 cost estimation |
+| 3d | meshy_v7_image_to_3d (defecto: textura + remesh) | 38 |  |
+| 3d | meshy_v7_image_to_3d lowpoly | 38 |  |
+| 3d | meshy_v7_image_to_3d sin textura | 25 |  |
+| 3d | meshy_v7_image_to_3d + rig | 44 |  |
+| 3d | meshy_v7_image_to_3d + rig + animacion | 47.5 |  |
+| 3d | meshy_v7_image_to_3d ultra | 44 |  |
+| 3d | hunyuan3d_v3_image_to_3d Normal | 11 |  |
+| 3d | hunyuan3d_v3_image_to_3d LowPoly quads | - | Error: face_count: Input should be greater than or equal to 40000 |
+| 3d | hunyuan3d_v3_image_to_3d Geometry (sin textura) | 7 |  |
+| 3d | hunyuan3d_v3_image_to_3d Normal + PBR | 15 |  |
+| 3d | tripo_h3_1_image_to_3d (defecto) | 9 |  |
+| 3d | tripo_h3_1_image_to_3d sin textura | 6 |  |
+| 3d | tripo_h3_1_image_to_3d quads 8000 caras | 10.5 |  |
+| 3d | tripo_h3_1_image_to_3d detallado | 18 |  |
+| 3d | tripo_h3_1_multiview_to_3d 4 vistas | 9 |  |
+| 3d | tripo_p2_image_to_3d (defecto) | 34 |  |
+| 3d | tripo_p2_image_to_3d quads 8000 caras | 34 |  |
+| 3d | tripo_p2_image_to_3d textura=fast | 34 |  |
+| 3d | tripo_p2_image_to_3d textura=detailed | 37 |  |
+| 3d | tripo_p2_image_to_3d textura=extreme | 40 |  |
+| 3d | sam_3_3d (objetos desde foto) | - | Error: job_type 'sam_3_3d' does not support alpha v2 cost estimation |
+| 3d | sam_3_3d_body | 1 |  |
+| 3d | 3d_rigging (solo rig) | - | Error: job_type '3d_rigging' does not support alpha v2 cost estimation |
+| 3d | 3d_rigging + animacion | - | Error: job_type '3d_rigging' does not support alpha v2 cost estimation |
+| 3d | meshy_v5_remesh quads 8000 | 6 |  |
+| 3d | meshy_v5_retexture por texto | 9.5 |  |
+| 3d | meshy_v5_retexture por imagen | 9.5 |  |
+| audio | elevenlabs_music_v2_5 15s instrumental | 2.18 |  |
+| audio | sonilo_music 15s | 0.94 |  |
+| audio | elevenlabs_music_v2_5 30s instrumental | 4.36 |  |
+| audio | sonilo_music 30s | 1.88 |  |
+| audio | elevenlabs_music_v2_5 60s instrumental | 8.72 |  |
+| audio | sonilo_music 60s | 3.75 |  |
+| audio | elevenlabs_music_v2_5 120s instrumental | 17.44 |  |
+| audio | sonilo_music 120s | 7.5 |  |
+| audio | elevenlabs_music_v2_5 180s instrumental | 26.16 |  |
+| audio | sonilo_music 180s | 11.25 |  |
+| audio | elevenlabs_music_v2 30s | 1.92 |  |
+| audio | elevenlabs_music_v2 120s | 7.68 |  |
+| audio | mirelo_text_to_audio (SFX) 1s | 0.25 |  |
+| audio | mirelo_text_to_audio (SFX) 3s | 0.75 |  |
+| audio | mirelo_text_to_audio (SFX) 5s | 1.25 |  |
+| audio | mirelo_text_to_audio (SFX) 10s | 2.5 |  |
+| audio | seed_audio (defecto) | 0.1 |  |
+| video | seedance_2_0_mini texto (defecto) | 5 |  |
+| video | seedance_2_0_mini imagen->video (defecto) | 5 |  |
+| video | seedance1_5 texto (defecto) | 4.8 |  |
+| video | seedance1_5 imagen->video (defecto) | 4.8 |  |
+| video | grok_video_v15_lite texto (defecto) | 5 |  |
+| video | grok_video_v15_lite imagen->video (defecto) | 5 |  |
+| video | kling3_0_turbo texto (defecto) | 7.5 |  |
+| video | kling3_0_turbo imagen->video (defecto) | 7.5 |  |
+| video | wan3_0 texto (defecto) | 8.75 |  |
+| video | wan3_0 imagen->video (defecto) | 8.75 |  |
+| video | kling_o3_flf texto (defecto) | 6.25 |  |
+| video | kling_o3_flf imagen->video (defecto) | 6.25 |  |
+| video | veo3_1_lite texto (defecto) | 12 |  |
+| video | veo3_1_lite imagen->video (defecto) | 12 |  |
+| video | kling4_0 texto (defecto) | 32.5 |  |
+| video | kling4_0 imagen->video (defecto) | - | Error: Text-to-video does not accept reference inputs. | Hint: Run: hf model get kling4_0 |
+| video | seedance_2_5 texto (defecto) | 35 |  |
+| video | seedance_2_5 imagen->video (defecto) | - | Error: mode 't2v' does not accept reference media | Hint: Run: hf model get seedance_2_5 |
+
+---
+tipo: datos
+fase: 0
+fecha: 2026-11-12
+---
+
+# Rendimiento de los renderizadores de Godot 4.7.2 en la Intel HD 620
+
+Medido con `pruebas/bench_render/` (escrito por Codex, revisado y ejecutado por Claude). Cada corrida calienta 3 s y mide de 10 a 12 s con vsync desactivado. Los JSON de cada corrida est�n en `pruebas/bench_render/corridas/`.
+
+- **base:** 150 mallas con sombreado toon, suelo con textura, una luz direccional con sombra.
+- **hierba:** la base m�s 40 000 briznas en un `MultiMesh` con viento.
+- **sprites:** la base m�s 200 `Sprite3D` en billboard, con recorte alfa y sombra.
+- **sdfgi:** la base con SDFGI, SSAO y glow.
+
+## Corrida principal
+
+| M�todo | Controlador | Escena | Resoluci�n | FPS medio | FPS 1 % | Cuadro m�x. ms | Llamadas | Primitivas | Memoria MiB |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| forward_plus | vulkan | base | 1280�720 | 68,1 | 54,8 | 19 | 305 | 93 321 | 117 |
+| forward_plus | vulkan | base | 1920�1066 | 38,6 | 32,4 | 31 | 305 | 93 429 | 149 |
+| forward_plus | vulkan | hierba | 1280�720 | 34,5 | 29,9 | 34 | 309 | 573 452 | 121 |
+| forward_plus | vulkan | hierba | 1920�1066 | 22,9 | 19,1 | 55 | 308 | 573 429 | 152 |
+| forward_plus | vulkan | sdfgi | 1280�720 | 19,7 | 8,7 | 119 | 306 | 93 468 | 481 |
+| forward_plus | vulkan | sdfgi | 1920�1066 | 12,9 | 7,4 | 135 | 306 | 93 437 | 556 |
+| forward_plus | vulkan | sprites | 1280�720 | 58,4 | 32,8 | 50 | 707 | 94 205 | 118 |
+| forward_plus | vulkan | sprites | 1920�1066 | 35,5 | 27,8 | 38 | 707 | 94 228 | 149 |
+| gl_compatibility | opengl3_angle | base | 1280�720 | 73,3 | 48,5 | 21 | 306 | 93 497 | 15 |
+| gl_compatibility | opengl3_angle | base | 1920�1066 | 61,5 | 36,4 | 30 | 306 | 93 476 | 24 |
+| gl_compatibility | opengl3_angle | hierba | 1280�720 | 41,7 | 27,7 | 37 | 309 | 573 452 | 17 |
+| gl_compatibility | opengl3_angle | hierba | 1920�1066 | 30,0 | 21,7 | 48 | 308 | 573 413 | 26 |
+| gl_compatibility | opengl3_angle | sprites | 1280�720 | 40,5 | 24,1 | 44 | 707 | 94 325 | 15 |
+| gl_compatibility | opengl3_angle | sprites | 1920�1066 | 40,2 | 23,7 | 44 | 707 | 94 204 | 24 |
+| mobile | vulkan | base | 1280�720 | 90,2 | 71,5 | 14 | 297 | 93 417 | 82 |
+| mobile | vulkan | base | 1920�1066 | 56,4 | 44,5 | 24 | 297 | 93 423 | 97 |
+| mobile | vulkan | hierba | 1280�720 | 42,5 | 35,7 | 29 | 299 | 573 444 | 85 |
+| mobile | vulkan | hierba | 1920�1066 | 29,9 | 24,9 | 41 | 299 | 573 403 | 100 |
+| mobile | vulkan | sprites | 1280�720 | 74,8 | 56,5 | 19 | 679 | 94 234 | 82 |
+| mobile | vulkan | sprites | 1920�1066 | 49,7 | 28,3 | 78 | 679 | 94 207 | 97 |
+
+Las corridas de �1920�1066� se pidieron a 1920�1080 en ventana; la ventana no cabe en la pantalla y Godot la recorta.
+
+## Corridas extra: D3D12 y 1080p a pantalla completa
+
+| M�todo | Controlador | Escena | Resoluci�n | FPS medio | FPS 1 % | Cuadro m�x. ms | Llamadas | Primitivas | Memoria MiB |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| mobile | d3d12 | base | 1280�720 | 114,4 | 50,8 | 33 | 297 | 93 515 | 95 |
+| mobile | d3d12 | hierba | 1280�720 | 42,9 | 35,7 | 28 | 299 | 573 331 | 99 |
+| mobile | d3d12 | sprites | 1280�720 | 98,3 | 60,8 | 18 | 679 | 94 089 | 145 |
+| mobile | d3d12 | hierba | 1920�1080 | 31,4 | 28,6 | 36 | 299 | 573 281 | 114 |
+| mobile | vulkan | base | 1920�1080 | 56,6 | 32,6 | 44 | 297 | 93 305 | 97 |
+| mobile | vulkan | hierba | 1920�1080 | 32,0 | 28,2 | 36 | 299 | 573 293 | 100 |
+| gl_compatibility | opengl3_angle | base | 1920�1080 | 71,3 | 46,1 | 24 | 305 | 93 312 | 24 |
+| gl_compatibility | opengl3_angle | hierba | 1920�1080 | 32,1 | 28,5 | 35 | 308 | 573 330 | 26 |
+| forward_plus | d3d12 | hierba | 1280�720 | 366,7 | 167,0 | 13 | 310 | 574 447 | 136 |
+
+La �ltima fila es an�mala: 367 fps con 574 000 primitivas no es cre�ble en esta gr�fica. No se usa.
+
+## L�mites
+
+- Las escenas son sint�ticas. No representan el juego.
+- Durante la corrida principal hab�a tareas de Codex activas. Una corrida r�pida anterior dio cifras casi iguales en Mobile (90,8 / 43,2 / 75,0).
+- La primera corrida de Forward+ super� el l�mite de 90 s, por la compilaci�n de shaders del primer arranque.
+- La memoria es la contabilidad del motor, no la memoria dedicada de video.
+
+
+ succeeded in 1123ms:
+---
+tipo: referencia
+fase: 0
+fecha: 2026-11-12
+estado: borrador para validar en la Fase 1
+---
+
+# An�lisis del tablero de referencia
+
+Son 14 capturas que Guillermo adjunt� el 2026-11-12. Vienen de un video de YouTube del canal @stefan_3d_ai sobre �After the Wind�, un juego hecho con IA (marca r/TopologyAI).
+
+**Uso:** fijan el nivel de acabado y el cat�logo de pantallas. No se copian el nombre, el logotipo, los personajes, las criaturas, el mapa ni la ambientaci�n.
+
+## Qu� muestra cada captura
+
+| Captura | Pantalla | Lo que interesa |
+|---|---|---|
+| ![[ref_03.jpg\|220]] | T�tulo | Logotipo ilustrado sobre un diorama lateral. Men� en un panel de papel. La opci�n activa se marca con un trazo de pincel. Ayudas de tecla abajo a la derecha. |
+| ![[ref_14.jpg\|220]] | Creador de personaje, cuerpo completo | Chibi de 2,5 a 3 cabezas. Opciones: nombre, cuerpo, piel, peinado, color de pelo, barba, bigote, ojos y color de ojos. Muestras de color en fila. Girar, restablecer, color libre y �sorpr�ndeme�. |
+| ![[ref_01.jpg\|220]] | Creador de personaje, rostro | Primer plano para pelo y cara. Rostro plano de anime con ojos simples: la expresi�n cabe en una textura. |
+| ![[ref_09.jpg\|220]] | Hub lateral | Diorama 2.5D en capas: hierba delante, tiendas y forja en el plano de juego, monta�as con perspectiva atmosf�rica y cielo saturado. Aviso de interacci�n sobre el objeto. |
+| ![[ref_12.jpg\|220]] | Hub con un NPC | Aviso de misi�n en una banda de tinta centrada. El NPC se distingue por su silueta (cuernos, pelo largo). |
+| ![[ref_08.jpg\|220]] | Exploraci�n 3/4 | C�mara alta de 50 a 60�. Suelo pintado con trazo visible, sendero de tierra, rocas facetadas con musgo y sombras suaves. |
+| ![[ref_05.jpg\|220]] | HUD de exploraci�n | Retrato enmarcado, barra de vida verde, barra de energ�a amarilla y contador de pociones. Misi�n arriba a la derecha con hora del d�a. Controles abajo a la derecha. |
+| ![[ref_06.jpg\|220]] | Combate | N�mero de da�o sobre el enemigo. La lista de combos cambia seg�n el ataque en curso. |
+| ![[ref_10.jpg\|220]] | Recolecci�n | Aviso �Obtenido� en una banda de tinta, con el total en la bolsa. El toc�n queda cortado: el mundo cambia al recolectar. |
+| ![[ref_04.jpg\|220]] | Mapa | Ilustraci�n sobre papel con zonas rotuladas, iconos dibujados, filtros arriba, leyenda abajo y un panel �Est�s aqu��. |
+| ![[ref_13.jpg\|220]] | Carga | Dos vi�etas tipo c�mic que cuentan una escena del mundo, con el nombre de la zona. |
+| ![[ref_02.jpg\|220]] | Exploraci�n | Rocas gigantes como hitos. El r�tulo anuncia un sistema de clima din�mico. |
+| ![[ref_07.jpg\|220]] ![[ref_11.jpg\|220]] | Exploraci�n | El mismo encuadre en movimiento: la c�mara no cambia de �ngulo dentro de un modo. |
+
+## Por qu� se ve profesional
+
+1. **Un solo lenguaje de material.** Suelo, roca, tela e interfaz parecen pintados con el mismo pincel: trazo visible, planos facetados y nada de ruido fotogr�fico.
+2. **Estructura de valores.** El personaje lleva el mayor contraste y el color m�s saturado (la capa roja) sobre un suelo de valor medio. Las rocas claras marcan hitos.
+3. **Proporci�n constante.** Cabeza grande, manos y pies simplificados. El personaje se lee aunque mida unos 50 px de alto en pantalla.
+4. **C�mara disciplinada.** 3/4 alta en exploraci�n y lateral por capas en el hub. No se mezclan �ngulos dentro de un modo.
+5. **Luz sencilla y coherente.** Una luz principal c�lida con sombra suave y relleno fr�o. No hay negros puros. El fondo del hub se aclara con la distancia.
+6. **Interfaz como objeto f�sico.** Papel, tinta y trazos de pincel sirven de estados (selecci�n, avisos). Una tipograf�a rotulada para t�tulos y otra muy legible para datos.
+7. **Detalle graduado.** Los mechones de hierba se concentran junto a senderos y rocas. Quedan zonas amplias de descanso visual.
+8. **Continuidad.** T�tulo, carga, mapa y HUD comparten paleta y trazo.
+
+## Hip�tesis de traducci�n a nuestro juego
+
+Se validan en la Fase 1, una por una.
+
+| Del tablero | En el Proyecto NASA-Ecuador |
+|---|---|
+| Hub lateral del campamento | Cuarto y barrio de Guayaquil al atardecer |
+| Exploraci�n 3/4 del valle | Campus, malec�n, laboratorio y centro de simulaci�n |
+| Mapa de pergamino | Cuaderno de ingenier�a con papel milimetrado |
+| Pergamino y pincel | Papel t�cnico, cinta, sellos y telemetr�a con DotGothic16 |
+| Vi�etas de carga | Apuntes ilustrados con el gato cient�fico |
+| Capa roja como acento | Un acento propio del protagonista, por definir |
+
+---
+tipo: fase
+fase: 0
+titulo: Investigaci�n t�cnica, arquitectura y pipeline
+estado: en revisi�n, espera la aprobaci�n de Guillermo
+fecha: 2026-11-12
+---
+
+# Fase 0 - Investigaci�n t�cnica, arquitectura y pipeline
+
+> Documento de decisi�n. El detalle est� en los informes de `Investigacion/` y en los datos de `Datos/`. Nada de aqu� se ejecuta hasta que Guillermo lo apruebe.
+
+## 0. Qu� se decide en esta puerta
+
+| ID | Decisi�n propuesta | Evidencia | �Cambia el plan maestro? |
+|---|---|---|---|
+| D-001 | Renderizador **Mobile**. Mundo 3D a 1280�720 escalado e interfaz a resoluci�n nativa. Meta: 30 fps estables en este port�til. Compatibility queda como perfil de respaldo y Forward+ como perfil opcional para equipos potentes. | Medici�n propia, �2.1 | S�: el plan ped�a Forward+ |
+| D-002 | Sin iluminaci�n global en tiempo real. Una luz direccional con sombra corta, ambiente y relleno. Lightmaps horneados solo en interiores y despu�s de probar el horneado aqu�. | Medici�n y documentaci�n, �2.3 | Responde a �SDFGI vs lightmaps� |
+| D-003 | Personajes principales en **3D chibi**. El gato va en sprites, salvo que la prueba encuentre una v�a de rig viable para cuadr�pedos. | Informe 02 verificado, �3 | No |
+| D-004 | Pipeline: concepto barato  hoja de modelo  imagen a malla con Tripo H3.1  inspecci�n en Godot  rig  GLB. | Informes 02 y 03, �3 | Lo concreta |
+| D-005 | Prueba de pipeline con **tope de 60 cr�ditos** antes de la Fase 1. | �3.4 | La a�ade |
+| D-006 | Presupuesto de los 1000 cr�ditos por partidas, con reglas de gasto. | �4 | La a�ade |
+| D-007 | Arquitectura con nodos, se�ales y `Resource`, sin ECS. Git LFS y CI con GitHub Actions. | �5 | Responde a �ECS vs OOP� |
+| D-008 | Proceso de estudio: tres aprobaciones por recurso, manifiesto y l�mite de reintentos. | Informe 07, �6 | Lo concreta |
+| D-009 | El pilar �mundo vivo� reserva contratos de interacci�n, tiempo, persistencia, audio y paleta desde ya. | Informe 10 verificado, �7 | Lo a�ade |
+| D-010 | Del trabajo anterior se conservan la historia, los datos y la l�gica de misi�n. La presentaci�n visual se rehace. | Informe 08, �8 | No |
+
+## 1. Punto de partida
+
+- **Equipo:** Intel i5-7200U (2 n�cleos), 7,9 GB de RAM e Intel HD Graphics 620. No hay GPU dedicada.
+- **Motor:** Godot 4.7.2-stable. Arranca aqu� con Forward+ (Vulkan 1.3 y D3D12), Mobile y Compatibility. Compatibility no usa el OpenGL de Intel: cae a ANGLE (OpenGL ES 3.0 sobre Direct3D 11).
+- **Higgsfield:** plan Plus con 1006,25 cr�ditos; 1000 son de suscripci�n y se acreditaron el 2026-11-12. Ofrece imagen, video, audio, sprites animados y 3D: imagen a malla, retopolog�a, retexturizado y rig.
+- **Meta visual:** el tablero de [[Analisis del tablero]]. Seg�n el informe [[04_caso_after_the_wind]], ese juego se hizo en Godot con Tripo, Blender y Cascadeur, en unas seis semanas y con mucha direcci�n humana. Estos datos vienen de publicaciones que la verificaci�n no pudo abrir: sirven de orientaci�n, no de presupuesto.
+
+## 2. Motor y renderizado
+
+### 2.1 Medici�n en tu equipo
+
+Fotogramas por segundo: media y, entre par�ntesis, el 1 % m�s lento. Son 29 corridas de 10 a 12 s con `pruebas/bench_render/`.
+
+| Renderizador | Base 720p | Hierba 720p | Sprites 720p | Base 1080p | Hierba 1080p |
+|---|---|---|---|---|---|
+| Mobile (Vulkan) | 90 (72) | 43 (36) | 75 (57) | 57 (33) | 32 (28) |
+| Mobile (D3D12) | 114 (51) | 43 (36) | 98 (61) | sin medir | 31 (29) |
+| Compatibility (ANGLE) | 73 (49) | 42 (28) | 41 (24) | 71 (46) | 32 (29) |
+| Forward+ (Vulkan) | 68 (55) | 35 (30) | 58 (33) | 39 (32)* | 23 (19)* |
+| Forward+ con SDFGI, SSAO y glow | 20 (9) | - | - | 13 (7)* | - |
+
+\* Medido en ventana a 1920�1066.
+
+- **Base:** 150 mallas con sombreado toon, unos 93 000 tri�ngulos, 300 llamadas de dibujo y una luz con sombra.
+- **Hierba:** la base m�s 40 000 briznas con viento (573 000 tri�ngulos).
+- **Sprites:** la base m�s 200 `Sprite3D` que proyectan sombra (700 llamadas de dibujo).
+
+Lo que dicen los n�meros:
+
+1. **SDFGI no es viable aqu�:** 20 fps con ca�das a 9.
+2. **Mobile es el m�s r�pido a 720p y el m�s estable.** Con 700 llamadas de dibujo mantiene de 75 a 98 fps; Compatibility baja a 41.
+3. **A 1080p con hierba densa todos rondan los 30 fps.** El l�mite es el relleno de p�xeles. Por eso el 3D va a 720p y la interfaz a resoluci�n nativa.
+4. **Compatibility rinde parecido en escenas simples** y usa menos memoria de video (de 15 a 26 MiB frente a 82 a 145).
+
+L�mites de la medici�n: las escenas son sint�ticas, no el juego. La corrida de Forward+ con D3D12 dio una cifra an�mala (367 fps) y se descart�. El primer arranque de Forward+ tard� m�s de 90 s.
+
+### 2.2 Qu� ofrece cada renderizador
+
+Datos de la documentaci�n de Godot 4.7, verificados de forma independiente.
+
+| Funci�n | Forward+ | Mobile | Compatibility |
+|---|---|---|---|
+| SDFGI, VoxelGI, niebla volum�trica, FSR | S� | No | No |
+| Mostrar lightmaps horneados | S� | S� | S� |
+| Desenfoque de profundidad (tilt-shift) | S� | S� | No |
+| Decals y proyectores de luz | S� | S� | No |
+| FXAA y SMAA | S� | S� | No |
+| Estelas de part�culas | S� | S� | No |
+| SSAO | S� | No | S�, simplificado |
+| Glow, niebla de altura y MSAA 3D | S� | S� | S� |
+| B�fer de color | - | 10 bits con debanding | 8 bits |
+
+Mobile conserva lo que el pilar �mundo vivo� necesita: desenfoque, decals, estelas y degradados de cielo sin bandas. Pierde el SSAO, que se sustituye por oclusi�n pintada en las texturas.
+
+### 2.3 Iluminaci�n global: SDFGI frente a lightmaps
+
+- **SDFGI queda descartado** por la medici�n y porque solo existe en Forward+.
+- **Los lightmaps horneados son viables en principio.** El horneado necesita una GPU con `RenderingDevice`, y la HD 620 la tiene. Falta medir cu�nto tarda y cu�nta memoria usa: se prueba con un interior peque�o en la prueba de pipeline.
+- **Durante la iteraci�n no hay GI.** Luz direccional, ambiente, un relleno y oclusi�n pintada. Los objetos m�viles reciben luz indirecta por sondas si se hornea.
+
+### 2.4 Sombras 3D sobre sprites 2D
+
+- `Sprite3D` proyecta sombra con recorte alfa (`alpha_cut` en `discard`). El sombreado (`shaded`) viene apagado por defecto.
+- Con billboard, la sombra gira con la c�mara y con varias c�maras el resultado no est� definido. Soluci�n: un plano fijo �solo sombra� orientado a la luz, o una sombra de contacto redonda.
+- Medido: 200 sprites con sombra a 75 fps en Mobile a 720p.
+
+### 2.5 Sombreado estilizado
+
+- `StandardMaterial3D` con difuso toon y rim en personajes. Shader propio solo donde haga falta.
+- Contorno por casco invertido solo en personajes y objetos interactivos. El contorno por posproceso necesita un b�fer que solo tiene Forward+.
+- Textura pintada en el albedo, rugosidad constante y pocos materiales.
+- Hierba en `MultiMesh` por parcelas, con viento en el shader.
+
+### 2.6 Presupuesto inicial de rendimiento
+
+Se calibra en la escena de la prueba de pipeline.
+
+| Recurso | Tri�ngulos | Textura | Materiales |
+|---|---|---|---|
+| Protagonista | 4000 a 6000 | 1024� | 1 o 2 |
+| Gato | 2000 a 3000 | 512� | 1 |
+| NPC cercano | 1500 a 3500 | 512� | 1 o 2 |
+| Prop singular | 500 a 2000 | 512� | 1 |
+| Escena visible | hasta 100 000 | atlas compartidos | hasta 300 llamadas de dibujo |
+
+Hierba: hasta 20 000 briznas visibles, la mitad de lo que dio 43 fps.
+
+### 2.7 C�maras de partida
+
+Son hip�tesis para la prueba de pipeline. La decisi�n final es de la Fase 1.
+
+- **Exploraci�n:** perspectiva con campo de visi�n de 30� e inclinaci�n de 55� hacia abajo, comparada con una c�mara ortogonal en el mismo encuadre.
+- **Hub lateral:** ortogonal, con pocas capas de profundidad y fondo ilustrado.
+- **Desenfoque tilt-shift:** existe en Mobile. Su costo en este equipo est� sin medir.
+
+## 3. Pipeline de arte con IA
+
+### 3.1 Flujo
+
+```mermaid
+flowchart LR
+  A[Ficha del recurso] --> B[Borrador de concepto]
+  B --> C{Puerta de dise�o}
+  C --> D[Hoja de modelo]
+  D --> E[Imagen a malla]
+  E --> F{Inspecci�n en Godot}
+  F --> G[Rig y animaci�n]
+  G --> H[GLB en Godot]
+  H --> I{Puerta en contexto}
+  I --> J[Aprobado en el manifiesto]
+```
+
+En cada rombo decide Guillermo. La puerta en contexto se juzga con la c�mara real y con los fps medidos.
+
+### 3.2 Modelo por tarea
+
+Costos medidos con `generate cost`.
+
+| Tarea | Modelo | Cr�ditos |
+|---|---|---|
+| Borrador de estilo o de concepto | `gpt_image_2_6`, calidad low, 1k | 0,25 |
+| Final de concepto, textura o icono | `gpt_image_2_6`, calidad high, 1k / 2k | 1,5 / 2,75 |
+| Maestro de personaje con referencias | `nano_banana_pro`, 2k | 2 |
+| Vista adicional de un personaje | `3d_jutsu_angles`, 1k | 1,25 |
+| Imagen a malla | `tripo_h3_1_image_to_3d` | 9 |
+| Retopolog�a / retexturizado | `meshy_v5_remesh` / `meshy_v5_retexture` | 6 / 9,5 |
+| Animaci�n de sprite | `autosprite`, turbo / pro | 2 / 3 |
+| M�sica de 2 minutos | `sonilo_music` | 7,5 |
+| Efecto de 3 segundos | `mirelo_text_to_audio` | 0,75 |
+
+### 3.3 Riesgos comprobados
+
+1. **Meshy se retira.** El proveedor retir� `lowpoly` el 30-10-2026 y retira Meshy 7 para geometr�a el 31-12-2026. La producci�n no se apoya en `meshy_v7_image_to_3d`.
+2. **Mixamo solo acepta FBX, OBJ o ZIP.** Si Tripo entrega GLB hace falta convertirlo. Opciones: Blender por script (hay que instalarlo) o el rig de Higgsfield, `3d_rigging`, cuyo costo no se puede cotizar.
+3. **El gato no tiene rig autom�tico** dentro de Higgsfield. Plan seguro: sprites con `autosprite`.
+4. **Cuatro modelos no se pueden cotizar:** `image_to_3d`, `multi_image_to_3d`, `3d_rigging` y `sam_3_3d`. Solo se prueban una vez y con permiso.
+5. **Blender pide 4 n�cleos** y este equipo tiene 2. Servir�a por script, sin garant�a de fluidez.
+6. **La m�sica generada tiene licencias por proveedor** que no est�n verificadas para publicar a trav�s de Higgsfield.
+7. **El rig es la mayor inc�gnita de costo.** Ocho personajes con rig por la �nica v�a cotizada (Meshy 7) costar�an de 352 a 380 cr�ditos. La v�a barata es Tripo a 9 cr�ditos m�s un rig gratuito o sin cotizar: la prueba de pipeline existe para validarla.
+8. **Los cr�ditos del plan no se acumulan.** Seg�n el apartado 9.4 de los t�rminos de Higgsfield, los cr�ditos de suscripci�n caducan al cierre de cada periodo de facturaci�n. Los comprados aparte duran 90 d�as (apartado 9.6).
+
+### 3.4 Prueba de pipeline
+
+Usa un estudiante y un gato de prueba, no los dise�os finales. Se detiene en el primer paso que falle.
+
+| Paso | Qu� se hace | Cr�ditos |
+|---|---|---|
+| 1 | Referencias de prueba: 4 borradores, 2 finales y 2 vistas en pose A | 7 |
+| 2 | Malla del protagonista con Tripo H3.1 (9). Malla del gato (9) solo si hay una v�a de rig para cuadr�pedos. | 18 |
+| 3 | Rig del protagonista: Mixamo (0 cr�ditos) o una ejecuci�n de `3d_rigging` | sin cotizar |
+| 4 | Sprites del gato: caminar en 5 direcciones, reposo y una comparaci�n en pro | 15 |
+| 5 | Un sprite de control del protagonista y una textura de suelo | 3,5 |
+| 6 | Escena en Godot con c�mara 3/4 y c�mara lateral, y horneado de un lightmap | 0 |
+| | **Total cotizado / tope** | **43,5 / 60** |
+
+Puerta de aceptaci�n:
+
+- Percentil 95 del tiempo de cuadro de 33 ms o menos, en un recorrido de 60 s a 720p.
+- Ning�n cambio de ropa, proporci�n o marcas entre direcciones.
+- Lectura correcta en la c�mara alta y en la lateral.
+- Minutos de reparaci�n manual anotados.
+- Veredicto de Guillermo sobre una l�mina comparativa y un video corto.
+
+## 4. Presupuesto de cr�ditos
+
+| Partida | Cr�ditos |
+|---|---|
+| Prueba de pipeline | 60 |
+| Exploraci�n y biblia visual | 20 |
+| 8 personajes: maestros, vistas, expresiones y retratos | 110 |
+| Hub, zona de exploraci�n, materiales, cielos y capas | 70 |
+| 40 props (dise�o 2D) | 85 |
+| Interfaz, iconos, logotipo, mapa y vi�etas de carga | 87 |
+| Utilidades: alfa, ediciones y ampliaci�n | 25 |
+| 5 pistas de m�sica y 30 efectos | 115 |
+| Voz y video, opcionales | 25 |
+| Mallas 3D, retopolog�a y rig | 160 |
+| **Subtotal** | **757** |
+| **Contingencia** | **243** |
+
+Los 160 cr�ditos de 3D alcanzan para unas 17 mallas de Tripo H3.1 sin rig de pago. No alcanzan para 40 props en malla: los props simples se construyen con geometr�a sencilla y textura pintada.
+
+**Caducidad.** Los 1000 cr�ditos se acreditaron el 2026-11-12 y caducan al cierre del periodo de facturaci�n. Si el plan es mensual, eso ocurre hacia el 2026-12-12; la fecha exacta est� por confirmar. Consecuencias:
+
+- Las fases que generan arte (1, 3 y 5) tendr�an que pasar sus puertas dentro de ese periodo, o se pierde el saldo sin usar.
+- La contingencia que siga libre una semana antes del cierre se convierte en recursos ya aprobados: versiones finales, m�sica y props.
+- Si mantienes el plan, cada periodo trae otros 1000 cr�ditos y el presupuesto se reparte por meses.
+
+Reglas de gasto:
+
+1. No se genera nada fuera de una partida aprobada.
+2. Primero el borrador de 0,25 cr�ditos; el final solo sobre un borrador aprobado.
+3. M�ximo 3 intentos por recurso y etapa. El cuarto exige cambiar de enfoque.
+4. Lotes de 25 cr�ditos como m�ximo, con revisi�n entre lotes.
+5. Se vuelve a cotizar antes de cada lote y cada generaci�n queda en el registro de [[trabajos]].
+
+## 5. Arquitectura y estructura de datos
+
+Detalle en [[06_arquitectura_godot]].
+
+**ECS frente a nodos.** Se propone composici�n con nodos, datos en `Resource` y l�gica en GDScript tipado, sin ECS. Con unos cientos de entidades no hay un cuello de botella que lo justifique. Cuatro informes llegaron por separado a la misma conclusi�n, y el trabajo anterior ya funcionaba as�.
+
+| Tema | Decisi�n |
+|---|---|
+| Entidades | Escenas compuestas por nodos. Las definiciones van en `Resource` y el estado de cada partida va aparte, para que dos instancias no compartan vida ni inventario. |
+| Dependencias | Un `Main` persistente conecta los servicios y cambia las escenas del mundo. Pocos autoloads. |
+| Comunicaci�n | Se�ales locales y un bus peque�o de eventos de dominio. |
+| Estados | M�quinas de estado propias y peque�as. Godot State Charts 0.22.5 queda de reserva. |
+| Lenguaje | GDScript tipado, con `gdlint` y `gdformat`. C# exige otra edici�n de Godot y otra cadena de exportaci�n. |
+| Guardado | JSON validado, con versi�n y migraciones, y dos generaciones de respaldo. Cargar un `Resource` de una partida puede ejecutar c�digo. |
+| Di�logos | Dialogue Manager 4.2.0 detr�s de un adaptador propio. Dialogic 2 sigue en alfa. |
+| Idiomas | gettext (`.po`), con espa�ol e ingl�s desde el inicio. |
+| C�mara | `Camera3D` con un director propio. Phantom Camera 0.11.0.4 queda como opci�n: su autor avisa de errores pendientes del lado de Godot. |
+| Gato | `NavigationAgent3D`, igual en la vista alta y en la lateral. |
+| Audio | Nativo: buses, zonas y `AudioStreamInteractive`. |
+| Pruebas | GUT 9.7.1 y ejecuci�n sin ventana. |
+| Tipograf�a | DotGothic16 tiene licencia SIL OFL 1.1 y declara el repertorio �GF Latin Core�, que incluye tildes, �, �, � y �. Falta probar el archivo en Godot a tama�o de juego. |
+
+Ning�n complemento se ha ejecutado todav�a en Godot 4.7.2. Cada uno pasa una prueba de aceptaci�n antes de entrar.
+
+**Repositorio propuesto**
+
+```text
+Juego 2d-hd/
+��� juego/              proyecto de Godot: app, core, features, world, presentation, ui, content, assets, shaders y tests
+��� arte_fuente/        originales generados y manifiestos
+��� herramientas/       scripts de Higgsfield, Codex, validaci�n y CI
+��� Nasa_Game/          b�veda de Obsidian
+��� pruebas/            pruebas t�cnicas, como bench_render
+��� .github/workflows/  integraci�n continua
+```
+
+- **Git LFS** para los binarios: im�genes, audio, modelos y fuentes. GitHub Free incluye 10 GiB de almacenamiento y 10 GiB de descarga por ciclo, con 2 GB por archivo. Cada versi�n de un binario ocupa su tama�o completo.
+- **CI con GitHub Actions:** importaci�n sin ventana, pruebas con GUT y exportaci�n para Windows.
+- **Accesibilidad desde la arquitectura:** remapeo de controles, escala de texto, paleta por datos para los modos de daltonismo y opci�n de reducir el movimiento.
+
+## 6. Proceso de estudio
+
+Detalle y plantillas en [[07_proceso_estudio]].
+
+- **Tres aprobaciones por recurso:** de dise�o (la hoja), t�cnica (tri�ngulos, textura, rig) y en contexto (en el motor, con la c�mara real).
+- **Entregables de la Fase 1:** biblia de arte breve, hoja de modelo, hoja de expresiones, lineup de escala, color script y marcos de estilo de interfaz.
+- **Comprobaciones objetivas por puerta:** silueta, lectura en grises, paleta, proporci�n en cabezas, legibilidad a la distancia de c�mara y presupuesto t�cnico.
+- **Manifiesto de recursos:** ID, estado, modelo, prompt, referencias, costo, archivo fuente, archivo en el motor y veredicto con fecha.
+- **Consistencia con IA:** bloques de prompt fijos y versionados, im�genes ancla propias y un solo cambio por intento.
+
+## 7. Pilar �mundo vivo�
+
+Detalle en [[10_mundo_vivo]].
+
+| Qu� da vida | C�mo se resuelve | Costo en este equipo |
+|---|---|---|
+| Vegetaci�n, telas y cables en movimiento | Viento por shader con par�metros globales | Bajo |
+| Hierba que se dobla al pasar | Dos posiciones globales: protagonista y gato | Bajo |
+| Polvo, hojas e insectos | Emisores de part�culas peque�os y por proximidad | Bajo |
+| Objetos que responden | Componente de interacci�n com�n, con aviso y resaltado | Bajo |
+| El mundo recuerda | Identificadores estables y estados guardados | Nulo |
+| NPC con rutinas | Horarios escritos, sin simular a toda la poblaci�n | Bajo |
+| Sonido coherente | Buses, capas de ambiente por zona, pasos por superficie y m�sica adaptativa nativa | Bajo |
+| Paleta consistente | Paleta maestra como dato, rampas compartidas y comprobaci�n autom�tica por recurso | Nulo |
+
+Desde ya se reservan: se�ales globales, capas de colisi�n, grupos, par�metros globales de shader, buses de audio y el formato de datos de zona. El audio usa el sistema nativo de Godot, sin FMOD ni Wwise.
+
+## 8. Trabajo anterior
+
+Detalle en [[08_antecedentes_boveda_anterior]].
+
+- **Se conserva:** la historia (Guayaquil, formaci�n, misi�n y transmisi�n del conocimiento), las clases de datos, el cat�logo de misiones, la mec�nica orbital con sus pruebas y el esquema de personalizaci�n y guardado.
+- **Se rehace:** avatar, gato, muebles, c�mara, escala e interfaz.
+- **Se descarta:** el p�xel-art y la resoluci�n de 384�216.
+- **Aviso:** en esa carpeta hay trabajo sin confirmar en Git (pr�logo, creador de avatar y guardado). Conviene confirmarlo antes de tocar nada.
+
+## 9. Preguntas para Guillermo
+
+1. �Aceptas Mobile como renderizador base en lugar de Forward+?
+2. �Autorizas la prueba de pipeline con tope de 60 cr�ditos y personajes de prueba?
+3. �Cu�ndo se renueva tu plan de Higgsfield y piensas mantenerlo?
+4. �Instalas Blender 4.5 LTS y tienes cuenta de Adobe para Mixamo, o prefieres pagar el rig con cr�ditos?
+5. �Hay fecha l�mite y cu�l es la plataforma objetivo?
+6. �Inicializo Git y Git LFS aqu�, y en qu� repositorio remoto?
+
+## 10. Evidencia
+
+| Fuente | Qu� aporta | Estado |
+|---|---|---|
+| `pruebas/bench_render/` | 29 corridas en este equipo | Medido |
+| `Datos/hf_costos_matriz.md` | 169 cotizaciones de Higgsfield | Medido, sin gastar cr�ditos |
+| Informes 01 a 10 de Codex | Investigaci�n con fuentes | Revisados |
+| Verificaci�n independiente | Contraste de las afirmaciones clave con fuentes primarias | Ver tabla |
+
+| Informe | Confirmadas | Imprecisas | Sin poder verificar | Refutadas |
+|---|---|---|---|---|
+| 01 Motor y render | 13 | 2 | 1 | 0 |
+| 02 Pipeline de personajes | 13 | 3 | 0 | 0 |
+| 03 Arte 2D y presupuesto | 12 | 3 | 0 | 0 |
+| 04 y 07 (muestreo) | 7 | 3 | 2 | 0 |
+| 05 Referentes (muestreo) | 9 | 1 | 0 | 0 |
+| 06 Arquitectura | 12 | 2 | 0 | 0 |
+| 10 Mundo vivo | 10 | 2 | 1 | 0 |
+
+En total: 76 afirmaciones confirmadas, 16 imprecisas, 4 sin poder verificar y ninguna refutada.
+
+La correcci�n m�s importante de la verificaci�n: los informes de Codex recomendaban Compatibility sin medirlo. La medici�n favorece a Mobile, y eso es lo que propone este documento.
+
+Sin verificar todav�a: el horneado de lightmaps en este equipo, la ejecuci�n de los complementos en Godot 4.7.2, DotGothic16 dentro de Godot, el costo de `3d_rigging` y los datos de c�mo se hizo el juego del tablero.
+
+
+web search: 
+web search: 
+web search: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0
+web search: https://www.runpod.io/pricing
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'Nasa_Game/Referencias/Tablero_usuario/Analisis del tablero.md' -Encoding UTF8 | Select-Object -Last 48; Get-Content -LiteralPath 'Nasa_Game/Fase_0_Tecnica/Fase 0 - Analisis.md' -Encoding UTF8 | Select-Object -First 90; Get-ChildItem -LiteralPath 'Nasa_Game' -Filter AGENTS.md -Recurse -ErrorAction SilentlyContinue | ForEach-Object FullName" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 913ms:
+
+# An�lisis del tablero de referencia
+
+Son 14 capturas que Guillermo adjunt� el 2026-11-12. Vienen de un video de YouTube del canal @stefan_3d_ai sobre �After the Wind�, un juego hecho con IA (marca r/TopologyAI).
+
+**Uso:** fijan el nivel de acabado y el cat�logo de pantallas. No se copian el nombre, el logotipo, los personajes, las criaturas, el mapa ni la ambientaci�n.
+
+## Qu� muestra cada captura
+
+| Captura | Pantalla | Lo que interesa |
+|---|---|---|
+| ![[ref_03.jpg\|220]] | T�tulo | Logotipo ilustrado sobre un diorama lateral. Men� en un panel de papel. La opci�n activa se marca con un trazo de pincel. Ayudas de tecla abajo a la derecha. |
+| ![[ref_14.jpg\|220]] | Creador de personaje, cuerpo completo | Chibi de 2,5 a 3 cabezas. Opciones: nombre, cuerpo, piel, peinado, color de pelo, barba, bigote, ojos y color de ojos. Muestras de color en fila. Girar, restablecer, color libre y �sorpr�ndeme�. |
+| ![[ref_01.jpg\|220]] | Creador de personaje, rostro | Primer plano para pelo y cara. Rostro plano de anime con ojos simples: la expresi�n cabe en una textura. |
+| ![[ref_09.jpg\|220]] | Hub lateral | Diorama 2.5D en capas: hierba delante, tiendas y forja en el plano de juego, monta�as con perspectiva atmosf�rica y cielo saturado. Aviso de interacci�n sobre el objeto. |
+| ![[ref_12.jpg\|220]] | Hub con un NPC | Aviso de misi�n en una banda de tinta centrada. El NPC se distingue por su silueta (cuernos, pelo largo). |
+| ![[ref_08.jpg\|220]] | Exploraci�n 3/4 | C�mara alta de 50 a 60�. Suelo pintado con trazo visible, sendero de tierra, rocas facetadas con musgo y sombras suaves. |
+| ![[ref_05.jpg\|220]] | HUD de exploraci�n | Retrato enmarcado, barra de vida verde, barra de energ�a amarilla y contador de pociones. Misi�n arriba a la derecha con hora del d�a. Controles abajo a la derecha. |
+| ![[ref_06.jpg\|220]] | Combate | N�mero de da�o sobre el enemigo. La lista de combos cambia seg�n el ataque en curso. |
+| ![[ref_10.jpg\|220]] | Recolecci�n | Aviso �Obtenido� en una banda de tinta, con el total en la bolsa. El toc�n queda cortado: el mundo cambia al recolectar. |
+| ![[ref_04.jpg\|220]] | Mapa | Ilustraci�n sobre papel con zonas rotuladas, iconos dibujados, filtros arriba, leyenda abajo y un panel �Est�s aqu��. |
+| ![[ref_13.jpg\|220]] | Carga | Dos vi�etas tipo c�mic que cuentan una escena del mundo, con el nombre de la zona. |
+| ![[ref_02.jpg\|220]] | Exploraci�n | Rocas gigantes como hitos. El r�tulo anuncia un sistema de clima din�mico. |
+| ![[ref_07.jpg\|220]] ![[ref_11.jpg\|220]] | Exploraci�n | El mismo encuadre en movimiento: la c�mara no cambia de �ngulo dentro de un modo. |
+
+## Por qu� se ve profesional
+
+1. **Un solo lenguaje de material.** Suelo, roca, tela e interfaz parecen pintados con el mismo pincel: trazo visible, planos facetados y nada de ruido fotogr�fico.
+2. **Estructura de valores.** El personaje lleva el mayor contraste y el color m�s saturado (la capa roja) sobre un suelo de valor medio. Las rocas claras marcan hitos.
+3. **Proporci�n constante.** Cabeza grande, manos y pies simplificados. El personaje se lee aunque mida unos 50 px de alto en pantalla.
+4. **C�mara disciplinada.** 3/4 alta en exploraci�n y lateral por capas en el hub. No se mezclan �ngulos dentro de un modo.
+5. **Luz sencilla y coherente.** Una luz principal c�lida con sombra suave y relleno fr�o. No hay negros puros. El fondo del hub se aclara con la distancia.
+6. **Interfaz como objeto f�sico.** Papel, tinta y trazos de pincel sirven de estados (selecci�n, avisos). Una tipograf�a rotulada para t�tulos y otra muy legible para datos.
+7. **Detalle graduado.** Los mechones de hierba se concentran junto a senderos y rocas. Quedan zonas amplias de descanso visual.
+8. **Continuidad.** T�tulo, carga, mapa y HUD comparten paleta y trazo.
+
+## Hip�tesis de traducci�n a nuestro juego
+
+Se validan en la Fase 1, una por una.
+
+| Del tablero | En el Proyecto NASA-Ecuador |
+|---|---|
+| Hub lateral del campamento | Cuarto y barrio de Guayaquil al atardecer |
+| Exploraci�n 3/4 del valle | Campus, malec�n, laboratorio y centro de simulaci�n |
+| Mapa de pergamino | Cuaderno de ingenier�a con papel milimetrado |
+| Pergamino y pincel | Papel t�cnico, cinta, sellos y telemetr�a con DotGothic16 |
+| Vi�etas de carga | Apuntes ilustrados con el gato cient�fico |
+| Capa roja como acento | Un acento propio del protagonista, por definir |
+---
+tipo: fase
+fase: 0
+titulo: Investigaci�n t�cnica, arquitectura y pipeline
+estado: en revisi�n, espera la aprobaci�n de Guillermo
+fecha: 2026-11-12
+---
+
+# Fase 0 - Investigaci�n t�cnica, arquitectura y pipeline
+
+> Documento de decisi�n. El detalle est� en los informes de `Investigacion/` y en los datos de `Datos/`. Nada de aqu� se ejecuta hasta que Guillermo lo apruebe.
+
+## 0. Qu� se decide en esta puerta
+
+| ID | Decisi�n propuesta | Evidencia | �Cambia el plan maestro? |
+|---|---|---|---|
+| D-001 | Renderizador **Mobile**. Mundo 3D a 1280�720 escalado e interfaz a resoluci�n nativa. Meta: 30 fps estables en este port�til. Compatibility queda como perfil de respaldo y Forward+ como perfil opcional para equipos potentes. | Medici�n propia, �2.1 | S�: el plan ped�a Forward+ |
+| D-002 | Sin iluminaci�n global en tiempo real. Una luz direccional con sombra corta, ambiente y relleno. Lightmaps horneados solo en interiores y despu�s de probar el horneado aqu�. | Medici�n y documentaci�n, �2.3 | Responde a �SDFGI vs lightmaps� |
+| D-003 | Personajes principales en **3D chibi**. El gato va en sprites, salvo que la prueba encuentre una v�a de rig viable para cuadr�pedos. | Informe 02 verificado, �3 | No |
+| D-004 | Pipeline: concepto barato  hoja de modelo  imagen a malla con Tripo H3.1  inspecci�n en Godot  rig  GLB. | Informes 02 y 03, �3 | Lo concreta |
+| D-005 | Prueba de pipeline con **tope de 60 cr�ditos** antes de la Fase 1. | �3.4 | La a�ade |
+| D-006 | Presupuesto de los 1000 cr�ditos por partidas, con reglas de gasto. | �4 | La a�ade |
+| D-007 | Arquitectura con nodos, se�ales y `Resource`, sin ECS. Git LFS y CI con GitHub Actions. | �5 | Responde a �ECS vs OOP� |
+| D-008 | Proceso de estudio: tres aprobaciones por recurso, manifiesto y l�mite de reintentos. | Informe 07, �6 | Lo concreta |
+| D-009 | El pilar �mundo vivo� reserva contratos de interacci�n, tiempo, persistencia, audio y paleta desde ya. | Informe 10 verificado, �7 | Lo a�ade |
+| D-010 | Del trabajo anterior se conservan la historia, los datos y la l�gica de misi�n. La presentaci�n visual se rehace. | Informe 08, �8 | No |
+
+## 1. Punto de partida
+
+- **Equipo:** Intel i5-7200U (2 n�cleos), 7,9 GB de RAM e Intel HD Graphics 620. No hay GPU dedicada.
+- **Motor:** Godot 4.7.2-stable. Arranca aqu� con Forward+ (Vulkan 1.3 y D3D12), Mobile y Compatibility. Compatibility no usa el OpenGL de Intel: cae a ANGLE (OpenGL ES 3.0 sobre Direct3D 11).
+- **Higgsfield:** plan Plus con 1006,25 cr�ditos; 1000 son de suscripci�n y se acreditaron el 2026-11-12. Ofrece imagen, video, audio, sprites animados y 3D: imagen a malla, retopolog�a, retexturizado y rig.
+- **Meta visual:** el tablero de [[Analisis del tablero]]. Seg�n el informe [[04_caso_after_the_wind]], ese juego se hizo en Godot con Tripo, Blender y Cascadeur, en unas seis semanas y con mucha direcci�n humana. Estos datos vienen de publicaciones que la verificaci�n no pudo abrir: sirven de orientaci�n, no de presupuesto.
+
+## 2. Motor y renderizado
+
+### 2.1 Medici�n en tu equipo
+
+Fotogramas por segundo: media y, entre par�ntesis, el 1 % m�s lento. Son 29 corridas de 10 a 12 s con `pruebas/bench_render/`.
+
+| Renderizador | Base 720p | Hierba 720p | Sprites 720p | Base 1080p | Hierba 1080p |
+|---|---|---|---|---|---|
+| Mobile (Vulkan) | 90 (72) | 43 (36) | 75 (57) | 57 (33) | 32 (28) |
+| Mobile (D3D12) | 114 (51) | 43 (36) | 98 (61) | sin medir | 31 (29) |
+| Compatibility (ANGLE) | 73 (49) | 42 (28) | 41 (24) | 71 (46) | 32 (29) |
+| Forward+ (Vulkan) | 68 (55) | 35 (30) | 58 (33) | 39 (32)* | 23 (19)* |
+| Forward+ con SDFGI, SSAO y glow | 20 (9) | - | - | 13 (7)* | - |
+
+\* Medido en ventana a 1920�1066.
+
+- **Base:** 150 mallas con sombreado toon, unos 93 000 tri�ngulos, 300 llamadas de dibujo y una luz con sombra.
+- **Hierba:** la base m�s 40 000 briznas con viento (573 000 tri�ngulos).
+- **Sprites:** la base m�s 200 `Sprite3D` que proyectan sombra (700 llamadas de dibujo).
+
+Lo que dicen los n�meros:
+
+1. **SDFGI no es viable aqu�:** 20 fps con ca�das a 9.
+2. **Mobile es el m�s r�pido a 720p y el m�s estable.** Con 700 llamadas de dibujo mantiene de 75 a 98 fps; Compatibility baja a 41.
+3. **A 1080p con hierba densa todos rondan los 30 fps.** El l�mite es el relleno de p�xeles. Por eso el 3D va a 720p y la interfaz a resoluci�n nativa.
+4. **Compatibility rinde parecido en escenas simples** y usa menos memoria de video (de 15 a 26 MiB frente a 82 a 145).
+
+L�mites de la medici�n: las escenas son sint�ticas, no el juego. La corrida de Forward+ con D3D12 dio una cifra an�mala (367 fps) y se descart�. El primer arranque de Forward+ tard� m�s de 90 s.
+
+### 2.2 Qu� ofrece cada renderizador
+
+Datos de la documentaci�n de Godot 4.7, verificados de forma independiente.
+
+| Funci�n | Forward+ | Mobile | Compatibility |
+|---|---|---|---|
+| SDFGI, VoxelGI, niebla volum�trica, FSR | S� | No | No |
+| Mostrar lightmaps horneados | S� | S� | S� |
+| Desenfoque de profundidad (tilt-shift) | S� | S� | No |
+| Decals y proyectores de luz | S� | S� | No |
+| FXAA y SMAA | S� | S� | No |
+| Estelas de part�culas | S� | S� | No |
+| SSAO | S� | No | S�, simplificado |
+| Glow, niebla de altura y MSAA 3D | S� | S� | S� |
+| B�fer de color | - | 10 bits con debanding | 8 bits |
+
+Mobile conserva lo que el pilar �mundo vivo� necesita: desenfoque, decals, estelas y degradados de cielo sin bandas. Pierde el SSAO, que se sustituye por oclusi�n pintada en las texturas.
+
+### 2.3 Iluminaci�n global: SDFGI frente a lightmaps
+
+- **SDFGI queda descartado** por la medici�n y porque solo existe en Forward+.
+- **Los lightmaps horneados son viables en principio.** El horneado necesita una GPU con `RenderingDevice`, y la HD 620 la tiene. Falta medir cu�nto tarda y cu�nta memoria usa: se prueba con un interior peque�o en la prueba de pipeline.
+- **Durante la iteraci�n no hay GI.** Luz direccional, ambiente, un relleno y oclusi�n pintada. Los objetos m�viles reciben luz indirecta por sondas si se hornea.
+
+### 2.4 Sombras 3D sobre sprites 2D
+
+- `Sprite3D` proyecta sombra con recorte alfa (`alpha_cut` en `discard`). El sombreado (`shaded`) viene apagado por defecto.
+
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:27 AM.
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:27 AM.
+tokens used
+34.831

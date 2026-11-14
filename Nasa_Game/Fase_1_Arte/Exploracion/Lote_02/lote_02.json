@@ -1,0 +1,62 @@
+{
+  "lote": "L02",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02",
+  "tope": 17,
+  "trabajos": [
+    {
+      "id": "L02_exploracion_camara_alta",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": [
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_exploracion_gpt26.png",
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+      ],
+      "prompt": "Use the exact art style of the reference images. In-game screenshot of a stylized 3D exploration RPG seen from a fixed high top-down three-quarter camera pitched steeply down about 60 degrees: no horizon and no sky, the ground fills the entire frame. In the center, small, about one eighth of the image height: a chibi engineering student with voluminous dark curly hair, khaki utility jacket, cargo pants and a brown crossbody tool bag walks along a winding dirt footpath, with a small gray-and-cream cat wearing a glowing cyan collar tag at their side. Setting: a grassy clearing of a tropical dry-forest park at the foot of a hill, late afternoon. Tufts of tall grass, wildflowers, mossy faceted boulders, the wide canopy of a ceibo tree, a green iguana basking on a rock, a small stream crossed by a plank bridge, the first steps of a mosaic stair in one corner. A rusty fallen satellite dish and an old solar panel lie half hidden in the grass, each with a faint cyan sparkle marking it as collectible. Long soft shadows, warm light, cool teal shade. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded light with rim light, matte materials. No text, no logos, no interface."
+    },
+    {
+      "id": "L02_mapa_region",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "prompt": "Game interface mockup, full screen: the region map screen of an exploration RPG, designed as a page of an engineer's field notebook. Background: cream graph paper with a faint blue grid and small ink doodles of circuit symbols in the margins. Center-left: a hand-illustrated map with an irregular torn-edge outline, flat gouache fills and ink outlines, showing a medium-sized riverside district of a tropical port city seen from above: a hill crowned by a lighthouse, a stair neighborhood of colorful houses, a riverfront promenade with a Ferris wheel, a covered electronics market, a plaza with iguanas, a university campus beside a small lake, a patch of dry forest with a giant ceibo tree, a mangrove estuary with a boardwalk, and docks with cranes. Winding cream paths connect every zone; tiny icons mark collectible parts, wildlife and landmarks. Hand-lettered zone labels in Spanish: \"MIRADOR DEL FARO\", \"LAS ESCALINATAS\", \"MALECÓN\", \"MERCADO\", \"PLAZA DE LAS IGUANAS\", \"CAMPUS DEL LAGO\", \"BOSQUE SECO\", \"MANGLAR\", \"ASTILLERO\". A small red triangle marker labeled \"Tú\". Top left title \"Cerro del Faro\" beside a small lighthouse emblem. Top right filter tabs: \"Todo\", \"Componentes\", \"Fauna\", \"Hitos\". Right panel on torn paper with a compass rose and the heading \"Estás aquí\". Bottom legend row with small icons: \"Chatarra\", \"Componentes\", \"Muestras\", \"Fauna\", \"Hitos\". Palette of cream, terracotta, tropical green, petrol blue and cyan accents. Clean, legible, charming, no brand logos."
+    },
+    {
+      "id": "L02_protagonista_tipo1_hoja",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": [
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_refs/ancla_protagonista.png",
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+      ],
+      "prompt": "Character model sheet of the chibi engineering student shown in the first reference image, keeping exactly the same design and the same art style: three heads tall, voluminous dark curly hair, warm brown skin, khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants gathered at the ankle, chunky navy-and-white sneakers, brown crossbody tool bag with pliers and a screwdriver, black wristwatch. Top row: four full-body turnaround views standing on the same baseline, evenly spaced: front view in a relaxed A-pose with the arms slightly away from the body, three-quarter front view, side profile, back view. Bottom row: four head close-ups with different expressions: neutral, happy, focused, surprised. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos."
+    },
+    {
+      "id": "L02_protagonista_tipo2_hoja",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": [
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_refs/ancla_protagonista.png",
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+      ],
+      "prompt": "Character model sheet for a second body type of the playable chibi engineering student, in exactly the same art style and wearing the same outfit as the character in the first reference image: khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants gathered at the ankle, chunky navy-and-white sneakers, brown crossbody tool bag with pliers and a screwdriver, black wristwatch. This version has a masculine build and short dark curly hair with faded sides, the same warm brown skin, three heads tall. Top row: four full-body turnaround views standing on the same baseline, evenly spaced: front view in a relaxed A-pose with the arms slightly away from the body, three-quarter front view, side profile, back view. Bottom row: four head close-ups with different expressions: neutral, happy, focused, surprised. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos."
+    },
+    {
+      "id": "L02_gato_orbita_hoja",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": [
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_02/_refs/ancla_gato.png",
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+      ],
+      "prompt": "Character model sheet of the companion cat shown in the first reference image, keeping exactly the same design and the same art style: a small gray-taupe cat with a cream face mask, cream chest and paws, pink inner ears, dark tail tip, big curious eyes, blue collar with a glowing cyan round tag, chibi proportions with a large head. Top row: four turnaround views standing on four legs on the same baseline, evenly spaced: front, three-quarter front, side profile, back. Bottom row: four poses: sitting and looking up, walking, alert with the tail raised and one paw pointing forward, curled up asleep. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos."
+    },
+    {
+      "id": "L02_centro_espacial_hub",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "2k", "quality": "high"},
+      "imagenes": [
+        "Nasa_Game/Fase_1_Arte/Exploracion/Lote_01/L01_A_lowpoly_hub_gpt26.png"
+      ],
+      "prompt": "Use the exact art style of the reference image. In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a mission training room inside a fictional space research center at night. Center: the same chibi engineering student from the reference (voluminous dark curly hair, khaki utility jacket, cargo pants, brown crossbody tool bag) stands at a mission console; the same small gray-and-cream cat with the glowing cyan collar tag sits on the console beside a cyan hologram of a satellite orbiting a planet. Rows of telemetry monitors with simple waveforms, a capsule simulator on a motion platform, mainframe server racks, a satellite engineering model hanging from the ceiling, a pressurized suit in a glass case, cable trays, and a large window showing a rocket on a distant launch pad under a starry sky. Layered depth with foreground equipment. Cool aseptic palette: deep blue, titanium gray and off-white, with gold accents and the cyan glow; soft cold key light and small warm gold practical lights. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded light with rim light, matte materials. No text, no logos, no interface."
+    }
+  ]
+}

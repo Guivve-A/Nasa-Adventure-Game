@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T23:15:20.279976Z",
+    "display_name": "GPT Image 2.6",
+    "id": "fae4f9b1-b2e8-4fed-8507-9c87e2c20074",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_231520_fae4f9b1-b2e8-4fed-8507-9c87e2c20074_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "d736e2b9-2cce-4b9b-8546-5be1f73cf156",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/d736e2b9-2cce-4b9b-8546-5be1f73cf156.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Character turnaround sheet for 3D modeling. Draw EXACTLY the same girl as in the reference images (the protagonist): same face shape, same large round warm-brown eyes with white highlights, same thick dark eyebrows, small nose, gentle closed-mouth smile, small stud earrings, warm tan skin; same voluminous dark-brown curly hair made of chunky faceted curls forming a rounded crown that frames the face and leaves the whole face, forehead and ears clearly visible; same khaki short-sleeve shirt with rolled sleeves, two chest pockets and small shoulder patches over a dark charcoal t-shirt; brown belt with a square buckle; brown cargo pants with side pockets, gathered at the ankles; white and navy high-top sneakers; black wristwatch on her left wrist. Chibi proportions, about 3 heads tall, exactly like the references. Four full-body orthographic views side by side in one row, from left to right: 1 FRONT view facing the viewer; 2 LEFT SIDE view showing the character's left side, the character facing the left edge of the image; 3 BACK view; 4 RIGHT SIDE view showing the character's right side, the character facing the right edge of the image. The same relaxed A-pose in all four views: arms straight down and slightly away from the body at about 25 degrees, hands open with fingers together, legs straight and slightly apart, feet flat on the ground. NO bag, NO shoulder strap, NO tools, nothing in the hands, nothing covering the body. Same height and same ground line for all four figures, generous empty space between them, nothing overlapping. Flat even neutral studio lighting with no cast shadows, no rim light, no glow; plain uniform light gray background. Low-poly hand-painted 3D style with crisp flat facets and soft painted gradients, matching the references. No text, no labels, no logos, no interface.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_231520_fae4f9b1-b2e8-4fed-8507-9c87e2c20074.png",
+    "status": "completed"
+  }
+]

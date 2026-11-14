@@ -1,0 +1,33 @@
+{
+ "centro_blender": [
+  0.135,
+  -0.1067,
+  -0.1164
+ ],
+ "angulo": 45.0,
+ "medidas_m": {
+  "ancho": 0.115,
+  "alto": 0.1,
+  "hondo": 0.044
+ },
+ "triangulos": 592,
+ "bolsillo_st": [
+  0.067,
+  0.287,
+  0.801,
+  0.852
+ ],
+ "paleta_hoja": {
+  "cuero_rgb": [
+   107.0,
+   60.0,
+   35.0
+  ],
+  "tan_rgb": [
+   189.0,
+   108.0,
+   48.0
+  ]
+ },
+ "mangos_alicates": "hoja"
+}

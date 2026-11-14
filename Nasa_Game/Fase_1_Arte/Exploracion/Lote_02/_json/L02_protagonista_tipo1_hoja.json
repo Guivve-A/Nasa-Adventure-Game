@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:22:07.986426Z",
+    "display_name": "GPT Image 2.6",
+    "id": "3c76e16b-3452-4869-bf3a-4d0957258d95",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172207_3c76e16b-3452-4869-bf3a-4d0957258d95_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "0f78e233-7a38-4b19-a49d-e501493cd86f",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/0f78e233-7a38-4b19-a49d-e501493cd86f.png"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "9fe91376-1b8c-42ed-bbda-a0d195e94828",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9fe91376-1b8c-42ed-bbda-a0d195e94828_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Character model sheet of the chibi engineering student shown in the first reference image, keeping exactly the same design and the same art style: three heads tall, voluminous dark curly hair, warm brown skin, khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants gathered at the ankle, chunky navy-and-white sneakers, brown crossbody tool bag with pliers and a screwdriver, black wristwatch. Top row: four full-body turnaround views standing on the same baseline, evenly spaced: front view in a relaxed A-pose with the arms slightly away from the body, three-quarter front view, side profile, back view. Bottom row: four head close-ups with different expressions: neutral, happy, focused, surprised. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172207_3c76e16b-3452-4869-bf3a-4d0957258d95.png",
+    "status": "completed"
+  }
+]

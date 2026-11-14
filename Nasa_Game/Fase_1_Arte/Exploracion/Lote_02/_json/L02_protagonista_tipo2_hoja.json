@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:23:15.614411Z",
+    "display_name": "GPT Image 2.6",
+    "id": "ecce237a-0287-43e3-a890-de26c04e6e14",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172315_ecce237a-0287-43e3-a890-de26c04e6e14_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "3758f4bb-f458-4ace-9d41-483d0bc78761",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/3758f4bb-f458-4ace-9d41-483d0bc78761.png"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "3da842db-aafa-4f8f-89b5-009d4f669bda",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/3da842db-aafa-4f8f-89b5-009d4f669bda_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Character model sheet for a second body type of the playable chibi engineering student, in exactly the same art style and wearing the same outfit as the character in the first reference image: khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants gathered at the ankle, chunky navy-and-white sneakers, brown crossbody tool bag with pliers and a screwdriver, black wristwatch. This version has a masculine build and short dark curly hair with faded sides, the same warm brown skin, three heads tall. Top row: four full-body turnaround views standing on the same baseline, evenly spaced: front view in a relaxed A-pose with the arms slightly away from the body, three-quarter front view, side profile, back view. Bottom row: four head close-ups with different expressions: neutral, happy, focused, surprised. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172315_ecce237a-0287-43e3-a890-de26c04e6e14.png",
+    "status": "completed"
+  }
+]

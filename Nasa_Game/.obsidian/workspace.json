@@ -1,0 +1,228 @@
+{
+  "main": {
+    "id": "1889fb2d2500a70a",
+    "type": "split",
+    "children": [
+      {
+        "id": "fb2342fb46649ce1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1f80d91504c1e38b",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Vista gráfica"
+            }
+          },
+          {
+            "id": "54c0078e7a2b6f44",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "file:C:/Users/guill/Desktop/Informes 2026_PAO2/ELECTRÓNICA DE POTENCIA 1/PRÁCTICA 2/video/Guion_voz.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Guion_voz"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "040bf5e26ef9bbf5",
+    "type": "split",
+    "children": [
+      {
+        "id": "c0c2d4ec03503863",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2433e88029cb8e73",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "eed9b5ecd88dbe1c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "3960f9b661461a1b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "511ff40088b2d483",
+    "type": "split",
+    "children": [
+      {
+        "id": "a739d6dac1cee33d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c00b931aba34356b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes"
+            }
+          },
+          {
+            "id": "6799ea5e58283c07",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes"
+            }
+          },
+          {
+            "id": "638f48f81149ff7e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "3798b34c00e7669e",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "366f9a46fde585b5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "54c0078e7a2b6f44",
+  "lastOpenFiles": [
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v7T",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/proyeccion",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/proyeccion.log",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4C/alineacion_cache.json",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste/ajuste.json",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste/frente_desplazamiento.png",
+    "Fase_1_Arte/Modelado/Lote_04/L04_PER01_v4D_geometria.glb",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste/espalda_despues.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste/perfil_despues.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste/frente_despues.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste/espalda_antes.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste/perfil_antes.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste/frente_antes.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4C/espalda_alineacion.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4C/espalda_mascara_erosion3.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4C/espalda_mascara.png",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/ajuste",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4D",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4C",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4A/metrica.json",
+    "Fase_1_Arte/Modelado/Lote_04/parecido/v4A/renders",
+    "Fase_0_Tecnica/Investigacion/04_caso_after_the_wind.md",
+    "Fase_0_Tecnica/Investigacion/12_render_aaa.md",
+    "Fase_0_Tecnica/Datos/red_latencias.md",
+    "Fase_0_Tecnica/Tareas_Codex/tareas_fase0_revB.md",
+    "Bienvenido.md"
+  ]
+}

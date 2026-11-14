@@ -1,0 +1,98 @@
+{
+  "lote": "L05",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05",
+  "tope": 2,
+  "_nota": "Borradores de la Habitacion-taller (D-016). Solo cotizado: no generar sin la aprobacion de Guillermo. Corregido tras el verificador (2026-11-12): sin la palabra diorama, ventana en C, Luna de B por su luz y su reflejo, luz pintada de D-015.",
+  "trabajos": [
+    {
+      "id": "L05_A_manana_calida",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_VISTA_JUEGO",
+        "@ANC_PROTA_1",
+        "@ANC_GATO"
+      ],
+      "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of the protagonist's small bedroom-workshop in a hillside house of a tropical port city, {CAMARA_JUEGO} The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. Early morning: {PROTAGONISTA} has just got out of bed and stretches in the middle of the room, while {GATO} sits on the windowsill. Layout: an unmade single bed in the back-left corner with a cardboard box beside it; a window in the back wall with a view of the colorful houses of the hillside stair neighborhood; a small white refractor telescope on a tripod beside the window; along the right wall a sturdy wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires) next to a vintage oscilloscope with a wobbly cyan trace; an open engineering notebook with ink sketches on the bench; a framed poster of a historic white observatory dome among trees; terracotta floor tiles, a woven rug, a ceiling-fan shadow, potted plants; in the front-right corner a wooden staircase goes down through an opening in the floor to the rest of the house. Warm golden sunrise light streams through the window in long diagonal shafts across the floor, cool petrol-blue shade in the corners. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts with floating dust motes, gentle bloom on light sources, a subtle vignette; painted light where the shade stays soft and colored, never black. {ESTILO} {SIN_TEXTO}"
+    },
+    {
+      "id": "L05_B_noche_luna",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_VISTA_JUEGO",
+        "@ANC_PROTA_1",
+        "@ANC_GATO"
+      ],
+      "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of the protagonist's small bedroom-workshop in a hillside house of a tropical port city, {CAMARA_JUEGO} The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. Night, just before sleeping: {PROTAGONISTA} sits on the edge of the bed looking toward the open window; the thin crescent Moon itself stays outside the frame, and its cool light pours through the window as a pale beam across the floor and the bed, with the crescent reflected small and bright in the window glass, and {GATO} is curled up on the pillow. The bed has a faint glowing cyan outline that marks it as interactive, and a cardboard box with a drawing of the Moon taped on it waits beside the bed. A sturdy wooden workbench holds the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires) under a warm desk lamp, next to a vintage oscilloscope with a dim cyan trace and an open engineering notebook with ink sketches; a small white refractor telescope on a tripod stands by the window; a wooden door ajar shows the top of the stairs going down to the house. Cool blue moonlight falls through the window in a soft shaft across the floor, warm lamp light and a string of small warm lights along the wall, deep blue shadows. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, gentle bloom on the lamp and the moonlit window, a subtle vignette; painted light where the shade stays soft and colored, never black. {ESTILO} {SIN_TEXTO}"
+    },
+    {
+      "id": "L05_C_azotea_terraza",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_VISTA_JUEGO",
+        "@ANC_PROTA_1",
+        "@ANC_GATO"
+      ],
+      "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of a small rooftop bedroom-workshop with a wide open terrace, on top of a hillside house of a tropical port city, {CAMARA_JUEGO} The left half of the frame is the room interior with its roof removed: a single bed with a cardboard box beside it, shelves of parts, a back-wall window framed by bougainvillea with the hillside houses beyond, a small white refractor telescope on a tripod beside it, and a narrow interior staircase going down to the rest of the house. A wide doorway opens to the right half: a flat concrete rooftop terrace where the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires) stands on a weathered wooden workbench aimed at the sky, next to a vintage oscilloscope with a wobbly cyan trace and an open engineering notebook with ink sketches. {PROTAGONISTA} adjusts the tracker while {GATO} watches from the low parapet. A water tank, a clothesline with colorful laundry, potted plants, bougainvillea and a corrugated zinc awning; beyond the parapet the rooftops and stairs of the colorful hillside neighborhood drop away below, seen from above. Late afternoon: warm low sun, long soft shadows, cool petrol-blue shade under the awning. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest edge and the far rooftops and keeps the middle crisp, soft light shafts, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. {ESTILO} {SIN_TEXTO}"
+    },
+    {
+      "id": "L05_D_cama_alta",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_VISTA_JUEGO",
+        "@ANC_PROTA_1",
+        "@ANC_GATO"
+      ],
+      "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of a compact, cozy bedroom-workshop in a hillside house of a tropical port city, {CAMARA_JUEGO} The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. A loft bed on a sturdy wooden frame with a short ladder sits along the back wall, and under it the workshop: a wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires), a vintage oscilloscope with a wobbly cyan trace, an open engineering notebook with ink sketches, a pegboard of tools and drawers of parts. {PROTAGONISTA} sits on a stool at the bench, small in the frame, and {GATO} peeks over the edge of the loft bed. A cardboard box under the ladder, a small white refractor telescope on a tripod beside a louvred window that shows the colorful houses of the hillside stair neighborhood, a hammock rolled in a corner, potted plants, terracotta floor tiles; a wooden door in the side wall opens onto the stair landing that leads down to the house. Warm afternoon light through the louvres in striped shafts plus a warm desk lamp, cool petrol-blue shade under the loft. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts with floating dust motes, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. {ESTILO} {SIN_TEXTO}"
+    },
+    {
+      "id": "L05_E_casa_munecas",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_VISTA_JUEGO",
+        "@ANC_PROTA_1",
+        "@ANC_GATO"
+      ],
+      "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of the upper floor of a hillside house in a tropical port city, {CAMARA_JUEGO} Dollhouse cutaway: the roof is removed and every wall is cut down to waist height with clean cut tops, so the whole floor plan reads clearly from above. The bedroom-workshop fills most of the frame: a single bed with a cardboard box beside it, a window opening toward the colorful hillside stair neighborhood, a small white refractor telescope on a tripod, and a wooden workbench with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires), a vintage oscilloscope with a wobbly cyan trace and an open engineering notebook with ink sketches. A doorway leads to a short hallway with family photos and the top of a wooden staircase that descends toward the ground-floor kitchen, partly visible below through the stairwell. {PROTAGONISTA} walks from the bed toward the workbench and {GATO} trots ahead of her. Terracotta floor tiles, woven rugs, potted plants, a ceiling fan seen from above. Warm morning sun from the windows casts long shafts across the floor, cool petrol-blue shade along the cut walls. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, soft volumetric light shafts, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. {ESTILO} {SIN_TEXTO}"
+    },
+    {
+      "id": "L05_F_recorrido_tutorial",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_VISTA_JUEGO",
+        "@ANC_PROTA_1",
+        "@ANC_GATO"
+      ],
+      "prompt": "Use the exact art style, camera and finish of the first reference image. The student is the character of the second reference image and the cat is the one of the third. In-game screenshot of the protagonist's bedroom-workshop in a hillside house of a tropical port city, designed as a clear first playable room, {CAMARA_JUEGO} The ceiling and the two nearest walls are removed so the camera sees the whole floor; only the two back walls stand. Readable L-shaped layout with open floor space for walking: the path flows from the single bed with a cardboard box beside it in the top-left, past the open window and a small white refractor telescope on a tripod, to a long wooden workbench on the right with the motorized Moon tracker she built (a small homemade two-axis mount with two stepper motors, a small camera, a bare circuit board and loose wires), a vintage oscilloscope with a wobbly cyan trace and an open engineering notebook with ink sketches, and ends at a wooden door and the stairs going down to the house in the bottom-right. Each interactive object (bed, window, telescope, tracker, notebook) is spaced apart and marked by a tiny cyan sparkle. A framed poster of a historic white observatory dome among trees, shelves of parts and books, a woven rug, potted plants and bougainvillea at the window, which shows the colorful houses of the hillside stair neighborhood. {PROTAGONISTA} stands near the center and {GATO} sits beside her, both small in the frame. Golden late-afternoon sun through the window in long warm shafts, cool petrol-blue shade in the corners. Polished 2D-HD presentation: a soft tilt-shift depth of field that gently blurs the nearest and farthest edges of the frame and keeps the middle crisp, floating dust motes, gentle bloom, a subtle vignette; painted light where the shade stays soft and colored, never black. {ESTILO} {SIN_TEXTO}"
+    }
+  ]
+}

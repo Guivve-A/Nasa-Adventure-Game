@@ -1,0 +1,169 @@
+{
+  "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+  "salida": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\parecido\\v4B\\variantes\\control_sin_tps\\malla.glb",
+  "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+  "sha256_entrada": "249490277719be670c948c09feda8836725bb1461cf088c84e970ea7b5ed70d9",
+  "sha256_hoja": "eb5cf7817c99aef8844c7f21a73e4514e65da6fd48f1671d696ec65f631e8200",
+  "argumentos": {
+    "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+    "salida": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\parecido\\v4B\\variantes\\control_sin_tps\\malla.glb",
+    "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+    "diagnosticos": "Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\parecido\\v4B\\variantes\\control_sin_tps",
+    "pares": "dtw",
+    "puntos": 100,
+    "rejilla": 45,
+    "dist_interior": 30,
+    "lambdas": [
+      0.0,
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1
+    ],
+    "det_min": 0.05,
+    "peso_original": 0.01,
+    "rasante": 0.0,
+    "tolerancia_px": 3.0,
+    "sin_deformacion": true,
+    "solo_deformacion": false
+  },
+  "triangulos": 7522,
+  "textura_px": [
+    4096,
+    4096
+  ],
+  "texels_superficie": 10414844,
+  "texels_con_hoja": 7938570,
+  "texels_con_hoja_pct_superficie": 76.22360930226127,
+  "padding_texels": 1652567,
+  "vistas": {
+    "frente": {
+      "iou": 0.8499310577707742,
+      "escala_base": 897.0,
+      "factor_escala": 1.0150000000000001,
+      "desplazamiento_px": [
+        7,
+        -12
+      ],
+      "limites_desplazamiento_px": [
+        27.599999999999998,
+        53.879999999999995
+      ],
+      "traslacion_px": [
+        264.51243632648595,
+        457.70904833869724
+      ],
+      "centro_inicial_px": [
+        259.309777984884,
+        469.70904833869724
+      ],
+      "tps_lambda": 0.0,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": 0.9999999999998295,
+          "det_p1": 0.999999999999936,
+          "det_max": 1.000000000000128,
+          "residuo_contorno_medio_px": 3.545554562162836e-13,
+          "residuo_contorno_max_px": 1.048140854583481e-12
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 41,
+      "pares": "dtw",
+      "desplazamiento_medio_px": 3.2692788546466464e-13,
+      "desplazamiento_max_px": 1.5007093205035841e-12,
+      "long_contorno_malla_px": 4740.734557122016,
+      "long_contorno_hoja_px": 4822.658438676268,
+      "muestras_aceptadas": 3988166,
+      "muestras_ocultas_rechazadas": 1275588,
+      "muestras_fuera_de_mascara": 170842
+    },
+    "perfil": {
+      "iou": 0.8696375025977496,
+      "escala_base": 898.0,
+      "factor_escala": 1.0150000000000001,
+      "desplazamiento_px": [
+        3,
+        -7
+      ],
+      "limites_desplazamiento_px": [
+        20.16,
+        53.94
+      ],
+      "traslacion_px": [
+        184.84115833909462,
+        457.23812833940195
+      ],
+      "centro_inicial_px": [
+        184.05762173784842,
+        464.23812833940195
+      ],
+      "tps_lambda": 0.0,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": 0.9999999999998437,
+          "det_p1": 0.999999999999929,
+          "det_max": 1.0000000000001563,
+          "residuo_contorno_medio_px": 2.636449210428147e-13,
+          "residuo_contorno_max_px": 1.061922699379318e-12
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 30,
+      "pares": "dtw",
+      "desplazamiento_medio_px": 2.5249727002255893e-13,
+      "desplazamiento_max_px": 1.1593828079623528e-12,
+      "long_contorno_malla_px": 2871.412480458819,
+      "long_contorno_hoja_px": 2897.6307345282985,
+      "muestras_aceptadas": 2404960,
+      "muestras_ocultas_rechazadas": 2571583,
+      "muestras_fuera_de_mascara": 72065
+    },
+    "espalda": {
+      "iou": 0.8708628877808948,
+      "escala_base": 896.0,
+      "factor_escala": 1.021,
+      "desplazamiento_px": [
+        -4,
+        -10
+      ],
+      "limites_desplazamiento_px": [
+        26.52,
+        53.82
+      ],
+      "traslacion_px": [
+        241.99013565235578,
+        456.62763015931034
+      ],
+      "centro_inicial_px": [
+        244.18418488425732,
+        466.62763015931034
+      ],
+      "tps_lambda": 0.0,
+      "tps_historial": [
+        {
+          "lambda": 0.0,
+          "det_min": 0.9999999999998721,
+          "det_p1": 0.9999999999999432,
+          "det_max": 1.000000000000142,
+          "residuo_contorno_medio_px": 2.6040023820353086e-13,
+          "residuo_contorno_max_px": 8.038873388460929e-13
+        }
+      ],
+      "puntos_contorno": 100,
+      "puntos_fijos": 42,
+      "pares": "dtw",
+      "desplazamiento_medio_px": 2.63609238756091e-13,
+      "desplazamiento_max_px": 9.25343817704044e-13,
+      "long_contorno_malla_px": 4766.391411371508,
+      "long_contorno_hoja_px": 4714.692926561674,
+      "muestras_aceptadas": 3462969,
+      "muestras_ocultas_rechazadas": 1287830,
+      "muestras_fuera_de_mascara": 229449
+    }
+  },
+  "segundos": 199.4
+}

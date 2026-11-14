@@ -1,0 +1,473 @@
+{
+  "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_giro_tripo_mv.glb",
+  "salida": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Modelado\\Lote_04\\L04_PER01_v4A.glb",
+  "hoja": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Fase_1_Arte\\Exploracion\\Lote_02\\L02_protagonista_tipo1_hoja.png",
+  "sha256_entrada": "249490277719be670c948c09feda8836725bb1461cf088c84e970ea7b5ed70d9",
+  "sha256_hoja": "eb5cf7817c99aef8844c7f21a73e4514e65da6fd48f1671d696ec65f631e8200",
+  "triangulos": 7522,
+  "textura_px": [
+    4096,
+    4096
+  ],
+  "texels_superficie": 10414844,
+  "texels_con_hoja": 5356100,
+  "texels_con_hoja_pct_superficie": 51.42755858849158,
+  "texels_hoja_dominante_pct_superficie": 50.673461839658856,
+  "texels_fondo": 0,
+  "muestras_fondo": 0,
+  "texels_izquierda": 2058415,
+  "padding_texels": 1652567,
+  "peso_original": 0.01,
+  "exponente": 4.0,
+  "perfil_cabeza": 0.3,
+  "razon_max": 1.3,
+  "rasante": 0.2,
+  "limite_banda": [
+    0.05,
+    0.025
+  ],
+  "rampa_izquierda": 0.2,
+  "bandas": [
+    [
+      "cabeza",
+      0.0,
+      0.38
+    ],
+    [
+      "torso",
+      0.38,
+      0.62
+    ],
+    [
+      "piernas",
+      0.62,
+      1.0
+    ]
+  ],
+  "transicion": 0.04,
+  "zonas": {
+    "pelo": {
+      "texels_zona": 3230799,
+      "fuente": 683772,
+      "centro_lab_altura": [
+        17.83,
+        12.43,
+        14.25,
+        8.27
+      ],
+      "media_tripo_lab": [
+        19.39,
+        12.87,
+        15.02
+      ],
+      "media_hoja_lab": [
+        21.52,
+        14.03,
+        12.68
+      ],
+      "razon_desviacion": [
+        1.3,
+        1.3,
+        1.3
+      ]
+    },
+    "piel": {
+      "texels_zona": 1476713,
+      "fuente": 202775,
+      "centro_lab_altura": [
+        59.68,
+        20.82,
+        46.85,
+        15.18
+      ],
+      "media_tripo_lab": [
+        61.43,
+        18.79,
+        44.44
+      ],
+      "media_hoja_lab": [
+        57.06,
+        28.22,
+        42.68
+      ],
+      "razon_desviacion": [
+        1.3,
+        1.3,
+        1.3
+      ]
+    },
+    "camisa": {
+      "texels_zona": 700043,
+      "fuente": 249652,
+      "centro_lab_altura": [
+        65.31,
+        7.43,
+        29.79,
+        15.76
+      ],
+      "media_tripo_lab": [
+        65.25,
+        7.53,
+        30.62
+      ],
+      "media_hoja_lab": [
+        58.71,
+        16.65,
+        31.08
+      ],
+      "razon_desviacion": [
+        1.3,
+        1.3,
+        1.3
+      ]
+    },
+    "pantalon": {
+      "texels_zona": 3415716,
+      "fuente": 772723,
+      "centro_lab_altura": [
+        39.39,
+        15.43,
+        30.06,
+        30.97
+      ],
+      "media_tripo_lab": [
+        40.2,
+        15.55,
+        31.73
+      ],
+      "media_hoja_lab": [
+        38.78,
+        19.36,
+        27.23
+      ],
+      "razon_desviacion": [
+        1.3,
+        1.3,
+        1.3
+      ]
+    },
+    "zapatos": {
+      "texels_zona": 998746,
+      "fuente": 115375,
+      "centro_lab_altura": [
+        70.79,
+        6.24,
+        16.49,
+        37.67
+      ],
+      "media_tripo_lab": [
+        69.36,
+        6.68,
+        16.6
+      ],
+      "media_hoja_lab": [
+        67.01,
+        16.33,
+        19.1
+      ],
+      "razon_desviacion": [
+        1.3,
+        1.3,
+        1.3
+      ]
+    },
+    "oscuro": {
+      "texels_zona": 592827,
+      "fuente": 54113,
+      "centro_lab_altura": [
+        18.3,
+        2.29,
+        -1.32,
+        36.3
+      ],
+      "media_tripo_lab": [
+        18.1,
+        2.09,
+        -1.25
+      ],
+      "media_hoja_lab": [
+        30.14,
+        7.99,
+        1.36
+      ],
+      "razon_desviacion": [
+        1.3,
+        1.3,
+        1.3
+      ]
+    }
+  },
+  "vistas": {
+    "frente": {
+      "escala_base": 897.0,
+      "factor_escala": 1.017,
+      "desplazamiento_px": [
+        7,
+        -12
+      ],
+      "traslacion_px": [
+        264.9918556759694,
+        457.5682033216191
+      ],
+      "iou_global": 0.8526394956235098,
+      "iou_bandas": 0.9145340886891971,
+      "fila_monotona": true,
+      "transicion": 0.04,
+      "bandas": [
+        {
+          "banda": "cabeza",
+          "filas_hoja": [
+            0,
+            349
+          ],
+          "centro_px": [
+            250.97205510506583,
+            174.5
+          ],
+          "k": 0.998,
+          "desplazamiento_px": [
+            -4.0,
+            7.0
+          ],
+          "e": [
+            -3.498055889789868,
+            7.349
+          ],
+          "iou_franja_global": 0.9295858420377114,
+          "iou_franja_busqueda": 0.9677090268679797,
+          "iou_franja_final": 0.9697216885444729
+        },
+        {
+          "banda": "torso",
+          "filas_hoja": [
+            348,
+            568
+          ],
+          "centro_px": [
+            251.80608118303908,
+            458.0
+          ],
+          "k": 1.07,
+          "desplazamiento_px": [
+            -12.0,
+            -3.0
+          ],
+          "e": [
+            -29.62642568281275,
+            -35.06000000000003
+          ],
+          "iou_franja_global": 0.7726031705190332,
+          "iou_franja_busqueda": 0.8599099555568424,
+          "iou_franja_final": 0.8616452681113113
+        },
+        {
+          "banda": "piernas",
+          "filas_hoja": [
+            567,
+            913
+          ],
+          "centro_px": [
+            262.36645725076835,
+            740.0
+          ],
+          "k": 1.07,
+          "desplazamiento_px": [
+            -2.0,
+            -1.0
+          ],
+          "e": [
+            -20.365652007553802,
+            -52.80000000000005
+          ],
+          "iou_franja_global": 0.83103444207148,
+          "iou_franja_busqueda": 0.8943845030801553,
+          "iou_franja_final": 0.8961461312950281
+        }
+      ],
+      "muestras_aceptadas": 0,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 0
+    },
+    "perfil": {
+      "escala_base": 898.0,
+      "factor_escala": 1.0170000000000001,
+      "desplazamiento_px": [
+        2,
+        -7
+      ],
+      "traslacion_px": [
+        184.21837017956852,
+        457.1412765418389
+      ],
+      "iou_global": 0.8734882014626872,
+      "iou_bandas": 0.8965527450144475,
+      "fila_monotona": true,
+      "transicion": 0.06,
+      "bandas": [
+        {
+          "banda": "cabeza",
+          "filas_hoja": [
+            0,
+            348
+          ],
+          "centro_px": [
+            197.29878797857117,
+            174.0
+          ],
+          "k": 1.01,
+          "desplazamiento_px": [
+            7.0,
+            3.0
+          ],
+          "e": [
+            5.027012120214287,
+            1.2599999999999985
+          ],
+          "iou_franja_global": 0.8944660969764459,
+          "iou_franja_busqueda": 0.9131750352403636,
+          "iou_franja_final": 0.9088562808224988
+        },
+        {
+          "banda": "torso",
+          "filas_hoja": [
+            347,
+            567
+          ],
+          "centro_px": [
+            237.2005210700112,
+            457.0
+          ],
+          "k": 1.07,
+          "desplazamiento_px": [
+            -3.0,
+            -22.0
+          ],
+          "e": [
+            -19.6040364749008,
+            -53.99000000000002
+          ],
+          "iou_franja_global": 0.8049523581946892,
+          "iou_franja_busqueda": 0.8375726957645538,
+          "iou_franja_final": 0.8350339635957303
+        },
+        {
+          "banda": "piernas",
+          "filas_hoja": [
+            566,
+            913
+          ],
+          "centro_px": [
+            229.6371710336608,
+            739.5
+          ],
+          "k": 1.012,
+          "desplazamiento_px": [
+            -5.0,
+            -2.0
+          ],
+          "e": [
+            -7.755646052403932,
+            -10.874000000000008
+          ],
+          "iou_franja_global": 0.8833267564875885,
+          "iou_franja_busqueda": 0.915661277145517,
+          "iou_franja_final": 0.9162283783014031
+        }
+      ],
+      "muestras_aceptadas": 0,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 0
+    },
+    "espalda": {
+      "escala_base": 897.0,
+      "factor_escala": 1.02,
+      "desplazamiento_px": [
+        -4,
+        -10
+      ],
+      "traslacion_px": [
+        242.49345877794943,
+        456.47731182303346
+      ],
+      "iou_global": 0.8734940249753587,
+      "iou_bandas": 0.9276756599580451,
+      "fila_monotona": true,
+      "transicion": 0.04,
+      "bandas": [
+        {
+          "banda": "cabeza",
+          "filas_hoja": [
+            0,
+            347
+          ],
+          "centro_px": [
+            257.33518678648437,
+            173.5
+          ],
+          "k": 0.992,
+          "desplazamiento_px": [
+            6.0,
+            9.0
+          ],
+          "e": [
+            8.058681494291877,
+            10.388000000000002
+          ],
+          "iou_franja_global": 0.9036650507919844,
+          "iou_franja_busqueda": 0.9534868745841293,
+          "iou_franja_final": 0.954018920136431
+        },
+        {
+          "banda": "torso",
+          "filas_hoja": [
+            346,
+            567
+          ],
+          "centro_px": [
+            247.1433348509349,
+            456.5
+          ],
+          "k": 1.046,
+          "desplazamiento_px": [
+            4.0,
+            2.0
+          ],
+          "e": [
+            -7.3685934031430165,
+            -18.99900000000002
+          ],
+          "iou_franja_global": 0.8474627680548394,
+          "iou_franja_busqueda": 0.8963013698630137,
+          "iou_franja_final": 0.8991843094125195
+        },
+        {
+          "banda": "piernas",
+          "filas_hoja": [
+            566,
+            913
+          ],
+          "centro_px": [
+            239.17134425817792,
+            739.5
+          ],
+          "k": 1.066,
+          "desplazamiento_px": [
+            -4.0,
+            1.0
+          ],
+          "e": [
+            -19.785308721039755,
+            -47.807000000000045
+          ],
+          "iou_franja_global": 0.858654900968018,
+          "iou_franja_busqueda": 0.9179662905022521,
+          "iou_franja_final": 0.9200891397289473
+        }
+      ],
+      "muestras_aceptadas": 0,
+      "muestras_sobre_fondo": 0,
+      "muestras_ocultas_rechazadas": 0
+    }
+  },
+  "segundos": 76.3
+}

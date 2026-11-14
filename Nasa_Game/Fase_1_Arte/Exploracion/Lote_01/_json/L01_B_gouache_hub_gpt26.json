@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-12T17:07:18.076082Z",
+    "display_name": "GPT Image 2.6",
+    "id": "aee1680a-99cd-497c-b47e-3cb8d32b6ee9",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170718_aee1680a-99cd-497c-b47e-3cb8d32b6ee9_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "In-game screenshot of a stylized 3D adventure RPG, side-view diorama cutaway of a small rooftop bedroom-workshop in Guayaquil, Ecuador, golden hour. Center: a chibi engineering student, three heads tall, short dark curly hair, warm brown skin, utility jacket, cargo pants, sneakers, crossbody tool bag. On the workbench a small curious cat with a glowing cyan collar tag sits beside an open book projecting a cyan hologram of a ringed planet. Soldering iron, oscilloscope, circuit boards, small telescope, model satellite, ceiling fan, tropical potted plants. Open window: hillside of colorful houses with a lighthouse above a wide river, orange sky. Foreground plants and crates, layered depth. Warm sunbeams, cool teal shadows. Art style: hand-painted gouache diorama in real-time 3D, soft rounded forms, visible opaque brush strokes on every surface, matte finish, painterly color variation on walls and fabric, sunlit surfaces with cool shadows, storybook warmth, palette of cream, terracotta, tropical green, petrol blue and a cyan accent. No text, no logos, no interface.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_170718_aee1680a-99cd-497c-b47e-3cb8d32b6ee9.png",
+    "status": "completed"
+  }
+]

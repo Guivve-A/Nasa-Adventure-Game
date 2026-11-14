@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-12T17:25:06.427652Z",
+    "display_name": "GPT Image 2.6",
+    "id": "15736a92-c2aa-42f1-87b5-355f5851ad42",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172506_15736a92-c2aa-42f1-87b5-355f5851ad42_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "478bcf41-dce4-4a1d-a03c-9de61b0eb304",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/478bcf41-dce4-4a1d-a03c-9de61b0eb304.png"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "39711624-4b0b-4829-801d-adb32ba0c4aa",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/39711624-4b0b-4829-801d-adb32ba0c4aa_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Character model sheet of the companion cat shown in the first reference image, keeping exactly the same design and the same art style: a small gray-taupe cat with a cream face mask, cream chest and paws, pink inner ears, dark tail tip, big curious eyes, blue collar with a glowing cyan round tag, chibi proportions with a large head. Top row: four turnaround views standing on four legs on the same baseline, evenly spaced: front, three-quarter front, side profile, back. Bottom row: four poses: sitting and looking up, walking, alert with the tail raised and one paw pointing forward, curled up asleep. Plain light warm-gray background, even neutral lighting, identical proportions and colors in every view. Stylized low-poly 3D, faceted flat-shaded planes with hand-painted gradients, cel-shaded with rim light, matte materials. No text, no logos.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261112_172506_15736a92-c2aa-42f1-87b5-355f5851ad42.png",
+    "status": "completed"
+  }
+]
