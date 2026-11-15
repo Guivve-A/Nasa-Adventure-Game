@@ -1,0 +1,18 @@
+{
+  "titulo": "La Luna sonriente",
+  "resumen": "Busca la Luna al oeste, fija el enfoque y registra tres rasgos sin perder vidas.",
+  "instrucciones": [
+    "Centra la Luna y pulsa E.",
+    "Pulsa E en la franja dorada.",
+    "Mantén E en cada diana; suelta al moverte."
+  ],
+  "controles": "Flechas/WASD: mover / E/Espacio: observar / Esc: salir",
+  "pistas": [
+    "Sigue el buscador hacia la Luna baja del oeste.",
+    "Espera la franja dorada antes de fijar el enfoque con E.",
+    "Suelta E al cambiar de diana; mantenla dentro del anillo hasta llenar la barra."
+  ],
+  "ficha": "luz_cenicienta",
+  "escena": "2.2",
+  "orden": 4
+}

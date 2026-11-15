@@ -1,0 +1,130 @@
+{
+ "alto": 1.0,
+ "cadera_y": -0.105,
+ "cuello_y": 0.152,
+ "hombro_y": 0.112,
+ "hombro_z": 0.108,
+ "rodilla_y": -0.26,
+ "zancada_caminar_m": 0.5636,
+ "zancada_correr_m": 0.9977,
+ "duraciones": {
+  "reposo": 2.0,
+  "caminar": 0.8,
+  "correr": 0.56,
+  "salto_lunar": 1.2,
+  "recoger": 1.0,
+  "celebrar": 1.4
+ },
+ "ciclicos": [
+  "reposo",
+  "caminar",
+  "correr",
+  "salto_lunar"
+ ],
+ "alto_malla": 0.9939,
+ "suelo_y": -0.5,
+ "tobillo_y": -0.415,
+ "articulaciones": {
+  "cadera": [
+   0.0609,
+   -0.1,
+   -0.0
+  ],
+  "columna": [
+   0.0685,
+   -0.025,
+   -0.0
+  ],
+  "pecho": [
+   0.0761,
+   0.06,
+   -0.0
+  ],
+  "cuello": [
+   0.0761,
+   0.152,
+   -0.0
+  ],
+  "cabeza": [
+   0.0761,
+   0.19,
+   -0.0
+  ],
+  "hombro_izq": [
+   0.0711,
+   0.13,
+   -0.03
+  ],
+  "brazo_izq": [
+   0.0494,
+   0.112,
+   -0.108
+  ],
+  "antebrazo_izq": [
+   0.0356,
+   0.0156,
+   -0.1439
+  ],
+  "mano_izq": [
+   0.0462,
+   -0.0474,
+   -0.1854
+  ],
+  "hombro_der": [
+   0.0711,
+   0.13,
+   0.03
+  ],
+  "brazo_der": [
+   0.0588,
+   0.112,
+   0.108
+  ],
+  "antebrazo_der": [
+   0.0507,
+   0.027,
+   0.1477
+  ],
+  "mano_der": [
+   0.0667,
+   -0.0406,
+   0.1977
+  ],
+  "muslo_izq": [
+   0.0609,
+   -0.105,
+   -0.072
+  ],
+  "pierna_izq": [
+   0.0656,
+   -0.26,
+   -0.0896
+  ],
+  "pie_izq": [
+   0.0423,
+   -0.415,
+   -0.1072
+  ],
+  "muslo_der": [
+   0.0609,
+   -0.105,
+   0.072
+  ],
+  "pierna_der": [
+   0.0694,
+   -0.26,
+   0.088
+  ],
+  "pie_der": [
+   0.05,
+   -0.415,
+   0.104
+  ],
+  "bolso": [
+   0.1208,
+   -0.0664,
+   0.0933
+  ]
+ },
+ "nota": "Unidades del GLB (1 m de alto, origen a media altura, mira a +X, derecha +Z). Zancada = avance por ciclo completo sin que resbale el pie apoyado. Generado por herramientas/blender/rig_protagonista.py."
+}

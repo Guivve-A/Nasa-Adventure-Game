@@ -1,0 +1,19 @@
+{
+  "titulo": "Base en Marte",
+  "resumen": "Programa el aterrizaje, levanta la base antes de la noche marciana y envía el primer reporte a la Tierra.",
+  "instrucciones": [
+    "Programa el paracaídas, los cohetes y la navegación, y pruébalo en el simulador.",
+    "Planta las tres banderas y despliega los módulos (mantén E): paneles antes que el extractor, agua antes que el invernadero.",
+    "Limpia los paneles en la tormenta de polvo y, de noche, revisa las unidades del reporte antes de enviarlo."
+  ],
+  "controles": "A/D o flechas: moverse. Espacio: saltar. E: usar (mantener: desplegar). Tab: cuaderno de campo. Ratón: flechas y X. Esc: salir del libro.",
+  "pistas": [
+    "Órbita mira los cuatro medidores y el cielo.",
+    "Nada funciona sin energía: primero los paneles. Y el invernadero necesita el agua del hielo.",
+    "Paracaídas a 11 km, cohetes a 2,1 km y navegación: sí. En la tormenta, mantén E junto a los paneles; en el reporte, las millas no son métricas."
+  ],
+  "ficha": "",
+  "escena": "biblioteca",
+  "zona": "ciudad",
+  "orden": 21
+}

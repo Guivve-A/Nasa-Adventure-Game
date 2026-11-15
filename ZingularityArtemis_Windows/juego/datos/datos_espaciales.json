@@ -1,0 +1,533 @@
+{
+  "version": 1,
+  "fichas": {
+    "observatorio_quito": {
+      "titulo": "El Observatorio de Quito",
+      "texto": "El Observatorio Astronómico de Quito pertenece a la Escuela Politécnica Nacional y fue fundado en 1873.",
+      "fuente": "OAQ-EPN, Introducción",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #22 (E6)"
+    },
+    "cielo_15_grados": {
+      "titulo": "El cielo gira",
+      "texto": "Cálculo propio: 360° / 24 h da unos 15° por hora de giro aparente del cielo. Es una referencia aproximada para el seguidor.",
+      "fuente": "Proyecto, Fase 2 §8.2",
+      "sello": "Cálculo propio",
+      "categoria": "Control",
+      "verificacion": "Fase 2 §8.2, Giro aparente del cielo"
+    },
+    "realimentacion": {
+      "titulo": "Realimentación",
+      "texto": "La realimentación usa lo medido para corregir el error respecto a lo deseado. El seguidor compara dónde apunta con dónde está la Luna y ajusta el motor.",
+      "fuente": "Proyecto, Fase 2 §3.1, escena 4.1",
+      "sello": "Concepto",
+      "categoria": "Control",
+      "verificacion": "Fase 2 §3.1, escena 4.1"
+    },
+    "ganancia": {
+      "titulo": "Ganancia",
+      "texto": "La ganancia indica cuánto responde el control a un error. En el seguidor lunar, una ganancia baja puede dejar atraso; una demasiado alta puede causar oscilaciones.",
+      "fuente": "Proyecto, Fase 2 §3.1, escena 2.1",
+      "sello": "Concepto",
+      "categoria": "Control",
+      "verificacion": "Fase 2 §3.1, escena 2.1"
+    },
+    "amortiguacion": {
+      "titulo": "Amortiguación",
+      "texto": "La amortiguación reduce las oscilaciones de un sistema. En el seguidor lunar ayuda a que el movimiento se estabilice al apuntar a la Luna.",
+      "fuente": "Proyecto, Fase 2 §3.1, escena 1.2",
+      "sello": "Concepto",
+      "categoria": "Control",
+      "verificacion": "Fase 2 §3.1, escena 1.2"
+    },
+    "prealimentacion": {
+      "titulo": "Prealimentación",
+      "texto": "La prealimentación anticipa la acción necesaria con un modelo. El seguidor mueve el motor según el giro previsto del cielo; la realimentación corrige el error restante.",
+      "fuente": "Proyecto, Fase 2 §3.1, escena 4.1",
+      "sello": "Concepto",
+      "categoria": "Control",
+      "verificacion": "Fase 2 §3.1, escena 4.1"
+    },
+    "chimborazo": {
+      "titulo": "Desde el centro de la Tierra",
+      "texto": "La cumbre del Chimborazo es la más alejada del centro terrestre: 6 384 418,505 m, según IGM-ESPE en 2019.",
+      "fuente": "IGM-ESPE, boletín SIRGAS, 2019",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #23 (E7 corregido)"
+    },
+    "pegaso": {
+      "titulo": "Pegaso, satélite ecuatoriano",
+      "texto": "NEE-01 Pegaso fue el primer satélite ecuatoriano. Su cuerpo era un cubo de 10 cm con dos paneles de 27 cm.",
+      "fuente": "NASA, Orbital Debris Quarterly News 17-3",
+      "sello": "Dato verificado",
+      "categoria": "Satélites",
+      "verificacion": "03a #16 (E2)"
+    },
+    "cubesat": {
+      "titulo": "Un satélite pequeño",
+      "texto": "El cuerpo de Pegaso era un cubo de 10 cm. Sus dos paneles medían 27 cm cada uno.",
+      "fuente": "NASA, Orbital Debris Quarterly News 17-3",
+      "sello": "Dato verificado",
+      "categoria": "Satélites",
+      "verificacion": "03a #16"
+    },
+    "exa_2007": {
+      "titulo": "EXA nació en 2007",
+      "texto": "EXA es una organización no gubernamental sin fines de lucro. Se presentó el 29-08-2007 e inició actividades el 01-11-2007.",
+      "fuente": "FAE, Sobrevuelo, 2011, p. 24",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #15"
+    },
+    "estacion_cotopaxi": {
+      "titulo": "La estación Quito",
+      "texto": "La estación Quito estaba al pie del Cotopaxi, a 3 650 m. Operó de 1957 a 1981 y se entregó a Ecuador en 1982.",
+      "fuente": "NASA, Read You Loud and Clear!, pp. 228–231",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #1 y #3 (A1 corregido)"
+    },
+    "apolo_soyuz_1975": {
+      "titulo": "Quito y Apolo-Soyuz",
+      "texto": "En 1975, Quito participó en el proyecto Apolo-Soyuz. La estación figura con el indicativo QUI en la red de apoyo.",
+      "fuente": "NASA, Read You Loud and Clear!, pp. 192–193",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #1 y #5 (A2)"
+    },
+    "sts2_despedida": {
+      "titulo": "Una despedida desde el STS-2",
+      "texto": "Engle y Truly se despidieron desde el STS-2 de los 75 empleados de la estación Quito el 14-11-1981, a las 07:04, hora local.",
+      "fuente": "NASA, Read You Loud and Clear!, p. 230",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #6 (A2)"
+    },
+    "luna_sonriente": {
+      "titulo": "La Luna sonriente",
+      "texto": "La creciente parece una sonrisa cuando el borde iluminado apunta hacia abajo. Desde el Mirador, el 12-11-2026 a las 19:30 estaba a 192,6° del cenit.",
+      "fuente": "NASA/JPL Horizons, Mirador, 12-11-2026",
+      "sello": "Dato medido",
+      "categoria": "Luna",
+      "verificacion": "Horizons 12-11-2026; Mirador, Mediciones"
+    },
+    "luz_cenicienta": {
+      "titulo": "Luz cenicienta",
+      "texto": "La luz cenicienta ilumina la parte oscura de la Luna con luz reflejada por la Tierra. El 12-11-2026 a las 19:30, la parte iluminada por el Sol era del 12,2 % desde el Mirador.",
+      "fuente": "NASA/JPL Horizons; Mirador, 12-11-2026",
+      "sello": "Dato medido",
+      "categoria": "Luna",
+      "verificacion": "Horizons 12-11-2026; Mirador, La prueba"
+    },
+    "terminador": {
+      "titulo": "El terminador lunar",
+      "texto": "El terminador es la frontera entre el día y la noche lunar. El 12-11-2026 a las 19:30, desde el Mirador se veía un 12,2 % del disco iluminado por el Sol.",
+      "fuente": "NASA/JPL Horizons; proyecto Mirador, 2026",
+      "sello": "Dato medido",
+      "categoria": "Luna",
+      "verificacion": "Horizons 12-11-2026; Fase 2 §3.1, escena 2.2"
+    },
+    "mare_crisium": {
+      "titulo": "Mare Crisium en el ocular",
+      "texto": "Mare Crisium es uno de los rasgos identificados en la prueba del telescopio. Su posición se contrastó con una proyección independiente.",
+      "fuente": "Proyecto, Mirador, Mediciones y verificación",
+      "sello": "Dato medido",
+      "categoria": "Luna",
+      "verificacion": "Mirador, Mediciones, Posición de Mare Crisium"
+    },
+    "mar_tranquilidad": {
+      "titulo": "El Mar de la Tranquilidad",
+      "texto": "El sueño se sitúa cerca del sitio del Apolo 11, en el Mar de la Tranquilidad. La visita de la protagonista es una licencia del sueño.",
+      "fuente": "Proyecto, Fase 2 §4.2",
+      "sello": "Sueño",
+      "categoria": "Luna",
+      "verificacion": "Fase 2 §4.2, Lugar"
+    },
+    "luna_12_noviembre": {
+      "titulo": "La Luna del 12 de noviembre",
+      "texto": "Desde el Mirador, el 12-11-2026 a las 19:30, la Luna tenía un 12,2 % iluminado, estaba a 20,0° de altura y a 403 151 km.",
+      "fuente": "NASA/JPL Horizons, Mirador, 12-11-2026",
+      "sello": "Dato medido",
+      "categoria": "Luna",
+      "verificacion": "Horizons 12-11-2026, 19:30"
+    },
+    "luna_13_noviembre": {
+      "titulo": "La Luna del 13 de noviembre",
+      "texto": "Desde el Mirador, el 13-11-2026 a las 19:30, la Luna tenía un 19,0 % iluminado, estaba a 31,0° de altura y a 402 285 km.",
+      "fuente": "NASA/JPL Horizons, revisión C7, 2026",
+      "sello": "Dato medido",
+      "categoria": "Luna",
+      "verificacion": "Horizons 13-11-2026; Fase 2, Revisión C7, Noche 2"
+    },
+    "luna_se_mueve": {
+      "titulo": "La Luna cruza el ocular",
+      "texto": "Cálculo propio: la Luna recorre su diámetro aparente de 29,6′ en unos 2 min. Sin seguimiento, se desplaza por el ocular.",
+      "fuente": "Proyecto, Fase 2 §8.2",
+      "sello": "Cálculo propio",
+      "categoria": "Luna",
+      "verificacion": "Fase 2 §8.2, La Luna recorre su diámetro"
+    },
+    "disco_apolo11": {
+      "titulo": "Un mensaje de Ecuador a la Luna",
+      "texto": "El disco del Apolo 11 llevó mensajes de 73 países, reducidos 200 veces. Velasco Ibarra envió el de Ecuador, con deseos de éxito y buena voluntad.",
+      "fuente": "NASA, comunicado 69-83F, 1969, pp. 1–3 y 18",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03a #8 y #9 (A4)"
+    },
+    "acuerdos_artemisa": {
+      "titulo": "Ecuador y los Acuerdos Artemisa",
+      "texto": "Ecuador firmó los Acuerdos Artemisa el 21-06-2023 y fue el país n.º 26. Firmó el canciller Gustavo Manrique Miranda.",
+      "fuente": "NASA, Ecuador como firmante n.º 26, 2023",
+      "sello": "Dato verificado",
+      "categoria": "Derecho espacial",
+      "verificacion": "03a #14 (E1)"
+    },
+    "gravedad_lunar": {
+      "titulo": "Gravedad lunar",
+      "texto": "En el ecuador lunar, la gravedad es de 1,624 m/s²: aproximadamente 1/6 de la terrestre.",
+      "fuente": "NASA, Moon by the numbers y Moon facts",
+      "sello": "Dato verificado",
+      "categoria": "Luna",
+      "verificacion": "03b L6"
+    },
+    "masa_y_peso": {
+      "titulo": "Masa y peso",
+      "texto": "En la Luna tu masa no cambia. Tu peso disminuye porque la gravedad lunar es menor.",
+      "fuente": "NASA, Moon by the numbers y Moon facts",
+      "sello": "Dato verificado",
+      "categoria": "Luna",
+      "verificacion": "03b L6"
+    },
+    "regolito": {
+      "titulo": "Regolito lunar",
+      "texto": "El regolito es polvo y escombros rocosos producidos por impactos durante miles de millones de años. Incluye desde peñascos hasta polvo.",
+      "fuente": "NASA, Moon facts",
+      "sello": "Dato verificado",
+      "categoria": "Luna",
+      "verificacion": "03b L8"
+    },
+    "herramientas_apolo11": {
+      "titulo": "Herramientas del Apolo 11",
+      "texto": "El Apolo 11 llevó cucharón de caja para el suelo, pinzas pequeñas para rocas y tubos de núcleo de 2 cm, hincados con martillo.",
+      "fuente": "NASA/JSC, Allton, herramientas Apolo",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L1 y L3"
+    },
+    "bolsas_numeradas": {
+      "titulo": "Cada muestra tiene un registro",
+      "texto": "Las bolsas numeradas ligaban cada muestra a su registro. La documentación del Apolo 11 fue bastante simple; el protocolo fotográfico completo llegó después.",
+      "fuente": "NASA, Phinney, SP-2015-626, pp. 96 y 159",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L4 corregido"
+    },
+    "muestras_apolo11": {
+      "titulo": "Las muestras del Apolo 11",
+      "texto": "El Apolo 11 trajo 21,5 kg de material lunar en 58 muestras. Son cifras de masa, que no cambia al viajar entre la Luna y la Tierra.",
+      "fuente": "NASA/JSC, The Lunar Sample Collection",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L5 corregido; L6"
+    },
+    "etapa_descenso": {
+      "titulo": "Lo que quedó en la Luna",
+      "texto": "La etapa de descenso sirvió de plataforma de lanzamiento y quedó en la Luna con la placa conmemorativa.",
+      "fuente": "NASA, cronología del Apolo 11",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L12"
+    },
+    "zona_75_m": {
+      "titulo": "Mirar sin borrar",
+      "texto": "NASA recomienda a los sistemas robóticos visitantes una zona de exclusión de 75 m desde la etapa de descenso del Apolo 11. Es una recomendación técnica, no un requisito legal.",
+      "fuente": "NASA, recomendaciones de sitios lunares, 2011",
+      "sello": "Dato verificado",
+      "categoria": "Derecho espacial",
+      "verificacion": "03b R3"
+    },
+    "bandera_lunar": {
+      "titulo": "Una barra sostiene la bandera",
+      "texto": "La bandera lunar llevaba una barra horizontal para sostenerla sin viento. Según Aldrin, el despegue derribó la del Apolo 11; NASA presume que ya no está en pie.",
+      "fuente": "NASA, Flag Day; Platoff, estudio histórico",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L10 y L11"
+    },
+    "tratado_espacio": {
+      "titulo": "Una bandera no da territorio",
+      "texto": "El artículo II del Tratado del Espacio prohíbe la apropiación nacional de la Luna. Colocar una bandera no convierte el lugar en territorio de un país.",
+      "fuente": "ONU, Tratado del Espacio, 1967, art. II",
+      "sello": "Dato verificado",
+      "categoria": "Derecho espacial",
+      "verificacion": "03b R1"
+    },
+    "tierra_en_cielo_lunar": {
+      "titulo": "La Tierra en el cielo lunar",
+      "texto": "Vista desde la Luna, la Tierra permanece más o menos en el mismo punto del cielo y oscila por la libración. Sus fases son opuestas a las de la Luna.",
+      "fuente": "NASA Goddard, StarChild, pregunta 58",
+      "sello": "Dato verificado",
+      "categoria": "Luna",
+      "verificacion": "03b L9"
+    },
+    "noche_lunar": {
+      "titulo": "Noche en Tranquilidad",
+      "texto": "Cálculo propio con NASA SVS: el 13-11-2026 a las 00:30 UT, el Sol estaba a −25,3° en Tranquilidad, bajo el horizonte. Allí era de noche.",
+      "fuente": "Proyecto, NASA SVS 5587; revisión C7",
+      "sello": "Cálculo propio",
+      "categoria": "Luna",
+      "verificacion": "Fase 2 §4.2 y Revisión C7, Cálculos del sueño"
+    },
+    "modulo_mando": {
+      "titulo": "La cápsula que volvió",
+      "texto": "El módulo de mando se separó del de servicio y reentró con el escudo térmico por delante. Amerizó con paracaídas en el Pacífico el 24-07-1969.",
+      "fuente": "NASA, cronología y resumen del Apolo 11",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L13"
+    },
+    "regreso_seis_pasos": {
+      "titulo": "El regreso del sueño",
+      "texto": "En el sueño ordenamos el regreso: despegue, encuentro en órbita lunar, separación del módulo de servicio, reentrada, paracaídas y amerizaje. Es una secuencia didáctica simplificada.",
+      "fuente": "Proyecto, Fase 2 §4.4",
+      "sello": "Sueño",
+      "categoria": "Apolo",
+      "verificacion": "Fase 2 §4.4, paso 1"
+    },
+    "limite_2_km": {
+      "titulo": "Cuidar los sitios al descender",
+      "texto": "NASA recomienda no sobrevolar ni aterrizar dentro del límite de descenso de 2,0 km de los sitios históricos. Es una recomendación técnica para las visitas lunares.",
+      "fuente": "NASA, recomendaciones de sitios lunares, 2011",
+      "sello": "Dato verificado",
+      "categoria": "Derecho espacial",
+      "verificacion": "03b R3 y R4"
+    },
+    "polo_sur_celeste": {
+      "titulo": "El polo sur celeste",
+      "texto": "Cálculo propio: desde el Mirador, a 2,18° S, el polo sur celeste queda a unos 2,2° sobre el horizonte. Por eso el eje polar de la montura está casi acostado.",
+      "fuente": "Proyecto, Fase 2 §8.2 y escena 2.2",
+      "sello": "Cálculo propio",
+      "categoria": "Control",
+      "verificacion": "Fase 2 §8.2, Polo sur celeste desde el Mirador"
+    },
+    "pegaso_inicio": {
+      "titulo": "Pegaso empezó en 2010",
+      "texto": "La primera fase del proyecto Pegaso se inició en 2010, según el relato de Ronnie Nader publicado en Sobrevuelo.",
+      "fuente": "FAE, Sobrevuelo, 2011, p. 24",
+      "sello": "Dato verificado",
+      "categoria": "Satélites",
+      "verificacion": "03a #21 (E4 corregido)"
+    },
+    "pegaso_lanzamiento": {
+      "titulo": "El lanzamiento de Pegaso",
+      "texto": "Según el equipo de Pegaso, se lanzó el 25-04-2013 desde Jiuquan, con fecha de Ecuador. Inició operaciones el 05-05-2013.",
+      "fuente": "Equipo Pegaso, resúmenes IAC-14",
+      "sello": "Dato verificado",
+      "categoria": "Satélites",
+      "verificacion": "03a #17 (E3)"
+    },
+    "pegaso_orbita": {
+      "titulo": "La órbita de Pegaso",
+      "texto": "NASA registró a Pegaso con una órbita de 627 × 654 km y el número de catálogo 39151.",
+      "fuente": "NASA, Orbital Debris Quarterly News 17-3",
+      "sello": "Dato verificado",
+      "categoria": "Satélites",
+      "verificacion": "03a #16"
+    },
+    "pegaso_incidente": {
+      "titulo": "Una hipótesis no es certeza",
+      "texto": "El 23-05-2013, Pegaso tuvo una anomalía tras un acercamiento a un cuerpo de cohete. NASA informó un paso a distancia segura y no detectó escombros nuevos.",
+      "fuente": "NASA, Orbital Debris Quarterly News 17-3",
+      "sello": "Dato verificado",
+      "categoria": "Satélites",
+      "verificacion": "03a #19 (E5); Fase 2 §7.2 S7"
+    },
+    "pegaso_contacto": {
+      "titulo": "Pegaso volvió a dar señal",
+      "texto": "El equipo de Pegaso informó que recuperó contacto el 25-01-2014. La pérdida de comunicación no demuestra por sí sola una colisión.",
+      "fuente": "Equipo Pegaso, IAC-14 A6.7; NASA, ODQN 17-3",
+      "sello": "Dato verificado",
+      "categoria": "Satélites",
+      "verificacion": "03a #19 (E5)"
+    },
+    "estacion_redes": {
+      "titulo": "De Minitrack a STDN",
+      "texto": "Quito fue una de las 7 estaciones Minitrack de 1957. Pasó a STADAN entre 1960 y 1963 y después a STDN.",
+      "fuente": "NASA, Read You Loud and Clear!, pp. 16–19, 42 y 229",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #2"
+    },
+    "estacion_antenas": {
+      "titulo": "Antenas de 12 m",
+      "texto": "Las antenas de 12 m de la estación Quito se instalaron entre 1960 y 1963.",
+      "fuente": "NASA, Read You Loud and Clear!, pp. 56 y 230",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #4"
+    },
+    "estacion_entrega": {
+      "titulo": "La estación pasó a Ecuador",
+      "texto": "La estación dejó de operar el 14-11-1981. La instalación se entregó a Ecuador, a CLIRSEN, el 01-07-1982.",
+      "fuente": "NASA, Read You Loud and Clear!, pp. 228–231",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a #3 corregido"
+    },
+    "estacion_horas": {
+      "titulo": "578 160 horas de apoyo",
+      "texto": "La estación del Cotopaxi acumuló 578 160 horas de apoyo a misiones en 22 años, según la historia de la red de rastreo.",
+      "fuente": "NASA, Read You Loud and Clear!, pp. 228–231",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a §3, La estación del Cotopaxi"
+    },
+    "estacion_personal": {
+      "titulo": "Un equipo que creció",
+      "texto": "El personal ecuatoriano de la estación del Cotopaxi pasó de 50 a 220 personas.",
+      "fuente": "NASA, Read You Loud and Clear!, pp. 228–231",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a §3, La estación del Cotopaxi"
+    },
+    "estacion_llamas": {
+      "titulo": "Llamas junto a una antena",
+      "texto": "Una foto de 1973 muestra una manada de llamas pastando junto a la antena de 12 m de la estación del Cotopaxi.",
+      "fuente": "NASA, Read You Loud and Clear!, pp. 228–231",
+      "sello": "Dato verificado",
+      "categoria": "Ecuador",
+      "verificacion": "03a §3, La estación del Cotopaxi"
+    },
+    "temperaturas_lunares": {
+      "titulo": "Los extremos de la superficie",
+      "texto": "La superficie lunar alcanza unos 127 °C a pleno Sol y unos −173 °C en la oscuridad. Son extremos de la superficie.",
+      "fuente": "NASA, Moon facts",
+      "sello": "Dato verificado",
+      "categoria": "Luna",
+      "verificacion": "03b L7"
+    },
+    "muestras_total": {
+      "titulo": "La colección de muestras Apolo",
+      "texto": "Las misiones Apolo trajeron 382 kg de material lunar en 2196 muestras. El Apolo 17 aportó 110,5 kg.",
+      "fuente": "NASA/JSC, The Lunar Sample Collection",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L5 corregido"
+    },
+    "rastrillo": {
+      "titulo": "El rastrillo llegó después",
+      "texto": "El rastrillo separaba fragmentos pequeños del material fino. Fue equipo de los Apolo 15–17, no del Apolo 11.",
+      "fuente": "NASA/JSC, Allton, herramientas Apolo",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L2"
+    },
+    "tubos_nucleo": {
+      "titulo": "Una columna del suelo",
+      "texto": "Los tubos de núcleo se hincaban con martillo para extraer una columna de suelo. En los Apolo 11–14 tenían 2 cm de diámetro; en los Apolo 15–17, 4 cm.",
+      "fuente": "NASA/JSC, Allton, herramientas Apolo",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L3"
+    },
+    "gnomon": {
+      "titulo": "Una referencia en las fotos",
+      "texto": "El gnomon daba escala, color, vertical y ángulo del Sol en las fotografías de documentación de muestras.",
+      "fuente": "Smithsonian, gnomon lunar; NASA, Phinney",
+      "sello": "Dato verificado",
+      "categoria": "Apolo",
+      "verificacion": "03b L4 corregido"
+    },
+    "marte_senal": {
+      "titulo": "La señal tarda",
+      "texto": "Según dónde esté cada planeta, la señal tarda entre unos 4 y 24 minutos.",
+      "fuente": "ESA, «Spacecraft event time vs. Earth receive time» (2012)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_siete": {
+      "titulo": "Siete minutos de terror",
+      "texto": "Perseverance entró a unos 20 000 km/h, abrió el paracaídas a unos 11 km y se soltó de él a unos 2,1 km para bajar con cohetes. Todo duró unos siete minutos.",
+      "fuente": "NASA, Mars 2020: Entry, Descent and Landing (2021)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_gravedad": {
+      "titulo": "Saltar en Marte",
+      "texto": "La gravedad de Marte es el 38 % de la terrestre.",
+      "fuente": "NASA/JPL, «Mars at a Glance»",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_sol": {
+      "titulo": "Un día marciano",
+      "texto": "Un día solar en Marte dura unas 24 horas y 39 minutos.",
+      "fuente": "NASA, Mars Fact Sheet (NSSDCA)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_aire": {
+      "titulo": "El aire de Marte",
+      "texto": "La atmósfera es 95 % dióxido de carbono y su presión en la superficie es menor al 1 % de la terrestre.",
+      "fuente": "NASA, Mars Fact Sheet (NSSDCA)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_moxie": {
+      "titulo": "MOXIE",
+      "texto": "MOXIE produjo 122 g de oxígeno entre 2021 y 2023; en su mejor momento, 12 g por hora.",
+      "fuente": "NASA/JPL, «MOXIE Completes Mars Mission» (2023)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_hielo": {
+      "titulo": "Hielo bajo el polvo",
+      "texto": "En las latitudes medias hay hielo a veces a solo 2,5 cm bajo la superficie.",
+      "fuente": "NASA/JPL, «NASA's Treasure Map for Water Ice on Mars» (2019)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_polvo": {
+      "titulo": "Tormentas de polvo",
+      "texto": "En junio de 2018 una tormenta cubrió todo el planeta. Opportunity no pudo recargar sus paneles y dejó de comunicarse tras casi 15 años de misión.",
+      "fuente": "NASA, «Opportunity Rover Mission on Mars Comes to End» (2019)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_frio": {
+      "titulo": "Frío de noche",
+      "texto": "En el sitio del Viking 1, la temperatura iba de unos −31 °C de día a unos −89 °C de noche.",
+      "fuente": "NASA, Mars Fact Sheet (NSSDCA)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_lunas": {
+      "titulo": "Fobos y Deimos",
+      "texto": "Fobos mide unos 27 × 22 × 18 km y da tres vueltas a Marte cada día. Deimos mide unos 15 × 12 × 11 km y tarda unas 30 horas.",
+      "fuente": "NASA Science, «Phobos» y «Deimos»",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    },
+    "marte_unidades": {
+      "titulo": "Cuidado con las unidades",
+      "texto": "En 1999 se perdió la Mars Climate Orbiter: un programa daba la fuerza en libras y otro la esperaba en newtons.",
+      "fuente": "NASA, informe de la junta de investigación de la Mars Climate Orbiter (1999)",
+      "sello": "Dato verificado",
+      "categoria": "Marte",
+      "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+    }
+  }
+}

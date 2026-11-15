@@ -1,0 +1,52 @@
+{
+  "comandante": {
+    "nombre": "Comandante Rivas",
+    "lineas": [
+      "¿Puedes ayudarnos en la construcción del cohete? Con él llegaremos a Marte.",
+      "Lleva cajas y minerales a la máquina constructora del astillero. Ella arma el cohete por fases.",
+      "Si suena la alerta de lluvia solar, entra en una cúpula o en el refugio."
+    ],
+    "dato": "En el polo sur de la Luna el Sol queda justo bajo o sobre el horizonte, y las montañas dan sombras muy oscuras.",
+    "fuente": "NASA, «Moon's South Pole is Full of Mystery, Science, Intrigue» (2022)"
+  },
+  "medica": {
+    "nombre": "Doctora Lucía",
+    "lineas": [
+      "Vigila tus cuatro medidores: oxígeno, energía, alimentos y radiación.",
+      "El oxígeno se recarga en los tanques azules y dentro de las cúpulas. En el invernadero también comes.",
+      "Lejos de la base la radiación sube. Dentro del refugio de regolito baja más rápido."
+    ],
+    "dato": "La Luna tiene una exosfera muy tenue que no protege de la radiación del Sol ni de los meteoroides.",
+    "fuente": "NASA Science, «Moon Facts»"
+  },
+  "ingeniero": {
+    "nombre": "Ingeniero Tomás",
+    "lineas": [
+      "Necesitamos más recursos para crear el cohete. Mira el plano de puntos: eso es lo que falta.",
+      "Cuando esté armado, hará falta combustible y batería. El combustible sale del hielo del cráter.",
+      "Orienta los paneles solares hacia el Sol y la batería del cohete se cargará sola."
+    ],
+    "dato": "La Luna está en promedio a 384 400 km de la Tierra.",
+    "fuente": "NASA Science, «Moon Facts»"
+  },
+  "piloto": {
+    "nombre": "Piloto Amara",
+    "lineas": [
+      "Aquí aterrizan las naves de carga que llegan de la Tierra. Cada cierto tiempo traen cajas nuevas.",
+      "Puedes llevar 4 cosas en la mochila. Con el rover del campo minero llevas hasta 10.",
+      "Cuidado con los meteoritos: una marca naranja en el suelo avisa dónde van a caer."
+    ],
+    "dato": "El traje naranja de la nave Orion se usa en el despegue y en el regreso: el color ayuda a encontrar a la tripulación en el océano.",
+    "fuente": "NASA, «Orion Suit Equipped to Expect the Unexpected on Artemis Missions»"
+  },
+  "geologa": {
+    "nombre": "Geóloga Paz",
+    "lineas": [
+      "En este campo hay ilmenita y regolito. Mantén pulsada la E junto a una veta para extraer.",
+      "Más a la derecha el suelo baja hacia un cráter que nunca ve el Sol. Ahí está el hielo.",
+      "Extraer gasta energía. Hay una estación de carga aquí cerca."
+    ],
+    "dato": "En 2018 se observó de forma directa hielo de agua en la Luna, concentrado en las sombras de los cráteres de los polos.",
+    "fuente": "NASA/JPL, «Ice Confirmed at the Moon's Poles» (2018)"
+  }
+}

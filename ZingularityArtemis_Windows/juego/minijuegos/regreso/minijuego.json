@@ -1,0 +1,18 @@
+{
+  "titulo": "Volver como el módulo de mando",
+  "resumen": "Guía la cápsula hasta el mar entre las boyas.",
+  "instrucciones": [
+    "Escudo abajo: corrige el giro y esquiva el calor.",
+    "Pulsa E dentro de la franja de paracaídas.",
+    "Con las telas abiertas, dirige la cápsula entre boyas."
+  ],
+  "controles": "A/D o flechas: girar y dirigir; S o abajo: picada; E o Espacio: paracaídas; Esc: salir",
+  "pistas": [
+    "Mira el escudo y las zonas de calor.",
+    "Corrige con pulsos cortos; frena el giro antes del centro.",
+    "Abre en la franja y corrige el viento hacia las boyas."
+  ],
+  "ficha": "modulo_mando",
+  "escena": "3.6",
+  "orden": 9
+}

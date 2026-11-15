@@ -1,0 +1,24 @@
+{
+  "nombre": "La Plaza de las Iguanas",
+  "lugar": "Las Escalinatas, Guayaquil",
+  "momento": "Tarde",
+  "estado_arte": "provisional: plaza y biblioteca sin concepto validado (v2 color y vida, 2026-11-14)",
+  "orden": 2,
+  "carga": {
+    "imagen": "res://zonas/ciudad/carga.jpg",
+    "fichas": [
+      "chimborazo",
+      "pegaso",
+      "exa_2007",
+      "observatorio_quito",
+      "terminador",
+      "luna_sonriente"
+    ]
+  },
+  "entradas": {
+    "inicio": "delante de la puerta de la casa de la protagonista, igual que «casa»",
+    "casa": "lado izquierdo de la plaza, delante de la puerta de la casa amarilla: se llega desde la habitación",
+    "sendero": "lado derecho, en la boca del camino del cerro: se vuelve del sendero del arroyo",
+    "biblioteca": "al pie de las gradas de la biblioteca municipal, mirando a la plaza"
+  }
+}

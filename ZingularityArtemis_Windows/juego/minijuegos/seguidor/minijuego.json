@@ -1,0 +1,18 @@
+{
+  "titulo": "El seguidor que tiembla",
+  "resumen": "Sigue la Luna con un motor con inercia y completa la grabación.",
+  "instrucciones": [
+    "Mantén la Luna dentro del visor hasta llenar REC.",
+    "Empuja con A/D y frena con Espacio antes de pasarte.",
+    "Con ayuda del cielo, pulsa E para activar su velocidad."
+  ],
+  "controles": "A/D o ←/→: motor. Espacio: freno. E: cielo (con ayuda). Esc: salir.",
+  "pistas": [
+    "Mira hacia dónde desliza el visor al soltar el motor.",
+    "Da impulsos cortos y frena antes de alcanzar la Luna.",
+    "Acumula 60 s de vídeo dentro del visor; E activa la ayuda del cielo."
+  ],
+  "ficha": "realimentacion",
+  "escena": "1.2",
+  "orden": 1
+}

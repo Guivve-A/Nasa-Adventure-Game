@@ -1,0 +1,18 @@
+{
+  "titulo": "La escalinata del tiempo",
+  "resumen": "Sube la escalinata: encuentra cada pictograma y revela nueve hitos al aterrizar.",
+  "instrucciones": [
+    "Busca el pictograma de SIGUE.",
+    "Salta sobre su placa para revelar el a?o.",
+    "Esquiva cocos e iguanas antes de que acabe el tiempo."
+  ],
+  "controles": "Flechas/WASD: mover ? E/Espacio: saltar ? Esc: salir",
+  "pistas": [
+    "La placa pendiente brilla en cian en dificultad 1.",
+    "Caminar no revela el a?o: aterriza sobre la placa del pictograma de SIGUE.",
+    "Salta los animales; tienes tres vidas para llegar a los Acuerdos."
+  ],
+  "ficha": "disco_apolo11",
+  "escena": "2.4",
+  "orden": 5
+}

@@ -1,0 +1,18 @@
+{
+  "titulo": "Recolector lunar",
+  "resumen": "Recoge cuatro muestras lunares con la herramienta adecuada y ll?valas a la caja cian.",
+  "instrucciones": [
+    "Mu?vete a saltos y evita los cr?teres.",
+    "E cambia herramienta; mant?n Espacio para recoger.",
+    "Lleva cada bolsa a la caja antes de agotar el ox?geno."
+  ],
+  "controles": "Flechas o WASD: mover ? E: herramienta ? Espacio: recoger ? Esc: salir",
+  "pistas": [
+    "En nivel 1, el icono junto a cada muestra indica su herramienta.",
+    "Cuchar?n para suelo y fragmentos, pinzas para roca, tubo para capas.",
+    "Suelta las flechas al recoger; lleva una bolsa por viaje a la caja cian. Aterriza fuera de los cr?teres."
+  ],
+  "ficha": "herramientas_apolo11",
+  "escena": "3.2",
+  "orden": 6
+}

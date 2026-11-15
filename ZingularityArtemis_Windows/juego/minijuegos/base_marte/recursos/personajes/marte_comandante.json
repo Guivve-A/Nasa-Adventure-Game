@@ -1,0 +1,36 @@
+{
+ "id": "marte_comandante",
+ "tam": 32,
+ "animaciones": {
+  "quieto": {
+   "fila": 0,
+   "cuadros": 2,
+   "fps": 2,
+   "bucle": true
+  },
+  "caminar": {
+   "fila": 1,
+   "cuadros": 4,
+   "fps": 8,
+   "bucle": true
+  },
+  "saltar": {
+   "fila": 2,
+   "cuadros": 1,
+   "fps": 1,
+   "bucle": false
+  },
+  "hablar": {
+   "fila": 3,
+   "cuadros": 2,
+   "fps": 4,
+   "bucle": true
+  },
+  "caido": {
+   "fila": 4,
+   "cuadros": 1,
+   "fps": 1,
+   "bucle": false
+  }
+ }
+}

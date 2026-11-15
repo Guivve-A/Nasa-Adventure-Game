@@ -1,0 +1,18 @@
+{
+  "titulo": "Sintoniza la señal",
+  "resumen": "Haz que tu onda coincida con la de referencia.",
+  "instrucciones": [
+    "Gira el dial hasta que la onda cian quede encima de la onda crema.",
+    "Mantenla ahí 1,5 segundos."
+  ],
+  "controles": "Izquierda y derecha (A y D, flechas o mando): girar el dial. También se puede arrastrar con el ratón.",
+  "pistas": [
+    "Órbita mira la barra de abajo: solo se llena cuando las dos ondas coinciden.",
+    "Si tu onda tiene menos crestas que la otra, tu frecuencia es menor.",
+    "Gira a la derecha hasta ver el mismo número de crestas y suelta."
+  ],
+  "ficha": "realimentacion",
+  "escena": "plantilla",
+  "orden": 99,
+  "oculto": true
+}

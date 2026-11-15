@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zingularity: Artemis</title>
+  <meta name="description" content="Zingularity: Artemis es un juego de aventura espacial: explora un barrio de Guayaquil, levanta una base en la Luna y aterriza en Marte. Descárgalo gratis para Windows.">
+  <meta name="theme-color" content="#1c2b83">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Zingularity: Artemis">
+  <meta property="og:description" content="Explora un barrio de Guayaquil, levanta una base en la Luna y aterriza en Marte.">
+  <meta property="og:image" content="/capturas/sendero-antena.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/capturas/sendero-antena.jpg">
+  <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+  <a class="salto" href="#capturas">Saltar al contenido</a>
+
+  <header class="barra">
+    <div class="ancho barra-fila">
+      <a class="marca" href="#inicio">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M8.500 25.500a13 13 0 0 0 23 0 15.500 15.500 0 0 1-23 0Z" fill="#fff"/><circle cx="31" cy="8" r="2.500" fill="#e9f12d"/></svg>
+        <span>Zingularity: Artemis</span>
+      </a>
+      <nav class="menu" aria-label="Secciones">
+        <a href="#capturas">Capturas</a>
+        <a href="#recursos">Recursos</a>
+      </nav>
+      <a class="boton" data-descarga="windows" href="https://github.com/Guivve-A/Nasa-Adventure-Game/releases">Descargar</a>
+    </div>
+    <div class="progreso" id="progreso" aria-hidden="true"></div>
+  </header>
+
+  <main>
+    <section class="portada" id="inicio">
+      <div class="ancho portada-rejilla">
+        <div>
+          <h1>Zingularity: Artemis</h1>
+          <p class="entrada">Explora un barrio de Guayaquil, levanta una base en la Luna y aterriza en Marte. Un juego de aventura del <em>NASA Space Apps Challenge 2026</em>.</p>
+          <div class="acciones">
+            <a class="boton grande" data-descarga="windows" href="https://github.com/Guivve-A/Nasa-Adventure-Game/releases">Descargar para Windows</a>
+            <a class="enlace-claro" data-descarga="repo" href="https://github.com/Guivve-A/Nasa-Adventure-Game" target="_blank" rel="noopener">Ver el código en GitHub</a>
+          </div>
+          <p class="etiqueta"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8.500 3.200 3.200L13 4.900" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></svg>Gratis, en español y sin instalación</p>
+        </div>
+        <div class="destino">
+          <div class="insignia" id="insignia">
+            <img class="activa" src="/capturas/sendero-antena.jpg" alt="La protagonista y su gato Órbita junto a una antena parabólica, en un sendero con flamboyanes." width="1600" height="847" style="--alto:114%; --arriba:0%; --x:50%">
+            <img src="/capturas/luna-modulo.jpg" alt="Un módulo de descenso sobre la superficie lunar, entre cráteres y huellas." width="1600" height="898" loading="lazy" style="--alto:124%; --arriba:0%; --x:50%">
+            <img src="/capturas/marte-banderas.jpg" alt="Astronautas junto a las banderas plantadas en Marte." width="1600" height="891" loading="lazy" style="--alto:150%; --arriba:-45%; --x:42%">
+          </div>
+          <div class="destinos" id="destinos" role="group" aria-label="Destino que se muestra">
+            <button type="button" aria-pressed="true">Guayaquil</button>
+            <button type="button" aria-pressed="false">La Luna</button>
+            <button type="button" aria-pressed="false">Marte</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="capturas" id="capturas">
+      <div class="ancho">
+        <h2>El juego</h2>
+
+        <div class="pestanas" role="tablist" aria-label="Partes del juego">
+          <button role="tab" id="p-explora" aria-controls="g-explora" aria-selected="true">Exploración</button>
+          <button role="tab" id="p-arcade" aria-controls="g-arcade" aria-selected="false">Minijuegos</button>
+          <button role="tab" id="p-luna" aria-controls="g-luna" aria-selected="false">Base lunar</button>
+          <button role="tab" id="p-marte" aria-controls="g-marte" aria-selected="false">Marte</button>
+        </div>
+
+        <div class="grupo" id="g-explora" role="tabpanel" aria-labelledby="p-explora">
+          <p class="grupo-texto">Recorre cinco lugares enlazados con Órbita, tu gato científico, y cumple encargos que te acercan al espacio.</p>
+          <div class="rejilla">
+            <figure><button type="button" class="ampliar"><img src="/capturas/sendero-antena.jpg" alt="La protagonista y su gato junto a una antena parabólica en un sendero con flamboyanes." loading="lazy" width="1600" height="847"></button><figcaption><strong>El sendero</strong> Reapunta la antena para volver a escuchar el cielo.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/plaza-fuente.jpg" alt="Una fuente rodeada de mosaicos con las fases de la Luna; una iguana descansa en el borde." loading="lazy" width="1600" height="852"></button><figcaption><strong>La plaza</strong> Los mosaicos de la fuente guardan las fases de la Luna.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/plaza-biblioteca.jpg" alt="Fachada de la biblioteca, con columnas, banderines y la puerta iluminada." loading="lazy" width="1600" height="898"></button><figcaption><strong>La biblioteca</strong> Sus libros abren las misiones de la Luna y de Marte.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/mirador-telescopio.jpg" alt="La protagonista junto a un telescopio en un mirador nocturno con faroles y buganvillas." loading="lazy" width="1600" height="899"></button><figcaption><strong>El mirador</strong> El telescopio muestra la Luna real de esa noche.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/luna-modulo.jpg" alt="Superficie lunar con cráteres, huellas y un módulo de descenso." loading="lazy" width="1600" height="898"></button><figcaption><strong>La Luna del sueño</strong> Camina con gravedad baja y toma la foto.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="grupo" id="g-arcade" role="tabpanel" aria-labelledby="p-arcade">
+          <p class="grupo-texto">Nueve retos arcade, cada uno con una idea real de una misión: control, rastreo, CubeSat, observación, historia, herramientas, cooperación, reentrada y órbita.</p>
+          <div class="rejilla">
+            <figure><button type="button" class="ampliar"><img src="/capturas/arcade-rastreo.jpg" alt="Una antena sigue a un satélite que pasa sobre un volcán nevado, de noche." loading="lazy" width="1600" height="874"></button><figcaption><strong>Rastreo</strong> Baja 45 paquetes en tres pasadas del satélite.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/arcade-telescopio.jpg" alt="Una mira sobre la Luna creciente y una barra de enfoque." loading="lazy" width="1600" height="885"></button><figcaption><strong>La Luna sonriente</strong> Enfoca y registra la Luna, iluminada al 12,2&nbsp;%.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="grupo" id="g-luna" role="tabpanel" aria-labelledby="p-luna">
+          <p class="grupo-texto">Levanta una base en el polo sur lunar y mantén a salvo a tu tripulación equilibrando oxígeno, energía, alimentos y radiación.</p>
+          <div class="rejilla">
+            <figure><button type="button" class="ampliar"><img src="/capturas/base-luna-invernadero.jpg" alt="Base lunar con cúpula, invernadero y paneles solares; la Tierra asoma tras las montañas." loading="lazy" width="1600" height="888"></button><figcaption><strong>La base</strong> Cúpula, invernadero y paneles solares.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/base-luna-aviso.jpg" alt="Aviso de lluvia solar sobre la base lunar, junto al rover y la constructora del cohete." loading="lazy" width="1600" height="894"></button><figcaption><strong>Aviso de lluvia solar</strong> Diez segundos para llegar a una cúpula.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/base-luna-lluvia-solar.jpg" alt="Partículas solares cruzan el cielo lunar mientras sube la barra de radiación." loading="lazy" width="1600" height="892"></button><figcaption><strong>La radiación sube</strong> Si llega al máximo, pierdes la mitad de la carga.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/base-luna-ilmenita.jpg" alt="Un astronauta salta en baja gravedad hacia un punto de extracción de ilmenita." loading="lazy" width="1600" height="889"></button><figcaption><strong>Recursos del suelo</strong> Extrae ilmenita y llévala a la constructora.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="grupo" id="g-marte" role="tabpanel" aria-labelledby="p-marte">
+          <p class="grupo-texto">Programa el descenso, plántate en Marte y sostén la base cuando llegue la tormenta de polvo.</p>
+          <div class="rejilla">
+            <figure><button type="button" class="ampliar"><img src="/capturas/marte-siete-minutos.jpg" alt="Pantalla «Siete minutos de terror» con las opciones de paracaídas, cohetes y navegación." loading="lazy" width="1600" height="895"></button><figcaption><strong>Siete minutos de terror</strong> Programa el descenso y pruébalo en el simulador.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/marte-descenso.jpg" alt="El cohete desciende sobre Marte con el paracaídas abierto." loading="lazy" width="1600" height="897"></button><figcaption><strong>El descenso</strong> Suave, duro o nave perdida, siempre con la causa.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/marte-banderas.jpg" alt="Tres banderas plantadas en Marte junto al cohete y el hábitat." loading="lazy" width="1600" height="891"></button><figcaption><strong>Llegamos juntos</strong> Planta las banderas y levanta el hábitat.</figcaption></figure>
+            <figure><button type="button" class="ampliar"><img src="/capturas/marte-tormenta.jpg" alt="Tormenta de polvo en Marte: los paneles quedan cubiertos y el extractor se detiene." loading="lazy" width="1600" height="892"></button><figcaption><strong>Tormenta de polvo</strong> Limpia los paneles para recuperar la energía.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="recursos" id="recursos">
+      <div class="ancho">
+        <h2>Datos y recursos</h2>
+        <p class="grupo-texto">El juego se apoya en datos abiertos de la NASA y en los recursos de los retos de Space Apps.</p>
+
+        <div class="columnas">
+          <div>
+            <h3>Dentro del juego</h3>
+            <ul>
+              <li><a href="https://svs.gsfc.nasa.gov/4720" target="_blank" rel="noopener">NASA SVS: CGI Moon Kit</a></li>
+              <li><a href="https://svs.gsfc.nasa.gov/5587" target="_blank" rel="noopener">NASA SVS: fase lunar de 2026</a></li>
+              <li><a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA JPL Horizons</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3><a href="https://www.spaceappschallenge.org/2026/challenges/permanent-moon-base-locations-and-mars/?tab=resources" target="_blank" rel="noopener">Reto: bases en la Luna y Marte</a></h3>
+            <ul>
+              <li><a href="https://pds.nasa.gov/" target="_blank" rel="noopener">NASA Planetary Data System</a></li>
+              <li><a href="https://pds-geosciences.wustl.edu/missions/lro/" target="_blank" rel="noopener">Lunar Reconnaissance Orbiter</a></li>
+              <li><a href="https://pds-geosciences.wustl.edu/missions/lro/diviner.htm" target="_blank" rel="noopener">LRO Diviner</a></li>
+              <li><a href="https://search.earthdata.nasa.gov/" target="_blank" rel="noopener">NASA Earthdata Search</a></li>
+              <li><a href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener">NASA Worldview</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3><a href="https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/?tab=resources" target="_blank" rel="noopener">Reto: mapa marciano</a></h3>
+            <ul>
+              <li><a href="https://trek.nasa.gov/mars/" target="_blank" rel="noopener">JPL Mars Trek</a></li>
+              <li><a href="https://astrogeology-usgs.hub.arcgis.com/pages/interactive-maps-mars" target="_blank" rel="noopener">Mapas geológicos de Marte (USGS y NASA)</a></li>
+              <li><a href="https://science.nasa.gov/resource/curiositys-proposed-path-up-mount-sharp/" target="_blank" rel="noopener">Ruta de Curiosity en el monte Sharp</a></li>
+              <li><a href="https://mars.nasa.gov/mars2020/multimedia/raw-images/" target="_blank" rel="noopener">Imágenes de Perseverance</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cierre" id="descargar">
+      <div class="ancho">
+        <h2>Juega Zingularity: Artemis</h2>
+        <p>Windows 10 u 11 de 64 bits. Funciona con gráfica integrada y 8 GB de RAM.</p>
+        <a class="boton grande" data-descarga="windows" href="https://github.com/Guivve-A/Nasa-Adventure-Game/releases">Descargar para Windows</a>
+        <p class="nota">ZIP de 136 MB. Extrae todo y abre <strong>Jugar.cmd</strong>, o <strong>Instalar.cmd</strong> para tener el acceso directo.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="ancho">
+      <p>Proyecto del NASA Space Apps Challenge 2026, hecho en Guayaquil con Godot Engine. Es independiente: no está afiliado a la NASA ni cuenta con su respaldo.</p>
+      <p>El arte conceptual, parte de los modelos y los efectos de sonido se generaron con IA y se terminaron a mano; el código contó con asistencia de IA.</p>
+    </div>
+  </footer>
+
+  <dialog class="visor" id="visor" aria-label="Captura ampliada">
+    <button class="visor-cerrar" id="visor-cerrar" type="button" aria-label="Cerrar">×</button>
+    <button class="visor-paso anterior" id="visor-anterior" type="button" aria-label="Captura anterior">‹</button>
+    <img id="visor-imagen" alt="">
+    <button class="visor-paso siguiente" id="visor-siguiente" type="button" aria-label="Captura siguiente">›</button>
+    <p id="visor-pie"></p>
+  </dialog>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="/app.js" defer></script>
+</body>
+</html>

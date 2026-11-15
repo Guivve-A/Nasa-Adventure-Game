@@ -1,0 +1,32 @@
+; Juego jugable v0 del Proyecto NASA-Ecuador (nombre interno). Titulo: "Zingularity: Artemis".
+; Godot 4.7.2, renderizador Mobile, 1280x720. Todo se arma por codigo: ver ARQUITECTURA.md.
+config_version=5
+
+[application]
+
+config/name="Zingularity: Artemis"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="ZingularityArtemis"
+run/main_scene="res://principal.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+
+[autoload]
+
+Juego="*res://nucleo/juego.gd"
+Audio="*res://nucleo/audio.gd"
+Interfaz="*res://nucleo/interfaz.gd"
+Zonas="*res://nucleo/zonas.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+anti_aliasing/quality/msaa_3d=1
+lights_and_shadows/directional_shadow/size=4096
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=2

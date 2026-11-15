@@ -1,0 +1,18 @@
+{
+  "titulo": "Rastreo",
+  "resumen": "Sigue sat?lites y recibe 45 paquetes en tres pasadas.",
+  "instrucciones": [
+    "Gira para mantener el sat?lite dentro del haz.",
+    "Mant?n E o Espacio: haz fino, doble descarga.",
+    "Completa la barra en tres pasadas."
+  ],
+  "controles": "? ? o A D: girar ? E o Espacio: haz fino ? Esc: salir.",
+  "pistas": [
+    "Mira el arco y la flecha de entrada.",
+    "Usa toques cortos para mantener el enlace.",
+    "El haz ancho basta; usa E solo al centrarte."
+  ],
+  "ficha": "estacion_cotopaxi",
+  "escena": "2.1",
+  "orden": 2
+}

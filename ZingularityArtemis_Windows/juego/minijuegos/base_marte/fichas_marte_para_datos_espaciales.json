@@ -1,0 +1,90 @@
+{
+  "marte_senal": {
+    "titulo": "La señal tarda",
+    "texto": "Según dónde esté cada planeta, la señal tarda entre unos 4 y 24 minutos.",
+    "fuente": "ESA, «Spacecraft event time vs. Earth receive time» (2012)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_siete": {
+    "titulo": "Siete minutos de terror",
+    "texto": "Perseverance entró a unos 20 000 km/h, abrió el paracaídas a unos 11 km y se soltó de él a unos 2,1 km para bajar con cohetes. Todo duró unos siete minutos.",
+    "fuente": "NASA, Mars 2020: Entry, Descent and Landing (2021)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_gravedad": {
+    "titulo": "Saltar en Marte",
+    "texto": "La gravedad de Marte es el 38 % de la terrestre.",
+    "fuente": "NASA/JPL, «Mars at a Glance»",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_sol": {
+    "titulo": "Un día marciano",
+    "texto": "Un día solar en Marte dura unas 24 horas y 39 minutos.",
+    "fuente": "NASA, Mars Fact Sheet (NSSDCA)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_aire": {
+    "titulo": "El aire de Marte",
+    "texto": "La atmósfera es 95 % dióxido de carbono y su presión en la superficie es menor al 1 % de la terrestre.",
+    "fuente": "NASA, Mars Fact Sheet (NSSDCA)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_moxie": {
+    "titulo": "MOXIE",
+    "texto": "MOXIE produjo 122 g de oxígeno entre 2021 y 2023; en su mejor momento, 12 g por hora.",
+    "fuente": "NASA/JPL, «MOXIE Completes Mars Mission» (2023)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_hielo": {
+    "titulo": "Hielo bajo el polvo",
+    "texto": "En las latitudes medias hay hielo a veces a solo 2,5 cm bajo la superficie.",
+    "fuente": "NASA/JPL, «NASA's Treasure Map for Water Ice on Mars» (2019)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_polvo": {
+    "titulo": "Tormentas de polvo",
+    "texto": "En junio de 2018 una tormenta cubrió todo el planeta. Opportunity no pudo recargar sus paneles y dejó de comunicarse tras casi 15 años de misión.",
+    "fuente": "NASA, «Opportunity Rover Mission on Mars Comes to End» (2019)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_frio": {
+    "titulo": "Frío de noche",
+    "texto": "En el sitio del Viking 1, la temperatura iba de unos −31 °C de día a unos −89 °C de noche.",
+    "fuente": "NASA, Mars Fact Sheet (NSSDCA)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_lunas": {
+    "titulo": "Fobos y Deimos",
+    "texto": "Fobos mide unos 27 × 22 × 18 km y da tres vueltas a Marte cada día. Deimos mide unos 15 × 12 × 11 km y tarda unas 30 horas.",
+    "fuente": "NASA Science, «Phobos» y «Deimos»",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  },
+  "marte_unidades": {
+    "titulo": "Cuidado con las unidades",
+    "texto": "En 1999 se perdió la Mars Climate Orbiter: un programa daba la fuerza en libras y otro la esperaba en newtons.",
+    "fuente": "NASA, informe de la junta de investigación de la Mars Climate Orbiter (1999)",
+    "sello": "Dato verificado",
+    "categoria": "Marte",
+    "verificacion": "Base en Marte, cuaderno de campo (consultado el 14-11-2026)"
+  }
+}

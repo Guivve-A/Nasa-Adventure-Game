@@ -31,3 +31,6 @@ Nasa_Game/Presentacion/intermedios/
 # Trabajo de Blender
 *.blend1
 herramientas/blender/salidas/
+
+# Paquete jugable generado (herramientas/empaquetar_juego.py)
+entrega/

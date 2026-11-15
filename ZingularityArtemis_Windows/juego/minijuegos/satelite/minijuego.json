@@ -1,0 +1,18 @@
+{
+  "titulo": "Un cubo de 10 cm",
+  "resumen": "Monta cinco piezas en el cubo, esquiva chatarra y enciende su señal.",
+  "instrucciones": [
+    "Atrapa cada pieza con su mismo conector.",
+    "Esquiva la chatarra; S acelera la cinta.",
+    "Con cinco piezas, centra el cubo y mantén E."
+  ],
+  "controles": "A/D o flechas: mover; S/abajo: acelerar; E/Espacio: girar o señal; Esc: salir",
+  "pistas": [
+    "La forma y el número deben coincidir: E cambia la cara.",
+    "Esquiva las aspas. Las piezas que pierdes vuelven a caer.",
+    "Monta las cinco piezas y mantén E bajo el receptor durante tres segundos."
+  ],
+  "ficha": "pegaso",
+  "escena": "1.5",
+  "orden": 3
+}

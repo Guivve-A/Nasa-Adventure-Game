@@ -1,0 +1,139 @@
+{
+  "_nota": "Mapa del mundo: lugares, rotulos y conexiones. Las posiciones van de 0 a 1 sobre la ilustracion (interfaz/arte/mapa_mundo.jpg). 'pos' es la marca del lugar y 'rotulo' el centro de su placa. Una ruta con 'dibujar' se traza encima porque no esta pintada en la ilustracion.",
+  "imagen": "res://interfaz/arte/mapa_mundo.jpg",
+  "nodos": [
+    {
+      "id": "habitacion",
+      "pos": [
+        0.15,
+        0.654
+      ],
+      "rotulo": [
+        0.165,
+        0.839
+      ],
+      "corto": "Mi cuarto",
+      "que_hay": "El banco de trabajo con el seguidor de la Luna, el cuaderno con la convocatoria y la cama donde empieza el sueño.",
+      "nombre": "La habitación-taller"
+    },
+    {
+      "id": "ciudad",
+      "pos": [
+        0.487,
+        0.724
+      ],
+      "rotulo": [
+        0.51,
+        0.834
+      ],
+      "corto": "La plaza",
+      "que_hay": "La fuente, el kiosco, las iguanas y la biblioteca: sus dos libros abren «Base en la Luna» y «Base en Marte».",
+      "nombre": "La Plaza de las Iguanas"
+    },
+    {
+      "id": "sendero",
+      "pos": [
+        0.685,
+        0.53
+      ],
+      "rotulo": [
+        0.858,
+        0.562
+      ],
+      "corto": "El sendero",
+      "que_hay": "El arroyo y su puente, el panel solar y la antena caída que hay que reapuntar.",
+      "nombre": "El sendero del arroyo"
+    },
+    {
+      "id": "mirador",
+      "pos": [
+        0.745,
+        0.215
+      ],
+      "rotulo": [
+        0.885,
+        0.269
+      ],
+      "corto": "El Mirador",
+      "que_hay": "El telescopio con la Luna de esta noche, la maqueta de Pegaso, el atril del club y el simulador de órbita.",
+      "nombre": "El Mirador del Faro"
+    },
+    {
+      "id": "luna",
+      "pos": [
+        0.105,
+        0.127
+      ],
+      "rotulo": [
+        0.105,
+        0.3
+      ],
+      "corto": "La Luna",
+      "sin_placa": true,
+      "que_hay": "El sueño: caminar a saltos, recoger muestras, mirar la etapa de descenso sin pisar su sitio y plantar juntas las dos banderas.",
+      "nombre": "La Luna del sueño"
+    }
+  ],
+  "rutas": [
+    {
+      "de": "habitacion",
+      "a": "ciudad",
+      "como": "por la escalera de la casa",
+      "requiere": [
+        "hab_seguidor"
+      ]
+    },
+    {
+      "de": "ciudad",
+      "a": "sendero",
+      "como": "por el camino del cerro"
+    },
+    {
+      "de": "sendero",
+      "a": "mirador",
+      "como": "cuesta arriba",
+      "requiere": [
+        "sen_antena"
+      ]
+    },
+    {
+      "de": "mirador",
+      "a": "habitacion",
+      "como": "por la bajada de los faroles",
+      "requiere": [
+        "mir_luna",
+        "mir_linea"
+      ],
+      "solo_ida": true,
+      "dibujar": true,
+      "puntos": [
+        [
+          0.745,
+          0.215
+        ],
+        [
+          0.6,
+          0.29
+        ],
+        [
+          0.38,
+          0.455
+        ],
+        [
+          0.15,
+          0.654
+        ]
+      ]
+    },
+    {
+      "de": "habitacion",
+      "a": "luna",
+      "como": "al dormir",
+      "requiere": [
+        "mir_luna",
+        "mir_linea"
+      ],
+      "sueno": true
+    }
+  ]
+}

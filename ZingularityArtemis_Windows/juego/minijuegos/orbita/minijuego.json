@@ -1,0 +1,18 @@
+{
+  "titulo": "Ni se cae ni se escapa",
+  "resumen": "Pilota entre anillos y sella una órbita a la altura de Pegaso.",
+  "instrucciones": [
+    "Cruza los anillos numerados; anticipa sus alturas.",
+    "Impulsa o frena con pulsos cortos.",
+    "Al completar los enlaces, centra la aguja y suelta el motor."
+  ],
+  "controles": "E, Espacio, W o arriba: motor hacia delante. S o abajo: freno. Soltar: inercia. Ratón opcional: izquierdo motor, derecho freno.",
+  "pistas": [
+    "La línea de puntos predice la órbita; el anillo cian muestra el próximo enlace.",
+    "Impulsar sube el lado opuesto; frenar lo baja. La aguja central ayuda a anticipar.",
+    "Usa pulsos hacia el lado de la aguja y suelta cerca del centro. Tras los anillos, llena SELLADO sin motor."
+  ],
+  "ficha": "pegaso",
+  "escena": "secundaria",
+  "orden": 8
+}

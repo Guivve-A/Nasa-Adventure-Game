@@ -1,0 +1,110 @@
+{
+ "suelo_identico_al_aprobado": true,
+ "hierba_identica_a_la_aprobada": true,
+ "suelo": {
+  "triangulos": 7280,
+  "triangulos_que_cambian": 347,
+  "cambian_dentro_del_cuadro_del_ancla": 0,
+  "caja_de_los_cambios_xz": [
+   [
+    -1.48,
+    -3.11
+   ],
+   [
+    14.78,
+    9.5
+   ]
+  ]
+ },
+ "hierba": {
+  "triangulos": 27134,
+  "briznas_quitadas": 796,
+  "quitadas_dentro_del_cuadro_del_ancla": 0,
+  "densidad_matas_m2": 42.2
+ },
+ "VEG-hierba_corta_norte": {
+  "triangulos": 7741,
+  "matas": 1927
+ },
+ "VEG-hierba_corta_este": {
+  "triangulos": 2867,
+  "matas": 718
+ },
+ "VEG-hierba_corta_oeste": {
+  "triangulos": 667,
+  "matas": 166
+ },
+ "TER-09_agua_este": {
+  "triangulos": 44
+ },
+ "TER-13_mosaico_ext": {
+  "triangulos": 3094
+ },
+ "TER-12_muro_B3": {
+  "triangulos": 150
+ },
+ "COL-01_caja_regenerada": [
+  [
+   -0.6,
+   0.0,
+   -0.48
+  ],
+  [
+   0.63,
+   1.02,
+   0.62
+  ]
+ ],
+ "COL-01_apuntada": {
+  "triangulos": 1240,
+  "triangulos_del_puntal_quitados": 98,
+  "elevacion_del_eje_grados": 70
+ },
+ "ARQ-09": {
+  "triangulos": 140
+ },
+ "mechones_quitados": [
+  {
+   "id": "hierba_24",
+   "en_cuadro_del_ancla": false
+  },
+  {
+   "id": "hierba_27",
+   "en_cuadro_del_ancla": false
+  },
+  {
+   "id": "hierba_106",
+   "en_cuadro_del_ancla": false
+  },
+  {
+   "id": "hierba_153",
+   "en_cuadro_del_ancla": false
+  },
+  {
+   "id": "hierba_160",
+   "en_cuadro_del_ancla": false
+  },
+  {
+   "id": "hierba_191",
+   "en_cuadro_del_ancla": false
+  },
+  {
+   "id": "hierba_196",
+   "en_cuadro_del_ancla": false
+  },
+  {
+   "id": "hierba_203",
+   "en_cuadro_del_ancla": false
+  }
+ ],
+ "mechones_nuevos": 0,
+ "adornos_nuevos": {
+  "plantas": 13,
+  "flores": 13,
+  "rocas": 5
+ },
+ "tramos_de_orilla": 37,
+ "celdas_del_tronco": 83,
+ "recursos_en_layout": 383,
+ "recursos_del_layout_aprobado": 352
+}

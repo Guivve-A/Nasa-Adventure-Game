@@ -1,0 +1,28 @@
+{
+  "nombre": "La Luna del sueño",
+  "lugar": "Mar de la Tranquilidad",
+  "momento": "Noche lunar",
+  "estado_arte": "provisional: sin concepto validado (lote 06 por aprobar); v2f del 2026-11-15 con color medido contra el arte de carga pintado, recursos LUN-10 a LUN-20 (LUN-20: labio facetado de los cráteres) y dinámicas, sin veredicto",
+  "orden": 5,
+  "carga": {
+    "imagen": "res://zonas/luna/carga.jpg",
+    "fichas": ["gravedad_lunar", "mar_tranquilidad", "tierra_en_cielo_lunar", "noche_lunar", "regolito"]
+  },
+  "entradas": {
+    "inicio": "junto a la caja de cartón, sobre la losa despejada de 2 × 2 m: se llega al dormirse en la cama"
+  },
+  "salidas": {
+    "Caja": "con las dos banderas plantadas abre el reto «regreso» y despierta en habitacion:cama",
+    "despertar": "siempre disponible en el menú de pausa: vuelve a habitacion:cama"
+  },
+  "opcional": {
+    "puntos_de_interes": "Espejo (tierra_en_cielo_lunar), Estacion (temperaturas_lunares), Instrumento (noche_lunar)",
+    "muestras_sueltas": "seis, se recogen con E (banderas luna_suelta_0 a luna_suelta_5; al final, ficha bolsas_numeradas)",
+    "salto": "cada salto largo se mide; cruzar la zanja de un salto da la bandera luna_zanja_saltada y la ficha gravedad_lunar",
+    "rocas": "doce rocas sueltas que se patean (cuerpos rígidos con 1,624 m/s²)",
+    "huellas": "las de ella y las de Órbita quedan en el suelo toda la visita (hasta 900 y 700)"
+  },
+  "minimapa": "radio_minimapa = 34 m",
+  "escala": "1:4: el anillo de 75 m se recorre como un círculo de 18,75 m de radio",
+  "licencias": "la luz principal entra baja (unos 37°) para dibujar sombras largas y se pinta crema cálida, como el arte de carga pintado; con los datos de la Fase 2 es de noche, el Sol está a −25,3° y la Tierra estaría a unos 66° de altura. El amanecer cálido tras plantar las banderas es un permiso del sueño"
+}

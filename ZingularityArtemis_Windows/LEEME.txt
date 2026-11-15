@@ -1,0 +1,97 @@
+﻿ZINGULARITY: ARTEMIS  -  aventura espacial educativa (version de prueba, 2026-11-15)
+=============================================================================
+
+Una estudiante de ingenieria de control de Guayaquil sigue su sueno de llegar a la NASA, con Orbita, su gato
+cientifico. Exploras Las Escalinatas, el sendero y el Mirador del Faro, juegas minijuegos de estilo arcade sobre
+satelites, antenas y telescopios, y en un sueno caminas por la Luna. Cada dato espacial del juego es real.
+
+
+REQUISITOS
+----------
+- Windows 10 u 11 de 64 bits.
+- Tarjeta grafica compatible con Vulkan (casi todas las de 2016 en adelante; tambien las integradas Intel HD).
+  Probado en un portatil con Intel HD Graphics 620 y 8 GB de RAM.
+- Unos 350 MB libres en el disco. No hace falta instalar Godot ni nada mas.
+
+
+COMO JUGAR
+----------
+Primero descomprime TODO el ZIP (clic derecho > Extraer todo). Despues, una de dos:
+
+  A) Instalarlo:   doble clic en Instalar.cmd
+                   Lo copia en tu usuario (no pide permisos de administrador) y crea el acceso directo
+                   "Zingularity - Artemis" en el Escritorio y en el menu Inicio. Al final te ofrece abrirlo.
+                   Para quitarlo: Desinstalar.cmd (en la carpeta instalada o en esta).
+
+  B) Sin instalar:  doble clic en Jugar.cmd   (o en "Jugar en pantalla completa.cmd")
+
+Aviso de Windows SmartScreen: como es un programa sin firma digital, Windows puede mostrar
+"Windows protegio su PC". Pulsa "Mas informacion" y despues "Ejecutar de todas formas".
+
+La partida se guarda sola en %APPDATA%\ZingularityArtemis
+
+
+CONTROLES
+---------
+  Moverse ................ W A S D  o  flechas
+  Correr ................. Mayus (mantener)
+  Interactuar / hablar ... E  o  Intro
+  Saltar ................. Espacio
+  Mapa del mundo ......... M
+  Minimapa ............... N
+  Cuaderno ............... Tab  o  C
+  Pausa .................. Esc  (o P)
+  Acercar / alejar ....... Z  y  X  (o Re Pag / Av Pag)
+  Pantalla completa ...... F11
+  Captura de pantalla .... F12 (se guarda en la carpeta juego\capturas)
+  Mando (gamepad) ........ tambien funciona: palanca o cruceta, A interactuar, X saltar, Y cuaderno,
+                           Start pausa, B o gatillo derecho correr
+Cada minijuego explica sus controles en su tarjeta de inicio.
+
+
+QUE PARTES SON PROVISIONALES
+----------------------------
+Es una version jugable de trabajo: la historia se juega de principio a fin, pero parte del arte aun no tiene
+su version final.
+  - El sendero del arroyo ........ aprobado.
+  - La habitacion-taller ......... concepto aprobado; su version en el juego espera revision.
+  - La Plaza de las Iguanas y la biblioteca, el Mirador del Faro y la Luna del sueno: PROVISIONALES
+    (construidos con el estilo aprobado, sin concepto final). La pantalla de carga lo indica.
+  - Juegos de la biblioteca: "Base en la Luna" y "Base en Marte" ya estan DENTRO del juego (los dos libros
+    de la biblioteca del pueblo). El libro de Marte se abre despues de terminar el de la Luna.
+  - Las mallas de los vecinos de la plaza y parte del sonido estan pendientes.
+
+
+LOS JUEGOS DE LA BIBLIOTECA
+---------------------------
+Hechos por los companeros del equipo, en pixel-art 2D. En la plaza del pueblo, entra a la biblioteca:
+  - "Base en la Luna" (Jean y Joel): arma el cohete en la base del polo sur lunar (4 fases), cargalo con hielo
+    del crater y energia de los paneles, y despega. El viaje a Marte continua en el otro libro.
+    Controles: A/D o flechas moverse, Mayus correr, Espacio saltar (otra vez en el aire: mochila), E usar
+    (mantener E para extraer u orientar paneles), Esc salir del libro.
+  - "Base en Marte" (Domenica): se abre despues de la Luna. Programa el aterrizaje (siete minutos de terror),
+    baja con tu equipo y con Orbita, planta las banderas, levanta la base, resiste la tormenta de polvo y
+    envia el primer reporte a la Tierra.
+    Controles: A/D o flechas moverse, Espacio saltar, E usar (mantener E para desplegar), Tab cuaderno de
+    campo, raton en las flechas y botones X, Esc salir del libro.
+
+
+CREDITOS
+--------
+  Direccion, diseno y desarrollo ........ Guillermo
+  Juegos de la biblioteca (Luna y Marte) .. Jean, Joel y Domenica
+  Guayaquil, Ecuador.
+
+  Datos abiertos de la NASA: mapas de la Luna del Lunar Reconnaissance Orbiter (LRO) y efemerides de
+  JPL Horizons. No se usan logotipos ni insignias de la NASA y el juego no esta respaldado por ella.
+  Las fuentes de cada dato del cuaderno estan en juego\datos\FUENTES.md.
+
+  Motor: Godot Engine 4.7.2 (godotengine.org), licencia MIT. Ver motor\LICENCIA_GODOT.txt.
+
+
+SI ALGO FALLA
+-------------
+  - "No se encuentra el motor": no se descomprimio todo el ZIP. Extrae todo y vuelve a intentarlo.
+  - Pantalla negra o se cierra al abrir: actualiza el controlador de la tarjeta grafica (necesita Vulkan).
+  - Para ver los mensajes del motor: abre una ventana de comandos en esta carpeta y escribe
+      motor\ZingularityArtemis_console.exe --path juego

@@ -1,0 +1,19 @@
+{
+  "titulo": "Base en la Luna",
+  "resumen": "Arma el cohete en la base del polo sur lunar, cárgalo con hielo y energía solar, y despega hacia Marte.",
+  "instrucciones": [
+    "Lleva cajas, ilmenita y regolito a la constructora: el cohete se arma en 4 fases.",
+    "Lleva hielo del cráter al depósito y orienta los 3 paneles solares (mantén E) para cargar la batería.",
+    "Con el cohete armado, el tanque lleno y la batería cargada, despega desde el cohete."
+  ],
+  "controles": "A/D o flechas: moverse. Mayús: correr. Espacio: saltar (otra vez en el aire: mochila). E: usar (mantener: extraer u orientar). Esc: salir del libro.",
+  "pistas": [
+    "Órbita mira los cuatro medidores y la constructora.",
+    "Cada fase pide materiales distintos; el rover lleva más carga. Refúgiate en la cúpula si llega la lluvia solar.",
+    "4 fases en la constructora, 4 de hielo al depósito y los 3 paneles orientados; luego E en el cohete."
+  ],
+  "ficha": "gravedad_lunar",
+  "escena": "biblioteca",
+  "zona": "ciudad",
+  "orden": 20
+}

@@ -1,0 +1,16 @@
+{
+  "nombre": "La habitación-taller",
+  "lugar": "Las Escalinatas, Guayaquil",
+  "momento": "Mañana",
+  "estado_arte": "concepto validado (L05 A); producción en el motor por validar",
+  "orden": 1,
+  "carga": {
+    "imagen": "res://zonas/habitacion/carga.jpg",
+    "fichas": ["observatorio_quito", "cielo_15_grados", "realimentacion", "luna_sonriente"]
+  },
+  "entradas": {
+    "inicio": "al centro del cuarto, sobre la alfombra tejida",
+    "escalera": "en el descanso de la escalera, ya dentro y mirando al cuarto: se llega desde la plaza",
+    "cama": "junto a la cama: se despierta del sueño de la Luna"
+  }
+}

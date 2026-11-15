@@ -1,0 +1,3 @@
+# Las capturas de la landing van como archivos normales, no por Git LFS:
+# asi Vercel las recibe completas sin depender de LFS.
+*.jpg -filter -diff -merge -text

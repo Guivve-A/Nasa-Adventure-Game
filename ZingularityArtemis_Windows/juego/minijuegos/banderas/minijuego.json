@@ -1,0 +1,18 @@
+{
+  "titulo": "Dos banderas, un cielo",
+  "resumen": "Hinca dos mástiles, extiende sus barras y nivela las banderas.",
+  "instrucciones": [
+    "Pulsa E al cruzar el centro del compás.",
+    "Mantén E y suelta en el tope cian.",
+    "Acércate y usa arriba o abajo para nivelar."
+  ],
+  "controles": "Flechas o WASD: mover y nivelar · E o Espacio: golpear y extender · Esc: salir",
+  "pistas": [
+    "Acércate al mástil señalado.",
+    "Golpea en el centro; suelta la barra dentro del corchete.",
+    "Golpea cada mástil, extiende ambas barras y junta las líneas con arriba o abajo."
+  ],
+  "ficha": "bandera_lunar",
+  "escena": "3.5",
+  "orden": 7
+}
