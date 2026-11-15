@@ -1,0 +1,63 @@
+{
+  "lote": "L09b",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09",
+  "tope": 18.0,
+  "_nota": "Segunda tanda del 09b: K04a y K11a con K04b y K11 finales como referencia; reintento de K07 (la primera corto el globo por abajo, y el alejamiento de P07 lo dejaria ver); K12 v2 con el cambio 5 de Revision_P14_personaje §8 (espalda de la hoja de giro) y sin la viñeta, que metia una bahia: el storyboard (§9, correccion 14) dice que el rio solo se oye.",
+  "trabajos": [
+    {
+      "id": "L09b_K04a_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "d84b75a5-f148-4d8d-bddf-e39eb2e49aff"
+      ],
+      "prompt": "Same frame, same lens, same light and same colour as the reference image, a few seconds earlier: the rocket stands completely still on the launch platform beside its tower, with no fire, no steam cloud and no glow at its base; only a thin wisp of white vapour drifts from its side in the heat shimmer. No people. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K11a_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "c458d8e8-7f42-4076-9ce7-457872d86109"
+      ],
+      "prompt": "Same frame, same lens, same focus and same light as the reference image, one second earlier: the edge of a gray boot sole with tread ribs is just lifting straight up out of the print and leaving through the top of the frame, with a few grains of dust hanging below it. Only the edge of the sole is visible: no person, no markings. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K07_final_r1",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "973fe31d-8370-469a-996b-c92d3b4db5dc"
+      ],
+      "_referencia_composicion": "L09_P07_tierra_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. The whole planet Earth floating in pure black space, photographed with a 24 mm lens at f/8 from a departing spacecraft, exposed for the sunlit clouds so that no stars show. A blue-and-white gibbous globe about three quarters lit, hard sunlight from the upper right, a band of night along its lower left edge melting into the black, and a thin luminous blue line of atmosphere along the sunlit limb. The globe sits slightly right of centre and low in the frame: its sunlit top edge touches a point at three fifths of the frame width and one third of the height from the top, and its bottom edge sits just above the bottom of the frame, so it fills 60 percent of the frame height. Deep saturated ocean blue and bright white cloud swirls, with only faint hints of land under the clouds: no sharply drawn or recognisable coastlines, no city lights. No stars, no Moon, no spacecraft parts, no lens flare. The background is perfectly black. The whole globe is inside the frame with black space all around it, including below its bottom edge: nothing of the globe is cut by any edge of the frame. Crisp large-format clarity, almost grainless. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K12_final_v2",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "@ANC_PROTA_1",
+        "9d0b5c50-0f81-4d30-837e-aa9386a69700"
+      ],
+      "_referencia_composicion": "L09_P12_guayaquil_1969_borrador",
+      "prompt": "The first reference image is the character sheet of the student; the second is the back view of her turnaround sheet. Night photograph, vintage 50 mm lens wide open at f/2, locked off at standing eye height, looking west and slightly upward from the top of a steep public stairway in an old hillside neighbourhood of a tropical port city in 1969. The focus is on the distance: the stairway falling away between small wooden houses with corrugated zinc roofs, laundry hanging on lines, four bare yellow tungsten bulbs that bloom into soft round highlights, and beyond, the dark rooftops and scattered warm lights of the city and low hills under a deep blue-black sky. The bulbs are the only key light: warm pools on the steps and walls, everything else falls into blue-black, about sixteen to one. The patch of sky at three fifths of the frame width and one third of the height from the top, above the roofs, is clear and empty, with a few faint stars: no Moon in the sky. In the foreground at the left third, softly out of focus and seen from behind, stands the small chibi student of the reference sheet, with her proportions, her voluminous dark curly hair, her khaki short-sleeve shirt worn open over a dark T-shirt and her brown cargo pants, barefoot on the stone step, without any bag, her chin slightly raised toward that empty patch of sky; seen from behind exactly as in the back view of her turnaround sheet: a big rounded mass of separate dark curl clumps, never a smooth ball; her khaki short-sleeve shirt with rolled cuffs and plain blank shoulder patches with no symbol, her brown cargo pants with side pockets; she is soft and out of focus, but her silhouette reads clearly against the lit wall, with a thin warm rim light from a bulb behind her on the right, and her face is not visible. Inland view only: no river, no bay, no sea and no water anywhere in the frame. No cars, no antennas, no television sets, no signs, no lighthouse, no numbered steps, no modern railings. Warm colour of 1960s 16 mm reversal film: amber bulbs, deep blue-black night, slightly lifted blacks. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    }
+  ]
+}

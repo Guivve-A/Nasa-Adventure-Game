@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-14T19:19:17.185894Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "febd9267-913e-43dd-a750-ede16b960118",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 2,
+      "prompt": "A soft airy whoosh that rises into a gentle shimmering tone, like stepping through a doorway of light, calm and warm, smooth fade out. No voice, no speech, no melody."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_191917_febd9267-913e-43dd-a750-ede16b960118.mp3",
+    "status": "completed"
+  }
+]

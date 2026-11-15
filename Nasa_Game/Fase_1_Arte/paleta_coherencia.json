@@ -78,5 +78,120 @@
   "cerca_pct": 53.8,
   "de_medio": 18.2,
   "tolerancia": 20
+ },
+ "antes_1.png": {
+  "cerca_pct": 96.0,
+  "de_medio": 7.9,
+  "tolerancia": 20
+ },
+ "v2_3.png": {
+  "cerca_pct": 74.0,
+  "de_medio": 16.9,
+  "tolerancia": 20
+ },
+ "v2_4.png": {
+  "cerca_pct": 91.5,
+  "de_medio": 12.0,
+  "tolerancia": 20
+ },
+ "v4_sur.png": {
+  "cerca_pct": 83.0,
+  "de_medio": 13.4,
+  "tolerancia": 20
+ },
+ "v4_este.png": {
+  "cerca_pct": 100.0,
+  "de_medio": 11.7,
+  "tolerancia": 20
+ },
+ "despues_1_entrada.png": {
+  "cerca_pct": 99.0,
+  "de_medio": 10.7,
+  "tolerancia": 20
+ },
+ "despues_2_centro.png": {
+  "cerca_pct": 100.0,
+  "de_medio": 12.3,
+  "tolerancia": 20
+ },
+ "despues_3_farol.png": {
+  "cerca_pct": 91.0,
+  "de_medio": 11.7,
+  "tolerancia": 20
+ },
+ "despues_4_sur.png": {
+  "cerca_pct": 83.0,
+  "de_medio": 13.4,
+  "tolerancia": 20
+ },
+ "despues_5_este.png": {
+  "cerca_pct": 100.0,
+  "de_medio": 11.7,
+  "tolerancia": 20
+ },
+ "antes_2.png": {
+  "cerca_pct": 100.0,
+  "de_medio": 10.3,
+  "tolerancia": 20
+ },
+ "tarde_1_fuente.png": {
+  "cerca_pct": 100.0,
+  "de_medio": 10.8,
+  "tolerancia": 20
+ },
+ "tarde_2_biblioteca.png": {
+  "cerca_pct": 100.0,
+  "de_medio": 9.7,
+  "tolerancia": 20
+ },
+ "tarde_3_frutas_kiosco.png": {
+  "cerca_pct": 100.0,
+  "de_medio": 9.7,
+  "tolerancia": 20
+ },
+ "tarde_4_flamboyan.png": {
+  "cerca_pct": 100.0,
+  "de_medio": 8.5,
+  "tolerancia": 20
+ },
+ "noche_2_biblioteca.png": {
+  "cerca_pct": 83.3,
+  "de_medio": 14.1,
+  "tolerancia": 20
+ },
+ "sendero_jugable.png": {
+  "cerca_pct": 80.7,
+  "de_medio": 11.6,
+  "tolerancia": 20
+ },
+ "critica_1_entrada.png": {
+  "cerca_pct": 99.0,
+  "de_medio": 10.6,
+  "tolerancia": 20
+ },
+ "critica_3_sur_farol.png": {
+  "cerca_pct": 91.0,
+  "de_medio": 11.0,
+  "tolerancia": 20
+ },
+ "carga_ciudad.jpg": {
+  "cerca_pct": 100.0,
+  "de_medio": 9.6,
+  "tolerancia": 20
+ },
+ "r5_2_este.png": {
+  "cerca_pct": 67.2,
+  "de_medio": 15.9,
+  "tolerancia": 20
+ },
+ "r3_2_este.png": {
+  "cerca_pct": 81.6,
+  "de_medio": 15.4,
+  "tolerancia": 20
+ },
+ "r3_1_entrada.png": {
+  "cerca_pct": 97.1,
+  "de_medio": 12.4,
+  "tolerancia": 20
  }
 }

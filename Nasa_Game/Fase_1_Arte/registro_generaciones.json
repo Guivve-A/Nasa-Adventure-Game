@@ -875,5 +875,1296 @@
   "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/L05_A_manana_calida_final.png",
   "job_id": "b1bd2602-56d5-4a4a-9498-aa56e9f1dbf3",
   "detalle": null
+ },
+ {
+  "lote": "L07a",
+  "fecha": "2026-11-14 12:32",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_MAPA",
+   "@ANC_EXPLORACION"
+  ],
+  "prompt": "Use the style of the first reference image (an illustrated game map on an engineering notebook). Top-down illustrated region map painted on cream graph paper with ink outlines, soft painted colors and torn paper edges: a green hillside beside a river estuary in a tropical port city. Exactly four places, clearly separated, connected by one dotted ink path that runs from the lower left to the upper right: (1) in the lower left, a small yellow house on a hillside stairway, with a tiny telescope at its window; (2) in the lower center, a round plaza with a fountain and a small library with columns; (3) in the center right, a forest path along a turquoise stream with a wooden plank bridge and a small satellite dish; (4) in the upper right, a white lighthouse viewpoint on the hilltop with a telescope on a stone terrace. In the upper left corner, separate from the land, a round inset showing the gray cratered surface of the Moon, joined to the yellow house by a thin dotted cyan line. Small ink doodles of circuits, a compass rose and stars in the margins. Leave clear cream space next to each place for labels. No labels, no text, no letters, no numbers. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L07_mapa_mundo_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173220_7ece05f5-e6f5-47af-8a36-54aaa564e84c.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/L07_mapa_mundo_borrador.png",
+  "job_id": "7ece05f5-e6f5-47af-8a36-54aaa564e84c",
+  "detalle": null
+ },
+ {
+  "lote": "L07a",
+  "fecha": "2026-11-14 12:32",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_EXPLORACION",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Use the exact art style and finish of the first reference image. The student is the character of the second reference and the cat is the one of the third. Cinematic establishing illustration for a game loading screen, wide shot: the surface of the Moon at night, lit by soft blue earthlight. A gray regolith plain with small craters and scattered rocks, long soft deep-blue shadows that are never pure black, a trail of bootprints and tiny paw prints, a small cardboard box with a hand-drawn crescent moon on its side resting on the ground like a tiny capsule, one small glowing cyan beacon in the middle distance, and far away the small silhouette of a generic gold-and-gray lunar descent stage with four legs and no markings. The student, wearing a small original soft spacesuit with a clear bubble helmet, and the cat, with a tiny bubble helmet, hop across the plain in low gravity, small in the frame. A big blue half-lit Earth hangs high in a black sky with a few stars. No flags, no insignia, no patches, no logos, no letters anywhere. The lower fifth of the image is calmer and darker so interface text can sit on it. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L07_carga_luna_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173221_87886228-db2b-4d8f-868d-f0c7560ffe8b.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/L07_carga_luna_borrador.png",
+  "job_id": "87886228-db2b-4d8f-868d-f0c7560ffe8b",
+  "detalle": null
+ },
+ {
+  "lote": "L07a",
+  "fecha": "2026-11-14 12:32",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_EXPLORACION",
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Use the exact art style and finish of the first two reference images. The student is the character of the third reference and the cat is the one of the fourth. Cinematic establishing illustration for a game loading screen, wide shot from a slightly elevated eye level, with sky: a small neighborhood plaza at the foot of a hillside stair neighborhood in a tropical port city at golden hour. A round stone fountain at the center, mosaic paving, benches, planters, a small juice kiosk, colorful houses with zinc roofs and clotheslines climbing the hill, and at the back the small municipal library: an original republican-style facade with wide steps, an arched portal with columns and an open-book relief above the door, with a soft cyan glow coming from inside the doorway. Two green iguanas sunbathe on a low wall. A thin crescent Moon lying on its back like a smile, low in the dusk sky. the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag walk across the plaza toward the library, small in the frame, seen from behind. The lower fifth of the image is calmer and darker so interface text can sit on it. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L07_carga_plaza_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173222_79f7176a-c7e6-451a-89d5-e7adac45cdd2.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/L07_carga_plaza_borrador.png",
+  "job_id": "79f7176a-c7e6-451a-89d5-e7adac45cdd2",
+  "detalle": null
+ },
+ {
+  "lote": "L07b",
+  "fecha": "2026-11-14 12:34",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_EXPLORACION",
+   "@ANC_PROTA_1",
+   "@ANC_GATO",
+   "23176c20-ffac-47d0-a4de-918269596f4f"
+  ],
+  "prompt": "Keep the composition, layout and placement of every element of the last reference image (the approved draft) and refine it into a clean, detailed final illustration. Use the exact art style and finish of the first reference image. The student is the character of the second reference and the cat is the one of the third. Cinematic establishing illustration for a game loading screen, wide shot: the surface of the Moon at night, lit by soft blue earthlight. A gray regolith plain with small craters and scattered rocks, long soft deep-blue shadows that are never pure black, a trail of bootprints and tiny paw prints, a small cardboard box with a hand-drawn crescent moon on its side resting on the ground like a tiny capsule, one small glowing cyan beacon in the middle distance, and far away the small silhouette of a generic gold-and-gray lunar descent stage with four legs and no markings. The student, wearing a small original soft spacesuit with a clear bubble helmet, and the cat, with a tiny bubble helmet, hop across the plain in low gravity, small in the frame. A big blue half-lit Earth hangs high in a black sky with a few stars. No flags, no insignia, no patches, no logos, no letters anywhere. The lower fifth of the image is calmer and darker so interface text can sit on it. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L07_carga_luna",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173433_6658c01c-56fa-4023-8fa0-439e23ae89e7.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/L07_carga_luna.png",
+  "job_id": "6658c01c-56fa-4023-8fa0-439e23ae89e7",
+  "detalle": null
+ },
+ {
+  "lote": "L07b",
+  "fecha": "2026-11-14 12:34",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_EXPLORACION",
+   "@ANC_VISTA_JUEGO",
+   "@ANC_PROTA_1",
+   "@ANC_GATO",
+   "a5233512-47e6-4a71-af5d-3f8d362e5229"
+  ],
+  "prompt": "Keep the composition, layout and placement of every element of the last reference image (the approved draft) and refine it into a clean, detailed final illustration. Use the exact art style and finish of the first two reference images. The student is the character of the third reference and the cat is the one of the fourth. Cinematic establishing illustration for a game loading screen, wide shot from a slightly elevated eye level, with sky: a small neighborhood plaza at the foot of a hillside stair neighborhood in a tropical port city at golden hour. A round stone fountain at the center, mosaic paving, benches, planters, a small juice kiosk, colorful houses with zinc roofs and clotheslines climbing the hill, and at the back the small municipal library: an original republican-style facade with wide steps, an arched portal with columns and an open-book relief above the door, with a soft cyan glow coming from inside the doorway. Two green iguanas sunbathe on a low wall. A thin crescent Moon lying on its back like a smile, low in the dusk sky. the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag walk across the plaza toward the library, small in the frame, seen from behind. The lower fifth of the image is calmer and darker so interface text can sit on it. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L07_carga_plaza",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173433_1bffd579-9a5a-4d03-a89c-48ff403bc1af.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/L07_carga_plaza.png",
+  "job_id": "1bffd579-9a5a-4d03-a89c-48ff403bc1af",
+  "detalle": null
+ },
+ {
+  "lote": "L07b",
+  "fecha": "2026-11-14 12:34",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_MAPA",
+   "@ANC_EXPLORACION",
+   "922dc8e4-83cf-47fb-85c3-151045085297"
+  ],
+  "prompt": "Keep the composition, layout and placement of every element of the last reference image (the approved draft) and refine it into a clean, detailed final illustration. Use the style of the first reference image (an illustrated game map on an engineering notebook). Top-down illustrated region map painted on cream graph paper with ink outlines, soft painted colors and torn paper edges: a green hillside beside a river estuary in a tropical port city. Exactly four places, clearly separated, connected by one dotted ink path that runs from the lower left to the upper right: (1) in the lower left, a small yellow house on a hillside stairway, with a tiny telescope at its window; (2) in the lower center, a round plaza with a fountain and a small library with columns; (3) in the center right, a forest path along a turquoise stream with a wooden plank bridge and a small satellite dish; (4) in the upper right, a white lighthouse viewpoint on the hilltop with a telescope on a stone terrace. In the upper left corner, separate from the land, a round inset showing the gray cratered surface of the Moon, joined to the yellow house by a thin dotted cyan line. Small ink doodles of circuits, a compass rose and stars in the margins. Leave clear cream space next to each place for labels. No labels, no text, no letters, no numbers. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L07_mapa_mundo",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173432_cf24cd9c-4df3-4292-9559-be0ffedc94a1.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/L07_mapa_mundo.png",
+  "job_id": "cf24cd9c-4df3-4292-9559-be0ffedc94a1",
+  "detalle": null
+ },
+ {
+  "lote": "L08a",
+  "fecha": "2026-11-15 00:20",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "A storybook painting. A wide vista of a small neighborhood plaza at the foot of a hillside stair neighborhood in a tropical port city, late golden afternoon. Colorful simple houses with tin roofs climb the hill along a long stairway; at the back of the plaza a small municipal library with a few columns, wide steps and a softly glowing doorway; a round stone fountain, a couple of benches and two green iguanas resting on a low wall. Far away on the right, a pale wide river estuary dissolving into the haze. The student and the cat cross the plaza toward the library, seen from behind. Foreground framed by the dark silhouette of a big tree branch with a few red flowers and a low wall in shadow. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L08_carga_ciudad_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052054_3e14395d-d42b-4196-808f-09409748385b.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_ciudad_borrador.png",
+  "job_id": "3e14395d-d42b-4196-808f-09409748385b",
+  "detalle": null
+ },
+ {
+  "lote": "L08a",
+  "fecha": "2026-11-15 00:20",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "A storybook painting. A wide view of a small upstairs bedroom-workshop in an old wooden hillside house of a tropical port city, on a warm early morning. Through a big open window with wooden shutters, the pale hazy river city and a green hill far away. Inside: a simple bed with a blue blanket, a long workbench with hand tools, a soldering iron, notebooks and a small homemade motorized telescope mount, a little telescope on a tripod facing the window, potted plants and a terracotta tile floor with a woven rug. Soft morning light falls across the floor in one calm warm shape. The student sits at the workbench working on the mount and the cat sleeps on the windowsill. Foreground framed by dark leaf silhouettes of a potted plant and the edge of a wooden beam. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L08_carga_habitacion_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052054_756f876f-ea8e-4faa-9a2a-ccbefec2f415.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_habitacion_borrador.png",
+  "job_id": "756f876f-ea8e-4faa-9a2a-ccbefec2f415",
+  "detalle": null
+ },
+ {
+  "lote": "L08a",
+  "fecha": "2026-11-15 00:20",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "A storybook painting. A wide vista of a forest path on a green hill above a tropical port city, warm afternoon. A dirt path winds beside a small turquoise stream with a wooden plank bridge; a huge old tree with red flowers spreads over the path; in a small clearing in the middle distance, a small homemade satellite dish antenna on a tripod and a little solar panel. Far below and behind, the pale hazy city and river. The student and the cat walk along the path toward the bridge. Foreground framed by dark silhouettes of large tropical leaves and ferns. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L08_carga_sendero_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052055_716fa96e-d715-46cc-8996-f915e9e51be7.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_sendero_borrador.png",
+  "job_id": "716fa96e-d715-46cc-8996-f915e9e51be7",
+  "detalle": null
+ },
+ {
+  "lote": "L08a",
+  "fecha": "2026-11-15 00:20",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "A storybook painting. A wide vista of a hilltop lookout at night under the Moon: a stone terrace with a low balustrade and a small white lighthouse tower with one warm lit window, a telescope on a tripod pointed at the sky, a few warm string lights. Below, the city lights spread along a dark wide river, painted as soft dots of warm color. Low in a deep petrol-blue and indigo sky, a thin crescent Moon lying on its back like a smile, with the rest of its disc faintly visible in a soft gray glow (earthshine). The student looks through the telescope and the cat sits on the balustrade. Night shadows are deep blue and teal, never black; the lamp light is warm orange. Foreground framed by the dark silhouette of the balustrade and a flowering bush. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L08_carga_mirador_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052127_8c413bdc-9439-4e8f-87c9-59125415e2a5.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_mirador_borrador.png",
+  "job_id": "8c413bdc-9439-4e8f-87c9-59125415e2a5",
+  "detalle": null
+ },
+ {
+  "lote": "L08a",
+  "fecha": "2026-11-15 00:20",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "A storybook painting. A dreamlike wide vista of the surface of the Moon: a gently rolling gray plain with soft round craters and scattered rocks, long soft shadows painted in deep blue and violet, never black. High in a deep indigo night sky with a few sparse stars hangs a large half-lit blue and white Earth. On the plain, a trail of small bootprints and tiny paw prints, a small cardboard box resting on the ground like a tiny capsule, and far away the small simple silhouette of a generic four-legged lunar landing stage with no markings. The student, in a small soft original spacesuit with a clear bubble helmet, and the cat, with a tiny bubble helmet, hop across the plain in low gravity. Foreground framed by the dark silhouette of a big boulder and the rim of a crater. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L08_carga_luna_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052130_41af2cfc-f523-4985-89bd-a5ab6241ce98.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_luna_borrador.png",
+  "job_id": "41af2cfc-f523-4985-89bd-a5ab6241ce98",
+  "detalle": null
+ },
+ {
+  "lote": "L08b",
+  "fecha": "2026-11-15 00:24",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO",
+   "a63120a1-59af-42a6-a4a2-3a40eca0bde9"
+  ],
+  "prompt": "Keep the composition, the layout and the painting technique of the last reference image (the approved draft) and repaint it as the finished gouache plate at higher resolution, with the same loose brushwork, the same paper grain and the same level of detail: do not add fine detail, do not sharpen, do not make it look like digital art. A storybook painting. A wide vista of a forest path on a green hill above a tropical port city, warm afternoon. A dirt path winds beside a small turquoise stream with a wooden plank bridge; a huge old tree with red flowers spreads over the path; in a small clearing in the middle distance, a small homemade satellite dish antenna on a tripod and a little solar panel. Far below and behind, the pale hazy city and river. The student and the cat walk along the path toward the bridge. Foreground framed by dark silhouettes of large tropical leaves and ferns. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L08_carga_sendero",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052409_6490f3c6-fd80-4bfb-a562-8b84e7d49baa.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_sendero.png",
+  "job_id": "6490f3c6-fd80-4bfb-a562-8b84e7d49baa",
+  "detalle": null
+ },
+ {
+  "lote": "L08b",
+  "fecha": "2026-11-15 00:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO",
+   "ef02e923-53f9-4494-acd3-b25fca7bc04f"
+  ],
+  "prompt": "Keep the composition, the layout and the painting technique of the last reference image (the approved draft) and repaint it as the finished gouache plate at higher resolution, with the same loose brushwork, the same paper grain and the same level of detail: do not add fine detail, do not sharpen, do not make it look like digital art. A storybook painting. A wide vista of a hilltop lookout at night under the Moon: a stone terrace with a low balustrade and a small white lighthouse tower with one warm lit window, a telescope on a tripod pointed at the sky, a few warm string lights. Below, the city lights spread along a dark wide river, painted as soft dots of warm color. Low in a deep petrol-blue and indigo sky, a thin crescent Moon lying on its back like a smile, with the rest of its disc faintly visible in a soft gray glow (earthshine). The student looks through the telescope and the cat sits on the balustrade. Night shadows are deep blue and teal, never black; the lamp light is warm orange. Foreground framed by the dark silhouette of the balustrade and a flowering bush. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L08_carga_mirador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052913_b90edb32-4a3f-4438-b06b-4bc5e076ce96.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_mirador.png",
+  "job_id": "b90edb32-4a3f-4438-b06b-4bc5e076ce96",
+  "detalle": null
+ },
+ {
+  "lote": "L08b",
+  "fecha": "2026-11-15 00:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO",
+   "0109a1aa-0dfe-46d9-84b8-15206c2a1547"
+  ],
+  "prompt": "Keep the composition, the layout and the painting technique of the last reference image (the approved draft) and repaint it as the finished gouache plate at higher resolution, with the same loose brushwork, the same paper grain and the same level of detail: do not add fine detail, do not sharpen, do not make it look like digital art. A storybook painting. Keep the cat asleep on the windowsill and the student at the workbench. A wide view of a small upstairs bedroom-workshop in an old wooden hillside house of a tropical port city, on a warm early morning. Through a big open window with wooden shutters, the pale hazy river city and a green hill far away. Inside: a simple bed with a blue blanket, a long workbench with hand tools, a soldering iron, notebooks and a small homemade motorized telescope mount, a little telescope on a tripod facing the window, potted plants and a terracotta tile floor with a woven rug. Soft morning light falls across the floor in one calm warm shape. The student sits at the workbench working on the mount and the cat sleeps on the windowsill. Foreground framed by dark leaf silhouettes of a potted plant and the edge of a wooden beam. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L08_carga_habitacion",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052912_83a0309d-8c7e-4c8b-8c3e-db92289a36f5.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_habitacion.png",
+  "job_id": "83a0309d-8c7e-4c8b-8c3e-db92289a36f5",
+  "detalle": null
+ },
+ {
+  "lote": "L08b",
+  "fecha": "2026-11-15 00:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO",
+   "88fb81bc-1444-41d8-a433-9334e04849e0"
+  ],
+  "prompt": "Keep the composition, the layout and the painting technique of the last reference image (the approved draft) and repaint it as the finished gouache plate at higher resolution, with the same loose brushwork, the same paper grain and the same level of detail: do not add fine detail, do not sharpen, do not make it look like digital art. A storybook painting. Make the red flowers on the foreground branch fewer and smaller, loosely painted. A wide vista of a small neighborhood plaza at the foot of a hillside stair neighborhood in a tropical port city, late golden afternoon. Colorful simple houses with tin roofs climb the hill along a long stairway; at the back of the plaza a small municipal library with a few columns, wide steps and a softly glowing doorway; a round stone fountain, a couple of benches and two green iguanas resting on a low wall. Far away on the right, a pale wide river estuary dissolving into the haze. The student and the cat cross the plaza toward the library, seen from behind. Foreground framed by the dark silhouette of a big tree branch with a few red flowers and a low wall in shadow. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L08_carga_ciudad",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052912_36e86d81-8cc7-478d-bb06-baf322eef351.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_ciudad.png",
+  "job_id": "36e86d81-8cc7-478d-bb06-baf322eef351",
+  "detalle": null
+ },
+ {
+  "lote": "L08b",
+  "fecha": "2026-11-15 00:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "@ANC_GATO",
+   "50e85008-be3f-4681-ab00-ef31d4d3e1ac"
+  ],
+  "prompt": "Keep the composition, the layout and the painting technique of the last reference image (the approved draft) and repaint it as the finished gouache plate at higher resolution, with the same loose brushwork, the same paper grain and the same level of detail: do not add fine detail, do not sharpen, do not make it look like digital art. A storybook painting. Paint the Earth softer and less saturated, with gouache, not as a photograph. A dreamlike wide vista of the surface of the Moon: a gently rolling gray plain with soft round craters and scattered rocks, long soft shadows painted in deep blue and violet, never black. High in a deep indigo night sky with a few sparse stars hangs a large half-lit blue and white Earth. On the plain, a trail of small bootprints and tiny paw prints, a small cardboard box resting on the ground like a tiny capsule, and far away the small simple silhouette of a generic four-legged lunar landing stage with no markings. The student, in a small soft original spacesuit with a clear bubble helmet, and the cat, with a tiny bubble helmet, hop across the plain in low gravity. Foreground framed by the dark silhouette of a big boulder and the rim of a crater. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+  "costo_cotizado": 2.75,
+  "veredicto": "pendiente",
+  "id": "L08_carga_luna",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_053005_e843fd78-76fe-48b8-999f-028033c0af1f.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_luna.png",
+  "job_id": "e843fd78-76fe-48b8-999f-028033c0af1f",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Extreme telephoto photograph, 600 mm full-frame-equivalent lens at f/11, camera locked on a heavy tripod at standing eye height, strongly compressed perspective that stacks the far shore, the launch tower and the haze into flat layers. Hard mid-morning sunlight from high behind the rocket: the scene is backlit, the rocket and the tower are rimmed with light, and hot haze over a perfectly still lagoon on a flat subtropical coast lowers the contrast to about two to one. Far away on the horizon, at three fifths of the frame width, stands a tall slender white three-stage rocket attached to its dark steel launch tower: tiny, about one sixth of the frame height, softened and wavering in the heat shimmer. Along the bottom edge of the frame, in its left two thirds, six or seven small black silhouettes of people seen from behind stand motionless on the hoods and beside two boxy 1960s cars, backlit, less than one twentieth of the frame height, no faces visible. A huge pale sky fills the upper two thirds of the frame. Colour of 1960s 16 mm reversal film: muted amber, cream and faded cyan, slightly lifted warm blacks, highlights that roll off softly. No markings, letters, flags or symbols on the rocket, the tower or the cars. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P03_torre_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064540_e50362fb-080b-4a64-bf21-222158a280e5.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P03_torre_borrador.png",
+  "job_id": "e50362fb-080b-4a64-bf21-222158a280e5",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_HABITACION",
+   "@ANC_GATO"
+  ],
+  "prompt": "Frontal close view at screen height, 35 mm lens at f/2.8, the camera square to the glass: the dream television that stands in the dark bedroom of the first reference image, a small 1960s tube television in a walnut wooden cabinet with rounded corners and four tapered legs, two plain round knobs and a cloth speaker grille to the right of the screen, with no brand plate, no numbers and no lettering anywhere. The bulging 4:3 glass screen with rounded corners occupies the central half of the frame width and two thirds of its height and is in crisp focus; the edges of the cabinet soften slightly. It shows a soft black-and-white picture with faint horizontal scan lines: a tall white three-stage rocket standing beside its launch tower, far away across flat water, slightly right of centre. The screen is the only light: its phosphor glow spills onto the walnut grain, the terracotta floor tiles and a corner of a blue blanket, and a faint reflection of the dark room and a pale window rectangle floats on the curved glass, less than one tenth as bright as the picture. From the top edge of the frame the tail of the cat of the second reference, gray-taupe with a dark tip, hangs across the upper right corner of the screen; the cat itself is out of frame. Around the set, petrol-blue darkness, never pure black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. The television and the room are painted in this low-poly style; only the picture on the screen looks like old footage. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P02_televisor_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064540_c6044da5-b674-433a-9cb2-5e95c7874ecd.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P02_televisor_borrador.png",
+  "job_id": "c6044da5-b674-433a-9cb2-5e95c7874ecd",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_HABITACION",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Same room, same furniture layout and same fixed high three-quarter top-down game camera as the first reference image, but at night, around 3 a.m. The girl is the character of the second reference and the cat is the one of the third. Low-key night interior lit like a quiet film scene by one single practical source: a small 1960s tube television in a walnut wooden cabinet on four tapered legs, standing on the floor at the foot of the bed exactly where the cardboard box stands in the reference (the box is gone). Its bulging 4:3 screen with rounded corners faces the camera, turned slightly toward the bed, and glows cool bluish white with a soft black-and-white picture of a tall white three-stage rocket standing beside its launch tower. That light falls off fast with distance: a bright pool on the terracotta tiles and on the near edge of the blue blanket, long soft shadows of the bed legs and the stool stretching away from the set, about eight to one between the lit floor and the dark corners, and a few dust motes glinting in the beam. The window shutters are ajar and show only a dark hillside with three or four tiny warm bulbs: no moon in the sky. The girl sleeps on top of the blue blanket, fully dressed in her khaki short-sleeve shirt worn open over a dark T-shirt, brown cargo pants and sneakers, without her bag, lying on her left side and facing the room, curled up with her face buried in her forearm: only her big dark curly hair shows, no face, with a cool rim of screen light on the curls. On top of the television, the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag sleeps with its tail hanging down over one upper corner of the screen. The telescope on its tripod points at the window. On the workbench the small oscilloscope shows a trembling cyan wave, the only other glow, and the brown tool bag hangs from the stool. The two lanterns by the stair landing are unlit. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. Night palette: petrol-blue shadows, darkest tones warm and never pure black, cool white television light. No brand or lettering on the television. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P01_cuarto_noche_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064541_55346705-7f4a-4696-a8eb-780aa64f6a1a.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P01_cuarto_noche_borrador.png",
+  "job_id": "55346705-7f4a-4696-a8eb-780aa64f6a1a",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Extreme telephoto photograph from a long-range tracking camera, about 1800 mm full-frame-equivalent lens at f/11, same camera position as a 600 mm view tightened three times, locked off, strongly compressed perspective and heat shimmer. A tall white three-stage rocket beside its dark steel launch tower stands at three fifths of the frame width and fills the central half of the frame height against a pale hot morning sky, rim-lit by the sun behind it; flat marsh and a strip of still water run along the bottom. The engines have just ignited: at the base, a blinding orange-white fire, the only saturated colour in the whole image, blooming with a soft red-orange halation. The fire lights the underside of the rocket and the steam from below, so the steam rolling outward low along the ground on both sides glows amber at its base and turns cream above. The rocket has barely left the pad, its base just above the launch platform, perfectly vertical, the tower still beside it. No people. Colour of 1960s 16 mm reversal film: muted cream and faded cyan everywhere except the fire, slightly lifted warm blacks. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P04b_ignicion_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064612_403ed80a-c95c-4617-b59e-22d8f6122e45.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P04b_ignicion_borrador.png",
+  "job_id": "403ed80a-c95c-4617-b59e-22d8f6122e45",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Looking steeply up into a vast empty sky, 50 mm lens focused at infinity at f/8, locked off. The sky grades smoothly from pale blue at the bottom of the frame to deep indigo at the top, as at high altitude. A single tiny white spark sits at three fifths of the frame width and one third of the height from the top, at the tip of a long, thin white exhaust trail that sweeps across the frame in one clean arc, like the upper part of a very large circle whose centre lies below the spark: the arc rises from the lower left and levels off at its apex exactly where the spark is. The trail is lit by the sun from below the frame, bright white on its lower side and softly shaded above; its lower part is wider, slightly twisted and thinned by high-altitude wind. Nothing else: no ground, no clouds, no aircraft, no birds, no sun in frame. Faded colour of 1960s 16 mm reversal film. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P06_chispa_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064622_8e514ff3-b801-45ae-ad7a-cbfe750890cb.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P06_chispa_borrador.png",
+  "job_id": "8e514ff3-b801-45ae-ad7a-cbfe750890cb",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Wide-angle photograph, 24 mm lens at f/8, deep focus from the stones at the waterline to the horizon, camera one metre above the ground on the shore of a still lagoon, behind a small group of spectators, level and slightly tilted up. In the lower fifth of the frame: the dark shoreline, two boxy 1960s cars and six or seven black silhouettes of people seen from behind, standing still on the hoods and beside the cars, less than one tenth of the frame height, no faces. Far across the water, at three fifths of the frame width, a colossal column of fire and cream-white smoke climbs straight up from the horizon and leaves the top of the frame; the column glows from inside like a lantern with orange fire, is amber on its sunlit side and falls into soft cream shadow on the other; the rocket itself is only a bright point at the head of the flame near the top edge. The calm water mirrors the column. Huge pale blue sky. Colour of 1960s 16 mm reversal film: amber, cream and faded blue, slightly lifted warm blacks. No markings, letters, flags or symbols anywhere. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P05_columna_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064619_da6ac466-395b-44ba-b1a8-c90c6e67b8c2.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P05_columna_borrador.png",
+  "job_id": "da6ac466-395b-44ba-b1a8-c90c6e67b8c2",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "The whole planet Earth floating in pure black space, photographed with a 24 mm lens at f/8 from a departing spacecraft, exposed for the sunlit clouds so that no stars show. A blue-and-white gibbous globe about three quarters lit, hard sunlight from the upper right, a band of night along its lower left edge melting into the black, and a thin luminous blue line of atmosphere along the sunlit limb. The globe sits slightly right of centre and low in the frame: its sunlit top edge touches a point at three fifths of the frame width and one third of the height from the top, and its bottom edge sits just above the bottom of the frame, so it fills 60 percent of the frame height. Deep saturated ocean blue and bright white cloud swirls, with only faint hints of land under the clouds: no sharply drawn or recognisable coastlines, no city lights. No stars, no Moon, no spacecraft parts, no lens flare. The background is perfectly black. Crisp large-format clarity, almost grainless. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P07_tierra_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064641_5be6cc97-4d18-457a-b31d-0c496251e75d.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P07_tierra_borrador.png",
+  "job_id": "5be6cc97-4d18-457a-b31d-0c496251e75d",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Photograph of the Moon from an approaching spacecraft, 85 mm lens at f/8, crisp large-format clarity. The curved limb of the Moon rises from the lower left and fills two thirds of the frame; the highest point of the limb sits at three fifths of the frame width and one third of the height from the top. Neutral silver-gray surface, densely cratered; hard, low raking sunlight from the right, so the craters near the terminator cast long black shadows and their sunward rims glow; on the left the surface sinks into darkness along a diagonal terminator. There is no atmosphere: every shadow edge is razor sharp and the black is absolute. Pure black sky, no stars, no Earth, no spacecraft. Nearly grainless, high contrast. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P08_borde_luna_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064645_d1a80c9a-e217-4673-947b-ed21fe585333.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P08_borde_luna_borrador.png",
+  "job_id": "d1a80c9a-e217-4673-947b-ed21fe585333",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Camera looking straight down at the surface of the Moon from about thirty metres up, 35 mm lens at f/11, everything in focus. Neutral gray powdery regolith fills the whole frame, peppered with small craters and scattered rocks. The sun is only ten degrees above the horizon, off the bottom of the frame: hard single-source light with no atmosphere and no fill, so every rock and crater rim casts a long, razor-sharp black shadow toward the top of the frame and the sunlit faces of the rocks glow. Entering from the bottom centre and reaching the middle of the frame: the long black shadow of a four-legged landing craft, an angular body on four splayed legs with round footpads, stretched to about five times its natural length by the low sun. Only the shadow is visible; the craft itself is never in frame. Fine dust streaks radially outward along the ground in perfectly straight thin rays that hug the surface, with no billowing cloud. No footprints, no flags, no people. Crisp and nearly grainless. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P09_sombra_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064648_c2966f86-3cd1-4f6c-b909-0bf9fbf8c0af.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P09_sombra_borrador.png",
+  "job_id": "c2966f86-3cd1-4f6c-b909-0bf9fbf8c0af",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Macro photograph, 100 mm macro lens at f/4, camera lying on the ground, side view at a grazing angle of about ten degrees: a single fresh boot print pressed into fine gray lunar dust, with crisp parallel tread ribs and sharp vertical walls, like a print in damp flour. A razor-thin plane of focus lies across the ribs in the lower middle of the frame; the dust before and behind it melts within a few centimetres into a soft blur. The print lies inside a large cool shadow and is lit only by soft light bounced from the sunlit ground beyond it: gentle, almost shadowless, slightly cool gray, about two to one, just enough to model each rib. In the background the hard edge of the shadow crosses the frame diagonally from the upper left toward the right, and beyond it the plain blazes in direct sunlight, five stops brighter and strongly out of focus; a thin strip of pitch-black sky runs along the very top. No boot, no person, no flag, no equipment. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P11_huella_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064705_db7e4c5f-cd3d-4b1c-b449-14894932d214.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P11_huella_borrador.png",
+  "job_id": "db7e4c5f-cd3d-4b1c-b449-14894932d214",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Stark black-and-white image in the manner of a low-resolution slow-scan television camera, very high contrast with blown-out whites, crushed shadows and soft detail. View from a camera fixed low on the side of a landing craft on the Moon, wide 20 mm-equivalent lens with slight barrel distortion. On the left, in deep shadow, the dark angular leg of the craft with a ladder. On the lowest rung of the ladder, seen from the side and facing the ladder, a bulky figure in a white pressure suit with a large square backpack and a round helmet holds the rails with both hands and lowers one boot toward the round footpad. The figure is pale and slightly translucent, like a ghost image, with no visible face, no identifiable person and no markings on the suit. Behind it, a blinding sunlit plain, a slightly tilted horizon and a pitch-black sky without stars. A vertical band of glare runs down the right side of the picture. No flag, no lettering on the craft or the suit. No scan lines and no borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P10_fantasma_tv_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064705_5703b1d6-d950-4bb8-a450-51bd31d32367.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P10_fantasma_tv_borrador.png",
+  "job_id": "5703b1d6-d950-4bb8-a450-51bd31d32367",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1"
+  ],
+  "prompt": "Night photograph, vintage 50 mm lens wide open at f/2, locked off at standing eye height, looking west and slightly upward from the top of a steep public stairway in an old hillside neighbourhood of a tropical port city in 1969. The focus is on the distance: the stairway falling away between small wooden houses with corrugated zinc roofs, laundry hanging on lines, four bare yellow tungsten bulbs that bloom into soft round highlights, and beyond, the dark rooftops and scattered warm lights of the city and low hills under a deep blue-black sky. The bulbs are the only key light: warm pools on the steps and walls, everything else falls into blue-black, about sixteen to one. The patch of sky at three fifths of the frame width and one third of the height from the top, above the roofs, is clear and empty, with a few faint stars: no Moon in the sky. In the foreground at the left third, softly out of focus and seen from behind, stands the small chibi student of the reference sheet, with her proportions, her voluminous dark curly hair, her khaki short-sleeve shirt worn open over a dark T-shirt and her brown cargo pants, barefoot on the stone step, without any bag, her chin slightly raised toward that empty patch of sky; she is a dark soft shape with a thin warm rim light from a bulb behind her on the right, and her face is not visible. No cars, no antennas, no television sets, no signs, no lighthouse, no numbered steps, no modern railings. Warm colour of 1960s 16 mm reversal film: amber bulbs, deep blue-black night, slightly lifted blacks. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P12_guayaquil_1969_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064720_a545b43d-10f5-419e-ab6f-c87e598c9704.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P12_guayaquil_1969_borrador.png",
+  "job_id": "a545b43d-10f5-419e-ab6f-c87e598c9704",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [],
+  "prompt": "Low-angle ultra-wide photograph on the surface of the Moon, 14 mm lens at f/11, everything in focus, camera thirty centimetres above the ground and tilted upward, the Sun low behind the camera. Hard single-source sunlight with no fill: every pebble and boot print casts a long black shadow pointing away from the camera, toward the horizon. At the bottom right, small and complete, stands a thin vertical pole whose base sits one twentieth of the frame height above the bottom edge; at its top a plain rectangular cloth about one tenth of the frame height hangs open from a horizontal rod along its top edge, perfectly still, keeping soft permanent wrinkles because the rod is not fully extended. The cloth is a blank, smooth, light neutral gray placeholder with no stripes, no stars and no pattern, front-lit by the low sun. At the foot of the pole, gray dust trampled by boot prints. The gray horizon lies very low in the frame. Above it, an enormous pitch-black sky without stars; near the top of the frame, at three fifths of the frame width and one tenth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white gibbous globe about two thirds lit, with its lit side facing up. The Earth is the only colour; everything else, the cloth included, is neutral gray and black. No spacecraft, no people, no other equipment, no lettering, no camera shadow. Crisp and without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P13_bandera_tierra_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064728_489b9537-9426-41ec-8f6b-1a0a35d33b9b.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P13_bandera_tierra_borrador.png",
+  "job_id": "489b9537-9426-41ec-8f6b-1a0a35d33b9b",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1"
+  ],
+  "prompt": "Extreme close-up, 100 mm macro lens at f/2, camera fixed at pillow height with the lens axis parallel to the pillow. The sleeping face of the girl from the reference sheet, the same hand-painted low-poly character: warm brown skin, big closed eyelids with thick dark lashes, round cheeks, voluminous dark curly hair. She lies on her left side, so her face is horizontal in the frame, forehead toward the right and chin toward the left, her left cheek sunk into a cream pillow, a few curls fallen over her temple and the collar of a khaki shirt over a dark T-shirt at the edge of the frame. Eyes closed, calm, mouth relaxed. A razor-thin plane of focus lies on the lashes of her upper eye; her lower eye and the far curls fall softly out of focus. The lashes and the inner corner of that eye are slightly wet, with no visible teardrop. The inner corner of her upper eye sits slightly above and to the right of the centre of the frame. It is just before dawn: the only light is faint cool skylight from a window above her head, a thin cool edge along the bridge of her nose and the lashes; the whole face is in deep petrol-blue shadow, the darkest tones warm and never pure black, and there is no warm light anywhere yet. The background melts into a soft dark blur. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P14a_gota_fria_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064731_c75d1e8a-2655-466c-b483-f32d2ae7e69f.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P14a_gota_fria_borrador.png",
+  "job_id": "c75d1e8a-2655-466c-b483-f32d2ae7e69f",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1"
+  ],
+  "prompt": "Extreme close-up, 100 mm macro lens at f/2, camera fixed at pillow height with the lens axis parallel to the pillow. The sleeping face of the girl from the reference sheet, the same hand-painted low-poly character: warm brown skin, big closed eyelids with thick dark lashes, round cheeks, voluminous dark curly hair. She lies on her left side, so her face is horizontal in the frame, forehead toward the right and chin toward the left, her left cheek sunk into a cream pillow, a few curls fallen over her temple and the collar of a khaki shirt over a dark T-shirt at the edge of the frame. Eyes still closed, calm. A razor-thin plane of focus lies on the lashes of her upper eye. A soft-edged band of amber morning sunlight, about one fifth of the frame wide and split into two or three soft stripes by window shutter slats, lies diagonally across her jaw and cheek at about thirty degrees and has just reached the closed eyelid of her upper eye; inside the band the skin glows warm orange and the painted facets catch the light, outside it everything stays petrol-blue, about four to one. The lashes and the inner corner of that eye are slightly wet and catch a warm glint, with no visible teardrop; the inner corner sits slightly above and to the right of the centre of the frame. The background melts into a soft dark blur. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P14b_franja_ambar_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064753_bfa0210a-7974-4921-abfa-cf2524529953.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P14b_franja_ambar_borrador.png",
+  "job_id": "bfa0210a-7974-4921-abfa-cf2524529953",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_PROTA_1"
+  ],
+  "prompt": "Extreme close-up, 100 mm macro lens at f/2, camera fixed at pillow height with the lens axis parallel to the pillow. The face of the girl from the reference sheet, the same hand-painted low-poly character: warm brown skin, round cheeks, voluminous dark curly hair. She lies on her left side, so her face is horizontal in the frame, forehead toward the right and chin toward the left, her left cheek sunk into a cream pillow, a few curls fallen over her temple and the collar of a khaki shirt over a dark T-shirt at the edge of the frame. She has just woken: her large dark-brown eyes are open, wet and bright, looking softly past the camera without focusing, with two small rectangular catchlights from the window shutters in each eye. She smiles with her eyes: the upper cheek is raised and the mouth is a small closed smile. Her eyes are moist, but there is no teardrop and no tear line on her face. Warm morning light from the window now covers the face as a soft key from the upper right: cream and soft orange light, the far side of her face still in gentle petrol-blue shadow at about three to one, and a golden rim on the curls. The feeling is quiet, overwhelming joy, not sadness. The background is a soft warm blur. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P14c_despierta_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064800_b9ec9318-43e9-46dd-8832-e1eaa57c2ea2.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P14c_despierta_borrador.png",
+  "job_id": "b9ec9318-43e9-46dd-8832-e1eaa57c2ea2",
+  "detalle": null
+ },
+ {
+  "lote": "L09a",
+  "fecha": "2026-11-15 01:45",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "1k",
+   "quality": "low"
+  },
+  "referencias": [
+   "@ANC_HABITACION",
+   "@ANC_PROTA_1",
+   "@ANC_GATO"
+  ],
+  "prompt": "Same room, same furniture layout, same warm early-morning light and same fixed high three-quarter top-down game camera as the first reference image. The girl is the character of the second reference and the cat is the one of the third. The girl has just sat up abruptly on top of the rumpled blue blanket of the bed, fully dressed in her khaki short-sleeve shirt worn open over a dark T-shirt, brown cargo pants and sneakers, without her bag, her hair tousled, one hand pressed on the mattress. She is not looking at the window: she looks across the room at the workbench, where the small motorized tracking mount, the open notebook and the oscilloscope with its cyan wave are. At the foot of the bed stands the plain cardboard box sealed with a cross of tape, as in the reference, and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag lies on top of the box with its tail hanging over one upper corner and one paw dangling, its head raised, looking at her. Low warm morning sun comes through the open window shutters in slanted beams, the key light of the room at about three to one, with a few bright dust motes floating in the beams; the shadows stay petrol blue. The telescope points at the window and the brown tool bag hangs from the stool. There is no television anywhere. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 0.25,
+  "veredicto": "pendiente",
+  "id": "L09_P15_manana_borrador",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064804_164d9eab-75fd-4e9b-a13b-35fa5767cca1.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09_P15_manana_borrador.png",
+  "job_id": "164d9eab-75fd-4e9b-a13b-35fa5767cca1",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 08:25",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [],
+  "prompt": "Heroic low-angle ultra-wide photograph on the surface of the Moon, 14 mm full-frame lens at f/11, everything in focus, camera thirty centimetres above the ground and about one and a third metres in front of a flagpole, tilted upward about thirty degrees. Hard single-source sunlight from low behind the camera and slightly to its left, about fifteen degrees above the horizon, with no fill and no atmosphere: razor-sharp black shadows and an absolutely black sky. Near the left edge of the frame, at about one sixth of the frame width, a thin gold-anodized aluminium pole rises from below the bottom edge of the frame, leaning back very slightly. From the top of the pole a thin horizontal crossbar runs to the right through a sewn hem along the top edge of a large nylon flag. The flag is the flag of the United States of America, its front side facing the camera and the pole on its left: exactly thirteen horizontal stripes, seven red and six white, alternating, with a red stripe at the top and a red stripe at the bottom; a deep blue canton in the upper corner next to the pole, as tall as the top seven stripes and about two fifths of the length of the flag, holding fifty white five-pointed stars in nine staggered rows that alternate six and five stars. The cloth is three units tall by five units long. The flag is large: its cloth fills the frame from about one fifth to one half of the frame height and from the pole to a little past the middle of the frame width, so that its free outer end sits just below and left of a point at three fifths of the frame width and one third of the height from the top. It has just been planted and is swinging: the cloth is caught at the end of a wide, slow pendulum swing, bellied gently toward the camera near the pole, with two or three clean diagonal waves running from the pole toward the free end; because the crossbar did not extend to its full length, the top edge is gathered in a few soft folds near its outer end. Smooth heavy folds, no fluttering, no torn or frayed edges. The bottom edge of the flag hangs well above the ground. The low sun rakes across the waves: saturated red and deep blue, the white slightly warm and never blown out, bright crests and soft shaded troughs, every stripe and every star crisp. At the left edge of the frame, just below the flag, a bulky white pressure-suit glove and the cuff of a white sleeve enter from outside the frame and are letting go of the pole, fingers opening; the person is entirely outside the frame: no arm beyond the cuff, no body, no helmet, no face, no patches and no markings on the glove. Along the very bottom of the frame, below the horizon at about nine tenths of the frame height, a strip of gray ground with boot prints and long black shadows pointing away from the camera. Above, an enormous pitch-black sky without stars; at three fifths of the frame width and one ninth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white globe about two thirds lit, its lit side facing up. The flag and the Earth are the only colours; the ground is neutral gray. The only graphic in the image is the flag itself. No spacecraft, no other equipment, no camera shadow. Crisp large-format clarity, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "descartada: 11 franjas en el vuelo (13 junto al asta); guante limpio (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_K13a_v1_frontal_guante",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132527_da3a476c-5dda-4315-89fa-6264f552a667.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_K13a_v1_frontal_guante.png",
+  "job_id": "da3a476c-5dda-4315-89fa-6264f552a667",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 08:25",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [],
+  "prompt": "Low-angle ultra-wide photograph on the surface of the Moon, 14 mm full-frame lens at f/11, everything in focus from the dust in the foreground to the horizon, camera thirty centimetres above the ground and about two metres from a flagpole, seen three-quarters from its front left, tilted upward about twenty-seven degrees. Hard single-source sunlight from low behind the camera and slightly to its left, about fifteen degrees above the horizon, with no fill and no atmosphere: razor-sharp black shadows and an absolutely black sky. At one third of the frame width a thin gold-anodized aluminium pole stands planted in trampled gray dust, its base at the very bottom edge of the frame, leaning back very slightly; a line of crisp boot prints leads to it from the lower left, each print casting a long black shadow away from the camera toward the horizon. From the top of the pole a thin horizontal crossbar runs to the right and slightly away from the camera through a sewn hem along the top edge of a large nylon flag, so the cloth recedes in gentle perspective. The flag is the flag of the United States of America, its front side facing the camera and the pole on its left: exactly thirteen horizontal stripes, seven red and six white, alternating, with a red stripe at the top and a red stripe at the bottom; a deep blue canton in the upper corner next to the pole, as tall as the top seven stripes and about two fifths of the length of the flag, holding fifty white five-pointed stars in nine staggered rows that alternate six and five stars. The cloth is three units tall by five units long. The flag is large: its cloth fills the frame from about one third to a little more than one half of the frame height, and its free outer end reaches just below and left of a point at three fifths of the frame width and one third of the height from the top. The pole is still quivering after being planted and the cloth is in mid-swing: one long smooth wave travels from the pole toward the free end and the outer end is lifted slightly toward the camera; because the crossbar did not extend to its full length, the top edge is gathered in a few soft folds near its outer end. Smooth heavy folds, no fluttering, no torn or frayed edges. The bottom edge of the flag hangs well above the ground. The low sun lights the front of the cloth and rakes across the wave: saturated red and deep blue, the white slightly warm and never blown out, every stripe and every star crisp. Nobody is in the frame. The gray horizon lies at about five sixths of the frame height. Above, an enormous pitch-black sky without stars; at three fifths of the frame width and one fifteenth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white globe about two thirds lit, its lit side facing up. The flag and the Earth are the only colours; the ground is neutral gray. The only graphic in the image is the flag itself. No spacecraft, no people, no other equipment, no camera shadow. Crisp large-format clarity, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "recomendada: 13 franjas, 50 estrellas, canton junto al asta, barra visible; bandera al 51 % del alto (pedido 23 %) (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_K13a_v2_tres_cuartos_asta",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132527_be095035-1f1b-494b-bf9a-b7f3482279c0.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_K13a_v2_tres_cuartos_asta.png",
+  "job_id": "be095035-1f1b-494b-bf9a-b7f3482279c0",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 08:27",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "481919be-a76a-4920-bb90-662b31f458fc",
+   "39712f78-40d4-4043-8355-9074af995982"
+  ],
+  "prompt": "Extreme close-up film frame, 100 mm macro lens at f/2, camera locked off at pillow height with the lens axis parallel to the pillow. She lies on her left side with her left cheek sunk into a cream pillow, so her face is horizontal in the frame: forehead toward the right edge, chin toward the left edge, and the line through her two eyes runs vertically. Her upper eye (her right eye) is in the upper half of the frame and its inner corner sits at three fifths of the frame width and one third of the height from the top; her lower eye is half hidden by the pillow and falls softly out of focus. A razor-thin plane of focus lies on the lashes of her upper eye. Her voluminous dark curls fill the right third of the frame, out of focus; the cream pillow fills the lower third; the collar of her khaki short-sleeve shirt over a dark T-shirt shows at the left edge. She is exactly the character of the reference images (the full character sheet, its row of head studies and the clean front view of her head): a round face, warm brown skin, large dark-brown eyes with a small dark wing at the outer end of the upper lash line, thick softly arched dark-brown brows, a small rounded button nose, a small mouth, a few faint freckles and a soft warm blush on the cheeks, a tiny silver diamond-shaped stud earring, and big voluminous dark-brown curly hair with one small curl at the temple. She is a university student about twenty years old drawn with the stylized proportions of her sheet: youthful but not a child, gently defined cheekbones and jaw, natural, no makeup look. She has just woken. Her eyes are open, wet and bright, looking softly past the camera without focusing. The smile is born in her eyes: the lower lids lift, the upper cheek rises, the outer corners crinkle softly, and her mouth is only a small closed smile beginning. One single small tear has just left the inner corner of her upper eye and runs sideways across the bridge of her nose as a thin glistening line with a tiny bead at its tip; never a stream. The feeling is quiet, overwhelming joy, not sadness. Light: low warm morning sun through wooden window shutters. Soft-edged bands of amber light, split by the shutter slats, fall diagonally across her cheek and eyes at about thirty degrees, rising from her jaw toward her upper eyelid; between the bands the skin stays in a gentle petrol-blue shade, about three to one, the darkest tones warm and never black. Two small rectangular catchlights from the shutters shine in each eye, a golden rim of light runs along the curls, and the background is a soft warm blur. Style: a stylized cinematic 3D close-up from a feature-length animated film, smooth sculpted forms that keep the design of her sheet. Soft translucent skin with a gentle subsurface glow where the sunlight passes through the edge of the cheek and the tip of the nose, a hand-painted skin texture with subtle colour variation, faint freckles and fine peach fuzz catching the rim light. Eyes full of life: a clear cornea, a layered dark-brown iris with fine radial fibres, a wet waterline and a thin moist meniscus, individual dark lashes. The curls are defined ringlet by ringlet, each spiral clump sculpted with soft rounded volume and a faint bevelled edge that echoes the low-poly game style; the khaki collar shows a fine cotton weave, and only the shirt and the cream pillow keep gentle low-poly faceted planes. Not photorealistic: painted, warm and stylized. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face, and the face stays horizontal, never tilted upright. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "mejor de la prueba: ojo con iris, menisco y pestanas, lagrima fina, rubor y pecas; rizos en bloques; cara girada unos 21 grados (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_P14c_C_cine_gpt",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132708_b3417879-5d95-4e4e-b521-f6c0f6fc0777.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_P14c_C_cine_gpt.png",
+  "job_id": "b3417879-5d95-4e4e-b521-f6c0f6fc0777",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 08:27",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "481919be-a76a-4920-bb90-662b31f458fc",
+   "39712f78-40d4-4043-8355-9074af995982"
+  ],
+  "prompt": "Extreme close-up film frame, 100 mm macro lens at f/2, camera locked off at pillow height with the lens axis parallel to the pillow. She lies on her left side with her left cheek sunk into a cream pillow, so her face is horizontal in the frame: forehead toward the right edge, chin toward the left edge, and the line through her two eyes runs vertically. Her upper eye (her right eye) is in the upper half of the frame and its inner corner sits at three fifths of the frame width and one third of the height from the top; her lower eye is half hidden by the pillow and falls softly out of focus. A razor-thin plane of focus lies on the lashes of her upper eye. Her voluminous dark curls fill the right third of the frame, out of focus; the cream pillow fills the lower third; the collar of her khaki short-sleeve shirt over a dark T-shirt shows at the left edge. She is exactly the character of the reference images (the full character sheet, its row of head studies and the clean front view of her head): a round face, warm brown skin, large dark-brown eyes with a small dark wing at the outer end of the upper lash line, thick softly arched dark-brown brows, a small rounded button nose, a small mouth, a few faint freckles and a soft warm blush on the cheeks, a tiny silver diamond-shaped stud earring, and big voluminous dark-brown curly hair with one small curl at the temple. She is a university student about twenty years old drawn with the stylized proportions of her sheet: youthful but not a child, gently defined cheekbones and jaw, natural, no makeup look. She has just woken. Her eyes are open, wet and bright, looking softly past the camera without focusing. The smile is born in her eyes: the lower lids lift, the upper cheek rises, the outer corners crinkle softly, and her mouth is only a small closed smile beginning. One single small tear has just left the inner corner of her upper eye and runs sideways across the bridge of her nose as a thin glistening line with a tiny bead at its tip; never a stream. The feeling is quiet, overwhelming joy, not sadness. Light: low warm morning sun through wooden window shutters. Soft-edged bands of amber light, split by the shutter slats, fall diagonally across her cheek and eyes at about thirty degrees, rising from her jaw toward her upper eyelid; between the bands the skin stays in a gentle petrol-blue shade, about three to one, the darkest tones warm and never black. Two small rectangular catchlights from the shutters shine in each eye, a golden rim of light runs along the curls, and the background is a soft warm blur. Style: refined hand-painted low-poly 3D for a game cinematic, a much denser mesh than the game model. The face is built from many small soft facets that show only as a delicate tessellation in the highlights, each facet painted with a soft gradient and fine brush texture, so the cheeks, eyelids and lips stay round and expressive with no large flat planes and no hard creases across the features. The eyes are smooth painted spheres with a layered iris, a wet waterline and fine individual lashes. The curls are spiral ringlets built from medium facets with hand-painted gradients; the shirt and the pillow keep chunkier facets. Matte, warm and painted. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face, and the face stays horizontal, never tilted upright. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "valida para comparar: facetas finas en la piel, ojo bien construido; cara girada unos 27 grados (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_P14c_A_lowpoly_fino_gpt",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132708_09ace157-2ca3-4d43-9a1a-7cd1d8600c34.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_P14c_A_lowpoly_fino_gpt.png",
+  "job_id": "09ace157-2ca3-4d43-9a1a-7cd1d8600c34",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 08:27",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "481919be-a76a-4920-bb90-662b31f458fc",
+   "39712f78-40d4-4043-8355-9074af995982"
+  ],
+  "prompt": "Extreme close-up film frame, 100 mm macro lens at f/2, camera locked off at pillow height with the lens axis parallel to the pillow. She lies on her left side with her left cheek sunk into a cream pillow, so her face is horizontal in the frame: forehead toward the right edge, chin toward the left edge, and the line through her two eyes runs vertically. Her upper eye (her right eye) is in the upper half of the frame and its inner corner sits at three fifths of the frame width and one third of the height from the top; her lower eye is half hidden by the pillow and falls softly out of focus. A razor-thin plane of focus lies on the lashes of her upper eye. Her voluminous dark curls fill the right third of the frame, out of focus; the cream pillow fills the lower third; the collar of her khaki short-sleeve shirt over a dark T-shirt shows at the left edge. She is exactly the character of the reference images (the full character sheet, its row of head studies and the clean front view of her head): a round face, warm brown skin, large dark-brown eyes with a small dark wing at the outer end of the upper lash line, thick softly arched dark-brown brows, a small rounded button nose, a small mouth, a few faint freckles and a soft warm blush on the cheeks, a tiny silver diamond-shaped stud earring, and big voluminous dark-brown curly hair with one small curl at the temple. She is a university student about twenty years old drawn with the stylized proportions of her sheet: youthful but not a child, gently defined cheekbones and jaw, natural, no makeup look. She has just woken. Her eyes are open, wet and bright, looking softly past the camera without focusing. The smile is born in her eyes: the lower lids lift, the upper cheek rises, the outer corners crinkle softly, and her mouth is only a small closed smile beginning. One single small tear has just left the inner corner of her upper eye and runs sideways across the bridge of her nose as a thin glistening line with a tiny bead at its tip; never a stream. The feeling is quiet, overwhelming joy, not sadness. Light: low warm morning sun through wooden window shutters. Soft-edged bands of amber light, split by the shutter slats, fall diagonally across her cheek and eyes at about thirty degrees, rising from her jaw toward her upper eyelid; between the bands the skin stays in a gentle petrol-blue shade, about three to one, the darkest tones warm and never black. Two small rectangular catchlights from the shutters shine in each eye, a golden rim of light runs along the curls, and the background is a soft warm blur. Style: a painted illustration with volume, digital gouache over soft watercolour washes with a faint warm paper texture, visible confident brushstrokes that follow the form, simple rounded shapes with no hard facets anywhere, soft lost-and-found edges, the light painted like a film still. The skin is built with warm transparent glazes; the eye is painted with care: a layered iris, a wet waterline and a few strong lash strokes. The curls are painted as rhythmic ringlet clumps with dry-brush highlights; the shirt and the pillow are loosely blocked in with broad strokes. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face, and the face stays horizontal, never tilted upright. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "valida para comparar: gouache con pincel visible, rizos por mechones; cara girada unos 26 grados (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_P14c_B_pintado_gpt",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132708_439124d9-5651-47d6-b247-322f84e497ed.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_P14c_B_pintado_gpt.png",
+  "job_id": "439124d9-5651-47d6-b247-322f84e497ed",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 08:27",
+  "modelo": "nano_banana_pro",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "481919be-a76a-4920-bb90-662b31f458fc",
+   "39712f78-40d4-4043-8355-9074af995982"
+  ],
+  "prompt": "Extreme close-up film frame, 100 mm macro lens at f/2, camera locked off at pillow height with the lens axis parallel to the pillow. She lies on her left side with her left cheek sunk into a cream pillow, so her face is horizontal in the frame: forehead toward the right edge, chin toward the left edge, and the line through her two eyes runs vertically. Her upper eye (her right eye) is in the upper half of the frame and its inner corner sits at three fifths of the frame width and one third of the height from the top; her lower eye is half hidden by the pillow and falls softly out of focus. A razor-thin plane of focus lies on the lashes of her upper eye. Her voluminous dark curls fill the right third of the frame, out of focus; the cream pillow fills the lower third; the collar of her khaki short-sleeve shirt over a dark T-shirt shows at the left edge. She is exactly the character of the reference images (the full character sheet, its row of head studies and the clean front view of her head): a round face, warm brown skin, large dark-brown eyes with a small dark wing at the outer end of the upper lash line, thick softly arched dark-brown brows, a small rounded button nose, a small mouth, a few faint freckles and a soft warm blush on the cheeks, a tiny silver diamond-shaped stud earring, and big voluminous dark-brown curly hair with one small curl at the temple. She is a university student about twenty years old drawn with the stylized proportions of her sheet: youthful but not a child, gently defined cheekbones and jaw, natural, no makeup look. She has just woken. Her eyes are open, wet and bright, looking softly past the camera without focusing. The smile is born in her eyes: the lower lids lift, the upper cheek rises, the outer corners crinkle softly, and her mouth is only a small closed smile beginning. One single small tear has just left the inner corner of her upper eye and runs sideways across the bridge of her nose as a thin glistening line with a tiny bead at its tip; never a stream. The feeling is quiet, overwhelming joy, not sadness. Light: low warm morning sun through wooden window shutters. Soft-edged bands of amber light, split by the shutter slats, fall diagonally across her cheek and eyes at about thirty degrees, rising from her jaw toward her upper eyelid; between the bands the skin stays in a gentle petrol-blue shade, about three to one, the darkest tones warm and never black. Two small rectangular catchlights from the shutters shine in each eye, a golden rim of light runs along the curls, and the background is a soft warm blur. Style: a stylized cinematic 3D close-up from a feature-length animated film, smooth sculpted forms that keep the design of her sheet. Soft translucent skin with a gentle subsurface glow where the sunlight passes through the edge of the cheek and the tip of the nose, a hand-painted skin texture with subtle colour variation, faint freckles and fine peach fuzz catching the rim light. Eyes full of life: a clear cornea, a layered dark-brown iris with fine radial fibres, a wet waterline and a thin moist meniscus, individual dark lashes. The curls are defined ringlet by ringlet, each spiral clump sculpted with soft rounded volume and a faint bevelled edge that echoes the low-poly game style; the khaki collar shows a fine cotton weave, and only the shirt and the cream pillow keep gentle low-poly faceted planes. Not photorealistic: painted, warm and stylized. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face, and the face stays horizontal, never tilted upright. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 2.0,
+  "veredicto": "descartada: pelo negro y facetado, camisa verdosa, ceja inferior mal puesta (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_P14c_C_cine_nbpro",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132817_c2c107c9-25ec-467b-9e59-abee9f9240b9.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_P14c_C_cine_nbpro.png",
+  "job_id": "c2c107c9-25ec-467b-9e59-abee9f9240b9",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 08:27",
+  "modelo": "seedream_5_5",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "481919be-a76a-4920-bb90-662b31f458fc",
+   "39712f78-40d4-4043-8355-9074af995982"
+  ],
+  "prompt": "Extreme close-up film frame, 100 mm macro lens at f/2, camera locked off at pillow height with the lens axis parallel to the pillow. She lies on her left side with her left cheek sunk into a cream pillow, so her face is horizontal in the frame: forehead toward the right edge, chin toward the left edge, and the line through her two eyes runs vertically. Her upper eye (her right eye) is in the upper half of the frame and its inner corner sits at three fifths of the frame width and one third of the height from the top; her lower eye is half hidden by the pillow and falls softly out of focus. A razor-thin plane of focus lies on the lashes of her upper eye. Her voluminous dark curls fill the right third of the frame, out of focus; the cream pillow fills the lower third; the collar of her khaki short-sleeve shirt over a dark T-shirt shows at the left edge. She is exactly the character of the reference images (the full character sheet, its row of head studies and the clean front view of her head): a round face, warm brown skin, large dark-brown eyes with a small dark wing at the outer end of the upper lash line, thick softly arched dark-brown brows, a small rounded button nose, a small mouth, a few faint freckles and a soft warm blush on the cheeks, a tiny silver diamond-shaped stud earring, and big voluminous dark-brown curly hair with one small curl at the temple. She is a university student about twenty years old drawn with the stylized proportions of her sheet: youthful but not a child, gently defined cheekbones and jaw, natural, no makeup look. She has just woken. Her eyes are open, wet and bright, looking softly past the camera without focusing. The smile is born in her eyes: the lower lids lift, the upper cheek rises, the outer corners crinkle softly, and her mouth is only a small closed smile beginning. One single small tear has just left the inner corner of her upper eye and runs sideways across the bridge of her nose as a thin glistening line with a tiny bead at its tip; never a stream. The feeling is quiet, overwhelming joy, not sadness. Light: low warm morning sun through wooden window shutters. Soft-edged bands of amber light, split by the shutter slats, fall diagonally across her cheek and eyes at about thirty degrees, rising from her jaw toward her upper eyelid; between the bands the skin stays in a gentle petrol-blue shade, about three to one, the darkest tones warm and never black. Two small rectangular catchlights from the shutters shine in each eye, a golden rim of light runs along the curls, and the background is a soft warm blur. Style: a stylized cinematic 3D close-up from a feature-length animated film, smooth sculpted forms that keep the design of her sheet. Soft translucent skin with a gentle subsurface glow where the sunlight passes through the edge of the cheek and the tip of the nose, a hand-painted skin texture with subtle colour variation, faint freckles and fine peach fuzz catching the rim light. Eyes full of life: a clear cornea, a layered dark-brown iris with fine radial fibres, a wet waterline and a thin moist meniscus, individual dark lashes. The curls are defined ringlet by ringlet, each spiral clump sculpted with soft rounded volume and a faint bevelled edge that echoes the low-poly game style; the khaki collar shows a fine cotton weave, and only the shirt and the cream pillow keep gentle low-poly faceted planes. Not photorealistic: painted, warm and stylized. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face, and the face stays horizontal, never tilted upright. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 3.5,
+  "veredicto": "valida con reparo: cara horizontal y rizos mechon a mechon; ojos redondos de juguete, mirada fija (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_P14c_C_cine_seedream55",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132820_06a2d6f7-7d01-4166-90e3-ca4ce53e28f6.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_P14c_C_cine_seedream55.png",
+  "job_id": "06a2d6f7-7d01-4166-90e3-ca4ce53e28f6",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "2b0daa6b-d144-4693-beea-b7b3f4e2897a"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Wide-angle photograph, 24 mm lens at f/8, deep focus from the stones at the waterline to the horizon, camera one metre above the ground on the shore of a still lagoon, behind a small group of spectators, level and slightly tilted up. In the lower fifth of the frame: the dark shoreline, two boxy 1960s cars and six or seven black silhouettes of people seen from behind, standing still on the hoods and beside the cars, less than one tenth of the frame height, no faces. Far across the water, at three fifths of the frame width, a colossal column of fire and cream-white smoke climbs straight up from the horizon and leaves the top of the frame; the column glows from inside like a lantern with orange fire, is amber on its sunlit side and falls into soft cream shadow on the other; the rocket itself is only a bright point at the head of the flame near the top edge. The calm water mirrors the column. Huge pale blue sky. Colour of 1960s 16 mm reversal film: amber, cream and faded blue, slightly lifted warm blacks. No markings, letters, flags or symbols anywhere. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: columna en x 0,59, sin marcas, placas en blanco (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K05_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132952_3981915a-3265-4a52-8df2-5a781d26cb99.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K05_final.png",
+  "job_id": "3981915a-3265-4a52-8df2-5a781d26cb99",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "9eea87a2-3af1-4075-8d9d-adeba8854214"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Extreme telephoto photograph, 600 mm full-frame-equivalent lens at f/11, camera locked on a heavy tripod at standing eye height, strongly compressed perspective that stacks the far shore, the launch tower and the haze into flat layers. Hard mid-morning sunlight from high behind the rocket: the scene is backlit, the rocket and the tower are rimmed with light, and hot haze over a perfectly still lagoon on a flat subtropical coast lowers the contrast to about two to one. Far away on the horizon, at three fifths of the frame width, stands a tall slender white three-stage rocket attached to its dark steel launch tower: tiny, about one sixth of the frame height, softened and wavering in the heat shimmer. Along the bottom edge of the frame, in its left two thirds, six or seven small black silhouettes of people seen from behind stand motionless on the hoods and beside two boxy 1960s cars, backlit, less than one twentieth of the frame height, no faces visible. A huge pale sky fills the upper two thirds of the frame. Colour of 1960s 16 mm reversal film: muted amber, cream and faded cyan, slightly lifted warm blacks, highlights that roll off softly. No markings, letters, flags or symbols on the rocket, the tower or the cars. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: sin letras ni marcas; autos de los 60; figuras mas altas que 1/20 del cuadro (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K03_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132952_c6109403-ec83-42b2-912e-2255963be9ae.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K03_final.png",
+  "job_id": "c6109403-ec83-42b2-912e-2255963be9ae",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "4b947eec-57e4-4ed2-a3be-4f1121442b5e"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Extreme telephoto photograph from a long-range tracking camera, about 1800 mm full-frame-equivalent lens at f/11, same camera position as a 600 mm view tightened three times, locked off, strongly compressed perspective and heat shimmer. A tall white three-stage rocket beside its dark steel launch tower stands at three fifths of the frame width and fills the central half of the frame height against a pale hot morning sky, rim-lit by the sun behind it; flat marsh and a strip of still water run along the bottom. The engines have just ignited: at the base, a blinding orange-white fire, the only saturated colour in the whole image, blooming with a soft red-orange halation. The fire lights the underside of the rocket and the steam from below, so the steam rolling outward low along the ground on both sides glows amber at its base and turns cream above. The rocket has barely left the pad, its base just above the launch platform, perfectly vertical, the tower still beside it. No people. Colour of 1960s 16 mm reversal film: muted cream and faded cyan everywhere except the fire, slightly lifted warm blacks. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: sin marcas; cohete a x 0,50 (pedido 0,60) (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K04b_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132952_26ca68fc-b01d-425e-a2a1-1d16bedfcac7.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K04b_final.png",
+  "job_id": "26ca68fc-b01d-425e-a2a1-1d16bedfcac7",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "5617e8e5-076e-4e78-b7d0-a8382d824433"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Looking steeply up into a vast empty sky, 50 mm lens focused at infinity at f/8, locked off. The sky grades smoothly from pale blue at the bottom of the frame to deep indigo at the top, as at high altitude. A single tiny white spark sits at three fifths of the frame width and one third of the height from the top, at the tip of a long, thin white exhaust trail that sweeps across the frame in one clean arc, like the upper part of a very large circle whose centre lies below the spark: the arc rises from the lower left and levels off at its apex exactly where the spark is. The trail is lit by the sun from below the frame, bright white on its lower side and softly shaded above; its lower part is wider, slightly twisted and thinned by high-altitude wind. Nothing else: no ground, no clouds, no aircraft, no birds, no sun in frame. Faded colour of 1960s 16 mm reversal film. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: chispa en P estrella (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K06_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133058_c27dcf11-742e-4988-b2a8-eff06d140af7.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K06_final.png",
+  "job_id": "c27dcf11-742e-4988-b2a8-eff06d140af7",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "973fe31d-8370-469a-996b-c92d3b4db5dc"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. The whole planet Earth floating in pure black space, photographed with a 24 mm lens at f/8 from a departing spacecraft, exposed for the sunlit clouds so that no stars show. A blue-and-white gibbous globe about three quarters lit, hard sunlight from the upper right, a band of night along its lower left edge melting into the black, and a thin luminous blue line of atmosphere along the sunlit limb. The globe sits slightly right of centre and low in the frame: its sunlit top edge touches a point at three fifths of the frame width and one third of the height from the top, and its bottom edge sits just above the bottom of the frame, so it fills 60 percent of the frame height. Deep saturated ocean blue and bright white cloud swirls, with only faint hints of land under the clouds: no sharply drawn or recognisable coastlines, no city lights. No stars, no Moon, no spacecraft parts, no lens flare. The background is perfectly black. Crisp large-format clarity, almost grainless. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "descartada: el globo se corta por abajo y el alejamiento de P07 lo dejaria ver (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K07_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133113_3f1b4eda-2a9d-4576-8131-97f897695b96.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K07_final.png",
+  "job_id": "3f1b4eda-2a9d-4576-8131-97f897695b96",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "3332fa4d-e587-4b81-a01c-6713139fa6f8"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Photograph of the Moon from an approaching spacecraft, 85 mm lens at f/8, crisp large-format clarity. The curved limb of the Moon rises from the lower left and fills two thirds of the frame; the highest point of the limb sits at three fifths of the frame width and one third of the height from the top. Neutral silver-gray surface, densely cratered; hard, low raking sunlight from the right, so the craters near the terminator cast long black shadows and their sunward rims glow; on the left the surface sinks into darkness along a diagonal terminator. There is no atmosphere: every shadow edge is razor sharp and the black is absolute. Pure black sky, no stars, no Earth, no spacecraft. Nearly grainless, high contrast. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: cima del limbo en P estrella; crateres algo repetidos (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K08_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133122_b2b27aa5-664f-44f8-83b3-5f0c8224e26b.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K08_final.png",
+  "job_id": "b2b27aa5-664f-44f8-83b3-5f0c8224e26b",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "high"
+  },
+  "referencias": [
+   "130b9af0-a408-46ce-96c4-1b1783fbd884"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Stark black-and-white image in the manner of a low-resolution slow-scan television camera, very high contrast with blown-out whites, crushed shadows and soft detail. View from a camera fixed low on the side of a landing craft on the Moon, wide 20 mm-equivalent lens with slight barrel distortion. On the left, in deep shadow, the dark angular leg of the craft with a ladder. On the lowest rung of the ladder, seen from the side and facing the ladder, a bulky figure in a white pressure suit with a large square backpack and a round helmet holds the rails with both hands and lowers one boot toward the round footpad. The figure is pale and slightly translucent, like a ghost image, with no visible face, no identifiable person and no markings on the suit. Behind it, a blinding sunlit plain, a slightly tilted horizon and a pitch-black sky without stars. A vertical band of glare runs down the right side of the picture. No flag, no lettering on the craft or the suit. No scan lines and no borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 2.75,
+  "veredicto": "aprobada en revision: sin rostro ni marcas en el traje (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K10_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133215_c60da9aa-2dc3-4d4d-b922-bdd7912193de.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K10_final.png",
+  "job_id": "c60da9aa-2dc3-4d4d-b922-bdd7912193de",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "3c8b49bc-d89b-4b0f-9634-1efa000bacba"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Camera looking straight down at the surface of the Moon from about thirty metres up, 35 mm lens at f/11, everything in focus. Neutral gray powdery regolith fills the whole frame, peppered with small craters and scattered rocks. The sun is only ten degrees above the horizon, off the bottom of the frame: hard single-source light with no atmosphere and no fill, so every rock and crater rim casts a long, razor-sharp black shadow toward the top of the frame and the sunlit faces of the rocks glow. Entering from the bottom centre and reaching the middle of the frame: the long black shadow of a four-legged landing craft, an angular body on four splayed legs with round footpads, stretched to about five times its natural length by the low sun. Only the shadow is visible; the craft itself is never in frame. Fine dust streaks radially outward along the ground in perfectly straight thin rays that hug the surface, with no billowing cloud. No footprints, no flags, no people. Crisp and nearly grainless. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "descartada: sombras de piedras como espigas iguales (aspecto de IA) (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K09_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133152_06205c2b-1e41-431f-99a2-f40b44343896.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K09_final.png",
+  "job_id": "06205c2b-1e41-431f-99a2-f40b44343896",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "54095cae-cb0b-490d-9580-c1ef8674d44d"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Macro photograph, 100 mm macro lens at f/4, camera lying on the ground, side view at a grazing angle of about ten degrees: a single fresh boot print pressed into fine gray lunar dust, with crisp parallel tread ribs and sharp vertical walls, like a print in damp flour. A razor-thin plane of focus lies across the ribs in the lower middle of the frame; the dust before and behind it melts within a few centimetres into a soft blur. The print lies inside a large cool shadow and is lit only by soft light bounced from the sunlit ground beyond it: gentle, almost shadowless, slightly cool gray, about two to one, just enough to model each rib. In the background the hard edge of the shadow crosses the frame diagonally from the upper left toward the right, and beyond it the plain blazes in direct sunlight, five stops brighter and strongly out of focus; a thin strip of pitch-black sky runs along the very top. No boot, no person, no flag, no equipment. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: limpia (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K11_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133231_4a3204d4-881e-4ee8-8661-209ca47f7411.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K11_final.png",
+  "job_id": "4a3204d4-881e-4ee8-8661-209ca47f7411",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:29",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "af6b1e14-c46a-42f9-be7e-b02bb282cd37",
+   "@ANC_PROTA_1"
+  ],
+  "prompt": "The first reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. The second reference image is the character sheet of the student. Night photograph, vintage 50 mm lens wide open at f/2, locked off at standing eye height, looking west and slightly upward from the top of a steep public stairway in an old hillside neighbourhood of a tropical port city in 1969. The focus is on the distance: the stairway falling away between small wooden houses with corrugated zinc roofs, laundry hanging on lines, four bare yellow tungsten bulbs that bloom into soft round highlights, and beyond, the dark rooftops and scattered warm lights of the city and low hills under a deep blue-black sky. The bulbs are the only key light: warm pools on the steps and walls, everything else falls into blue-black, about sixteen to one. The patch of sky at three fifths of the frame width and one third of the height from the top, above the roofs, is clear and empty, with a few faint stars: no Moon in the sky. In the foreground at the left third, softly out of focus and seen from behind, stands the small chibi student of the reference sheet, with her proportions, her voluminous dark curly hair, her khaki short-sleeve shirt worn open over a dark T-shirt and her brown cargo pants, barefoot on the stone step, without any bag, her chin slightly raised toward that empty patch of sky; she is a dark soft shape with a thin warm rim light from a bulb behind her on the right, and her face is not visible. No cars, no antennas, no television sets, no signs, no lighthouse, no numbered steps, no modern railings. Warm colour of 1960s 16 mm reversal film: amber bulbs, deep blue-black night, slightly lifted blacks. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "descartada: pelo de fieltro, camisa crema, bahia al fondo (el rio queda a su espalda) (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K12_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133312_fc2249e8-8c67-4293-afc8-934b13cf505f.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K12_final.png",
+  "job_id": "fc2249e8-8c67-4293-afc8-934b13cf505f",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 08:34",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [],
+  "prompt": "Heroic low-angle ultra-wide photograph on the surface of the Moon, 14 mm full-frame lens at f/11, everything in focus, camera thirty centimetres above the ground and about one and a third metres in front of a flagpole, tilted upward about thirty degrees. Hard single-source sunlight from low behind the camera and slightly to its left, about fifteen degrees above the horizon, with no fill and no atmosphere: razor-sharp black shadows and an absolutely black sky. Near the left edge of the frame, at about one sixth of the frame width, a thin gold-anodized aluminium pole rises from below the bottom edge of the frame, leaning back very slightly. From the top of the pole a thin horizontal crossbar runs to the right through a sewn hem along the top edge of a large nylon flag. The flag is the flag of the United States of America, its front side facing the camera and the pole on its left: exactly thirteen horizontal stripes, seven red and six white, alternating, with a red stripe at the top and a red stripe at the bottom, and all thirteen stripes run unbroken along the whole length of the cloth from the pole to the free end, so thirteen stripes are counted at every point; a deep blue canton in the upper corner next to the pole, as tall as the top seven stripes and about two fifths of the length of the flag, holding fifty white five-pointed stars in nine staggered rows that alternate six and five stars. The cloth is three units tall by five units long. The flag is large: its cloth fills the frame from about one fifth to one half of the frame height and from the pole to a little past the middle of the frame width, so that its free outer end sits just below and left of a point at three fifths of the frame width and one third of the height from the top. It has just been planted and is swinging: the cloth is caught at the end of a wide, slow pendulum swing, bellied gently toward the camera near the pole, with two or three clean diagonal waves running from the pole toward the free end; because the crossbar did not extend to its full length, the top edge is gathered in a few soft folds near its outer end. Smooth heavy folds, no fluttering, no torn or frayed edges. The bottom edge of the flag hangs well above the ground. The low sun rakes across the waves: saturated red and deep blue, the white slightly warm and never blown out, bright crests and soft shaded troughs, every stripe and every star crisp. At the left edge of the frame, just below the flag, a bulky white pressure-suit glove and the cuff of a white sleeve enter from outside the frame and are letting go of the pole, fingers opening; the person is entirely outside the frame: no arm beyond the cuff, no body, no helmet, no face, no patches and no markings on the glove. Along the very bottom of the frame, below the horizon at about nine tenths of the frame height, a strip of gray ground with boot prints and long black shadows pointing away from the camera. Above, an enormous pitch-black sky without stars; at three fifths of the frame width and one ninth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white globe about two thirds lit, its lit side facing up. The flag and the Earth are the only colours; the ground is neutral gray. The only graphic in the image is the flag itself. No spacecraft, no other equipment, no camera shadow. Crisp large-format clarity, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "valida con reparo: 13 franjas y 50 estrellas, pero sin barra; la tela flamea como con viento (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_K13a_v1_frontal_guante_r1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133428_7a29bb88-30ee-4966-a560-cc0aa1d57f47.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_K13a_v1_frontal_guante_r1.png",
+  "job_id": "7a29bb88-30ee-4966-a560-cc0aa1d57f47",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "973fe31d-8370-469a-996b-c92d3b4db5dc"
+  ],
+  "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. The whole planet Earth floating in pure black space, photographed with a 24 mm lens at f/8 from a departing spacecraft, exposed for the sunlit clouds so that no stars show. A blue-and-white gibbous globe about three quarters lit, hard sunlight from the upper right, a band of night along its lower left edge melting into the black, and a thin luminous blue line of atmosphere along the sunlit limb. The globe sits slightly right of centre and low in the frame: its sunlit top edge touches a point at three fifths of the frame width and one third of the height from the top, and its bottom edge sits just above the bottom of the frame, so it fills 60 percent of the frame height. Deep saturated ocean blue and bright white cloud swirls, with only faint hints of land under the clouds: no sharply drawn or recognisable coastlines, no city lights. No stars, no Moon, no spacecraft parts, no lens flare. The background is perfectly black. The whole globe is inside the frame with black space all around it, including below its bottom edge: nothing of the globe is cut by any edge of the frame. Crisp large-format clarity, almost grainless. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: globo entero, borde iluminado en P estrella (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K07_final_r1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133628_130fa334-2201-45fa-8eba-ba98f30718c3.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K07_final_r1.png",
+  "job_id": "130fa334-2201-45fa-8eba-ba98f30718c3",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "d84b75a5-f148-4d8d-bddf-e39eb2e49aff"
+  ],
+  "prompt": "Same frame, same lens, same light and same colour as the reference image, a few seconds earlier: the rocket stands completely still on the launch platform beside its tower, with no fire, no steam cloud and no glow at its base; only a thin wisp of white vapour drifts from its side in the heat shimmer. No people. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: mismo encuadre que K04b (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K04a_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133628_b94f1d36-b212-4e42-a361-01299c13b279.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K04a_final.png",
+  "job_id": "b94f1d36-b212-4e42-a361-01299c13b279",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "c458d8e8-7f42-4076-9ce7-457872d86109"
+  ],
+  "prompt": "Same frame, same lens, same focus and same light as the reference image, one second earlier: the edge of a gray boot sole with tread ribs is just lifting straight up out of the print and leaving through the top of the frame, with a few grains of dust hanging below it. Only the edge of the sole is visible: no person, no markings. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: solo el borde de la suela, mismo encuadre que K11 (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K11a_final",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133628_ac28441d-fe43-438e-b448-829f75692354.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K11a_final.png",
+  "job_id": "ac28441d-fe43-438e-b448-829f75692354",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 08:36",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "@ANC_PROTA_1",
+   "9d0b5c50-0f81-4d30-837e-aa9386a69700"
+  ],
+  "prompt": "The first reference image is the character sheet of the student; the second is the back view of her turnaround sheet. Night photograph, vintage 50 mm lens wide open at f/2, locked off at standing eye height, looking west and slightly upward from the top of a steep public stairway in an old hillside neighbourhood of a tropical port city in 1969. The focus is on the distance: the stairway falling away between small wooden houses with corrugated zinc roofs, laundry hanging on lines, four bare yellow tungsten bulbs that bloom into soft round highlights, and beyond, the dark rooftops and scattered warm lights of the city and low hills under a deep blue-black sky. The bulbs are the only key light: warm pools on the steps and walls, everything else falls into blue-black, about sixteen to one. The patch of sky at three fifths of the frame width and one third of the height from the top, above the roofs, is clear and empty, with a few faint stars: no Moon in the sky. In the foreground at the left third, softly out of focus and seen from behind, stands the small chibi student of the reference sheet, with her proportions, her voluminous dark curly hair, her khaki short-sleeve shirt worn open over a dark T-shirt and her brown cargo pants, barefoot on the stone step, without any bag, her chin slightly raised toward that empty patch of sky; seen from behind exactly as in the back view of her turnaround sheet: a big rounded mass of separate dark curl clumps, never a smooth ball; her khaki short-sleeve shirt with rolled cuffs and plain blank shoulder patches with no symbol, her brown cargo pants with side pockets; she is soft and out of focus, but her silhouette reads clearly against the lit wall, with a thin warm rim light from a bulb behind her on the right, and her face is not visible. Inland view only: no river, no bay, no sea and no water anywhere in the frame. No cars, no antennas, no television sets, no signs, no lighthouse, no numbered steps, no modern railings. Warm colour of 1960s 16 mm reversal film: amber bulbs, deep blue-black night, slightly lifted blacks. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: espalda fiel a la hoja de giro, sin agua; nitida, no desenfocada (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K12_final_v2",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133723_28f7e7d7-9e9b-404f-a5bb-4509481ef120.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K12_final_v2.png",
+  "job_id": "28f7e7d7-9e9b-404f-a5bb-4509481ef120",
+  "detalle": "The read operation timed out"
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 09:09",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [
+   "d84b75a5-f148-4d8d-bddf-e39eb2e49aff"
+  ],
+  "prompt": "Same frame, same lens, same light and same colour as the reference image, a few seconds earlier. Keep the exact framing of the reference: the rocket and the tower are exactly the same size and in exactly the same position in the frame, the rocket filling the same height and the same marsh and water strip along the bottom; nothing is zoomed out. the rocket stands completely still on the launch platform beside its tower, with no fire, no steam cloud and no glow at its base; only a thin wisp of white vapour drifts from its side in the heat shimmer. No people. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "duplicado: el reintento salio de un error de revision; equivale al K04a original (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K04a_final_r1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_140950_37c1ef5b-f02a-4de7-afb7-9a72a523335c.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K04a_final_r1.png",
+  "job_id": "37c1ef5b-f02a-4de7-afb7-9a72a523335c",
+  "detalle": null
+ },
+ {
+  "lote": "L09c",
+  "fecha": "2026-11-15 09:10",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [],
+  "prompt": "Heroic low-angle ultra-wide photograph on the surface of the Moon, 14 mm full-frame lens at f/11, everything in focus, camera thirty centimetres above the ground and about one and a third metres in front of a flagpole, tilted upward about thirty degrees. Hard single-source sunlight from low behind the camera and slightly to its left, about fifteen degrees above the horizon, with no fill and no atmosphere: razor-sharp black shadows and an absolutely black sky. Near the left edge of the frame, at about one sixth of the frame width, a thin gold-anodized aluminium pole rises from below the bottom edge of the frame, leaning back very slightly. From the top of the pole a thin, clearly visible horizontal crossbar runs to the right through a sewn hem along the top edge of a large nylon flag. The flag is the flag of the United States of America, its front side facing the camera and the pole on its left: exactly thirteen horizontal stripes, seven red and six white, alternating, with a red stripe at the top and a red stripe at the bottom, and all thirteen stripes run unbroken along the whole length of the cloth from the pole to the free end, so thirteen stripes are counted at every point; a deep blue canton in the upper corner next to the pole, as tall as the top seven stripes and about two fifths of the length of the flag, holding fifty white five-pointed stars in nine staggered rows that alternate six and five stars. The cloth is three units tall by five units long. The flag is large: its cloth fills the frame from about one fifth to one half of the frame height and from the pole to a little past the middle of the frame width, so that its free outer end sits just below and left of a point at three fifths of the frame width and one third of the height from the top. It has just been planted and is swinging: the cloth is caught at the end of a wide, slow pendulum swing, bellied gently toward the camera near the pole, with two or three clean diagonal waves running from the pole toward the free end; because the crossbar did not extend to its full length, the top edge is gathered in a few soft folds near its outer end. The cloth hangs from the crossbar along its whole top edge, as there is no air on the Moon. Smooth heavy folds, no fluttering, no torn or frayed edges. The bottom edge of the flag hangs well above the ground. The low sun rakes across the waves: saturated red and deep blue, the white slightly warm and never blown out, bright crests and soft shaded troughs, every stripe and every star crisp. At the left edge of the frame, just below the flag, a bulky white pressure-suit glove and the cuff of a white sleeve enter from outside the frame and are letting go of the pole, fingers opening; the person is entirely outside the frame: no arm beyond the cuff, no body, no helmet, no face, no patches and no markings on the glove. Along the very bottom of the frame, below the horizon at about nine tenths of the frame height, a strip of gray ground with boot prints and long black shadows pointing away from the camera. Above, an enormous pitch-black sky without stars; at three fifths of the frame width and one ninth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white globe about two thirds lit, its lit side facing up. The flag and the Earth are the only colours; the ground is neutral gray. The only graphic in the image is the flag itself. No spacecraft, no other equipment, no camera shadow. Crisp large-format clarity, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "descartada: barra visible, pero 11 franjas en el vuelo (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09c_K13a_v1_frontal_guante_r2",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_141056_8f82692d-a416-4580-977e-9c96cf10edc1.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09c_K13a_v1_frontal_guante_r2.png",
+  "job_id": "8f82692d-a416-4580-977e-9c96cf10edc1",
+  "detalle": null
+ },
+ {
+  "lote": "L09b",
+  "fecha": "2026-11-15 09:13",
+  "modelo": "gpt_image_2_6",
+  "params": {
+   "aspect_ratio": "16:9",
+   "resolution": "2k",
+   "quality": "xhigh"
+  },
+  "referencias": [],
+  "prompt": "Camera looking straight down at the surface of the Moon from about thirty metres up, 35 mm lens at f/11, everything in focus. Neutral gray powdery regolith fills the whole frame, peppered with small craters and scattered rocks. The sun is only ten degrees above the horizon, off the bottom of the frame: hard single-source light with no atmosphere and no fill, so every rock and crater rim casts a long, razor-sharp black shadow toward the top of the frame that follows the true outline of the rock and the bumps of the ground, never a uniform pointed spike and the sunlit faces of the rocks glow. Entering from the bottom centre and reaching the middle of the frame: the long black shadow of a four-legged landing craft, an angular body on four splayed legs with round footpads, stretched to about five times its natural length by the low sun. Only the shadow is visible; the craft itself is never in frame. Fine dust streaks radially outward along the ground in perfectly straight thin rays that hug the surface, with no billowing cloud. No footprints, no flags, no people. Crisp and nearly grainless. No text, no logos, no insignia, no emblems, no watermark.",
+  "costo_cotizado": 4.5,
+  "veredicto": "aprobada en revision: sombras naturales, cuatro patas (revision de Claude; el veredicto final es de Guillermo)",
+  "id": "L09b_K09_final_r1",
+  "estado": "ok",
+  "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_141324_57633aa7-b6e0-465c-8c8d-78d1d9dbfadf.png",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K09_final_r1.png",
+  "job_id": "57633aa7-b6e0-465c-8c8d-78d1d9dbfadf",
+  "detalle": null
  }
 ]

@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-11-15T13:36:28.230351Z",
+    "display_name": "GPT Image 2.6",
+    "id": "b94f1d36-b212-4e42-a361-01299c13b279",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133628_b94f1d36-b212-4e42-a361-01299c13b279_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "d84b75a5-f148-4d8d-bddf-e39eb2e49aff",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/d84b75a5-f148-4d8d-bddf-e39eb2e49aff_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Same frame, same lens, same light and same colour as the reference image, a few seconds earlier: the rocket stands completely still on the launch platform beside its tower, with no fire, no steam cloud and no glow at its base; only a thin wisp of white vapour drifts from its side in the heat shimmer. No people. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "xhigh",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133628_b94f1d36-b212-4e42-a361-01299c13b279.png",
+    "status": "completed"
+  }
+]

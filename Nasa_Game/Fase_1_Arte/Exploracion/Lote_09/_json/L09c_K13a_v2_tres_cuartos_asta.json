@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-15T13:25:27.822267Z",
+    "display_name": "GPT Image 2.6",
+    "id": "be095035-1f1b-494b-bf9a-b7f3482279c0",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132527_be095035-1f1b-494b-bf9a-b7f3482279c0_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Low-angle ultra-wide photograph on the surface of the Moon, 14 mm full-frame lens at f/11, everything in focus from the dust in the foreground to the horizon, camera thirty centimetres above the ground and about two metres from a flagpole, seen three-quarters from its front left, tilted upward about twenty-seven degrees. Hard single-source sunlight from low behind the camera and slightly to its left, about fifteen degrees above the horizon, with no fill and no atmosphere: razor-sharp black shadows and an absolutely black sky. At one third of the frame width a thin gold-anodized aluminium pole stands planted in trampled gray dust, its base at the very bottom edge of the frame, leaning back very slightly; a line of crisp boot prints leads to it from the lower left, each print casting a long black shadow away from the camera toward the horizon. From the top of the pole a thin horizontal crossbar runs to the right and slightly away from the camera through a sewn hem along the top edge of a large nylon flag, so the cloth recedes in gentle perspective. The flag is the flag of the United States of America, its front side facing the camera and the pole on its left: exactly thirteen horizontal stripes, seven red and six white, alternating, with a red stripe at the top and a red stripe at the bottom; a deep blue canton in the upper corner next to the pole, as tall as the top seven stripes and about two fifths of the length of the flag, holding fifty white five-pointed stars in nine staggered rows that alternate six and five stars. The cloth is three units tall by five units long. The flag is large: its cloth fills the frame from about one third to a little more than one half of the frame height, and its free outer end reaches just below and left of a point at three fifths of the frame width and one third of the height from the top. The pole is still quivering after being planted and the cloth is in mid-swing: one long smooth wave travels from the pole toward the free end and the outer end is lifted slightly toward the camera; because the crossbar did not extend to its full length, the top edge is gathered in a few soft folds near its outer end. Smooth heavy folds, no fluttering, no torn or frayed edges. The bottom edge of the flag hangs well above the ground. The low sun lights the front of the cloth and rakes across the wave: saturated red and deep blue, the white slightly warm and never blown out, every stripe and every star crisp. Nobody is in the frame. The gray horizon lies at about five sixths of the frame height. Above, an enormous pitch-black sky without stars; at three fifths of the frame width and one fifteenth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white globe about two thirds lit, its lit side facing up. The flag and the Earth are the only colours; the ground is neutral gray. The only graphic in the image is the flag itself. No spacecraft, no people, no other equipment, no camera shadow. Crisp large-format clarity, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "xhigh",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132527_be095035-1f1b-494b-bf9a-b7f3482279c0.png",
+    "status": "completed"
+  }
+]

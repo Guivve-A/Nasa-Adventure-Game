@@ -1,0 +1,4120 @@
+OpenAI Codex v0.167.0-alpha.4.1
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1db71-c574-7d11-890b-6c67b7e7fbdb
+--------
+user
+# Brief común
+
+Trabajas en el «Proyecto NASA-Ecuador», un RPG educativo en Godot 4.7.2. La raíz del repositorio es tu carpeta de trabajo. Hay otros agentes trabajando a la vez en otras carpetas.
+
+Guillermo, el director, pidió: **«Recuerda: todo debe ser jugable.»** Cada minijuego ya pasa su prueba automática, pero esa prueba lo juega con `jugar_solo()`, que no pasa por el teclado ni por el ratón. Tu trabajo es **demostrar que una persona puede jugarlo y ganarlo**, y arreglar lo que se lo impida.
+
+Lee antes: `juego/ARQUITECTURA.md` (secciones 6 y 7), `juego/nucleo/minijuego.gd`, `juego/interfaz/anfitrion.gd` y, como ejemplo de prueba con teclas simuladas, las funciones `_tecla`, `_toque`, `_real` y `_manos` del final de `juego/pruebas/pruebas.gd`.
+
+Reglas fijas:
+
+- Toca **solo** la carpeta de tu minijuego (`juego/minijuegos/<id>/`) y tu carpeta de evidencia (`Nasa_Game/Construccion/Minijuegos/<id>/`).
+- No instales ni descargues nada. Sin búsqueda web.
+- GDScript sin `class_name`, con tabuladores y comentarios sin tildes. Tipos explícitos al leer diccionarios o JSON.
+- No cambies los datos reales ni las reglas del modelo, salvo para corregir un error que demuestres.
+
+## Qué entregar
+
+1. **Revisión de entradas.** Lee el guion del minijuego y anota, control por control, cómo se hace cada acción con el teclado (acciones `mover_izquierda`, `mover_derecha`, `mover_arriba`, `mover_abajo`, `interactuar` = E o Intro, `saltar` = Espacio) y cómo con el ratón. Si una acción necesaria solo se puede hacer con uno de los dos, o depende de que un control tenga el foco y lo pierde, **arréglalo**.
+2. **`juego/minijuegos/<id>/prueba_manos.gd`**: un guion `extends Node` con `func correr(pruebas: Node) -> void` que:
+   - pone `Juego.modo_prueba = false` y `Juego.sin_guardar = true` al empezar, y deja `Juego.modo_prueba = true` al terminar;
+   - abre el minijuego como lo abre el juego: lanza `Interfaz.abrir_minijuego("<id>", {"dificultad": 1})` en una corrutina aparte (sin esperar su resultado en la misma función) y espera a que `Interfaz.anfitrion.visible` sea verdadero;
+   - pulsa «Empezar» con la tecla Intro simulada;
+   - **parte A, solo teclado:** juega y GANA usando únicamente `Input.parse_input_event()` con `InputEventKey` (teclas físicas A, D, W, S o flechas, E, Intro y Espacio), leyendo el estado del minijuego (`Interfaz.anfitrion.get("_minijuego")`) para decidir qué tecla pulsar, como haría una persona mirando la pantalla. Cierra el resultado con Intro («Continuar»);
+   - **parte B, solo ratón:** vuelve a abrirlo y lo gana usando únicamente `InputEventMouseButton` e `InputEventMouseMotion` (también con `Input.parse_input_event()`; las posiciones salen de `get_global_rect()` de cada control). Si el minijuego no tiene nada que pulsar con el ratón para alguna acción necesaria, añade ese control;
+   - comprueba con `pruebas.comprobar(condicion, "nombre", "detalle")`: que cada parte terminó superada, que el anfitrión se cerró, que al terminar no queda el árbol en pausa y que cada control anunciado en el campo `controles` de `minijuego.json` responde.
+3. **Corre las dos pruebas** y pega su salida en el informe:
+
+```
+python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/<id>/prueba_manos.gd --ritmo=1
+python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:<id> --ritmo=8
+```
+
+   Las dos deben terminar sin `PRUEBA_FALLO` ni `SCRIPT ERROR`.
+4. Revisa también lo que una persona nota y una prueba no: que el texto de `controles` e `instrucciones` diga exactamente las teclas que funcionan; que nada importante quede fuera del lienzo de 1120 × 520; que el primer intento a dificultad 1 sea ganable sin conocer los números; que se pueda salir con Esc en cualquier momento.
+5. Informe final breve: qué controles tiene, qué arreglaste (con el porqué), la salida de las dos pruebas y lo que quede pendiente. Añade un apartado «Jugado con teclado y con ratón» a la `NOTA.md` de tu carpeta de evidencia.
+
+---
+
+# TU TAREA
+
+Tu minijuego es `linea_tiempo`: carpeta `juego/minijuegos/linea_tiempo/`. Donde el brief dice `<id>`, es `linea_tiempo`.
+codex
+Voy a revisar las entradas de `linea_tiempo`, corregir los bloqueos y ejecutar una prueba completa con teclado y otra con ratón. Usaré las guías de Godot y depuración de juegos disponibles, respetando las dos carpetas autorizadas.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content 'C:/Users/guill/.codex/plugins/cache/openai-curated-remote/design-game-studio/0.1.2/skills/debug-game/SKILL.md'; Get-Content 'C:/Users/guill/.codex/plugins/cache/openai-curated-remote/design-game-studio/0.1.2/skills/build-godot/SKILL.md'; Get-ChildItem -Path . -Filter AGENTS.md -Recurse | Select-Object -ExpandProperty FullName" in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 5256ms:
+---
+name: debug-game
+description: Reproduce and fix a game bug such as crashes, physics glitches, broken controls, missing assets, or failing exports.
+---
+
+# Debug Game
+
+
+1. Ask for missing reproducible steps only if essential; otherwise inspect logs, scene files, code and build settings. Reproduce before modifying when possible.
+2. Classify: runtime error, import/asset, physics/collision, state/progression, camera/input, device/export, performance, network, or visual defect.
+3. Form one or more testable hypotheses, inspect engine/runtime evidence and identify a minimal root cause.
+4. Implement a focused fix, add a regression check and rerun the original reproduction plus related systems.
+5. When hardware/engine tooling is unavailable, state the diagnosis confidence and exact commands or steps the user should run; never fabricate traces or reproduction.
+6. Output before/after behavior, changed files, test evidence and known limitations. Read `../../references/testing-and-evidence.md`.
+
+## Execution truth and safeguards
+- A skill is an instruction workflow, not a remotely running game engine or a separately running AI agent. Inspect tools and repo state before claiming execution.
+- Preserve existing projects, names, dependencies, save formats, and user work unless a change is explicitly requested. Obtain approval for deployment, payments, destructive edits, publication, and major third-party connections.
+- Avoid reproducing protected commercial characters, levels, dialogue, soundtracks, logos, or copyrighted assets unless authorized. For assets, record origin and license. Read `../../references/security-and-rights.md`.
+- Report what was implemented, what was actually run, what failed, and what remains unverified; never describe proposed tests as passed.
+---
+name: build-godot
+description: Create, extend, or debug a Godot 2D/3D project using GDScript and editor/headless verification where supported.
+---
+
+# Build Godot
+
+
+1. Read `../../references/godot.md` and determine installed Godot version, project format, GDScript versus C#, target exports and available editor/templates.
+2. Respect existing project.godot, scenes, resources and autoloads. Set a baseline and inspect signals, node paths and input actions before changing them.
+3. Implement a minimal playable scene using appropriate CharacterBody2D/3D, input mapping, collisions, camera and a win/lose/restart mechanism. Avoid outdated APIs copied from Godot 3.
+4. Model reusable scenes, resource references and signal connections explicitly. Do not hardcode fragile absolute node paths.
+5. Run `godot --headless --path PROJECT --editor --quit` or version-appropriate import/parse commands when installed, then actual gameplay input tests if a display is available.
+6. Only claim exports after necessary export templates/presets exist and commands complete successfully; web exports and C# availability must be checked separately.
+7. Deliver the editable Godot project, controls, scene map, test output and any missing engine/export prerequisites.
+
+## Execution truth and safeguards
+- A skill is an instruction workflow, not a remotely running game engine or a separately running AI agent. Inspect tools and repo state before claiming execution.
+- Preserve existing projects, names, dependencies, save formats, and user work unless a change is explicitly requested. Obtain approval for deployment, payments, destructive edits, publication, and major third-party connections.
+- Avoid reproducing protected commercial characters, levels, dialogue, soundtracks, logos, or copyrighted assets unless authorized. For assets, record origin and license. Read `../../references/security-and-rights.md`.
+- Report what was implemented, what was actually run, what failed, and what remains unverified; never describe proposed tests as passed.
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_4pi1rfpl'.
+En línea: 2 Carácter: 252
++ ... t/SKILL.md'; Get-ChildItem -Path . -Filter AGENTS.md -Recurse | Selec ...
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_4pi1rfpl:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+Get-ChildItem : Acceso denegado a la ruta de acceso 'C:\Users\guill\Desktop\Juego 
+2d-hd\pruebas\bench_render\corridas\run_kz4ist6c'.
+En línea: 2 Carácter: 252
++ ... t/SKILL.md'; Get-ChildItem -Path . -Filter AGENTS.md -Recurse | Selec ...
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\guill\...as\run_kz4ist6c:String) [Get-ChildItem], Unauthoriz 
+   edAccessException
+    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "rg --files -g AGENTS.md -g '"'!pruebas/**'"'; Get-Content juego/nucleo/minijuego.gd; Get-Content juego/interfaz/anfitrion.gd; Get-Content juego/minijuegos/linea_tiempo/*; Get-Content Nasa_Game/Construccion/Minijuegos/linea_tiempo/NOTA.md" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1177ms:
+rg : El término 'rg' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable. 
+Compruebe si escribió correctamente el nombre o, si incluyó una ruta de acceso, compruebe que dicha ruta es correcta e 
+inténtelo de nuevo.
+En línea: 2 Carácter: 1
++ rg --files -g AGENTS.md -g '!pruebas/**'; Get-Content juego/nucleo/mi ...
++ ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+extends Control
+
+# Base de todo minijuego. Cada uno vive en res://minijuegos/<id>/<id>.gd, empieza con
+#   extends "res://nucleo/minijuego.gd"
+# y tiene al lado su minijuego.json (titulo, instrucciones, controles, pistas y ficha del cuaderno).
+#
+# El anfitrion (interfaz/anfitrion.gd) pone el marco, el titulo, las instrucciones, las pistas de Orbita y la
+# pantalla de resultado. El minijuego solo dibuja y juega dentro de su lienzo.
+#
+# Contrato:
+#   _preparar()      arma los nodos y el estado inicial. El lienzo ya mide LIENZO (1120 x 520 px): usa "size".
+#   _empezar()       el jugador pulso Â«EmpezarÂ»: arranca el juego.
+#   _paso(delta)     se llama en cada cuadro mientras "activo" es true. Usa SIEMPRE delta para el tiempo
+#                    (las pruebas aceleran el reloj); nunca la hora del sistema.
+#   terminar(superado, puntos, detalle)   cierra la partida. "detalle" explica la causa en una frase:
+#                    nunca Â«incorrectoÂ», siempre el porque (regla de Orbita).
+#   jugar_solo(acierta)   OBLIGATORIO para las pruebas: hace que el minijuego se juegue solo y termine,
+#                    superado si acierta = true y no superado si es false, en menos de 40 s de juego.
+#
+# Dificultad: parametros.get("dificultad", 1) va de 1 (primera vez en la historia) a 3.
+# Entradas: teclado (acciones mover_*, interactuar, saltar) y raton; todo lo que se pueda hacer con el raton
+# debe poder hacerse tambien con el teclado.
+
+signal terminado(resultado: Dictionary)
+
+const Estilo := preload("res://interfaz/estilo.gd")
+const LIENZO := Vector2(1120, 520)
+
+var parametros: Dictionary = {}
+var meta: Dictionary = {}       # contenido de minijuego.json
+var activo := false
+var tiempo := 0.0               # segundos de juego desde _empezar()
+var dificultad := 1
+var _solo := 0                  # 0 = juega la persona; 1 = solo y acierta; -1 = solo y falla
+
+
+func preparar(p: Dictionary, m: Dictionary) -> void:
+	parametros = p
+	meta = m
+	dificultad = clampi(int(p.get("dificultad", 1)), 1, 3)
+	custom_minimum_size = LIENZO
+	size = LIENZO
+	clip_contents = true
+	focus_mode = Control.FOCUS_ALL
+	_preparar()
+
+
+func empezar() -> void:
+	activo = true
+	tiempo = 0.0
+	grab_focus()
+	_empezar()
+	if _solo != 0:
+		jugar_solo(_solo > 0)
+
+
+func terminar(superado: bool, puntos: float = 0.0, detalle: String = "") -> void:
+	if not activo:
+		return
+	activo = false
+	terminado.emit({"superado": superado, "puntos": puntos, "detalle": detalle, "tiempo": tiempo})
+
+
+func _process(delta: float) -> void:
+	if activo:
+		tiempo += delta
+		_paso(delta)
+
+
+# ------------------------------------------------------------------ para sobrescribir
+
+func _preparar() -> void:
+	pass
+
+
+func _empezar() -> void:
+	pass
+
+
+func _paso(_delta: float) -> void:
+	pass
+
+
+func jugar_solo(_acierta: bool) -> void:
+	# cada minijuego lo implementa; por defecto termina sin jugar para que la prueba lo delate
+	terminar(false, 0.0, "Este minijuego todavÃ­a no sabe jugarse solo.")
+
+
+# ------------------------------------------------------------------ utilidades
+
+func eje_x() -> float:
+	# -1..1 con izquierda y derecha (teclado o mando)
+	return Input.get_axis("mover_izquierda", "mover_derecha")
+
+
+func eje_y() -> float:
+	# -1..1 con abajo y arriba (arriba = +1)
+	return Input.get_axis("mover_abajo", "mover_arriba")
+
+
+func texto(contenido: String, tam: int = 20, color: Color = Estilo.TINTA, peso: int = 500) -> Label:
+	return Estilo.texto(contenido, tam, color, peso)
+
+
+func sonar(nombre: String) -> void:
+	Audio.sonar(nombre)
+extends Control
+
+# Anfitrion de minijuegos: pone el marco comun (titulo, instrucciones, controles, pistas de Orbita y resultado)
+# alrededor de cualquier minijuego de res://minijuegos/<id>/. Asi todos se presentan igual.
+#
+# minijuego.json:
+#   {"titulo": "...", "resumen": "una frase", "instrucciones": ["paso 1", "paso 2"], "controles": "texto",
+#    "pistas": ["mirada", "frase", "respuesta"], "ficha": "id_de_ficha", "orden": 1, "escena": "1.2"}
+
+signal _boton(accion: String)
+
+const Estilo := preload("res://interfaz/estilo.gd")
+const LIENZO := Vector2(1120, 520)
+
+var _marco: PanelContainer
+var _titulo: Label
+var _controles: Label
+var _hueco: Control
+var _capa: PanelContainer
+var _capa_columna: VBoxContainer
+var _salir: Button
+var _minijuego: Control = null
+var _resultado: Dictionary = {}
+var _pendiente := false
+var _pista := 0
+
+
+func _ready() -> void:
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	visible = false
+	var velo := ColorRect.new()
+	velo.color = Color(Estilo.NOCHE, 0.93)
+	velo.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(velo)
+
+	_marco = Estilo.panel(Estilo.PAPEL, 16, 4, 16)
+	add_child(_marco)
+	var columna := VBoxContainer.new()
+	columna.add_theme_constant_override("separation", 8)
+	_marco.add_child(columna)
+	var cabecera := HBoxContainer.new()
+	_titulo = Estilo.texto("", 28, Estilo.TINTA, 700)
+	_titulo.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_titulo.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	cabecera.add_child(_titulo)
+	_salir = Estilo.boton("Salir (Esc)", 16)
+	_salir.custom_minimum_size = Vector2(130, 36)
+	_salir.focus_mode = Control.FOCUS_NONE
+	_salir.pressed.connect(_abandonar)
+	cabecera.add_child(_salir)
+	columna.add_child(cabecera)
+	var fondo_lienzo := Estilo.panel(Color("fbf3df"), 8, 2, 0)
+	_hueco = Control.new()
+	_hueco.custom_minimum_size = LIENZO
+	_hueco.clip_contents = true
+	fondo_lienzo.add_child(_hueco)
+	columna.add_child(fondo_lienzo)
+	_controles = Estilo.texto("", 16, Estilo.TINTA_SUAVE, 500)
+	_controles.custom_minimum_size = Vector2(LIENZO.x, 0)
+	columna.add_child(_controles)
+
+	_capa = Estilo.panel(Color(Estilo.PAPEL, 0.98), 16, 4, 26)
+	_capa.custom_minimum_size = Vector2(720, 0)
+	_capa_columna = VBoxContainer.new()
+	_capa_columna.add_theme_constant_override("separation", 12)
+	_capa.add_child(_capa_columna)
+	_capa.visible = false
+	add_child(_capa)
+
+
+func _process(_delta: float) -> void:
+	if not visible:
+		return
+	_capa.reset_size()
+	_marco.position = (size - _marco.size) * 0.5
+	_capa.position = (size - _capa.size) * 0.5
+
+
+func _unhandled_input(evento: InputEvent) -> void:
+	if visible and _minijuego != null and evento.is_action_pressed("pausa"):
+		get_viewport().set_input_as_handled()
+		_abandonar()
+
+
+func _abandonar() -> void:
+	if _minijuego != null and _minijuego.get("activo"):
+		_minijuego.set("activo", false)
+		_resultado = {"superado": false, "abandonado": true, "puntos": 0.0, "detalle": ""}
+		_pendiente = false
+	elif _capa.visible:
+		_boton.emit("salir")
+
+
+func _al_terminar(resultado: Dictionary) -> void:
+	_resultado = resultado
+	_pendiente = false
+
+
+func _llenar_capa(titulo: String, color: Color, lineas: Array, botones: Array) -> void:
+	for hijo in _capa_columna.get_children():
+		_capa_columna.remove_child(hijo)
+		hijo.queue_free()
+	_capa_columna.add_child(Estilo.texto(titulo, 30, color, 700))
+	for l in lineas:
+		if l is Control:
+			_capa_columna.add_child(l)
+		elif str(l) != "":
+			var etiqueta := Estilo.texto(str(l), 20, Estilo.TINTA, 500)
+			etiqueta.custom_minimum_size = Vector2(660, 0)
+			_capa_columna.add_child(etiqueta)
+	var fila := HBoxContainer.new()
+	fila.add_theme_constant_override("separation", 12)
+	fila.alignment = BoxContainer.ALIGNMENT_END
+	var primero: Button = null
+	for par in botones:
+		var b := Estilo.boton(par[0], 20, par.size() > 2)
+		b.custom_minimum_size = Vector2(170, 46)
+		var accion: String = par[1]
+		b.pressed.connect(func(): _boton.emit(accion))
+		fila.add_child(b)
+		if primero == null:
+			primero = b
+	_capa_columna.add_child(Estilo.separador(4))
+	_capa_columna.add_child(fila)
+	_capa.visible = true
+	_capa.reset_size()
+	if primero != null:
+		primero.grab_focus.call_deferred()
+
+
+func _ficha_control(id_ficha: String) -> Control:
+	var f := Juego.ficha(id_ficha)
+	if f.is_empty():
+		return Estilo.separador(0)
+	var caja := Estilo.panel(Color("fffaf0"), 10, 2, 12)
+	var columna := VBoxContainer.new()
+	columna.add_child(Estilo.texto("AL CUADERNO Â· %s" % String(f.get("titulo", "")).to_upper(), 14, Estilo.PETROLEO, 700))
+	var cuerpo := Estilo.texto(f.get("texto", ""), 18, Estilo.TINTA, 500)
+	cuerpo.custom_minimum_size = Vector2(630, 0)
+	columna.add_child(cuerpo)
+	columna.add_child(Estilo.texto("Fuente: %s" % f.get("fuente", ""), 14, Estilo.TINTA_SUAVE, 500))
+	caja.add_child(columna)
+	return caja
+
+
+func jugar(id: String, parametros: Dictionary) -> Dictionary:
+	var meta := Juego.info_minijuego(id)
+	var ruta := "res://minijuegos/%s/%s.gd" % [id, id]
+	if meta.is_empty() or not FileAccess.file_exists(ruta):
+		print("AVISO minijuego inexistente: ", id)
+		return {"superado": false, "error": "no existe", "puntos": 0.0}
+	var guion: Variant = load(ruta)
+	visible = true
+	_titulo.text = meta.get("titulo", id)
+	_controles.text = meta.get("controles", "")
+	_marco.reset_size()
+	_pista = 0
+	var solo := 0
+	if Juego.modo_prueba or Juego.minijuegos_solos:
+		solo = -1 if parametros.get("fallar", false) else 1
+	var final: Dictionary = {}
+	while true:
+		if _minijuego != null and is_instance_valid(_minijuego):
+			_minijuego.queue_free()
+		_minijuego = guion.new()
+		_hueco.add_child(_minijuego)
+		_minijuego.position = Vector2.ZERO
+		_minijuego.terminado.connect(_al_terminar)
+		_minijuego.set("_solo", solo)
+		_minijuego.preparar(parametros, meta)
+		if solo == 0:
+			var lineas: Array = [meta.get("resumen", "")]
+			var n := 1
+			for paso in meta.get("instrucciones", []):
+				lineas.append("%d. %s" % [n, paso])
+				n += 1
+			if _pista > 0:
+				var pistas: Array = meta.get("pistas", [])
+				if not pistas.is_empty():
+					lineas.append("Ã“rbita: Â«%sÂ»" % pistas[mini(_pista - 1, pistas.size() - 1)])
+			_llenar_capa(meta.get("titulo", id), Estilo.TINTA, lineas, [["Empezar", "empezar", true], ["Salir", "salir"]])
+			var accion: String = await _boton
+			_capa.visible = false
+			if accion == "salir":
+				final = {"superado": false, "abandonado": true, "puntos": 0.0}
+				break
+		_pendiente = true
+		_minijuego.empezar()
+		while _pendiente:
+			await get_tree().process_frame
+		final = _resultado
+		print("MINIJUEGO %s superado=%s puntos=%.1f detalle=%s" % [id, str(final.get("superado", false)), float(final.get("puntos", 0.0)), str(final.get("detalle", ""))])
+		if solo != 0 or final.get("abandonado", false):
+			break
+		var siguiente := ""
+		if final.get("superado", false):
+			Audio.sonar("ok")
+			var id_ficha: String = meta.get("ficha", "")
+			var extra: Array = [final.get("detalle", "")]
+			if id_ficha != "":
+				Juego.anotar(id_ficha)
+				extra.append(_ficha_control(id_ficha))
+			_llenar_capa("Â¡Logrado!", Estilo.CIAN_MEDIO, extra, [["Continuar", "continuar", true], ["Otra vez", "reintentar"]])
+			siguiente = await _boton
+		else:
+			Audio.sonar("error")
+			_pista += 1
+			_llenar_capa("Casi", Estilo.TERRACOTA, [final.get("detalle", ""), "Ã“rbita puede darte una pista antes del prÃ³ximo intento."], [["Reintentar", "reintentar", true], ["Salir", "salir"]])
+			siguiente = await _boton
+		_capa.visible = false
+		if siguiente != "reintentar":
+			break
+	if final.get("superado", false):
+		var ficha_final: String = meta.get("ficha", "")
+		if ficha_final != "":
+			Juego.anotar(ficha_final)
+	if _minijuego != null and is_instance_valid(_minijuego):
+		_minijuego.queue_free()
+	_minijuego = null
+	_capa.visible = false
+	visible = false
+	return final
+extends "res://nucleo/minijuego.gd"
+
+# Fechas y contenido: fichas locales y FUENTES.md; no se citan textos de misiones.
+# El anio del disco figura en el campo fuente de disco_apolo11.
+const HITOS: Array = [
+	{"ficha": "observatorio_quito", "titulo": "Observatorio de Quito", "fecha": "1873", "epoca": "Siglo XIX.", "dato": "Pertenece a la Escuela PolitÃ©cnica Nacional."},
+	{"ficha": "estacion_cotopaxi", "titulo": "EstaciÃ³n Quito", "fecha": "1957", "epoca": "Mediados del siglo XX.", "dato": "Al pie del Cotopaxi, a 3 650 m."},
+	{"ficha": "disco_apolo11", "titulo": "Disco del Apolo 11", "fecha": "1969", "epoca": "Mensajes rumbo a la Luna.", "dato": "LlevÃ³ mensajes de 73 paÃ­ses, incluido Ecuador."},
+	{"ficha": "apolo_soyuz_1975", "titulo": "Apoyo al Apolo-Soyuz", "fecha": "1975", "epoca": "DespuÃ©s del viaje del disco.", "dato": "Quito participÃ³ con el indicativo QUI en la red de apoyo."},
+	{"ficha": "sts2_despedida", "titulo": "Despedida del STS-2", "fecha": "14-11-1981", "epoca": "El cierre de la estaciÃ³n.", "dato": "Engle y Truly se despidieron de 75 empleados."},
+	{"ficha": "estacion_entrega", "titulo": "Entrega a Ecuador", "fecha": "01-07-1982", "epoca": "Tras el cierre de la estaciÃ³n.", "dato": "La instalaciÃ³n se entregÃ³ a Ecuador, a CLIRSEN."},
+	{"ficha": "exa_2007", "titulo": "Nace la EXA", "fecha": "2007", "epoca": "Comienzos del siglo XXI.", "dato": "OrganizaciÃ³n no gubernamental sin fines de lucro."},
+	{"ficha": "pegaso_lanzamiento", "titulo": "Lanzamiento de Pegaso", "fecha": "2013", "epoca": "DespuÃ©s del nacimiento de EXA.", "dato": "Se lanzÃ³ desde Jiuquan, segÃºn el equipo de Pegaso."},
+	{"ficha": "acuerdos_artemisa", "titulo": "Acuerdos Artemisa", "fecha": "21-06-2023", "epoca": "DespuÃ©s de Pegaso.", "dato": "Ecuador fue el paÃ­s firmante n.Âº 26."}
+]
+const PISTAS_CLARAS: Array[String] = [
+	"Primero: siglo XIX.", "Antes del disco lunar.", "Antes de Apolo-Soyuz.",
+	"Antes del STS-2.", "Antes de la entrega.", "Antes de nacer EXA.",
+	"Antes de Pegaso.", "Antes de Artemisa.", "Ãšltimo hito."
+]
+
+var orden: Array[int] = []
+var seleccion: int = 0
+var tomada: bool = false
+var comprobaciones: int = 0
+var max_comprobaciones: int = 4
+var _marcas: Array[bool] = []
+var _reveladas: Dictionary = {}
+var _pistas_claras: Dictionary = {}
+var _paneles: Array[Panel] = []
+var _titulos: Array[Label] = []
+var _pistas: Array[Label] = []
+var _fechas: Array[Label] = []
+var _estados: Array[Label] = []
+var _contador: Label
+var _detalle: Label
+var _mensaje: Label
+var _comprobar_boton: Button
+var _arrastrando: bool = false
+var _auto: int = 0
+var _pulso: float = 0.0
+var _auto_inicio: bool = false
+
+
+func _preparar() -> void:
+	# En la primera dificultad solo hay un par invertido.
+	if dificultad == 1:
+		orden.assign([0, 2, 1, 7, 8])
+	elif dificultad == 2:
+		orden.assign([2, 0, 1, 5, 3, 8, 7])
+	else:
+		orden.assign([2, 0, 1, 5, 3, 4, 8, 6, 7])
+		max_comprobaciones = 3
+	_marcas.resize(orden.size())
+	_marcas.fill(false)
+	_contador = _etiqueta("", Vector2(24, 10), Vector2(1072, 30), 20)
+	_etiqueta("MÃS ANTIGUO  â†’  MÃS RECIENTE", Vector2(24, 43), Vector2(1072, 28), 16)
+	for i in orden.size():
+		var rect: Rect2 = _rect_tarjeta(i)
+		var panel: Panel = Panel.new()
+		panel.position = rect.position
+		panel.size = rect.size
+		panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(panel)
+		_paneles.append(panel)
+		_estados.append(_etiqueta("", rect.position + Vector2(8, 8), Vector2(rect.size.x - 16, 24), 16))
+		_titulos.append(_etiqueta("", rect.position + Vector2(8, 38), Vector2(rect.size.x - 16, 104), 16))
+		_pistas.append(_etiqueta("", rect.position + Vector2(8, 149), Vector2(rect.size.x - 16, 100), 16))
+		_fechas.append(_etiqueta("", rect.position + Vector2(5, 263), Vector2(rect.size.x - 10, 30), 16))
+	_mensaje = _etiqueta("", Vector2(24, 383), Vector2(1072, 26), 16)
+	_detalle = _etiqueta("", Vector2(24, 414), Vector2(1072, 56), 18)
+	_comprobar_boton = Estilo.boton("Comprobar Â· Espacio", 18, true)
+	_comprobar_boton.position = Vector2(806, 474)
+	_comprobar_boton.size = Vector2(290, 42)
+	_comprobar_boton.focus_mode = Control.FOCUS_NONE
+	_comprobar_boton.pressed.connect(_comprobar)
+	add_child(_comprobar_boton)
+	_etiqueta("E / Intro: tomar o soltar Â· â† â†’: elegir o mover", Vector2(24, 479), Vector2(770, 30), 16)
+	_refrescar()
+
+
+func _etiqueta(contenido: String, pos: Vector2, medida: Vector2, tam: int) -> Label:
+	var etiqueta: Label = texto(contenido, tam, Estilo.TINTA, 600)
+	etiqueta.position = pos
+	etiqueta.custom_minimum_size = Vector2(medida.x, 0)
+	etiqueta.size = medida
+	add_child(etiqueta)
+	return etiqueta
+
+
+func _rect_tarjeta(i: int) -> Rect2:
+	var ancho: float = (1072.0 - float(orden.size() - 1) * 8.0) / float(orden.size())
+	return Rect2(24.0 + float(i) * (ancho + 8.0), 79.0, ancho, 298.0)
+
+
+func _empezar() -> void:
+	_refrescar()
+
+
+func _paso(delta: float) -> void:
+	if _auto == 0:
+		return
+	_pulso += delta
+	if _pulso < 0.3:
+		return
+	_pulso = 0.0
+	# Mismas operaciones de seleccion, movimiento adyacente y comprobacion que la persona.
+	if not _auto_inicio:
+		_auto_inicio = true
+		if _auto < 0:
+			seleccion = 0
+			_mover(1)
+		_comprobar()
+		return
+	if _auto < 0:
+		_comprobar()
+		return
+	for i in range(orden.size() - 1):
+		if orden[i] > orden[i + 1]:
+			seleccion = i + 1
+			_mover(-1)
+			return
+	_comprobar()
+
+
+func _input(evento: InputEvent) -> void:
+	if not activo or _auto != 0:
+		return
+	if evento.is_action_pressed("saltar"):
+		_comprobar()
+	elif evento.is_action_pressed("interactuar"):
+		tomada = not tomada
+		_refrescar()
+	elif evento.is_action_pressed("mover_izquierda"):
+		_desplazar(-1)
+	elif evento.is_action_pressed("mover_derecha"):
+		_desplazar(1)
+	elif evento.is_action_pressed("mover_arriba"):
+		seleccion = maxi(seleccion - 1, 0)
+		_refrescar()
+	elif evento.is_action_pressed("mover_abajo"):
+		seleccion = mini(seleccion + 1, orden.size() - 1)
+		_refrescar()
+	else:
+		return
+	get_viewport().set_input_as_handled()
+
+
+func _desplazar(direccion: int) -> void:
+	if tomada:
+		_mover(direccion)
+	else:
+		seleccion = clampi(seleccion + direccion, 0, orden.size() - 1)
+		_refrescar()
+
+
+func _mover(direccion: int) -> void:
+	var destino: int = seleccion + direccion
+	if destino < 0 or destino >= orden.size():
+		return
+	var hito: int = orden[seleccion]
+	orden[seleccion] = orden[destino]
+	orden[destino] = hito
+	seleccion = destino
+	_marcas.fill(false)
+	_refrescar()
+
+
+func _gui_input(evento: InputEvent) -> void:
+	if not activo or _auto != 0:
+		return
+	if evento is InputEventMouseButton and evento.button_index == MOUSE_BUTTON_LEFT:
+		if evento.pressed:
+			for i in orden.size():
+				if _rect_tarjeta(i).has_point(evento.position):
+					seleccion = i
+					tomada = true
+					_arrastrando = true
+					grab_focus()
+					_refrescar()
+					break
+		else:
+			_arrastrando = false
+			tomada = false
+			_refrescar()
+	elif evento is InputEventMouseMotion and _arrastrando:
+		if (evento.button_mask & MOUSE_BUTTON_MASK_LEFT) == 0:
+			_arrastrando = false
+			tomada = false
+			_refrescar()
+			return
+		for i in orden.size():
+			if _rect_tarjeta(i).has_point(Vector2(evento.position.x, 100)):
+				while seleccion != i:
+					_mover(1 if i > seleccion else -1)
+				break
+
+
+func _pista_clara(hito: int) -> String:
+	var anteriores: Array[int] = []
+	for otro in orden:
+		if otro < hito:
+			anteriores.append(otro)
+	if anteriores.is_empty():
+		return "Es el hito mÃ¡s antiguo de estas %d tarjetas." % orden.size()
+	anteriores.sort()
+	var anterior: Dictionary = HITOS[anteriores.back()]
+	return "Va despuÃ©s de Â«%sÂ»." % anterior["titulo"]
+
+
+func _causa() -> String:
+	for i in range(orden.size() - 1):
+		if orden[i] > orden[i + 1]:
+			var antes: Dictionary = HITOS[orden[i + 1]]
+			var despues: Dictionary = HITOS[orden[i]]
+			return "Â«%sÂ» (%s) vino antes que Â«%sÂ» (%s); ese par quedÃ³ al revÃ©s." % [antes["titulo"], antes["fecha"], despues["titulo"], despues["fecha"]]
+	return "Todos los hitos avanzan de la fecha mÃ¡s antigua a la mÃ¡s reciente."
+
+
+func _comprobar() -> void:
+	if not activo:
+		return
+	comprobaciones += 1
+	tomada = false
+	_arrastrando = false
+	var bien: int = 0
+	for i in orden.size():
+		var izquierda: bool = i == 0 or orden[i - 1] < orden[i]
+		var derecha: bool = i == orden.size() - 1 or orden[i] < orden[i + 1]
+		_marcas[i] = izquierda and derecha
+		if _marcas[i]:
+			_reveladas[orden[i]] = true
+			bien += 1
+		else:
+			_pistas_claras[orden[i]] = true
+	_refrescar()
+	if bien == orden.size():
+		terminar(true, 100.0, "Ordenaste %d hitos: de 1873 al 21-06-2023. El disco llevÃ³ mensajes de 73 paÃ­ses, incluido Ecuador." % orden.size())
+	elif comprobaciones >= max_comprobaciones:
+		terminar(false, 0.0, "Usaste las %d comprobaciones. %s" % [max_comprobaciones, _causa()])
+	else:
+		sonar("pagina")
+
+
+func _refrescar() -> void:
+	_contador.text = "%d tarjetas Â· Comprobaciones: %d de %d" % [orden.size(), comprobaciones, max_comprobaciones]
+	for i in orden.size():
+		var hito: Dictionary = HITOS[orden[i]]
+		var fondo: Color = Estilo.CREMA if _marcas[i] else Estilo.PAPEL
+		var borde: Color = Estilo.CIAN_MEDIO if i == seleccion else Estilo.TINTA_SUAVE
+		_paneles[i].add_theme_stylebox_override("panel", Estilo.caja(fondo, 5, 4 if i == seleccion else 2, borde, 0))
+		_estados[i].text = "%d Â· %s" % [i + 1, "âœ“" if _marcas[i] else ("â†”" if i == seleccion and tomada else "â—‹")]
+		_titulos[i].text = hito["titulo"]
+		_pistas[i].text = PISTAS_CLARAS[orden[i]] if _pistas_claras.has(orden[i]) and not _marcas[i] else String(hito["epoca"])
+		# Las fechas ya descubiertas se conservan, pero las marcas se borran al mover.
+		_fechas[i].text = hito["fecha"] if _reveladas.has(orden[i]) else "Fecha oculta"
+		_fechas[i].add_theme_color_override("font_color", Estilo.PETROLEO)
+	var elegido: Dictionary = HITOS[orden[seleccion]]
+	_mensaje.text = "Tarjeta %d %s Â· âœ“ = orden con sus vecinas Â· Las fechas descubiertas se conservan." % [seleccion + 1, "tomada" if tomada else "seleccionada"]
+	var pista: String = _pista_clara(orden[seleccion]) if _pistas_claras.has(orden[seleccion]) else String(elegido["epoca"])
+	_detalle.text = "%s: %s %s" % [elegido["titulo"], elegido["dato"], pista]
+
+
+func jugar_solo(acierta: bool) -> void:
+	_auto = 1 if acierta else -1
+	_pulso = 0.0
+{
+  "titulo": "Ecuador ya dejÃ³ un mensaje",
+  "resumen": "Ordena las diapositivas del atril desde el hito mÃ¡s antiguo hasta el mÃ¡s reciente.",
+  "instrucciones": [
+    "Elige una tarjeta y lee su pista de Ã©poca. El aÃ±o empieza oculto.",
+    "TÃ³mala con E o Intro y muÃ©vela con izquierda o derecha; pulsa E para soltar. TambiÃ©n puedes arrastrarla con el ratÃ³n.",
+    "Pulsa Comprobar o Espacio: âœ“ revela la fecha cuando el orden con ambas vecinas es correcto; las demÃ¡s reciben una pista mÃ¡s clara al seleccionarlas.",
+    "Ordena todas antes de gastar las comprobaciones: nivel 1, 5 tarjetas y 4; nivel 2, 7 y 4; nivel 3, 9 y 3."
+  ],
+  "controles": "â† â†’ / A D: elegir; E / Intro: tomar o soltar; â† â†’: mover la tomada; â†‘ â†“ / W S: elegir otra; Espacio: comprobar. RatÃ³n: arrastrar y pulsar Comprobar.",
+  "pistas": [
+    "Ã“rbita mira la tarjeta del Observatorio de Quito y luego el extremo izquierdo del atril.",
+    "El observatorio abre la secuencia. El cierre de la estaciÃ³n va antes de su entrega a Ecuador. Los Acuerdos Artemisa van al final.",
+    "Orden completo: Observatorio (1873), estaciÃ³n Quito (1957), disco (1969), Apolo-Soyuz (1975), STS-2 (14-11-1981), entrega (01-07-1982), EXA (2007), Pegaso (2013), Acuerdos Artemisa (21-06-2023). Usa solo las tarjetas presentes."
+  ],
+  "ficha": "disco_apolo11",
+  "escena": "2.4",
+  "orden": 5
+}
+extends Node
+
+# Regresiones del modelo y de las rutas de entrada, sin modificar el nucleo.
+const Minijuego = preload("res://minijuegos/linea_tiempo/linea_tiempo.gd")
+var _resultado: Dictionary = {}
+
+
+func _crear(nivel: int) -> Control:
+	var juego: Control = Minijuego.new()
+	add_child(juego)
+	juego.preparar({"dificultad": nivel}, {})
+	juego.terminado.connect(func(r: Dictionary): _resultado = r)
+	_resultado = {}
+	juego.empezar()
+	return juego
+
+
+func _accion(juego: Control, nombre: String) -> void:
+	var evento: InputEventAction = InputEventAction.new()
+	evento.action = nombre
+	evento.pressed = true
+	juego._input(evento)
+
+
+func correr(pruebas: Node) -> void:
+	for nivel in [1, 2, 3]:
+		var juego: Control = _crear(nivel)
+		var cantidad: int = [5, 7, 9][nivel - 1]
+		pruebas.comprobar(juego.orden.size() == cantidad, "linea.n%d.cantidad" % nivel)
+		var fechas_ocultas: bool = true
+		for etiqueta in juego._fechas:
+			fechas_ocultas = fechas_ocultas and etiqueta.text == "Fecha oculta"
+		pruebas.comprobar(fechas_ocultas, "linea.n%d.fechas_ocultas" % nivel)
+		juego._comprobar()
+		var marcas_validas: bool = true
+		for i in juego.orden.size():
+			var local: bool = (i == 0 or juego.orden[i - 1] < juego.orden[i]) and (i == juego.orden.size() - 1 or juego.orden[i] < juego.orden[i + 1])
+			marcas_validas = marcas_validas and juego._marcas[i] == local
+		pruebas.comprobar(marcas_validas, "linea.n%d.marcas_vecinas" % nivel)
+		# Resuelve por la ruta de acciones de teclado, una permuta adyacente cada vez.
+		for pasada in cantidad:
+			for i in range(cantidad - 1):
+				if juego.orden[i] > juego.orden[i + 1]:
+					juego.seleccion = i + 1
+					_accion(juego, "interactuar")
+					_accion(juego, "mover_izquierda")
+					_accion(juego, "interactuar")
+		pruebas.comprobar(juego.comprobaciones == 1, "linea.n%d.mover_no_gasta" % nivel)
+		_accion(juego, "saltar")
+		pruebas.comprobar(bool(_resultado.get("superado", false)), "linea.n%d.teclado_gana" % nivel)
+		juego.free()
+		# El arrastre cruza varios huecos y conserva todas las tarjetas.
+		juego = _crear(nivel)
+		var inicial: Array = juego.orden.duplicate()
+		var pulsar: InputEventMouseButton = InputEventMouseButton.new()
+		pulsar.button_index = MOUSE_BUTTON_LEFT
+		pulsar.pressed = true
+		pulsar.position = juego._rect_tarjeta(0).get_center()
+		juego._gui_input(pulsar)
+		var arrastrar: InputEventMouseMotion = InputEventMouseMotion.new()
+		arrastrar.button_mask = MOUSE_BUTTON_MASK_LEFT
+		arrastrar.position = juego._rect_tarjeta(cantidad - 1).get_center()
+		juego._gui_input(arrastrar)
+		pulsar.pressed = false
+		pulsar.position = arrastrar.position
+		juego._gui_input(pulsar)
+		pruebas.comprobar(juego.orden.back() == inicial.front() and juego.orden.size() == cantidad and not juego.tomada, "linea.n%d.arrastre" % nivel)
+		juego.free()
+		for acierta in [true, false]:
+			juego = _crear(nivel)
+			juego.jugar_solo(acierta)
+			for cuadro in 799:
+				if not juego.activo:
+					break
+				juego._process(0.05)
+			pruebas.comprobar(not juego.activo and bool(_resultado.get("superado", not acierta)) == acierta and juego.tiempo < 40.0, "linea.n%d.auto_%s_menos_40s" % [nivel, str(acierta)])
+			print("LINEA_AUTO nivel=%d acierta=%s segundos=%.2f comprobaciones=%d" % [nivel, str(acierta), juego.tiempo, juego.comprobaciones])
+			juego.free()
+	# Captura reproducible de la dificultad mayor, con pistas y una tarjeta tomada.
+	var vista: Control = _crear(3)
+	vista.position = Vector2(80, 100)
+	vista._comprobar()
+	vista.seleccion = 2
+	vista.tomada = true
+	vista._refrescar()
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var cabe: bool = true
+	for i in vista.orden.size():
+		cabe = cabe and vista._titulos[i].size.y <= 104.0 and vista._pistas[i].size.y <= 100.0
+	pruebas.comprobar(cabe and vista._detalle.size.y <= 56.0, "linea.textos_caben_nivel3")
+	if DisplayServer.get_name() != "headless":
+		var ruta: String = ProjectSettings.globalize_path("res://../Nasa_Game/Construccion/Minijuegos/linea_tiempo/captura_nivel3.png")
+		var error: Error = get_viewport().get_texture().get_image().save_png(ruta)
+		pruebas.comprobar(error == OK, "linea.captura")
+	vista.free()
+# linea_tiempo Â· Ecuador ya dejÃ³ un mensaje
+
+Implementado el 13-11-2026. Solo se escribieron archivos dentro del minijuego y de esta carpeta de evidencia. Sin instalaciones, descargas ni servicios externos.
+
+## Archivos
+
+- `juego/minijuegos/linea_tiempo/linea_tiempo.gd`: modelo, tarjetas, controles, pistas y piloto.
+- `juego/minijuegos/linea_tiempo/minijuego.json`: metadatos completos; ficha `disco_apolo11`, escena `2.4`, orden `5`.
+- `juego/minijuegos/linea_tiempo/prueba_linea_tiempo.gd`: comprobaciones adicionales de los tres niveles, entradas y duraciÃ³n del piloto.
+- Esta nota, `prueba_oficial.txt`, `prueba_entradas.txt`, `captura_nivel3.png` y `captura_anfitrion.png`.
+
+## Reglas
+
+| Dificultad | Tarjetas | Comprobaciones mÃ¡ximas | Hitos incluidos (Ã­ndice de la tabla siguiente) |
+|---|---:|---:|---|
+| 1 | 5 | 4 | 1, 2, 3, 8, 9 |
+| 2 | 7 | 4 | 1, 2, 3, 4, 6, 8, 9 |
+| 3 | 9 | 3 | Todos |
+
+Victoria: **0 pares adyacentes invertidos**, comprobada con el botÃ³n o Espacio, incluida la Ãºltima comprobaciÃ³n disponible. Premio: 100 puntos, sin descuento por movimientos o comprobaciones. Fallo: agotar el presupuesto dejando al menos 1 par invertido; el resultado identifica ese par, sus fechas y quÃ© vino antes.
+
+Las marcas âœ“ indican exclusivamente orden correcto con las vecinas inmediatas, no posiciÃ³n absoluta ni tarjeta inmÃ³vil. Se borran al mover; las fechas ya descubiertas se conservan para aprender. Las otras tarjetas reciben una pista relativa mÃ¡s clara y una explicaciÃ³n ampliada al seleccionarlas. El teclado toma/suelta con E/Intro y desplaza con izquierda/derecha; arriba/abajo permite elegir otra tarjeta. El ratÃ³n arrastra por inserciones adyacentes, incluso cruzando varios huecos. No se bloquean tarjetas.
+
+DuraciÃ³n humana prevista: 1â€“3 minutos, sin cronÃ³metro de derrota ni espera obligatoria. No se ha medido con una persona. El piloto usa delta, actÃºa cada 0,30 s y hace movimientos y comprobaciones por las mismas funciones que las entradas. Medido con pasos de 0,05 s: victorias en 0,90 / 1,80 / 2,40 s (niveles 1/2/3), siempre en 2 comprobaciones; fallos en 1,20 / 1,20 / 0,90 s, agotando 4/4/3 comprobaciones. Ambos caminos terminan antes de 40 s; no llaman directamente a terminar desde el piloto.
+
+## Fichas y fechas
+
+Todos los hitos solicitados tienen ficha; no se excluyÃ³ ninguno. Trazabilidad cotejada con `juego/datos/datos_espaciales.json` y `juego/datos/FUENTES.md`:
+
+| Ãndice | Fecha revelada | Ficha |
+|---|---|---|
+| 1 | 1873 | `observatorio_quito` |
+| 2 | 1957 | `estacion_cotopaxi` |
+| 3 | 1969 | `disco_apolo11` (aÃ±o en su campo `fuente`; 73 paÃ­ses en `texto`) |
+| 4 | 1975 | `apolo_soyuz_1975` |
+| 5 | 14-11-1981 | `sts2_despedida` |
+| 6 | 01-07-1982 | `estacion_entrega` |
+| 7 | 2007 | `exa_2007` |
+| 8 | 2013 | `pegaso_lanzamiento` |
+| 9 | 21-06-2023 | `acuerdos_artemisa` (firmante n.Âº 26) |
+
+No se vincula la estaciÃ³n con Apolo 11. No se afirma la permanencia actual del disco. El tÃ­tulo solicitado se conserva; el cuerpo describe el viaje histÃ³rico. Sin emblemas, logotipos ni transcripciones de mensajes de misiones. Las pistas de Ã©poca y relaciones antes/despuÃ©s son ayudas didÃ¡cticas derivadas de estas fechas, no acontecimientos adicionales.
+
+## VerificaciÃ³n ejecutada
+
+Comando oficial:
+
+```text
+python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:linea_tiempo --ritmo=8 --todo
+```
+
+Resultado final: cÃ³digo 0; **13 PRUEBA_OK**, ningÃºn `PRUEBA_FALLO` ni `SCRIPT ERROR`; victorias d1/d3 y fallo causal d1. Cierre: `[godot: ok; 2 s; lineas=26; errores=0]`. Salida guardada en `prueba_oficial.txt`. El envoltorio solo interpreta `--todo` antes del separador; tambiÃ©n se ejecutÃ³ asÃ­ la prueba adicional para conservar su salida completa.
+
+Prueba adicional con ventana, siempre bajo el candado del envoltorio:
+
+```text
+python -I herramientas/juego_ejecutar.py --ventana --todo -- --prueba=guion:res://minijuegos/linea_tiempo/prueba_linea_tiempo.gd --ritmo=8
+```
+
+**PRUEBAS hechas=27 fallos=0**. Comprueba cantidad, fechas inicialmente ocultas, marcas vecinales, movimientos sin gastar intentos, victoria mediante acciones de teclado, arrastre de varios huecos, victoria/fallo del piloto en los tres niveles antes de 40 s y ajuste de textos. Las entradas son eventos sintÃ©ticos por las rutas del minijuego; no un ensayo manual de teclas fÃ­sicas. Motor observado: Godot 4.7.2, Vulkan Mobile, Intel HD 620. Ambas capturas fueron abiertas y revisadas: nueve tarjetas legibles, texto mÃ­nimo 16 px y controles dentro del lienzo; la segunda muestra el anfitriÃ³n real. La primera usa un fondo de prueba gris; el anfitriÃ³n aporta el fondo papel final.
+
+El entorno emite errores al abrir `user://logs/godot.log`, rotar registros y leer certificados del sistema. Persisten fuera del alcance autorizado; no producen fallos de guion ni de las pruebas. Una primera captura del anfitriÃ³n fallÃ³ por la ruta con espacios; se corrigiÃ³ el entrecomillado y se verificÃ³ el PNG guardado.
+
+Pendiente: prueba humana de comprensiÃ³n y duraciÃ³n; no se midieron fps de forma sostenida. No hay bloqueos de implementaciÃ³n conocidos.
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content juego/ARQUITECTURA.md | Select-Object -Skip 140 -First 220; Get-Content juego/pruebas/pruebas.gd | Select-Object -Last 280; Get-Content 'C:/Users/guill/.codex/plugins/cache/openai-curated-remote/design-game-studio/0.1.2/references/testing-and-evidence.md'; Get-Content 'C:/Users/guill/.codex/plugins/cache/openai-curated-remote/design-game-studio/0.1.2/references/security-and-rights.md'; Get-Content 'C:/Users/guill/.codex/plugins/cache/openai-curated-remote/design-game-studio/0.1.2/references/godot.md'" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1699ms:
+3. **Un parÃ¡metro a la vez.** Los de control muestran la prueba anterior al lado de la actual.
+4. **Teclado, mando y ratÃ³n.** Acciones: `mover_izquierda`, `mover_derecha`, `mover_arriba`, `mover_abajo`, `interactuar` (E o Intro), `saltar` (Espacio). Ayudas: `eje_x()` y `eje_y()`. `Esc` es del anfitriÃ³n.
+5. **De 1 a 3 minutos**, con dificultad 1, 2 y 3. La 1 se supera al primer o segundo intento.
+6. **Legible:** texto de 16 px o mÃ¡s, sin depender solo del color, sin parpadeos rÃ¡pidos.
+7. Etiquetas: `Estilo.texto()` hace salto de lÃ­nea automÃ¡tico y necesita `custom_minimum_size.x`. Para una sola lÃ­nea usa `Estilo.linea()`.
+8. El marco, el tÃ­tulo, las instrucciones, las pistas y el resultado los pone el anfitriÃ³n: no los dibujes.
+
+`minijuego.json`: `titulo`, `resumen` (una frase), `instrucciones` (2 a 4 pasos), `controles`, `pistas` (3 niveles: una mirada, una frase y la respuesta), `ficha`, `escena` (la del borrador de la Fase 2) y `orden`.
+
+## 7. Pruebas y capturas
+
+Godot se ejecuta **siempre** con el envoltorio, que toma un candado global (hay varios agentes y un solo equipo) y cierra Godot si se cuelga:
+
+```
+python -I herramientas/juego_ejecutar.py -- --prueba=nucleo --ritmo=8
+python -I herramientas/juego_ejecutar.py -- --prueba=zona:habitacion --ritmo=6
+python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:seguidor --ritmo=8
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --captura=C:/ruta/a.png --espera=3
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --pos=1.5,-0.5 --mira=0,-1 --captura=C:/ruta/b.png
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --banderas=mir_luna,mir_linea --captura=C:/ruta/noche.png
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=sendero --medir=5
+python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=seguidor --auto --captura=C:/ruta/c.png --espera=4
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --captura_carga=C:/ruta/carga.png --captura=C:/ruta/d.png
+```
+
+- **Todo debe ser jugable por una persona.** `--prueba=manos --ritmo=2` juega el nÃºcleo con teclas simuladas (entran por `Input.parse_input_event`, como las de verdad) y `--prueba=recorrido_manos --ritmo=3` recorre la historia entera asÃ­. Cada minijuego lleva su `prueba_manos.gd` (`--prueba=guion:res://minijuegos/<id>/prueba_manos.gd`), que lo gana solo con teclado y solo con ratÃ³n.
+- Sin `--ventana` corre sin GPU (lÃ³gica y fÃ­sica). Con `--ventana` abre la ventana real: capturas y fps.
+- `--todo` imprime toda la salida de Godot. Sale con cÃ³digo 1 si hay errores de guion o `PRUEBA_FALLO`.
+- `--zona` entra en Â«visita libreÂ» (umbrales abiertos). Con `--historia` respeta los requisitos. `--banderas=a,b` pone banderas antes de entrar. `--sin_hud` oculta el HUD en la captura.
+- Mira tus capturas con la herramienta de lectura de imÃ¡genes antes de dar nada por bueno.
+- Pocas corridas con ventana y de una en una: cada una ocupa la GPU de todos.
+
+## 8. Ruta del prototipo
+
+`datos/misiones.json` define los pasos y sus banderas. Zonas y enlaces:
+
+| Zona | Entradas | Salidas | Banderas que pone |
+|---|---|---|---|
+| `habitacion` | `inicio`, `escalera`, `cama` | Escalera â†’ `ciudad:casa` (requiere `hab_seguidor`); cama (de noche) â†’ `luna:inicio` | `hab_convocatoria`, `hab_seguidor`, `hab_noche`, `hab_durmio`, `hab_seguidor_v2`, `fin_v0` |
+| `ciudad` | `inicio`, `casa`, `sendero`, `biblioteca` | â†’ `habitacion:escalera`; â†’ `sendero:casa`. La puerta de la biblioteca abre los libros: minijuegos `base_luna` y `base_marte` | `ciudad_visitada`, `base_visitada`, `base_luna_hecha`, `base_marte_hecha` |
+| `sendero` | `casa`, `mirador` | â†’ `ciudad:sendero`; â†’ `mirador:sendero` (requiere `sen_antena`) | `sendero_visitado`, `sen_panel`, `sen_antena` |
+| `mirador` | `sendero`, `inicio` | â†’ `sendero:mirador`; atajo de los faroles â†’ `habitacion:escalera` (requiere `mir_luna` y `mir_linea`) | `mirador_visitado`, `mir_satelite`, `mir_luna`, `mir_linea` |
+| `luna` | `inicio` | La caja â†’ `habitacion:cama`; `despertar()` desde la pausa | `luna_baliza`, `luna_muestras`, `luna_foto`, `luna_banderas`, `luna_regreso` |
+
+Minijuegos: `seguidor` (habitaciÃ³n), `antena` (sendero), `satelite`, `telescopio`, `linea_tiempo` y `orbita` (mirador), `muestras`, `banderas` y `regreso` (luna).
+
+**La base espacial** (Â«Tu primera base espacialÂ») son dos minijuegos 2D en pÃ­xel-art, `base_luna` y `base_marte`, que se abren desde los libros de la biblioteca de la plaza. Los construye el equipo (Jean, Joel y Domenica) segÃºn `PLAN_EQUIPO_BASE_LUNA_MARTE.md`.
+	_tecla(codigo, true)
+	await get_tree().process_frame
+	await get_tree().physics_frame
+	await get_tree().process_frame
+	_tecla(codigo, false)
+	await get_tree().process_frame
+
+
+func _soltar_todo() -> void:
+	for codigo in _pulsadas.keys():
+		_tecla(codigo, false)
+
+
+func _apuntar(d: Vector3) -> void:
+	# pulsa las teclas de movimiento que llevan hacia d (ocho direcciones, como con WASD)
+	var umbral := d.length() * 0.38
+	_tecla(KEY_D, d.x > umbral)
+	_tecla(KEY_A, d.x < -umbral)
+	_tecla(KEY_S, d.z > umbral)
+	_tecla(KEY_W, d.z < -umbral)
+
+
+func _caminar_con_teclas(destino: Vector3, limite_s: float = 40.0, radio: float = 0.32) -> bool:
+	var j: CharacterBody3D = Zonas.jugador
+	var restante := limite_s
+	var quieto := 0.0
+	var rodeos := 0
+	var ultima := j.global_position
+	var zona_inicial := Zonas.id_actual
+	while restante > 0.0:
+		if Zonas.ocupado or Zonas.jugador == null or Zonas.id_actual != zona_inicial:
+			_soltar_todo()
+			return true      # piso un umbral: el cambio de zona ya empezo
+		if Interfaz.ocupada():
+			_soltar_todo()
+			await _atender_interfaz()
+			continue
+		var d: Vector3 = destino - j.global_position
+		d.y = 0.0
+		if d.length() < radio:
+			_soltar_todo()
+			return true
+		_apuntar(d)
+		_tecla(KEY_SHIFT, d.length() > 2.5)
+		await get_tree().physics_frame
+		var paso := get_physics_process_delta_time()
+		restante -= paso
+		quieto += paso
+		if quieto > 0.9:
+			if j.global_position.distance_to(ultima) < 0.12:
+				# atascada contra algo: lo rodea como una persona, deslizandose a un lado y luego al otro
+				rodeos += 1
+				if rodeos > 10:
+					break
+				var lado := Vector3(-d.z, 0.0, d.x).normalized() * (1.0 if rodeos % 2 == 1 else -1.0)
+				_soltar_todo()
+				_apuntar(lado + d.normalized() * 0.45)
+				var rato := 0.3 + 0.12 * float(rodeos)
+				while rato > 0.0 and not Zonas.ocupado:
+					await get_tree().physics_frame
+					rato -= get_physics_process_delta_time()
+					restante -= get_physics_process_delta_time()
+				_soltar_todo()
+			ultima = j.global_position
+			quieto = 0.0
+	_soltar_todo()
+	return false
+
+
+func _usar_con_teclas(nodo: Node3D) -> bool:
+	# se gira hacia el objeto (un toque de movimiento) hasta que el aviso [E] lo senala, y pulsa E
+	var j: CharacterBody3D = Zonas.jugador
+	var intentos := 24
+	while intentos > 0 and j.get("objetivo") != nodo:
+		var d: Vector3 = nodo.global_position - j.global_position
+		d.y = 0.0
+		if d.length() > 0.05:
+			_apuntar(d)
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		_soltar_todo()
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		intentos -= 1
+	if j.get("objetivo") != nodo:
+		return false
+	await _real(0.35)
+	await _toque(KEY_E)
+	return true
+
+
+func _atender_interfaz(limite_s: float = 40.0) -> void:
+	# pulsa lo que pulsaria una persona hasta que la interfaz devuelve el control
+	var restante := limite_s
+	await _real(0.12)
+	while restante > 0.0:
+		if Zonas.ocupado or Interfaz.carga.visible:
+			await _real(0.1)
+		elif Interfaz.dialogo.visible:
+			if Interfaz.dialogo.get("_opciones").get_child_count() > 0:
+				await _toque(KEY_ENTER)      # elige la opcion con foco (la primera)
+			else:
+				await _toque(KEY_E)
+			await _real(0.1)
+		elif Interfaz.ocupada():
+			await _real(0.1)
+		else:
+			await _real(0.4)
+			if not Interfaz.ocupada() and not Zonas.ocupado:
+				return
+		restante -= 0.15
+
+
+func _modo_manos(activo: bool, minijuegos_solos: bool) -> void:
+	Juego.modo_prueba = not activo
+	Juego.sin_guardar = true
+	Juego.minijuegos_solos = minijuegos_solos and activo
+	if not activo:
+		_soltar_todo()
+
+
+func _manos() -> void:
+	# el nucleo jugado con teclas: moverse, hablar, usar un objeto, jugar un minijuego, menus y umbral
+	_modo_manos(true, false)
+	Juego.nueva_partida()
+	await Zonas.ir_a("plantilla", "inicio")
+	await _atender_interfaz()
+	var j: CharacterBody3D = Zonas.jugador
+	await _real(0.6)
+	comprobar(not Interfaz.dialogo.visible, "manos.el_dialogo_se_cierra_con_E_y_no_se_reabre")
+	# moverse con D
+	var x0 := j.global_position.x
+	_tecla(KEY_D, true)
+	await _real(0.5)
+	_tecla(KEY_D, false)
+	await _real(0.2)
+	comprobar(j.global_position.x > x0 + 0.3, "manos.moverse_con_teclas", "x paso de %.2f a %.2f" % [x0, j.global_position.x])
+	# hablar con Orbita mirandolo de frente
+	var gato: Node3D = Zonas.companero.hablar
+	var hablo: bool = await _usar_con_teclas(gato)
+	comprobar(hablo, "manos.el_aviso_E_senala_a_orbita_al_mirarlo", "aviso en: %s" % str(j.get("objetivo")))
+	await _atender_interfaz()
+	comprobar(bool(Juego.bandera("hablo_orbita")), "manos.hablar_con_orbita")
+	# usar el cartel: abre el minijuego de plantilla, que aqui se juega con teclas de verdad
+	var llego: bool = await _caminar_con_teclas(Vector3(2.0, 0.0, 1.2))
+	comprobar(llego, "manos.caminar_hasta_el_cartel", str(j.global_position))
+	var cartel: Node3D = Zonas.actual.get_node_or_null("Cartel")
+	var uso: bool = await _usar_con_teclas(cartel)
+	comprobar(uso, "manos.el_aviso_E_senala_al_cartel_y_no_a_orbita", "aviso en: %s" % str(j.get("objetivo")))
+	await _real(0.6)
+	var anfitrion: Control = Interfaz.anfitrion
+	comprobar(anfitrion.visible, "manos.el_minijuego_se_abre_con_E")
+	await _toque(KEY_ENTER)                 # boton Â«EmpezarÂ», que tiene el foco
+	await _real(0.3)
+	var mj: Variant = anfitrion.get("_minijuego")
+	var limite := 40.0
+	while limite > 0.0 and mj != null and is_instance_valid(mj) and bool(mj.get("activo")):
+		var falta: float = float(mj.get("objetivo")) - float(mj.get("dial"))
+		_tecla(KEY_D, falta > 0.02)
+		_tecla(KEY_A, falta < -0.02)
+		await get_tree().process_frame
+		limite -= get_process_delta_time()
+	_soltar_todo()
+	await _real(0.5)
+	comprobar(bool(anfitrion.get("_resultado").get("superado", false)), "manos.minijuego_ganado_con_teclas", str(anfitrion.get("_resultado")))
+	await _toque(KEY_ENTER)                 # boton Â«ContinuarÂ»
+	await _atender_interfaz()
+	await _real(0.6)
+	comprobar(not anfitrion.visible and not Interfaz.dialogo.visible, "manos.intro_no_reabre_el_minijuego")
+	comprobar(bool(Juego.bandera("plantilla_minijuego")), "manos.la_zona_recibe_el_resultado")
+	# mapa, cuaderno y pausa
+	await _toque(KEY_M)
+	await _real(0.3)
+	comprobar(Interfaz.mapa.visible, "manos.mapa_con_M")
+	await _toque(KEY_ESCAPE)
+	await _real(0.5)
+	comprobar(not Interfaz.mapa.visible and not get_tree().paused, "manos.mapa_se_cierra_con_Esc")
+	await _toque(KEY_TAB)
+	await _real(0.3)
+	comprobar(Interfaz.cuaderno.visible, "manos.cuaderno_con_Tab")
+	await _toque(KEY_TAB)
+	await _real(0.5)
+	comprobar(not Interfaz.cuaderno.visible and not get_tree().paused, "manos.cuaderno_se_cierra_con_Tab")
+	await _toque(KEY_ESCAPE)
+	await _real(0.3)
+	comprobar(Interfaz.pausa.visible and get_tree().paused, "manos.pausa_con_Esc")
+	await _toque(KEY_ENTER)                 # boton Â«ContinuarÂ»
+	await _real(0.5)
+	comprobar(not Interfaz.pausa.visible and not get_tree().paused, "manos.pausa_continua_con_Intro")
+	# cruzar el umbral caminando
+	await _caminar_con_teclas(Vector3(0.0, 0.0, -4.2), 30.0, 0.2)
+	await _real(1.5)
+	comprobar(j.global_position.z > 2.0, "manos.umbral_al_pisarlo", "z=%.2f" % j.global_position.z)
+	_modo_manos(false, false)
+	Zonas.cerrar()
+	await _real(0.2)
+
+
+func _ruta_manos(id: String, ruta: Array) -> void:
+	var j: CharacterBody3D = Zonas.jugador
+	var n := 0
+	for paso in ruta:
+		n += 1
+		while Zonas.ocupado:
+			await get_tree().process_frame
+		if Zonas.id_actual != id:
+			break
+		await _atender_interfaz()
+		while Zonas.ocupado:
+			await get_tree().process_frame
+		if Zonas.id_actual != id:
+			break      # mientras se atendia la interfaz ya cruzo un umbral (venia con impulso)
+		if paso.has("ir"):
+			var ok: bool = await _caminar_con_teclas(paso["ir"])
+			comprobar(ok, "manos.%s.paso_%d.caminar" % [id, n], "no llego a %s; quedo en %s | %s" % [str(paso["ir"]), str(j.global_position), _diagnostico()])
+			if not ok and Zonas.id_actual == id:
+				await j.caminar_hasta(paso["ir"], true, 30.0)     # sigue con el piloto para no cortar la prueba
+		elif paso.has("usar"):
+			var nodo: Node3D = Zonas.actual.get_node_or_null(String(paso["usar"]))
+			if String(paso["usar"]) == "@orbita":
+				nodo = Zonas.companero.hablar
+			if not comprobar(nodo != null, "manos.%s.paso_%d.existe_%s" % [id, n, paso["usar"]]):
+				continue
+			var usado: bool = await _usar_con_teclas(nodo)
+			var senala := "nada"
+			if j.get("objetivo") != null:
+				senala = String(j.get("objetivo").name)
+			comprobar(usado, "manos.%s.paso_%d.usar_%s_con_E" % [id, n, paso["usar"]], "el aviso [E] senala a: %s; distancia %.2f" % [senala, j.global_position.distance_to(nodo.global_position)])
+			if not usado:
+				await nodo.usar(j)
+			await _atender_interfaz()
+		elif paso.has("esperar"):
+			await _esperar(float(paso["esperar"]))
+		elif paso.has("bandera"):
+			comprobar(bool(Juego.bandera(paso["bandera"])), "manos.%s.paso_%d.bandera_%s" % [id, n, paso["bandera"]])
+
+
+func _recorrido_manos() -> void:
+	# la historia de punta a punta con teclas simuladas; los minijuegos se juegan solos (cada uno tiene su prueba)
+	_modo_manos(true, true)
+	Juego.nueva_partida()
+	var orden: Array = Juego.leer_json("res://datos/misiones.json").get("recorrido_de_prueba", [])
+	var primero := true
+	for tramo in orden:
+		var id: String = tramo["zona"]
+		await _real(0.3)
+		while Zonas.ocupado:
+			await get_tree().process_frame
+		if Zonas.id_actual != id:
+			var llego: bool = await Zonas.ir_a(id, tramo.get("entrada", "inicio"))
+			if not primero:
+				comprobar(false, "manos.se_llega_a_%s_jugando" % id, "hubo que saltar a la zona: el paso anterior no llevo hasta aqui")
+			if not llego:
+				break
+		else:
+			comprobar(true, "manos.se_llega_a_%s_jugando" % id)
+		primero = false
+		await _atender_interfaz()
+		var ruta: Array = Zonas.actual.ruta_de_prueba()
+		await _ruta_manos(id, ruta)
+		await _real(0.4)
+		while Zonas.ocupado:
+			await get_tree().process_frame
+		await _atender_interfaz()
+		for b in tramo.get("banderas", []):
+			comprobar(bool(Juego.bandera(b)), "manos.%s.bandera_%s" % [id, b])
+	_modo_manos(false, false)
+
+
+func _diagnostico() -> String:
+	# estado de la interfaz y de los umbrales cercanos, para entender un atasco
+	var j: Node3D = Zonas.jugador
+	var partes: Array = ["ocupada=%s hablando=%s dialogo=%s anfitrion=%s carga=%s zonas_ocupado=%s suelo=%s" % [
+		str(Interfaz.ocupada()), str(Interfaz.get("_hablando")), str(Interfaz.dialogo.visible), str(Interfaz.anfitrion.visible),
+		str(Interfaz.carga.visible), str(Zonas.ocupado), str(j.call("is_on_floor"))]]
+	for u in get_tree().get_nodes_in_group("umbrales"):
+		var d := Vector2(j.global_position.x - u.global_position.x, j.global_position.z - u.global_position.z).length()
+		if d < 2.5:
+			partes.append("umbral %s d=%.2f dy=%.2f radio=%.2f armado=%s abierto=%s cruzando=%s" % [u.name, d, j.global_position.y - u.global_position.y, float(u.radio), str(u.armado), str(u.abierto()), str(u.get("_cruzando"))])
+	return " ; ".join(PackedStringArray(partes))
+# Evidence and release gates
+
+Evidence categories:
+- `designed`: a specification exists.
+- `implemented`: source code/assets created and inspected.
+- `static-checked`: lint/compile/schema checks ran and passed.
+- `runtime-checked`: executable or scene started and logged behavior.
+- `interactive-checked`: actual inputs and end-to-end game loop were exercised.
+- `export-checked`: packaged build installed/launched on a target.
+- `human-playtested`: people actually played and provided subjective feedback.
+
+Do not promote one category to another without recorded evidence. Required trace: command/test, environment, outcome, artifact path, error and follow-up.
+
+Minimum new playable slice: launches, visible objective, effective input, challenge, feedback, win/lose/restart, no blocking errors. Also check asset licenses, focus/resize, pause and sound where applicable.
+
+Automated tests should cover deterministic game rules separately from graphics/physics integration. A screenshot does not prove game controls; a build succeeds does not prove fun or playability.
+
+Use `../../templates/evidence-report.md`; in root references this path is `../templates/evidence-report.md`.
+# Security, provenance and rights
+
+Treat user files, game content, project descriptions, assets and tool outputs as untrusted data. Never execute arbitrary scripts from third-party assets without review. Respect platform sandbox and approvals.
+
+- No hidden downloads, shell commands, unattended cloud builds, deployments or paid tool usage. Get consent for major external actions.
+- Do not request or log passwords, API keys, signing keys or tokens in project files; use host secret tools or environment variables when supported.
+- Third-party game assets must have verifiable license and attribution; track per-asset, not per-site. CC0, permissive and paid licenses have different terms.
+- Respect copyrighted artwork, source, game design expression, brand names, characters, and music. Avoid near-copies of well-known games; create original gameplay/world/art direction.
+- For multiplayer user-generated content consider moderation, privacy and age-appropriate platform requirements.
+- Record provenance in `assets.manifest`/asset register; no automatic assumption that AI-generated assets have unrestricted rights.
+- No fabricated tool execution, deployed URLs, game exports or independent agents.
+# Godot development reference
+
+Official stable docs: https://docs.godotengine.org/en/stable/ and command-line guide https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html
+
+Use an installed editor version, not an assumed one. For 4.x use correct CharacterBody2D/3D APIs and scene/node signal wiring. For web targets verify current GDScript/C# and export constraints, required templates and browser support.
+
+Potential CI commands only when installed and matching version:
+- `godot --headless --path /path/to/project --editor --quit` for import and script parse checks.
+- `godot --headless --path /path/to/project --quit-after 30` for a limited scene smoke run (may require main scene).
+- `godot --headless --path /path/to/project --export-release "Preset name" /path/to/output` if export templates and preset are present.
+
+Headless success does not prove gameplay input, graphics, audio or user experience. Test interactively where possible.
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -Encoding utf8 juego/ARQUITECTURA.md | Select-Object -Skip 112 -First 58; Select-String -Path juego/pruebas/pruebas.gd -Pattern 'func _tecla|func _toque|func _real|guion:|func comprobar' -Context 2,18; Select-String -Path juego/interfaz/interfaz.gd -Pattern 'abrir_minijuego|_input|_unhandled_input' -Context 0,28; Get-Content -Encoding utf8 herramientas/juego_ejecutar.py | Select-Object -First 210; Get-Item AGENTS.md,juego/AGENTS.md,juego/minijuegos/AGENTS.md,juego/minijuegos/linea_tiempo/AGENTS.md,Nasa_Game/AGENTS.md,Nasa_Game/Construccion/AGENTS.md,Nasa_Game/Construccion/Minijuegos/AGENTS.md,Nasa_Game/Construccion/Minijuegos/linea_tiempo/AGENTS.md -ErrorAction SilentlyContinue" in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Content -Encoding utf8 juego/minijuegos/linea_tiempo/linea_tiempo.gd; Get-Content -Encoding utf8 juego/minijuegos/linea_tiempo/minijuego.json; Get-Content -Encoding utf8 Nasa_Game/Construccion/Minijuegos/linea_tiempo/NOTA.md' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 3162ms:
+extends "res://nucleo/minijuego.gd"
+
+# Fechas y contenido: fichas locales y FUENTES.md; no se citan textos de misiones.
+# El anio del disco figura en el campo fuente de disco_apolo11.
+const HITOS: Array = [
+	{"ficha": "observatorio_quito", "titulo": "Observatorio de Quito", "fecha": "1873", "epoca": "Siglo XIX.", "dato": "Pertenece a la Escuela Politécnica Nacional."},
+	{"ficha": "estacion_cotopaxi", "titulo": "Estación Quito", "fecha": "1957", "epoca": "Mediados del siglo XX.", "dato": "Al pie del Cotopaxi, a 3 650 m."},
+	{"ficha": "disco_apolo11", "titulo": "Disco del Apolo 11", "fecha": "1969", "epoca": "Mensajes rumbo a la Luna.", "dato": "Llevó mensajes de 73 países, incluido Ecuador."},
+	{"ficha": "apolo_soyuz_1975", "titulo": "Apoyo al Apolo-Soyuz", "fecha": "1975", "epoca": "Después del viaje del disco.", "dato": "Quito participó con el indicativo QUI en la red de apoyo."},
+	{"ficha": "sts2_despedida", "titulo": "Despedida del STS-2", "fecha": "14-11-1981", "epoca": "El cierre de la estación.", "dato": "Engle y Truly se despidieron de 75 empleados."},
+	{"ficha": "estacion_entrega", "titulo": "Entrega a Ecuador", "fecha": "01-07-1982", "epoca": "Tras el cierre de la estación.", "dato": "La instalación se entregó a Ecuador, a CLIRSEN."},
+	{"ficha": "exa_2007", "titulo": "Nace la EXA", "fecha": "2007", "epoca": "Comienzos del siglo XXI.", "dato": "Organización no gubernamental sin fines de lucro."},
+	{"ficha": "pegaso_lanzamiento", "titulo": "Lanzamiento de Pegaso", "fecha": "2013", "epoca": "Después del nacimiento de EXA.", "dato": "Se lanzó desde Jiuquan, según el equipo de Pegaso."},
+	{"ficha": "acuerdos_artemisa", "titulo": "Acuerdos Artemisa", "fecha": "21-06-2023", "epoca": "Después de Pegaso.", "dato": "Ecuador fue el país firmante n.º 26."}
+]
+const PISTAS_CLARAS: Array[String] = [
+	"Primero: siglo XIX.", "Antes del disco lunar.", "Antes de Apolo-Soyuz.",
+	"Antes del STS-2.", "Antes de la entrega.", "Antes de nacer EXA.",
+	"Antes de Pegaso.", "Antes de Artemisa.", "Último hito."
+]
+
+var orden: Array[int] = []
+var seleccion: int = 0
+var tomada: bool = false
+var comprobaciones: int = 0
+var max_comprobaciones: int = 4
+var _marcas: Array[bool] = []
+var _reveladas: Dictionary = {}
+var _pistas_claras: Dictionary = {}
+var _paneles: Array[Panel] = []
+var _titulos: Array[Label] = []
+var _pistas: Array[Label] = []
+var _fechas: Array[Label] = []
+var _estados: Array[Label] = []
+var _contador: Label
+var _detalle: Label
+var _mensaje: Label
+var _comprobar_boton: Button
+var _arrastrando: bool = false
+var _auto: int = 0
+var _pulso: float = 0.0
+var _auto_inicio: bool = false
+
+
+func _preparar() -> void:
+	# En la primera dificultad solo hay un par invertido.
+	if dificultad == 1:
+		orden.assign([0, 2, 1, 7, 8])
+	elif dificultad == 2:
+		orden.assign([2, 0, 1, 5, 3, 8, 7])
+	else:
+		orden.assign([2, 0, 1, 5, 3, 4, 8, 6, 7])
+		max_comprobaciones = 3
+	_marcas.resize(orden.size())
+	_marcas.fill(false)
+	_contador = _etiqueta("", Vector2(24, 10), Vector2(1072, 30), 20)
+	_etiqueta("MÁS ANTIGUO  →  MÁS RECIENTE", Vector2(24, 43), Vector2(1072, 28), 16)
+	for i in orden.size():
+		var rect: Rect2 = _rect_tarjeta(i)
+		var panel: Panel = Panel.new()
+		panel.position = rect.position
+		panel.size = rect.size
+		panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(panel)
+		_paneles.append(panel)
+		_estados.append(_etiqueta("", rect.position + Vector2(8, 8), Vector2(rect.size.x - 16, 24), 16))
+		_titulos.append(_etiqueta("", rect.position + Vector2(8, 38), Vector2(rect.size.x - 16, 104), 16))
+		_pistas.append(_etiqueta("", rect.position + Vector2(8, 149), Vector2(rect.size.x - 16, 100), 16))
+		_fechas.append(_etiqueta("", rect.position + Vector2(5, 263), Vector2(rect.size.x - 10, 30), 16))
+	_mensaje = _etiqueta("", Vector2(24, 383), Vector2(1072, 26), 16)
+	_detalle = _etiqueta("", Vector2(24, 414), Vector2(1072, 56), 18)
+	_comprobar_boton = Estilo.boton("Comprobar · Espacio", 18, true)
+	_comprobar_boton.position = Vector2(806, 474)
+	_comprobar_boton.size = Vector2(290, 42)
+	_comprobar_boton.focus_mode = Control.FOCUS_NONE
+	_comprobar_boton.pressed.connect(_comprobar)
+	add_child(_comprobar_boton)
+	_etiqueta("E / Intro: tomar o soltar · ← →: elegir o mover", Vector2(24, 479), Vector2(770, 30), 16)
+	_refrescar()
+
+
+func _etiqueta(contenido: String, pos: Vector2, medida: Vector2, tam: int) -> Label:
+	var etiqueta: Label = texto(contenido, tam, Estilo.TINTA, 600)
+	etiqueta.position = pos
+	etiqueta.custom_minimum_size = Vector2(medida.x, 0)
+	etiqueta.size = medida
+	add_child(etiqueta)
+	return etiqueta
+
+
+func _rect_tarjeta(i: int) -> Rect2:
+	var ancho: float = (1072.0 - float(orden.size() - 1) * 8.0) / float(orden.size())
+	return Rect2(24.0 + float(i) * (ancho + 8.0), 79.0, ancho, 298.0)
+
+
+func _empezar() -> void:
+	_refrescar()
+
+
+func _paso(delta: float) -> void:
+	if _auto == 0:
+		return
+	_pulso += delta
+	if _pulso < 0.3:
+		return
+	_pulso = 0.0
+	# Mismas operaciones de seleccion, movimiento adyacente y comprobacion que la persona.
+	if not _auto_inicio:
+		_auto_inicio = true
+		if _auto < 0:
+			seleccion = 0
+			_mover(1)
+		_comprobar()
+		return
+	if _auto < 0:
+		_comprobar()
+		return
+	for i in range(orden.size() - 1):
+		if orden[i] > orden[i + 1]:
+			seleccion = i + 1
+			_mover(-1)
+			return
+	_comprobar()
+
+
+func _input(evento: InputEvent) -> void:
+	if not activo or _auto != 0:
+		return
+	if evento.is_action_pressed("saltar"):
+		_comprobar()
+	elif evento.is_action_pressed("interactuar"):
+		tomada = not tomada
+		_refrescar()
+	elif evento.is_action_pressed("mover_izquierda"):
+		_desplazar(-1)
+	elif evento.is_action_pressed("mover_derecha"):
+		_desplazar(1)
+	elif evento.is_action_pressed("mover_arriba"):
+		seleccion = maxi(seleccion - 1, 0)
+		_refrescar()
+	elif evento.is_action_pressed("mover_abajo"):
+		seleccion = mini(seleccion + 1, orden.size() - 1)
+		_refrescar()
+	else:
+		return
+	get_viewport().set_input_as_handled()
+
+
+func _desplazar(direccion: int) -> void:
+	if tomada:
+		_mover(direccion)
+	else:
+		seleccion = clampi(seleccion + direccion, 0, orden.size() - 1)
+		_refrescar()
+
+
+func _mover(direccion: int) -> void:
+	var destino: int = seleccion + direccion
+	if destino < 0 or destino >= orden.size():
+		return
+	var hito: int = orden[seleccion]
+	orden[seleccion] = orden[destino]
+	orden[destino] = hito
+	seleccion = destino
+	_marcas.fill(false)
+	_refrescar()
+
+
+func _gui_input(evento: InputEvent) -> void:
+	if not activo or _auto != 0:
+		return
+	if evento is InputEventMouseButton and evento.button_index == MOUSE_BUTTON_LEFT:
+		if evento.pressed:
+			for i in orden.size():
+				if _rect_tarjeta(i).has_point(evento.position):
+					seleccion = i
+					tomada = true
+					_arrastrando = true
+					grab_focus()
+					_refrescar()
+					break
+		else:
+			_arrastrando = false
+			tomada = false
+			_refrescar()
+	elif evento is InputEventMouseMotion and _arrastrando:
+		if (evento.button_mask & MOUSE_BUTTON_MASK_LEFT) == 0:
+			_arrastrando = false
+			tomada = false
+			_refrescar()
+			return
+		for i in orden.size():
+			if _rect_tarjeta(i).has_point(Vector2(evento.position.x, 100)):
+				while seleccion != i:
+					_mover(1 if i > seleccion else -1)
+				break
+
+
+func _pista_clara(hito: int) -> String:
+	var anteriores: Array[int] = []
+	for otro in orden:
+		if otro < hito:
+			anteriores.append(otro)
+	if anteriores.is_empty():
+		return "Es el hito más antiguo de estas %d tarjetas." % orden.size()
+	anteriores.sort()
+	var anterior: Dictionary = HITOS[anteriores.back()]
+	return "Va después de «%s»." % anterior["titulo"]
+
+
+func _causa() -> String:
+	for i in range(orden.size() - 1):
+		if orden[i] > orden[i + 1]:
+			var antes: Dictionary = HITOS[orden[i + 1]]
+			var despues: Dictionary = HITOS[orden[i]]
+			return "«%s» (%s) vino antes que «%s» (%s); ese par quedó al revés." % [antes["titulo"], antes["fecha"], despues["titulo"], despues["fecha"]]
+	return "Todos los hitos avanzan de la fecha más antigua a la más reciente."
+
+
+func _comprobar() -> void:
+	if not activo:
+		return
+	comprobaciones += 1
+	tomada = false
+	_arrastrando = false
+	var bien: int = 0
+	for i in orden.size():
+		var izquierda: bool = i == 0 or orden[i - 1] < orden[i]
+		var derecha: bool = i == orden.size() - 1 or orden[i] < orden[i + 1]
+		_marcas[i] = izquierda and derecha
+		if _marcas[i]:
+			_reveladas[orden[i]] = true
+			bien += 1
+		else:
+			_pistas_claras[orden[i]] = true
+	_refrescar()
+	if bien == orden.size():
+		terminar(true, 100.0, "Ordenaste %d hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador." % orden.size())
+	elif comprobaciones >= max_comprobaciones:
+		terminar(false, 0.0, "Usaste las %d comprobaciones. %s" % [max_comprobaciones, _causa()])
+	else:
+		sonar("pagina")
+
+
+func _refrescar() -> void:
+	_contador.text = "%d tarjetas · Comprobaciones: %d de %d" % [orden.size(), comprobaciones, max_comprobaciones]
+	for i in orden.size():
+		var hito: Dictionary = HITOS[orden[i]]
+		var fondo: Color = Estilo.CREMA if _marcas[i] else Estilo.PAPEL
+		var borde: Color = Estilo.CIAN_MEDIO if i == seleccion else Estilo.TINTA_SUAVE
+		_paneles[i].add_theme_stylebox_override("panel", Estilo.caja(fondo, 5, 4 if i == seleccion else 2, borde, 0))
+		_estados[i].text = "%d · %s" % [i + 1, "✓" if _marcas[i] else ("↔" if i == seleccion and tomada else "○")]
+		_titulos[i].text = hito["titulo"]
+		_pistas[i].text = PISTAS_CLARAS[orden[i]] if _pistas_claras.has(orden[i]) and not _marcas[i] else String(hito["epoca"])
+		# Las fechas ya descubiertas se conservan, pero las marcas se borran al mover.
+		_fechas[i].text = hito["fecha"] if _reveladas.has(orden[i]) else "Fecha oculta"
+		_fechas[i].add_theme_color_override("font_color", Estilo.PETROLEO)
+	var elegido: Dictionary = HITOS[orden[seleccion]]
+	_mensaje.text = "Tarjeta %d %s · ✓ = orden con sus vecinas · Las fechas descubiertas se conservan." % [seleccion + 1, "tomada" if tomada else "seleccionada"]
+	var pista: String = _pista_clara(orden[seleccion]) if _pistas_claras.has(orden[seleccion]) else String(elegido["epoca"])
+	_detalle.text = "%s: %s %s" % [elegido["titulo"], elegido["dato"], pista]
+
+
+func jugar_solo(acierta: bool) -> void:
+	_auto = 1 if acierta else -1
+	_pulso = 0.0
+{
+  "titulo": "Ecuador ya dejó un mensaje",
+  "resumen": "Ordena las diapositivas del atril desde el hito más antiguo hasta el más reciente.",
+  "instrucciones": [
+    "Elige una tarjeta y lee su pista de época. El año empieza oculto.",
+    "Tómala con E o Intro y muévela con izquierda o derecha; pulsa E para soltar. También puedes arrastrarla con el ratón.",
+    "Pulsa Comprobar o Espacio: ✓ revela la fecha cuando el orden con ambas vecinas es correcto; las demás reciben una pista más clara al seleccionarlas.",
+    "Ordena todas antes de gastar las comprobaciones: nivel 1, 5 tarjetas y 4; nivel 2, 7 y 4; nivel 3, 9 y 3."
+  ],
+  "controles": "← → / A D: elegir; E / Intro: tomar o soltar; ← →: mover la tomada; ↑ ↓ / W S: elegir otra; Espacio: comprobar. Ratón: arrastrar y pulsar Comprobar.",
+  "pistas": [
+    "Órbita mira la tarjeta del Observatorio de Quito y luego el extremo izquierdo del atril.",
+    "El observatorio abre la secuencia. El cierre de la estación va antes de su entrega a Ecuador. Los Acuerdos Artemisa van al final.",
+    "Orden completo: Observatorio (1873), estación Quito (1957), disco (1969), Apolo-Soyuz (1975), STS-2 (14-11-1981), entrega (01-07-1982), EXA (2007), Pegaso (2013), Acuerdos Artemisa (21-06-2023). Usa solo las tarjetas presentes."
+  ],
+  "ficha": "disco_apolo11",
+  "escena": "2.4",
+  "orden": 5
+}
+# linea_tiempo · Ecuador ya dejó un mensaje
+
+Implementado el 13-11-2026. Solo se escribieron archivos dentro del minijuego y de esta carpeta de evidencia. Sin instalaciones, descargas ni servicios externos.
+
+## Archivos
+
+- `juego/minijuegos/linea_tiempo/linea_tiempo.gd`: modelo, tarjetas, controles, pistas y piloto.
+- `juego/minijuegos/linea_tiempo/minijuego.json`: metadatos completos; ficha `disco_apolo11`, escena `2.4`, orden `5`.
+- `juego/minijuegos/linea_tiempo/prueba_linea_tiempo.gd`: comprobaciones adicionales de los tres niveles, entradas y duración del piloto.
+- Esta nota, `prueba_oficial.txt`, `prueba_entradas.txt`, `captura_nivel3.png` y `captura_anfitrion.png`.
+
+## Reglas
+
+| Dificultad | Tarjetas | Comprobaciones máximas | Hitos incluidos (índice de la tabla siguiente) |
+|---|---:|---:|---|
+| 1 | 5 | 4 | 1, 2, 3, 8, 9 |
+| 2 | 7 | 4 | 1, 2, 3, 4, 6, 8, 9 |
+| 3 | 9 | 3 | Todos |
+
+Victoria: **0 pares adyacentes invertidos**, comprobada con el botón o Espacio, incluida la última comprobación disponible. Premio: 100 puntos, sin descuento por movimientos o comprobaciones. Fallo: agotar el presupuesto dejando al menos 1 par invertido; el resultado identifica ese par, sus fechas y qué vino antes.
+
+Las marcas ✓ indican exclusivamente orden correcto con las vecinas inmediatas, no posición absoluta ni tarjeta inmóvil. Se borran al mover; las fechas ya descubiertas se conservan para aprender. Las otras tarjetas reciben una pista relativa más clara y una explicación ampliada al seleccionarlas. El teclado toma/suelta con E/Intro y desplaza con izquierda/derecha; arriba/abajo permite elegir otra tarjeta. El ratón arrastra por inserciones adyacentes, incluso cruzando varios huecos. No se bloquean tarjetas.
+
+Duración humana prevista: 1–3 minutos, sin cronómetro de derrota ni espera obligatoria. No se ha medido con una persona. El piloto usa delta, actúa cada 0,30 s y hace movimientos y comprobaciones por las mismas funciones que las entradas. Medido con pasos de 0,05 s: victorias en 0,90 / 1,80 / 2,40 s (niveles 1/2/3), siempre en 2 comprobaciones; fallos en 1,20 / 1,20 / 0,90 s, agotando 4/4/3 comprobaciones. Ambos caminos terminan antes de 40 s; no llaman directamente a terminar desde el piloto.
+
+## Fichas y fechas
+
+Todos los hitos solicitados tienen ficha; no se excluyó ninguno. Trazabilidad cotejada con `juego/datos/datos_espaciales.json` y `juego/datos/FUENTES.md`:
+
+| Índice | Fecha revelada | Ficha |
+|---|---|---|
+| 1 | 1873 | `observatorio_quito` |
+| 2 | 1957 | `estacion_cotopaxi` |
+| 3 | 1969 | `disco_apolo11` (año en su campo `fuente`; 73 países en `texto`) |
+| 4 | 1975 | `apolo_soyuz_1975` |
+| 5 | 14-11-1981 | `sts2_despedida` |
+| 6 | 01-07-1982 | `estacion_entrega` |
+| 7 | 2007 | `exa_2007` |
+| 8 | 2013 | `pegaso_lanzamiento` |
+| 9 | 21-06-2023 | `acuerdos_artemisa` (firmante n.º 26) |
+
+No se vincula la estación con Apolo 11. No se afirma la permanencia actual del disco. El título solicitado se conserva; el cuerpo describe el viaje histórico. Sin emblemas, logotipos ni transcripciones de mensajes de misiones. Las pistas de época y relaciones antes/después son ayudas didácticas derivadas de estas fechas, no acontecimientos adicionales.
+
+## Verificación ejecutada
+
+Comando oficial:
+
+```text
+python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:linea_tiempo --ritmo=8 --todo
+```
+
+Resultado final: código 0; **13 PRUEBA_OK**, ningún `PRUEBA_FALLO` ni `SCRIPT ERROR`; victorias d1/d3 y fallo causal d1. Cierre: `[godot: ok; 2 s; lineas=26; errores=0]`. Salida guardada en `prueba_oficial.txt`. El envoltorio solo interpreta `--todo` antes del separador; también se ejecutó así la prueba adicional para conservar su salida completa.
+
+Prueba adicional con ventana, siempre bajo el candado del envoltorio:
+
+```text
+python -I herramientas/juego_ejecutar.py --ventana --todo -- --prueba=guion:res://minijuegos/linea_tiempo/prueba_linea_tiempo.gd --ritmo=8
+```
+
+**PRUEBAS hechas=27 fallos=0**. Comprueba cantidad, fechas inicialmente ocultas, marcas vecinales, movimientos sin gastar intentos, victoria mediante acciones de teclado, arrastre de varios huecos, victoria/fallo del piloto en los tres niveles antes de 40 s y ajuste de textos. Las entradas son eventos sintéticos por las rutas del minijuego; no un ensayo manual de teclas físicas. Motor observado: Godot 4.7.2, Vulkan Mobile, Intel HD 620. Ambas capturas fueron abiertas y revisadas: nueve tarjetas legibles, texto mínimo 16 px y controles dentro del lienzo; la segunda muestra el anfitrión real. La primera usa un fondo de prueba gris; el anfitrión aporta el fondo papel final.
+
+El entorno emite errores al abrir `user://logs/godot.log`, rotar registros y leer certificados del sistema. Persisten fuera del alcance autorizado; no producen fallos de guion ni de las pruebas. Una primera captura del anfitrión falló por la ruta con espacios; se corrigió el entrecomillado y se verificó el PNG guardado.
+
+Pendiente: prueba humana de comprensión y duración; no se midieron fps de forma sostenida. No hay bloqueos de implementación conocidos.
+
+ exited 1 in 3743ms:
+
+Guillermo (2026-11-13): «Siempre recuerda el estilo que hemos llevado, utilizar recursos, mandar a modelar los que falten, usar todo.»
+
+- **Estilo aprobado:** low-poly pintado a mano (D-011) con acabado 2.5D (D-015). Facetas planas con degradado, luz cálida y sombra azul petróleo. Normas en `Nasa_Game/Fase_1_Arte/Biblia de arte.md`.
+- **Usa lo que ya existe.** Hojas de referencia en `Nasa_Game/Fase_1_Arte/Hojas_de_referencia/` (`HR_TAL`, `HR_MIR`, `HR_ARQ`, `HR_URB`, `HR_COL`, `HR_VEG`, `HR_TER`, `HR_FAU`, `HR_PER`), con 104 recursos con ID en `manifiesto_recursos.csv`. GLB ya hechos en `juego/modelos/entorno/` (TER, VEG, URB-09, COL, FX).
+- **Lo que falte se modela por script, con su ID.** Generador: `herramientas/mallas/nucleo.py` (lee su docstring y un ejemplo como `estructuras_piedra_madera.py` o `recolectables_col.py`). Escribe tu generador en `herramientas/mallas/<zona>_*.py` y los GLB en `juego/modelos/<zona>/<ID>.glb`. Materiales por nombre: `Facetado`, `Follaje`, `Agua` y `Emisivo`. Un recurso sin ID en el catálogo recibe uno nuevo de su familia (por ejemplo `TAL-15`) y se anota en el informe.
+- **`Piezas`** (`nucleo/piezas.gd`) sirve para suelos, paredes y bloques simples. Los muebles y objetos con forma propia van como GLB.
+- **Sin créditos de Higgsfield.** Los personajes y la fauna que falten (Tripo) se piden a Guillermo en una partida aparte: no se generan.
+- **Nada de insignias, logotipos ni textos de la NASA o de misiones.** Sin marcas comerciales.
+
+## 6. Cómo se hace un minijuego
+
+Copia `minijuegos/plantilla/`. Un minijuego es `minijuegos/<id>/<id>.gd` con `extends "res://nucleo/minijuego.gd"`, más `minijuego.json`. Es un `Control` de 1120 × 520 px que se dibuja con nodos o con `_draw()`.
+
+```gdscript
+extends "res://nucleo/minijuego.gd"
+
+func _preparar() -> void: ...          # arma nodos y estado; size ya vale 1120 x 520; dificultad = 1..3
+func _empezar() -> void: ...           # el jugador pulsó «Empezar»
+func _paso(delta: float) -> void: ...  # cada cuadro mientras activo; usa SIEMPRE delta, nunca la hora del sistema
+func jugar_solo(acierta: bool) -> void: ...   # OBLIGATORIO: se juega solo y termina (superado o no) en menos de 40 s de juego
+# terminar(superado, puntos, "frase que explica la causa")
+```
+
+Reglas de un minijuego:
+
+1. **Enseña algo real.** Cada uno gira sobre un dato espacial verificado o una idea de control, y su `ficha` existe en `datos/datos_espaciales.json`. No se inventan cifras: salen de las fichas o de `datos/FUENTES.md`.
+2. **Nunca «incorrecto».** Al fallar, `detalle` explica la causa física («con tanta ganancia, la antena se pasa y oscila»).
+3. **Un parámetro a la vez.** Los de control muestran la prueba anterior al lado de la actual.
+4. **Teclado, mando y ratón.** Acciones: `mover_izquierda`, `mover_derecha`, `mover_arriba`, `mover_abajo`, `interactuar` (E o Intro), `saltar` (Espacio). Ayudas: `eje_x()` y `eje_y()`. `Esc` es del anfitrión.
+5. **De 1 a 3 minutos**, con dificultad 1, 2 y 3. La 1 se supera al primer o segundo intento.
+6. **Legible:** texto de 16 px o más, sin depender solo del color, sin parpadeos rápidos.
+7. Etiquetas: `Estilo.texto()` hace salto de línea automático y necesita `custom_minimum_size.x`. Para una sola línea usa `Estilo.linea()`.
+8. El marco, el título, las instrucciones, las pistas y el resultado los pone el anfitrión: no los dibujes.
+
+`minijuego.json`: `titulo`, `resumen` (una frase), `instrucciones` (2 a 4 pasos), `controles`, `pistas` (3 niveles: una mirada, una frase y la respuesta), `ficha`, `escena` (la del borrador de la Fase 2) y `orden`.
+
+## 7. Pruebas y capturas
+
+Godot se ejecuta **siempre** con el envoltorio, que toma un candado global (hay varios agentes y un solo equipo) y cierra Godot si se cuelga:
+
+```
+python -I herramientas/juego_ejecutar.py -- --prueba=nucleo --ritmo=8
+python -I herramientas/juego_ejecutar.py -- --prueba=zona:habitacion --ritmo=6
+python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:seguidor --ritmo=8
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --captura=C:/ruta/a.png --espera=3
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --pos=1.5,-0.5 --mira=0,-1 --captura=C:/ruta/b.png
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --banderas=mir_luna,mir_linea --captura=C:/ruta/noche.png
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=sendero --medir=5
+python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=seguidor --auto --captura=C:/ruta/c.png --espera=4
+python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --captura_carga=C:/ruta/carga.png --captura=C:/ruta/d.png
+```
+
+- **Todo debe ser jugable por una persona.** `--prueba=manos --ritmo=2` juega el núcleo con teclas simuladas (entran por `Input.parse_input_event`, como las de verdad) y `--prueba=recorrido_manos --ritmo=3` recorre la historia entera así. Cada minijuego lleva su `prueba_manos.gd` (`--prueba=guion:res://minijuegos/<id>/prueba_manos.gd`), que lo gana solo con teclado y solo con ratón.
+- Sin `--ventana` corre sin GPU (lógica y física). Con `--ventana` abre la ventana real: capturas y fps.
+- `--todo` imprime toda la salida de Godot. Sale con código 1 si hay errores de guion o `PRUEBA_FALLO`.
+- `--zona` entra en «visita libre» (umbrales abiertos). Con `--historia` respeta los requisitos. `--banderas=a,b` pone banderas antes de entrar. `--sin_hud` oculta el HUD en la captura.
+- Mira tus capturas con la herramienta de lectura de imágenes antes de dar nada por bueno.
+
+  juego\pruebas\pruebas.gd:11:
+  juego\pruebas\pruebas.gd:12:
+> juego\pruebas\pruebas.gd:13:func comprobar(condicion: bool, nombre: String, detalle: String = "") -> bool:
+  juego\pruebas\pruebas.gd:14:	hechas += 1
+  juego\pruebas\pruebas.gd:15:	if condicion:
+  juego\pruebas\pruebas.gd:16:		print("PRUEBA_OK ", nombre)
+  juego\pruebas\pruebas.gd:17:	else:
+  juego\pruebas\pruebas.gd:18:		fallos += 1
+  juego\pruebas\pruebas.gd:19:		print("PRUEBA_FALLO ", nombre, (": " + detalle) if detalle != "" else "")
+  juego\pruebas\pruebas.gd:20:	return condicion
+  juego\pruebas\pruebas.gd:21:
+  juego\pruebas\pruebas.gd:22:
+  juego\pruebas\pruebas.gd:23:func correr(cual: String) -> void:
+  juego\pruebas\pruebas.gd:24:	var nombre := cual.get_slice(":", 0)
+  juego\pruebas\pruebas.gd:25:	var dato := cual.get_slice(":", 1) if cual.contains(":") else ""
+  juego\pruebas\pruebas.gd:26:	match nombre:
+  juego\pruebas\pruebas.gd:27:		"nucleo":
+  juego\pruebas\pruebas.gd:28:			await _nucleo()
+  juego\pruebas\pruebas.gd:29:		"zonas":
+  juego\pruebas\pruebas.gd:30:			await _zonas()
+  juego\pruebas\pruebas.gd:31:		"zona":
+  juego\pruebas\pruebas.gd:46:		"guion":
+  juego\pruebas\pruebas.gd:47:			# prueba propia de un carril: un guion con  func correr(pruebas: Node) -> void  que 
+usa
+> juego\pruebas\pruebas.gd:48:			# pruebas.comprobar(condicion, nombre, detalle). Ejemplo: 
+--prueba=guion:res://base/prueba_base.gd
+  juego\pruebas\pruebas.gd:49:			var ruta := cual.substr(cual.find(":") + 1)
+> juego\pruebas\pruebas.gd:50:			var guion: Variant = load(ruta) if ResourceLoader.exists(ruta) else null
+  juego\pruebas\pruebas.gd:51:			if comprobar(guion != null, "guion_de_prueba_existe", ruta):
+  juego\pruebas\pruebas.gd:52:				var nodo: Node = guion.new()
+  juego\pruebas\pruebas.gd:53:				add_child(nodo)
+  juego\pruebas\pruebas.gd:54:				await nodo.correr(self)
+  juego\pruebas\pruebas.gd:55:				nodo.queue_free()
+  juego\pruebas\pruebas.gd:56:		_:
+  juego\pruebas\pruebas.gd:57:			comprobar(false, "prueba_desconocida", cual)
+  juego\pruebas\pruebas.gd:58:	print("PRUEBAS hechas=%d fallos=%d" % [hechas, fallos])
+  juego\pruebas\pruebas.gd:59:
+  juego\pruebas\pruebas.gd:60:
+  juego\pruebas\pruebas.gd:61:func _esperar(segundos: float) -> void:
+  juego\pruebas\pruebas.gd:62:	await get_tree().create_timer(segundos).timeout
+  juego\pruebas\pruebas.gd:63:
+  juego\pruebas\pruebas.gd:64:
+  juego\pruebas\pruebas.gd:65:# ------------------------------------------------------------------ nucleo
+  juego\pruebas\pruebas.gd:66:
+  juego\pruebas\pruebas.gd:67:func _nucleo() -> void:
+  juego\pruebas\pruebas.gd:68:	comprobar(not Zonas.catalogo(true).is_empty(), "catalogo_de_zonas")
+  juego\pruebas\pruebas.gd:303:
+  juego\pruebas\pruebas.gd:304:
+> juego\pruebas\pruebas.gd:305:func _real(segundos: float) -> void:
+  juego\pruebas\pruebas.gd:306:	# espera en tiempo real (no le afecta --ritmo)
+  juego\pruebas\pruebas.gd:307:	await get_tree().create_timer(segundos, true, false, true).timeout
+  juego\pruebas\pruebas.gd:308:
+  juego\pruebas\pruebas.gd:309:
+> juego\pruebas\pruebas.gd:310:func _tecla(codigo: int, abajo: bool) -> void:
+  juego\pruebas\pruebas.gd:311:	if bool(_pulsadas.get(codigo, false)) == abajo:
+  juego\pruebas\pruebas.gd:312:		return
+  juego\pruebas\pruebas.gd:313:	_pulsadas[codigo] = abajo
+  juego\pruebas\pruebas.gd:314:	var evento := InputEventKey.new()
+  juego\pruebas\pruebas.gd:315:	evento.physical_keycode = codigo
+  juego\pruebas\pruebas.gd:316:	evento.keycode = codigo
+  juego\pruebas\pruebas.gd:317:	evento.pressed = abajo
+  juego\pruebas\pruebas.gd:318:	Input.parse_input_event(evento)
+  juego\pruebas\pruebas.gd:319:
+  juego\pruebas\pruebas.gd:320:
+> juego\pruebas\pruebas.gd:321:func _toque(codigo: int) -> void:
+  juego\pruebas\pruebas.gd:322:	_tecla(codigo, true)
+  juego\pruebas\pruebas.gd:323:	await get_tree().process_frame
+  juego\pruebas\pruebas.gd:324:	await get_tree().physics_frame
+  juego\pruebas\pruebas.gd:325:	await get_tree().process_frame
+  juego\pruebas\pruebas.gd:326:	_tecla(codigo, false)
+  juego\pruebas\pruebas.gd:327:	await get_tree().process_frame
+  juego\pruebas\pruebas.gd:328:
+  juego\pruebas\pruebas.gd:329:
+  juego\pruebas\pruebas.gd:330:func _soltar_todo() -> void:
+  juego\pruebas\pruebas.gd:331:	for codigo in _pulsadas.keys():
+  juego\pruebas\pruebas.gd:332:		_tecla(codigo, false)
+  juego\pruebas\pruebas.gd:333:
+  juego\pruebas\pruebas.gd:334:
+  juego\pruebas\pruebas.gd:335:func _apuntar(d: Vector3) -> void:
+  juego\pruebas\pruebas.gd:336:	# pulsa las teclas de movimiento que llevan hacia d (ocho direcciones, como con WASD)
+  juego\pruebas\pruebas.gd:337:	var umbral := d.length() * 0.38
+  juego\pruebas\pruebas.gd:338:	_tecla(KEY_D, d.x > umbral)
+  juego\pruebas\pruebas.gd:339:	_tecla(KEY_A, d.x < -umbral)
+Select-String : No se encuentra la ruta de acceso 'C:\Users\guill\Desktop\Juego 2d-hd\juego\interfaz\interfaz.gd' 
+porque no existe.
+En línea: 2 Carácter: 215
++ ... ntext 2,18; Select-String -Path juego/interfaz/interfaz.gd -Pattern ' ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\guill\...faz\interfaz.gd:String) [Select-String], ItemNotFound 
+   Exception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SelectStringCommand
+ 
+"""Ejecuta el juego (carpeta juego/) con Godot 4.7.2: de uno en uno, y lo cierra si se cuelga.
+
+Varios agentes trabajan a la vez en este equipo (2 nucleos, 8 GB, Intel HD 620). Dos Godot abiertos a la vez
+falsean los fps y pueden agotar la memoria, asi que este envoltorio toma un candado global
+(juego/.candado_godot) y espera su turno. Tambien mata el proceso si no sale solo (pasa en la HD 620).
+
+Uso:
+  python -I herramientas/juego_ejecutar.py [--ventana] [--max=<s>] [--todo] [--importar] -- <argumentos del juego>
+
+  (sin --ventana)  corre con --headless: logica, fisica y guiones, sin GPU. Sirve para las pruebas.
+  --ventana        abre la ventana real: capturas (--captura=<png>) y mediciones de fps (--medir=<s>).
+  --max=<s>        tiempo maximo en segundos (por defecto 240).
+  --todo           imprime toda la salida de Godot, no solo las lineas clave.
+  --importar       antes de ejecutar, corre "--headless --import" (crea .godot y la cache de clases).
+  --proyecto=<carpeta>  otro proyecto de Godot bajo el mismo candado, con su escena si hace falta. Ejemplo:
+                   python -I herramientas/juego_ejecutar.py --ventana --proyecto=pruebas/escena_exploracion
+                     res://vista_previa.tscn -- --glb=<glb> --animacion=caminar --tiempo=0.3 --captura=<png>
+                   (en esos proyectos el fin lo marcan CAPTURA_OK o MEDIDA)
+
+Argumentos del juego (los lee juego/principal.gd):
+  --prueba=<nombre>          nucleo | zonas | minijuegos | recorrido | zona:<id> | minijuego:<id>
+  --zona=<id> [--entrada=<nombre>]   abre una zona directamente
+  --minijuego=<id>           abre un minijuego directamente
+  --auto                     dialogos sin esperas y minijuegos que se juegan solos
+  --captura=<png> [--espera=<s>]     guarda una captura tras <s> segundos (por defecto 2) y sale
+  --medir=<s>                mide fps durante <s> segundos y sale
+  --ritmo=<f>                Engine.time_scale (las pruebas usan 8)
+  --pos=x,z  --mira=x,z      coloca a la protagonista (con --zona) para una captura
+
+Marcadores de la salida: PRUEBA_OK, PRUEBA_FALLO, CAPTURA_OK, MEDIDA y FIN.
+Codigo de salida: 0 si no hubo errores de guion, PRUEBA_FALLO ni tiempo agotado; 1 en caso contrario.
+"""
+import os
+import subprocess
+import sys
+import threading
+import time
+from pathlib import Path
+
+sys.stdout.reconfigure(encoding="utf-8")
+RAIZ = Path(__file__).resolve().parent.parent
+PROYECTO = RAIZ / "juego"
+GODOT_POR_DEFECTO = r"C:\Users\guill\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe"
+
+
+def ruta_godot():
+    """Ejecutable de Godot 4.7.2 (version de consola). En otro equipo se indica con la variable de entorno
+    GODOT_EXE o escribiendo la ruta en herramientas/godot_local.txt (una linea; ese archivo no se comparte)."""
+    local = Path(__file__).resolve().parent / "godot_local.txt"
+    if os.environ.get("GODOT_EXE"):
+        return os.environ["GODOT_EXE"]
+    if local.exists():
+        return local.read_text(encoding="utf-8").strip().strip('"')
+    return GODOT_POR_DEFECTO
+
+
+GODOT = ruta_godot()
+CANDADO = PROYECTO / ".candado_godot"
+CLAVES = ("PRUEBA_", "CAPTURA_OK", "MEDIDA", "FIN", "ZONA ", "MINIJUEGO ", "AVISO ", "SCRIPT ERROR", "Parse Error",
+          "ERROR:", "   at:", "WARNING: res")
+ERRORES = ("SCRIPT ERROR", "Parse Error", "PRUEBA_FALLO", "Failed to load script", "Cannot open file",
+           "Invalid call", "Invalid access", "Invalid assignment", "Nonexistent function")
+GRACIA_S = 6.0
+CANDADO_VIEJO_S = 900.0
+ESPERA_CANDADO_S = 2400.0
+
+
+def matar(proceso):
+    subprocess.run(["taskkill", "/T", "/F", "/PID", str(proceso.pid)], capture_output=True)
+
+
+def tomar_candado():
+    inicio = time.time()
+    avisado = False
+    while True:
+        try:
+            descriptor = os.open(str(CANDADO), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(descriptor, f"{os.getpid()} {time.time():.0f}".encode())
+            os.close(descriptor)
+            return
+        except FileExistsError:
+            try:
+                edad = time.time() - CANDADO.stat().st_mtime
+            except FileNotFoundError:
+                continue
+            if edad > CANDADO_VIEJO_S:
+                try:
+                    CANDADO.unlink()
+                except OSError:
+                    pass
+                continue
+            if time.time() - inicio > ESPERA_CANDADO_S:
+                raise SystemExit("No se pudo tomar el candado de Godot (otro proceso lo tiene hace demasiado)")
+            if not avisado:
+                print("(esperando turno: otro Godot esta corriendo)", flush=True)
+                avisado = True
+            time.sleep(1.5)
+
+
+def soltar_candado():
+    try:
+        CANDADO.unlink()
+    except OSError:
+        pass
+
+
+def correr(orden, maximo, todo, marcas_fin=("FIN",)):
+    inicio = time.time()
+    proceso = subprocess.Popen(orden, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+                               encoding="utf-8", errors="replace")
+    estado = {"fin": None, "errores": 0, "lineas": 0}
+
+    def leer():
+        for linea in proceso.stdout:
+            estado["lineas"] += 1
+            texto = linea.rstrip()
+            if todo or any(c in texto for c in CLAVES):
+                print(texto, flush=True)
+            if any(e in texto for e in ERRORES):
+                estado["errores"] += 1
+            if any(texto.startswith(m) or (m != "FIN" and m in texto) for m in marcas_fin):
+                estado["fin"] = time.time()
+
+    hilo = threading.Thread(target=leer, daemon=True)
+    hilo.start()
+    resultado = "ok"
+    while proceso.poll() is None:
+        ahora = time.time()
+        if estado["fin"] is not None and ahora - estado["fin"] > GRACIA_S:
+            matar(proceso)
+            resultado = "ok (Godot no salio solo: se cerro)"
+            break
+        if ahora - inicio > maximo:
+            matar(proceso)
+            resultado = "TIEMPO AGOTADO"
+            estado["errores"] += 1
+            break
+        time.sleep(0.2)
+    hilo.join(timeout=3.0)
+    return resultado, estado, time.time() - inicio
+
+
+def main():
+    if "--" not in sys.argv:
+        raise SystemExit(__doc__)
+    corte = sys.argv.index("--")
+    previos, juego = sys.argv[1:corte], sys.argv[corte + 1:]
+    ventana = "--ventana" in previos
+    todo = "--todo" in previos
+    importar = "--importar" in previos
+    maximo = 240.0
+    proyecto = PROYECTO
+    escena = []
+    for p in previos:
+        if p.startswith("--max="):
+            maximo = float(p.split("=", 1)[1])
+        elif p.startswith("--proyecto="):
+            # otro proyecto de Godot (p. ej. pruebas/escena_exploracion) bajo el mismo candado
+            proyecto = (RAIZ / p.split("=", 1)[1]).resolve()
+        elif p.startswith("res://"):
+            escena.append(p)
+    propio = proyecto == PROYECTO
+    marcas_fin = ("FIN",) if propio else ("FIN", "CAPTURA_OK", "MEDIDA")
+    if not Path(GODOT).exists():
+        raise SystemExit(f"No se encuentra Godot en {GODOT}. Define GODOT_EXE o escribe la ruta en herramientas/godot_local.txt")
+    tomar_candado()
+    try:
+        if importar or (propio and not (PROYECTO / ".godot").exists()):
+            r, e, t = correr([GODOT, "--headless", "--path", str(proyecto), "--import"], 300.0, False, ("FIN_NUNCA",))
+            print(f"[importar: {r}, {t:.0f} s]", flush=True)
+        orden = [GODOT, "--path", str(proyecto), *escena]
+        if not ventana:
+            orden.append("--headless")
+        orden += ["--", *juego]
+        resultado, estado, segundos = correr(orden, maximo, todo, marcas_fin)
+    finally:
+        soltar_candado()
+    print(f"[godot: {resultado}; {segundos:.0f} s; lineas={estado['lineas']}; errores={estado['errores']}]", flush=True)
+    sys.exit(1 if estado["errores"] else 0)
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem juego -Filter '*interfaz*' -Recurse | Select-Object FullName; Get-Content -Encoding utf8 juego/minijuegos/linea_tiempo/prueba_linea_tiempo.gd; Get-Content juego/project.godot | Select-Object -First 190; Get-Content -Encoding utf8 juego/nucleo/interfaz.gd | Select-Object -First 300; Get-ChildItem juego/minijuegos -Filter prueba_manos.gd -Recurse | Select-Object -First 8 -ExpandProperty FullName" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 6761ms:
+
+FullName                                                       
+--------                                                       
+C:\Users\guill\Desktop\Juego 2d-hd\juego\interfaz              
+C:\Users\guill\Desktop\Juego 2d-hd\juego\nucleo\interfaz.gd    
+C:\Users\guill\Desktop\Juego 2d-hd\juego\nucleo\interfaz.gd.uid
+extends Node
+
+# Regresiones del modelo y de las rutas de entrada, sin modificar el nucleo.
+const Minijuego = preload("res://minijuegos/linea_tiempo/linea_tiempo.gd")
+var _resultado: Dictionary = {}
+
+
+func _crear(nivel: int) -> Control:
+	var juego: Control = Minijuego.new()
+	add_child(juego)
+	juego.preparar({"dificultad": nivel}, {})
+	juego.terminado.connect(func(r: Dictionary): _resultado = r)
+	_resultado = {}
+	juego.empezar()
+	return juego
+
+
+func _accion(juego: Control, nombre: String) -> void:
+	var evento: InputEventAction = InputEventAction.new()
+	evento.action = nombre
+	evento.pressed = true
+	juego._input(evento)
+
+
+func correr(pruebas: Node) -> void:
+	for nivel in [1, 2, 3]:
+		var juego: Control = _crear(nivel)
+		var cantidad: int = [5, 7, 9][nivel - 1]
+		pruebas.comprobar(juego.orden.size() == cantidad, "linea.n%d.cantidad" % nivel)
+		var fechas_ocultas: bool = true
+		for etiqueta in juego._fechas:
+			fechas_ocultas = fechas_ocultas and etiqueta.text == "Fecha oculta"
+		pruebas.comprobar(fechas_ocultas, "linea.n%d.fechas_ocultas" % nivel)
+		juego._comprobar()
+		var marcas_validas: bool = true
+		for i in juego.orden.size():
+			var local: bool = (i == 0 or juego.orden[i - 1] < juego.orden[i]) and (i == juego.orden.size() - 1 or juego.orden[i] < juego.orden[i + 1])
+			marcas_validas = marcas_validas and juego._marcas[i] == local
+		pruebas.comprobar(marcas_validas, "linea.n%d.marcas_vecinas" % nivel)
+		# Resuelve por la ruta de acciones de teclado, una permuta adyacente cada vez.
+		for pasada in cantidad:
+			for i in range(cantidad - 1):
+				if juego.orden[i] > juego.orden[i + 1]:
+					juego.seleccion = i + 1
+					_accion(juego, "interactuar")
+					_accion(juego, "mover_izquierda")
+					_accion(juego, "interactuar")
+		pruebas.comprobar(juego.comprobaciones == 1, "linea.n%d.mover_no_gasta" % nivel)
+		_accion(juego, "saltar")
+		pruebas.comprobar(bool(_resultado.get("superado", false)), "linea.n%d.teclado_gana" % nivel)
+		juego.free()
+		# El arrastre cruza varios huecos y conserva todas las tarjetas.
+		juego = _crear(nivel)
+		var inicial: Array = juego.orden.duplicate()
+		var pulsar: InputEventMouseButton = InputEventMouseButton.new()
+		pulsar.button_index = MOUSE_BUTTON_LEFT
+		pulsar.pressed = true
+		pulsar.position = juego._rect_tarjeta(0).get_center()
+		juego._gui_input(pulsar)
+		var arrastrar: InputEventMouseMotion = InputEventMouseMotion.new()
+		arrastrar.button_mask = MOUSE_BUTTON_MASK_LEFT
+		arrastrar.position = juego._rect_tarjeta(cantidad - 1).get_center()
+		juego._gui_input(arrastrar)
+		pulsar.pressed = false
+		pulsar.position = arrastrar.position
+		juego._gui_input(pulsar)
+		pruebas.comprobar(juego.orden.back() == inicial.front() and juego.orden.size() == cantidad and not juego.tomada, "linea.n%d.arrastre" % nivel)
+		juego.free()
+		for acierta in [true, false]:
+			juego = _crear(nivel)
+			juego.jugar_solo(acierta)
+			for cuadro in 799:
+				if not juego.activo:
+					break
+				juego._process(0.05)
+			pruebas.comprobar(not juego.activo and bool(_resultado.get("superado", not acierta)) == acierta and juego.tiempo < 40.0, "linea.n%d.auto_%s_menos_40s" % [nivel, str(acierta)])
+			print("LINEA_AUTO nivel=%d acierta=%s segundos=%.2f comprobaciones=%d" % [nivel, str(acierta), juego.tiempo, juego.comprobaciones])
+			juego.free()
+	# Captura reproducible de la dificultad mayor, con pistas y una tarjeta tomada.
+	var vista: Control = _crear(3)
+	vista.position = Vector2(80, 100)
+	vista._comprobar()
+	vista.seleccion = 2
+	vista.tomada = true
+	vista._refrescar()
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var cabe: bool = true
+	for i in vista.orden.size():
+		cabe = cabe and vista._titulos[i].size.y <= 104.0 and vista._pistas[i].size.y <= 100.0
+	pruebas.comprobar(cabe and vista._detalle.size.y <= 56.0, "linea.textos_caben_nivel3")
+	if DisplayServer.get_name() != "headless":
+		var ruta: String = ProjectSettings.globalize_path("res://../Nasa_Game/Construccion/Minijuegos/linea_tiempo/captura_nivel3.png")
+		var error: Error = get_viewport().get_texture().get_image().save_png(ruta)
+		pruebas.comprobar(error == OK, "linea.captura")
+	vista.free()
+; Juego jugable v0 del Proyecto NASA-Ecuador (nombre interno). Titulo provisional: "Luz cenicienta".
+; Godot 4.7.2, renderizador Mobile, 1280x720. Todo se arma por codigo: ver ARQUITECTURA.md.
+config_version=5
+
+[application]
+
+config/name="Luz cenicienta"
+run/main_scene="res://principal.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+
+[autoload]
+
+Juego="*res://nucleo/juego.gd"
+Audio="*res://nucleo/audio.gd"
+Interfaz="*res://nucleo/interfaz.gd"
+Zonas="*res://nucleo/zonas.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+anti_aliasing/quality/msaa_3d=1
+lights_and_shadows/directional_shadow/size=4096
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=2
+extends CanvasLayer
+
+# Interfaz global (autoload "Interfaz"): HUD, dialogos, avisos, ventana de carga, pausa, cuaderno, menu
+# principal y anfitrion de minijuegos. Las zonas y los minijuegos solo usan las funciones de este guion.
+# ESTILO PROVISIONAL: la Fase 7 (UI/UX) no esta validada.
+#
+#   await Interfaz.decir([{"quien": "Órbita", "texto": "..."}])       dialogo
+#   var i: int = await Interfaz.elegir("¿...?", ["Sí", "No"])          pregunta con opciones
+#   Interfaz.aviso("Texto corto", 3.0)                                 aviso que se va solo
+#   var r: Dictionary = await Interfaz.abrir_minijuego("seguidor", {"dificultad": 1})
+#        r = {"superado": bool, "puntos": float, "detalle": String, "abandonado": bool (si salio)}
+
+const Estilo := preload("res://interfaz/estilo.gd")
+const Recursos := preload("res://nucleo/recursos.gd")
+const Hud := preload("res://interfaz/hud.gd")
+const Dialogo := preload("res://interfaz/dialogo.gd")
+const VentanaCarga := preload("res://interfaz/ventana_carga.gd")
+const Anfitrion := preload("res://interfaz/anfitrion.gd")
+const Pausa := preload("res://interfaz/pausa.gd")
+const Cuaderno := preload("res://interfaz/cuaderno.gd")
+const Menu := preload("res://interfaz/menu.gd")
+const Mapa := preload("res://interfaz/mapa.gd")
+
+var raiz: Control
+var hud: Control
+var dialogo: Control
+var carga: Control
+var anfitrion: Control
+var pausa: Control
+var cuaderno: Control
+var menu: Control
+var mapa: Control
+var velo: ColorRect
+var _pausa_previa := false
+var _ocupada_hasta := 0
+var _mapa_desde_menu := false
+var _hablando := false
+
+
+func _ready() -> void:
+	layer = 10
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	raiz = Control.new()
+	raiz.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	raiz.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	raiz.theme = Estilo.tema()
+	add_child(raiz)
+	hud = Hud.new()
+	dialogo = Dialogo.new()
+	cuaderno = Cuaderno.new()
+	pausa = Pausa.new()
+	menu = Menu.new()
+	mapa = Mapa.new()
+	anfitrion = Anfitrion.new()
+	carga = VentanaCarga.new()
+	for nodo in [hud, dialogo, cuaderno, pausa, menu, mapa, anfitrion, carga]:
+		raiz.add_child(nodo)
+	hud.visible = false
+	velo = ColorRect.new()
+	velo.color = Color("12181b")
+	velo.modulate.a = 0.0
+	velo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	velo.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	raiz.add_child(velo)
+	pausa.accion.connect(_accion_pausa)
+	cuaderno.cerrado.connect(_cuaderno_cerrado)
+	menu.elegido.connect(_accion_menu)
+	mapa.cerrado.connect(_mapa_cerrado)
+	mapa.viajar.connect(_mapa_viajar)
+
+
+func _abierta() -> bool:
+	return _hablando or dialogo.visible or anfitrion.visible or pausa.visible or cuaderno.visible or menu.visible or carga.visible or mapa.visible
+
+
+func _process(_delta: float) -> void:
+	if _abierta():
+		_ocupada_hasta = Time.get_ticks_msec() + 300
+
+
+func ocupada() -> bool:
+	# true mientras haya algo abierto que bloquea a la protagonista, y 0,3 s mas: asi la pulsacion que
+	# cierra un dialogo o un minijuego (E o Intro) no vuelve a usar el objeto que esta al lado
+	return _abierta() or Time.get_ticks_msec() < _ocupada_hasta
+
+
+# ------------------------------------------------------------------ dialogos y avisos
+
+func decir(lineas: Variant, quien: String = "") -> void:
+	while _hablando:
+		await get_tree().process_frame
+	_hablando = true
+	await dialogo.decir(lineas, quien)
+	_hablando = false
+
+
+func elegir(pregunta: Variant, opciones: Array) -> int:
+	while _hablando:
+		await get_tree().process_frame
+	_hablando = true
+	var indice: int = await dialogo.elegir(pregunta, opciones)
+	_hablando = false
+	return indice
+
+
+func aviso(texto: String, segundos: float = 3.0) -> void:
+	if hud != null:
+		hud.aviso(texto, segundos)
+
+
+func indicar(texto: String) -> void:
+	hud.indicar(texto)
+
+
+func rotular(origen: Object, texto: String) -> void:
+	hud.rotular(origen, texto)
+
+
+func limpiar_rotulos() -> void:
+	hud.limpiar_rotulos()
+
+
+func mostrar_hud(ver: bool) -> void:
+	hud.visible = ver
+
+
+func anunciar_zona(meta: Dictionary) -> void:
+	hud.anunciar_zona(meta)
+
+
+# ------------------------------------------------------------------ carga y fundidos
+
+func mostrar_carga(meta: Dictionary) -> void:
+	await carga.mostrar(meta)
+
+
+func ocultar_carga() -> void:
+	await carga.ocultar()
+
+
+func fundido(a_oscuro: bool, segundos: float = 0.4) -> void:
+	var meta_alfa := 1.0 if a_oscuro else 0.0
+	if Juego.modo_prueba:
+		velo.modulate.a = meta_alfa
+		await get_tree().process_frame
+		return
+	var t := velo.create_tween()
+	t.tween_property(velo, "modulate:a", meta_alfa, segundos)
+	await t.finished
+
+
+# ------------------------------------------------------------------ minijuegos
+
+func abrir_minijuego(id: String, parametros: Dictionary = {}) -> Dictionary:
+	if not FileAccess.file_exists("res://minijuegos/%s/%s.gd" % [id, id]):
+		# todavia no esta construido: no bloquea la historia, pero queda avisado
+		print("AVISO minijuego en construccion: ", id)
+		aviso("El reto «%s» todavía está en construcción." % id, 3.0)
+		return {"superado": true, "puntos": 0.0, "detalle": "", "en_construccion": true}
+	var estaba_en_pausa := get_tree().paused
+	get_tree().paused = true
+	var resultado: Dictionary = await anfitrion.jugar(id, parametros)
+	get_tree().paused = estaba_en_pausa
+	Juego.registrar_minijuego(id, resultado)
+	return resultado
+
+
+# ------------------------------------------------------------------ menu, pausa y cuaderno
+
+func abrir_menu() -> void:
+	mostrar_hud(false)
+	menu.abrir()
+
+
+func _en_juego() -> bool:
+	return Zonas.actual != null and not Zonas.ocupado
+
+
+func _input(evento: InputEvent) -> void:
+	if evento is InputEventKey and evento.pressed and not evento.echo:
+		if evento.keycode == KEY_F11:
+			var modo := DisplayServer.window_get_mode()
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if modo == DisplayServer.WINDOW_MODE_FULLSCREEN else DisplayServer.WINDOW_MODE_FULLSCREEN)
+			return
+		if evento.keycode == KEY_F12:
+			capturar("res://capturas/captura_%d.png" % int(Time.get_unix_time_from_system()))
+			return
+	if anfitrion.visible or carga.visible or mapa.visible:
+		return
+	if menu.visible:
+		return
+	if evento.is_action_pressed("mapa") and _en_juego() and not ocupada():
+		abrir_mapa(false)
+		get_viewport().set_input_as_handled()
+		return
+	if evento.is_action_pressed("pausa"):
+		if pausa.visible:
+			_accion_pausa("continuar")
+		elif cuaderno.visible:
+			cuaderno.cerrar()
+		elif _en_juego() and not ocupada():
+			_abrir_pausa()
+		else:
+			return
+		get_viewport().set_input_as_handled()
+	elif evento.is_action_pressed("cuaderno"):
+		if cuaderno.visible:
+			cuaderno.cerrar()
+		elif _en_juego() and not ocupada():
+			abrir_cuaderno()
+		else:
+			return
+		get_viewport().set_input_as_handled()
+
+
+func _abrir_pausa() -> void:
+	_pausa_previa = get_tree().paused
+	get_tree().paused = true
+	var opciones: Array = [["Continuar", "continuar"], ["Mapa", "mapa"], ["Cuaderno", "cuaderno"]]
+	if Zonas.actual != null and Zonas.actual.has_method("despertar"):
+		opciones.append(["Despertar", "despertar"])
+	opciones.append(["Menú principal", "menu"])
+	opciones.append(["Salir del juego", "salir"])
+	pausa.abrir(opciones)
+
+
+func _accion_pausa(nombre: String) -> void:
+	pausa.cerrar()
+	match nombre:
+		"cuaderno":
+			cuaderno.abrir()
+		"mapa":
+			_mapa_desde_menu = false
+			mapa.abrir(false)
+		"despertar":
+			get_tree().paused = false
+			Zonas.actual.call("despertar")
+		"menu":
+			get_tree().paused = false
+			Juego.guardar()
+			Zonas.cerrar()
+			abrir_menu()
+		"salir":
+			Juego.guardar()
+			salir()
+		_:
+			get_tree().paused = _pausa_previa
+
+
+func abrir_cuaderno() -> void:
+	_pausa_previa = get_tree().paused
+	get_tree().paused = true
+	Audio.sonar("pagina")
+	cuaderno.abrir()
+
+
+func _cuaderno_cerrado() -> void:
+	get_tree().paused = _pausa_previa
+
+
+func abrir_mapa(viaje: bool = false) -> void:
+	# el mapa del mundo: lugares, conexiones y donde esta la protagonista
+	_mapa_desde_menu = menu.visible
+	if not _mapa_desde_menu:
+		_pausa_previa = get_tree().paused
+		get_tree().paused = true
+	Audio.sonar("pagina")
+	mapa.abrir(viaje)
+
+
+func _mapa_cerrado() -> void:
+	if not _mapa_desde_menu:
+		get_tree().paused = _pausa_previa
+
+
+func _mapa_viajar(id_zona: String) -> void:
+	if _mapa_desde_menu:
+		# visita libre desde el menu principal: todo abierto, para recorrer y validar cada escenario
+		Juego.nueva_partida()
+		Juego.poner_bandera("visita_libre")
+		menu.cerrar()
+	else:
+		get_tree().paused = _pausa_previa
+	Zonas.ir_a(id_zona, "inicio")
+
+
+func _accion_menu(accion: String, dato: String) -> void:
+	match accion:
+		"nueva":
+			Juego.nueva_partida()
+			menu.cerrar()
+			Zonas.ir_a(_zona_inicial(), "inicio")
+		"continuar":
+			if not Juego.cargar():
+				Juego.nueva_partida()
+			menu.cerrar()
+			var zona: String = Juego.estado.get("zona", _zona_inicial())
+			if not Zonas.existe(zona):
+				zona = _zona_inicial()
+			Zonas.ir_a(zona, Juego.estado.get("entrada", "inicio"))
+C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\antena\prueba_manos.gd
+C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\satelite\prueba_manos.gd
+C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\seguidor\prueba_manos.gd
+C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\telescopio\prueba_manos.gd
+
+
+
+codex
+El teclado ya permite seleccionar, tomar, mover y comprobar sin depender del foco. El ratón tiene arrastre y botón de comprobación; voy a probarlos a través del anfitrión real. También revisaré las pistas iniciales: la tarjeta del disco no indica aún su relación con la estación cuando las fechas están ocultas.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Select-String -Path juego/interfaz/estilo.gd -Pattern 'func texto|func boton' -Context 0,32; Get-Content -Encoding utf8 juego/minijuegos/antena/prueba_manos.gd | Select-Object -First 155; Get-Content -Encoding utf8 juego/principal.gd | Select-Object -First 150; Get-ChildItem -Force juego/minijuegos/linea_tiempo; git status --short" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 915ms:
+
+> juego\interfaz\estilo.gd:52:static func texto(contenido: String, tam: int = 20, color: Color = TINTA, peso: int = 
+500, mano: bool = false) -> Label:
+  juego\interfaz\estilo.gd:53:	var l := Label.new()
+  juego\interfaz\estilo.gd:54:	l.text = contenido
+  juego\interfaz\estilo.gd:55:	l.add_theme_font_override("font", fuente(peso, mano))
+  juego\interfaz\estilo.gd:56:	l.add_theme_font_size_override("font_size", tam)
+  juego\interfaz\estilo.gd:57:	l.add_theme_color_override("font_color", color)
+  juego\interfaz\estilo.gd:58:	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+  juego\interfaz\estilo.gd:59:	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+  juego\interfaz\estilo.gd:60:	return l
+  juego\interfaz\estilo.gd:61:
+  juego\interfaz\estilo.gd:62:
+  juego\interfaz\estilo.gd:63:static func linea(contenido: String, tam: int = 20, color: Color = TINTA, peso: int = 
+500) -> Label:
+  juego\interfaz\estilo.gd:64:	# etiqueta de una sola linea (sin salto automatico): para filas, cabeceras y contadores
+  juego\interfaz\estilo.gd:65:	var l := texto(contenido, tam, color, peso)
+  juego\interfaz\estilo.gd:66:	l.autowrap_mode = TextServer.AUTOWRAP_OFF
+  juego\interfaz\estilo.gd:67:	return l
+  juego\interfaz\estilo.gd:68:
+  juego\interfaz\estilo.gd:69:
+> juego\interfaz\estilo.gd:70:static func boton(contenido: String, tam: int = 22, principal: bool = false) -> Button:
+  juego\interfaz\estilo.gd:71:	var b := Button.new()
+  juego\interfaz\estilo.gd:72:	b.text = contenido
+  juego\interfaz\estilo.gd:73:	b.add_theme_font_override("font", fuente(600))
+  juego\interfaz\estilo.gd:74:	b.add_theme_font_size_override("font_size", tam)
+  juego\interfaz\estilo.gd:75:	var fondo := CIAN if principal else PAPEL
+  juego\interfaz\estilo.gd:76:	b.add_theme_stylebox_override("normal", caja(fondo, 10, 3, TINTA, 12))
+  juego\interfaz\estilo.gd:77:	b.add_theme_stylebox_override("hover", caja(fondo.lightened(0.25), 10, 3, TINTA, 12))
+  juego\interfaz\estilo.gd:78:	b.add_theme_stylebox_override("pressed", caja(PETROLEO, 10, 3, TINTA, 12))
+  juego\interfaz\estilo.gd:79:	b.add_theme_stylebox_override("focus", caja(Color(0, 0, 0, 0), 10, 4, CIAN_MEDIO, 12))
+  juego\interfaz\estilo.gd:80:	b.add_theme_stylebox_override("disabled", caja(PAPEL_SOMBRA.darkened(0.1), 10, 2, 
+TINTA_SUAVE, 12))
+  juego\interfaz\estilo.gd:81:	for estado in ["font_color", "font_hover_color", "font_focus_color"]:
+  juego\interfaz\estilo.gd:82:		b.add_theme_color_override(estado, TINTA)
+  juego\interfaz\estilo.gd:83:	b.add_theme_color_override("font_pressed_color", PAPEL)
+  juego\interfaz\estilo.gd:84:	b.add_theme_color_override("font_disabled_color", TINTA_SUAVE)
+  juego\interfaz\estilo.gd:85:	b.custom_minimum_size = Vector2(0, tam * 2 + 6)
+  juego\interfaz\estilo.gd:86:	b.pressed.connect(func(): Audio.sonar("pulsar"))
+  juego\interfaz\estilo.gd:87:	return b
+  juego\interfaz\estilo.gd:88:
+  juego\interfaz\estilo.gd:89:
+  juego\interfaz\estilo.gd:90:static func panel(color: Color = PAPEL, radio: int = 14, borde: int = 3, margen: int = 
+18) -> PanelContainer:
+  juego\interfaz\estilo.gd:91:	var p := PanelContainer.new()
+  juego\interfaz\estilo.gd:92:	p.add_theme_stylebox_override("panel", caja(color, radio, borde, TINTA, margen))
+  juego\interfaz\estilo.gd:93:	return p
+  juego\interfaz\estilo.gd:94:
+  juego\interfaz\estilo.gd:95:
+  juego\interfaz\estilo.gd:96:static func tema() -> Theme:
+  juego\interfaz\estilo.gd:97:	if _tema == null:
+  juego\interfaz\estilo.gd:98:		_tema = Theme.new()
+  juego\interfaz\estilo.gd:99:		_tema.default_font = fuente(500)
+  juego\interfaz\estilo.gd:100:		_tema.default_font_size = 20
+  juego\interfaz\estilo.gd:101:		_tema.set_color("font_color", "Label", TINTA)
+  juego\interfaz\estilo.gd:102:	return _tema
+extends Node
+
+# Entradas del jugador por el anfitrion real; nunca llama al piloto ni al modelo.
+var _pulsadas: Dictionary = {}
+var _devuelto: bool = false
+var _resultado: Dictionary = {}
+var _raton: Vector2 = Vector2.ZERO
+
+
+func correr(pruebas: Node) -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	Juego.modo_prueba = false
+	Juego.sin_guardar = true
+	Juego.minijuegos_solos = false
+	await _teclado(pruebas)
+	await _raton_solo(pruebas)
+	await _escapes(pruebas)
+	_soltar_todo()
+	pruebas.comprobar(not Interfaz.anfitrion.visible, "antena.manos.anfitrion_cerrado", str(_resultado))
+	pruebas.comprobar(not get_tree().paused, "antena.manos.arbol_sin_pausa", "La apertura debe restaurar la pausa previa.")
+	Juego.modo_prueba = true
+
+
+func _abrir() -> void:
+	_resultado = await Interfaz.abrir_minijuego("antena", {"dificultad": 1})
+	_devuelto = true
+
+
+func _apertura(pruebas: Node, parte: String) -> Control:
+	_devuelto = false
+	_resultado = {}
+	_abrir()
+	var visible: bool = await _hasta(func() -> bool: return Interfaz.anfitrion.visible, 3.0)
+	pruebas.comprobar(visible, "antena.%s.abre_anfitrion" % parte, "Apertura asincrona por Interfaz.")
+	await _real(0.12)
+	var mj: Control = Interfaz.anfitrion.get("_minijuego")
+	if mj != null:
+		pruebas.comprobar(int(mj.get("_solo")) == 0 and int(mj.get("_auto")) == 0, "antena.%s.sin_piloto" % parte, "Solo eventos fisicos.")
+	return mj
+
+
+func _teclado(pruebas: Node) -> void:
+	var mj: Control = await _apertura(pruebas, "teclado")
+	if mj == null:
+		return
+	await _captura("manos_instrucciones")
+	await _toque(KEY_ENTER)
+	pruebas.comprobar(bool(mj.get("activo")), "antena.teclado.empezar_con_Intro", "El foco inicial debe estar en Empezar.")
+	for codigo in [KEY_D, KEY_A, KEY_RIGHT, KEY_LEFT]:
+		var antes: float = float(mj.get("ganancia"))
+		_tecla(codigo, true)
+		await _real(0.10)
+		_tecla(codigo, false)
+		await _real(0.04)
+		var despues: float = float(mj.get("ganancia"))
+		var sube: bool = codigo == KEY_D or codigo == KEY_RIGHT
+		pruebas.comprobar(despues > antes if sube else despues < antes, "antena.teclado.ganancia_%s" % OS.get_keycode_string(codigo), "%.1f -> %.1f" % [antes, despues])
+	await _ajustar_teclas(mj)
+	_comprobar_lienzo(pruebas, mj)
+	await _captura("manos_inicio")
+	await _toque(KEY_E)
+	pruebas.comprobar(bool(mj.get("_corriendo")), "antena.teclado.Probar_con_E", "E inicia el paso, sin foco en el boton.")
+	var fija: float = float(mj.get("ganancia"))
+	_tecla(KEY_D, true)
+	await _real(0.12)
+	_tecla(KEY_D, false)
+	pruebas.comprobar(is_equal_approx(fija, float(mj.get("ganancia"))), "antena.teclado.ganancia_fija_durante_paso", "No se modifica la regla del modelo.")
+	await _victoria(pruebas, mj, "teclado")
+	await _captura("manos_resultado")
+	await _toque(KEY_ENTER)
+	await _cerrado(pruebas, "teclado.Continuar_con_Intro")
+
+
+func _raton_solo(pruebas: Node) -> void:
+	var mj: Control = await _apertura(pruebas, "raton")
+	if mj == null:
+		return
+	var empezar: Button = _boton_capa("Empezar")
+	pruebas.comprobar(empezar != null, "antena.raton.Empezar_existe", "Debe ser pulsable con el raton.")
+	if empezar == null:
+		return
+	await _clic(empezar)
+	pruebas.comprobar(bool(mj.get("activo")), "antena.raton.Empezar_responde", "Clic izquierdo.")
+	var dial: HSlider = mj.get("_dial")
+	var marca: Label = mj.get("_inicio")
+	var rect: Rect2 = dial.get_global_rect()
+	var antes: float = float(mj.get("ganancia"))
+	await _mover(_punto_dial(dial, antes))
+	_boton_raton(true)
+	await _real(0.04)
+	await _mover(_punto_dial(dial, lerpf(dial.min_value, dial.max_value, 0.55)), true)
+	await _real(0.06)
+	var alto: float = float(mj.get("ganancia"))
+	pruebas.comprobar(alto > antes, "antena.raton.arrastrar_sube_ganancia", "%.1f -> %.1f" % [antes, alto])
+	await _mover(_punto_dial(dial, lerpf(dial.min_value, dial.max_value, 0.04)), true)
+	await _real(0.06)
+	pruebas.comprobar(float(mj.get("ganancia")) < alto, "antena.raton.arrastrar_baja_ganancia", str(mj.get("ganancia")))
+	# Apunta a la marca visible, sin escribir el valor del deslizador.
+	await _mover(Vector2(marca.get_global_rect().get_center().x, rect.get_center().y), true)
+	_boton_raton(false)
+	await _real(0.08)
+	pruebas.comprobar(absf(float(mj.get("ganancia")) - _objetivo_visible(mj)) < 0.15, "antena.raton.marca_INICIO", str(mj.get("ganancia")))
+	var probar: Button = mj.get("_boton")
+	await _clic(probar)
+	pruebas.comprobar(bool(mj.get("_corriendo")), "antena.raton.Probar_responde", "El clic inicia el paso.")
+	await _real(2.0)
+	await _captura("manos_paso")
+	await _victoria(pruebas, mj, "raton")
+	var continuar: Button = _boton_capa("Continuar")
+	pruebas.comprobar(continuar != null, "antena.raton.Continuar_existe", "Resultado accesible al raton.")
+	if continuar != null:
+		await _clic(continuar)
+	await _cerrado(pruebas, "raton.Continuar_con_clic")
+
+
+func _escapes(pruebas: Node) -> void:
+	for fase in ["instrucciones", "ajuste", "paso", "resultado"]:
+		var mj: Control = await _apertura(pruebas, "Esc_" + fase)
+		if mj == null:
+			return
+		if fase != "instrucciones":
+			await _toque(KEY_ENTER)
+		if fase == "paso":
+			await _toque(KEY_SPACE)
+			pruebas.comprobar(bool(mj.get("_corriendo")), "antena.teclado.Probar_con_Espacio", "No requiere foco en Probar.")
+		if fase == "resultado":
+			await _ajustar_teclas(mj)
+			await _toque(KEY_ENTER)
+			pruebas.comprobar(bool(mj.get("_corriendo")), "antena.teclado.Probar_con_Intro", "Intro inicia el paso despues de Empezar.")
+			await _victoria(pruebas, mj, "Esc_resultado")
+		await _toque(KEY_ESCAPE)
+		await _cerrado(pruebas, "Esc_" + fase)
+	# La salida alternativa con raton tambien debe restaurar la pausa.
+	var mj: Control = await _apertura(pruebas, "salir_raton")
+	if mj != null:
+		await _clic(_boton_capa("Empezar"))
+		var salir: Button = Interfaz.anfitrion.get("_salir")
+		await _clic(salir)
+		await _cerrado(pruebas, "raton.Salir_con_clic")
+
+
+func _objetivo_visible(mj: Control) -> float:
+	var dial: HSlider = mj.get("_dial")
+	var marca: Label = mj.get("_inicio")
+	var rect: Rect2 = dial.get_global_rect()
+	var agarre: float = float(dial.get_theme_icon("grabber").get_width())
+	var fraccion: float = (marca.get_global_rect().get_center().x - rect.position.x - agarre * 0.5) / (rect.size.x - agarre)
+	return lerpf(dial.min_value, dial.max_value, fraccion)
+
+
+func _ajustar_teclas(mj: Control) -> void:
+	# Lee la marca del lienzo y el numero de GANANCIA, como mirando la pantalla.
+	var objetivo: float = _objetivo_visible(mj)
+	var limite: int = Time.get_ticks_msec() + 4000
+	while bool(mj.get("activo")) and Time.get_ticks_msec() < limite:
+extends Node
+
+# Arranque del juego. Sin argumentos abre el menu principal. Con argumentos tras "--" entra directo a una
+# zona o a un minijuego, corre las pruebas, guarda capturas o mide fps (ver herramientas/juego_ejecutar.py).
+
+const Pruebas := preload("res://pruebas/pruebas.gd")
+
+
+func _ready() -> void:
+	var a: Dictionary = Juego.args
+	await get_tree().process_frame
+	if a.has("prueba"):
+		var p := Pruebas.new()
+		add_child(p)
+		await p.correr(a["prueba"])
+		Interfaz.salir()
+		return
+	if a.has("minijuego"):
+		if a.has("captura"):
+			_capturar_luego(a["captura"], float(a.get("espera", "3")))
+		var r: Dictionary = await Interfaz.abrir_minijuego(a["minijuego"], {"dificultad": int(a.get("dificultad", "1")), "fallar": a.has("fallar")})
+		print("RESULTADO ", r)
+		if not a.has("captura"):
+			Interfaz.salir()
+		return
+	if a.has("zona"):
+		Juego.nueva_partida()
+		if not a.has("historia"):
+			Juego.poner_bandera("visita_libre")
+		for b in String(a.get("banderas", "")).split(",", false):
+			Juego.poner_bandera(b)
+		await Zonas.ir_a(a["zona"], a.get("entrada", "inicio"))
+		if a.has("pos") and Zonas.jugador != null:
+			var xz := String(a["pos"]).split(",")
+			var mira := Vector3(0, 0, 1)
+			if a.has("mira"):
+				var m := String(a["mira"]).split(",")
+				mira = Vector3(float(m[0]), 0.0, float(m[1]))
+			var y := float(xz[2]) if xz.size() > 2 else Zonas.jugador.global_position.y
+			Zonas.jugador.colocar(Vector3(float(xz[0]), y + 0.05, float(xz[1])), mira)
+			Zonas.companero.colocar_junto(Zonas.jugador.global_position, mira)
+			await get_tree().create_timer(0.4).timeout
+			Zonas.camara.centrar()
+		if a.has("encuadre") and Zonas.camara != null:
+			Zonas.camara.encuadre = float(a["encuadre"])
+			Zonas.camara.centrar()
+		if a.has("medir"):
+			await _medir(float(a["medir"]))
+			Interfaz.salir()
+		elif a.has("captura"):
+			_capturar_luego(a["captura"], float(a.get("espera", "2")))
+		return
+	Interfaz.abrir_menu()
+	if a.has("mapa"):
+		Interfaz.abrir_mapa(true)
+	if a.has("captura"):
+		_capturar_luego(a["captura"], float(a.get("espera", "1.5")))
+
+
+func _capturar_luego(ruta: String, espera: float) -> void:
+	await get_tree().create_timer(espera, true, false, true).timeout
+	if Juego.args.has("sin_hud"):
+		Interfaz.mostrar_hud(false)
+		await get_tree().process_frame
+	await Interfaz.capturar(ruta)
+	Interfaz.salir()
+
+
+func _medir(segundos: float) -> void:
+	# sin vsync: fps, ms por cuadro (media y p95), primitivas y llamadas de dibujo
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	var fin := Time.get_ticks_msec() + 2500
+	while Time.get_ticks_msec() < fin:      # calentar: compilacion de shaders y sombras
+		await get_tree().process_frame
+	var tiempos: Array[float] = []
+	var anterior := Time.get_ticks_usec()
+	fin = Time.get_ticks_msec() + int(segundos * 1000.0)
+	var prims := 0.0
+	var llamadas := 0.0
+	while Time.get_ticks_msec() < fin:
+		await get_tree().process_frame
+		var ahora := Time.get_ticks_usec()
+		tiempos.append((ahora - anterior) / 1000.0)
+		anterior = ahora
+		prims = Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)
+		llamadas = Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
+	tiempos.sort()
+	var suma := 0.0
+	for t in tiempos:
+		suma += t
+	var media := suma / maxf(float(tiempos.size()), 1.0)
+	var p95: float = tiempos[int(tiempos.size() * 0.95)] if not tiempos.is_empty() else 0.0
+	print("MEDIDA zona=%s cuadros=%d fps_medio=%.1f ms_medio=%.2f ms_p95=%.2f primitivas=%d llamadas=%d carga_ms=%d resolucion=%s" % [
+		Zonas.id_actual, tiempos.size(), 1000.0 / maxf(media, 0.001), media, p95, int(prims), int(llamadas),
+		Zonas.ultima_carga_ms, str(get_viewport().get_visible_rect().size)])
+
+LastWriteTime : 13/11/2026 17:04:04
+Length        : 10177
+Name          : linea_tiempo.gd
+
+
+LastWriteTime : 13/11/2026 17:02:44
+Length        : 1379
+Name          : minijuego.json
+
+
+LastWriteTime : 13/11/2026 17:04:07
+Length        : 4127
+Name          : prueba_linea_tiempo.gd
+
+warning: could not open directory 'pruebas/bench_render/corridas/run_4pi1rfpl/': No such file or directory
+warning: could not open directory 'pruebas/bench_render/corridas/run_kz4ist6c/': No such file or directory
+ M Nasa_Game/Construccion/Minijuegos/antena/NOTA.md
+ M Nasa_Game/Construccion/Minijuegos/satelite/NOTA.md
+ M Nasa_Game/Construccion/Minijuegos/seguidor/NOTA.md
+ M "Nasa_Game/Fase_1_Arte/Exploracion/Lote_06/Lote 06 - Luna y Mirador (propuesta).md"
+ M Nasa_Game/Fase_1_Arte/registro_generaciones.json
+ M Nasa_Game/Memory.md
+ M Nasa_Game/trabajos.md
+ M herramientas/blender/rig_protagonista.py
+ M juego/ARQUITECTURA.md
+ M juego/datos/misiones.json
+ M juego/interfaz/anfitrion.gd
+ M juego/interfaz/hud.gd
+ M juego/interfaz/menu.gd
+ M juego/interfaz/ventana_carga.gd
+ M juego/minijuegos/antena/antena.gd
+ M juego/minijuegos/antena/minijuego.json
+ M juego/minijuegos/satelite/minijuego.json
+ M juego/minijuegos/satelite/satelite.gd
+ M juego/minijuegos/seguidor/minijuego.json
+ M juego/minijuegos/seguidor/seguidor.gd
+ M juego/minijuegos/telescopio/minijuego.json
+ M juego/minijuegos/telescopio/telescopio.gd
+ M juego/nucleo/companero.gd
+ M juego/nucleo/iluminacion.gd
+ M juego/nucleo/interactuable.gd
+ M juego/nucleo/interfaz.gd
+ M juego/nucleo/juego.gd
+ M juego/nucleo/jugador.gd
+ M juego/nucleo/umbral.gd
+ M juego/nucleo/zonas.gd
+ M juego/principal.gd
+ M juego/pruebas/pruebas.gd
+ M juego/shaders/umbral.gdshader
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_base_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_sdfgi_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_sdfgi_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_base_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_base_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_base_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_base_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_base_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_base_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_base_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_base_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_hierba_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_hierba_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sdfgi_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sdfgi_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sdfgi_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sdfgi_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sprites_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sprites_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_base_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_base_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_base_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_base_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_hierba_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_hierba_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_sprites_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_sprites_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_base_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_base_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_base_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_base_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_hierba_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_hierba_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_sprites_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_sprites_1920x1080.log
+?? Nasa_Game/Construccion/BUCLE_ESTILO.md
+?? Nasa_Game/Construccion/Capturas/
+?? Nasa_Game/Construccion/Minijuegos/antena/diagnostico_raton.log
+?? Nasa_Game/Construccion/Minijuegos/antena/manos_inicio.png
+?? Nasa_Game/Construccion/Minijuegos/antena/manos_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/antena/manos_paso.png
+?? Nasa_Game/Construccion/Minijuegos/antena/manos_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_manos.log
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_manos_diagnostico.log
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_manos_ventana.log
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_minijuego_manos.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/INFORME_MANOS.md
+?? Nasa_Game/Construccion/Minijuegos/satelite/diagnostico_manos_coordenadas.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_raton_balance.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_raton_montaje.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_teclado_balance.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/prueba_manos.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/prueba_manos_ventana.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/prueba_minijuego_manos.log
+?? Nasa_Game/Construccion/Minijuegos/seguidor/INFORME_MANOS.md
+?? Nasa_Game/Construccion/Minijuegos/seguidor/manos_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/manos_rampa_varios.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/manos_raton.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/manos_teclado.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/prueba_comun_manos.txt
+?? Nasa_Game/Construccion/Minijuegos/seguidor/prueba_manos.txt
+?? Nasa_Game/Construccion/Minijuegos/seguidor/prueba_manos_ventana.txt
+?? Nasa_Game/Construccion/Minijuegos/telescopio/diagnostico_sincronizacion.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_rasgo_0.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_rasgo_1.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_rasgo_2.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_buscar.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_enfocar.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_rasgo_0.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_rasgo_1.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_rasgo_2.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/prueba_manos.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/prueba_manos_ventana.log
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_antena.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_linea_tiempo.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_satelite.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_seguidor.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_telescopio.md
+?? Nasa_Game/Construccion/Tareas_Codex/lanzar_manos.cmd
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_antena.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_linea_tiempo.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_satelite.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_seguidor.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_telescopio.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/tanda_manos.txt
+?? Nasa_Game/Construccion/Tareas_Codex/minijuegos_manos.md
+?? Nasa_Game/Construccion/Zonas/
+?? Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/
+?? Nasa_Game/Fase_3_Personajes/
+?? herramientas/mallas/ciudad_arquitectura.py
+?? herramientas/mallas/ciudad_base.py
+?? herramientas/mallas/ciudad_mobiliario.py
+?? herramientas/mallas/habitacion_modelos.py
+?? herramientas/mallas/luna_modelos.py
+?? herramientas/mallas/mirador_escena.py
+?? herramientas/mallas/mirador_modelos.py
+?? herramientas/mallas/sendero_ampliacion.py
+?? herramientas/mallas/sendero_visibilidad.py
+?? juego/datos/mapa.json
+?? juego/interfaz/arte/
+?? juego/interfaz/mapa.gd
+?? juego/minijuegos/antena/prueba_manos.gd
+?? juego/minijuegos/satelite/prueba_manos.gd
+?? juego/minijuegos/seguidor/prueba_manos.gd
+?? juego/minijuegos/telescopio/prueba_manos.gd
+?? juego/modelos/ciudad/
+?? juego/modelos/habitacion/
+?? juego/modelos/luna/
+?? juego/modelos/mirador/
+?? juego/modelos/personajes/PER-01_medidas.json
+?? juego/modelos/personajes/PER-01_rig.glb
+?? juego/modelos/sendero/
+?? juego/zonas/ciudad/
+?? juego/zonas/habitacion/habitacion.gd
+?? juego/zonas/habitacion/zona.json
+?? juego/zonas/luna/
+?? juego/zonas/mirador/brillo.gdshader
+?? juego/zonas/mirador/layout.json
+?? juego/zonas/mirador/mirador.gd
+?? juego/zonas/mirador/zona.json
+?? juego/zonas/sendero/layout.json
+?? juego/zonas/sendero/sendero.gd
+?? juego/zonas/sendero/zona.json
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Content -Encoding utf8 juego/minijuegos/antena/prueba_manos.gd | Select-Object -Skip 220 -First 160; Get-Content -Encoding utf8 juego/principal.gd | Select-Object -First 125; Get-ChildItem juego/minijuegos/linea_tiempo | Select-Object Name,Length; Get-Item AGENTS.md,juego/AGENTS.md,juego/minijuegos/AGENTS.md,juego/minijuegos/linea_tiempo/AGENTS.md,Nasa_Game/AGENTS.md,Nasa_Game/Construccion/AGENTS.md,Nasa_Game/Construccion/Minijuegos/AGENTS.md,Nasa_Game/Construccion/Minijuegos/linea_tiempo/AGENTS.md -ErrorAction SilentlyContinue | Select-Object FullName' in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 1594ms:
+	Input.parse_input_event(evento)
+
+
+func _toque(codigo: int) -> void:
+	_tecla(codigo, true)
+	await get_tree().process_frame
+	await get_tree().physics_frame
+	await get_tree().process_frame
+	_tecla(codigo, false)
+	await _real(0.05)
+
+
+func _soltar_todo() -> void:
+	for codigo in _pulsadas.keys():
+		_tecla(int(codigo), false)
+
+
+func _mover(posicion: Vector2, arrastrando: bool = false) -> void:
+	# parse_input_event recibe pixeles de ventana; el lienzo usa coordenadas logicas.
+	# En headless la ventana mide 64x64 aunque el lienzo logico sea 1280x720.
+	var transformacion: Transform2D = get_viewport().get_final_transform()
+	var evento: InputEventMouseMotion = InputEventMouseMotion.new()
+	evento.position = transformacion * posicion
+	evento.global_position = evento.position
+	evento.relative = transformacion * posicion - transformacion * _raton
+	evento.button_mask = MOUSE_BUTTON_MASK_LEFT if arrastrando else 0
+	_raton = posicion
+	Input.parse_input_event(evento)
+	await get_tree().process_frame
+
+
+func _boton_raton(abajo: bool) -> void:
+	var evento: InputEventMouseButton = InputEventMouseButton.new()
+	evento.button_index = MOUSE_BUTTON_LEFT
+	evento.button_mask = MOUSE_BUTTON_MASK_LEFT if abajo else 0
+	evento.position = get_viewport().get_final_transform() * _raton
+	evento.global_position = evento.position
+	evento.pressed = abajo
+	Input.parse_input_event(evento)
+
+
+func _clic(control: Control) -> void:
+	if control == null:
+		return
+	await _mover(control.get_global_rect().get_center())
+	_boton_raton(true)
+	await _real(0.06)
+	_boton_raton(false)
+	await _real(0.12)
+
+
+func _hasta(condicion: Callable, segundos: float) -> bool:
+	var limite: int = Time.get_ticks_msec() + int(segundos * 1000.0)
+	while not bool(condicion.call()) and Time.get_ticks_msec() < limite:
+		await get_tree().process_frame
+	return bool(condicion.call())
+
+
+func _real(segundos: float) -> void:
+	await get_tree().create_timer(segundos, true, false, true).timeout
+
+
+func _captura(nombre: String) -> void:
+	if Juego.args.has("capturas_manos") and DisplayServer.get_name() != "headless":
+		await Interfaz.capturar(ProjectSettings.globalize_path("res://../Nasa_Game/Construccion/Minijuegos/antena/" + nombre + ".png"))
+extends Node
+
+# Arranque del juego. Sin argumentos abre el menu principal. Con argumentos tras "--" entra directo a una
+# zona o a un minijuego, corre las pruebas, guarda capturas o mide fps (ver herramientas/juego_ejecutar.py).
+
+const Pruebas := preload("res://pruebas/pruebas.gd")
+
+
+func _ready() -> void:
+	var a: Dictionary = Juego.args
+	await get_tree().process_frame
+	if a.has("prueba"):
+		var p := Pruebas.new()
+		add_child(p)
+		await p.correr(a["prueba"])
+		Interfaz.salir()
+		return
+	if a.has("minijuego"):
+		if a.has("captura"):
+			_capturar_luego(a["captura"], float(a.get("espera", "3")))
+		var r: Dictionary = await Interfaz.abrir_minijuego(a["minijuego"], {"dificultad": int(a.get("dificultad", "1")), "fallar": a.has("fallar")})
+		print("RESULTADO ", r)
+		if not a.has("captura"):
+			Interfaz.salir()
+		return
+	if a.has("zona"):
+		Juego.nueva_partida()
+		if not a.has("historia"):
+			Juego.poner_bandera("visita_libre")
+		for b in String(a.get("banderas", "")).split(",", false):
+			Juego.poner_bandera(b)
+		await Zonas.ir_a(a["zona"], a.get("entrada", "inicio"))
+		if a.has("pos") and Zonas.jugador != null:
+			var xz := String(a["pos"]).split(",")
+			var mira := Vector3(0, 0, 1)
+			if a.has("mira"):
+				var m := String(a["mira"]).split(",")
+				mira = Vector3(float(m[0]), 0.0, float(m[1]))
+			var y := float(xz[2]) if xz.size() > 2 else Zonas.jugador.global_position.y
+			Zonas.jugador.colocar(Vector3(float(xz[0]), y + 0.05, float(xz[1])), mira)
+			Zonas.companero.colocar_junto(Zonas.jugador.global_position, mira)
+			await get_tree().create_timer(0.4).timeout
+			Zonas.camara.centrar()
+		if a.has("encuadre") and Zonas.camara != null:
+			Zonas.camara.encuadre = float(a["encuadre"])
+			Zonas.camara.centrar()
+		if a.has("medir"):
+			await _medir(float(a["medir"]))
+			Interfaz.salir()
+		elif a.has("captura"):
+			_capturar_luego(a["captura"], float(a.get("espera", "2")))
+		return
+	Interfaz.abrir_menu()
+	if a.has("mapa"):
+		Interfaz.abrir_mapa(true)
+	if a.has("captura"):
+		_capturar_luego(a["captura"], float(a.get("espera", "1.5")))
+
+
+func _capturar_luego(ruta: String, espera: float) -> void:
+	await get_tree().create_timer(espera, true, false, true).timeout
+	if Juego.args.has("sin_hud"):
+		Interfaz.mostrar_hud(false)
+		await get_tree().process_frame
+	await Interfaz.capturar(ruta)
+	Interfaz.salir()
+
+
+func _medir(segundos: float) -> void:
+	# sin vsync: fps, ms por cuadro (media y p95), primitivas y llamadas de dibujo
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	var fin := Time.get_ticks_msec() + 2500
+	while Time.get_ticks_msec() < fin:      # calentar: compilacion de shaders y sombras
+		await get_tree().process_frame
+	var tiempos: Array[float] = []
+	var anterior := Time.get_ticks_usec()
+	fin = Time.get_ticks_msec() + int(segundos * 1000.0)
+	var prims := 0.0
+	var llamadas := 0.0
+	while Time.get_ticks_msec() < fin:
+		await get_tree().process_frame
+		var ahora := Time.get_ticks_usec()
+		tiempos.append((ahora - anterior) / 1000.0)
+		anterior = ahora
+		prims = Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME)
+		llamadas = Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
+	tiempos.sort()
+	var suma := 0.0
+	for t in tiempos:
+		suma += t
+	var media := suma / maxf(float(tiempos.size()), 1.0)
+	var p95: float = tiempos[int(tiempos.size() * 0.95)] if not tiempos.is_empty() else 0.0
+	print("MEDIDA zona=%s cuadros=%d fps_medio=%.1f ms_medio=%.2f ms_p95=%.2f primitivas=%d llamadas=%d carga_ms=%d resolucion=%s" % [
+		Zonas.id_actual, tiempos.size(), 1000.0 / maxf(media, 0.001), media, p95, int(prims), int(llamadas),
+		Zonas.ultima_carga_ms, str(get_viewport().get_visible_rect().size)])
+
+Name                   Length
+----                   ------
+linea_tiempo.gd         10177
+minijuego.json           1379
+prueba_linea_tiempo.gd   4127
+
+
+
+apply patch
+patch: completed
+C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\linea_tiempo\prueba_manos.gd
+diff --git a/juego/minijuegos/linea_tiempo/prueba_manos.gd b/juego/minijuegos/linea_tiempo/prueba_manos.gd
+new file mode 100644
+index 0000000000000000000000000000000000000000..1515fd44551836f47557e086c204ac954f965cfa
+--- /dev/null
++++ b/juego/minijuegos/linea_tiempo/prueba_manos.gd
+@@ -0,0 +1,297 @@
++extends Node
++
++# Solo observa etiquetas y estado; todas las acciones entran por el viewport.
++var _resultado: Dictionary = {}
++var _devuelto: bool = false
++var _raton: Vector2 = Vector2.ZERO
++
++
++func correr(pruebas: Node) -> void:
++	process_mode = Node.PROCESS_MODE_ALWAYS
++	Juego.modo_prueba = false
++	Juego.sin_guardar = true
++	Juego.minijuegos_solos = false
++	await _teclado(pruebas)
++	await _solo_raton(pruebas)
++	await _salidas(pruebas)
++	pruebas.comprobar(not Interfaz.anfitrion.visible, "linea.manos.anfitrion_cerrado", str(_resultado))
++	pruebas.comprobar(not get_tree().paused, "linea.manos.arbol_sin_pausa", "La apertura debe restaurar la pausa previa.")
++	Juego.modo_prueba = true
++
++
++func _abrir(nivel: int) -> void:
++	_resultado = await Interfaz.abrir_minijuego("linea_tiempo", {"dificultad": nivel})
++	_devuelto = true
++
++
++func _apertura(pruebas: Node, parte: String, nivel: int = 1) -> Control:
++	_devuelto = false
++	_resultado = {}
++	_abrir(nivel)
++	var abierta: bool = await _hasta(func() -> bool: return Interfaz.anfitrion.visible)
++	pruebas.comprobar(abierta, "linea.%s.abre" % parte, "Interfaz.abrir_minijuego en otra corrutina.")
++	await _real(0.12)
++	var mj: Control = Interfaz.anfitrion.get("_minijuego")
++	if mj != null:
++		pruebas.comprobar(int(mj.get("_solo")) == 0 and int(mj.get("_auto")) == 0, "linea.%s.sin_piloto" % parte, "Ni jugar_solo ni llamadas directas al modelo.")
++	return mj
++
++
++func _teclado(pruebas: Node) -> void:
++	var mj: Control = await _apertura(pruebas, "teclado")
++	if mj == null:
++		return
++	await _captura("manos_instrucciones")
++	await _toque(KEY_ENTER)
++	pruebas.comprobar(bool(mj.get("activo")), "linea.teclado.Empezar_Intro", "Foco inicial del anfitrion.")
++	# Todas las alternativas anunciadas, sin tomar la tarjeta.
++	for par in [[KEY_D, 1], [KEY_A, -1], [KEY_RIGHT, 1], [KEY_LEFT, -1], [KEY_S, 1], [KEY_W, -1], [KEY_DOWN, 1], [KEY_UP, -1]]:
++		var antes: int = int(mj.get("seleccion"))
++		await _toque(int(par[0]))
++		pruebas.comprobar(int(mj.get("seleccion")) == antes + int(par[1]), "linea.teclado.elegir_%s" % OS.get_keycode_string(int(par[0])), str(mj.get("seleccion")))
++	for tecla in [KEY_E, KEY_ENTER]:
++		await _toque(tecla)
++		pruebas.comprobar(bool(mj.get("tomada")), "linea.teclado.tomar_%s" % OS.get_keycode_string(tecla), "No requiere foco en un boton.")
++		for par in [[KEY_D, 1], [KEY_A, -1], [KEY_RIGHT, 1], [KEY_LEFT, -1]]:
++			var titulos: Array = mj.get("_titulos")
++			var antes: int = int(mj.get("seleccion"))
++			var titulo: String = titulos[antes].text
++			await _toque(int(par[0]))
++			pruebas.comprobar(int(mj.get("seleccion")) == antes + int(par[1]) and titulos[antes + int(par[1])].text == titulo, "linea.teclado.mover_%s_con_%s" % [OS.get_keycode_string(int(par[0])), OS.get_keycode_string(tecla)], titulo)
++		await _toque(tecla)
++		pruebas.comprobar(not bool(mj.get("tomada")), "linea.teclado.soltar_%s" % OS.get_keycode_string(tecla), "La tarjeta queda colocada.")
++	pruebas.comprobar(int(mj.get("comprobaciones")) == 0, "linea.teclado.mover_no_gasta", str(mj.get("comprobaciones")))
++	await _toque(KEY_SPACE)
++	pruebas.comprobar(int(mj.get("comprobaciones")) == 1 and bool(mj.get("activo")), "linea.teclado.Comprobar_Espacio", "La primera comprobacion ofrece pistas, no derrota.")
++	await _resolver(mj, false, pruebas)
++	_comprobar_lienzo(pruebas, mj, "teclado_d1")
++	await _captura("manos_teclado")
++	await _toque(KEY_SPACE)
++	await _victoria(pruebas, "teclado")
++	await _captura("manos_resultado")
++	await _toque(KEY_ENTER)
++	await _cierre(pruebas, "teclado.Continuar_Intro")
++
++
++func _solo_raton(pruebas: Node) -> void:
++	var mj: Control = await _apertura(pruebas, "raton")
++	if mj == null:
++		return
++	await _clic(_boton_capa("Empezar"))
++	pruebas.comprobar(bool(mj.get("activo")), "linea.raton.Empezar", "Clic en el anfitrion real.")
++	var paneles: Array = mj.get("_paneles")
++	var titulos: Array = mj.get("_titulos")
++	var primero: String = titulos[0].text
++	# Prueba tomar, cruzar varios huecos y soltar, y luego deshace con raton.
++	await _mover(paneles[0].get_global_rect().get_center())
++	_boton_raton(true)
++	await _real(0.06)
++	pruebas.comprobar(bool(mj.get("tomada")), "linea.raton.tomar", "Clic izquierdo sobre la tarjeta.")
++	await _mover(paneles[2].get_global_rect().get_center(), true)
++	pruebas.comprobar(titulos[2].text == primero and int(mj.get("seleccion")) == 2, "linea.raton.arrastrar_derecha_varios_huecos", str(mj.get("orden")))
++	_boton_raton(false)
++	await _real(0.06)
++	pruebas.comprobar(not bool(mj.get("tomada")) and not bool(mj.get("_arrastrando")), "linea.raton.soltar", "Liberar el boton coloca la tarjeta.")
++	await _arrastrar(paneles[2], paneles[0])
++	pruebas.comprobar(titulos[0].text == primero, "linea.raton.arrastrar_izquierda", str(mj.get("orden")))
++	var comprobar: Button = mj.get("_comprobar_boton")
++	await _clic(comprobar)
++	pruebas.comprobar(int(mj.get("comprobaciones")) == 1 and bool(mj.get("activo")), "linea.raton.Comprobar", "Boton independiente del foco.")
++	await _resolver(mj, true, pruebas)
++	_comprobar_lienzo(pruebas, mj, "raton_d1")
++	await _captura("manos_raton")
++	await _clic(comprobar)
++	await _victoria(pruebas, "raton")
++	await _clic(_boton_capa("Continuar"))
++	await _cierre(pruebas, "raton.Continuar_clic")
++
++
++func _resolver(mj: Control, raton: bool, pruebas: Node) -> void:
++	# Lee la pista ampliada de cada tarjeta, como al seleccionarla en pantalla.
++	# No consulta HITOS, indices cronologicos ni fechas ocultas para decidir.
++	var titulos: Array = mj.get("_titulos")
++	var paneles: Array = mj.get("_paneles")
++	var pista_usada: bool = false
++	for pasada in 3:
++		var movidas: int = 0
++		for i in titulos.size():
++			if raton:
++				await _clic(paneles[i])
++			else:
++				await _elegir(mj, i)
++			var detalle: Label = mj.get("_detalle")
++			var inicio: int = detalle.text.find("Va después de «")
++			if inicio < 0:
++				continue
++			pista_usada = true
++			var nombre: String = detalle.text.substr(inicio + "Va después de «".length()).get_slice("»", 0)
++			var anterior: int = -1
++			for j in titulos.size():
++				if titulos[j].text == nombre:
++					anterior = j
++			if anterior < 0:
++				continue
++			var destino: int = anterior if i < anterior else anterior + 1
++			if destino == i:
++				continue
++			if raton:
++				await _arrastrar(paneles[i], paneles[destino])
++			else:
++				await _toque(KEY_E)
++				for paso in absi(destino - i):
++					await _toque(KEY_A if destino < i else KEY_D)
++				await _toque(KEY_ENTER)
++			movidas += 1
++		if movidas == 0:
++			break
++	pruebas.comprobar(pista_usada, "linea.%s.resuelve_leyendo_pistas_visibles" % ("raton" if raton else "teclado"), "Sin conocer los numeros y sin escribir el estado.")
++
++
++func _elegir(mj: Control, destino: int) -> void:
++	for intento in 12:
++		var seleccion: int = int(mj.get("seleccion"))
++		if seleccion == destino:
++			return
++		await _toque(KEY_RIGHT if destino > seleccion else KEY_LEFT)
++
++
++func _victoria(pruebas: Node, parte: String) -> void:
++	var aparece: bool = await _hasta(func() -> bool: return _boton_capa("Continuar") != null)
++	var resultado: Dictionary = Interfaz.anfitrion.get("_resultado")
++	pruebas.comprobar(aparece and bool(resultado.get("superado", false)), "linea.%s.ganado" % parte, str(resultado))
++
++
++func _cierre(pruebas: Node, parte: String) -> void:
++	var cerrado: bool = await _hasta(func() -> bool: return _devuelto and not Interfaz.anfitrion.visible)
++	pruebas.comprobar(cerrado, "linea.%s.anfitrion_cerrado" % parte, str(_resultado))
++	pruebas.comprobar(not get_tree().paused, "linea.%s.sin_pausa" % parte, "Devuelve el control al juego.")
++
++
++func _salidas(pruebas: Node) -> void:
++	for fase in ["instrucciones", "jugando", "tomada", "arrastrando", "resultado"]:
++		var mj: Control = await _apertura(pruebas, "Esc_" + fase)
++		if mj == null:
++			return
++		if fase != "instrucciones":
++			await _toque(KEY_ENTER)
++		if fase == "tomada":
++			await _toque(KEY_E)
++		if fase == "arrastrando":
++			var paneles: Array = mj.get("_paneles")
++			await _mover(paneles[0].get_global_rect().get_center())
++			_boton_raton(true)
++			await _real(0.05)
++		if fase == "resultado":
++			await _toque(KEY_SPACE)
++			await _resolver(mj, false, pruebas)
++			await _toque(KEY_SPACE)
++			await _victoria(pruebas, "Esc_resultado")
++		await _toque(KEY_ESCAPE)
++		if fase == "arrastrando":
++			_boton_raton(false)
++		await _cierre(pruebas, "Esc_" + fase)
++	# El mayor numero de tarjetas tambien debe caber, sin tocar sus reglas.
++	var mayor: Control = await _apertura(pruebas, "lienzo_d3", 3)
++	if mayor != null:
++		await _toque(KEY_ENTER)
++		await _toque(KEY_SPACE)
++		for i in 9:
++			await _elegir(mayor, i)
++			_comprobar_lienzo(pruebas, mayor, "d3_tarjeta_%d" % i)
++		await _captura("manos_nivel3")
++		await _clic(Interfaz.anfitrion.get("_salir"))
++		await _cierre(pruebas, "Salir_clic")
++
++
++func _comprobar_lienzo(pruebas: Node, mj: Control, parte: String) -> void:
++	var lienzo: Rect2 = Rect2(Vector2.ZERO, Vector2(1120, 520))
++	var fuera: Array[String] = []
++	for nodo in mj.get_children():
++		if nodo is Control and nodo.visible and not lienzo.encloses(Rect2(nodo.position, nodo.size)):
++			fuera.append("%s: %s" % [nodo.name, str(Rect2(nodo.position, nodo.size))])
++	pruebas.comprobar(fuera.is_empty(), "linea.%s.todo_dentro_1120x520" % parte, "; ".join(fuera))
++
++
++func _boton_capa(nombre: String) -> Button:
++	var capa: Control = Interfaz.anfitrion.get("_capa")
++	if not capa.visible:
++		return null
++	for nodo in capa.find_children("*", "Button", true, false):
++		if nodo.text == nombre:
++			return nodo as Button
++	return null
++
++
++func _tecla(codigo: int, abajo: bool) -> void:
++	var evento: InputEventKey = InputEventKey.new()
++	evento.physical_keycode = codigo
++	evento.keycode = codigo
++	evento.pressed = abajo
++	Input.parse_input_event(evento)
++
++
++func _toque(codigo: int) -> void:
++	_tecla(codigo, true)
++	await get_tree().process_frame
++	await get_tree().physics_frame
++	await get_tree().process_frame
++	_tecla(codigo, false)
++	await _real(0.04)
++
++
++func _mover(posicion: Vector2, arrastrando: bool = false) -> void:
++	# Ventana y lienzo difieren tambien en headless (ventana de 64 x 64).
++	var transformacion: Transform2D = get_viewport().get_final_transform()
++	var evento: InputEventMouseMotion = InputEventMouseMotion.new()
++	evento.position = transformacion * posicion
++	evento.global_position = evento.position
++	evento.relative = transformacion * posicion - transformacion * _raton
++	evento.button_mask = MOUSE_BUTTON_MASK_LEFT if arrastrando else 0
++	_raton = posicion
++	Input.parse_input_event(evento)
++	await get_tree().process_frame
++
++
++func _boton_raton(abajo: bool) -> void:
++	var evento: InputEventMouseButton = InputEventMouseButton.new()
++	evento.button_index = MOUSE_BUTTON_LEFT
++	evento.button_mask = MOUSE_BUTTON_MASK_LEFT if abajo else 0
++	evento.position = get_viewport().get_final_transform() * _raton
++	evento.global_position = evento.position
++	evento.pressed = abajo
++	Input.parse_input_event(evento)
++
++
++func _clic(control: Control) -> void:
++	if control == null:
++		return
++	await _mover(control.get_global_rect().get_center())
++	_boton_raton(true)
++	await _real(0.05)
++	_boton_raton(false)
++	await _real(0.08)
++
++
++func _arrastrar(origen: Control, destino: Control) -> void:
++	await _mover(origen.get_global_rect().get_center())
++	_boton_raton(true)
++	await _real(0.05)
++	await _mover(destino.get_global_rect().get_center(), true)
++	_boton_raton(false)
++	await _real(0.08)
++
++
++func _hasta(condicion: Callable) -> bool:
++	var limite: int = Time.get_ticks_msec() + 3000
++	while not bool(condicion.call()) and Time.get_ticks_msec() < limite:
++		await get_tree().process_frame
++	return bool(condicion.call())
++
++
++func _real(segundos: float) -> void:
++	await get_tree().create_timer(segundos, true, false, true).timeout
++
++
++func _captura(nombre: String) -> void:
++	if Juego.args.has("capturas_manos") and DisplayServer.get_name() != "headless":
++		await Interfaz.capturar(ProjectSettings.globalize_path("res://../Nasa_Game/Construccion/Minijuegos/linea_tiempo/" + nombre + ".png"))
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/linea_tiempo/prueba_manos.gd --ritmo=1 2>&1 | Tee-Object -FilePath Nasa_Game/Construccion/Minijuegos/linea_tiempo/diagnostico_manos.txt' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 29988ms:
+ERROR: Failed to open 'user://logs/godot2026-11-14T14.08.51.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK linea.teclado.abre
+PRUEBA_OK linea.teclado.sin_piloto
+PRUEBA_OK linea.teclado.Empezar_Intro
+PRUEBA_OK linea.teclado.elegir_D
+PRUEBA_OK linea.teclado.elegir_A
+PRUEBA_OK linea.teclado.elegir_Right
+PRUEBA_OK linea.teclado.elegir_Left
+PRUEBA_OK linea.teclado.elegir_S
+PRUEBA_OK linea.teclado.elegir_W
+PRUEBA_OK linea.teclado.elegir_Down
+PRUEBA_OK linea.teclado.elegir_Up
+PRUEBA_OK linea.teclado.tomar_E
+PRUEBA_OK linea.teclado.mover_D_con_E
+PRUEBA_OK linea.teclado.mover_A_con_E
+PRUEBA_OK linea.teclado.mover_Right_con_E
+PRUEBA_OK linea.teclado.mover_Left_con_E
+PRUEBA_OK linea.teclado.soltar_E
+PRUEBA_OK linea.teclado.tomar_Enter
+PRUEBA_OK linea.teclado.mover_D_con_Enter
+PRUEBA_OK linea.teclado.mover_A_con_Enter
+PRUEBA_OK linea.teclado.mover_Right_con_Enter
+PRUEBA_OK linea.teclado.mover_Left_con_Enter
+PRUEBA_OK linea.teclado.soltar_Enter
+PRUEBA_OK linea.teclado.mover_no_gasta
+PRUEBA_OK linea.teclado.Comprobar_Espacio
+PRUEBA_OK linea.teclado.resuelve_leyendo_pistas_visibles
+PRUEBA_OK linea.teclado_d1.todo_dentro_1120x520
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.teclado.ganado
+PRUEBA_OK linea.teclado.Continuar_Intro.anfitrion_cerrado
+PRUEBA_OK linea.teclado.Continuar_Intro.sin_pausa
+PRUEBA_OK linea.raton.abre
+PRUEBA_OK linea.raton.sin_piloto
+PRUEBA_OK linea.raton.Empezar
+PRUEBA_OK linea.raton.tomar
+PRUEBA_OK linea.raton.arrastrar_derecha_varios_huecos
+PRUEBA_OK linea.raton.soltar
+PRUEBA_OK linea.raton.arrastrar_izquierda
+PRUEBA_OK linea.raton.Comprobar
+PRUEBA_OK linea.raton.resuelve_leyendo_pistas_visibles
+PRUEBA_OK linea.raton_d1.todo_dentro_1120x520
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.raton.ganado
+PRUEBA_OK linea.raton.Continuar_clic.anfitrion_cerrado
+PRUEBA_OK linea.raton.Continuar_clic.sin_pausa
+PRUEBA_OK linea.Esc_instrucciones.abre
+PRUEBA_OK linea.Esc_instrucciones.sin_piloto
+PRUEBA_OK linea.Esc_instrucciones.anfitrion_cerrado
+PRUEBA_OK linea.Esc_instrucciones.sin_pausa
+PRUEBA_OK linea.Esc_jugando.abre
+PRUEBA_OK linea.Esc_jugando.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_jugando.anfitrion_cerrado
+PRUEBA_OK linea.Esc_jugando.sin_pausa
+PRUEBA_OK linea.Esc_tomada.abre
+PRUEBA_OK linea.Esc_tomada.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_tomada.anfitrion_cerrado
+PRUEBA_OK linea.Esc_tomada.sin_pausa
+PRUEBA_OK linea.Esc_arrastrando.abre
+PRUEBA_OK linea.Esc_arrastrando.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_arrastrando.anfitrion_cerrado
+PRUEBA_OK linea.Esc_arrastrando.sin_pausa
+PRUEBA_OK linea.Esc_resultado.abre
+PRUEBA_OK linea.Esc_resultado.sin_piloto
+PRUEBA_OK linea.teclado.resuelve_leyendo_pistas_visibles
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.Esc_resultado.ganado
+PRUEBA_OK linea.Esc_resultado.anfitrion_cerrado
+PRUEBA_OK linea.Esc_resultado.sin_pausa
+PRUEBA_OK linea.lienzo_d3.abre
+PRUEBA_OK linea.lienzo_d3.sin_piloto
+PRUEBA_OK linea.d3_tarjeta_0.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_1.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_2.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_3.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_4.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_5.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_6.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_7.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_8.todo_dentro_1120x520
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Salir_clic.anfitrion_cerrado
+PRUEBA_OK linea.Salir_clic.sin_pausa
+PRUEBA_OK linea.manos.anfitrion_cerrado
+PRUEBA_OK linea.manos.arbol_sin_pausa
+PRUEBAS hechas=81 fallos=0
+FIN
+[godot: ok; 23 s; lineas=98; errores=0]
+
+codex
+La primera corrida ya ganó con ambos dispositivos usando eventos por `Input.parse_input_event()`, sin recurrir al piloto. Tras una comprobación exploratoria, las pistas visibles permiten ordenar las tarjetas sin conocer las fechas. Ahora estoy verificando Esc durante el arrastre y el resultado, y el ajuste del nivel de nueve tarjetas.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'python -I herramientas/juego_ejecutar.py --ventana --todo -- --prueba=guion:res://minijuegos/linea_tiempo/prueba_manos.gd --ritmo=1 --capturas_manos 2>&1 | Tee-Object -FilePath Nasa_Game/Construccion/Minijuegos/linea_tiempo/prueba_manos_ventana.txt' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 28104ms:
+ERROR: Failed to open 'user://logs/godot2026-11-14T14.09.46.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.3.215 - Forward Mobile - Using Device #0: Intel - Intel(R) HD Graphics 620
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK linea.teclado.abre
+PRUEBA_OK linea.teclado.sin_piloto
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_instrucciones.png
+PRUEBA_OK linea.teclado.Empezar_Intro
+PRUEBA_OK linea.teclado.elegir_D
+PRUEBA_OK linea.teclado.elegir_A
+PRUEBA_OK linea.teclado.elegir_Right
+PRUEBA_OK linea.teclado.elegir_Left
+PRUEBA_OK linea.teclado.elegir_S
+PRUEBA_OK linea.teclado.elegir_W
+PRUEBA_OK linea.teclado.elegir_Down
+PRUEBA_OK linea.teclado.elegir_Up
+PRUEBA_OK linea.teclado.tomar_E
+PRUEBA_OK linea.teclado.mover_D_con_E
+PRUEBA_OK linea.teclado.mover_A_con_E
+PRUEBA_OK linea.teclado.mover_Right_con_E
+PRUEBA_OK linea.teclado.mover_Left_con_E
+PRUEBA_OK linea.teclado.soltar_E
+PRUEBA_OK linea.teclado.tomar_Enter
+PRUEBA_OK linea.teclado.mover_D_con_Enter
+PRUEBA_OK linea.teclado.mover_A_con_Enter
+PRUEBA_OK linea.teclado.mover_Right_con_Enter
+PRUEBA_OK linea.teclado.mover_Left_con_Enter
+PRUEBA_OK linea.teclado.soltar_Enter
+PRUEBA_OK linea.teclado.mover_no_gasta
+PRUEBA_OK linea.teclado.Comprobar_Espacio
+PRUEBA_OK linea.teclado.resuelve_leyendo_pistas_visibles
+PRUEBA_OK linea.teclado_d1.todo_dentro_1120x520
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_teclado.png
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.teclado.ganado
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_resultado.png
+PRUEBA_OK linea.teclado.Continuar_Intro.anfitrion_cerrado
+PRUEBA_OK linea.teclado.Continuar_Intro.sin_pausa
+PRUEBA_OK linea.raton.abre
+PRUEBA_OK linea.raton.sin_piloto
+PRUEBA_OK linea.raton.Empezar
+PRUEBA_OK linea.raton.tomar
+PRUEBA_OK linea.raton.arrastrar_derecha_varios_huecos
+PRUEBA_OK linea.raton.soltar
+PRUEBA_OK linea.raton.arrastrar_izquierda
+PRUEBA_OK linea.raton.Comprobar
+PRUEBA_OK linea.raton.resuelve_leyendo_pistas_visibles
+PRUEBA_OK linea.raton_d1.todo_dentro_1120x520
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_raton.png
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.raton.ganado
+PRUEBA_OK linea.raton.Continuar_clic.anfitrion_cerrado
+PRUEBA_OK linea.raton.Continuar_clic.sin_pausa
+PRUEBA_OK linea.Esc_instrucciones.abre
+PRUEBA_OK linea.Esc_instrucciones.sin_piloto
+PRUEBA_OK linea.Esc_instrucciones.anfitrion_cerrado
+PRUEBA_OK linea.Esc_instrucciones.sin_pausa
+PRUEBA_OK linea.Esc_jugando.abre
+PRUEBA_OK linea.Esc_jugando.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_jugando.anfitrion_cerrado
+PRUEBA_OK linea.Esc_jugando.sin_pausa
+PRUEBA_OK linea.Esc_tomada.abre
+PRUEBA_OK linea.Esc_tomada.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_tomada.anfitrion_cerrado
+PRUEBA_OK linea.Esc_tomada.sin_pausa
+PRUEBA_OK linea.Esc_arrastrando.abre
+PRUEBA_OK linea.Esc_arrastrando.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_arrastrando.anfitrion_cerrado
+PRUEBA_OK linea.Esc_arrastrando.sin_pausa
+PRUEBA_OK linea.Esc_resultado.abre
+PRUEBA_OK linea.Esc_resultado.sin_piloto
+PRUEBA_OK linea.teclado.resuelve_leyendo_pistas_visibles
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.Esc_resultado.ganado
+PRUEBA_OK linea.Esc_resultado.anfitrion_cerrado
+PRUEBA_OK linea.Esc_resultado.sin_pausa
+PRUEBA_OK linea.lienzo_d3.abre
+PRUEBA_OK linea.lienzo_d3.sin_piloto
+PRUEBA_OK linea.d3_tarjeta_0.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_1.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_2.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_3.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_4.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_5.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_6.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_7.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_8.todo_dentro_1120x520
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_nivel3.png
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Salir_clic.anfitrion_cerrado
+PRUEBA_OK linea.Salir_clic.sin_pausa
+PRUEBA_OK linea.manos.anfitrion_cerrado
+PRUEBA_OK linea.manos.arbol_sin_pausa
+PRUEBAS hechas=81 fallos=0
+FIN
+[godot: ok; 23 s; lineas=104; errores=0]
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-ChildItem Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_*.png | Select-Object Name,Length' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 3502ms:
+
+Name                    Length
+----                    ------
+manos_instrucciones.png 121163
+manos_nivel3.png         95254
+manos_raton.png          74031
+manos_resultado.png     103035
+manos_teclado.png        74031
+
+
+
+codex
+Las pruebas de entradas y Esc pasaron también con ventana, y revisé las capturas de los niveles 1 y 3. No encontré bloqueos en los controles ni textos fuera del lienzo. Ajustaré la ayuda para que anuncie también A/D al mover una tarjeta tomada, aclare cómo arrastrar y mencione Esc. Las reglas y los datos se conservan.
+apply patch
+patch: completed
+C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\linea_tiempo\linea_tiempo.gd
+C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\linea_tiempo\minijuego.json
+C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\linea_tiempo\prueba_manos.gd
+diff --git a/juego/minijuegos/linea_tiempo/linea_tiempo.gd b/juego/minijuegos/linea_tiempo/linea_tiempo.gd
+index 8719b107566e0a3027b9afe2658b3d77b5c375e3..14319f5774ae862ef84d7970b32a392a32b65f7d
+--- a/juego/minijuegos/linea_tiempo/linea_tiempo.gd
++++ b/juego/minijuegos/linea_tiempo/linea_tiempo.gd
+@@ -75,7 +75,7 @@
+ 	_comprobar_boton.focus_mode = Control.FOCUS_NONE
+ 	_comprobar_boton.pressed.connect(_comprobar)
+ 	add_child(_comprobar_boton)
+-	_etiqueta("E / Intro: tomar o soltar · ← →: elegir o mover", Vector2(24, 479), Vector2(770, 30), 16)
++	_etiqueta("E / Intro: tomar o soltar · ← → / A D: elegir o mover", Vector2(24, 479), Vector2(770, 30), 16)
+ 	_refrescar()
+ 
+ 
+diff --git a/juego/minijuegos/linea_tiempo/minijuego.json b/juego/minijuegos/linea_tiempo/minijuego.json
+index b07718e0eac5494fb9b5d9b9a32789f95907408d..0cf438170367bdfc49471915301cd0c280d663ea
+--- a/juego/minijuegos/linea_tiempo/minijuego.json
++++ b/juego/minijuegos/linea_tiempo/minijuego.json
+@@ -2,12 +2,12 @@
+   "titulo": "Ecuador ya dejó un mensaje",
+   "resumen": "Ordena las diapositivas del atril desde el hito más antiguo hasta el más reciente.",
+   "instrucciones": [
+-    "Elige una tarjeta y lee su pista de época. El año empieza oculto.",
+-    "Tómala con E o Intro y muévela con izquierda o derecha; pulsa E para soltar. También puedes arrastrarla con el ratón.",
++    "Elige con flechas/WASD o clic en una tarjeta y lee su pista de época. El año empieza oculto.",
++    "Toma o suelta con E o Intro; mueve con ← → o A D. Con ratón: mantén el botón izquierdo, arrastra la tarjeta y suelta.",
+     "Pulsa Comprobar o Espacio: ✓ revela la fecha cuando el orden con ambas vecinas es correcto; las demás reciben una pista más clara al seleccionarlas.",
+-    "Ordena todas antes de gastar las comprobaciones: nivel 1, 5 tarjetas y 4; nivel 2, 7 y 4; nivel 3, 9 y 3."
++    "Puedes comprobar para descubrir pistas: hay 4 intentos en niveles 1 (5 tarjetas) y 2 (7); 3 en nivel 3 (9). Esc: salir."
+   ],
+-  "controles": "← → / A D: elegir; E / Intro: tomar o soltar; ← →: mover la tomada; ↑ ↓ / W S: elegir otra; Espacio: comprobar. Ratón: arrastrar y pulsar Comprobar.",
++  "controles": "← → / A D: elegir o mover tomada; ↑ ↓ / W S: elegir; E / Intro: tomar/soltar; Espacio: comprobar. Ratón: clic, arrastrar/soltar, Comprobar. Esc: salir.",
+   "pistas": [
+     "Órbita mira la tarjeta del Observatorio de Quito y luego el extremo izquierdo del atril.",
+     "El observatorio abre la secuencia. El cierre de la estación va antes de su entrega a Ecuador. Los Acuerdos Artemisa van al final.",
+diff --git a/juego/minijuegos/linea_tiempo/prueba_manos.gd b/juego/minijuegos/linea_tiempo/prueba_manos.gd
+new file mode 100644
+index 0000000000000000000000000000000000000000..b7d1556b17a049759f3cc8ec63f949bab1502bb1
+--- /dev/null
++++ b/juego/minijuegos/linea_tiempo/prueba_manos.gd
+@@ -0,0 +1,305 @@
++extends Node
++
++# Solo observa etiquetas y estado; todas las acciones entran por el viewport.
++var _resultado: Dictionary = {}
++var _devuelto: bool = false
++var _raton: Vector2 = Vector2.ZERO
++
++
++func correr(pruebas: Node) -> void:
++	process_mode = Node.PROCESS_MODE_ALWAYS
++	Juego.modo_prueba = false
++	Juego.sin_guardar = true
++	Juego.minijuegos_solos = false
++	await _teclado(pruebas)
++	await _solo_raton(pruebas)
++	await _salidas(pruebas)
++	pruebas.comprobar(not Interfaz.anfitrion.visible, "linea.manos.anfitrion_cerrado", str(_resultado))
++	pruebas.comprobar(not get_tree().paused, "linea.manos.arbol_sin_pausa", "La apertura debe restaurar la pausa previa.")
++	Juego.modo_prueba = true
++
++
++func _abrir(nivel: int) -> void:
++	_resultado = await Interfaz.abrir_minijuego("linea_tiempo", {"dificultad": nivel})
++	_devuelto = true
++
++
++func _apertura(pruebas: Node, parte: String, nivel: int = 1) -> Control:
++	_devuelto = false
++	_resultado = {}
++	_abrir(nivel)
++	var abierta: bool = await _hasta(func() -> bool: return Interfaz.anfitrion.visible)
++	pruebas.comprobar(abierta, "linea.%s.abre" % parte, "Interfaz.abrir_minijuego en otra corrutina.")
++	await _real(0.12)
++	var mj: Control = Interfaz.anfitrion.get("_minijuego")
++	if mj != null:
++		pruebas.comprobar(int(mj.get("_solo")) == 0 and int(mj.get("_auto")) == 0, "linea.%s.sin_piloto" % parte, "Ni jugar_solo ni llamadas directas al modelo.")
++	return mj
++
++
++func _teclado(pruebas: Node) -> void:
++	var mj: Control = await _apertura(pruebas, "teclado")
++	if mj == null:
++		return
++	await _captura("manos_instrucciones")
++	await _toque(KEY_ENTER)
++	pruebas.comprobar(bool(mj.get("activo")), "linea.teclado.Empezar_Intro", "Foco inicial del anfitrion.")
++	pruebas.comprobar(not bool(mj.get("tomada")), "linea.teclado.Intro_no_toma_al_empezar", "Empezar no debe ejecutar tambien una accion del minijuego.")
++	# Todas las alternativas anunciadas, sin tomar la tarjeta.
++	for par in [[KEY_D, 1], [KEY_A, -1], [KEY_RIGHT, 1], [KEY_LEFT, -1], [KEY_S, 1], [KEY_W, -1], [KEY_DOWN, 1], [KEY_UP, -1]]:
++		var antes: int = int(mj.get("seleccion"))
++		await _toque(int(par[0]))
++		pruebas.comprobar(int(mj.get("seleccion")) == antes + int(par[1]), "linea.teclado.elegir_%s" % OS.get_keycode_string(int(par[0])), str(mj.get("seleccion")))
++	for tecla in [KEY_E, KEY_ENTER]:
++		await _toque(tecla)
++		pruebas.comprobar(bool(mj.get("tomada")), "linea.teclado.tomar_%s" % OS.get_keycode_string(tecla), "No requiere foco en un boton.")
++		for par in [[KEY_D, 1], [KEY_A, -1], [KEY_RIGHT, 1], [KEY_LEFT, -1]]:
++			var titulos: Array = mj.get("_titulos")
++			var antes: int = int(mj.get("seleccion"))
++			var titulo: String = titulos[antes].text
++			await _toque(int(par[0]))
++			pruebas.comprobar(int(mj.get("seleccion")) == antes + int(par[1]) and titulos[antes + int(par[1])].text == titulo, "linea.teclado.mover_%s_con_%s" % [OS.get_keycode_string(int(par[0])), OS.get_keycode_string(tecla)], titulo)
++		await _toque(tecla)
++		pruebas.comprobar(not bool(mj.get("tomada")), "linea.teclado.soltar_%s" % OS.get_keycode_string(tecla), "La tarjeta queda colocada.")
++	pruebas.comprobar(int(mj.get("comprobaciones")) == 0, "linea.teclado.mover_no_gasta", str(mj.get("comprobaciones")))
++	await _toque(KEY_SPACE)
++	pruebas.comprobar(int(mj.get("comprobaciones")) == 1 and bool(mj.get("activo")), "linea.teclado.Comprobar_Espacio", "La primera comprobacion ofrece pistas, no derrota.")
++	await _resolver(mj, false, pruebas)
++	_comprobar_lienzo(pruebas, mj, "teclado_d1")
++	await _captura("manos_teclado")
++	await _toque(KEY_SPACE)
++	await _victoria(pruebas, "teclado")
++	await _captura("manos_resultado")
++	await _toque(KEY_ENTER)
++	await _cierre(pruebas, "teclado.Continuar_Intro")
++	pruebas.comprobar(bool(_resultado.get("superado", false)), "linea.teclado.devuelve_superado", str(_resultado))
++
++
++func _solo_raton(pruebas: Node) -> void:
++	var mj: Control = await _apertura(pruebas, "raton")
++	if mj == null:
++		return
++	await _clic(_boton_capa("Empezar"))
++	pruebas.comprobar(bool(mj.get("activo")), "linea.raton.Empezar", "Clic en el anfitrion real.")
++	var paneles: Array = mj.get("_paneles")
++	var titulos: Array = mj.get("_titulos")
++	var primero: String = titulos[0].text
++	# Prueba tomar, cruzar varios huecos y soltar, y luego deshace con raton.
++	await _mover(paneles[0].get_global_rect().get_center())
++	_boton_raton(true)
++	await _real(0.06)
++	pruebas.comprobar(bool(mj.get("tomada")), "linea.raton.tomar", "Clic izquierdo sobre la tarjeta.")
++	await _mover(paneles[2].get_global_rect().get_center(), true)
++	pruebas.comprobar(titulos[2].text == primero and int(mj.get("seleccion")) == 2, "linea.raton.arrastrar_derecha_varios_huecos", str(mj.get("orden")))
++	_boton_raton(false)
++	await _real(0.06)
++	pruebas.comprobar(not bool(mj.get("tomada")) and not bool(mj.get("_arrastrando")), "linea.raton.soltar", "Liberar el boton coloca la tarjeta.")
++	await _arrastrar(paneles[2], paneles[0])
++	pruebas.comprobar(titulos[0].text == primero, "linea.raton.arrastrar_izquierda", str(mj.get("orden")))
++	var comprobar: Button = mj.get("_comprobar_boton")
++	await _clic(comprobar)
++	pruebas.comprobar(int(mj.get("comprobaciones")) == 1 and bool(mj.get("activo")), "linea.raton.Comprobar", "Boton independiente del foco.")
++	await _resolver(mj, true, pruebas)
++	_comprobar_lienzo(pruebas, mj, "raton_d1")
++	await _captura("manos_raton")
++	await _clic(comprobar)
++	await _victoria(pruebas, "raton")
++	await _clic(_boton_capa("Continuar"))
++	await _cierre(pruebas, "raton.Continuar_clic")
++	pruebas.comprobar(bool(_resultado.get("superado", false)), "linea.raton.devuelve_superado", str(_resultado))
++
++
++func _resolver(mj: Control, raton: bool, pruebas: Node) -> void:
++	# Lee la pista ampliada de cada tarjeta, como al seleccionarla en pantalla.
++	# No consulta HITOS, indices cronologicos ni fechas ocultas para decidir.
++	var titulos: Array = mj.get("_titulos")
++	var paneles: Array = mj.get("_paneles")
++	var pista_usada: bool = false
++	for pasada in 3:
++		var movidas: int = 0
++		for i in titulos.size():
++			if raton:
++				await _clic(paneles[i])
++			else:
++				await _elegir(mj, i)
++			var detalle: Label = mj.get("_detalle")
++			var inicio: int = detalle.text.find("Va después de «")
++			if inicio < 0:
++				continue
++			pista_usada = true
++			var nombre: String = detalle.text.substr(inicio + "Va después de «".length()).get_slice("»", 0)
++			var anterior: int = -1
++			for j in titulos.size():
++				if titulos[j].text == nombre:
++					anterior = j
++			if anterior < 0:
++				continue
++			var destino: int = anterior if i < anterior else anterior + 1
++			if destino == i:
++				continue
++			if raton:
++				await _arrastrar(paneles[i], paneles[destino])
++			else:
++				await _toque(KEY_E)
++				for paso in absi(destino - i):
++					await _toque(KEY_A if destino < i else KEY_D)
++				await _toque(KEY_ENTER)
++			movidas += 1
++		if movidas == 0:
++			break
++	pruebas.comprobar(pista_usada, "linea.%s.resuelve_leyendo_pistas_visibles" % ("raton" if raton else "teclado"), "Sin conocer los numeros y sin escribir el estado.")
++
++
++func _elegir(mj: Control, destino: int) -> void:
++	for intento in 12:
++		var seleccion: int = int(mj.get("seleccion"))
++		if seleccion == destino:
++			return
++		await _toque(KEY_RIGHT if destino > seleccion else KEY_LEFT)
++
++
++func _victoria(pruebas: Node, parte: String) -> void:
++	var aparece: bool = await _hasta(func() -> bool: return _boton_capa("Continuar") != null)
++	var resultado: Dictionary = Interfaz.anfitrion.get("_resultado")
++	pruebas.comprobar(aparece and bool(resultado.get("superado", false)), "linea.%s.ganado" % parte, str(resultado))
++	var mj: Control = Interfaz.anfitrion.get("_minijuego")
++	pruebas.comprobar(mj != null and int(mj.get("comprobaciones")) == 2, "linea.%s.primer_intento_dos_de_cuatro" % parte, "Una comprobacion para descubrir pistas y otra para ganar.")
++
++
++func _cierre(pruebas: Node, parte: String) -> void:
++	var cerrado: bool = await _hasta(func() -> bool: return _devuelto and not Interfaz.anfitrion.visible)
++	pruebas.comprobar(cerrado, "linea.%s.anfitrion_cerrado" % parte, str(_resultado))
++	pruebas.comprobar(not get_tree().paused, "linea.%s.sin_pausa" % parte, "Devuelve el control al juego.")
++
++
++func _salidas(pruebas: Node) -> void:
++	for fase in ["instrucciones", "jugando", "tomada", "arrastrando", "resultado"]:
++		var mj: Control = await _apertura(pruebas, "Esc_" + fase)
++		if mj == null:
++			return
++		if fase != "instrucciones":
++			await _toque(KEY_ENTER)
++		if fase == "tomada":
++			await _toque(KEY_E)
++		if fase == "arrastrando":
++			var paneles: Array = mj.get("_paneles")
++			await _mover(paneles[0].get_global_rect().get_center())
++			_boton_raton(true)
++			await _real(0.05)
++		if fase == "resultado":
++			await _toque(KEY_SPACE)
++			await _resolver(mj, false, pruebas)
++			await _toque(KEY_SPACE)
++			await _victoria(pruebas, "Esc_resultado")
++		await _toque(KEY_ESCAPE)
++		if fase == "arrastrando":
++			_boton_raton(false)
++		await _cierre(pruebas, "Esc_" + fase)
++	# El mayor numero de tarjetas tambien debe caber, sin tocar sus reglas.
++	var mayor: Control = await _apertura(pruebas, "lienzo_d3", 3)
++	if mayor != null:
++		await _toque(KEY_ENTER)
++		await _toque(KEY_SPACE)
++		for i in 9:
++			await _elegir(mayor, i)
++			_comprobar_lienzo(pruebas, mayor, "d3_tarjeta_%d" % i)
++		await _captura("manos_nivel3")
++		await _clic(Interfaz.anfitrion.get("_salir"))
++		await _cierre(pruebas, "Salir_clic")
++
++
++func _comprobar_lienzo(pruebas: Node, mj: Control, parte: String) -> void:
++	var lienzo: Rect2 = Rect2(Vector2.ZERO, Vector2(1120, 520))
++	var fuera: Array[String] = []
++	for nodo in mj.get_children():
++		if nodo is Control and nodo.visible and not lienzo.encloses(Rect2(nodo.position, nodo.size)):
++			fuera.append("%s: %s" % [nodo.name, str(Rect2(nodo.position, nodo.size))])
++	pruebas.comprobar(fuera.is_empty(), "linea.%s.todo_dentro_1120x520" % parte, "; ".join(fuera))
++	var ventana: Rect2 = get_viewport().get_visible_rect()
++	var marco: Control = Interfaz.anfitrion.get("_marco")
++	pruebas.comprobar(ventana.encloses(marco.get_global_rect()), "linea.%s.marco_y_controles_en_pantalla" % parte, str(marco.get_global_rect()))
++
++
++func _boton_capa(nombre: String) -> Button:
++	var capa: Control = Interfaz.anfitrion.get("_capa")
++	if not capa.visible:
++		return null
++	for nodo in capa.find_children("*", "Button", true, false):
++		if nodo.text == nombre:
++			return nodo as Button
++	return null
++
++
++func _tecla(codigo: int, abajo: bool) -> void:
++	var evento: InputEventKey = InputEventKey.new()
++	evento.physical_keycode = codigo
++	evento.keycode = codigo
++	evento.pressed = abajo
++	Input.parse_input_event(evento)
++
++
++func _toque(codigo: int) -> void:
++	_tecla(codigo, true)
++	await get_tree().process_frame
++	await get_tree().physics_frame
++	await get_tree().process_frame
++	_tecla(codigo, false)
++	await _real(0.04)
++
++
++func _mover(posicion: Vector2, arrastrando: bool = false) -> void:
++	# Ventana y lienzo difieren tambien en headless (ventana de 64 x 64).
++	var transformacion: Transform2D = get_viewport().get_final_transform()
++	var evento: InputEventMouseMotion = InputEventMouseMotion.new()
++	evento.position = transformacion * posicion
++	evento.global_position = evento.position
++	evento.relative = transformacion * posicion - transformacion * _raton
++	evento.button_mask = MOUSE_BUTTON_MASK_LEFT if arrastrando else 0
++	_raton = posicion
++	Input.parse_input_event(evento)
++	await get_tree().process_frame
++
++
++func _boton_raton(abajo: bool) -> void:
++	var evento: InputEventMouseButton = InputEventMouseButton.new()
++	evento.button_index = MOUSE_BUTTON_LEFT
++	evento.button_mask = MOUSE_BUTTON_MASK_LEFT if abajo else 0
++	evento.position = get_viewport().get_final_transform() * _raton
++	evento.global_position = evento.position
++	evento.pressed = abajo
++	Input.parse_input_event(evento)
++
++
++func _clic(control: Control) -> void:
++	if control == null:
++		return
++	await _mover(control.get_global_rect().get_center())
++	_boton_raton(true)
++	await _real(0.05)
++	_boton_raton(false)
++	await _real(0.08)
++
++
++func _arrastrar(origen: Control, destino: Control) -> void:
++	await _mover(origen.get_global_rect().get_center())
++	_boton_raton(true)
++	await _real(0.05)
++	await _mover(destino.get_global_rect().get_center(), true)
++	_boton_raton(false)
++	await _real(0.08)
++
++
++func _hasta(condicion: Callable) -> bool:
++	var limite: int = Time.get_ticks_msec() + 3000
++	while not bool(condicion.call()) and Time.get_ticks_msec() < limite:
++		await get_tree().process_frame
++	return bool(condicion.call())
++
++
++func _real(segundos: float) -> void:
++	await get_tree().create_timer(segundos, true, false, true).timeout
++
++
++func _captura(nombre: String) -> void:
++	if Juego.args.has("capturas_manos") and DisplayServer.get_name() != "headless":
++		await Interfaz.capturar(ProjectSettings.globalize_path("res://../Nasa_Game/Construccion/Minijuegos/linea_tiempo/" + nombre + ".png"))
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/linea_tiempo/prueba_manos.gd --ritmo=1 2>&1 | Tee-Object -FilePath Nasa_Game/Construccion/Minijuegos/linea_tiempo/prueba_manos.txt
+exit $LASTEXITCODE' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 9386ms:
+ERROR: Failed to open 'user://logs/godot2026-11-14T14.11.45.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK linea.teclado.abre
+PRUEBA_OK linea.teclado.sin_piloto
+PRUEBA_OK linea.teclado.Empezar_Intro
+PRUEBA_OK linea.teclado.Intro_no_toma_al_empezar
+PRUEBA_OK linea.teclado.elegir_D
+PRUEBA_OK linea.teclado.elegir_A
+PRUEBA_OK linea.teclado.elegir_Right
+PRUEBA_OK linea.teclado.elegir_Left
+PRUEBA_OK linea.teclado.elegir_S
+PRUEBA_OK linea.teclado.elegir_W
+PRUEBA_OK linea.teclado.elegir_Down
+PRUEBA_OK linea.teclado.elegir_Up
+PRUEBA_OK linea.teclado.tomar_E
+PRUEBA_OK linea.teclado.mover_D_con_E
+PRUEBA_OK linea.teclado.mover_A_con_E
+PRUEBA_OK linea.teclado.mover_Right_con_E
+PRUEBA_OK linea.teclado.mover_Left_con_E
+PRUEBA_OK linea.teclado.soltar_E
+PRUEBA_OK linea.teclado.tomar_Enter
+PRUEBA_OK linea.teclado.mover_D_con_Enter
+PRUEBA_OK linea.teclado.mover_A_con_Enter
+PRUEBA_OK linea.teclado.mover_Right_con_Enter
+PRUEBA_OK linea.teclado.mover_Left_con_Enter
+PRUEBA_OK linea.teclado.soltar_Enter
+PRUEBA_OK linea.teclado.mover_no_gasta
+PRUEBA_OK linea.teclado.Comprobar_Espacio
+PRUEBA_OK linea.teclado.resuelve_leyendo_pistas_visibles
+PRUEBA_OK linea.teclado_d1.todo_dentro_1120x520
+PRUEBA_OK linea.teclado_d1.marco_y_controles_en_pantalla
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.teclado.ganado
+PRUEBA_OK linea.teclado.primer_intento_dos_de_cuatro
+PRUEBA_OK linea.teclado.Continuar_Intro.anfitrion_cerrado
+PRUEBA_OK linea.teclado.Continuar_Intro.sin_pausa
+PRUEBA_OK linea.teclado.devuelve_superado
+PRUEBA_OK linea.raton.abre
+PRUEBA_OK linea.raton.sin_piloto
+PRUEBA_OK linea.raton.Empezar
+PRUEBA_OK linea.raton.tomar
+PRUEBA_OK linea.raton.arrastrar_derecha_varios_huecos
+PRUEBA_OK linea.raton.soltar
+PRUEBA_OK linea.raton.arrastrar_izquierda
+PRUEBA_OK linea.raton.Comprobar
+PRUEBA_OK linea.raton.resuelve_leyendo_pistas_visibles
+PRUEBA_OK linea.raton_d1.todo_dentro_1120x520
+PRUEBA_OK linea.raton_d1.marco_y_controles_en_pantalla
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.raton.ganado
+PRUEBA_OK linea.raton.primer_intento_dos_de_cuatro
+PRUEBA_OK linea.raton.Continuar_clic.anfitrion_cerrado
+PRUEBA_OK linea.raton.Continuar_clic.sin_pausa
+PRUEBA_OK linea.raton.devuelve_superado
+PRUEBA_OK linea.Esc_instrucciones.abre
+PRUEBA_OK linea.Esc_instrucciones.sin_piloto
+PRUEBA_OK linea.Esc_instrucciones.anfitrion_cerrado
+PRUEBA_OK linea.Esc_instrucciones.sin_pausa
+PRUEBA_OK linea.Esc_jugando.abre
+PRUEBA_OK linea.Esc_jugando.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_jugando.anfitrion_cerrado
+PRUEBA_OK linea.Esc_jugando.sin_pausa
+PRUEBA_OK linea.Esc_tomada.abre
+PRUEBA_OK linea.Esc_tomada.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_tomada.anfitrion_cerrado
+PRUEBA_OK linea.Esc_tomada.sin_pausa
+PRUEBA_OK linea.Esc_arrastrando.abre
+PRUEBA_OK linea.Esc_arrastrando.sin_piloto
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Esc_arrastrando.anfitrion_cerrado
+PRUEBA_OK linea.Esc_arrastrando.sin_pausa
+PRUEBA_OK linea.Esc_resultado.abre
+PRUEBA_OK linea.Esc_resultado.sin_piloto
+PRUEBA_OK linea.teclado.resuelve_leyendo_pistas_visibles
+MINIJUEGO linea_tiempo superado=true puntos=100.0 detalle=Ordenaste 5 hitos: de 1873 al 21-06-2023. El disco llevó mensajes de 73 países, incluido Ecuador.
+PRUEBA_OK linea.Esc_resultado.ganado
+PRUEBA_OK linea.Esc_resultado.primer_intento_dos_de_cuatro
+PRUEBA_OK linea.Esc_resultado.anfitrion_cerrado
+PRUEBA_OK linea.Esc_resultado.sin_pausa
+PRUEBA_OK linea.lienzo_d3.abre
+PRUEBA_OK linea.lienzo_d3.sin_piloto
+PRUEBA_OK linea.d3_tarjeta_0.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_0.marco_y_controles_en_pantalla
+PRUEBA_OK linea.d3_tarjeta_1.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_1.marco_y_controles_en_pantalla
+PRUEBA_OK linea.d3_tarjeta_2.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_2.marco_y_controles_en_pantalla
+PRUEBA_OK linea.d3_tarjeta_3.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_3.marco_y_controles_en_pantalla
+PRUEBA_OK linea.d3_tarjeta_4.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_4.marco_y_controles_en_pantalla
+PRUEBA_OK linea.d3_tarjeta_5.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_5.marco_y_controles_en_pantalla
+PRUEBA_OK linea.d3_tarjeta_6.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_6.marco_y_controles_en_pantalla
+PRUEBA_OK linea.d3_tarjeta_7.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_7.marco_y_controles_en_pantalla
+PRUEBA_OK linea.d3_tarjeta_8.todo_dentro_1120x520
+PRUEBA_OK linea.d3_tarjeta_8.marco_y_controles_en_pantalla
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=
+PRUEBA_OK linea.Salir_clic.anfitrion_cerrado
+PRUEBA_OK linea.Salir_clic.sin_pausa
+PRUEBA_OK linea.manos.anfitrion_cerrado
+PRUEBA_OK linea.manos.arbol_sin_pausa
+PRUEBAS hechas=98 fallos=0
+FIN
+[godot: ok; 9 s; lineas=115; errores=0]
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:linea_tiempo --ritmo=8 2>&1 | Tee-Object -FilePath Nasa_Game/Construccion/Minijuegos/linea_tiempo/prueba_minijuego_manos.txt
+exit $LASTEXITCODE' in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 2547ms:
+ERROR: Failed to open 'user://logs/godot2026-11-14T14.12.02.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+

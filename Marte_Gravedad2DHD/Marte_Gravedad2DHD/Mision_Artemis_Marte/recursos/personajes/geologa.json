@@ -1,0 +1,19 @@
+{
+  "id": "geologa",
+  "nombre": "Geóloga Paz",
+  "tam": 32,
+  "animaciones": {
+    "quieto": {
+      "fila": 0,
+      "cuadros": 2,
+      "fps": 2,
+      "bucle": true
+    },
+    "hablar": {
+      "fila": 1,
+      "cuadros": 2,
+      "fps": 4,
+      "bucle": true
+    }
+  }
+}

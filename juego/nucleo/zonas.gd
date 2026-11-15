@@ -106,6 +106,7 @@ func ir_a(id: String, entrada: String = "inicio", opciones: Dictionary = {}) -> 
 	Materiales.ajustar_parametro("inclinacion", float(zona.get("cizalla")))
 	Juego.estado["zona"] = id
 	Juego.estado["entrada"] = entrada
+	Juego.poner_bandera("visitada_" + id)
 	Juego.guardar()
 	ultima_carga_ms = Time.get_ticks_msec() - inicio
 	print("ZONA %s entrada=%s carga_ms=%d" % [id, entrada, ultima_carga_ms])

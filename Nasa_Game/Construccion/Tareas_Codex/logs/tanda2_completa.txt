@@ -1,0 +1,6 @@
+Codex: C:\Users\guill\AppData\Local\OpenAI\Codex\bin\9e1da79431da526b\codex.exe
+4 tareas, 2 en paralelo
+  completa_satelite            ok                      23.2 min      811 bytes
+  completa_telescopio          ok                      19.6 min      663 bytes
+  completa_linea_tiempo        ok                      18.0 min      643 bytes
+  completa_muestras            ok                      20.2 min      798 bytes

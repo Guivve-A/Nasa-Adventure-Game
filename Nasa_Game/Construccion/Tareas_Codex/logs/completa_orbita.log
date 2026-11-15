@@ -1,0 +1,58 @@
+OpenAI Codex v0.167.0-alpha.4.1
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a1dcb0-656f-7022-9b88-33edb69568b5
+--------
+user
+# Brief común
+
+Trabajas en el «Proyecto NASA-Ecuador», un RPG educativo espacial en Godot 4.7.2 (carpeta `juego/`). La raíz del repositorio es tu carpeta de trabajo. Hay otros agentes trabajando a la vez en otras carpetas.
+
+Tu minijuego acaba de rehacerse como arcade de acción (campo en píxeles gordos dibujado con `_draw()`, marcador, vidas y tiempo) sobre un lienzo de 1120 × 520 (280 × 130 píxeles gordos ×4). El director lo vio y dijo: **«lo que no me gusta son los bordes en los minijuegos»**. El anfitrión ya no dibuja marco, y el contrato nuevo deja al minijuego ocupar toda la pantalla. **No lo rehagas: amplíalo a pantalla completa.**
+
+Lee antes: `juego/nucleo/minijuego.gd` (variable `pantalla_completa` y `LIENZO_COMPLETO`), `juego/interfaz/anfitrion.gd`, el guion de tu minijuego completo y su `prueba_manos.gd`.
+
+## Qué entregar
+
+1. **Campo a PANTALLA COMPLETA.** Añade `func _init() -> void: pantalla_completa = true`; el lienzo pasa a **1280 × 720, es decir 320 × 180 píxeles gordos ×4**. Adapta el juego a ese campo: fondo, suelo, cielo y recorridos llegan a los cuatro bordes; el marcador, las vidas, la barra y el tiempo van dentro del campo, a 4 píxeles lógicos o más del borde; reparte el espacio ganado (más cielo, más recorrido), no lo dejes vacío. Con pantalla completa el anfitrión no muestra título ni línea de controles durante la partida: lo imprescindible (por ejemplo «E») se dibuja en el campo como pictograma. Revisa todas las constantes que dependían de 280 × 130 y vuelve a ajustar la dificultad 1 para que siga siendo ganable al primer o segundo intento.
+2. **`minijuego.json` al día:** `controles` en una línea corta (flechas o WASD, E o Espacio, Esc), `instrucciones` (2 o 3 frases muy cortas), `resumen` y 3 `pistas` que describan lo que de verdad se juega. Conserva `titulo`, `ficha`, `escena` y `orden`.
+3. **`prueba_manos.gd` al día** con el campo nuevo: sigue ganando solo con teclas simuladas (`Input.parse_input_event` con `InputEventKey`) y comprueba que se superó, que el anfitrión se cerró y que el árbol no queda en pausa.
+4. **Tres capturas** nuevas con ventana en momentos distintos de la partida, en `Nasa_Game/Construccion/Minijuegos/<id>/completa_1.png`, `completa_2.png` y `completa_3.png`:
+
+```
+python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=<id> --auto --captura=<png> --espera=<s>
+```
+
+5. **Las dos pruebas sin fallos** (pega el resumen en el informe):
+
+```
+python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:<id> --ritmo=8
+python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/<id>/prueba_manos.gd --ritmo=1
+```
+
+## Reglas fijas
+
+- Toca **solo** `juego/minijuegos/<id>/` y tu evidencia en `Nasa_Game/Construccion/Minijuegos/<id>/`.
+- No instales ni descargues nada. Sin búsqueda web. Sin créditos de Higgsfield.
+- GDScript sin `class_name`, con tabuladores, comentarios sin tildes y tipos explícitos al leer diccionarios o JSON.
+- Godot solo con `python -I herramientas/juego_ejecutar.py` (candado global: espera su turno; no cierres procesos ajenos).
+- No cambies los datos reales (salen de `juego/datos/datos_espaciales.json`). Contrato intacto: `_preparar`, `_empezar`, `_paso(delta)`, `terminar(...)`, `jugar_solo(acierta)` y los `parametros` que ya acepta.
+- Si tu minijuego todavía es la versión vieja de paneles y deslizadores (no un campo en píxeles), dilo en el informe y no hagas nada más.
+
+## Informe
+
+Breve: qué cambiaste, cómo se reparte el campo de 320 × 180, el resultado de las dos pruebas, las rutas de las capturas y lo que quedó pendiente.
+
+---
+
+# TU TAREA
+
+Tu minijuego: id `orbita`, carpeta `juego/minijuegos/orbita/`.
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 11:49 PM.
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 11:49 PM.

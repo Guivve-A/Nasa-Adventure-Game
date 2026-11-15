@@ -1,0 +1,17 @@
+Comando: python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/antena/prueba_manos.gd --ritmo=1
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK antena.manos.abierto
+PRUEBA_OK antena.manos.empezar_intro
+PRUEBA_OK antena.manos.campo_completo
+PRUEBA_OK antena.manos.sin_piloto
+MINIJUEGO antena superado=true puntos=118.0 (meta: 45)
+PRUEBA_OK antena.manos.superado
+ANTENA_MANOS paquetes=118 por_pasada=[45, 39, 34] enlace=59.29 visible=59.29
+PRUEBA_OK antena.manos.resultado_devuelto
+PRUEBA_OK antena.manos.anfitrion_cerrado
+PRUEBA_OK antena.manos.arbol_sin_pausa
+PRUEBAS hechas=9 fallos=0
+FIN
+[godot: ok; 76 s; lineas=21; errores=0]
+
+Avisos del entorno: no se pudo escribir user://logs ni leer el almacen de certificados. Sin errores de guion ni PRUEBA_FALLO.

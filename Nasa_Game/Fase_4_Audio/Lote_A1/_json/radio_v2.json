@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-14T19:24:16.044383Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "3bfadfad-83d9-4e08-b839-58e8a2160de3",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 1,
+      "prompt": "Two clear electronic beeps of a walkie-talkie, the second one higher in pitch, loud and clear, isolated, dry, with silence after. No voice, no speech, no music."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_192416_3bfadfad-83d9-4e08-b839-58e8a2160de3.mp3",
+    "status": "completed"
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-11-15T13:36:28.545742Z",
+    "display_name": "GPT Image 2.6",
+    "id": "ac28441d-fe43-438e-b448-829f75692354",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133628_ac28441d-fe43-438e-b448-829f75692354_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "c458d8e8-7f42-4076-9ce7-457872d86109",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/c458d8e8-7f42-4076-9ce7-457872d86109_resize.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Same frame, same lens, same focus and same light as the reference image, one second earlier: the edge of a gray boot sole with tread ribs is just lifting straight up out of the print and leaving through the top of the frame, with a few grains of dust hanging below it. Only the edge of the sole is visible: no person, no markings. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "xhigh",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133628_ac28441d-fe43-438e-b448-829f75692354.png",
+    "status": "completed"
+  }
+]

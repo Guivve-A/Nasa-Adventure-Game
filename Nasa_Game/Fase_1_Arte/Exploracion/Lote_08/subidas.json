@@ -1,0 +1,27 @@
+{
+ "L08_carga_habitacion_borrador": {
+  "id": "0109a1aa-0dfe-46d9-84b8-15206c2a1547",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/jpg/L08_carga_habitacion_borrador.jpg",
+  "bytes": 260739
+ },
+ "L08_carga_ciudad_borrador": {
+  "id": "88fb81bc-1444-41d8-a433-9334e04849e0",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/jpg/L08_carga_ciudad_borrador.jpg",
+  "bytes": 322944
+ },
+ "L08_carga_sendero_borrador": {
+  "id": "a63120a1-59af-42a6-a4a2-3a40eca0bde9",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/jpg/L08_carga_sendero_borrador.jpg",
+  "bytes": 294319
+ },
+ "L08_carga_mirador_borrador": {
+  "id": "ef02e923-53f9-4494-acd3-b25fca7bc04f",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/jpg/L08_carga_mirador_borrador.jpg",
+  "bytes": 243887
+ },
+ "L08_carga_luna_borrador": {
+  "id": "50e85008-be3f-4681-ab00-ef31d4d3e1ac",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/jpg/L08_carga_luna_borrador.jpg",
+  "bytes": 231969
+ }
+}

@@ -1,0 +1,16 @@
+{
+  "nombre": "El sendero del arroyo",
+  "lugar": "Cerro, sobre Las Escalinatas",
+  "momento": "Tarde",
+  "estado_arte": "aprobado en el motor (D-015); ampliación jugable por validar",
+  "orden": 3,
+  "carga": {
+    "imagen": "res://zonas/sendero/carga.jpg",
+    "fichas": ["estacion_cotopaxi", "ganancia", "chimborazo", "pegaso"]
+  },
+  "entradas": {
+    "inicio": "extremo cercano del sendero, igual que «casa»",
+    "casa": "extremo cercano del sendero, junto a la baranda: se llega desde la plaza",
+    "mirador": "extremo lejano, cuesta arriba: se vuelve del Mirador del Faro"
+  }
+}

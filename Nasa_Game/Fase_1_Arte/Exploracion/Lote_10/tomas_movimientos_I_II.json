@@ -1,0 +1,62 @@
+{
+ "lote": "L10",
+ "_nota": "Video de los movimientos I (P03 a P06) y II (P08 y P09) de la cinematica «Un punto de luz». Reparto de modelos del storyboard §5.4. Encargos M copiados tal cual de la seccion 2 del storyboard; solo se cambia el «No text.» final por la proteccion de su fotograma (sin marcas) y la proteccion fija. P07 no lleva video: es la fija K07 con alejamiento en ffmpeg. Un intento por toma; cada clip se revisa antes de lanzar el siguiente. Tope de esta pasada: la suma cotizada de las seis tomas.",
+ "tope_total": 212,
+ "tomas": [
+  {
+   "id": "L10_P03_t1",
+   "plano": "P03",
+   "modelo": "minimax_h3",
+   "inicial": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K03_final.png",
+   "duracion": 10,
+   "resolucion": "2K",
+   "encargo": "Locked-off extreme telephoto shot, 10 seconds, real time, no camera movement at all, as if on a heavy tripod. Only the air moves: heat shimmer ripples horizontally over the water and makes the distant rocket and tower waver slightly. A faint wisp of white vapour drifts sideways from the rocket and dissolves. The silhouettes do not move. The water stays mirror still. No ignition, no smoke, no flames, no birds, no zoom. No markings, letters, flags or symbols on the rocket, the tower or the cars. No text, no logos, no insignia, no emblems, no watermark."
+  },
+  {
+   "id": "L10_P04_t1",
+   "plano": "P04",
+   "modelo": "seedance_2_5",
+   "inicial": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K04a_final_r1.png",
+   "final": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K04b_final.png",
+   "duracion": 8,
+   "resolucion": "720p",
+   "encargo": "Locked-off extreme telephoto shot, 8 seconds, filmed in slow motion as if at 48 frames per second, so everything feels enormous and heavy. No camera movement, no shake, no zoom. Seconds 0 to 1: nothing happens, only heat shimmer. Seconds 1 to 5: a tiny orange point of fire ignites at the base of the rocket and silently swells into a blinding fireball; steam lit amber from below rolls outward along the ground in slow, massive billows. Seconds 5 to 8: the rocket begins to lift off extremely slowly and perfectly vertically, rising less than one fifth of its own height, and arrives exactly at the last frame. The tower stays in place. No explosion, no debris, no birds. No markings, letters, flags or symbols on the rocket or the tower. No text, no logos, no insignia, no emblems, no watermark."
+  },
+  {
+   "id": "L10_P05_t1",
+   "plano": "P05",
+   "modelo": "seedance_2_5",
+   "inicial": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_10/fotogramas/L10_K05_placas_lisas.png",
+   "duracion": 8,
+   "resolucion": "720p",
+   "encargo": "8 seconds, real time. One single slow upward tilt with an eased start, about three percent of the frame height per second, following the rising column of fire and smoke until the flame leaves the top of the frame, as if a heavy tripod head is being pushed by hand. The smoke column billows and thickens in slow, massive rolls, glowing from inside. The silhouettes stay almost perfectly still. The water stays calm and mirrors the glow. No camera shake, no zoom, no cuts. No markings, letters, flags or symbols anywhere, and plain blank licence plates on the cars. No text, no logos, no insignia, no emblems, no watermark."
+  },
+  {
+   "id": "L10_P06_t1",
+   "plano": "P06",
+   "modelo": "minimax_h3",
+   "inicial": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K06_final.png",
+   "duracion": 6,
+   "resolucion": "2K",
+   "encargo": "Locked-off shot, 6 seconds, real time. The white spark climbs slowly along the arc, levels off as it reaches the apex and shrinks to a point of light that stays at the apex for the last two seconds. High-altitude wind slowly bends, twists and thins the lower part of the trail. The sky darkens slightly toward indigo. Nothing else moves and nothing enters the frame. No text, no logos, no insignia, no emblems, no watermark."
+  },
+  {
+   "id": "L10_P08_t1",
+   "plano": "P08",
+   "modelo": "minimax_h3",
+   "inicial": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K08_final.png",
+   "duracion": 6,
+   "resolucion": "2K",
+   "encargo": "6 seconds, real time. A slow lateral drift from right to left along the curved limb of the Moon, about two percent of the frame width per second, with a very gentle approach, smooth as a spacecraft coasting, with no acceleration. The craters and their long shadows stay fixed on the surface; the light does not change. Nothing crosses the frame: no spacecraft, no stars, no Earth. No camera shake. No text, no logos, no insignia, no emblems, no watermark."
+  },
+  {
+   "id": "L10_P09_t1",
+   "plano": "P09",
+   "modelo": "seedance_2_5",
+   "inicial": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09b_K09_final.png",
+   "duracion": 8,
+   "resolucion": "720p",
+   "encargo": "8 seconds. The camera looks straight down and descends slowly and steadily, with no rotation: the ground comes closer and drifts slowly toward the bottom of the frame. The long four-legged shadow grows larger and its edges sharpen. Thin rays of dust shoot outward along the ground in perfectly straight lines, fast and flat, crisp as if shot with a very short shutter, with no cloud and no swirling, because there is no air. At the seventh second all motion stops at once: the descent stops, the shadow is still and sharp, and the dust is gone. The last second is completely still. The craft is never visible, only its shadow. No footprints, no flags, no people. No text, no logos, no insignia, no emblems, no watermark."
+  }
+ ]
+}

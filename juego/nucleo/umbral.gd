@@ -30,7 +30,7 @@ func _ready() -> void:
 	add_to_group("umbrales")
 	_malla = MeshInstance3D.new()
 	var plano := PlaneMesh.new()
-	plano.size = Vector2(1.5, 1.5)
+	plano.size = Vector2(1.15, 1.15)
 	_malla.mesh = plano
 	_material = ShaderMaterial.new()
 	_material.shader = SHADER

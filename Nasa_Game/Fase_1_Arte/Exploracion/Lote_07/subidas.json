@@ -1,0 +1,17 @@
+{
+ "L07_carga_plaza_borrador": {
+  "id": "a5233512-47e6-4a71-af5d-3f8d362e5229",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/jpg/L07_carga_plaza_borrador.jpg",
+  "bytes": 442968
+ },
+ "L07_carga_luna_borrador": {
+  "id": "23176c20-ffac-47d0-a4de-918269596f4f",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/jpg/L07_carga_luna_borrador.jpg",
+  "bytes": 179275
+ },
+ "L07_mapa_mundo_borrador": {
+  "id": "922dc8e4-83cf-47fb-85c3-151045085297",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/jpg/L07_mapa_mundo_borrador.jpg",
+  "bytes": 555721
+ }
+}

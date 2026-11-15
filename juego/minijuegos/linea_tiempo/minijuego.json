@@ -1,17 +1,16 @@
 {
-  "titulo": "Ecuador ya dejó un mensaje",
-  "resumen": "Ordena las diapositivas del atril desde el hito más antiguo hasta el más reciente.",
+  "titulo": "La escalinata del tiempo",
+  "resumen": "Sube la escalinata: encuentra cada pictograma y revela nueve hitos al aterrizar.",
   "instrucciones": [
-    "Elige una tarjeta y lee su pista de época. El año empieza oculto.",
-    "Tómala con E o Intro y muévela con izquierda o derecha; pulsa E para soltar. También puedes arrastrarla con el ratón.",
-    "Pulsa Comprobar o Espacio: ✓ revela la fecha cuando el orden con ambas vecinas es correcto; las demás reciben una pista más clara al seleccionarlas.",
-    "Ordena todas antes de gastar las comprobaciones: nivel 1, 5 tarjetas y 4; nivel 2, 7 y 4; nivel 3, 9 y 3."
+    "Busca el pictograma de SIGUE.",
+    "Salta sobre su placa para revelar el a?o.",
+    "Esquiva cocos e iguanas antes de que acabe el tiempo."
   ],
-  "controles": "← → / A D: elegir; E / Intro: tomar o soltar; ← →: mover la tomada; ↑ ↓ / W S: elegir otra; Espacio: comprobar. Ratón: arrastrar y pulsar Comprobar.",
+  "controles": "Flechas/WASD: mover ? E/Espacio: saltar ? Esc: salir",
   "pistas": [
-    "Órbita mira la tarjeta del Observatorio de Quito y luego el extremo izquierdo del atril.",
-    "El observatorio abre la secuencia. El cierre de la estación va antes de su entrega a Ecuador. Los Acuerdos Artemisa van al final.",
-    "Orden completo: Observatorio (1873), estación Quito (1957), disco (1969), Apolo-Soyuz (1975), STS-2 (14-11-1981), entrega (01-07-1982), EXA (2007), Pegaso (2013), Acuerdos Artemisa (21-06-2023). Usa solo las tarjetas presentes."
+    "La placa pendiente brilla en cian en dificultad 1.",
+    "Caminar no revela el a?o: aterriza sobre la placa del pictograma de SIGUE.",
+    "Salta los animales; tienes tres vidas para llegar a los Acuerdos."
   ],
   "ficha": "disco_apolo11",
   "escena": "2.4",

@@ -1,0 +1,214 @@
+{
+  "lote": "L09a",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09",
+  "tope": 6.0,
+  "_nota": "Borradores de los fotogramas clave del storyboard de la cinematica de apertura «Un punto de luz». Partida abierta en trabajos.md (lote 09a, tope 6,00; Guillermo 2026-11-14: «Empecemos por el storyboard»). Encargos copiados por script de Nasa_Game/Fase_2_Narrativa/Cinematica_apertura/Storyboard - Cinematica de apertura.md, §2, reescritos el 2026-11-15 en el pase de fotografia (§12 del storyboard): optica, diafragma, altura, luz motivada, contraste y color de pelicula, con las mismas protecciones y referencias. Un trabajo por plano (P01 a P13 y P15) y tres de P14. K04a, K11a y K14d van en el 09b. En el animatic se componen a 0 creditos: la bandera por script sobre el pano neutro de P13, la Luna sobre P12 y la gota de P14. Solo cotizado: no generar hasta que Guillermo valide el storyboard.",
+  "trabajos": [
+    {
+      "id": "L09_P01_cuarto_noche_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_HABITACION",
+        "@ANC_PROTA_1",
+        "@ANC_GATO"
+      ],
+      "prompt": "Same room, same furniture layout and same fixed high three-quarter top-down game camera as the first reference image, but at night, around 3 a.m. The girl is the character of the second reference and the cat is the one of the third. Low-key night interior lit like a quiet film scene by one single practical source: a small 1960s tube television in a walnut wooden cabinet on four tapered legs, standing on the floor at the foot of the bed exactly where the cardboard box stands in the reference (the box is gone). Its bulging 4:3 screen with rounded corners faces the camera, turned slightly toward the bed, and glows cool bluish white with a soft black-and-white picture of a tall white three-stage rocket standing beside its launch tower. That light falls off fast with distance: a bright pool on the terracotta tiles and on the near edge of the blue blanket, long soft shadows of the bed legs and the stool stretching away from the set, about eight to one between the lit floor and the dark corners, and a few dust motes glinting in the beam. The window shutters are ajar and show only a dark hillside with three or four tiny warm bulbs: no moon in the sky. The girl sleeps on top of the blue blanket, fully dressed in her khaki short-sleeve shirt worn open over a dark T-shirt, brown cargo pants and sneakers, without her bag, lying on her left side and facing the room, curled up with her face buried in her forearm: only her big dark curly hair shows, no face, with a cool rim of screen light on the curls. On top of the television, {GATO} sleeps with its tail hanging down over one upper corner of the screen. The telescope on its tripod points at the window. On the workbench the small oscilloscope shows a trembling cyan wave, the only other glow, and the brown tool bag hangs from the stool. The two lanterns by the stair landing are unlit. {ESTILO} Night palette: petrol-blue shadows, darkest tones warm and never pure black, cool white television light. No brand or lettering on the television. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P02_televisor_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_HABITACION",
+        "@ANC_GATO"
+      ],
+      "prompt": "Frontal close view at screen height, 35 mm lens at f/2.8, the camera square to the glass: the dream television that stands in the dark bedroom of the first reference image, a small 1960s tube television in a walnut wooden cabinet with rounded corners and four tapered legs, two plain round knobs and a cloth speaker grille to the right of the screen, with no brand plate, no numbers and no lettering anywhere. The bulging 4:3 glass screen with rounded corners occupies the central half of the frame width and two thirds of its height and is in crisp focus; the edges of the cabinet soften slightly. It shows a soft black-and-white picture with faint horizontal scan lines: a tall white three-stage rocket standing beside its launch tower, far away across flat water, slightly right of centre. The screen is the only light: its phosphor glow spills onto the walnut grain, the terracotta floor tiles and a corner of a blue blanket, and a faint reflection of the dark room and a pale window rectangle floats on the curved glass, less than one tenth as bright as the picture. From the top edge of the frame the tail of the cat of the second reference, gray-taupe with a dark tip, hangs across the upper right corner of the screen; the cat itself is out of frame. Around the set, petrol-blue darkness, never pure black. {ESTILO} The television and the room are painted in this low-poly style; only the picture on the screen looks like old footage. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P03_torre_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Extreme telephoto photograph, 600 mm full-frame-equivalent lens at f/11, camera locked on a heavy tripod at standing eye height, strongly compressed perspective that stacks the far shore, the launch tower and the haze into flat layers. Hard mid-morning sunlight from high behind the rocket: the scene is backlit, the rocket and the tower are rimmed with light, and hot haze over a perfectly still lagoon on a flat subtropical coast lowers the contrast to about two to one. Far away on the horizon, at three fifths of the frame width, stands a tall slender white three-stage rocket attached to its dark steel launch tower: tiny, about one sixth of the frame height, softened and wavering in the heat shimmer. Along the bottom edge of the frame, in its left two thirds, six or seven small black silhouettes of people seen from behind stand motionless on the hoods and beside two boxy 1960s cars, backlit, less than one twentieth of the frame height, no faces visible. A huge pale sky fills the upper two thirds of the frame. Colour of 1960s 16 mm reversal film: muted amber, cream and faded cyan, slightly lifted warm blacks, highlights that roll off softly. No markings, letters, flags or symbols on the rocket, the tower or the cars. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P04b_ignicion_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Extreme telephoto photograph from a long-range tracking camera, about 1800 mm full-frame-equivalent lens at f/11, same camera position as a 600 mm view tightened three times, locked off, strongly compressed perspective and heat shimmer. A tall white three-stage rocket beside its dark steel launch tower stands at three fifths of the frame width and fills the central half of the frame height against a pale hot morning sky, rim-lit by the sun behind it; flat marsh and a strip of still water run along the bottom. The engines have just ignited: at the base, a blinding orange-white fire, the only saturated colour in the whole image, blooming with a soft red-orange halation. The fire lights the underside of the rocket and the steam from below, so the steam rolling outward low along the ground on both sides glows amber at its base and turns cream above. The rocket has barely left the pad, its base just above the launch platform, perfectly vertical, the tower still beside it. No people. Colour of 1960s 16 mm reversal film: muted cream and faded cyan everywhere except the fire, slightly lifted warm blacks. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P05_columna_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Wide-angle photograph, 24 mm lens at f/8, deep focus from the stones at the waterline to the horizon, camera one metre above the ground on the shore of a still lagoon, behind a small group of spectators, level and slightly tilted up. In the lower fifth of the frame: the dark shoreline, two boxy 1960s cars and six or seven black silhouettes of people seen from behind, standing still on the hoods and beside the cars, less than one tenth of the frame height, no faces. Far across the water, at three fifths of the frame width, a colossal column of fire and cream-white smoke climbs straight up from the horizon and leaves the top of the frame; the column glows from inside like a lantern with orange fire, is amber on its sunlit side and falls into soft cream shadow on the other; the rocket itself is only a bright point at the head of the flame near the top edge. The calm water mirrors the column. Huge pale blue sky. Colour of 1960s 16 mm reversal film: amber, cream and faded blue, slightly lifted warm blacks. No markings, letters, flags or symbols anywhere. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P06_chispa_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Looking steeply up into a vast empty sky, 50 mm lens focused at infinity at f/8, locked off. The sky grades smoothly from pale blue at the bottom of the frame to deep indigo at the top, as at high altitude. A single tiny white spark sits at three fifths of the frame width and one third of the height from the top, at the tip of a long, thin white exhaust trail that sweeps across the frame in one clean arc, like the upper part of a very large circle whose centre lies below the spark: the arc rises from the lower left and levels off at its apex exactly where the spark is. The trail is lit by the sun from below the frame, bright white on its lower side and softly shaded above; its lower part is wider, slightly twisted and thinned by high-altitude wind. Nothing else: no ground, no clouds, no aircraft, no birds, no sun in frame. Faded colour of 1960s 16 mm reversal film. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P07_tierra_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "The whole planet Earth floating in pure black space, photographed with a 24 mm lens at f/8 from a departing spacecraft, exposed for the sunlit clouds so that no stars show. A blue-and-white gibbous globe about three quarters lit, hard sunlight from the upper right, a band of night along its lower left edge melting into the black, and a thin luminous blue line of atmosphere along the sunlit limb. The globe sits slightly right of centre and low in the frame: its sunlit top edge touches a point at three fifths of the frame width and one third of the height from the top, and its bottom edge sits just above the bottom of the frame, so it fills 60 percent of the frame height. Deep saturated ocean blue and bright white cloud swirls, with only faint hints of land under the clouds: no sharply drawn or recognisable coastlines, no city lights. No stars, no Moon, no spacecraft parts, no lens flare. The background is perfectly black. Crisp large-format clarity, almost grainless. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P08_borde_luna_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Photograph of the Moon from an approaching spacecraft, 85 mm lens at f/8, crisp large-format clarity. The curved limb of the Moon rises from the lower left and fills two thirds of the frame; the highest point of the limb sits at three fifths of the frame width and one third of the height from the top. Neutral silver-gray surface, densely cratered; hard, low raking sunlight from the right, so the craters near the terminator cast long black shadows and their sunward rims glow; on the left the surface sinks into darkness along a diagonal terminator. There is no atmosphere: every shadow edge is razor sharp and the black is absolute. Pure black sky, no stars, no Earth, no spacecraft. Nearly grainless, high contrast. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P09_sombra_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Camera looking straight down at the surface of the Moon from about thirty metres up, 35 mm lens at f/11, everything in focus. Neutral gray powdery regolith fills the whole frame, peppered with small craters and scattered rocks. The sun is only ten degrees above the horizon, off the bottom of the frame: hard single-source light with no atmosphere and no fill, so every rock and crater rim casts a long, razor-sharp black shadow toward the top of the frame and the sunlit faces of the rocks glow. Entering from the bottom centre and reaching the middle of the frame: the long black shadow of a four-legged landing craft, an angular body on four splayed legs with round footpads, stretched to about five times its natural length by the low sun. Only the shadow is visible; the craft itself is never in frame. Fine dust streaks radially outward along the ground in perfectly straight thin rays that hug the surface, with no billowing cloud. No footprints, no flags, no people. Crisp and nearly grainless. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P10_fantasma_tv_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Stark black-and-white image in the manner of a low-resolution slow-scan television camera, very high contrast with blown-out whites, crushed shadows and soft detail. View from a camera fixed low on the side of a landing craft on the Moon, wide 20 mm-equivalent lens with slight barrel distortion. On the left, in deep shadow, the dark angular leg of the craft with a ladder. On the lowest rung of the ladder, seen from the side and facing the ladder, a bulky figure in a white pressure suit with a large square backpack and a round helmet holds the rails with both hands and lowers one boot toward the round footpad. The figure is pale and slightly translucent, like a ghost image, with no visible face, no identifiable person and no markings on the suit. Behind it, a blinding sunlit plain, a slightly tilted horizon and a pitch-black sky without stars. A vertical band of glare runs down the right side of the picture. No flag, no lettering on the craft or the suit. No scan lines and no borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P11_huella_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Macro photograph, 100 mm macro lens at f/4, camera lying on the ground, side view at a grazing angle of about ten degrees: a single fresh boot print pressed into fine gray lunar dust, with crisp parallel tread ribs and sharp vertical walls, like a print in damp flour. A razor-thin plane of focus lies across the ribs in the lower middle of the frame; the dust before and behind it melts within a few centimetres into a soft blur. The print lies inside a large cool shadow and is lit only by soft light bounced from the sunlit ground beyond it: gentle, almost shadowless, slightly cool gray, about two to one, just enough to model each rib. In the background the hard edge of the shadow crosses the frame diagonally from the upper left toward the right, and beyond it the plain blazes in direct sunlight, five stops brighter and strongly out of focus; a thin strip of pitch-black sky runs along the very top. No boot, no person, no flag, no equipment. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P12_guayaquil_1969_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_PROTA_1"
+      ],
+      "prompt": "Night photograph, vintage 50 mm lens wide open at f/2, locked off at standing eye height, looking west and slightly upward from the top of a steep public stairway in an old hillside neighbourhood of a tropical port city in 1969. The focus is on the distance: the stairway falling away between small wooden houses with corrugated zinc roofs, laundry hanging on lines, four bare yellow tungsten bulbs that bloom into soft round highlights, and beyond, the dark rooftops and scattered warm lights of the city and low hills under a deep blue-black sky. The bulbs are the only key light: warm pools on the steps and walls, everything else falls into blue-black, about sixteen to one. The patch of sky at three fifths of the frame width and one third of the height from the top, above the roofs, is clear and empty, with a few faint stars: no Moon in the sky. In the foreground at the left third, softly out of focus and seen from behind, stands the small chibi student of the reference sheet, with her proportions, her voluminous dark curly hair, her khaki short-sleeve shirt worn open over a dark T-shirt and her brown cargo pants, barefoot on the stone step, without any bag, her chin slightly raised toward that empty patch of sky; she is a dark soft shape with a thin warm rim light from a bulb behind her on the right, and her face is not visible. No cars, no antennas, no television sets, no signs, no lighthouse, no numbered steps, no modern railings. Warm colour of 1960s 16 mm reversal film: amber bulbs, deep blue-black night, slightly lifted blacks. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P13_bandera_tierra_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [],
+      "prompt": "Low-angle ultra-wide photograph on the surface of the Moon, 14 mm lens at f/11, everything in focus, camera thirty centimetres above the ground and tilted upward, the Sun low behind the camera. Hard single-source sunlight with no fill: every pebble and boot print casts a long black shadow pointing away from the camera, toward the horizon. At the bottom right, small and complete, stands a thin vertical pole whose base sits one twentieth of the frame height above the bottom edge; at its top a plain rectangular cloth about one tenth of the frame height hangs open from a horizontal rod along its top edge, perfectly still, keeping soft permanent wrinkles because the rod is not fully extended. The cloth is a blank, smooth, light neutral gray placeholder with no stripes, no stars and no pattern, front-lit by the low sun. At the foot of the pole, gray dust trampled by boot prints. The gray horizon lies very low in the frame. Above it, an enormous pitch-black sky without stars; near the top of the frame, at three fifths of the frame width and one tenth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white gibbous globe about two thirds lit, with its lit side facing up. The Earth is the only colour; everything else, the cloth included, is neutral gray and black. No spacecraft, no people, no other equipment, no lettering, no camera shadow. Crisp and without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P14a_gota_fria_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_PROTA_1"
+      ],
+      "prompt": "Extreme close-up, 100 mm macro lens at f/2, camera fixed at pillow height with the lens axis parallel to the pillow. The sleeping face of the girl from the reference sheet, the same hand-painted low-poly character: warm brown skin, big closed eyelids with thick dark lashes, round cheeks, voluminous dark curly hair. She lies on her left side, so her face is horizontal in the frame, forehead toward the right and chin toward the left, her left cheek sunk into a cream pillow, a few curls fallen over her temple and the collar of a khaki shirt over a dark T-shirt at the edge of the frame. Eyes closed, calm, mouth relaxed. A razor-thin plane of focus lies on the lashes of her upper eye; her lower eye and the far curls fall softly out of focus. The lashes and the inner corner of that eye are slightly wet, with no visible teardrop. The inner corner of her upper eye sits slightly above and to the right of the centre of the frame. It is just before dawn: the only light is faint cool skylight from a window above her head, a thin cool edge along the bridge of her nose and the lashes; the whole face is in deep petrol-blue shadow, the darkest tones warm and never pure black, and there is no warm light anywhere yet. The background melts into a soft dark blur. {ESTILO} Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P14b_franja_ambar_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_PROTA_1"
+      ],
+      "prompt": "Extreme close-up, 100 mm macro lens at f/2, camera fixed at pillow height with the lens axis parallel to the pillow. The sleeping face of the girl from the reference sheet, the same hand-painted low-poly character: warm brown skin, big closed eyelids with thick dark lashes, round cheeks, voluminous dark curly hair. She lies on her left side, so her face is horizontal in the frame, forehead toward the right and chin toward the left, her left cheek sunk into a cream pillow, a few curls fallen over her temple and the collar of a khaki shirt over a dark T-shirt at the edge of the frame. Eyes still closed, calm. A razor-thin plane of focus lies on the lashes of her upper eye. A soft-edged band of amber morning sunlight, about one fifth of the frame wide and split into two or three soft stripes by window shutter slats, lies diagonally across her jaw and cheek at about thirty degrees and has just reached the closed eyelid of her upper eye; inside the band the skin glows warm orange and the painted facets catch the light, outside it everything stays petrol-blue, about four to one. The lashes and the inner corner of that eye are slightly wet and catch a warm glint, with no visible teardrop; the inner corner sits slightly above and to the right of the centre of the frame. The background melts into a soft dark blur. {ESTILO} Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P14c_despierta_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_PROTA_1"
+      ],
+      "prompt": "Extreme close-up, 100 mm macro lens at f/2, camera fixed at pillow height with the lens axis parallel to the pillow. The face of the girl from the reference sheet, the same hand-painted low-poly character: warm brown skin, round cheeks, voluminous dark curly hair. She lies on her left side, so her face is horizontal in the frame, forehead toward the right and chin toward the left, her left cheek sunk into a cream pillow, a few curls fallen over her temple and the collar of a khaki shirt over a dark T-shirt at the edge of the frame. She has just woken: her large dark-brown eyes are open, wet and bright, looking softly past the camera without focusing, with two small rectangular catchlights from the window shutters in each eye. She smiles with her eyes: the upper cheek is raised and the mouth is a small closed smile. Her eyes are moist, but there is no teardrop and no tear line on her face. Warm morning light from the window now covers the face as a soft key from the upper right: cream and soft orange light, the far side of her face still in gentle petrol-blue shadow at about three to one, and a golden rim on the curls. The feeling is quiet, overwhelming joy, not sadness. The background is a soft warm blur. {ESTILO} Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09_P15_manana_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "1k",
+        "quality": "low"
+      },
+      "imagenes": [
+        "@ANC_HABITACION",
+        "@ANC_PROTA_1",
+        "@ANC_GATO"
+      ],
+      "prompt": "Same room, same furniture layout, same warm early-morning light and same fixed high three-quarter top-down game camera as the first reference image. The girl is the character of the second reference and the cat is the one of the third. The girl has just sat up abruptly on top of the rumpled blue blanket of the bed, fully dressed in her khaki short-sleeve shirt worn open over a dark T-shirt, brown cargo pants and sneakers, without her bag, her hair tousled, one hand pressed on the mattress. She is not looking at the window: she looks across the room at the workbench, where the small motorized tracking mount, the open notebook and the oscilloscope with its cyan wave are. At the foot of the bed stands the plain cardboard box sealed with a cross of tape, as in the reference, and {GATO} lies on top of the box with its tail hanging over one upper corner and one paw dangling, its head raised, looking at her. Low warm morning sun comes through the open window shutters in slanted beams, the key light of the room at about three to one, with a few bright dust motes floating in the beams; the shadows stay petrol blue. The telescope points at the window and the brown tool bag hangs from the stool. There is no television anywhere. {ESTILO} Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    }
+  ]
+}

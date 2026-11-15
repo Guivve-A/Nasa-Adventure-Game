@@ -1,0 +1,23 @@
+; Mision Artemis: Mas alla de las paginas. Proyecto de Godot 4.7 independiente.
+config_version=5
+
+[application]
+
+config/name="Misión Artemis: Más allá de las páginas"
+run/main_scene="res://escenas/principal.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.043, 0.055, 0.102, 1)

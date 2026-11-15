@@ -31,8 +31,7 @@
               "title": "Guion_voz"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -196,8 +195,9 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "54c0078e7a2b6f44",
+  "active": "1f80d91504c1e38b",
   "lastOpenFiles": [
+    "file:C:/Users/guill/Desktop/Informes 2026_PAO2/ELECTRÓNICA DE POTENCIA 1/PRÁCTICA 2/video/Guion_voz.md",
     "Fase_1_Arte/Modelado/Lote_04/parecido/v7T",
     "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/proyeccion",
     "Fase_1_Arte/Modelado/Lote_04/parecido/v4D/proyeccion.log",
@@ -218,7 +218,6 @@
     "Fase_1_Arte/Modelado/Lote_04/parecido/v4D",
     "Fase_1_Arte/Modelado/Lote_04/parecido/v4C",
     "Fase_1_Arte/Modelado/Lote_04/parecido/v4A/metrica.json",
-    "Fase_1_Arte/Modelado/Lote_04/parecido/v4A/renders",
     "Fase_0_Tecnica/Investigacion/04_caso_after_the_wind.md",
     "Fase_0_Tecnica/Investigacion/12_render_aaa.md",
     "Fase_0_Tecnica/Datos/red_latencias.md",

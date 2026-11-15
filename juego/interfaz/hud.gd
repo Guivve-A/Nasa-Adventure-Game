@@ -4,6 +4,7 @@ extends Control
 # y el rotulo de interaccion ("[E] Examinar"). Estilo provisional (Fase 7 sin validar).
 
 const Estilo := preload("res://interfaz/estilo.gd")
+const Minimapa := preload("res://interfaz/minimapa.gd")
 
 var _tarjeta: PanelContainer
 var _mision: Label
@@ -18,6 +19,7 @@ var _inventario: Label
 var _ayuda: Label
 var _indicacion := ""
 var _rotulos := {}
+var minimapa: Control
 
 
 func _ready() -> void:
@@ -43,6 +45,10 @@ func _ready() -> void:
 	_inventario.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_inventario.autowrap_mode = TextServer.AUTOWRAP_OFF
 	add_child(_inventario)
+
+	minimapa = Minimapa.new()
+	minimapa.name = "Minimapa"
+	add_child(minimapa)
 
 	_avisos = VBoxContainer.new()
 	_avisos.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -71,7 +77,7 @@ func _ready() -> void:
 	_rotulo.visible = false
 	add_child(_rotulo)
 
-	_ayuda = Estilo.texto("WASD o flechas: moverse · Mayús: correr · E: interactuar · Tab: cuaderno · Esc: pausa · Z/X: acercar y alejar", 14, Estilo.PAPEL, 500)
+	_ayuda = Estilo.texto("WASD o flechas: moverse · Mayús: correr · E: interactuar · M: mapa · N: minimapa · Tab: cuaderno · Esc: pausa · Z/X: acercar y alejar", 14, Estilo.PAPEL, 500)
 	_ayuda.add_theme_color_override("font_outline_color", Estilo.TINTA)
 	_ayuda.add_theme_constant_override("outline_size", 5)
 	_ayuda.autowrap_mode = TextServer.AUTOWRAP_OFF
@@ -85,7 +91,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var tam := size
 	_tarjeta.reset_size()
-	_inventario.position = Vector2(tam.x - _inventario.size.x - 20, 18)
+	# el minimapa ocupa la esquina de arriba a la derecha; el inventario va justo debajo
+	minimapa.position = Vector2(tam.x - minimapa.size.x - 18, 16)
+	var bajo_mapa := 18.0
+	if minimapa.visible:
+		bajo_mapa = minimapa.position.y + minimapa.alto_total() + 6.0
+	_inventario.position = Vector2(tam.x - _inventario.size.x - 20, bajo_mapa)
 	_avisos.position = Vector2((tam.x - _avisos.size.x) * 0.5, 84)
 	_lugar.position = Vector2((tam.x - _lugar.size.x) * 0.5, tam.y * 0.20)
 	_rotulo.position = Vector2((tam.x - _rotulo.size.x) * 0.5, tam.y - _rotulo.size.y - 54)

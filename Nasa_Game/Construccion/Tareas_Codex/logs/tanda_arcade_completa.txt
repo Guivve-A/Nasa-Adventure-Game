@@ -1,0 +1,7 @@
+Codex: C:\Users\guill\AppData\Local\OpenAI\Codex\bin\9e1da79431da526b\codex.exe
+5 tareas, 2 en paralelo
+  completa_satelite            error (codigo 1)         0.1 min        0 bytes
+  completa_telescopio          error (codigo 1)         0.1 min        0 bytes
+  completa_linea_tiempo        error (codigo 1)         0.1 min        0 bytes
+  completa_muestras            error (codigo 1)         0.2 min        0 bytes
+  completa_orbita              error (codigo 1)         0.1 min        0 bytes

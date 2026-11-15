@@ -1,0 +1,12 @@
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.16.39.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+ERROR: Can't save PNG at path: 'Nasa_Game/Construccion/Minijuegos/muestras/completa_1.png'.
+   at: save_image (drivers/png/resource_saver_png.cpp:56)
+CAPTURA_OK Nasa_Game/Construccion/Minijuegos/muestras/completa_1.png
+FIN
+[godot: ok; 9 s; lineas=15; errores=0]

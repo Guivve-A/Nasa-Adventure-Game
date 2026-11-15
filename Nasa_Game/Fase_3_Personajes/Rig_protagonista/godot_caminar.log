@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.3.215 - Forward Mobile - Using Device #0: Intel - Intel(R) HD Graphics 620
+
+ANIMACIONES ["caminar", "celebrar", "correr", "recoger", "reposo", "salto_lunar"]
+RECURSO PER-01_rig.glb triangulos=8114 superficies=2 tamano=(0.397085, 1.05, 0.523642)
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/Nasa_Game/Fase_3_Personajes/Rig_protagonista/godot_caminar.png
+[godot: ok; 2 s; lineas=6; errores=0]

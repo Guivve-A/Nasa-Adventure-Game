@@ -1,0 +1,75 @@
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-14T19.44.28.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK muestras.manos.d1.m-1.abre
+PRUEBA_OK muestras.manos.d1.m-1.sin_piloto
+PRUEBA_OK muestras.manos.d1.m-1.intro_empieza
+MINIJUEGO muestras superado=true puntos=1144.0 detalle=Cucharón para suelo, pinzas para roca, tubo para capas.
+PRUEBA_OK muestras.manos.d1.m-1.superado_con_teclas
+PRUEBA_OK muestras.manos.d1.m-1.carga_entregada
+PRUEBA_OK muestras.manos.d1.m-1.intro_cierra
+PRUEBA_OK muestras.manos.d1.m-1.sin_pausa
+PRUEBA_OK muestras.manos.d2.m-1.abre
+PRUEBA_OK muestras.manos.d2.m-1.sin_piloto
+PRUEBA_OK muestras.manos.d2.m-1.intro_empieza
+MINIJUEGO muestras superado=true puntos=1110.0 detalle=Cucharón para suelo, pinzas para roca, tubo para capas.
+PRUEBA_OK muestras.manos.d2.m-1.superado_con_teclas
+PRUEBA_OK muestras.manos.d2.m-1.carga_entregada
+PRUEBA_OK muestras.manos.d2.m-1.intro_cierra
+PRUEBA_OK muestras.manos.d2.m-1.sin_pausa
+PRUEBA_OK muestras.manos.d3.m-1.abre
+PRUEBA_OK muestras.manos.d3.m-1.sin_piloto
+PRUEBA_OK muestras.manos.d3.m-1.intro_empieza
+MINIJUEGO muestras superado=true puntos=1080.0 detalle=Cucharón para suelo, pinzas para roca, tubo para capas.
+PRUEBA_OK muestras.manos.d3.m-1.superado_con_teclas
+PRUEBA_OK muestras.manos.d3.m-1.carga_entregada
+PRUEBA_OK muestras.manos.d3.m-1.intro_cierra
+PRUEBA_OK muestras.manos.d3.m-1.sin_pausa
+PRUEBA_OK muestras.manos.d1.m0.abre
+PRUEBA_OK muestras.manos.d1.m0.sin_piloto
+PRUEBA_OK muestras.manos.d1.m0.intro_empieza
+MINIJUEGO muestras superado=true puntos=450.0 detalle=Cucharón para suelo, pinzas para roca, tubo para capas.
+PRUEBA_OK muestras.manos.d1.m0.superado_con_teclas
+PRUEBA_OK muestras.manos.d1.m0.carga_entregada
+PRUEBA_OK muestras.manos.d1.m0.intro_cierra
+PRUEBA_OK muestras.manos.d1.m0.sin_pausa
+PRUEBA_OK muestras.manos.d1.m1.abre
+PRUEBA_OK muestras.manos.d1.m1.sin_piloto
+PRUEBA_OK muestras.manos.d1.m1.intro_empieza
+MINIJUEGO muestras superado=true puntos=442.0 detalle=Cucharón para suelo, pinzas para roca, tubo para capas.
+PRUEBA_OK muestras.manos.d1.m1.superado_con_teclas
+PRUEBA_OK muestras.manos.d1.m1.carga_entregada
+PRUEBA_OK muestras.manos.d1.m1.intro_cierra
+PRUEBA_OK muestras.manos.d1.m1.sin_pausa
+PRUEBA_OK muestras.manos.d1.m2.abre
+PRUEBA_OK muestras.manos.d1.m2.sin_piloto
+PRUEBA_OK muestras.manos.d1.m2.intro_empieza
+MINIJUEGO muestras superado=true puntos=438.0 detalle=Cucharón para suelo, pinzas para roca, tubo para capas.
+PRUEBA_OK muestras.manos.d1.m2.superado_con_teclas
+PRUEBA_OK muestras.manos.d1.m2.carga_entregada
+PRUEBA_OK muestras.manos.d1.m2.intro_cierra
+PRUEBA_OK muestras.manos.d1.m2.sin_pausa
+PRUEBA_OK muestras.manos.d1.m3.abre
+PRUEBA_OK muestras.manos.d1.m3.sin_piloto
+PRUEBA_OK muestras.manos.d1.m3.intro_empieza
+MINIJUEGO muestras superado=true puntos=448.0 detalle=Cucharón para suelo, pinzas para roca, tubo para capas.
+PRUEBA_OK muestras.manos.d1.m3.superado_con_teclas
+PRUEBA_OK muestras.manos.d1.m3.carga_entregada
+PRUEBA_OK muestras.manos.d1.m3.intro_cierra
+PRUEBA_OK muestras.manos.d1.m3.sin_pausa
+PRUEBA_OK muestras.manos.anfitrion_cerrado
+PRUEBA_OK muestras.manos.arbol_sin_pausa
+PRUEBAS hechas=52 fallos=0
+FIN
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+[godot: ok; 159 s; lineas=73; errores=0]

@@ -1,0 +1,29 @@
+{
+  "lote": "L07a",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_07",
+  "tope": 1.0,
+  "_nota": "Arte de las pantallas de carga y del mapa del mundo. Guillermo (2026-11-14): «usa higgsfield para lo que necesites te doy el permiso... quiero ver el mapa, las interconexiones entre escenas, las pantallas de carga tipo Monster Hunter pero en version NASA space». Partida: tope de 20 creditos (borradores low a 0,25 y finales high 2k a 2,75). Primero borradores.",
+  "trabajos": [
+    {
+      "id": "L07_carga_plaza_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "1k", "quality": "low"},
+      "imagenes": ["@ANC_EXPLORACION", "@ANC_VISTA_JUEGO", "@ANC_PROTA_1", "@ANC_GATO"],
+      "prompt": "Use the exact art style and finish of the first two reference images. The student is the character of the third reference and the cat is the one of the fourth. Cinematic establishing illustration for a game loading screen, wide shot from a slightly elevated eye level, with sky: a small neighborhood plaza at the foot of a hillside stair neighborhood in a tropical port city at golden hour. A round stone fountain at the center, mosaic paving, benches, planters, a small juice kiosk, colorful houses with zinc roofs and clotheslines climbing the hill, and at the back the small municipal library: an original republican-style facade with wide steps, an arched portal with columns and an open-book relief above the door, with a soft cyan glow coming from inside the doorway. Two green iguanas sunbathe on a low wall. A thin crescent Moon lying on its back like a smile, low in the dusk sky. {PROTAGONISTA} and {GATO} walk across the plaza toward the library, small in the frame, seen from behind. The lower fifth of the image is calmer and darker so interface text can sit on it. {ESTILO} {SIN_TEXTO}"
+    },
+    {
+      "id": "L07_carga_luna_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "1k", "quality": "low"},
+      "imagenes": ["@ANC_EXPLORACION", "@ANC_PROTA_1", "@ANC_GATO"],
+      "prompt": "Use the exact art style and finish of the first reference image. The student is the character of the second reference and the cat is the one of the third. Cinematic establishing illustration for a game loading screen, wide shot: the surface of the Moon at night, lit by soft blue earthlight. A gray regolith plain with small craters and scattered rocks, long soft deep-blue shadows that are never pure black, a trail of bootprints and tiny paw prints, a small cardboard box with a hand-drawn crescent moon on its side resting on the ground like a tiny capsule, one small glowing cyan beacon in the middle distance, and far away the small silhouette of a generic gold-and-gray lunar descent stage with four legs and no markings. The student, wearing a small original soft spacesuit with a clear bubble helmet, and the cat, with a tiny bubble helmet, hop across the plain in low gravity, small in the frame. A big blue half-lit Earth hangs high in a black sky with a few stars. No flags, no insignia, no patches, no logos, no letters anywhere. The lower fifth of the image is calmer and darker so interface text can sit on it. {ESTILO} {SIN_TEXTO}"
+    },
+    {
+      "id": "L07_mapa_mundo_borrador",
+      "modelo": "gpt_image_2_6",
+      "params": {"aspect_ratio": "16:9", "resolution": "1k", "quality": "low"},
+      "imagenes": ["@ANC_MAPA", "@ANC_EXPLORACION"],
+      "prompt": "Use the style of the first reference image (an illustrated game map on an engineering notebook). Top-down illustrated region map painted on cream graph paper with ink outlines, soft painted colors and torn paper edges: a green hillside beside a river estuary in a tropical port city. Exactly four places, clearly separated, connected by one dotted ink path that runs from the lower left to the upper right: (1) in the lower left, a small yellow house on a hillside stairway, with a tiny telescope at its window; (2) in the lower center, a round plaza with a fountain and a small library with columns; (3) in the center right, a forest path along a turquoise stream with a wooden plank bridge and a small satellite dish; (4) in the upper right, a white lighthouse viewpoint on the hilltop with a telescope on a stone terrace. In the upper left corner, separate from the land, a round inset showing the gray cratered surface of the Moon, joined to the yellow house by a thin dotted cyan line. Small ink doodles of circuits, a compass rose and stars in the margins. Leave clear cream space next to each place for labels. No labels, no text, no letters, no numbers. {SIN_TEXTO}"
+    }
+  ]
+}

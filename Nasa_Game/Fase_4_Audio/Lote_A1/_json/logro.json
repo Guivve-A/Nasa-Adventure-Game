@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-14T19:19:26.537151Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "bf45671f-6150-4cb6-a530-be85c5f552a4",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 2,
+      "prompt": "A warm short success chime: three soft bell-like notes rising, with a gentle sparkle tail, calm and hopeful, clean ending. No voice, no speech, no drums."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_191926_bf45671f-6150-4cb6-a530-be85c5f552a4.mp3",
+    "status": "completed"
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-15T06:45:40.883196Z",
+    "display_name": "GPT Image 2.6",
+    "id": "c6044da5-b674-433a-9cb2-5e95c7874ecd",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064540_c6044da5-b674-433a-9cb2-5e95c7874ecd_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [
+        {
+          "data": {
+            "id": "1f75f4e1-2cc7-4504-b12b-b76996d8c3f5",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/1f75f4e1-2cc7-4504-b12b-b76996d8c3f5.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/ff4e139f-ab33-4aff-8831-db4b2f92c40d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Frontal close view at screen height, 35 mm lens at f/2.8, the camera square to the glass: the dream television that stands in the dark bedroom of the first reference image, a small 1960s tube television in a walnut wooden cabinet with rounded corners and four tapered legs, two plain round knobs and a cloth speaker grille to the right of the screen, with no brand plate, no numbers and no lettering anywhere. The bulging 4:3 glass screen with rounded corners occupies the central half of the frame width and two thirds of its height and is in crisp focus; the edges of the cabinet soften slightly. It shows a soft black-and-white picture with faint horizontal scan lines: a tall white three-stage rocket standing beside its launch tower, far away across flat water, slightly right of centre. The screen is the only light: its phosphor glow spills onto the walnut grain, the terracotta floor tiles and a corner of a blue blanket, and a faint reflection of the dark room and a pale window rectangle floats on the curved glass, less than one tenth as bright as the picture. From the top edge of the frame the tail of the cat of the second reference, gray-taupe with a dark tip, hangs across the upper right corner of the screen; the cat itself is out of frame. Around the set, petrol-blue darkness, never pure black. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. The television and the room are painted in this low-poly style; only the picture on the screen looks like old footage. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064540_c6044da5-b674-433a-9cb2-5e95c7874ecd.png",
+    "status": "completed"
+  }
+]

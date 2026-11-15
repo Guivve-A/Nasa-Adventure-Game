@@ -78,5 +78,133 @@
   "bytes_informe": 943,
   "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\banderas.md",
   "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\banderas.log"
+ },
+ "remate_seguidor": {
+  "id": "remate_seguidor",
+  "estado": "ok",
+  "minutos": 40.2,
+  "bytes_informe": 671,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\remate_seguidor.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\remate_seguidor.log"
+ },
+ "remate_antena": {
+  "id": "remate_antena",
+  "estado": "ok",
+  "minutos": 25.7,
+  "bytes_informe": 687,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\remate_antena.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\remate_antena.log"
+ },
+ "remate_banderas": {
+  "id": "remate_banderas",
+  "estado": "ok",
+  "minutos": 10.4,
+  "bytes_informe": 809,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\remate_banderas.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\remate_banderas.log"
+ },
+ "remate_regreso": {
+  "id": "remate_regreso",
+  "estado": "ok",
+  "minutos": 22.6,
+  "bytes_informe": 627,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\remate_regreso.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\remate_regreso.log"
+ },
+ "arcade_satelite": {
+  "id": "arcade_satelite",
+  "estado": "ok",
+  "minutos": 18.7,
+  "bytes_informe": 1515,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\arcade_satelite.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\arcade_satelite.log"
+ },
+ "arcade_telescopio": {
+  "id": "arcade_telescopio",
+  "estado": "ok",
+  "minutos": 20.5,
+  "bytes_informe": 1182,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\arcade_telescopio.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\arcade_telescopio.log"
+ },
+ "arcade_linea_tiempo": {
+  "id": "arcade_linea_tiempo",
+  "estado": "error (codigo 1)",
+  "minutos": 42.5,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\arcade_linea_tiempo.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\arcade_linea_tiempo.log"
+ },
+ "arcade_muestras": {
+  "id": "arcade_muestras",
+  "estado": "error (codigo 1)",
+  "minutos": 40.5,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\arcade_muestras.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\arcade_muestras.log"
+ },
+ "arcade_orbita": {
+  "id": "arcade_orbita",
+  "estado": "ok",
+  "minutos": 24.7,
+  "bytes_informe": 1531,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\arcade_orbita.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\arcade_orbita.log"
+ },
+ "completa_satelite": {
+  "id": "completa_satelite",
+  "estado": "ok",
+  "minutos": 23.2,
+  "bytes_informe": 811,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\completa_satelite.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\completa_satelite.log"
+ },
+ "completa_telescopio": {
+  "id": "completa_telescopio",
+  "estado": "ok",
+  "minutos": 19.6,
+  "bytes_informe": 663,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\completa_telescopio.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\completa_telescopio.log"
+ },
+ "completa_linea_tiempo": {
+  "id": "completa_linea_tiempo",
+  "estado": "ok",
+  "minutos": 18.0,
+  "bytes_informe": 643,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\completa_linea_tiempo.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\completa_linea_tiempo.log"
+ },
+ "completa_muestras": {
+  "id": "completa_muestras",
+  "estado": "ok",
+  "minutos": 20.2,
+  "bytes_informe": 798,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\completa_muestras.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\completa_muestras.log"
+ },
+ "completa_orbita": {
+  "id": "completa_orbita",
+  "estado": "error (codigo 1)",
+  "minutos": 0.1,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\completa_orbita.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\completa_orbita.log"
+ },
+ "libros_mapa": {
+  "id": "libros_mapa",
+  "estado": "error (codigo 1)",
+  "minutos": 5.8,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\libros_mapa.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\libros_mapa.log"
+ },
+ "libros_integrar": {
+  "id": "libros_integrar",
+  "estado": "error (codigo 1)",
+  "minutos": 0.1,
+  "bytes_informe": 0,
+  "informe": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\informes\\libros_integrar.md",
+  "log": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\Nasa_Game\\Construccion\\Tareas_Codex\\logs\\libros_integrar.log"
  }
 }

@@ -1,0 +1,20 @@
+{
+  "lote": "L09b",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09",
+  "tope": 4.5,
+  "_nota": "Reintento de K09 sin la vineta: las sombras de las piedras salian como espigas iguales (heredadas del borrador), aspecto de imagen de IA. El encargo, sin la frase de la referencia, con una aclaracion sobre la forma de las sombras.",
+  "trabajos": [
+    {
+      "id": "L09b_K09_final_r1",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [],
+      "_referencia_composicion": "L09_P09_sombra_borrador",
+      "prompt": "Camera looking straight down at the surface of the Moon from about thirty metres up, 35 mm lens at f/11, everything in focus. Neutral gray powdery regolith fills the whole frame, peppered with small craters and scattered rocks. The sun is only ten degrees above the horizon, off the bottom of the frame: hard single-source light with no atmosphere and no fill, so every rock and crater rim casts a long, razor-sharp black shadow toward the top of the frame that follows the true outline of the rock and the bumps of the ground, never a uniform pointed spike and the sunlit faces of the rocks glow. Entering from the bottom centre and reaching the middle of the frame: the long black shadow of a four-legged landing craft, an angular body on four splayed legs with round footpads, stretched to about five times its natural length by the low sun. Only the shadow is visible; the craft itself is never in frame. Fine dust streaks radially outward along the ground in perfectly straight thin rays that hug the surface, with no billowing cloud. No footprints, no flags, no people. Crisp and nearly grainless. No text, no logos, no insignia, no emblems, no watermark."
+    }
+  ]
+}

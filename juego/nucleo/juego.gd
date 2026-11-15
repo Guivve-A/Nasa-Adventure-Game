@@ -18,6 +18,8 @@ var misiones: Array = []       # definicion de las misiones (datos/misiones.json
 var fichas: Dictionary = {}    # fichas del cuaderno por id (datos/datos_espaciales.json)
 var args: Dictionary = {}      # argumentos tras "--": --clave=valor o --clave
 var modo_prueba := false       # dialogos sin esperas y minijuegos que se juegan solos
+var minijuegos_solos := false  # solo los minijuegos se juegan solos (pruebas con teclas simuladas)
+var sin_guardar := false       # no escribe la partida (pruebas)
 var _revisando := false
 
 
@@ -58,6 +60,8 @@ func _registrar_acciones() -> void:
 	_accion("saltar", [KEY_SPACE], [JOY_BUTTON_X])
 	_accion("pausa", [KEY_ESCAPE, KEY_P], [JOY_BUTTON_START])
 	_accion("cuaderno", [KEY_TAB, KEY_C], [JOY_BUTTON_Y])
+	_accion("mapa", [KEY_M], [JOY_BUTTON_BACK])
+	_accion("minimapa", [KEY_N], [JOY_BUTTON_RIGHT_STICK])
 	_accion("acercar", [KEY_Z, KEY_PAGEUP], [JOY_BUTTON_RIGHT_SHOULDER])
 	_accion("alejar", [KEY_X, KEY_PAGEDOWN], [JOY_BUTTON_LEFT_SHOULDER])
 
@@ -153,7 +157,7 @@ func hay_partida() -> bool:
 
 
 func guardar() -> void:
-	if modo_prueba:
+	if modo_prueba or sin_guardar:
 		return
 	var archivo := FileAccess.open(RUTA_PARTIDA, FileAccess.WRITE)
 	if archivo != null:
@@ -267,6 +271,23 @@ func paso_actual() -> Dictionary:
 
 func objetivo() -> String:
 	return paso_actual().get("texto", "")
+
+
+func destino_actual() -> Dictionary:
+	# a donde lleva el paso en curso (lo usa el minimapa): {"zona", "destino", "texto"}.
+	#   zona    = id de la zona donde se cumple el paso (si el paso no la trae, la de su mision)
+	#   destino = nombre del nodo dentro de esa zona; "@orbita" = el gato; "" = basta con llegar a la zona
+	#   texto   = el objetivo tal como sale en la tarjeta
+	# Vacio si no queda ningun paso.
+	var paso := paso_actual()
+	if paso.is_empty():
+		return {}
+	var mision := mision_activa()
+	return {
+		"zona": String(paso.get("zona", mision.get("zona", ""))),
+		"destino": String(paso.get("destino", "")),
+		"texto": String(paso.get("texto", "")),
+	}
 
 
 func _revisar_misiones() -> void:

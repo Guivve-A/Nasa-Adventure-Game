@@ -1,0 +1,47 @@
+[
+  {
+    "created_at": "2026-11-15T13:28:20.883225Z",
+    "display_name": "Seedream 5.5",
+    "id": "06a2d6f7-7d01-4166-90e3-ca4ce53e28f6",
+    "job_type": "seedream_5_5",
+    "min_result_url": "https://cdn.higgsfield.ai/733dbea1-49e5-46f1-9d8a-0a0e23fc7c3c.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "background": "auto",
+      "batch_size": 1,
+      "folder_id": null,
+      "height": 1536,
+      "medias": [
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "481919be-a76a-4920-bb90-662b31f458fc",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/481919be-a76a-4920-bb90-662b31f458fc.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "39712f78-40d4-4043-8355-9074af995982",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/39712f78-40d4-4043-8355-9074af995982.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "prompt": "Extreme close-up film frame, 100 mm macro lens at f/2, camera locked off at pillow height with the lens axis parallel to the pillow. She lies on her left side with her left cheek sunk into a cream pillow, so her face is horizontal in the frame: forehead toward the right edge, chin toward the left edge, and the line through her two eyes runs vertically. Her upper eye (her right eye) is in the upper half of the frame and its inner corner sits at three fifths of the frame width and one third of the height from the top; her lower eye is half hidden by the pillow and falls softly out of focus. A razor-thin plane of focus lies on the lashes of her upper eye. Her voluminous dark curls fill the right third of the frame, out of focus; the cream pillow fills the lower third; the collar of her khaki short-sleeve shirt over a dark T-shirt shows at the left edge. She is exactly the character of the reference images (the full character sheet, its row of head studies and the clean front view of her head): a round face, warm brown skin, large dark-brown eyes with a small dark wing at the outer end of the upper lash line, thick softly arched dark-brown brows, a small rounded button nose, a small mouth, a few faint freckles and a soft warm blush on the cheeks, a tiny silver diamond-shaped stud earring, and big voluminous dark-brown curly hair with one small curl at the temple. She is a university student about twenty years old drawn with the stylized proportions of her sheet: youthful but not a child, gently defined cheekbones and jaw, natural, no makeup look. She has just woken. Her eyes are open, wet and bright, looking softly past the camera without focusing. The smile is born in her eyes: the lower lids lift, the upper cheek rises, the outer corners crinkle softly, and her mouth is only a small closed smile beginning. One single small tear has just left the inner corner of her upper eye and runs sideways across the bridge of her nose as a thin glistening line with a tiny bead at its tip; never a stream. The feeling is quiet, overwhelming joy, not sadness. Light: low warm morning sun through wooden window shutters. Soft-edged bands of amber light, split by the shutter slats, fall diagonally across her cheek and eyes at about thirty degrees, rising from her jaw toward her upper eyelid; between the bands the skin stays in a gentle petrol-blue shade, about three to one, the darkest tones warm and never black. Two small rectangular catchlights from the shutters shine in each eye, a golden rim of light runs along the curls, and the background is a soft warm blur. Style: a stylized cinematic 3D close-up from a feature-length animated film, smooth sculpted forms that keep the design of her sheet. Soft translucent skin with a gentle subsurface glow where the sunlight passes through the edge of the cheek and the tip of the nose, a hand-painted skin texture with subtle colour variation, faint freckles and fine peach fuzz catching the rim light. Eyes full of life: a clear cornea, a layered dark-brown iris with fine radial fibres, a wet waterline and a thin moist meniscus, individual dark lashes. The curls are defined ringlet by ringlet, each spiral clump sculpted with soft rounded volume and a faint bevelled edge that echoes the low-poly game style; the khaki collar shows a fine cotton weave, and only the shirt and the cream pillow keep gentle low-poly faceted planes. Not photorealistic: painted, warm and stylized. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face, and the face stays horizontal, never tilted upright. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "resolution": "2k",
+      "width": 2720
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132820_06a2d6f7-7d01-4166-90e3-ca4ce53e28f6.png",
+    "status": "completed"
+  }
+]

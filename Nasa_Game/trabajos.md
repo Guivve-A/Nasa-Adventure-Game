@@ -93,6 +93,16 @@ actualizado: 2026-11-12
 - [x] Diseño de la base espacial: [[Base espacial - Diseno]] (pedido de Guillermo del 2026-11-13).
 - [x] Flujos lanzados, cada carril con su verificador escéptico: rig de la protagonista y lote 06 de conceptos (solo cotizar); Habitación y Plaza con biblioteca; Sendero y Mirador; base espacial (datos reales, simulación, mundo e interfaz); minijuegos seguidor, antena y satélite. Codex: línea de tiempo, órbita y regreso.
 
+### 2026-11-14
+
+- [x] Codex construyó los 9 minijuegos (seguidor, antena, satélite, telescopio, línea de tiempo, muestras, banderas, regreso y órbita). La prueba automática de todos pasa sin fallos.
+- [x] Plan de equipo para Jean, Joel y Domenica: minijuegos 2D en píxel-art de la Luna y de Marte, que se abren desde los libros de la biblioteca (`PLAN_EQUIPO_BASE_LUNA_MARTE.md`). Decisión de Guillermo: esos dos minijuegos van en píxel-art; el resto sigue en low-poly pintado.
+- [x] Repositorio en GitHub (`Guivve-A/Nasa-Adventure-Game`), con Git LFS.
+- [x] **Pantallas de carga de expedición** (`juego/interfaz/ventana_carga.gd`): ilustración del destino a pantalla completa con movimiento lento, tramo del viaje, misión en curso, dato real con su fuente y un indicador de órbita.
+- [x] **Mapa del mundo** (tecla M, pausa y menú principal): ilustración de la región con los cinco lugares, «estás aquí», conexiones entre escenas y candados; en visita libre se viaja eligiendo el lugar (`juego/interfaz/mapa.gd`, `juego/datos/mapa.json`).
+- [x] Lote 07 de Higgsfield (9,00 créditos): arte de carga de la Plaza y de la Luna, y el mapa.
+- [x] Sendero jugable con el aspecto aprobado; rig de la protagonista exportado. Siguen en construcción la Habitación, la Plaza y el Mirador.
+
 ## Pendiente
 
 ### De Guillermo
@@ -176,3 +186,11 @@ actualizado: 2026-11-12
 | 2026-11-12 | Lote 05a: 6 borradores de la Habitación con vista superior 3/4 y aire 2D-HD (A mañana, B noche, C azotea, D cama alta, E casa de muñecas, F cuarto-tutorial en L). Lámina: `Exploracion/Lote_05/_lamina_lote05.png` | GPT Image 2.6 low 1k | 6 | 1,50 | 888,00 | Guillermo (partida del lote 05). Quedan 7,00 del tope |
 | 2026-11-12 | Lote 04c: malla nueva de la protagonista desde la hoja de giro (frente, perfil espejado, espalda y perfil), textura detallada. La cara salió fiel a la hoja | Tripo H3.1 multivista ×4 | 1 | 12,00 | 889,50 | Guillermo (reserva de la partida de la escena v1). Quedan 2,00 |
 | 2026-11-13 | Lote 05b: versión final del concepto A de la Habitación, con el descanso de la escalera como entrada y salida (`Exploracion/Lote_05/L05_A_manana_calida_final.png`) | GPT Image 2.6 high 2k | 1 | 2,75 | 885,25 | Guillermo (partida del lote 05). Quedan 4,25 del tope |
+| 2026-11-14 | **Partida autorizada:** arte de las pantallas de carga y del mapa del mundo («usa Higgsfield para lo que necesites, te doy el permiso»). Tope que se fijó Claude: 20 créditos | GPT Image 2.6 | — | — | 885,25 | Guillermo (permiso general del 2026-11-14) |
+| 2026-11-14 | Lote 07a: 3 borradores (carga de la Plaza, carga de la Luna y mapa del mundo). Revisados: sin insignias ni texto | GPT Image 2.6 low 1k | 3 | 0,75 | 884,50 | Guillermo (partida del lote 07) |
+| 2026-11-14 | Lote 07b: versiones finales de los 3, con el borrador como referencia. Van en el juego: `juego/interfaz/arte/` | GPT Image 2.6 high 2k | 3 | 8,25 | 876,25 | Guillermo (partida del lote 07). Quedan 11,00 del tope |
+| 2026-11-14 | Lote A1 (audio): 15 efectos y ambientes, 30 s en total (paso, paso lunar, salto, recoger, umbral, logro, página, radio, golpe de mástil, ambiente de la Luna y del sendero; 4 repeticiones). Originales en `Fase_4_Audio/Lote_A1/originales/`; la integración en `juego/audio/` está en curso | Mirelo text-to-audio | 15 | 7,50 | 868,75 | Guillermo (permiso general del 2026-11-14). Tope del encargo: 8,00; no se genera más |
+| 2026-11-15 | Lote 08: láminas pintadas de las pantallas de carga (habitación, plaza, sendero, mirador y Luna): 5 borradores y 5 finales con el borrador como referencia, en `Fase_1_Arte/Exploracion/Lote_08/`. La integración en el motor está en curso y sin revisar | GPT Image 2.6 low 1k y high 2k | 10 | 15,00 | 853,75 | Guillermo (permiso general del 2026-11-14). Tope del encargo: 18,00 |
+| 2026-11-15 | **Partida aprobada:** producción de la cinemática de apertura con los mejores modelos («Usa los mejores modelos de Higgsfield para este objetivo, no importa el gasto»). Límite real: el saldo. Puerta 2 (lotes 09b y 09c): fotogramas finales, bandera ondeando (P13) y rediseño de la protagonista en primer plano (P14); tope 150,00. El video va después, por movimientos | GPT Image 2.6 xhigh 2k y los que gane la prueba de diseño | — | — | 849,50 | Guillermo (2026-11-15) |
+| 2026-11-15 | **Partida abierta:** video demo de la presentación (2:30). Música, efectos de sonido y, si hace falta, una imagen de portada. Tope: 40,00, reservados frente al video de la cinemática. Registro en `Presentacion/registro_creditos.md` | Sonilo o ElevenLabs Music, Mirelo y GPT Image 2.6 | — | hasta 40,00 | por registrar | Guillermo («usa toda clase de recursos para editar el video: sonidos, sfx, imágenes en alta calidad») |
+| 2026-11-15 | Lote 09a: 17 viñetas de borrador del storyboard de la cinemática de apertura «Un punto de luz» (15 planos; P14 en tres). Láminas: `Fase_1_Arte/Exploracion/Lote_09/storyboard_lamina_1.jpg` y `_2.jpg`. Revisadas: sin insignias, sin texto y sin rostros reales. Tope de la partida: 6,00; quedan 1,75. El video y los fotogramas finales esperan la aprobación de Guillermo | GPT Image 2.6 low 1k | 17 | 4,25 | 849,50 | Guillermo («Empecemos por el storyboard»; permiso general del 2026-11-14) |

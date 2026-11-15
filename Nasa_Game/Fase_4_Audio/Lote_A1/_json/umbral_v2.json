@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-14T19:24:50.865176Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "530f6ce5-f9e6-40a9-bc83-24f33a83f106",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 2,
+      "prompt": "A magical whoosh: a smooth airy swoosh that rises in pitch and ends in a bright sparkling shimmer, loud and clear, isolated. No voice, no speech, no melody."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_192450_530f6ce5-f9e6-40a9-bc83-24f33a83f106.mp3",
+    "status": "completed"
+  }
+]

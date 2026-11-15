@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-15T06:46:12.434142Z",
+    "display_name": "GPT Image 2.6",
+    "id": "403ed80a-c95c-4617-b59e-22d8f6122e45",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064612_403ed80a-c95c-4617-b59e-22d8f6122e45_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Extreme telephoto photograph from a long-range tracking camera, about 1800 mm full-frame-equivalent lens at f/11, same camera position as a 600 mm view tightened three times, locked off, strongly compressed perspective and heat shimmer. A tall white three-stage rocket beside its dark steel launch tower stands at three fifths of the frame width and fills the central half of the frame height against a pale hot morning sky, rim-lit by the sun behind it; flat marsh and a strip of still water run along the bottom. The engines have just ignited: at the base, a blinding orange-white fire, the only saturated colour in the whole image, blooming with a soft red-orange halation. The fire lights the underside of the rocket and the steam from below, so the steam rolling outward low along the ground on both sides glows amber at its base and turns cream above. The rocket has barely left the pad, its base just above the launch platform, perfectly vertical, the tower still beside it. No people. Colour of 1960s 16 mm reversal film: muted cream and faded cyan everywhere except the fire, slightly lifted warm blacks. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064612_403ed80a-c95c-4617-b59e-22d8f6122e45.png",
+    "status": "completed"
+  }
+]

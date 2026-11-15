@@ -1,0 +1,8 @@
+Comando: python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:muestras --ritmo=8
+13 PRUEBA_OK; 0 PRUEBA_FALLO
+Dificultad 1: superado=true puntos=1144.0
+Dificultad 3: superado=true puntos=1076.0
+Fallo deliberado: superado=false; causa explicada
+FIN
+[godot: ok; 13 s; lineas=30; errores=0]
+Resumen de la salida observada; no es un volcado completo.

@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-15T06:46:41.620531Z",
+    "display_name": "GPT Image 2.6",
+    "id": "5be6cc97-4d18-457a-b31d-0c496251e75d",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064641_5be6cc97-4d18-457a-b31d-0c496251e75d_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "The whole planet Earth floating in pure black space, photographed with a 24 mm lens at f/8 from a departing spacecraft, exposed for the sunlit clouds so that no stars show. A blue-and-white gibbous globe about three quarters lit, hard sunlight from the upper right, a band of night along its lower left edge melting into the black, and a thin luminous blue line of atmosphere along the sunlit limb. The globe sits slightly right of centre and low in the frame: its sunlit top edge touches a point at three fifths of the frame width and one third of the height from the top, and its bottom edge sits just above the bottom of the frame, so it fills 60 percent of the frame height. Deep saturated ocean blue and bright white cloud swirls, with only faint hints of land under the clouds: no sharply drawn or recognisable coastlines, no city lights. No stars, no Moon, no spacecraft parts, no lens flare. The background is perfectly black. Crisp large-format clarity, almost grainless. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064641_5be6cc97-4d18-457a-b31d-0c496251e75d.png",
+    "status": "completed"
+  }
+]

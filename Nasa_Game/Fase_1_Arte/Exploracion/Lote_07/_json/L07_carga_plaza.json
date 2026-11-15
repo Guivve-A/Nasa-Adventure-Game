@@ -1,0 +1,65 @@
+[
+  {
+    "created_at": "2026-11-14T17:34:33.426587Z",
+    "display_name": "GPT Image 2.6",
+    "id": "1bffd579-9a5a-4d03-a89c-48ff403bc1af",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173433_1bffd579-9a5a-4d03-a89c-48ff403bc1af_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "233d88a5-03cd-49c1-bbf6-b0509f27cad8",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/233d88a5-03cd-49c1-bbf6-b0509f27cad8.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "762a3579-95e5-4573-ab6f-38d95afb2e0d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/762a3579-95e5-4573-ab6f-38d95afb2e0d.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/ff4e139f-ab33-4aff-8831-db4b2f92c40d.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "a5233512-47e6-4a71-af5d-3f8d362e5229",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/a5233512-47e6-4a71-af5d-3f8d362e5229.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Keep the composition, layout and placement of every element of the last reference image (the approved draft) and refine it into a clean, detailed final illustration. Use the exact art style and finish of the first two reference images. The student is the character of the third reference and the cat is the one of the fourth. Cinematic establishing illustration for a game loading screen, wide shot from a slightly elevated eye level, with sky: a small neighborhood plaza at the foot of a hillside stair neighborhood in a tropical port city at golden hour. A round stone fountain at the center, mosaic paving, benches, planters, a small juice kiosk, colorful houses with zinc roofs and clotheslines climbing the hill, and at the back the small municipal library: an original republican-style facade with wide steps, an arched portal with columns and an open-book relief above the door, with a soft cyan glow coming from inside the doorway. Two green iguanas sunbathe on a low wall. A thin crescent Moon lying on its back like a smile, low in the dusk sky. the chibi engineering student with voluminous dark curly hair, warm brown skin, a khaki short-sleeve utility jacket over a dark t-shirt, khaki cargo pants, chunky navy-and-white sneakers and a brown crossbody tool bag and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag walk across the plaza toward the library, small in the frame, seen from behind. The lower fifth of the image is calmer and darker so interface text can sit on it. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. No text, no logos, no interface.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173433_1bffd579-9a5a-4d03-a89c-48ff403bc1af.png",
+    "status": "completed"
+  }
+]

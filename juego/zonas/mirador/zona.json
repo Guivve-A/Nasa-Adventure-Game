@@ -1,0 +1,15 @@
+{
+  "nombre": "El Mirador del Faro",
+  "lugar": "Cerro, sobre Las Escalinatas",
+  "momento": "Noche con Luna",
+  "estado_arte": "provisional: concepto L03 sin veredicto",
+  "orden": 4,
+  "carga": {
+    "imagen": "res://zonas/mirador/carga.jpg",
+    "fichas": ["luz_cenicienta", "luna_sonriente", "luna_12_noviembre", "mare_crisium", "polo_sur_celeste"]
+  },
+  "entradas": {
+    "inicio": "descanso de llegada, al pie de la escalinata de mosaico, mirando a la terraza (igual que «sendero»)",
+    "sendero": "descanso de llegada, al pie de la escalinata de mosaico: se llega desde el sendero del arroyo"
+  }
+}

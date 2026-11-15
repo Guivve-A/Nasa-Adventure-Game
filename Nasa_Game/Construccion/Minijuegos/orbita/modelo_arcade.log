@@ -1,0 +1,16 @@
+Comando: python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/orbita/prueba_modelo.gd --ritmo=8
+Godot 4.7.2
+PRUEBA_OK orbita.modelo.d1
+PRUEBA_OK orbita.reglas.d1
+PRUEBA_OK orbita.modelo.d2
+PRUEBA_OK orbita.reglas.d2
+PRUEBA_OK orbita.modelo.d3
+PRUEBA_OK orbita.reglas.d3
+PRUEBA_OK orbita.paso_fijo
+PRUEBA_OK orbita.frenar_cae
+PRUEBA_OK orbita.gravedad_inverso_cuadrado
+PRUEBA_OK orbita.alturas_desde_ficha
+PRUEBAS hechas=11 fallos=0
+FIN
+[godot: ok; 3 s; lineas=27; errores=0]
+Salida del entorno adicional: Failed to read the root certificate store; 53 ObjectDB instances were leaked at exit; 6 resources still in use at exit.

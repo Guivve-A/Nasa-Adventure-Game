@@ -1,0 +1,86 @@
+{
+ "pose_de_union": {
+  "vertices_dentro": 0,
+  "hondura_max_m": 0.0,
+  "vertices_bolso": 1163
+ },
+ "caminar": {
+  "cuadros": 21,
+  "duracion_s": 0.8,
+  "vertices_dentro_max": 23,
+  "fraccion_max": 0.0198,
+  "vertices_dentro_medio": 4.4,
+  "hondura_max_m": 0.0063,
+  "peor_instante_s": 0.24,
+  "partes_en_el_peor_instante": {
+   "columna": 23
+  }
+ },
+ "celebrar": {
+  "cuadros": 36,
+  "duracion_s": 1.4,
+  "vertices_dentro_max": 14,
+  "fraccion_max": 0.012,
+  "vertices_dentro_medio": 5.4,
+  "hondura_max_m": 0.0019,
+  "peor_instante_s": 1.04,
+  "partes_en_el_peor_instante": {
+   "muslo_der": 14
+  }
+ },
+ "correr": {
+  "cuadros": 15,
+  "duracion_s": 0.56,
+  "vertices_dentro_max": 440,
+  "fraccion_max": 0.3783,
+  "vertices_dentro_medio": 76.8,
+  "hondura_max_m": 0.033,
+  "peor_instante_s": 0.08,
+  "partes_en_el_peor_instante": {
+   "muslo_der": 82,
+   "pierna_der": 226,
+   "cadera": 132
+  }
+ },
+ "recoger": {
+  "cuadros": 26,
+  "duracion_s": 1.0,
+  "vertices_dentro_max": 562,
+  "fraccion_max": 0.4832,
+  "vertices_dentro_medio": 244.4,
+  "hondura_max_m": 0.0367,
+  "peor_instante_s": 0.44,
+  "partes_en_el_peor_instante": {
+   "pierna_der": 171,
+   "muslo_der": 241,
+   "antebrazo_der": 12,
+   "cadera": 119,
+   "columna": 19
+  }
+ },
+ "reposo": {
+  "cuadros": 51,
+  "duracion_s": 2.0,
+  "vertices_dentro_max": 14,
+  "fraccion_max": 0.012,
+  "vertices_dentro_medio": 7.2,
+  "hondura_max_m": 0.0017,
+  "peor_instante_s": 0.48,
+  "partes_en_el_peor_instante": {
+   "muslo_der": 14
+  }
+ },
+ "salto_lunar": {
+  "cuadros": 31,
+  "duracion_s": 1.2,
+  "vertices_dentro_max": 88,
+  "fraccion_max": 0.0757,
+  "vertices_dentro_medio": 33.9,
+  "hondura_max_m": 0.0248,
+  "peor_instante_s": 0.76,
+  "partes_en_el_peor_instante": {
+   "cadera": 29,
+   "columna": 59
+  }
+ }
+}

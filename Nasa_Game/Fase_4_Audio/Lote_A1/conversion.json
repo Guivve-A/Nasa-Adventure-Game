@@ -1,0 +1,112 @@
+{
+ "paso": {
+  "duracion_s": 0.26,
+  "mean_volume": -22.7,
+  "max_volume": -1.5,
+  "original": "paso.mp3",
+  "modo": "corto",
+  "ganancia_db": 3.5,
+  "eleccion": "unica version",
+  "bytes": 6439
+ },
+ "paso_luna": {
+  "duracion_s": 0.36,
+  "mean_volume": -19.6,
+  "max_volume": -4.2,
+  "original": "paso_luna.mp3",
+  "modo": "corto",
+  "ganancia_db": 12.1,
+  "eleccion": "v1: la v2 tiene el pico en -30,6 dB y el 64 % de la energia bajo 150 Hz (no se oiria en altavoces de portatil)",
+  "bytes": 7325
+ },
+ "salto": {
+  "duracion_s": 0.7,
+  "mean_volume": -17.2,
+  "max_volume": -4.9,
+  "original": "salto_v2.mp3",
+  "modo": "completo",
+  "ganancia_db": -0.6,
+  "eleccion": "v2: la v1 tiene el 100 % de la energia bajo 150 Hz, un retumbo sin el roce de tela pedido",
+  "bytes": 10157
+ },
+ "recoger": {
+  "duracion_s": 0.71,
+  "mean_volume": -27.1,
+  "max_volume": -1.6,
+  "original": "recoger.mp3",
+  "modo": "completo",
+  "ganancia_db": 10.8,
+  "eleccion": "unica version",
+  "bytes": 11545
+ },
+ "umbral": {
+  "duracion_s": 2.0,
+  "mean_volume": -19.1,
+  "max_volume": -4.2,
+  "original": "umbral.mp3",
+  "modo": "completo",
+  "ganancia_db": 22.8,
+  "eleccion": "v1: la v2 se pago pero no se pudo descargar (conexion cortada)",
+  "bytes": 22237
+ },
+ "logro": {
+  "duracion_s": 1.99,
+  "mean_volume": -31.8,
+  "max_volume": -1.9,
+  "original": "logro.mp3",
+  "modo": "completo",
+  "ganancia_db": 7.3,
+  "eleccion": "unica version",
+  "bytes": 24190
+ },
+ "pagina": {
+  "duracion_s": 0.55,
+  "mean_volume": -24.3,
+  "max_volume": -1.3,
+  "original": "pagina.mp3",
+  "modo": "corto",
+  "ganancia_db": 21.8,
+  "eleccion": "unica version",
+  "bytes": 9674
+ },
+ "radio": {
+  "duracion_s": 0.8,
+  "mean_volume": -20.6,
+  "max_volume": -1.1,
+  "original": "radio_v2.mp3",
+  "modo": "completo",
+  "ganancia_db": 2.7,
+  "eleccion": "v2: la v1 es casi silencio (pico -41,8 dB, RMS -57,7 dB)",
+  "bytes": 11553
+ },
+ "golpe_mastil": {
+  "duracion_s": 0.4,
+  "mean_volume": -28.2,
+  "max_volume": -0.7,
+  "original": "golpe_mastil.mp3",
+  "modo": "corto",
+  "ganancia_db": 1.1,
+  "eleccion": "unica version",
+  "bytes": 7631
+ },
+ "ambiente_luna": {
+  "duracion_s": 7.11,
+  "mean_volume": -18.0,
+  "max_volume": -6.9,
+  "original": "ambiente_luna.mp3",
+  "modo": "bucle",
+  "ganancia_db": 14.4,
+  "eleccion": "unica version",
+  "bytes": 65653
+ },
+ "ambiente_sendero": {
+  "duracion_s": 5.11,
+  "mean_volume": -20.3,
+  "max_volume": -3.7,
+  "original": "ambiente_sendero.mp3",
+  "modo": "bucle",
+  "ganancia_db": -1.0,
+  "eleccion": "unica version",
+  "bytes": 53169
+ }
+}

@@ -16,6 +16,17 @@ Uso:
                    python -I herramientas/juego_ejecutar.py --ventana --proyecto=pruebas/escena_exploracion
                      res://vista_previa.tscn -- --glb=<glb> --animacion=caminar --tiempo=0.3 --captura=<png>
                    (en esos proyectos el fin lo marcan CAPTURA_OK o MEDIDA)
+  --pelicula=<archivo.avi|.png>  graba video con el modo de pelicula de Godot (--write-movie) a cuadros fijos:
+                   no pierde cuadros aunque el equipo vaya lento. Implica --ventana. Con .avi da MJPEG y sonido PCM;
+                   con .png, una secuencia de PNG mas un .wav. El archivo se cierra cuando el juego sale.
+  --resolucion=<AxB>   tamano de la ventana (por ejemplo 1920x1080); se pasa como --resolution.
+  --fps=<n>        cuadros por segundo de la pelicula (por defecto 30); se pasa como --fixed-fps.
+  --cuadros=<n>    sale solo tras <n> cuadros (--quit-after): para grabar proyectos que no terminan solos.
+  --pantalla_completa  abre a pantalla completa (--fullscreen). En esta pantalla una ventana de 1920x1080 no
+                   cabe (queda en 1866x1050); a pantalla completa el juego se dibuja a 1920x1080 de verdad.
+  Ojo: el video sale del tamano del viewport del proyecto (1280x720 en juego/), no del de la ventana: Godot
+  reescala cada cuadro. Para 1080p nativo, herramientas/demo/capturar.py graba una copia espejo del proyecto
+  con un override.cfg (viewport 1920x1080 y stretch/scale 1,5, que deja la interfaz igual).
 
 Argumentos del juego (los lee juego/principal.gd):
   --prueba=<nombre>          nucleo | zonas | minijuegos | recorrido | zona:<id> | minijuego:<id>
@@ -151,9 +162,19 @@ def main():
     maximo = 240.0
     proyecto = PROYECTO
     escena = []
+    pelicula = None
+    resolucion = None
+    fps = "30"
     for p in previos:
         if p.startswith("--max="):
             maximo = float(p.split("=", 1)[1])
+        elif p.startswith("--pelicula="):
+            pelicula = Path(p.split("=", 1)[1]).resolve()
+            ventana = True
+        elif p.startswith("--resolucion="):
+            resolucion = p.split("=", 1)[1]
+        elif p.startswith("--fps="):
+            fps = p.split("=", 1)[1]
         elif p.startswith("--proyecto="):
             # otro proyecto de Godot (p. ej. pruebas/escena_exploracion) bajo el mismo candado
             proyecto = (RAIZ / p.split("=", 1)[1]).resolve()
@@ -171,6 +192,16 @@ def main():
         orden = [GODOT, "--path", str(proyecto), *escena]
         if not ventana:
             orden.append("--headless")
+        if resolucion:
+            orden += ["--resolution", resolucion]
+        if "--pantalla_completa" in previos:
+            orden.append("--fullscreen")
+        for p in previos:
+            if p.startswith("--cuadros="):
+                orden += ["--quit-after", p.split("=", 1)[1]]
+        if pelicula is not None:
+            pelicula.parent.mkdir(parents=True, exist_ok=True)
+            orden += ["--write-movie", str(pelicula), "--fixed-fps", fps]
         orden += ["--", *juego]
         resultado, estado, segundos = correr(orden, maximo, todo, marcas_fin)
     finally:

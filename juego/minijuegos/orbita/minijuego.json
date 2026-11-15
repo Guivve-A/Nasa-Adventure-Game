@@ -1,17 +1,16 @@
 {
   "titulo": "Ni se cae ni se escapa",
-  "resumen": "Ajusta la velocidad tangencial para rodear la Tierra a una altura casi constante.",
+  "resumen": "Pilota entre anillos y sella una órbita a la altura de Pegaso.",
   "instrucciones": [
-    "Consulta la altura de partida y la velocidad circular calculada.",
-    "Ajusta el deslizador en km/s y pulsa Lanzar.",
-    "Completa 1 vuelta: la diferencia entre alturas debe ser menor que 150, 80 o 40 km según el nivel.",
-    "Si cae o se alarga, reintenta: el trazo anterior queda tenue y discontinuo."
+    "Cruza los anillos numerados; anticipa sus alturas.",
+    "Impulsa o frena con pulsos cortos.",
+    "Al completar los enlaces, centra la aguja y suelta el motor."
   ],
-  "controles": "A/D o ←/→: velocidad. E, Intro o Espacio: lanzar. Ratón: arrastrar el deslizador y pulsar Lanzar.",
+  "controles": "E, Espacio, W o arriba: motor hacia delante. S o abajo: freno. Soltar: inercia. Ratón opcional: izquierdo motor, derecho freno.",
   "pistas": [
-    "Órbita mira la flecha tangente y luego las alturas mínima y máxima.",
-    "Con poca velocidad baja; con demasiada, la elipse se alarga. Busca v = √(μ / r).",
-    "A 627 km usa 7,547 km/s; a 654 km, 7,533 km/s. Son cálculos propios: ajusta el deslizador y lanza."
+    "La línea de puntos predice la órbita; el anillo cian muestra el próximo enlace.",
+    "Impulsar sube el lado opuesto; frenar lo baja. La aguja central ayuda a anticipar.",
+    "Usa pulsos hacia el lado de la aguja y suelta cerca del centro. Tras los anillos, llena SELLADO sin motor."
   ],
   "ficha": "pegaso",
   "escena": "secundaria",

@@ -1,0 +1,379 @@
+extends Node
+
+# Entradas reales: nunca llama a jugar_solo ni a los manejadores del minijuego.
+const EVIDENCIA: String = "res://../Nasa_Game/Construccion/Minijuegos/telescopio/"
+var _pulsadas: Dictionary = {}
+var _raton: Vector2 = Vector2.ZERO
+var _resultado: Dictionary = {}
+var _listo: bool = false
+
+
+func correr(pruebas: Node) -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	Juego.modo_prueba = false
+	Juego.sin_guardar = true
+	Juego.minijuegos_solos = false
+	await _teclado(pruebas)
+	await _raton_solo(pruebas)
+	await _salidas(pruebas)
+	_soltar()
+	pruebas.comprobar(not get_tree().paused, "telescopio.manos.arbol_sin_pausa", "El anfitrion debe devolver la pausa previa.")
+	Juego.modo_prueba = true
+
+
+func _lanzar() -> void:
+	_resultado = await Interfaz.abrir_minijuego("telescopio", {"dificultad": 1})
+	_listo = true
+
+
+func _abrir(p: Node, nombre: String, teclado: bool = true) -> Control:
+	_listo = false
+	_resultado = {}
+	_lanzar()
+	for i in 180:
+		if Interfaz.anfitrion.visible:
+			break
+		await get_tree().process_frame
+	await _real(0.12)
+	var m: Control = Interfaz.anfitrion.get("_minijuego")
+	if not p.comprobar(Interfaz.anfitrion.visible and m != null, "telescopio.%s.abierto" % nombre):
+		return null
+	p.comprobar(int(m.get("_auto")) == 0 and int(m.get("_solo")) == 0, "telescopio.%s.sin_piloto" % nombre)
+	if nombre in ["teclado", "raton"]:
+		await _captura(nombre + "_instrucciones")
+	if teclado:
+		await _toque(KEY_ENTER)
+	else:
+		await _clic(_boton("Empezar").get_global_rect().get_center())
+	p.comprobar(bool(m.get("activo")), "telescopio.%s.Empezar" % nombre)
+	return m
+
+
+func _teclado(p: Node) -> void:
+	var m: Control = await _abrir(p, "teclado")
+	if m == null:
+		return
+	await _captura("teclado_buscar")
+	await _limites(p, m, "buscar")
+	# Cada tecla anunciada debe mover el eje correspondiente, sin pedir foco.
+	for par in [[KEY_A, "acimut", -1], [KEY_D, "acimut", 1], [KEY_W, "altura", 1], [KEY_S, "altura", -1], [KEY_LEFT, "acimut", -1], [KEY_RIGHT, "acimut", 1], [KEY_UP, "altura", 1], [KEY_DOWN, "altura", -1]]:
+		var antes: float = float(m.get(par[1]))
+		await _sostener(int(par[0]), 0.06)
+		p.comprobar((float(m.get(par[1])) - antes) * int(par[2]) > 0.0, "telescopio.teclado.buscar_%s" % OS.get_keycode_string(int(par[0])))
+	# Los numeros son las lecturas que aparecen en la ayuda de BUSCAR.
+	for i in 1800:
+		var dx: float = 241.4 - float(m.get("acimut"))
+		var dy: float = 20.0 - float(m.get("altura"))
+		_tecla(KEY_A, dx < -0.3)
+		_tecla(KEY_D, dx > 0.3)
+		_tecla(KEY_W, dy > 0.3)
+		_tecla(KEY_S, dy < -0.3)
+		if absf(dx) <= 0.3 and absf(dy) <= 0.3:
+			break
+		await get_tree().process_frame
+	_soltar()
+	await _toque(KEY_E)
+	p.comprobar(int(m.get("etapa")) == 1, "telescopio.teclado.E_confirma_busqueda")
+	await _limites(p, m, "enfocar")
+	for codigo in [KEY_A, KEY_D, KEY_LEFT, KEY_RIGHT]:
+		var antes: float = float(m.get("enfoque"))
+		await _sostener(codigo, 0.06)
+		var signo: float = -1.0 if codigo in [KEY_A, KEY_LEFT] else 1.0
+		p.comprobar((float(m.get("enfoque")) - antes) * signo > 0.0, "telescopio.teclado.enfocar_%s" % OS.get_keycode_string(codigo))
+	_tecla(KEY_D, true)
+	for i in 900:
+		if _nitidez(m) >= 95.0:
+			break
+		await get_tree().process_frame
+	_soltar()
+	await _captura("teclado_enfocar")
+	await _toque(KEY_ENTER)
+	p.comprobar(int(m.get("etapa")) == 2, "telescopio.teclado.Intro_confirma_enfoque")
+	for codigo in [KEY_A, KEY_D, KEY_W, KEY_S, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN]:
+		var antes: Vector2 = m.get("mira")
+		await _sostener(codigo, 0.06)
+		var cambio: Vector2 = Vector2(m.get("mira")) - antes
+		var direccion: Vector2 = Vector2.LEFT if codigo in [KEY_A, KEY_LEFT] else Vector2.RIGHT
+		if codigo in [KEY_W, KEY_UP]:
+			direccion = Vector2.UP
+		elif codigo in [KEY_S, KEY_DOWN]:
+			direccion = Vector2.DOWN
+		p.comprobar(cambio.dot(direccion) > 0.0, "telescopio.teclado.mira_%s" % OS.get_keycode_string(codigo))
+	for rasgo in 3:
+		var destino: Vector2 = _marca_visible(m, rasgo)
+		for i in 900:
+			var d: Vector2 = destino - Vector2(m.get("mira"))
+			_tecla(KEY_A, d.x < -4.0)
+			_tecla(KEY_D, d.x > 4.0)
+			_tecla(KEY_W, d.y < -4.0)
+			_tecla(KEY_S, d.y > 4.0)
+			if absf(d.x) <= 4.0 and absf(d.y) <= 4.0:
+				_soltar()
+				await get_tree().process_frame
+				await get_tree().process_frame
+				var restante: Vector2 = destino - Vector2(m.get("mira"))
+				if absf(restante.x) <= 4.0 and absf(restante.y) <= 4.0:
+					break
+			await get_tree().process_frame
+		_soltar()
+		await _limites(p, m, "rasgo_%d" % rasgo)
+		await _captura("teclado_rasgo_%d" % rasgo)
+		await _toque([KEY_SPACE, KEY_E, KEY_ENTER][rasgo])
+		p.comprobar(int(m.get("rasgo")) == rasgo + 1, "telescopio.teclado.marca_%d" % rasgo)
+	await _victoria(p, "teclado", true)
+
+
+func _raton_solo(p: Node) -> void:
+	var m: Control = await _abrir(p, "raton", false)
+	if m == null:
+		return
+	# Coordenadas de la Luna que se ve en el buscador, relativas al ocular.
+	var ocular: Control = m.get("_superficie")
+	var luna: Vector2 = ocular.get_global_rect().get_center() + Vector2((241.4 - float(m.get("acimut"))) * 6.0, (float(m.get("altura")) - 20.0) * 6.0)
+	await _clic(luna)
+	p.comprobar(absf(float(m.get("acimut")) - 241.4) < 0.01 and absf(float(m.get("altura")) - 20.0) < 0.01, "telescopio.raton.clic_centra_luna_visible")
+	for par in [["_dial_az", "acimut", 241.0], ["_dial_alt", "altura", 20.3]]:
+		var antes: float = float(m.get(par[1]))
+		await _arrastrar(m.get(par[0]), float(par[2]))
+		p.comprobar(absf(float(m.get(par[1])) - float(par[2])) < 0.1 and not is_equal_approx(antes, float(m.get(par[1]))), "telescopio.raton.arrastra_%s" % par[1])
+	await _clic_confirmar(m)
+	p.comprobar(int(m.get("etapa")) == 1, "telescopio.raton.boton_confirma_busqueda")
+	await _arrastrar(m.get("_dial_foco"), 0.45)
+	p.comprobar(absf(float(m.get("enfoque")) - 0.45) < 0.01, "telescopio.raton.arrastra_enfoque")
+	await _mover(ocular.get_global_rect().get_center())
+	var antes: float = float(m.get("enfoque"))
+	await _rueda(MOUSE_BUTTON_WHEEL_DOWN)
+	p.comprobar(float(m.get("enfoque")) < antes, "telescopio.raton.rueda_abajo")
+	antes = float(m.get("enfoque"))
+	await _rueda(MOUSE_BUTTON_WHEEL_UP)
+	p.comprobar(float(m.get("enfoque")) > antes, "telescopio.raton.rueda_arriba")
+	for i in 25:
+		if _nitidez(m) >= 95.0:
+			break
+		await _rueda(MOUSE_BUTTON_WHEEL_UP)
+	await _clic_confirmar(m)
+	p.comprobar(int(m.get("etapa")) == 2, "telescopio.raton.boton_confirma_enfoque")
+	for rasgo in 3:
+		var local: Vector2 = _marca_visible(m, rasgo)
+		var posicion: Vector2 = m.get_global_rect().position + local
+		if rasgo == 1:
+			await _clic(posicion)
+		else:
+			await _mover(posicion)
+		p.comprobar(Vector2(m.get("mira")).distance_to(local) < 0.1, "telescopio.raton.mira_%d" % rasgo)
+		await _captura("raton_rasgo_%d" % rasgo)
+		await _clic_confirmar(m)
+		p.comprobar(int(m.get("rasgo")) == rasgo + 1, "telescopio.raton.marca_%d" % rasgo)
+	await _victoria(p, "raton", false)
+
+
+func _marca_visible(m: Control, rasgo: int) -> Vector2:
+	# Puntos observados en el ocular: frontera inferior, centro oscuro y guia.
+	# No consulta objetivos del piloto ni llama a la funcion que decide aciertos.
+	var ocular: Control = m.get("_superficie")
+	var centro: Vector2 = ocular.get_rect().get_center()
+	if rasgo == 0:
+		return centro + Vector2(0, 114)
+	if rasgo == 1:
+		return centro
+	return centro + Vector2(55, 118)
+
+
+func _nitidez(m: Control) -> float:
+	var lectura: Label = m.get("_lectura")
+	var patron: RegEx = RegEx.new()
+	patron.compile("Nitidez: ([0-9]+)")
+	var coincidencia: RegExMatch = patron.search(lectura.text)
+	return float(coincidencia.get_string(1)) if coincidencia != null else 0.0
+
+
+func _victoria(p: Node, nombre: String, teclado: bool) -> void:
+	await _real(0.12)
+	var resultado: Dictionary = Interfaz.anfitrion.get("_resultado")
+	var gano: bool = bool(resultado.get("superado", false))
+	p.comprobar(gano, "telescopio.%s.superado" % nombre, str(resultado))
+	print("TELESCOPIO_MANOS %s %s" % [nombre, str(resultado)])
+	await _captura(nombre + "_resultado")
+	if not gano:
+		# Un fallo de la prueba no debe abrir otra partida sobre una aun activa.
+		await _toque(KEY_ESCAPE)
+		await _cerrado(p, nombre)
+		return
+	if teclado:
+		await _toque(KEY_ENTER)
+	else:
+		var boton: Button = _boton("Continuar")
+		if boton != null:
+			await _clic(boton.get_global_rect().get_center())
+	await _cerrado(p, nombre)
+
+
+func _cerrado(p: Node, nombre: String) -> void:
+	for i in 180:
+		if _listo and not Interfaz.anfitrion.visible:
+			break
+		await get_tree().process_frame
+	await _real(0.12)
+	p.comprobar(_listo and not Interfaz.anfitrion.visible, "telescopio.%s.anfitrion_cerrado" % nombre)
+	p.comprobar(not get_tree().paused, "telescopio.%s.sin_pausa" % nombre)
+
+
+func _salidas(p: Node) -> void:
+	# Esc desde instrucciones, las tres etapas y el resultado, con entradas reales.
+	_listo = false
+	_lanzar()
+	await _real(0.12)
+	await _toque(KEY_ESCAPE)
+	await _cerrado(p, "Esc_instrucciones")
+	var m: Control = await _abrir(p, "Esc_buscar")
+	await _toque(KEY_ESCAPE)
+	await _cerrado(p, "Esc_buscar")
+	for etapa in [1, 2, 3]:
+		m = await _abrir(p, "Esc_etapa_%d" % etapa)
+		if m == null:
+			return
+		await _arrastrar(m.get("_dial_az"), 241.4)
+		await _arrastrar(m.get("_dial_alt"), 20.0)
+		await _clic_confirmar(m)
+		if etapa >= 2:
+			await _arrastrar(m.get("_dial_foco"), 0.60)
+			await _clic_confirmar(m)
+		if etapa == 3:
+			for rasgo in 3:
+				await _mover(m.get_global_rect().position + _marca_visible(m, rasgo))
+				await _clic_confirmar(m)
+			var resultado: Dictionary = Interfaz.anfitrion.get("_resultado")
+			p.comprobar(bool(resultado.get("superado", false)), "telescopio.Esc_resultado.visible")
+		else:
+			p.comprobar(int(m.get("etapa")) == etapa, "telescopio.Esc_etapa_%d.alcanzada" % etapa)
+		await _toque(KEY_ESCAPE)
+		await _cerrado(p, "Esc_etapa_%d" % etapa)
+	# La salida tambien debe estar disponible usando solo el raton.
+	_listo = false
+	_lanzar()
+	await _real(0.12)
+	await _clic(_boton("Salir").get_global_rect().get_center())
+	await _cerrado(p, "raton_Salir_instrucciones")
+	m = await _abrir(p, "raton_Salir_activo", false)
+	var salir: Button = Interfaz.anfitrion.get("_salir")
+	await _clic(salir.get_global_rect().get_center())
+	await _cerrado(p, "raton_Salir_activo")
+
+
+func _limites(p: Node, m: Control, nombre: String) -> void:
+	await get_tree().process_frame
+	var fuera: PackedStringArray = []
+	for hijo in m.get_children():
+		if hijo is Control and hijo.visible and hijo != m.get("_capa_mira"):
+			if not Rect2(Vector2.ZERO, m.size).encloses(hijo.get_rect()):
+				fuera.append("%s %s" % [hijo.name, str(hijo.get_rect())])
+	p.comprobar(fuera.is_empty(), "telescopio.lienzo.%s" % nombre, str(fuera))
+
+
+func _boton(nombre: String) -> Button:
+	var columna: Control = Interfaz.anfitrion.get("_capa_columna")
+	for nodo in columna.find_children("*", "Button", true, false):
+		if nodo.text == nombre:
+			return nodo
+	return null
+
+
+func _captura(nombre: String) -> void:
+	if Juego.args.has("evidencia_manos"):
+		await Interfaz.capturar(ProjectSettings.globalize_path(EVIDENCIA + "manos_" + nombre + ".png"))
+
+
+func _real(segundos: float) -> void:
+	await get_tree().create_timer(segundos, true, false, true).timeout
+
+
+func _tecla(codigo: int, abajo: bool) -> void:
+	if bool(_pulsadas.get(codigo, false)) == abajo:
+		return
+	_pulsadas[codigo] = abajo
+	var evento: InputEventKey = InputEventKey.new()
+	evento.physical_keycode = codigo
+	evento.keycode = codigo
+	evento.pressed = abajo
+	Input.parse_input_event(evento)
+
+
+func _toque(codigo: int) -> void:
+	_tecla(codigo, true)
+	await get_tree().process_frame
+	await get_tree().physics_frame
+	await get_tree().process_frame
+	_tecla(codigo, false)
+	await _real(0.04)
+
+
+func _sostener(codigo: int, segundos: float) -> void:
+	_tecla(codigo, true)
+	await get_tree().process_frame
+	await get_tree().physics_frame
+	await get_tree().process_frame
+	await _real(segundos)
+	_tecla(codigo, false)
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+
+func _soltar() -> void:
+	for codigo in _pulsadas.keys():
+		_tecla(int(codigo), false)
+
+
+func _mover(posicion: Vector2, arrastrando: bool = false) -> void:
+	# parse_input_event recibe pixeles de ventana, tambien en headless (64x64).
+	var transformacion: Transform2D = get_viewport().get_final_transform()
+	var evento: InputEventMouseMotion = InputEventMouseMotion.new()
+	evento.position = transformacion * posicion
+	evento.global_position = evento.position
+	evento.relative = transformacion * posicion - transformacion * _raton
+	evento.button_mask = MOUSE_BUTTON_MASK_LEFT if arrastrando else 0
+	_raton = posicion
+	Input.parse_input_event(evento)
+	await get_tree().process_frame
+
+
+func _boton_raton(codigo: int, abajo: bool) -> void:
+	var evento: InputEventMouseButton = InputEventMouseButton.new()
+	evento.position = get_viewport().get_final_transform() * _raton
+	evento.global_position = evento.position
+	evento.button_index = codigo
+	evento.button_mask = MOUSE_BUTTON_MASK_LEFT if abajo and codigo == MOUSE_BUTTON_LEFT else 0
+	evento.pressed = abajo
+	Input.parse_input_event(evento)
+
+
+func _clic(posicion: Vector2) -> void:
+	await _mover(posicion)
+	_boton_raton(MOUSE_BUTTON_LEFT, true)
+	await _real(0.04)
+	_boton_raton(MOUSE_BUTTON_LEFT, false)
+	await _real(0.06)
+
+
+func _clic_confirmar(m: Control) -> void:
+	var boton: Button = m.get("_confirmar_boton")
+	await _clic(boton.get_global_rect().get_center())
+
+
+func _rueda(codigo: int) -> void:
+	_boton_raton(codigo, true)
+	await get_tree().process_frame
+	_boton_raton(codigo, false)
+	await get_tree().process_frame
+
+
+func _arrastrar(dial: HSlider, destino: float) -> void:
+	var rect: Rect2 = dial.get_global_rect()
+	var ancho: float = dial.get_theme_icon("grabber").get_width()
+	var inicio: float = (dial.value - dial.min_value) / (dial.max_value - dial.min_value)
+	var fin: float = (destino - dial.min_value) / (dial.max_value - dial.min_value)
+	await _mover(rect.position + Vector2(ancho * 0.5 + inicio * (rect.size.x - ancho), rect.size.y * 0.5))
+	_boton_raton(MOUSE_BUTTON_LEFT, true)
+	await get_tree().process_frame
+	await _mover(rect.position + Vector2(ancho * 0.5 + fin * (rect.size.x - ancho), rect.size.y * 0.5), true)
+	_boton_raton(MOUSE_BUTTON_LEFT, false)
+	await _real(0.06)

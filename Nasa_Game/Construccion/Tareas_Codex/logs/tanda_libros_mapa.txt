@@ -1,0 +1,3 @@
+Codex: C:\Users\guill\AppData\Local\OpenAI\Codex\bin\c38161ad8494f88c\codex.exe
+1 tareas, 1 en paralelo
+  libros_mapa                  error (codigo 1)         5.8 min        0 bytes

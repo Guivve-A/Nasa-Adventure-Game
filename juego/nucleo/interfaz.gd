@@ -19,6 +19,7 @@ const Anfitrion := preload("res://interfaz/anfitrion.gd")
 const Pausa := preload("res://interfaz/pausa.gd")
 const Cuaderno := preload("res://interfaz/cuaderno.gd")
 const Menu := preload("res://interfaz/menu.gd")
+const Mapa := preload("res://interfaz/mapa.gd")
 
 var raiz: Control
 var hud: Control
@@ -28,8 +29,11 @@ var anfitrion: Control
 var pausa: Control
 var cuaderno: Control
 var menu: Control
+var mapa: Control
 var velo: ColorRect
 var _pausa_previa := false
+var _ocupada_hasta := 0
+var _mapa_desde_menu := false
 var _hablando := false
 
 
@@ -46,9 +50,10 @@ func _ready() -> void:
 	cuaderno = Cuaderno.new()
 	pausa = Pausa.new()
 	menu = Menu.new()
+	mapa = Mapa.new()
 	anfitrion = Anfitrion.new()
 	carga = VentanaCarga.new()
-	for nodo in [hud, dialogo, cuaderno, pausa, menu, anfitrion, carga]:
+	for nodo in [hud, dialogo, cuaderno, pausa, menu, mapa, anfitrion, carga]:
 		raiz.add_child(nodo)
 	hud.visible = false
 	velo = ColorRect.new()
@@ -60,11 +65,23 @@ func _ready() -> void:
 	pausa.accion.connect(_accion_pausa)
 	cuaderno.cerrado.connect(_cuaderno_cerrado)
 	menu.elegido.connect(_accion_menu)
+	mapa.cerrado.connect(_mapa_cerrado)
+	mapa.viajar.connect(_mapa_viajar)
+
+
+func _abierta() -> bool:
+	return _hablando or dialogo.visible or anfitrion.visible or pausa.visible or cuaderno.visible or menu.visible or carga.visible or mapa.visible
+
+
+func _process(_delta: float) -> void:
+	if _abierta():
+		_ocupada_hasta = Time.get_ticks_msec() + 300
 
 
 func ocupada() -> bool:
-	# true mientras haya algo abierto que bloquea a la protagonista
-	return _hablando or dialogo.visible or anfitrion.visible or pausa.visible or cuaderno.visible or menu.visible or carga.visible
+	# true mientras haya algo abierto que bloquea a la protagonista, y 0,3 s mas: asi la pulsacion que
+	# cierra un dialogo o un minijuego (E o Intro) no vuelve a usar el objeto que esta al lado
+	return _abierta() or Time.get_ticks_msec() < _ocupada_hasta
 
 
 # ------------------------------------------------------------------ dialogos y avisos
@@ -168,7 +185,13 @@ func _input(evento: InputEvent) -> void:
 		if evento.keycode == KEY_F12:
 			capturar("res://capturas/captura_%d.png" % int(Time.get_unix_time_from_system()))
 			return
-	if anfitrion.visible or menu.visible or carga.visible:
+	if anfitrion.visible or carga.visible or mapa.visible:
+		return
+	if menu.visible:
+		return
+	if evento.is_action_pressed("mapa") and _en_juego() and not ocupada():
+		abrir_mapa(false)
+		get_viewport().set_input_as_handled()
 		return
 	if evento.is_action_pressed("pausa"):
 		if pausa.visible:
@@ -193,7 +216,7 @@ func _input(evento: InputEvent) -> void:
 func _abrir_pausa() -> void:
 	_pausa_previa = get_tree().paused
 	get_tree().paused = true
-	var opciones: Array = [["Continuar", "continuar"], ["Cuaderno", "cuaderno"]]
+	var opciones: Array = [["Continuar", "continuar"], ["Mapa", "mapa"], ["Cuaderno", "cuaderno"]]
 	if Zonas.actual != null and Zonas.actual.has_method("despertar"):
 		opciones.append(["Despertar", "despertar"])
 	opciones.append(["Menú principal", "menu"])
@@ -206,6 +229,9 @@ func _accion_pausa(nombre: String) -> void:
 	match nombre:
 		"cuaderno":
 			cuaderno.abrir()
+		"mapa":
+			_mapa_desde_menu = false
+			mapa.abrir(false)
 		"despertar":
 			get_tree().paused = false
 			Zonas.actual.call("despertar")
@@ -232,6 +258,32 @@ func _cuaderno_cerrado() -> void:
 	get_tree().paused = _pausa_previa
 
 
+func abrir_mapa(viaje: bool = false) -> void:
+	# el mapa del mundo: lugares, conexiones y donde esta la protagonista
+	_mapa_desde_menu = menu.visible
+	if not _mapa_desde_menu:
+		_pausa_previa = get_tree().paused
+		get_tree().paused = true
+	Audio.sonar("pagina")
+	mapa.abrir(viaje)
+
+
+func _mapa_cerrado() -> void:
+	if not _mapa_desde_menu:
+		get_tree().paused = _pausa_previa
+
+
+func _mapa_viajar(id_zona: String) -> void:
+	if _mapa_desde_menu:
+		# visita libre desde el menu principal: todo abierto, para recorrer y validar cada escenario
+		Juego.nueva_partida()
+		Juego.poner_bandera("visita_libre")
+		menu.cerrar()
+	else:
+		get_tree().paused = _pausa_previa
+	Zonas.ir_a(id_zona, "inicio")
+
+
 func _accion_menu(accion: String, dato: String) -> void:
 	match accion:
 		"nueva":
@@ -250,6 +302,8 @@ func _accion_menu(accion: String, dato: String) -> void:
 			menu.mostrar_minijuegos()
 		"lugares":
 			menu.mostrar_lugares()
+		"mapa":
+			abrir_mapa(true)
 		"inicio":
 			menu.mostrar_inicio()
 		"minijuego":

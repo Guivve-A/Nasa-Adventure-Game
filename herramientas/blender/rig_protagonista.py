@@ -622,7 +622,8 @@ class Cinematica:
                 "talon": A0 + Vector(talon), "punta": A0 + Vector(punta),
                 "flex0": math.atan2(dm0.x, -dm0.z),
             }
-        self.exceso = 0.0   # mayor distancia que le falto a una pierna para alcanzar su objetivo
+        self.exceso = 0.0          # mayor distancia que le falto a una pierna para alcanzar su objetivo
+        self.exceso_apoyo = 0.0    # lo mismo, solo con el pie apoyado
 
     @staticmethod
     def marco(d, n):
@@ -679,7 +680,11 @@ class Cinematica:
             a.z = self.zs + g("pie_z" + L) + self.altura_tobillo(lado, qf)
             H = pr + qr @ (pi["H0"] - self.cab["cadera"])
             polo = QZ(g("raiz_yaw") * 0.5) @ Vector((1.0, s * (0.10 + g("rodilla_abre" + L)), 0.0))
+            previo, self.exceso = self.exceso, 0.0
             qm, qp = self.inversa(lado, H, a, polo)
+            if g("pie_z" + L) < 1e-4:            # pie apoyado: si no alcanza, resbala o se despega
+                self.exceso_apoyo = max(self.exceso_apoyo, self.exceso)
+            self.exceso = max(previo, self.exceso)
             d["muslo" + L] = qr.conjugated() @ qm
             d["pierna" + L] = qm.conjugated() @ qp
             d["pie" + L] = qp.conjugated() @ qf
@@ -688,7 +693,9 @@ class Cinematica:
                 v = qr.conjugated() @ (qm @ (pi["K0"] - pi["H0"]))
                 flex = math.degrees(math.atan2(v.x, -v.z) - pi["flex0"])
                 sigue = 0.80 * max(flex, 0.0) + 0.15 * min(flex, 0.0)
-                d["bolso"] = QY(-(sigue + g("bolso_pitch"))) @ QX(-g("bolso_fuera"))
+                # ... y se abre hacia fuera para quedar sobre el costado del muslo, no entre el muslo y el vientre
+                fuera = BOLSO_FUERA_POR_FLEXION * max(flex, 0.0) + g("bolso_fuera")
+                d["bolso"] = QY(-(sigue + g("bolso_pitch"))) @ QX(-fuera)
         return pose
 
     def inversa(self, lado, H, A, polo):
@@ -728,6 +735,7 @@ def paso_pie(p, zancada, apoyo, alza, centro):
 CABECEO_CAMINAR = [(0.0, -16.0), (0.09, 0.0), (0.37, 0.0), (0.55, 27.0), (0.63, 33.0), (0.80, 6.0), (0.93, -13.0)]
 CABECEO_CORRER = [(0.0, 3.0), (0.05, 0.0), (0.16, 0.0), (0.30, 32.0), (0.42, 56.0), (0.62, 34.0), (0.84, 0.0),
                   (0.95, 4.0)]
+BOLSO_FUERA_POR_FLEXION = 0.35      # grados que el bolso se abre hacia fuera por cada grado que sube el muslo derecho
 CAMINAR = {"zancada": 0.31, "apoyo": 0.55, "alza": 0.055, "centro": 0.012}
 CORRER = {"zancada": 0.30, "apoyo": 0.30, "alza": 0.120, "centro": 0.0}
 
@@ -812,26 +820,30 @@ def p_salto_lunar(u):
     return p
 
 
-AGACHADA = {"raiz_z": -0.185, "raiz_pitch": 22.0, "col_pitch": 22.0, "pec_pitch": 18.0, "cue_pitch": -14.0,
-            "cab_pitch": -16.0, "rodilla_abre_izq": 0.30, "rodilla_abre_der": 0.30,
-            "flex_izq": 86.0, "abd_izq": -14.0, "codo_izq": 8.0, "hom_adel_izq": 8.0,
-            "flex_der": 30.0, "abd_der": 6.0, "codo_der": 25.0, "bolso_fuera": 6.0}
+AGACHADA = {"raiz_z": -0.225, "raiz_pitch": 32.0, "col_pitch": 32.0, "pec_pitch": 28.0, "cue_pitch": -22.0,
+            "cab_pitch": -24.0, "rodilla_abre_izq": 0.30, "rodilla_abre_der": 0.30,
+            "flex_izq": 90.0, "abd_izq": -14.0, "codo_izq": 8.0, "hom_adel_izq": 8.0,
+            "flex_der": 34.0, "abd_der": 6.0, "codo_der": 25.0,
+            # en cuclillas el bolso sale por el costado: si no, queda enterrado entre el muslo y el vientre
+            "bolso_fuera": 38.0, "bolso_pitch": -25.0}
 RECOGER = [(0.00, {}), (0.42, AGACHADA),
-           (0.58, dict(AGACHADA, flex_izq=90.0, codo_izq=4.0, raiz_z=-0.190)), (1.00, {})]
+           (0.58, dict(AGACHADA, flex_izq=94.0, codo_izq=4.0, raiz_z=-0.230)), (1.00, {})]
 
-ARRIBA = {"raiz_z": 0.028, "raiz_pitch": -2.0, "col_pitch": -5.0, "pec_pitch": -6.0, "cue_pitch": -5.0,
-          "cab_pitch": -8.0, "pie_pitch_izq": 22.0, "pie_pitch_der": 22.0}
+# brazos en V abierta (unos 30 grados sobre la horizontal, el antebrazo algo mas), como en el concepto de la
+# Habitacion; la cabeza apenas mira arriba para que desde la camara alta no se pierda la cara
+ARRIBA = {"raiz_z": 0.020, "raiz_pitch": -1.0, "col_pitch": -3.0, "pec_pitch": -3.0, "cue_pitch": -2.0,
+          "cab_pitch": -3.0, "pie_pitch_izq": 16.0, "pie_pitch_der": 16.0}
 for _lado in ("izq", "der"):
-    ARRIBA.update({"hom_elev_" + _lado: 20.0, "abd_" + _lado: 84.0, "flex_" + _lado: 14.0,
-                   "codo_lat_" + _lado: 24.0, "mano_lat_" + _lado: 8.0})
+    ARRIBA.update({"hom_elev_" + _lado: 14.0, "abd_" + _lado: 78.0, "flex_" + _lado: 8.0,
+                   "codo_lat_" + _lado: 12.0, "mano_lat_" + _lado: 6.0})
 ANTICIPA = {"raiz_z": -0.030, "raiz_pitch": 3.0, "col_pitch": 4.0, "cab_pitch": 6.0,
             "abd_izq": -4.0, "abd_der": -4.0, "flex_izq": -8.0, "flex_der": -8.0, "codo_izq": 25.0, "codo_der": 25.0}
 CELEBRAR = [(0.00, {}), (0.16, ANTICIPA), (0.46, ARRIBA),
-            (0.62, dict(ARRIBA, raiz_z=0.012, abd_izq=80.0, abd_der=80.0, codo_lat_izq=30.0, codo_lat_der=30.0,
-                        pie_pitch_izq=10.0, pie_pitch_der=10.0)),
-            (0.80, dict(ARRIBA, raiz_z=0.024, abd_izq=85.0, abd_der=85.0, pie_pitch_izq=19.0, pie_pitch_der=19.0)),
-            (1.02, dict(ARRIBA, raiz_z=0.004, abd_izq=80.0, abd_der=80.0, pie_pitch_izq=3.0, pie_pitch_der=3.0,
-                        cab_pitch=-5.0)),
+            (0.62, dict(ARRIBA, raiz_z=0.008, abd_izq=72.0, abd_der=72.0, codo_lat_izq=20.0, codo_lat_der=20.0,
+                        pie_pitch_izq=7.0, pie_pitch_der=7.0)),
+            (0.80, dict(ARRIBA, raiz_z=0.017, abd_izq=80.0, abd_der=80.0, pie_pitch_izq=14.0, pie_pitch_der=14.0)),
+            (1.02, dict(ARRIBA, raiz_z=0.003, abd_izq=72.0, abd_der=72.0, pie_pitch_izq=2.0, pie_pitch_der=2.0,
+                        cab_pitch=-2.0)),
             (1.40, {})]
 
 
@@ -860,13 +872,19 @@ def crear_clips(armadura, cine):
     for nombre, duracion, ciclico in CLIPS:
         cuadros = int(round(duracion * FPS))
         exigir(abs(cuadros / FPS - duracion) < 1e-9, "La duracion de %s no cae en cuadros enteros" % nombre)
-        cine.exceso = 0.0
-        poses = []
+        poses, faltas, faltas_apoyo = [], [], []
         for k in range(cuadros + 1):
             kk = k % cuadros if ciclico else k            # el ultimo cuadro de un ciclo es el primero, exacto
+            cine.exceso = cine.exceso_apoyo = 0.0
             poses.append(cine.construir(parametros(nombre, kk / FPS, duracion)))
-        if cine.exceso > 5e-4:
-            aviso("%s: a una pierna le faltaron %.1f mm para alcanzar su apoyo" % (nombre, cine.exceso * 1000))
+            faltas.append(cine.exceso)
+            faltas_apoyo.append(cine.exceso_apoyo)
+        if max(faltas_apoyo) > 5e-4:
+            aviso("%s: a una pierna apoyada le faltaron %.1f mm para alcanzar el suelo (cuadros %s)" % (
+                nombre, max(faltas_apoyo) * 1000, [k for k, f in enumerate(faltas_apoyo) if f > 5e-4]))
+        elif max(faltas) > 5e-4:
+            log("%s: en el vuelo, una pierna se queda %.1f mm corta de su objetivo (cuadros %s); no afecta al apoyo"
+                % (nombre, max(faltas) * 1000, [k for k, f in enumerate(faltas) if f > 5e-4]))
         accion = bpy.data.actions.new(nombre)
         accion.use_fake_user = True
         ranura = accion.slots.new(armadura.id_type, armadura.name)
@@ -895,25 +913,32 @@ def crear_clips(armadura, cine):
             if ciclico:
                 qs[-1] = qs[0].copy()
             giro_max = max(2.0 * math.degrees(math.acos(min(1.0, abs(q.w)))) for q in qs)
-            if giro_max < 0.08:
-                # Godot descarta al importar las pistas que no se apartan del reposo, y entonces el hueso se
-                # queda con la pose del clip anterior: un vaiven imperceptible mantiene viva la pista
+            cambio = max(2.0 * math.degrees(math.acos(min(1.0, abs(q.dot(qs[0]))))) for q in qs)
+            if giro_max < 0.08 or cambio < 0.08:
+                # Godot descarta al importar las pistas que no se apartan del reposo, y el exportador de Blender
+                # las que no cambian (aunque no esten en reposo): el hueso se quedaria con la pose del clip
+                # anterior. Un vaiven imperceptible mantiene viva la pista
                 quietos.append(n)
                 for k in range(cuadros + 1):
                     f = math.sin((2.0 if ciclico else 1.0) * math.pi * k / cuadros)
                     qs[k] = qs[k] @ Quaternion((1.0, 0.0, 0.0), math.radians(0.12) * f)
                 if ciclico:
                     qs[-1] = qs[0].copy()
+                # la pose guardada debe ser la que se exporta: con ella se comprueba la cinematica propia
+                for k in range(cuadros + 1):
+                    poses[k]["d"][n] = rq @ qs[k] @ rq.conjugated()
             ruta = 'pose.bones["%s"].rotation_quaternion' % n
             for i in range(4):
                 escribir(ruta, i, n, [q[i] for q in qs])
         # posicion de la raiz: solo la vertical (en ejes locales del hueso)
         rq = reposo_q["cadera"]
         locs = [rq.conjugated() @ pose["t"] for pose in poses]
-        if max(abs(pose["t"].z) for pose in poses) < 2e-4:
+        alturas = [pose["t"].z for pose in poses]
+        if max(alturas) - min(alturas) < 2e-4:
             for k in range(cuadros + 1):
                 f = math.sin((2.0 if ciclico else 1.0) * math.pi * k / cuadros)
-                locs[k] = rq.conjugated() @ Vector((0.0, 0.0, 0.0004 * f))
+                poses[k]["t"] = Vector((0.0, 0.0, alturas[k] + 0.0004 * f))
+                locs[k] = rq.conjugated() @ poses[k]["t"]
         for i in range(3):
             escribir('pose.bones["cadera"].location', i, "cadera", [v[i] for v in locs])
         pista = ad.nla_tracks.new()
@@ -926,7 +951,8 @@ def crear_clips(armadura, cine):
         tira.blend_type = "REPLACE"
         pista.mute = True
         clips.append({"nombre": nombre, "duracion": duracion, "ciclico": ciclico, "cuadros": cuadros,
-                      "accion": accion, "ranura": ranura, "poses": poses, "quietos": quietos})
+                      "accion": accion, "ranura": ranura, "poses": poses, "quietos": quietos,
+                      "falta_alcance_m": float(max(faltas)), "falta_alcance_apoyo_m": float(max(faltas_apoyo))})
         log("Clip %-12s %3d cuadros; huesos con vaiven minimo anadido: %s" % (nombre, cuadros, quietos or "ninguno"))
     return clips
 
@@ -991,7 +1017,9 @@ def exportar(ruta, armadura, mallas):
             export_animations=True, export_animation_mode="NLA_TRACKS", export_nla_strips=True,
             export_frame_range=False, export_frame_step=1, export_force_sampling=True,
             export_sampling_interpolation_fallback="LINEAR", export_anim_slide_to_zero=True,
-            export_optimize_animation_size=False, export_reset_pose_bones=True,
+            # sin canales constantes: fuera la escala (siempre 1) y la posicion de los huesos que no son la raiz
+            export_optimize_animation_size=True, export_optimize_animation_keep_anim_armature=False,
+            export_optimize_animation_keep_anim_object=False, export_reset_pose_bones=True,
             export_morph=False, export_morph_animation=False)
         exigir("FINISHED" in res and temporal.is_file(), "El exportador glTF no termino")
     finally:
@@ -1165,6 +1193,13 @@ def comprobar(ruta_glb, ruta_entrada, g, gb, reg, W_unicos, cuerpo, bolso, armad
     exigir(len(m.prims) == 2, "Se esperaban 2 primitivas y hay %d" % len(m.prims))
     pc = next(p for p in m.prims if "cuerpo" in p["nombre"])
     pb = next(p for p in m.prims if "bolso" in p["nombre"])
+    i_c, i_b = m.prims.index(pc), m.prims.index(pb)
+
+    def piel(anim=None, t=0.0):
+        """Piel del archivo, siempre en el orden (cuerpo, bolso)."""
+        pr, G = m.piel(anim, t)
+        return (pr[i_c], pr[i_b]), G
+
     ij = {n: m.nombres.index(n) for n in HUESOS}
     inf["malla"] = {"triangulos": int(len(pc["tri"]) + len(pb["tri"])), "triangulos_cuerpo": int(len(pc["tri"])),
                     "vertices_glb": int(len(pc["pos"]) + len(pb["pos"])), "huesos": len(m.art),
@@ -1200,7 +1235,7 @@ def comprobar(ruta_glb, ruta_entrada, g, gb, reg, W_unicos, cuerpo, bolso, armad
             peor = max(peor, float(np.sqrt(d2.min(1)).max()))
         return peor
 
-    reposo, _ = m.piel(None)
+    reposo, _ = piel(None)
     inf["a_reposo"] = {
         "dif_max_salida_a_entrada_m": a_la_mas_cercana(sal, ent),
         "dif_max_entrada_a_salida_m": a_la_mas_cercana(ent, sal),
@@ -1261,9 +1296,12 @@ def comprobar(ruta_glb, ruta_entrada, g, gb, reg, W_unicos, cuerpo, bolso, armad
         return n, hondo
 
     n0, h0 = dentro_del_cuerpo(reposo[0], reposo[1])
-    inf["e_bolso"] = {"reposo": {"vertices_dentro": n0, "hondura_max_m": h0, "vertices_bolso": int(len(pb["pos"]))}}
+    # punto de partida: en la malla aprobada el bolso ya va pegado a la cadera (clave aparte del clip "reposo")
+    inf["e_bolso"] = {"pose_de_union": {"vertices_dentro": n0, "hondura_max_m": h0,
+                                        "vertices_bolso": int(len(pb["pos"]))}}
     inf["b_aristas"], inf["d_ciclos"], inf["raiz_plano"], inf["zancadas"], inf["duraciones"] = {}, {}, {}, {}, {}
-    inf["c_pies"] = {}
+    inf["c_pies"], inf["mano_mas_baja_m"] = {}, {}
+    manos = np.where((Wg[:, IH["mano_izq"]] > 0.5) | (Wg[:, IH["mano_der"]] > 0.5))[0]
     nodo_cadera = m.art[ij["cadera"]]
     for nombre, duracion, ciclico in CLIPS:
         an = m.anims[nombre]
@@ -1289,10 +1327,11 @@ def comprobar(ruta_glb, ruta_entrada, g, gb, reg, W_unicos, cuerpo, bolso, armad
         # b) aristas, c) punto mas bajo, e) bolso, zancada
         peor_frac, peor_razon, peor_cab = 1.0, 0.0, 0.0
         y_min, y_max = 9.0, -9.0
-        bolso_n, bolso_h = 0, 0.0
+        bolso_n, bolso_h, bolso_t = 0, 0.0, 0.0
+        mano_baja = 9.0
         pies = {lado: [] for lado, _ in LADOS}
         for k, t in enumerate(tiempos):
-            (dc, db), _ = m.piel(nombre, float(t))
+            (dc, db), _ = piel(nombre, float(t))
             rc = np.linalg.norm(dc[ar_c[:, 0]] - dc[ar_c[:, 1]], axis=1) / np.maximum(l0_c, 1e-9)
             rb = np.linalg.norm(db[ar_b[:, 0]] - db[ar_b[:, 1]], axis=1) / np.maximum(l0_b, 1e-9)
             validas = l0_c > 1e-5
@@ -1304,13 +1343,27 @@ def comprobar(ruta_glb, ruta_entrada, g, gb, reg, W_unicos, cuerpo, bolso, armad
             y_min, y_max = min(y_min, bajo), max(y_max, bajo)
             if k % 2 == 0:
                 nb_, hb_ = dentro_del_cuerpo(dc, db)
+                if nb_ > bolso_n:
+                    bolso_t = float(t)
                 bolso_n, bolso_h = max(bolso_n, nb_), max(bolso_h, hb_)
+            mano_baja = min(mano_baja, float(dc[manos, 1].min()) - y_suelo)
             for lado, _ in LADOS:
                 pies[lado].append(dc[suela[lado]])
         inf["b_aristas"][nombre] = {"fraccion_min_bajo_2_2": peor_frac, "razon_max": peor_razon,
                                     "deformacion_max_cabeza_pelo": peor_cab, "cuadros": int(len(tiempos))}
         inf["c_pies"][nombre] = {"y_mas_bajo_min": y_min, "y_mas_bajo_max": y_max}
-        inf["e_bolso"][nombre] = {"vertices_dentro_max": bolso_n, "hondura_max_m": bolso_h}
+        inf["e_bolso"][nombre] = {"vertices_dentro_max": bolso_n, "hondura_max_m": bolso_h, "peor_instante_s": bolso_t}
+        inf["mano_mas_baja_m"][nombre] = mano_baja
+        # criterios de aceptacion duros: si alguno falla, la salida no se escribe
+        exigir(peor_frac >= 0.995, "%s: solo el %.2f %% de las aristas queda bajo 2,2 veces su longitud"
+               % (nombre, 100.0 * peor_frac))
+        exigir(peor_cab < 1e-4, "%s deforma la cabeza o el pelo (%.2e)" % (nombre, peor_cab))
+        exigir(plano < 1e-4, "%s desplaza la raiz en el plano (%.5f m)" % (nombre, plano))
+        if ciclico:
+            exigir(giro < 0.5 and tras < 1e-4, "%s no cierra el ciclo (%.3f grados, %.5f m)" % (nombre, giro, tras))
+        if nombre == "caminar":
+            exigir(y_suelo - 0.03 <= y_min and y_max <= y_suelo + 0.03,
+                   "caminar: el punto mas bajo va de %.4f a %.4f (suelo en %.4f)" % (y_min, y_max, y_suelo))
         if nombre in ("caminar", "correr"):
             # velocidad hacia atras de los puntos de la suela que tocan el suelo, entre claves consecutivas
             vel, contacto = [], np.zeros(len(tiempos) - 1, dtype=bool)
@@ -1335,7 +1388,7 @@ def comprobar(ruta_glb, ruta_entrada, g, gb, reg, W_unicos, cuerpo, bolso, armad
     for clip in clips:
         k = clip["cuadros"] // 3
         poner_clip(armadura, clip, k)
-        (dc, db), _ = m.piel(clip["nombre"], k / FPS)
+        (dc, db), _ = piel(clip["nombre"], k / FPS)
         bl = posiciones_deformadas(cuerpo)
         idx_bl = np.zeros(g["nu"], dtype=np.int64)
         idx_bl[g["inv"]] = np.arange(len(g["inv"]))
@@ -1545,6 +1598,8 @@ def main():
     finally:
         if temporal.exists():
             temporal.unlink()
+    informe["falta_alcance_piernas_m"] = {c["nombre"]: {"en_vuelo": c["falta_alcance_m"],
+                                                         "apoyada": c["falta_alcance_apoyo_m"]} for c in clips}
     informe.update(entrada=str(a.entrada), salida=str(a.salida), blender=bpy.app.version_string, textura=textura,
                    pesos_info=info_pesos, cinematica_propia_vs_blender_m=err_cine, alto_malla_m=alto, fps=FPS)
     log("GLB escrito: %s (%.2f MB)" % (a.salida, informe["glb_bytes"] / 1e6))

@@ -1,0 +1,19 @@
+{
+  "titulo": "La Luna sonriente",
+  "resumen": "Busca la Luna del 12-11-2026 a las 19:30 desde Guayaquil, enfócala y reconoce 3 rasgos.",
+  "instrucciones": [
+    "BUSCAR: mueve el telescopio hacia el oeste y baja hasta los 20,0°. Centra la Luna en la cruz, o púlsala con el ratón, y confirma.",
+    "ENFOCAR: ajusta el dial hasta ver el borde nítido. La lectura de nitidez debe alcanzar el umbral mostrado; después confirma.",
+    "SEÑALAR: mueve la mira al terminador, a la luz cenicienta y a Mare Crisium, uno por vez. Confirma cada marca.",
+    "Tienes 150 s. La sesión termina tras 5 revisiones en nivel 1, 4 en nivel 2 y 3 en nivel 3; cada revisión explica la causa."
+  ],
+  "controles": "A D / ← →: acimut o enfoque; W S / ↑ ↓: altura; WASD / flechas: mira. E / Intro / Espacio: confirmar. Ratón: pulsa la Luna, arrastra diales o mueve la mira; rueda sobre el ocular: enfoque; botón: confirmar. Esc: salir.",
+  "pistas": [
+    "Órbita mira el horizonte del oeste, después la rueda y por último la frontera entre la luz y la sombra.",
+    "Busca a 20,0° de altura. La luz cenicienta está en la parte oscura: la ilumina la Tierra. Mare Crisium queda abajo y a la derecha en este ocular.",
+    "Centra a 241,4° de acimut y 20,0° de altura. Ajusta la rueda a 62. Señala la frontera interior de la sonrisa, luego el centro oscuro y finalmente la mancha de Mare Crisium dentro de la guía."
+  ],
+  "ficha": "luz_cenicienta",
+  "escena": "2.2",
+  "orden": 4
+}

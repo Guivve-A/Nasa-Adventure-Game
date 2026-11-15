@@ -1,0 +1,10 @@
+  cotizado radio_v2               1 s   0.25
+  cotizado salto_v2               1 s   0.25
+  cotizado paso_luna_v2           1 s   0.25
+  cotizado umbral_v2              2 s   0.50
+Cotizado: 1.25  |  ya gastado en el lote: 6.25  |  tope: 8.00
+  radio_v2             ok             originales/radio_v2.mp3
+  salto_v2             ok             originales/salto_v2.mp3
+  paso_luna_v2         ok             originales/paso_luna_v2.mp3
+  umbral_v2            sin descargar  Remote end closed connection without response
+Saldo: 870.00 -> 868.75 (gastado 1.25)

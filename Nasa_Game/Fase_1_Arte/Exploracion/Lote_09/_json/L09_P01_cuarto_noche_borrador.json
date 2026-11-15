@@ -1,0 +1,49 @@
+[
+  {
+    "created_at": "2026-11-15T06:45:41.206837Z",
+    "display_name": "GPT Image 2.6",
+    "id": "55346705-7f4a-4696-a8eb-780aa64f6a1a",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064541_55346705-7f4a-4696-a8eb-780aa64f6a1a_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [
+        {
+          "data": {
+            "id": "1f75f4e1-2cc7-4504-b12b-b76996d8c3f5",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/1f75f4e1-2cc7-4504-b12b-b76996d8c3f5.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/ff4e139f-ab33-4aff-8831-db4b2f92c40d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Same room, same furniture layout and same fixed high three-quarter top-down game camera as the first reference image, but at night, around 3 a.m. The girl is the character of the second reference and the cat is the one of the third. Low-key night interior lit like a quiet film scene by one single practical source: a small 1960s tube television in a walnut wooden cabinet on four tapered legs, standing on the floor at the foot of the bed exactly where the cardboard box stands in the reference (the box is gone). Its bulging 4:3 screen with rounded corners faces the camera, turned slightly toward the bed, and glows cool bluish white with a soft black-and-white picture of a tall white three-stage rocket standing beside its launch tower. That light falls off fast with distance: a bright pool on the terracotta tiles and on the near edge of the blue blanket, long soft shadows of the bed legs and the stool stretching away from the set, about eight to one between the lit floor and the dark corners, and a few dust motes glinting in the beam. The window shutters are ajar and show only a dark hillside with three or four tiny warm bulbs: no moon in the sky. The girl sleeps on top of the blue blanket, fully dressed in her khaki short-sleeve shirt worn open over a dark T-shirt, brown cargo pants and sneakers, without her bag, lying on her left side and facing the room, curled up with her face buried in her forearm: only her big dark curly hair shows, no face, with a cool rim of screen light on the curls. On top of the television, the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag sleeps with its tail hanging down over one upper corner of the screen. The telescope on its tripod points at the window. On the workbench the small oscilloscope shows a trembling cyan wave, the only other glow, and the brown tool bag hangs from the stool. The two lanterns by the stair landing are unlit. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. Night palette: petrol-blue shadows, darkest tones warm and never pure black, cool white television light. No brand or lettering on the television. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064541_55346705-7f4a-4696-a8eb-780aa64f6a1a.png",
+    "status": "completed"
+  }
+]

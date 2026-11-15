@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-15T13:34:28.532174Z",
+    "display_name": "GPT Image 2.6",
+    "id": "7a29bb88-30ee-4966-a560-cc0aa1d57f47",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133428_7a29bb88-30ee-4966-a560-cc0aa1d57f47_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Heroic low-angle ultra-wide photograph on the surface of the Moon, 14 mm full-frame lens at f/11, everything in focus, camera thirty centimetres above the ground and about one and a third metres in front of a flagpole, tilted upward about thirty degrees. Hard single-source sunlight from low behind the camera and slightly to its left, about fifteen degrees above the horizon, with no fill and no atmosphere: razor-sharp black shadows and an absolutely black sky. Near the left edge of the frame, at about one sixth of the frame width, a thin gold-anodized aluminium pole rises from below the bottom edge of the frame, leaning back very slightly. From the top of the pole a thin horizontal crossbar runs to the right through a sewn hem along the top edge of a large nylon flag. The flag is the flag of the United States of America, its front side facing the camera and the pole on its left: exactly thirteen horizontal stripes, seven red and six white, alternating, with a red stripe at the top and a red stripe at the bottom, and all thirteen stripes run unbroken along the whole length of the cloth from the pole to the free end, so thirteen stripes are counted at every point; a deep blue canton in the upper corner next to the pole, as tall as the top seven stripes and about two fifths of the length of the flag, holding fifty white five-pointed stars in nine staggered rows that alternate six and five stars. The cloth is three units tall by five units long. The flag is large: its cloth fills the frame from about one fifth to one half of the frame height and from the pole to a little past the middle of the frame width, so that its free outer end sits just below and left of a point at three fifths of the frame width and one third of the height from the top. It has just been planted and is swinging: the cloth is caught at the end of a wide, slow pendulum swing, bellied gently toward the camera near the pole, with two or three clean diagonal waves running from the pole toward the free end; because the crossbar did not extend to its full length, the top edge is gathered in a few soft folds near its outer end. Smooth heavy folds, no fluttering, no torn or frayed edges. The bottom edge of the flag hangs well above the ground. The low sun rakes across the waves: saturated red and deep blue, the white slightly warm and never blown out, bright crests and soft shaded troughs, every stripe and every star crisp. At the left edge of the frame, just below the flag, a bulky white pressure-suit glove and the cuff of a white sleeve enter from outside the frame and are letting go of the pole, fingers opening; the person is entirely outside the frame: no arm beyond the cuff, no body, no helmet, no face, no patches and no markings on the glove. Along the very bottom of the frame, below the horizon at about nine tenths of the frame height, a strip of gray ground with boot prints and long black shadows pointing away from the camera. Above, an enormous pitch-black sky without stars; at three fifths of the frame width and one ninth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white globe about two thirds lit, its lit side facing up. The flag and the Earth are the only colours; the ground is neutral gray. The only graphic in the image is the flag itself. No spacecraft, no other equipment, no camera shadow. Crisp large-format clarity, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "xhigh",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133428_7a29bb88-30ee-4966-a560-cc0aa1d57f47.png",
+    "status": "completed"
+  }
+]

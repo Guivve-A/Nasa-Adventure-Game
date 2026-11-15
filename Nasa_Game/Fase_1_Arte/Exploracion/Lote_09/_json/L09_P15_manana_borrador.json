@@ -1,0 +1,49 @@
+[
+  {
+    "created_at": "2026-11-15T06:48:04.65344Z",
+    "display_name": "GPT Image 2.6",
+    "id": "164d9eab-75fd-4e9b-a13b-35fa5767cca1",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064804_164d9eab-75fd-4e9b-a13b-35fa5767cca1_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [
+        {
+          "data": {
+            "id": "1f75f4e1-2cc7-4504-b12b-b76996d8c3f5",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/1f75f4e1-2cc7-4504-b12b-b76996d8c3f5.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/ff4e139f-ab33-4aff-8831-db4b2f92c40d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Same room, same furniture layout, same warm early-morning light and same fixed high three-quarter top-down game camera as the first reference image. The girl is the character of the second reference and the cat is the one of the third. The girl has just sat up abruptly on top of the rumpled blue blanket of the bed, fully dressed in her khaki short-sleeve shirt worn open over a dark T-shirt, brown cargo pants and sneakers, without her bag, her hair tousled, one hand pressed on the mattress. She is not looking at the window: she looks across the room at the workbench, where the small motorized tracking mount, the open notebook and the oscilloscope with its cyan wave are. At the foot of the bed stands the plain cardboard box sealed with a cross of tape, as in the reference, and the small gray-taupe companion cat with a cream face mask, cream chest and paws, a dark tail tip and a blue collar with a glowing cyan round tag lies on top of the box with its tail hanging over one upper corner and one paw dangling, its head raised, looking at her. Low warm morning sun comes through the open window shutters in slanted beams, the key light of the room at about three to one, with a few bright dust motes floating in the beams; the shadows stay petrol blue. The telescope points at the window and the brown tool bag hangs from the stool. There is no television anywhere. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064804_164d9eab-75fd-4e9b-a13b-35fa5767cca1.png",
+    "status": "completed"
+  }
+]

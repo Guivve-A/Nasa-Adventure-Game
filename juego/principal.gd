@@ -51,6 +51,8 @@ func _ready() -> void:
 			_capturar_luego(a["captura"], float(a.get("espera", "2")))
 		return
 	Interfaz.abrir_menu()
+	if a.has("mapa"):
+		Interfaz.abrir_mapa(true)
 	if a.has("captura"):
 		_capturar_luego(a["captura"], float(a.get("espera", "1.5")))
 

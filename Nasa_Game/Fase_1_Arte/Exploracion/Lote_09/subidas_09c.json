@@ -1,0 +1,17 @@
+{
+ "L09c_ref_caras_hoja": {
+  "id": "481919be-a76a-4920-bb90-662b31f458fc",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/referencias_09c/jpg/L09c_ref_caras_hoja.jpg",
+  "bytes": 229458
+ },
+ "L09c_ref_cara_giro": {
+  "id": "39712f78-40d4-4043-8355-9074af995982",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/referencias_09c/jpg/L09c_ref_cara_giro.jpg",
+  "bytes": 54021
+ },
+ "L09c_ref_espalda_giro": {
+  "id": "9d0b5c50-0f81-4d30-837e-aa9386a69700",
+  "archivo": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/referencias_09c/jpg/L09c_ref_espalda_giro.jpg",
+  "bytes": 106015
+ }
+}

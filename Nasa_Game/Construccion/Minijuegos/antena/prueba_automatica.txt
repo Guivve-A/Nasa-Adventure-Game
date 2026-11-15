@@ -1,0 +1,21 @@
+Comando: python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:antena --ritmo=8
+PRUEBA_OK antena.minijuego_json
+PRUEBA_OK antena.json.titulo
+PRUEBA_OK antena.json.resumen
+PRUEBA_OK antena.json.controles
+PRUEBA_OK antena.json.instrucciones
+PRUEBA_OK antena.json.pistas
+PRUEBA_OK antena.json.ficha
+MINIJUEGO antena superado=true puntos=224.0 (meta: 45, dificultad 1)
+PRUEBA_OK antena.d1.termina_solo
+PRUEBA_OK antena.d1.se_puede_superar
+MINIJUEGO antena superado=true puntos=164.0 (meta: 70, dificultad 3)
+PRUEBA_OK antena.d3.termina_solo
+PRUEBA_OK antena.d3.se_puede_superar
+MINIJUEGO antena superado=false puntos=16.0 (meta: 45)
+PRUEBA_OK antena.se_puede_fallar
+PRUEBA_OK antena.el_fallo_explica_la_causa
+FIN
+[godot: ok; 18 s; lineas=30; errores=0]
+
+Avisos del entorno: no se pudo escribir user://logs ni leer el almacen de certificados; al salir Godot aviso de dos recursos en uso. Sin errores de guion ni PRUEBA_FALLO.

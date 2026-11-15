@@ -11,8 +11,41 @@ signal _boton(accion: String)
 
 const Estilo := preload("res://interfaz/estilo.gd")
 const LIENZO := Vector2(1120, 520)
+const LIENZO_COMPLETO := Vector2(1280, 720)   # minijuegos con pantalla_completa = true (ver nucleo/minijuego.gd)
 
-var _marco: PanelContainer
+# Resplandor del campo: fuera del lienzo, cada pixel toma el color del campo reflejado en su borde, muy
+# desenfocado (niveles bajos de la copia de pantalla) y atenuado con la distancia. Asi el campo no lleva marco:
+# sus propios colores llegan hasta el borde de la pantalla. Un solo pase, sin imagenes ni viewport extra.
+const RESPLANDOR := """
+shader_type canvas_item;
+uniform sampler2D pantalla : hint_screen_texture, filter_linear_mipmap, repeat_disable;
+uniform vec4 campo = vec4(0.0625, 0.139, 0.875, 0.722);
+uniform vec3 tinte : source_color = vec3(0.11, 0.157, 0.18);
+uniform float fuerza = 0.62;
+uniform float desenfoque = 5.5;
+uniform float alcance = 150.0;
+
+void fragment() {
+	vec2 a = campo.xy;
+	vec2 b = campo.xy + campo.zw;
+	vec2 fuera = max(max(a - SCREEN_UV, SCREEN_UV - b), vec2(0.0));
+	if (fuera.x + fuera.y <= 0.0) {
+		COLOR = vec4(0.0);
+	} else {
+		vec2 espejo = clamp(SCREEN_UV, a, b);
+		espejo += (espejo - SCREEN_UV) * 0.6;
+		espejo = clamp(espejo, a + campo.zw * 0.04, b - campo.zw * 0.04);
+		vec3 c = textureLod(pantalla, espejo, desenfoque).rgb;
+		float d = length(fuera / SCREEN_PIXEL_SIZE) * (720.0 * SCREEN_PIXEL_SIZE.y);
+		float caida = exp(-d / alcance);
+		vec3 color = mix(tinte * 0.55, c, fuerza * caida);
+		COLOR = vec4(color, 1.0);
+	}
+}
+"""
+
+var _marco: Control
+var _ambiente: ColorRect
 var _titulo: Label
 var _controles: Label
 var _hueco: Control
@@ -23,41 +56,59 @@ var _minijuego: Control = null
 var _resultado: Dictionary = {}
 var _pendiente := false
 var _pista := 0
+var _lienzo := LIENZO
+var _completo := false           # el minijuego pidio toda la pantalla (pantalla_completa)
 
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	visible = false
 	var velo := ColorRect.new()
-	velo.color = Color(Estilo.NOCHE, 0.93)
+	# fondo opaco: mientras se juega no se ve (ni se dibuja) el mundo 3D
+	velo.color = Estilo.NOCHE.darkened(0.45)
 	velo.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(velo)
 
-	_marco = Estilo.panel(Estilo.PAPEL, 16, 4, 16)
+	# sin marco ni recuadro: el campo va centrado sobre el fondo y su resplandor llena los margenes
+	_marco = Control.new()
+	_marco.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_marco.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_marco)
-	var columna := VBoxContainer.new()
-	columna.add_theme_constant_override("separation", 8)
-	_marco.add_child(columna)
-	var cabecera := HBoxContainer.new()
-	_titulo = Estilo.texto("", 28, Estilo.TINTA, 700)
-	_titulo.autowrap_mode = TextServer.AUTOWRAP_OFF
-	_titulo.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	cabecera.add_child(_titulo)
-	_salir = Estilo.boton("Salir (Esc)", 16)
-	_salir.custom_minimum_size = Vector2(130, 36)
-	_salir.focus_mode = Control.FOCUS_NONE
-	_salir.pressed.connect(_abandonar)
-	cabecera.add_child(_salir)
-	columna.add_child(cabecera)
-	var fondo_lienzo := Estilo.panel(Color("fbf3df"), 8, 2, 0)
 	_hueco = Control.new()
 	_hueco.custom_minimum_size = LIENZO
+	_hueco.size = LIENZO
 	_hueco.clip_contents = true
-	fondo_lienzo.add_child(_hueco)
-	columna.add_child(fondo_lienzo)
-	_controles = Estilo.texto("", 16, Estilo.TINTA_SUAVE, 500)
+	_marco.add_child(_hueco)
+	_ambiente = ColorRect.new()
+	_ambiente.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_ambiente.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var sombreador := Shader.new()
+	sombreador.code = RESPLANDOR
+	var material_resplandor := ShaderMaterial.new()
+	material_resplandor.shader = sombreador
+	material_resplandor.set_shader_parameter("tinte", Estilo.NOCHE)
+	_ambiente.material = material_resplandor
+	_marco.add_child(_ambiente)
+	_titulo = Estilo.texto("", 18, Color(Estilo.PAPEL, 0.82), 700)
+	_titulo.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_marco.add_child(_titulo)
+	_salir = Button.new()
+	_salir.text = "Esc · Salir"
+	_salir.flat = true
+	_salir.focus_mode = Control.FOCUS_NONE
+	_salir.add_theme_font_override("font", Estilo.fuente(600))
+	_salir.add_theme_font_size_override("font_size", 15)
+	_salir.add_theme_color_override("font_color", Color(Estilo.PAPEL, 0.6))
+	_salir.add_theme_color_override("font_hover_color", Estilo.PAPEL)
+	_salir.add_theme_color_override("font_pressed_color", Estilo.PAPEL)
+	_salir.pressed.connect(_abandonar)
+	_marco.add_child(_salir)
+	_controles = Estilo.texto("", 15, Color(Estilo.PAPEL, 0.55), 500)
+	_controles.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_controles.clip_text = true
+	_controles.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_controles.custom_minimum_size = Vector2(LIENZO.x, 0)
-	columna.add_child(_controles)
+	_marco.add_child(_controles)
 
 	_capa = Estilo.panel(Color(Estilo.PAPEL, 0.98), 16, 4, 26)
 	_capa.custom_minimum_size = Vector2(720, 0)
@@ -72,8 +123,27 @@ func _process(_delta: float) -> void:
 	if not visible:
 		return
 	_capa.reset_size()
-	_marco.position = (size - _marco.size) * 0.5
 	_capa.position = (size - _capa.size) * 0.5
+	_colocar()
+
+
+func _colocar() -> void:
+	# el campo centrado en pixeles enteros; titulo y salida en el margen de arriba, controles en el de abajo
+	var origen: Vector2 = Vector2.ZERO if _completo else ((size - _lienzo) * 0.5).floor()
+	_hueco.position = origen
+	_hueco.size = _lienzo
+	for nodo in [_ambiente, _titulo, _salir, _controles]:
+		nodo.visible = not _completo
+	_titulo.reset_size()
+	_salir.reset_size()
+	_controles.reset_size()
+	_titulo.position = Vector2(origen.x + 2.0, origen.y - _titulo.size.y - 10.0)
+	_salir.position = Vector2(origen.x + _lienzo.x - _salir.size.x, origen.y - _salir.size.y - 6.0)
+	_controles.size.x = _lienzo.x
+	_controles.position = Vector2(origen.x, origen.y + _lienzo.y + 12.0)
+	if size.x > 0.0 and size.y > 0.0:
+		var m: ShaderMaterial = _ambiente.material
+		m.set_shader_parameter("campo", Vector4(origen.x / size.x, origen.y / size.y, _lienzo.x / size.x, _lienzo.y / size.y))
 
 
 func _unhandled_input(evento: InputEvent) -> void:
@@ -151,18 +221,25 @@ func jugar(id: String, parametros: Dictionary) -> Dictionary:
 		return {"superado": false, "error": "no existe", "puntos": 0.0}
 	var guion: Variant = load(ruta)
 	visible = true
-	_titulo.text = meta.get("titulo", id)
+	_titulo.text = String(meta.get("titulo", id)).to_upper()
 	_controles.text = meta.get("controles", "")
-	_marco.reset_size()
+	_colocar()
+	# el mundo 3D queda tapado por el fondo opaco: no se dibuja mientras dura el minijuego
+	var vista := get_viewport()
+	var tenia_3d: bool = not vista.disable_3d
+	vista.disable_3d = true
 	_pista = 0
 	var solo := 0
-	if Juego.modo_prueba:
+	if Juego.modo_prueba or Juego.minijuegos_solos:
 		solo = -1 if parametros.get("fallar", false) else 1
 	var final: Dictionary = {}
 	while true:
 		if _minijuego != null and is_instance_valid(_minijuego):
 			_minijuego.queue_free()
 		_minijuego = guion.new()
+		_completo = _minijuego.get("pantalla_completa") == true
+		_lienzo = LIENZO_COMPLETO if _completo else LIENZO
+		_colocar()
 		_hueco.add_child(_minijuego)
 		_minijuego.position = Vector2.ZERO
 		_minijuego.terminado.connect(_al_terminar)
@@ -174,6 +251,8 @@ func jugar(id: String, parametros: Dictionary) -> Dictionary:
 			for paso in meta.get("instrucciones", []):
 				lineas.append("%d. %s" % [n, paso])
 				n += 1
+			if String(meta.get("controles", "")) != "":
+				lineas.append(Estilo.texto("Controles: %s" % meta.get("controles", ""), 16, Estilo.TINTA_SUAVE, 500))
 			if _pista > 0:
 				var pistas: Array = meta.get("pistas", [])
 				if not pistas.is_empty():
@@ -219,4 +298,5 @@ func jugar(id: String, parametros: Dictionary) -> Dictionary:
 	_minijuego = null
 	_capa.visible = false
 	visible = false
+	vista.disable_3d = not tenia_3d
 	return final

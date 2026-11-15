@@ -1,0 +1,87 @@
+{
+  "lote": "A1",
+  "modelo": "mirelo_text_to_audio",
+  "tope": 8.0,
+  "_nota": "Efectos de sonido del juego jugable v0. 0,25 creditos por segundo. Sin voces, sin musica con derechos y sin marcas. Cada trabajo sale a originales/<id>.<ext>; procesar.py lo convierte a juego/audio/<id>.ogg.",
+  "trabajos": [
+    {
+      "id": "paso",
+      "duracion": 1,
+      "prompt": "A single soft footstep of a sneaker on a packed dirt path with a little fine gravel, close microphone, dry, outdoors, no reverb. No voice, no speech, no music."
+    },
+    {
+      "id": "paso_luna",
+      "duracion": 1,
+      "prompt": "A single muffled thud of a heavy boot pressing into fine dry powdery dust, heard from inside a space helmet, very dull and soft, low frequencies only, no echo. No voice, no speech, no music."
+    },
+    {
+      "id": "salto",
+      "duracion": 1,
+      "prompt": "A short soft whoosh of fabric and a light push off the ground, a small jump with a quiet cloth rustle, close and dry. No voice, no grunt, no speech, no music."
+    },
+    {
+      "id": "recoger",
+      "duracion": 1,
+      "prompt": "A short bright pick-up sound: a small metal part lifted with a soft glassy chime, clean and pleasant, item collected in a cozy adventure game. No voice, no speech, no melody."
+    },
+    {
+      "id": "umbral",
+      "duracion": 2,
+      "prompt": "A soft airy whoosh that rises into a gentle shimmering tone, like stepping through a doorway of light, calm and warm, smooth fade out. No voice, no speech, no melody."
+    },
+    {
+      "id": "logro",
+      "duracion": 2,
+      "prompt": "A warm short success chime: three soft bell-like notes rising, with a gentle sparkle tail, calm and hopeful, clean ending. No voice, no speech, no drums."
+    },
+    {
+      "id": "pagina",
+      "duracion": 1,
+      "prompt": "A single paper page turning in a notebook, crisp, close microphone, dry room. No voice, no speech, no music."
+    },
+    {
+      "id": "radio",
+      "duracion": 1,
+      "prompt": "A short clean two-tone intercom beep inside a space helmet with a tiny static click at the end, friendly and soft. No voice, no speech, no music."
+    },
+    {
+      "id": "golpe_mastil",
+      "duracion": 1,
+      "prompt": "A single dull metallic clank of a small hammer driving a thin aluminum pole into dry compact dust, muffled as if heard through a space suit, short, no echo. No voice, no speech, no music."
+    },
+    {
+      "id": "ambiente_luna",
+      "duracion": 8,
+      "prompt": "Calm slow breathing inside a space helmet over the soft steady low hum of a suit life-support fan, intimate, muffled, continuous and even from start to end. No voice, no speech, no beeps, no music."
+    },
+    {
+      "id": "ambiente_sendero",
+      "duracion": 6,
+      "prompt": "A gentle small stream flowing over stones with a few tropical songbirds in the late afternoon and a light breeze in the leaves, continuous natural ambience, even from start to end. No voice, no speech, no music."
+    },
+    {
+      "id": "radio_v2",
+      "duracion": 1,
+      "_motivo": "radio salio casi en silencio (pico -41,8 dB, sin pitido)",
+      "prompt": "Two clear electronic beeps of a walkie-talkie, the second one higher in pitch, loud and clear, isolated, dry, with silence after. No voice, no speech, no music."
+    },
+    {
+      "id": "salto_v2",
+      "duracion": 1,
+      "_motivo": "salto salio como un retumbo de 41 Hz, sin nada por encima de 150 Hz",
+      "prompt": "One quick whoosh of air, a fast bright swish like swinging a thin stick through the air once, loud and clear, isolated, dry. No voice, no speech, no music."
+    },
+    {
+      "id": "paso_luna_v2",
+      "duracion": 1,
+      "_motivo": "paso_luna salio como un ruido de fondo parejo, con un golpe muy debil; el efecto de casco se pone al procesar",
+      "prompt": "One single heavy footstep in deep dry sand, a deep thump with a short sandy crunch, loud and clear, isolated, dry, no reverb, with silence before and after. No voice, no speech, no music."
+    },
+    {
+      "id": "umbral_v2",
+      "duracion": 2,
+      "_motivo": "umbral salio como un zumbido grave y parejo, sin soplo ni brillo",
+      "prompt": "A magical whoosh: a smooth airy swoosh that rises in pitch and ends in a bright sparkling shimmer, loud and clear, isolated. No voice, no speech, no melody."
+    }
+  ]
+}

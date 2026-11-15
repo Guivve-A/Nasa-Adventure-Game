@@ -1,0 +1,76 @@
+ERROR: Failed to open 'user://logs/godot2026-11-14T13.39.28.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK antena.teclado.abre_anfitrion
+PRUEBA_OK antena.teclado.sin_piloto
+PRUEBA_OK antena.teclado.empezar_con_Intro
+PRUEBA_OK antena.teclado.ganancia_D
+PRUEBA_OK antena.teclado.ganancia_A
+PRUEBA_OK antena.teclado.ganancia_Right
+PRUEBA_OK antena.teclado.ganancia_Left
+PRUEBA_OK antena.manos.controles_y_textos_dentro_de_1120x520
+PRUEBA_OK antena.manos.entradas_no_dependen_del_foco
+PRUEBA_OK antena.teclado.Probar_con_E
+PRUEBA_OK antena.teclado.ganancia_fija_durante_paso
+ANTENA d1 K=2.9 paso=10.0 util=9.383 porcentaje=93.833 cruces=2 prueba=1
+MINIJUEGO antena superado=true puntos=93.8 detalle=Señal > 70 % durante 93.8 % del paso; meta: 80 %. La ganancia sostiene el haz sobre el satélite.
+PRUEBA_OK antena.teclado.superado
+PRUEBA_OK antena.teclado.gana_primer_intento_con_marca_visible
+PRUEBA_OK antena.teclado.Continuar_con_Intro.anfitrion_cerrado
+PRUEBA_OK antena.teclado.Continuar_con_Intro.sin_pausa
+PRUEBA_OK antena.raton.abre_anfitrion
+PRUEBA_OK antena.raton.sin_piloto
+PRUEBA_OK antena.raton.Empezar_existe
+MANOS_CLIC control=@Button@159:<Button#193357416267> rect=[P: (622.0, 456.5), S: (170.0, 46.0)] viewport=[P: (0.0, 0.0), S: (1280.0, 720.0)] ventana=(0, 0)
+PRUEBA_FALLO antena.raton.Empezar_responde: Clic izquierdo.
+PRUEBA_FALLO antena.raton.arrastrar_sube_ganancia: 1.2 -> 1.2
+PRUEBA_FALLO antena.raton.arrastrar_baja_ganancia: 1.2
+PRUEBA_FALLO antena.raton.marca_INICIO: 1.2
+MANOS_CLIC control=@Button@152:<Button#192988317483> rect=[P: (462.0, 558.0), S: (140.0, 50.0)] viewport=[P: (0.0, 0.0), S: (1280.0, 720.0)] ventana=(0, 0)
+PRUEBA_FALLO antena.raton.Probar_responde: El clic inicia el paso.
+PRUEBA_FALLO antena.raton.superado: { "superado": true, "puntos": 93.8333333333344, "detalle": "Señal > 70 % durante 93.8 % del paso; meta: 80 %. La ganancia sostiene el haz sobre el satélite.", "tiempo": 10.9721196666666 }
+PRUEBA_FALLO antena.raton.gana_primer_intento_con_marca_visible: No hace falta memorizar ganancias.
+PRUEBA_FALLO antena.raton.Continuar_existe: Resultado accesible al raton.
+PRUEBA_FALLO antena.raton.Continuar_con_clic.anfitrion_cerrado: {  }
+PRUEBA_FALLO antena.raton.Continuar_con_clic.sin_pausa: El anfitrion devuelve el control.
+PRUEBA_OK antena.Esc_instrucciones.abre_anfitrion
+PRUEBA_OK antena.Esc_instrucciones.sin_piloto
+PRUEBA_OK antena.Esc_instrucciones.anfitrion_cerrado
+PRUEBA_OK antena.Esc_instrucciones.sin_pausa
+PRUEBA_OK antena.Esc_ajuste.abre_anfitrion
+PRUEBA_OK antena.Esc_ajuste.sin_piloto
+MINIJUEGO antena superado=false puntos=0.0 detalle=
+PRUEBA_OK antena.Esc_ajuste.anfitrion_cerrado
+PRUEBA_OK antena.Esc_ajuste.sin_pausa
+PRUEBA_OK antena.Esc_paso.abre_anfitrion
+PRUEBA_OK antena.Esc_paso.sin_piloto
+PRUEBA_OK antena.teclado.Probar_con_Espacio
+MINIJUEGO antena superado=false puntos=0.0 detalle=
+PRUEBA_OK antena.Esc_paso.anfitrion_cerrado
+PRUEBA_OK antena.Esc_paso.sin_pausa
+PRUEBA_OK antena.Esc_resultado.abre_anfitrion
+PRUEBA_OK antena.Esc_resultado.sin_piloto
+PRUEBA_OK antena.teclado.Probar_con_Intro
+ANTENA d1 K=2.9 paso=10.0 util=9.383 porcentaje=93.833 cruces=2 prueba=1
+MINIJUEGO antena superado=true puntos=93.8 detalle=Señal > 70 % durante 93.8 % del paso; meta: 80 %. La ganancia sostiene el haz sobre el satélite.
+PRUEBA_OK antena.Esc_resultado.superado
+PRUEBA_OK antena.Esc_resultado.gana_primer_intento_con_marca_visible
+PRUEBA_OK antena.Esc_resultado.anfitrion_cerrado
+PRUEBA_OK antena.Esc_resultado.sin_pausa
+PRUEBA_OK antena.salir_raton.abre_anfitrion
+PRUEBA_OK antena.salir_raton.sin_piloto
+MANOS_CLIC control=@Button@310:<Button#331215800136> rect=[P: (622.0, 456.5), S: (170.0, 46.0)] viewport=[P: (0.0, 0.0), S: (1280.0, 720.0)] ventana=(0, 0)
+MANOS_CLIC control=@Button@67:<Button#57176753849> rect=[P: (1070.0, 60.0), S: (130.0, 41.0)] viewport=[P: (0.0, 0.0), S: (1280.0, 720.0)] ventana=(0, 0)
+PRUEBA_FALLO antena.raton.Salir_con_clic.anfitrion_cerrado: {  }
+PRUEBA_FALLO antena.raton.Salir_con_clic.sin_pausa: El anfitrion devuelve el control.
+PRUEBA_OK antena.manos.anfitrion_cerrado
+PRUEBA_OK antena.manos.arbol_sin_pausa
+PRUEBAS hechas=55 fallos=12
+FIN
+[godot: ok; 32 s; lineas=75; errores=12]

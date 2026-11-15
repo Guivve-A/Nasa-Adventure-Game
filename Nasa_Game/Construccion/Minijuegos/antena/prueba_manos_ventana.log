@@ -1,0 +1,81 @@
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-14T13.50.03.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.3.215 - Forward Mobile - Using Device #0: Intel - Intel(R) HD Graphics 620
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK antena.teclado.abre_anfitrion
+PRUEBA_OK antena.teclado.sin_piloto
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/antena/manos_instrucciones.png
+PRUEBA_OK antena.teclado.empezar_con_Intro
+PRUEBA_OK antena.teclado.ganancia_D
+PRUEBA_OK antena.teclado.ganancia_A
+PRUEBA_OK antena.teclado.ganancia_Right
+PRUEBA_OK antena.teclado.ganancia_Left
+PRUEBA_OK antena.manos.controles_y_textos_dentro_de_1120x520
+PRUEBA_OK antena.manos.entradas_no_dependen_del_foco
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/antena/manos_inicio.png
+PRUEBA_OK antena.teclado.Probar_con_E
+PRUEBA_OK antena.teclado.ganancia_fija_durante_paso
+ANTENA d1 K=3.0 paso=10.0 util=9.400 porcentaje=94.000 cruces=2 prueba=1
+MINIJUEGO antena superado=true puntos=94.0 detalle=Señal > 70 % durante 94.0 % del paso; meta: 80 %. La ganancia sostiene el haz sobre el satélite.
+PRUEBA_OK antena.teclado.superado
+PRUEBA_OK antena.teclado.gana_primer_intento_con_marca_visible
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/antena/manos_resultado.png
+PRUEBA_OK antena.teclado.Continuar_con_Intro.anfitrion_cerrado
+PRUEBA_OK antena.teclado.Continuar_con_Intro.sin_pausa
+PRUEBA_OK antena.raton.abre_anfitrion
+PRUEBA_OK antena.raton.sin_piloto
+PRUEBA_OK antena.raton.Empezar_existe
+PRUEBA_OK antena.raton.Empezar_responde
+PRUEBA_OK antena.raton.arrastrar_sube_ganancia
+PRUEBA_OK antena.raton.arrastrar_baja_ganancia
+PRUEBA_OK antena.raton.marca_INICIO
+PRUEBA_OK antena.raton.Probar_responde
+CAPTURA_OK C:/Users/guill/Desktop/Juego 2d-hd/juego/../Nasa_Game/Construccion/Minijuegos/antena/manos_paso.png
+ANTENA d1 K=3.0 paso=10.0 util=9.400 porcentaje=94.000 cruces=2 prueba=1
+MINIJUEGO antena superado=true puntos=94.0 detalle=Señal > 70 % durante 94.0 % del paso; meta: 80 %. La ganancia sostiene el haz sobre el satélite.
+PRUEBA_OK antena.raton.superado
+PRUEBA_OK antena.raton.gana_primer_intento_con_marca_visible
+PRUEBA_OK antena.raton.Continuar_existe
+PRUEBA_OK antena.raton.Continuar_con_clic.anfitrion_cerrado
+PRUEBA_OK antena.raton.Continuar_con_clic.sin_pausa
+PRUEBA_OK antena.Esc_instrucciones.abre_anfitrion
+PRUEBA_OK antena.Esc_instrucciones.sin_piloto
+PRUEBA_OK antena.Esc_instrucciones.anfitrion_cerrado
+PRUEBA_OK antena.Esc_instrucciones.sin_pausa
+PRUEBA_OK antena.Esc_ajuste.abre_anfitrion
+PRUEBA_OK antena.Esc_ajuste.sin_piloto
+MINIJUEGO antena superado=false puntos=0.0 detalle=
+PRUEBA_OK antena.Esc_ajuste.anfitrion_cerrado
+PRUEBA_OK antena.Esc_ajuste.sin_pausa
+PRUEBA_OK antena.Esc_paso.abre_anfitrion
+PRUEBA_OK antena.Esc_paso.sin_piloto
+PRUEBA_OK antena.teclado.Probar_con_Espacio
+MINIJUEGO antena superado=false puntos=0.0 detalle=
+PRUEBA_OK antena.Esc_paso.anfitrion_cerrado
+PRUEBA_OK antena.Esc_paso.sin_pausa
+PRUEBA_OK antena.Esc_resultado.abre_anfitrion
+PRUEBA_OK antena.Esc_resultado.sin_piloto
+PRUEBA_OK antena.teclado.Probar_con_Intro
+ANTENA d1 K=3.0 paso=10.0 util=9.400 porcentaje=94.000 cruces=2 prueba=1
+MINIJUEGO antena superado=true puntos=94.0 detalle=Señal > 70 % durante 94.0 % del paso; meta: 80 %. La ganancia sostiene el haz sobre el satélite.
+PRUEBA_OK antena.Esc_resultado.superado
+PRUEBA_OK antena.Esc_resultado.gana_primer_intento_con_marca_visible
+PRUEBA_OK antena.Esc_resultado.anfitrion_cerrado
+PRUEBA_OK antena.Esc_resultado.sin_pausa
+PRUEBA_OK antena.salir_raton.abre_anfitrion
+PRUEBA_OK antena.salir_raton.sin_piloto
+MINIJUEGO antena superado=false puntos=0.0 detalle=
+PRUEBA_OK antena.raton.Salir_con_clic.anfitrion_cerrado
+PRUEBA_OK antena.raton.Salir_con_clic.sin_pausa
+PRUEBA_OK antena.manos.anfitrion_cerrado
+PRUEBA_OK antena.manos.arbol_sin_pausa
+PRUEBAS hechas=55 fallos=0
+FIN
+[godot: ok; 38 s; lineas=79; errores=0]

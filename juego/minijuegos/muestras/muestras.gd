@@ -1,460 +1,517 @@
 extends "res://nucleo/minijuego.gd"
 
-# Fuentes: herramientas_apolo11, regolito, bolsas_numeradas, muestras_apolo11.
-# Las cuatro muestras, etiquetas, golpes y tiempos son reglas del suenio.
-# No representan un inventario historico ni una profundidad real de hincado.
-const MUESTRAS: Array[Dictionary] = [
-	{"nombre": "Suelo fino", "lugar": "A", "bolsa": 2, "herramienta": 0},
-	{"nombre": "Fragmentos pequeños", "lugar": "B", "bolsa": 4, "herramienta": 0},
-	{"nombre": "Roca suelta", "lugar": "C", "bolsa": 1, "herramienta": 1},
-	{"nombre": "Columna con capas", "lugar": "D", "bolsa": 3, "herramienta": 2}
-]
-const GOLPES: int = 4
-const PERIODO: float = 1.0
-const LIMITE: float = 150.0
-const EXTRAER: Rect2 = Rect2(800, 452, 294, 40)
-const MARTILLO: Rect2 = Rect2(600, 452, 184, 40)
-enum Fase {HERRAMIENTA, RECOGIDA, RITMO, BOLSA, MAPA, REGISTRADA, FALLO}
-
-var fase: int = Fase.HERRAMIENTA
-var muestra: int = 0
-var seleccion: int = 0
-var recogida: bool = false
-var bolsa_guardada: int = 0
-var registros: Array[Dictionary] = []
-var golpes: int = 0
-var desajustes: int = 0
-var ritmo: float = 0.0
-var ventana: float = 0.24
-var _ultimo_pulso: int = -1
-var _una: bool = false
+# Distancias, oxigeno, tiempos y sellos son reglas del suenio, no cifras de una EVA.
+# La gravedad se lee de la ficha; la altura balistica se ve respecto a la sombra.
+const DT: float = 1.0 / 120.0
+const CAJA: Vector2 = Vector2(32, 108)
+const SITIOS: Array[Vector2] = [Vector2(108, 68), Vector2(220, 64), Vector2(284, 146), Vector2(126, 148)]
+const UTILES: Array[int] = [0, 0, 1, 2]
+const HERRAMIENTAS: Array[String] = ["CUCHARON", "PINZAS", "TUBO"]
+const LIMITES: Array[float] = [105.0, 90.0, 75.0]
+const RADIOS: Array[float] = [6.0, 8.0, 10.0]
+const CANTIDADES: Array[int] = [3, 4, 5]
+const CRATERES: Array[Vector2] = [Vector2(73, 81), Vector2(165, 91), Vector2(205, 149), Vector2(96, 145), Vector2(263, 94)]
+const ASTRONAUTA: Array[String] = ["...PPP...", "..PPPPP..", "..PkkkP..", "..PwwwP..", "...PPP...", ".cPPPPP..", ".cPPtPPc.", "..PPtPP..", "..P...P..", ".PP...PP."]
+const CAJON: Array[String] = [".kkkkkkkkkkkkk.", "kPPPPPPPPPPPPPk", "kPwwwwwwwwwwwPk", "kPwwwwwwwwwwwPk", "kPPPPPPPPPPPPPk", "kcccccPtPccccck", "kcccccPtPccccck", "kPPPPPPPPPPPPPk", ".kkkkkkkkkkkkk."]
+const CUCHARON: Array[String] = ["...P...", "...P...", "...P...", ".PPPPP.", ".PcccP.", ".PPPPP."]
+const PINZAS: Array[String] = ["...P...", "..P.P..", "..P.P..", ".P...P.", ".P...P.", ".PP.PP."]
+const TUBO: Array[String] = [".PPP.P.", ".PkP.P.", ".PcP.P.", ".PwPPPP", ".PcP...", ".PPP..."]
+const ROCA: Array[String] = ["..PPP..", ".PPccP.", "PPccwwP", ".PwwwP.", "..PPP.."]
+const LETRAS: Dictionary = {
+	"A":".#./#.#/###/#.#/#.#", "B":"##./#.#/##./#.#/##.", "C":"###/#../#../#../###",
+	"D":"##./#.#/#.#/#.#/##.", "E":"###/#../##./#../###", "F":"###/#../##./#../#..",
+	"G":"###/#../#.#/#.#/###", "H":"#.#/#.#/###/#.#/#.#", "I":"###/.#./.#./.#./###",
+	"J":"..#/..#/..#/#.#/###", "K":"#.#/#.#/##./#.#/#.#", "L":"#../#../#../#../###",
+	"M":"#.#/###/###/#.#/#.#", "N":"#.#/###/###/###/#.#", "O":"###/#.#/#.#/#.#/###",
+	"P":"###/#.#/###/#../#..", "Q":"###/#.#/#.#/###/..#", "R":"##./#.#/##./#.#/#.#",
+	"S":"###/#../###/..#/###", "T":"###/.#./.#./.#./.#.", "U":"#.#/#.#/#.#/#.#/###",
+	"V":"#.#/#.#/#.#/#.#/.#.", "W":"#.#/#.#/###/###/#.#", "X":"#.#/#.#/.#./#.#/#.#",
+	"Y":"#.#/#.#/.#./.#./.#.", "Z":"###/..#/.#./#../###",
+	"0":"###/#.#/#.#/#.#/###", "1":".#./##./.#./.#./###", "2":"###/..#/###/#../###",
+	"3":"###/..#/###/..#/###", "4":"#.#/#.#/###/..#/..#", "5":"###/#../###/..#/###",
+	"6":"###/#../###/#.#/###", "7":"###/..#/..#/..#/..#", "8":"###/#.#/###/#.#/###",
+	"9":"###/#.#/###/..#/###", "/":"..#/..#/.#./#../#..", ":":".../.#./.../.#./...",
+	"+":".../.#./###/.#./...", "-":".../.../###/.../...", ".":".../.../.../.../.#.",
+}
+var posicion: Vector2 = CAJA + Vector2(14, 0)
+var velocidad: Vector2 = Vector2.ZERO
+var altura: float = 0.0
+var vertical: float = 0.0
+var gravedad: float = 0.0
+var fraccion: String = ""
+var herramienta: int = 0
+var carga: int = -1
+var entregadas: Array[int] = []
+var muestras: Array[Dictionary] = []
+var vidas: int = 3
+var oxigeno: float = 105.0
+var puntos: float = 0.0
+var progreso: float = 0.0
+var cercana: int = -1
+var fase: int = 0 # 0 mision, 1 campo, 2 celebracion, 3 perdida
+var reloj: float = 0.0
+var fase_t: float = 0.0
+var objetivo_total: int = 4
+var causa: String = ""
+var mando: Vector2 = Vector2.ZERO
+var accion: bool = false
 var _auto: int = 0
-var _pulso_auto: float = 0.0
-var _transicion: float = 0.0
-var _causa: String = ""
-var _mensaje: String = ""
-var _correcciones: int = 0
-var _detalle: Label
+var _acum: float = 0.0
+var _inmune: float = 0.0
+var _pausa_muestra: float = 0.0
+var _destello: float = 0.0
+var _sacudida: float = 0.0
+var _aviso: String = ""
+var _aviso_t: float = 0.0
+var _huellas: Array[Vector2] = []
+var _particulas: Array[Dictionary] = []
+var _azar: RandomNumberGenerator = RandomNumberGenerator.new()
+var _pal: Dictionary = {}
+var _glifos: Dictionary = {}
+
+
+func _init() -> void:
+	pantalla_completa = true
 
 
 func _preparar() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	oxigeno = LIMITES[dificultad - 1]
+	_azar.seed = 331
+	_pal = {"P": Estilo.CREMA, "c": Estilo.NARANJA, "w": Estilo.PETROLEO, "k": Estilo.CIAN, "t": Estilo.CORAL}
+	for clave in LETRAS:
+		var dibujo: String = LETRAS[clave]
+		_glifos[clave] = dibujo.split("/")
+	var ficha: Dictionary = Juego.ficha("gravedad_lunar")
+	var texto_gravedad: String = str(ficha.get("texto", ""))
+	var numero: RegEx = RegEx.new()
+	numero.compile("[0-9]+,[0-9]+")
+	var dato: RegExMatch = numero.search(texto_gravedad)
+	if dato != null:
+		gravedad = float(dato.get_string().replace(",", ".")) * 40.0
+	numero.compile("[0-9]+/[0-9]+")
+	dato = numero.search(texto_gravedad)
+	if dato != null:
+		fraccion = dato.get_string()
 	var pedida: int = int(parametros.get("muestra", -1))
-	_una = pedida >= 0 and pedida <= 3
-	muestra = pedida if _una else 0
-	ventana = [0.24, 0.17, 0.10][dificultad - 1]
-	_detalle = texto("", 19, Estilo.TINTA, 600)
-	_detalle.position = Vector2(24, 387)
-	_detalle.custom_minimum_size = Vector2(1072, 0)
-	_detalle.size = Vector2(1072, 58)
-	add_child(_detalle)
-	_nueva_muestra()
+	objetivo_total = 1 if pedida >= 0 and pedida <= 3 else 4
+	for i in 4:
+		if objetivo_total == 1 and i != pedida:
+			continue
+		muestras.append({"id": i, "pos": SITIOS[i], "v": Vector2.ZERO, "espera": 0.0, "estado": 0})
+	queue_redraw()
 
 
 func _empezar() -> void:
-	_actualizar()
+	fase = 0
+	fase_t = 0.0
+	sonar("radio")
 
 
-func _nueva_muestra() -> void:
-	fase = Fase.HERRAMIENTA
-	seleccion = 0
-	recogida = false
-	bolsa_guardada = 0
-	golpes = 0
-	desajustes = 0
-	ritmo = 0.0
-	_ultimo_pulso = -1
-	_mensaje = "Elige una herramienta para conservar lo que buscas."
-	if dificultad == 1:
-		_mensaje = ["El cucharón retiene el suelo fino.", "Usa el cucharón para recoger los fragmentos pequeños con el suelo.", "Las pinzas sujetan una roca suelta.", "El tubo conserva la columna de capas; se hinca con martillo."][muestra]
-	elif dificultad == 2:
-		_mensaje = "Piensa en la forma de la muestra: polvo, roca o capas."
-	_actualizar()
-
-
-func _paso(delta: float) -> void:
-	# Pasos pequenos mantienen la misma ventana a ritmo de pruebas x8.
-	var restante: float = delta
-	while restante > 0.000001 and activo:
-		var paso: float = minf(restante, 1.0 / 120.0)
-		restante -= paso
-		_avanzar(paso)
-	if activo and tiempo >= (90.0 if _una else LIMITE):
-		var causa: String = "Falta recoger la muestra con una herramienta que la conserve."
-		if fase == Fase.BOLSA:
-			causa = "La muestra está recogida, pero falta vincularla a su bolsa numerada."
-		elif fase == Fase.MAPA:
-			causa = "La bolsa está guardada, pero falta marcar su origen en el croquis."
-		elif fase == Fase.RITMO:
-			causa = "El tubo sigue en el suelo: faltó completar y extraer la columna."
-		terminar(false, 0.0, "Se agotó la sesión. " + causa)
-	_actualizar()
-
-
-func _avanzar(delta: float) -> void:
-	if fase in [Fase.RECOGIDA, Fase.REGISTRADA, Fase.FALLO]:
-		_transicion -= delta
-		if _transicion <= 0.0:
-			if fase == Fase.FALLO:
-				terminar(false, 0.0, _causa)
-			elif fase == Fase.RECOGIDA:
-				fase = Fase.BOLSA
-				seleccion = 0
-				_mensaje = "Muestra conservada. Lee su etiqueta y elige la bolsa numerada."
-			else:
-				if _una or muestra == 3:
-					print("MUESTRAS registros=%s correcciones=%d tiempo=%.3f" % [str(registros), _correcciones, tiempo])
-					terminar(true, 100.0, "Registraste %d muestra(s): herramienta, bolsa y lugar vinculados. Referencia histórica: 21,5 kg en 58 muestras." % registros.size())
-				else:
-					muestra += 1
-					_nueva_muestra()
-		return
-	if fase == Fase.RITMO:
-		ritmo += delta
-		if _auto != 0 and ritmo >= float(golpes + 1) * PERIODO:
-			_golpear()
-		if _auto != 0 and golpes == GOLPES and ritmo >= 4.35:
-			_activar()
-		if fase == Fase.RITMO and ritmo >= 8.0:
-			_extraer()
-		return
-	if _auto == 0:
-		return
-	_pulso_auto += delta
-	if _pulso_auto < 0.32:
-		return
-	_pulso_auto = 0.0
-	var objetivo: int = 0
-	match fase:
-		Fase.HERRAMIENTA:
-			objetivo = int(MUESTRAS[muestra]["herramienta"])
-			if _auto < 0:
-				objetivo = 0 if objetivo == 2 else 1 if objetivo == 0 else 2
-		Fase.BOLSA:
-			objetivo = int(MUESTRAS[muestra]["bolsa"]) - 1
-		Fase.MAPA:
-			objetivo = muestra
-	if seleccion != objetivo:
-		_mover(1 if objetivo > seleccion else -1)
-	else:
-		_activar()
+func jugar_solo(acierta: bool) -> void:
+	_auto = 1 if acierta else -1
 
 
 func _input(evento: InputEvent) -> void:
 	if not activo or _auto != 0 or evento.is_echo():
 		return
-	if evento.is_action_pressed("mover_izquierda") or evento.is_action_pressed("mover_arriba"):
-		_mover(-1)
-	elif evento.is_action_pressed("mover_derecha") or evento.is_action_pressed("mover_abajo"):
-		_mover(1)
-	elif evento.is_action_pressed("saltar"):
-		if fase == Fase.RITMO:
-			_golpear()
-		else:
-			_activar()
-	elif evento.is_action_pressed("interactuar"):
-		_activar()
-	else:
-		return
-	get_viewport().set_input_as_handled()
-	_actualizar()
+	if evento.is_action_pressed("interactuar"):
+		_cambiar()
+		get_viewport().set_input_as_handled()
 
 
-func _gui_input(evento: InputEvent) -> void:
-	if not activo or _auto != 0:
-		return
-	if evento is InputEventMouseButton and evento.button_index == MOUSE_BUTTON_LEFT and evento.pressed:
-		grab_focus()
-		if EXTRAER.has_point(evento.position):
-			_activar()
-		elif fase == Fase.RITMO and MARTILLO.has_point(evento.position):
-			_golpear()
-		else:
-			for i in _cantidad_opciones():
-				if _rect_opcion(i).has_point(evento.position):
-					seleccion = i
-					_activar()
-					break
-		_actualizar()
-
-
-func _cantidad_opciones() -> int:
-	if fase == Fase.HERRAMIENTA:
-		return 3
-	if fase in [Fase.BOLSA, Fase.MAPA]:
-		return 4
-	return 0
-
-
-func _mover(direccion: int) -> void:
-	var cantidad: int = _cantidad_opciones()
-	if cantidad > 0:
-		seleccion = posmod(seleccion + direccion, cantidad)
-		sonar("pulsar")
-
-
-func _activar() -> void:
-	if not activo:
-		return
-	var ficha: Dictionary = MUESTRAS[muestra]
-	match fase:
-		Fase.HERRAMIENTA:
-			if seleccion != int(ficha["herramienta"]):
-				var causa: String
-				if muestra <= 1 and seleccion == 1:
-					causa = "Las pinzas no retienen el polvo ni el suelo entre los fragmentos; el material se escapa. Usa el cucharón de caja."
-				elif muestra <= 1:
-					causa = "El tubo conserva una columna, pero aquí buscas suelo superficial y fragmentos pequeños juntos. Recógelos con el cucharón de caja."
-				elif muestra == 3 and seleccion == 0:
-					causa = "El cucharón revuelve las capas: ya no conserva su orden. Usa el tubo de núcleo de 2 cm con martillo."
-				elif muestra == 3:
-					causa = "Las pinzas no encierran una columna de suelo: se escapan los granos y las capas. Usa el tubo de núcleo de 2 cm con martillo."
-				elif seleccion == 0:
-					causa = "El cucharón recoge suelo junto a la roca; aquí necesitas sujetar solo la roca suelta. Usa las pinzas pequeñas."
-				else:
-					causa = "El tubo extrae una columna del suelo; no sujeta la roca suelta. Usa las pinzas pequeñas."
-				_fallar(causa)
-			elif seleccion == 2:
-				fase = Fase.RITMO
-				ritmo = 0.0
-				_mensaje = "Da 4 golpes en el centro (Espacio) y luego extrae (E). No mantengas la tecla."
-			else:
-				_recoger()
-		Fase.RITMO:
-			_extraer()
-		Fase.BOLSA:
-			if seleccion + 1 != int(ficha["bolsa"]):
-				_correcciones += 1
-				_mensaje = "La bolsa %d no coincide con la etiqueta %d. La muestra se conserva: corrige el número para vincular su registro." % [seleccion + 1, int(ficha["bolsa"])]
-				sonar("pagina")
-			else:
-				bolsa_guardada = seleccion + 1
-				fase = Fase.MAPA
-				seleccion = 0
-				_mensaje = "Bolsa %d guardada. Marca el lugar %s: el número y el origen deben quedar unidos." % [bolsa_guardada, ficha["lugar"]]
-		Fase.MAPA:
-			if seleccion != muestra:
-				_correcciones += 1
-				_mensaje = "La muestra vino de %s. Marcar %s perdería su origen; conserva la bolsa %d y corrige el croquis." % [ficha["lugar"], MUESTRAS[seleccion]["lugar"], bolsa_guardada]
-				sonar("pagina")
-			else:
-				registros.append({"muestra": muestra, "bolsa": bolsa_guardada, "lugar": ficha["lugar"], "herramienta": ficha["herramienta"]})
-				fase = Fase.REGISTRADA
-				_transicion = 1.6
-				_mensaje = "Registro completo: %s → bolsa %d → lugar %s. La bolsa numerada conserva el vínculo con el registro." % [ficha["nombre"], bolsa_guardada, ficha["lugar"]]
-				sonar("recoger")
-	_actualizar()
-
-
-func _recoger() -> void:
-	recogida = true
-	fase = Fase.RECOGIDA
-	_transicion = 0.9
-	_mensaje = "Muestra recogida. Ahora hay que conservar su número y su origen."
-	sonar("recoger")
-
-
-func _golpear() -> void:
-	if not activo or fase != Fase.RITMO:
-		return
-	var pulso: int = int(roundf(ritmo / PERIODO))
-	var distancia: float = absf(ritmo - float(pulso) * PERIODO)
-	if pulso < 1 or pulso == _ultimo_pulso or distancia > ventana:
-		desajustes += 1
-		_mensaje = "El golpe cayó fuera del pulso; espera al centro. Desajustes: %d / 2." % desajustes
-		if desajustes >= 2:
-			_fallar("Dos golpes fuera del pulso rompieron el ritmo. Espera al centro de la barra antes de golpear.")
-		return
-	_ultimo_pulso = pulso
-	golpes += 1
+func _cambiar() -> void:
+	herramienta = (herramienta + 1) % 3
+	progreso = 0.0
 	sonar("tic")
-	_mensaje = "Golpes: %d / 4. %s" % [golpes, "Ya puedes extraer con E." if golpes == 4 else "Espera al siguiente pulso."]
-	if golpes == GOLPES + 1:
-		_mensaje = "Sobra 1 golpe: había que extraer tras 4. Otro golpe romperá el ritmo."
-	elif golpes >= GOLPES + 2:
-		_fallar("Diste 6 golpes: 2 de más rompieron el ritmo. El modelo pide 4 y luego extraer; no es una cifra histórica.")
-	_actualizar()
 
 
-func _extraer() -> void:
-	if golpes < GOLPES:
-		_fallar("Con %d de 4 golpes el tubo quedó corto en el modelo: no recogió la columna completa. Completa los 4 pulsos antes de extraer." % golpes)
-	elif golpes > GOLPES:
-		_fallar("Sobra 1 golpe: se perdió la secuencia de 4 pulsos y extracción. Detente al llegar a 4; es una regla del sueño.")
-	else:
-		_recoger()
-
-
-func _fallar(causa: String) -> void:
-	_causa = causa
-	_mensaje = causa
-	fase = Fase.FALLO
-	_transicion = 2.2
-	sonar("error")
-	_actualizar()
-
-
-func _actualizar() -> void:
-	_detalle.text = _mensaje
+func _paso(delta: float) -> void:
+	_acum += delta
+	while _acum >= DT and activo:
+		_acum -= DT
+		if _auto != 0:
+			_piloto()
+		else:
+			mando = Vector2(eje_x(), -eje_y()).limit_length()
+			accion = Input.is_action_pressed("saltar")
+		_tic(DT)
 	queue_redraw()
 
 
-func _rect_opcion(i: int) -> Rect2:
-	if fase == Fase.HERRAMIENTA:
-		return Rect2(610 + i * 164, 112, 156, 213)
-	if fase == Fase.BOLSA:
-		return Rect2(610 + i * 124, 122, 114, 196)
-	return Rect2(644 + (i % 2) * 224, 136 + (i / 2) * 92, 192, 70)
+func _tic(dt: float) -> void:
+	reloj += dt
+	fase_t += dt
+	_efectos(dt)
+	if fase == 0:
+		if fase_t >= 1.8:
+			fase = 1
+			fase_t = 0.0
+		return
+	if fase >= 2:
+		if fase_t >= 1.2:
+			var aprendizaje: String = "Cucharón para suelo, pinzas para roca, tubo para capas."
+			terminar(fase == 2, puntos, aprendizaje if fase == 2 else causa)
+		return
+	oxigeno = maxf(0.0, oxigeno - dt)
+	_inmune = maxf(0.0, _inmune - dt)
+	_pausa_muestra = maxf(0.0, _pausa_muestra - dt)
+	for m in muestras:
+		var espera: float = m["espera"]
+		m["espera"] = maxf(0.0, espera - dt)
+		var p: Vector2 = m["pos"]
+		var v: Vector2 = m["v"]
+		p += v * dt
+		m["pos"] = Vector2(clampf(p.x, 12, 302), clampf(p.y, 60, 157))
+		m["v"] = v.move_toward(Vector2.ZERO, 22.0 * dt)
+	_cercania()
+	# Espacio planta los pies; recoger no requiere acertar un cuadro de aterrizaje.
+	var trabajando: bool = accion and carga < 0 and cercana >= 0 and mando.length() < 0.1
+	if trabajando:
+		velocidad = velocidad.move_toward(Vector2.ZERO, 180.0 * dt)
+		altura = move_toward(altura, 0.0, 32.0 * dt)
+		vertical = 0.0
+	else:
+		var empuje: float = 120.0 if altura <= 0.0 else 80.0
+		velocidad = velocidad.move_toward(mando * 62.0, empuje * dt)
+		if altura <= 0.0 and mando.length() > 0.1:
+			vertical = 30.0
+			altura = 0.01
+			_huellas.append(posicion)
+			if _huellas.size() > 65:
+				_huellas.pop_front()
+			sonar("salto")
+		if altura > 0.0:
+			vertical -= gravedad * dt
+			altura = maxf(0.0, altura + vertical * dt)
+	posicion += velocidad * dt
+	posicion = Vector2(clampf(posicion.x, 10, 306), clampf(posicion.y, 60, 158))
+	for i in CANTIDADES[dificultad - 1]:
+		var centro: Vector2 = CRATERES[i]
+		if posicion.distance_to(centro) < RADIOS[dificultad - 1] and altura < 2.0 and _inmune <= 0.0:
+			var fuera: Vector2 = (posicion - centro).normalized()
+			if fuera == Vector2.ZERO:
+				fuera = Vector2.LEFT
+			posicion = centro + fuera * (RADIOS[dificultad - 1] + 4.0)
+			velocidad = fuera * 30.0
+			_dano("Un aterrizaje dentro del cráter rompió el último sello del traje.")
+			_aviso = "ATERRIZA FUERA DEL CRATER"
+			_aviso_t = 2.0
+	if trabajando and _pausa_muestra <= 0.0 and altura <= 0.1:
+		var m: Dictionary = muestras[cercana]
+		var id: int = m["id"]
+		if herramienta != UTILES[id]:
+			_escapar(m)
+		else:
+			progreso += dt
+			if int(progreso * 4.0) != int((progreso - dt) * 4.0):
+				sonar("tic")
+				var sitio: Vector2 = m["pos"]
+				_estallar(sitio, Estilo.CREMA, 3)
+			if progreso >= (1.7 if id == 3 else 0.7):
+				carga = id
+				m["estado"] = 1
+				progreso = 0.0
+				_destello = 0.16
+				_estallar(posicion, Estilo.CIAN, 12)
+				sonar("recoger")
+	else:
+		progreso = maxf(0.0, progreso - dt)
+	if carga >= 0 and posicion.distance_to(CAJA) < 14.0:
+		entregadas.append(carga)
+		for m in muestras:
+			if int(m["id"]) == carga:
+				m["estado"] = 2
+		carga = -1
+		puntos += 250.0
+		_destello = 0.2
+		_estallar(CAJA, Estilo.DORADO, 20)
+		sonar("ok")
+		if entregadas.size() == objetivo_total:
+			puntos += floorf(oxigeno) * 2.0
+			fase = 2
+			fase_t = 0.0
+			sonar("logro")
+	if oxigeno <= 0.0 and fase == 1:
+		_perder("El oxígeno se agotó antes de llevar todas las muestras a la caja.")
 
 
-func _letra(s: String, punto: Vector2, tam: int = 18, color: Color = Estilo.TINTA) -> void:
-	draw_string(Estilo.fuente(600), punto, s, HORIZONTAL_ALIGNMENT_LEFT, -1, tam, color)
+func _cercania() -> void:
+	cercana = -1
+	var distancia: float = 12.0
+	for i in muestras.size():
+		var m: Dictionary = muestras[i]
+		if int(m["estado"]) != 0 or float(m["espera"]) > 0.0:
+			continue
+		var p: Vector2 = m["pos"]
+		var d: float = posicion.distance_to(p)
+		if d < distancia:
+			cercana = i
+			distancia = d
 
 
-func _caja(rect: Rect2, elegido: bool = false, fondo: Color = Estilo.PAPEL) -> void:
-	draw_style_box(Estilo.caja(fondo, 8, 3 if elegido else 2, Estilo.CIAN_MEDIO if elegido else Estilo.TINTA_SUAVE, 0), rect)
+func _escapar(m: Dictionary) -> void:
+	var id: int = m["id"]
+	var p: Vector2 = m["pos"]
+	var direccion: Vector2 = (p - posicion).normalized()
+	if direccion.length() < 0.1:
+		direccion = Vector2.RIGHT
+	m["v"] = direccion * (42.0 if id == 2 else 23.0)
+	m["espera"] = 1.6
+	_pausa_muestra = 1.7
+	progreso = 0.0
+	if id < 2:
+		_aviso = "EL POLVO CAE ENTRE LAS PUNTAS" if herramienta == 1 else "EL TUBO NO BARRE EL SUELO"
+		for k in 14:
+			_particulas.append({"p": posicion + Vector2(8, -3), "v": Vector2(_azar.randf_range(-9, 9), _azar.randf_range(12, 22)), "t": 1.0, "c": Estilo.CREMA})
+	elif id == 2:
+		_aviso = "LA ROCA RUEDA DEL CUCHARON" if herramienta == 0 else "EL TUBO EMPUJA LA ROCA"
+	else:
+		_aviso = "EL CUCHARON MEZCLA LAS CAPAS" if herramienta == 0 else "LAS PINZAS ROMPEN LAS CAPAS"
+	_aviso_t = 2.4
+	_estallar(p, Estilo.NARANJA, 24)
+	_dano(_aviso.capitalize() + "; la muestra escapó y se perdió el último sello del traje.")
+
+
+func _dano(motivo: String) -> void:
+	vidas -= 1
+	oxigeno = maxf(0.0, oxigeno - 6.0)
+	_inmune = 1.6
+	_destello = 0.18
+	_sacudida = 0.3
+	_estallar(posicion, Estilo.CORAL, 16)
+	sonar("error")
+	if vidas <= 0:
+		_perder(motivo)
+
+
+func _perder(motivo: String) -> void:
+	causa = motivo
+	fase = 3
+	fase_t = 0.0
+	sonar("error")
+
+
+func _piloto() -> void:
+	# Solo escribe los mismos mandos que las teclas. Nunca entrega ni mueve muestras.
+	mando = Vector2.ZERO
+	accion = false
+	if fase != 1:
+		return
+	var destino: Vector2 = CAJA
+	var elegida: Dictionary = {}
+	if carga < 0:
+		for m in muestras:
+			if int(m["estado"]) == 0:
+				elegida = m
+				break
+		if elegida.is_empty():
+			return
+		destino = elegida["pos"]
+		var id: int = elegida["id"]
+		var util: int = UTILES[id] if _auto > 0 else (UTILES[id] + 1) % 3
+		if herramienta != util:
+			_cambiar()
+	var diferencia: Vector2 = destino - posicion
+	if carga < 0 and diferencia.length() < 9.0:
+		accion = true
+		return
+	var rumbo: Vector2 = diferencia.normalized()
+	for i in CANTIDADES[dificultad - 1]:
+		var offset: Vector2 = CRATERES[i] - posicion
+		var frente: float = offset.dot(rumbo)
+		if frente > 0.0 and frente < minf(42.0, diferencia.length()):
+			var lateral: float = offset.cross(rumbo)
+			if absf(lateral) < RADIOS[dificultad - 1] + 9.0:
+				var lado: float = 1.0 if lateral >= 0.0 else -1.0
+				diferencia = rumbo * 10.0 + Vector2(-rumbo.y, rumbo.x) * lado * 24.0
+				break
+	var frenada: Vector2 = diferencia - velocidad * 0.23
+	mando = Vector2(signf(frenada.x) if absf(frenada.x) > 2.5 else 0.0, signf(frenada.y) if absf(frenada.y) > 2.5 else 0.0).limit_length()
+
+
+func _estallar(p: Vector2, color: Color, cantidad: int) -> void:
+	for i in cantidad:
+		_particulas.append({"p": p, "v": Vector2.from_angle(_azar.randf_range(0, TAU)) * _azar.randf_range(8, 38), "t": _azar.randf_range(0.25, 0.8), "c": color})
+
+
+func _efectos(dt: float) -> void:
+	_destello = maxf(0.0, _destello - dt)
+	_sacudida = maxf(0.0, _sacudida - dt)
+	_aviso_t = maxf(0.0, _aviso_t - dt)
+	for i in range(_particulas.size() - 1, -1, -1):
+		var p: Dictionary = _particulas[i]
+		var t: float = float(p["t"]) - dt
+		p["t"] = t
+		p["p"] = Vector2(p["p"]) + Vector2(p["v"]) * dt
+		if t <= 0.0:
+			_particulas.remove_at(i)
+
+
+func _r(x: float, y: float, w: float, h: float, color: Color) -> void:
+	draw_rect(Rect2(floorf(x), floorf(y), floorf(w), floorf(h)), color)
+
+
+func _sprite(mapa: Array[String], p: Vector2, escala: int = 1) -> void:
+	for y in mapa.size():
+		var fila: String = mapa[y]
+		for x in fila.length():
+			var c: String = fila[x]
+			if _pal.has(c):
+				var color: Color = _pal[c]
+				_r(p.x + x * escala, p.y + y * escala, escala, escala, color)
+
+
+func _texto(t: String, x: float, y: float, color: Color, e: int = 1) -> void:
+	var cx: float = x
+	for letra in t:
+		if _glifos.has(letra):
+			var filas: PackedStringArray = _glifos[letra]
+			for fy in 5:
+				for fx in 3:
+					if filas[fy][fx] == "#":
+						_r(cx + fx * e, y + fy * e, e, e, color)
+		cx += 4 * e
+
+
+func _centro(t: String, y: float, color: Color, e: int = 1) -> void:
+	_texto(t, (320 - t.length() * 4 * e) * 0.5, y, color, e)
+
+
+func _muestra(id: int, p: Vector2, dispersa: bool = false) -> void:
+	if id <= 1:
+		for k in 15:
+			var dx: float = float((k * 7) % 17 - 8)
+			var dy: float = float((k * 3) % 7 - 3)
+			if dispersa:
+				dy += sin(reloj * 6.0 + k) * 3.0
+			_r(p.x + dx, p.y + dy, 2 if id == 1 else 1, 1, Estilo.CREMA)
+	elif id == 2:
+		_sprite(ROCA, p - Vector2(3, 3))
+	else:
+		for k in 5:
+			var desvio: float = sin(reloj * 8.0 + k) * 5.0 if dispersa else 0.0
+			_r(p.x - 6 + desvio, p.y - 5 + k * 2, 12, 2, Estilo.CREMA if k % 2 == 0 else Estilo.NARANJA)
+		_r(p.x - 7, p.y - 6, 1, 12, Estilo.PETROLEO)
 
 
 func _draw() -> void:
-	var ficha: Dictionary = MUESTRAS[muestra]
-	_letra("%s · %s" % [ficha["lugar"], ficha["nombre"]], Vector2(24, 30), 25)
-	_letra("Registros: %d / %d   ·   Sesión: %d s" % [registros.size(), 1 if _una else 4, maxi(0, int((90.0 if _una else LIMITE) - tiempo))], Vector2(681, 30), 18)
-	var paso: String = "1 · ELEGIR Y RECOGER" if fase in [Fase.HERRAMIENTA, Fase.RITMO, Fase.RECOGIDA, Fase.FALLO] else "2 · REGISTRAR: BOLSA + CROQUIS"
-	_letra(paso, Vector2(24, 68), 18, Estilo.PETROLEO)
-	_terreno()
-	if fase == Fase.HERRAMIENTA:
-		for i in 3:
-			var rect: Rect2 = _rect_opcion(i)
-			_caja(rect, seleccion == i)
-			_herramienta(i, rect.position + Vector2(78, 72), 0.8)
-			var titulos: Array[String] = ["Cucharón", "Pinzas", "Tubo de núcleo"]
-			_letra(titulos[i], rect.position + Vector2(10, 146), 18)
-			_letra(["de caja", "pequeñas", "2 cm + martillo"][i], rect.position + Vector2(10, 174), 16)
-		_letra("¿Qué conserva esta muestra?", Vector2(610, 92), 19)
-	elif fase == Fase.BOLSA:
-		_letra("Etiqueta: bolsa %d · lugar %s" % [int(ficha["bolsa"]), ficha["lugar"]], Vector2(610, 92), 21)
-		for i in 4:
-			var rect: Rect2 = _rect_opcion(i)
-			_caja(rect, seleccion == i)
-			_bolsa(rect.position + Vector2(57, 77), i + 1)
-			_letra("Bolsa %d" % (i + 1), rect.position + Vector2(17, 171), 18)
-	elif fase in [Fase.MAPA, Fase.REGISTRADA]:
-		_letra("CROQUIS DEL SUEÑO · sin escala", Vector2(610, 92), 19)
-		_caja(Rect2(610, 108, 484, 223), false, Estilo.PAPEL_SOMBRA)
-		draw_line(Vector2(638, 270), Vector2(1045, 143), Estilo.TINTA_SUAVE, 2)
-		for i in 4:
-			var rect: Rect2 = _rect_opcion(i)
-			_caja(rect, seleccion == i and fase == Fase.MAPA)
-			_letra("%s · %s" % [MUESTRAS[i]["lugar"], ["suelo fino", "fragmentos", "roca", "columna"][i]], rect.position + Vector2(12, 29), 18)
-			for registro in registros:
-				if int(registro["muestra"]) == i:
-					_letra("✓ Bolsa %d" % int(registro["bolsa"]), rect.position + Vector2(12, 55), 16, Estilo.PETROLEO)
-	elif fase == Fase.RITMO:
-		_dibujar_ritmo()
-	else:
-		_herramienta(int(ficha["herramienta"]) if fase != Fase.FALLO else seleccion, Vector2(827, 203), 1.4)
-		_letra("Conserva la muestra y su origen", Vector2(610, 320), 19)
-	_letra("Origen %s → bolsa %d" % [ficha["lugar"], int(ficha["bolsa"])], Vector2(24, 364), 21)
-	_letra("Etiquetas y croquis: ejercicio del sueño.", Vector2(610, 364), 16, Estilo.TINTA_SUAVE)
-	if fase == Fase.RITMO:
-		_caja(MARTILLO, false, Estilo.CIAN)
-		_letra("Golpear · Espacio", MARTILLO.position + Vector2(10, 27), 18)
-	if _cantidad_opciones() > 0 or fase == Fase.RITMO:
-		_caja(EXTRAER, true, Estilo.CIAN)
-		_letra("Extraer · E" if fase == Fase.RITMO else "Confirmar selección · E", EXTRAER.position + Vector2(16, 27), 18)
-	_letra("← ↑ ↓ →  Elegir   ·   E / Intro  Confirmar", Vector2(24, 478), 17)
-	_letra("Referencia histórica: 21,5 kg en 58 muestras. Aquí recogemos 4 muestras del sueño.", Vector2(24, 511), 16, Estilo.TINTA_SUAVE)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(4, 4))
+	_r(0, 0, 320, 180, Estilo.NOCHE)
+	# Cielo y horizonte de lado a lado; el suelo alcanza el borde inferior.
+	for i in 42:
+		_r((i * 73) % 320, 18 + (i * 17) % 25, 1, 1, Estilo.CREMA)
+	for x in range(0, 320, 4):
+		var horizonte: int = floori(46 + sin(x * 0.04) * 3 + sin(x * 0.11) * 2)
+		_r(x, horizonte, 4, 180 - horizonte, Estilo.TINTA)
+		_r(x, horizonte, 4, 2, Estilo.PETROLEO)
+	_r(278, 24, 9, 9, Estilo.CIAN)
+	_r(276, 26, 13, 5, Estilo.CIAN)
+	_r(280, 25, 4, 4, Estilo.PETROLEO)
+	var temblor: Vector2 = Vector2(roundf(sin(reloj * 91.0) * 2), roundf(cos(reloj * 77.0))) if _sacudida > 0.0 else Vector2.ZERO
+	draw_set_transform(temblor * 4, 0.0, Vector2(4, 4))
+	for i in 180:
+		var x: int = (i * 67) % 320
+		var y: int = 53 + (i * 31) % 127
+		_r(x, y, 2 if i % 3 else 4, 1, Color(Estilo.PETROLEO, 0.25))
+	for p in _huellas:
+		_r(p.x - 2, p.y, 1, 2, Estilo.TINTA_SUAVE)
+		_r(p.x + 2, p.y + 1, 1, 2, Estilo.TINTA_SUAVE)
+	for i in CANTIDADES[dificultad - 1]:
+		var c: Vector2 = CRATERES[i]
+		var r: int = int(RADIOS[dificultad - 1]) + 2
+		for y in range(-r, r + 1):
+			var ancho: int = int(sqrt(maxf(0, r * r - y * y)))
+			_r(c.x - ancho, c.y + y, ancho * 2 + 1, 1, Estilo.PETROLEO)
+			if absi(y) < r - 2:
+				var dentro: int = int(sqrt(maxf(0, (r - 2) * (r - 2) - y * y)))
+				_r(c.x - dentro, c.y + y, dentro * 2 + 1, 1, Estilo.TINTA)
+		_r(c.x - r * 0.5, c.y - r + 1, r, 1, Estilo.CREMA)
+	_sprite(CAJON, CAJA - Vector2(7, 5))
+	for i in objetivo_total:
+		_r(CAJA.x - 10 + i * 6, CAJA.y + 12, 4, 3, Estilo.CIAN if i < entregadas.size() else Estilo.PETROLEO)
+	_texto("CAJA", CAJA.x - 8, CAJA.y - 12, Estilo.CIAN)
+	for m in muestras:
+		if int(m["estado"]) != 0:
+			continue
+		var p: Vector2 = m["pos"]
+		var id: int = m["id"]
+		_muestra(id, p, float(m["espera"]) > 0.0)
+		if id == 3 and progreso > 0.0 and cercana >= 0 and int(muestras[cercana]["id"]) == id:
+			_sprite(TUBO, p + Vector2(-2, -9 + progreso * 3.0))
+			var golpe: float = 2.0 if fmod(progreso, 0.25) < 0.12 else 0.0
+			_r(p.x + 6, p.y - 11 + golpe, 6, 2, Estilo.PETROLEO)
+			_r(p.x + 8, p.y - 9 + golpe, 1, 5, Estilo.CREMA)
+		_texto(str(id + 1), p.x - 1, p.y + 8, Estilo.DORADO)
+		if dificultad == 1:
+			var icono: Array[String] = [CUCHARON, PINZAS, TUBO][UTILES[id]]
+			_sprite(icono, p + Vector2(10, -4))
+	if carga >= 0:
+		var d: Vector2 = CAJA - posicion
+		for k in range(1, 6):
+			var p: Vector2 = posicion + d.normalized() * float(k * 5)
+			_r(p.x, p.y, 1, 1, Estilo.CIAN)
+	_r(posicion.x - 4, posicion.y + 2, 9, 2, Estilo.TINTA_SUAVE)
+	if _inmune <= 0.0 or fmod(_inmune, 0.4) < 0.2:
+		_sprite(ASTRONAUTA, posicion - Vector2(4, 8 + roundf(altura)))
+		var util: Array[String] = [CUCHARON, PINZAS, TUBO][herramienta]
+		_sprite(util, posicion + Vector2(5, -5 - roundf(altura)))
+		if carga >= 0:
+			_r(posicion.x - 7, posicion.y - 6 - roundf(altura), 4, 5, Estilo.DORADO)
+	if cercana >= 0 and carga < 0 and fase == 1:
+		var m: Dictionary = muestras[cercana]
+		var id: int = m["id"]
+		var ancho: float = clampf(progreso / (1.7 if id == 3 else 0.7), 0.0, 1.0) * 18
+		_r(posicion.x - 10, posicion.y - altura - 15, 20, 3, Estilo.PETROLEO)
+		_r(posicion.x - 9, posicion.y - altura - 14, ancho, 1, Estilo.CIAN)
+		_texto("ESP", posicion.x - 6, posicion.y + 7, Estilo.CIAN)
+	for part in _particulas:
+		var p: Vector2 = part["p"]
+		var color: Color = part["c"]
+		_r(p.x, p.y, 1, 1, color)
+	if _aviso_t > 0.0:
+		_r(4, 19, 312, 8, Estilo.NOCHE)
+		_centro(_aviso, 20, Estilo.CORAL)
+	if _destello > 0.0:
+		_r(0, 46, 320, 134, Color(Estilo.CREMA, _destello * 0.6))
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(4, 4))
+	_hud()
+	if fase == 0:
+		_r(53, 60, 214, 64, Estilo.NOCHE)
+		_centro("RECOGE Y LLEVA A LA CAJA", 66, Estilo.CREMA, 2)
+		_sprite(CUCHARON, Vector2(82, 87), 2)
+		_sprite(PINZAS, Vector2(116, 87), 2)
+		_sprite(TUBO, Vector2(150, 87), 2)
+		_texto("+", 181, 92, Estilo.CIAN, 2)
+		_sprite(CAJON, Vector2(202, 89), 2)
+		_centro("%s G" % fraccion, 113, Estilo.DORADO)
+	elif fase == 2:
+		_r(63, 72, 194, 28, Estilo.NOCHE)
+		_centro("CARGA A SALVO", 77, Estilo.CIAN, 2)
+		_centro("+%d" % int(puntos), 91, Estilo.DORADO)
+	elif fase == 3:
+		_r(56, 74, 208, 22, Estilo.NOCHE)
+		_centro("SIN OXIGENO" if oxigeno <= 0 else "TRAJE SIN SELLOS", 80, Estilo.CORAL, 2)
 
 
-func _terreno() -> void:
-	_caja(Rect2(24, 90, 554, 248), false, Estilo.PETROLEO)
-	# Facetas y pinceladas geometricas originales, sin texturas ni recursos externos.
-	draw_colored_polygon(PackedVector2Array([Vector2(25, 205), Vector2(197, 122), Vector2(375, 181), Vector2(577, 136), Vector2(577, 337), Vector2(25, 337)]), Estilo.PAPEL_SOMBRA)
-	draw_colored_polygon(PackedVector2Array([Vector2(25, 205), Vector2(197, 122), Vector2(232, 259), Vector2(25, 337)]), Estilo.CREMA)
-	draw_colored_polygon(PackedVector2Array([Vector2(232, 259), Vector2(375, 181), Vector2(577, 337)]), Estilo.TINTA_SUAVE)
-	for i in 26:
-		var p: Vector2 = Vector2(46 + (i * 73) % 500, 239 + (i * 37) % 77)
-		draw_line(p, p + Vector2(9, -3), Estilo.TINTA_SUAVE, 2)
-	if muestra in [0, 1]:
-		for i in 38:
-			var p: Vector2 = Vector2(160 + (i * 41) % 245, 224 + (i * 17) % 58)
-			if fase == Fase.FALLO and seleccion == 1:
-				p.y += (2.2 - _transicion) * 25.0
-			draw_circle(p, 2.0 if muestra == 0 else 4.0, Estilo.TINTA_SUAVE)
-	elif muestra == 2:
-		draw_colored_polygon(PackedVector2Array([Vector2(207, 275), Vector2(229, 209), Vector2(294, 187), Vector2(349, 229), Vector2(333, 282)]), Estilo.TINTA_SUAVE)
-		draw_colored_polygon(PackedVector2Array([Vector2(229, 209), Vector2(294, 187), Vector2(282, 247), Vector2(207, 275)]), Estilo.PAPEL)
-		draw_colored_polygon(PackedVector2Array([Vector2(294, 187), Vector2(349, 229), Vector2(282, 247)]), Estilo.CREMA)
-	else:
-		for i in 5:
-			var rect: Rect2 = Rect2(148, 194 + i * 23, 300, 23)
-			draw_rect(rect, [Estilo.PAPEL, Estilo.TINTA_SUAVE, Estilo.CREMA, Estilo.PETROLEO, Estilo.PAPEL_SOMBRA][i])
-			if fase == Fase.FALLO and seleccion == 0:
-				draw_line(Vector2(170 + i * 31, 193), Vector2(300 + i * 29, 307), Estilo.TINTA_SUAVE, 10)
-		if fase == Fase.RITMO or recogida:
-			var h: float = 30.0 + minf(float(golpes) / GOLPES, 1.0) * 85.0
-			draw_rect(Rect2(288, 186, 24, h), Color(Estilo.PAPEL, 0.7))
-			draw_rect(Rect2(288, 186, 24, h), Estilo.TINTA, false, 3)
-			_herramienta(3, Vector2(348, 145 + (8.0 if fmod(ritmo, 1.0) < 0.15 else 0.0)), 0.7)
-	if recogida and fase not in [Fase.RECOGIDA, Fase.RITMO]:
-		_bolsa(Vector2(490, 191), int(MUESTRAS[muestra]["bolsa"]) if bolsa_guardada > 0 else 0)
-	_letra("Regolito: polvo y escombros de impactos", Vector2(40, 115), 16, Estilo.PAPEL)
-
-
-func _herramienta(tipo: int, centro: Vector2, escala: float) -> void:
-	draw_set_transform(centro, -0.18 if tipo == 3 else 0.0, Vector2.ONE * escala)
-	if tipo == 0:
-		draw_line(Vector2(25, -65), Vector2(-8, 23), Estilo.TINTA, 13)
-		draw_line(Vector2(25, -65), Vector2(-8, 23), Estilo.CREMA, 7)
-		draw_colored_polygon(PackedVector2Array([Vector2(-40, 8), Vector2(11, 16), Vector2(31, 52), Vector2(-39, 49)]), Estilo.PETROLEO)
-		draw_polyline(PackedVector2Array([Vector2(-40, 8), Vector2(11, 16), Vector2(31, 52), Vector2(-39, 49), Vector2(-40, 8)]), Estilo.TINTA, 4)
-		draw_line(Vector2(-32, 20), Vector2(8, 26), Estilo.PAPEL, 4)
-	elif tipo == 1:
-		draw_polyline(PackedVector2Array([Vector2(-31, 52), Vector2(-9, -55), Vector2(9, -55), Vector2(31, 52)]), Estilo.TINTA, 12)
-		draw_polyline(PackedVector2Array([Vector2(-31, 52), Vector2(-9, -55), Vector2(9, -55), Vector2(31, 52)]), Estilo.PAPEL_SOMBRA, 6)
-		draw_line(Vector2(-31, 52), Vector2(-16, 46), Estilo.PAPEL, 6)
-		draw_line(Vector2(31, 52), Vector2(16, 46), Estilo.PAPEL, 6)
-	elif tipo == 2:
-		draw_rect(Rect2(-34, -56, 25, 111), Estilo.PAPEL_SOMBRA)
-		draw_rect(Rect2(-34, -56, 25, 111), Estilo.TINTA, false, 4)
-		draw_line(Vector2(-28, -47), Vector2(-28, 44), Estilo.PAPEL, 4)
-		draw_line(Vector2(28, 51), Vector2(28, -27), Estilo.CREMA, 9)
-		draw_rect(Rect2(4, -45, 54, 24), Estilo.PETROLEO)
-		draw_rect(Rect2(4, -45, 54, 24), Estilo.TINTA, false, 3)
-	else:
-		draw_line(Vector2(0, 45), Vector2(0, -20), Estilo.TINTA, 12)
-		draw_line(Vector2(0, 45), Vector2(0, -20), Estilo.CREMA, 7)
-		draw_rect(Rect2(-30, -44, 60, 28), Estilo.PAPEL_SOMBRA)
-		draw_rect(Rect2(-30, -44, 60, 28), Estilo.TINTA, false, 3)
-	draw_set_transform(Vector2.ZERO)
-
-
-func _bolsa(centro: Vector2, numero: int) -> void:
-	var puntos: PackedVector2Array = PackedVector2Array([centro + Vector2(-31, -40), centro + Vector2(31, -40), centro + Vector2(40, 43), centro + Vector2(-38, 43), centro + Vector2(-31, -40)])
-	draw_colored_polygon(puntos, Estilo.CREMA)
-	draw_polyline(puntos, Estilo.TINTA, 3)
-	draw_line(centro + Vector2(-32, -28), centro + Vector2(32, -28), Estilo.TINTA_SUAVE, 3)
-	draw_rect(Rect2(centro + Vector2(-21, -12), Vector2(42, 37)), Estilo.PAPEL)
-	_letra(str(numero) if numero > 0 else "?", centro + Vector2(-9, 15), 26)
-
-
-func _dibujar_ritmo() -> void:
-	_letra("Tubo de 2 cm · %d / 4 golpes" % golpes, Vector2(610, 111), 23)
-	_letra("Ritmo del sueño: 1 pulso/s", Vector2(610, 151), 18)
-	_letra("Regla didáctica, sin profundidad real", Vector2(610, 178), 16, Estilo.TINTA_SUAVE)
-	var barra: Rect2 = Rect2(622, 212, 460, 54)
-	_caja(barra, false, Estilo.PAPEL_SOMBRA)
-	var margen: float = ventana * 460.0 / PERIODO
-	draw_rect(Rect2(852 - margen, 212, margen * 2.0, 54), Estilo.CIAN)
-	draw_line(Vector2(852, 207), Vector2(852, 274), Estilo.TINTA, 2)
-	# Antes del primer barrido la aguja espera al borde, no invita a golpear en t=0.
-	var fase_pulso: float = fposmod(ritmo / PERIODO + 0.5, 1.0) if ritmo >= 0.5 else 0.0
-	var x: float = 622.0 + fase_pulso * 460.0
-	draw_line(Vector2(x, 207), Vector2(x, 274), Estilo.TINTA, 5)
-	_letra("Golpea en el centro · margen ±%.2f s" % ventana, Vector2(610, 302), 18)
-	_letra("4 golpes, luego E · Desajustes %d / 2" % desajustes, Vector2(610, 329), 18)
-
-
-func jugar_solo(acierta: bool) -> void:
-	# Solo elige, confirma y golpea mediante las mismas operaciones de la persona.
-	_auto = 1 if acierta else -1
-	_pulso_auto = 0.0
+func _hud() -> void:
+	_texto(str(int(puntos)).pad_zeros(4), 4, 4, Estilo.CREMA, 2)
+	_texto("O2", 43, 5, Estilo.CIAN)
+	_r(55, 4, 59, 10, Estilo.PETROLEO)
+	_r(56, 5, 57 * oxigeno / LIMITES[dificultad - 1], 8, Estilo.CORAL if oxigeno < 20 else Estilo.CIAN)
+	_texto(str(ceili(oxigeno)).pad_zeros(3), 120, 4, Estilo.CREMA, 2)
+	_texto("S", 145, 8, Estilo.CREMA)
+	for i in 3:
+		_r(156 + i * 10, 5, 7, 7, Estilo.CREMA if i < vidas else Estilo.TINTA_SUAVE)
+		_r(158 + i * 10, 7, 3, 3, Estilo.NOCHE)
+	_texto("%d/%d" % [entregadas.size(), objetivo_total], 198, 4, Estilo.DORADO, 2)
+	_texto("N%d" % dificultad, 242, 5, Estilo.CIAN)
+	_texto("ESC SALIR", 280, 5, Estilo.CREMA)
+	var icono: Array[String] = [CUCHARON, PINZAS, TUBO][herramienta]
+	_sprite(icono, Vector2(5, 168))
+	_r(15, 166, 9, 9, Estilo.PETROLEO)
+	_texto("E", 18, 168, Estilo.CIAN)
+	_texto(HERRAMIENTAS[herramienta], 28, 168, Estilo.CIAN)
+	_texto("ESP RECOGER", 106, 168, Estilo.CREMA)
+	_texto("BOLSA A CAJA" if carga >= 0 else "%s G" % fraccion, 181, 168, Estilo.DORADO)
+	_texto("WASD", 299, 168, Estilo.CREMA)

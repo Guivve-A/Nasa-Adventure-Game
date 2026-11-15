@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-15T06:47:28.679467Z",
+    "display_name": "GPT Image 2.6",
+    "id": "489b9537-9426-41ec-8f6b-1a0a35d33b9b",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064728_489b9537-9426-41ec-8f6b-1a0a35d33b9b_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Low-angle ultra-wide photograph on the surface of the Moon, 14 mm lens at f/11, everything in focus, camera thirty centimetres above the ground and tilted upward, the Sun low behind the camera. Hard single-source sunlight with no fill: every pebble and boot print casts a long black shadow pointing away from the camera, toward the horizon. At the bottom right, small and complete, stands a thin vertical pole whose base sits one twentieth of the frame height above the bottom edge; at its top a plain rectangular cloth about one tenth of the frame height hangs open from a horizontal rod along its top edge, perfectly still, keeping soft permanent wrinkles because the rod is not fully extended. The cloth is a blank, smooth, light neutral gray placeholder with no stripes, no stars and no pattern, front-lit by the low sun. At the foot of the pole, gray dust trampled by boot prints. The gray horizon lies very low in the frame. Above it, an enormous pitch-black sky without stars; near the top of the frame, at three fifths of the frame width and one tenth of the height from the top, small, about one fortieth of the frame height, the Earth: a blue-and-white gibbous globe about two thirds lit, with its lit side facing up. The Earth is the only colour; everything else, the cloth included, is neutral gray and black. No spacecraft, no people, no other equipment, no lettering, no camera shadow. Crisp and without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064728_489b9537-9426-41ec-8f6b-1a0a35d33b9b.png",
+    "status": "completed"
+  }
+]

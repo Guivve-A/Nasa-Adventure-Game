@@ -1,0 +1,6 @@
+Codex: C:\Users\guill\AppData\Local\OpenAI\Codex\bin\9e1da79431da526b\codex.exe
+9 tareas, 2 en paralelo
+  manos_seguidor               ok                      17.1 min      786 bytes
+  manos_antena                 ok                      18.7 min      720 bytes
+  manos_satelite               ok                      12.9 min      946 bytes
+  manos_telescopio             ok                      17.5 min      598 bytes

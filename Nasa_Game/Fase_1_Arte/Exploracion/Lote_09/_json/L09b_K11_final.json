@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-11-15T13:32:31.820802Z",
+    "display_name": "GPT Image 2.6",
+    "id": "4a3204d4-881e-4ee8-8661-209ca47f7411",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133231_4a3204d4-881e-4ee8-8661-209ca47f7411_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "54095cae-cb0b-490d-9580-c1ef8674d44d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/54095cae-cb0b-490d-9580-c1ef8674d44d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Macro photograph, 100 mm macro lens at f/4, camera lying on the ground, side view at a grazing angle of about ten degrees: a single fresh boot print pressed into fine gray lunar dust, with crisp parallel tread ribs and sharp vertical walls, like a print in damp flour. A razor-thin plane of focus lies across the ribs in the lower middle of the frame; the dust before and behind it melts within a few centimetres into a soft blur. The print lies inside a large cool shadow and is lit only by soft light bounced from the sunlit ground beyond it: gentle, almost shadowless, slightly cool gray, about two to one, just enough to model each rib. In the background the hard edge of the shadow crosses the frame diagonally from the upper left toward the right, and beyond it the plain blazes in direct sunlight, five stops brighter and strongly out of focus; a thin strip of pitch-black sky runs along the very top. No boot, no person, no flag, no equipment. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "xhigh",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133231_4a3204d4-881e-4ee8-8661-209ca47f7411.png",
+    "status": "completed"
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-15T06:46:22.269082Z",
+    "display_name": "GPT Image 2.6",
+    "id": "8e514ff3-b801-45ae-ad7a-cbfe750890cb",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064622_8e514ff3-b801-45ae-ad7a-cbfe750890cb_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Looking steeply up into a vast empty sky, 50 mm lens focused at infinity at f/8, locked off. The sky grades smoothly from pale blue at the bottom of the frame to deep indigo at the top, as at high altitude. A single tiny white spark sits at three fifths of the frame width and one third of the height from the top, at the tip of a long, thin white exhaust trail that sweeps across the frame in one clean arc, like the upper part of a very large circle whose centre lies below the spark: the arc rises from the lower left and levels off at its apex exactly where the spark is. The trail is lit by the sun from below the frame, bright white on its lower side and softly shaded above; its lower part is wider, slightly twisted and thinned by high-altitude wind. Nothing else: no ground, no clouds, no aircraft, no birds, no sun in frame. Faded colour of 1960s 16 mm reversal film. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064622_8e514ff3-b801-45ae-ad7a-cbfe750890cb.png",
+    "status": "completed"
+  }
+]

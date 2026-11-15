@@ -1,18 +1,18 @@
 {
-  "titulo": "Rastrear como en el Cotopaxi",
-  "resumen": "Ajusta la ganancia para que el haz de la antena siga al satélite.",
+  "titulo": "Rastreo",
+  "resumen": "Sigue sat?lites y recibe 45 paquetes en tres pasadas.",
   "instrucciones": [
-    "Mueve GANANCIA y pulsa Probar. El paso simulado dura entre 7 y 10 s.",
-    "Mantén la señal por encima del 70 % durante al menos el 80 % del paso.",
-    "Compara los errores actual y anterior. Tienes 3 pruebas y 180 s: poca ganancia atrasa; mucha hace oscilar."
+    "Gira para mantener el sat?lite dentro del haz.",
+    "Mant?n E o Espacio: haz fino, doble descarga.",
+    "Completa la barra en tres pasadas."
   ],
-  "controles": "← → / A y D: ganancia · E / Intro / Espacio: Probar · Ratón: deslizador y botón.",
+  "controles": "? ? o A D: girar ? E o Espacio: haz fino ? Esc: salir.",
   "pistas": [
-    "Órbita mira el haz: ¿queda detrás del satélite o cruza de un lado al otro?",
-    "Si el error sigue por encima de 0°, sube la ganancia. Si cruza 0° muchas veces, bájala: el motor responde con retardo.",
-    "Pon GANANCIA en 3,0 y pulsa Probar. Ese equilibrio permite seguir el paso incluso con las ráfagas."
+    "Mira el arco y la flecha de entrada.",
+    "Usa toques cortos para mantener el enlace.",
+    "El haz ancho basta; usa E solo al centrarte."
   ],
-  "ficha": "ganancia",
+  "ficha": "estacion_cotopaxi",
   "escena": "2.1",
   "orden": 2
 }

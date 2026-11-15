@@ -1,0 +1,73 @@
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-14T19.44.21.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK muestras.modelo.d1.m-1.true
+PRUEBA_OK muestras.modelo.entregadas.d1.m-1
+PRUEBA_OK muestras.modelo.d1.m-1.false
+PRUEBA_OK muestras.modelo.d1.m0.true
+PRUEBA_OK muestras.modelo.entregadas.d1.m0
+PRUEBA_OK muestras.modelo.d1.m0.false
+PRUEBA_OK muestras.modelo.d1.m1.true
+PRUEBA_OK muestras.modelo.entregadas.d1.m1
+PRUEBA_OK muestras.modelo.d1.m1.false
+PRUEBA_OK muestras.modelo.d1.m2.true
+PRUEBA_OK muestras.modelo.entregadas.d1.m2
+PRUEBA_OK muestras.modelo.d1.m2.false
+PRUEBA_OK muestras.modelo.d1.m3.true
+PRUEBA_OK muestras.modelo.entregadas.d1.m3
+PRUEBA_OK muestras.modelo.d1.m3.false
+PRUEBA_OK muestras.modelo.d2.m-1.true
+PRUEBA_OK muestras.modelo.entregadas.d2.m-1
+PRUEBA_OK muestras.modelo.d2.m-1.false
+PRUEBA_OK muestras.modelo.d2.m0.true
+PRUEBA_OK muestras.modelo.entregadas.d2.m0
+PRUEBA_OK muestras.modelo.d2.m0.false
+PRUEBA_OK muestras.modelo.d2.m1.true
+PRUEBA_OK muestras.modelo.entregadas.d2.m1
+PRUEBA_OK muestras.modelo.d2.m1.false
+PRUEBA_OK muestras.modelo.d2.m2.true
+PRUEBA_OK muestras.modelo.entregadas.d2.m2
+PRUEBA_OK muestras.modelo.d2.m2.false
+PRUEBA_OK muestras.modelo.d2.m3.true
+PRUEBA_OK muestras.modelo.entregadas.d2.m3
+PRUEBA_OK muestras.modelo.d2.m3.false
+PRUEBA_OK muestras.modelo.d3.m-1.true
+PRUEBA_OK muestras.modelo.entregadas.d3.m-1
+PRUEBA_OK muestras.modelo.d3.m-1.false
+PRUEBA_OK muestras.modelo.d3.m0.true
+PRUEBA_OK muestras.modelo.entregadas.d3.m0
+PRUEBA_OK muestras.modelo.d3.m0.false
+PRUEBA_OK muestras.modelo.d3.m1.true
+PRUEBA_OK muestras.modelo.entregadas.d3.m1
+PRUEBA_OK muestras.modelo.d3.m1.false
+PRUEBA_OK muestras.modelo.d3.m2.true
+PRUEBA_OK muestras.modelo.entregadas.d3.m2
+PRUEBA_OK muestras.modelo.d3.m2.false
+PRUEBA_OK muestras.modelo.d3.m3.true
+PRUEBA_OK muestras.modelo.entregadas.d3.m3
+PRUEBA_OK muestras.modelo.d3.m3.false
+PRUEBA_OK muestras.modelo.herramienta_deja_escapar_0
+PRUEBA_OK muestras.modelo.recupera_muestra_0
+PRUEBA_OK muestras.modelo.herramienta_deja_escapar_1
+PRUEBA_OK muestras.modelo.recupera_muestra_1
+PRUEBA_OK muestras.modelo.herramienta_deja_escapar_2
+PRUEBA_OK muestras.modelo.recupera_muestra_2
+PRUEBA_OK muestras.modelo.herramienta_deja_escapar_3
+PRUEBA_OK muestras.modelo.recupera_muestra_3
+PRUEBA_OK muestras.modelo.oxigeno_agotado
+PRUEBA_OK muestras.modelo.gravedad_desde_ficha
+PRUEBA_OK muestras.modelo.salto_con_inercia
+PRUEBAS hechas=57 fallos=0
+FIN
+WARNING: 22 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+[godot: ok; 5 s; lineas=71; errores=0]

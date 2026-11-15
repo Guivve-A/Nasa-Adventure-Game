@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-11-15T13:29:52.652465Z",
+    "display_name": "GPT Image 2.6",
+    "id": "c6109403-ec83-42b2-912e-2255963be9ae",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132952_c6109403-ec83-42b2-912e-2255963be9ae_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "9eea87a2-3af1-4075-8d9d-adeba8854214",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9eea87a2-3af1-4075-8d9d-adeba8854214.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Extreme telephoto photograph, 600 mm full-frame-equivalent lens at f/11, camera locked on a heavy tripod at standing eye height, strongly compressed perspective that stacks the far shore, the launch tower and the haze into flat layers. Hard mid-morning sunlight from high behind the rocket: the scene is backlit, the rocket and the tower are rimmed with light, and hot haze over a perfectly still lagoon on a flat subtropical coast lowers the contrast to about two to one. Far away on the horizon, at three fifths of the frame width, stands a tall slender white three-stage rocket attached to its dark steel launch tower: tiny, about one sixth of the frame height, softened and wavering in the heat shimmer. Along the bottom edge of the frame, in its left two thirds, six or seven small black silhouettes of people seen from behind stand motionless on the hoods and beside two boxy 1960s cars, backlit, less than one twentieth of the frame height, no faces visible. A huge pale sky fills the upper two thirds of the frame. Colour of 1960s 16 mm reversal film: muted amber, cream and faded cyan, slightly lifted warm blacks, highlights that roll off softly. No markings, letters, flags or symbols on the rocket, the tower or the cars. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "xhigh",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_132952_c6109403-ec83-42b2-912e-2255963be9ae.png",
+    "status": "completed"
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-14T19:19:48.63615Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "44ef3938-2ae1-486b-ae7a-ba568a365b4e",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 1,
+      "prompt": "A short clean two-tone intercom beep inside a space helmet with a tiny static click at the end, friendly and soft. No voice, no speech, no music."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_191948_44ef3938-2ae1-486b-ae7a-ba568a365b4e.mp3",
+    "status": "completed"
+  }
+]

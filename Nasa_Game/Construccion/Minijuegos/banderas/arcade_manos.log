@@ -1,0 +1,27 @@
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T00.21.18.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK banderas.manos.abierto
+PRUEBA_OK banderas.manos.empezar_intro
+PRUEBA_OK banderas.manos.campo_completo
+PRUEBA_OK banderas.manos.sin_piloto
+MINIJUEGO banderas superado=true puntos=5910.0 detalle=Sin viento, la barra horizontal sostiene la tela extendida. Y plantar una bandera no da territorio: es cooperación.
+PRUEBA_OK banderas.manos.superado
+PRUEBA_OK banderas.manos.tres_misiones_y_amanecer
+PRUEBA_OK banderas.manos.banderas_integras
+BANDERAS_MANOS tiempo=25.48 vidas=3 golpes=[4, 4] barras=[40.0, 40.0] alturas=[22.7631967555454, 18.0]
+PRUEBA_OK banderas.manos.resultado_devuelto
+PRUEBA_OK banderas.manos.anfitrion_cerrado
+PRUEBA_OK banderas.manos.arbol_sin_pausa
+PRUEBAS hechas=11 fallos=0
+FIN
+[godot: ok; 33 s; lineas=23; errores=0]
+
+Salida transcrita de la ejecucion observada con E y Espacio, --ritmo=1.

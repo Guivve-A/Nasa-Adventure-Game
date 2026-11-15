@@ -1,0 +1,1633 @@
+[
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 480p 5s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 480p 8s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 480p 10s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 480p 12s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 36,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 720p 5s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 35,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 720p 8s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 56,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 720p 10s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 70,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 720p 12s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 84,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 1080p 5s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 80,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 1080p 8s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 128,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 1080p 10s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 160,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 1080p 12s inicial",
+  "job_type": "seedance_2_5",
+  "creditos": 192,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 720p 8s texto",
+  "job_type": "seedance_2_5",
+  "creditos": 56,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 720p 8s inicial sin audio",
+  "job_type": "seedance_2_5",
+  "creditos": 56,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 1080p 8s inicial bitrate alto",
+  "job_type": "seedance_2_5",
+  "creditos": 128,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 720p 8s inicial+final",
+  "job_type": "seedance_2_5",
+  "creditos": 56,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 480p 5s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 480p 8s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 480p 10s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 480p 12s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 36,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 720p 5s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 35,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 720p 8s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 56,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 720p 10s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 70,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 720p 12s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 84,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 1080p 5s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 80,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 1080p 8s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 128,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 1080p 10s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 160,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 1080p 12s inicial",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 192,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 720p 8s texto",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 56,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 720p 8s inicial sin audio",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 56,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 1080p 8s inicial bitrate alto",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 128,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_video_4_0 720p 8s inicial+final",
+  "job_type": "cinematic_studio_video_4_0",
+  "creditos": 56,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 720p 8s inicial draft",
+  "job_type": "seedance_2_5",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_5 480p 8s inicial draft",
+  "job_type": "seedance_2_5",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 720p 5s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 22.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 720p 8s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 36,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 720p 10s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 45,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 720p 12s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 54,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 1080p 5s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 60,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 1080p 8s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 96,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 1080p 10s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 120,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 1080p 12s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 144,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 4k 5s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 110,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 4k 8s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 176,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 4k 10s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 220,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 4k 12s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 264,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 fast 720p 5s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 12.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0_mini 720p 5s inicial",
+  "job_type": "seedance_2_0_mini",
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 fast 720p 8s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 20,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0_mini 720p 8s inicial",
+  "job_type": "seedance_2_0_mini",
+  "creditos": 8,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 fast 720p 10s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0_mini 720p 10s inicial",
+  "job_type": "seedance_2_0_mini",
+  "creditos": 10,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0 fast 720p 12s inicial",
+  "job_type": "seedance_2_0",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance_2_0_mini 720p 12s inicial",
+  "job_type": "seedance_2_0_mini",
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast basic 4s inicial",
+  "job_type": "veo3_1",
+  "creditos": 16,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast basic 6s inicial",
+  "job_type": "veo3_1",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast basic 8s inicial",
+  "job_type": "veo3_1",
+  "creditos": 32,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview basic 4s inicial",
+  "job_type": "veo3_1",
+  "creditos": 40,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview basic 6s inicial",
+  "job_type": "veo3_1",
+  "creditos": 60,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview basic 8s inicial",
+  "job_type": "veo3_1",
+  "creditos": 80,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast high 4s inicial",
+  "job_type": "veo3_1",
+  "creditos": 16,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast high 6s inicial",
+  "job_type": "veo3_1",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast high 8s inicial",
+  "job_type": "veo3_1",
+  "creditos": 32,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview high 4s inicial",
+  "job_type": "veo3_1",
+  "creditos": 40,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview high 6s inicial",
+  "job_type": "veo3_1",
+  "creditos": 60,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview high 8s inicial",
+  "job_type": "veo3_1",
+  "creditos": 80,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast ultra 4s inicial",
+  "job_type": "veo3_1",
+  "creditos": 36,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast ultra 6s inicial",
+  "job_type": "veo3_1",
+  "creditos": 54,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-fast ultra 8s inicial",
+  "job_type": "veo3_1",
+  "creditos": 72,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview ultra 4s inicial",
+  "job_type": "veo3_1",
+  "creditos": 60,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview ultra 6s inicial",
+  "job_type": "veo3_1",
+  "creditos": 90,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1 veo-3-1-preview ultra 8s inicial",
+  "job_type": "veo3_1",
+  "creditos": 120,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1_lite 4s inicial",
+  "job_type": "veo3_1_lite",
+  "creditos": 6,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1_lite 4s inicial con audio",
+  "job_type": "veo3_1_lite",
+  "creditos": 6,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1_lite 6s inicial",
+  "job_type": "veo3_1_lite",
+  "creditos": 9,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1_lite 6s inicial con audio",
+  "job_type": "veo3_1_lite",
+  "creditos": 9,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1_lite 8s inicial",
+  "job_type": "veo3_1_lite",
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "veo3_1_lite 8s inicial con audio",
+  "job_type": "veo3_1_lite",
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 std 5s inicial",
+  "job_type": "kling3_0",
+  "creditos": 10,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf std 5s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 6.25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 std 8s inicial",
+  "job_type": "kling3_0",
+  "creditos": 16,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf std 8s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 10,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 std 10s inicial",
+  "job_type": "kling3_0",
+  "creditos": 20,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf std 10s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 12.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 std 12s inicial",
+  "job_type": "kling3_0",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf std 12s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 std 8s inicial sin sonido",
+  "job_type": "kling3_0",
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 pro 5s inicial",
+  "job_type": "kling3_0",
+  "creditos": 12.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf pro 5s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 9,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 pro 8s inicial",
+  "job_type": "kling3_0",
+  "creditos": 20,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf pro 8s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 14.4,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 pro 10s inicial",
+  "job_type": "kling3_0",
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf pro 10s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 18,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 pro 12s inicial",
+  "job_type": "kling3_0",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf pro 12s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 21.6,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 pro 8s inicial sin sonido",
+  "job_type": "kling3_0",
+  "creditos": 14,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 4k 5s inicial",
+  "job_type": "kling3_0",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf 4k 5s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 4k 8s inicial",
+  "job_type": "kling3_0",
+  "creditos": 48,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf 4k 8s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 48,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 4k 10s inicial",
+  "job_type": "kling3_0",
+  "creditos": 60,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf 4k 10s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 60,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 4k 12s inicial",
+  "job_type": "kling3_0",
+  "creditos": 72,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_o3_flf 4k 12s inicial",
+  "job_type": "kling_o3_flf",
+  "creditos": 72,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0 4k 8s inicial sin sonido",
+  "job_type": "kling3_0",
+  "creditos": 48,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 720p 5s inicial",
+  "job_type": "kling4_0",
+  "creditos": 11.25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 720p 5s inicial",
+  "job_type": "wan3_0",
+  "creditos": 8.75,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0_prime 720p 5s inicial",
+  "job_type": "wan3_0_prime",
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan2_7 720p 5s inicial",
+  "job_type": "wan2_7",
+  "creditos": 7.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 720p 5s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15 720p 5s inicial",
+  "job_type": "grok_video_v15",
+  "creditos": 22.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "happy_horse_video 720p 5s inicial",
+  "job_type": "happy_horse_video",
+  "creditos": 12.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 720p 5s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 11.25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 720p 8s inicial",
+  "job_type": "kling4_0",
+  "creditos": 18,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 720p 8s inicial",
+  "job_type": "wan3_0",
+  "creditos": 14,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0_prime 720p 8s inicial",
+  "job_type": "wan3_0_prime",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan2_7 720p 8s inicial",
+  "job_type": "wan2_7",
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 720p 8s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 48,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15 720p 8s inicial",
+  "job_type": "grok_video_v15",
+  "creditos": 36,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "happy_horse_video 720p 8s inicial",
+  "job_type": "happy_horse_video",
+  "creditos": 20,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 720p 8s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 18,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 720p 10s inicial",
+  "job_type": "kling4_0",
+  "creditos": 22.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 720p 10s inicial",
+  "job_type": "wan3_0",
+  "creditos": 17.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0_prime 720p 10s inicial",
+  "job_type": "wan3_0_prime",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan2_7 720p 10s inicial",
+  "job_type": "wan2_7",
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 720p 10s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 60,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15 720p 10s inicial",
+  "job_type": "grok_video_v15",
+  "creditos": 45,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "happy_horse_video 720p 10s inicial",
+  "job_type": "happy_horse_video",
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 720p 10s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 22.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 720p 12s inicial",
+  "job_type": "kling4_0",
+  "creditos": 27,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 720p 12s inicial",
+  "job_type": "wan3_0",
+  "creditos": 21,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0_prime 720p 12s inicial",
+  "job_type": "wan3_0_prime",
+  "creditos": 36,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan2_7 720p 12s inicial",
+  "job_type": "wan2_7",
+  "creditos": 18,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 720p 12s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 72,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15 720p 12s inicial",
+  "job_type": "grok_video_v15",
+  "creditos": 54,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "happy_horse_video 720p 12s inicial",
+  "job_type": "happy_horse_video",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 720p 12s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 27,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 1080p 5s inicial",
+  "job_type": "kling4_0",
+  "creditos": 16.25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 1080p 5s inicial",
+  "job_type": "wan3_0",
+  "creditos": 17.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0_prime 1080p 5s inicial",
+  "job_type": "wan3_0_prime",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan2_7 1080p 5s inicial",
+  "job_type": "wan2_7",
+  "creditos": 12.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 1080p 5s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 40,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15 1080p 5s inicial",
+  "job_type": "grok_video_v15",
+  "creditos": 40,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "happy_horse_video 1080p 5s inicial",
+  "job_type": "happy_horse_video",
+  "creditos": 22.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 1080p 5s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 16.25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 1080p 8s inicial",
+  "job_type": "kling4_0",
+  "creditos": 26,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 1080p 8s inicial",
+  "job_type": "wan3_0",
+  "creditos": 28,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0_prime 1080p 8s inicial",
+  "job_type": "wan3_0_prime",
+  "creditos": 48,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan2_7 1080p 8s inicial",
+  "job_type": "wan2_7",
+  "creditos": 20,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 1080p 8s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 64,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15 1080p 8s inicial",
+  "job_type": "grok_video_v15",
+  "creditos": 64,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "happy_horse_video 1080p 8s inicial",
+  "job_type": "happy_horse_video",
+  "creditos": 36,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 1080p 8s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 26,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 1080p 10s inicial",
+  "job_type": "kling4_0",
+  "creditos": 32.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 1080p 10s inicial",
+  "job_type": "wan3_0",
+  "creditos": 35,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0_prime 1080p 10s inicial",
+  "job_type": "wan3_0_prime",
+  "creditos": 60,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan2_7 1080p 10s inicial",
+  "job_type": "wan2_7",
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 1080p 10s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 80,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15 1080p 10s inicial",
+  "job_type": "grok_video_v15",
+  "creditos": 80,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "happy_horse_video 1080p 10s inicial",
+  "job_type": "happy_horse_video",
+  "creditos": 45,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 1080p 10s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 32.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling4_0 1080p 12s inicial",
+  "job_type": "kling4_0",
+  "creditos": 39,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0 1080p 12s inicial",
+  "job_type": "wan3_0",
+  "creditos": 42,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan3_0_prime 1080p 12s inicial",
+  "job_type": "wan3_0_prime",
+  "creditos": 72,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "wan2_7 1080p 12s inicial",
+  "job_type": "wan2_7",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 1080p 12s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 96,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "grok_video_v15 1080p 12s inicial",
+  "job_type": "grok_video_v15",
+  "creditos": 96,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "happy_horse_video 1080p 12s inicial",
+  "job_type": "happy_horse_video",
+  "creditos": 54,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 1080p 12s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 39,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_4_0_flash 720p 5s inicial",
+  "job_type": "kling_4_0_flash",
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0_turbo 5s inicial",
+  "job_type": "kling3_0_turbo",
+  "creditos": 7.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_h3 2K 5s inicial",
+  "job_type": "minimax_h3",
+  "creditos": 10,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_h3_max 768p 5s inicial",
+  "job_type": "minimax_h3_max",
+  "creditos": 12.5,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance1_5 5s inicial",
+  "job_type": "seedance1_5",
+  "creditos": null,
+  "error": "Error: No model with job_type \"seedance1_5\"."
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_3_0 1080p 5s inicial",
+  "job_type": "cinematic_studio_3_0",
+  "creditos": 65,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_4_0_flash 720p 8s inicial",
+  "job_type": "kling_4_0_flash",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0_turbo 8s inicial",
+  "job_type": "kling3_0_turbo",
+  "creditos": 12,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_h3 2K 8s inicial",
+  "job_type": "minimax_h3",
+  "creditos": 16,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_h3_max 768p 8s inicial",
+  "job_type": "minimax_h3_max",
+  "creditos": 20,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance1_5 8s inicial",
+  "job_type": "seedance1_5",
+  "creditos": null,
+  "error": "Error: No model with job_type \"seedance1_5\"."
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_3_0 1080p 8s inicial",
+  "job_type": "cinematic_studio_3_0",
+  "creditos": 104,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_4_0_flash 720p 10s inicial",
+  "job_type": "kling_4_0_flash",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0_turbo 10s inicial",
+  "job_type": "kling3_0_turbo",
+  "creditos": 15,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_h3 2K 10s inicial",
+  "job_type": "minimax_h3",
+  "creditos": 20,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_h3_max 768p 10s inicial",
+  "job_type": "minimax_h3_max",
+  "creditos": 25,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance1_5 10s inicial",
+  "job_type": "seedance1_5",
+  "creditos": null,
+  "error": "Error: No model with job_type \"seedance1_5\"."
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_3_0 1080p 10s inicial",
+  "job_type": "cinematic_studio_3_0",
+  "creditos": 130,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling_4_0_flash 720p 12s inicial",
+  "job_type": "kling_4_0_flash",
+  "creditos": 36,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling3_0_turbo 12s inicial",
+  "job_type": "kling3_0_turbo",
+  "creditos": 18,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_h3 2K 12s inicial",
+  "job_type": "minimax_h3",
+  "creditos": 24,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_h3_max 768p 12s inicial",
+  "job_type": "minimax_h3_max",
+  "creditos": 30,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "seedance1_5 12s inicial",
+  "job_type": "seedance1_5",
+  "creditos": null,
+  "error": "Error: No model with job_type \"seedance1_5\"."
+ },
+ {
+  "grupo": "video",
+  "caso": "cinematic_studio_3_0 1080p 12s inicial",
+  "job_type": "cinematic_studio_3_0",
+  "creditos": 156,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling2_6 5s inicial",
+  "job_type": "kling2_6",
+  "creditos": 10,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "kling2_6 10s inicial",
+  "job_type": "kling2_6",
+  "creditos": 20,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_hailuo 2.3 768 6s inicial",
+  "job_type": "minimax_hailuo",
+  "creditos": null,
+  "error": "Error: Invalid types: resolution should be string, got number | Hint: Run: hf model get minimax_hailuo"
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_hailuo 2.3 1080 6s inicial",
+  "job_type": "minimax_hailuo",
+  "creditos": null,
+  "error": "Error: Invalid types: resolution should be string, got number | Hint: Run: hf model get minimax_hailuo"
+ },
+ {
+  "grupo": "video",
+  "caso": "minimax_hailuo 2.3 768 10s inicial",
+  "job_type": "minimax_hailuo",
+  "creditos": null,
+  "error": "Error: Invalid types: resolution should be string, got number | Hint: Run: hf model get minimax_hailuo"
+ },
+ {
+  "grupo": "video",
+  "caso": "flux_3_video 4k 8s inicial",
+  "job_type": "flux_3_video",
+  "creditos": 104,
+  "error": null
+ },
+ {
+  "grupo": "video",
+  "caso": "gemini_omni_flash_1_2 4k 8s inicial",
+  "job_type": "gemini_omni_flash_1_2",
+  "creditos": 54,
+  "error": null
+ },
+ {
+  "grupo": "util",
+  "caso": "bytedance_video_upscale (sin video: error esperado)",
+  "job_type": "bytedance_video_upscale",
+  "creditos": null,
+  "error": "Error: Missing required params: video_references | Unknown params: prompt | Hint: Run: hf model get bytedance_video_upscale"
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 10s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "creditos": 1.46,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 10s",
+  "job_type": "sonilo_music",
+  "creditos": 0.63,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2 10s",
+  "job_type": "elevenlabs_music_v2",
+  "creditos": 0.64,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 30s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "creditos": 4.36,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 30s",
+  "job_type": "sonilo_music",
+  "creditos": 1.88,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2 30s",
+  "job_type": "elevenlabs_music_v2",
+  "creditos": 1.92,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 60s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "creditos": 8.72,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 60s",
+  "job_type": "sonilo_music",
+  "creditos": 3.75,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2 60s",
+  "job_type": "elevenlabs_music_v2",
+  "creditos": 3.84,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2_5 120s instrumental",
+  "job_type": "elevenlabs_music_v2_5",
+  "creditos": 17.44,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "sonilo_music 120s",
+  "job_type": "sonilo_music",
+  "creditos": 7.5,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "elevenlabs_music_v2 120s",
+  "job_type": "elevenlabs_music_v2",
+  "creditos": 7.68,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "mirelo_text_to_audio 1s",
+  "job_type": "mirelo_text_to_audio",
+  "creditos": 0.25,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "mirelo_text_to_audio 5s",
+  "job_type": "mirelo_text_to_audio",
+  "creditos": 1.25,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "mirelo_text_to_audio 10s",
+  "job_type": "mirelo_text_to_audio",
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "mirelo_text_to_audio 20s",
+  "job_type": "mirelo_text_to_audio",
+  "creditos": 5,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "seed_audio (defecto)",
+  "job_type": "seed_audio",
+  "creditos": 0.1,
+  "error": null
+ },
+ {
+  "grupo": "audio",
+  "caso": "seed_audio 10s",
+  "job_type": "seed_audio",
+  "creditos": null,
+  "error": "Error: Unknown params: duration | Hint: Run: hf model get seed_audio"
+ },
+ {
+  "grupo": "audio",
+  "caso": "seed_audio 30s",
+  "job_type": "seed_audio",
+  "creditos": null,
+  "error": "Error: Unknown params: duration | Hint: Run: hf model get seed_audio"
+ },
+ {
+  "grupo": "audio",
+  "caso": "seed_audio 60s",
+  "job_type": "seed_audio",
+  "creditos": null,
+  "error": "Error: Unknown params: duration | Hint: Run: hf model get seed_audio"
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 low 1k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "creditos": 0.25,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 low 2k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "creditos": 0.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 medium 1k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "creditos": 0.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 medium 2k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "creditos": 1,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 high 1k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "creditos": 1.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 high 2k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "creditos": 2.75,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 xhigh 1k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "creditos": 2.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "gpt_image_2_6 xhigh 2k con 4 referencias",
+  "job_type": "gpt_image_2_6",
+  "creditos": 4.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "soul_cinematic (defecto)",
+  "job_type": "soul_cinematic",
+  "creditos": 0.12,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "soul_cinematic 2k",
+  "job_type": "soul_cinematic",
+  "creditos": 0.12,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "seedream_5_5 2k",
+  "job_type": "seedream_5_5",
+  "creditos": 3.5,
+  "error": null
+ },
+ {
+  "grupo": "imagen",
+  "caso": "cinematic_studio_image_2_5 (defecto)",
+  "job_type": "cinematic_studio_image_2_5",
+  "creditos": null,
+  "error": "Error: No model with job_type \"cinematic_studio_image_2_5\"."
+ }
+]

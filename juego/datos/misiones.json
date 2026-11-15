@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "_nota": "Ruta principal del prototipo jugable v0: version corta del borrador «Luz cenicienta» (Fase 2, sin aprobar) con los cuatro escenarios construidos: Habitacion, Sendero, Mirador y Luna del sueno. Cada paso se cumple cuando la zona pone su bandera con Juego.poner_bandera(). Las pistas son de Orbita, en tres niveles: una mirada, una frase y la respuesta.",
+  "_nota": "Ruta principal del prototipo jugable v0: version corta del borrador «Luz cenicienta» (Fase 2, sin aprobar) con los cuatro escenarios construidos: Habitacion, Sendero, Mirador y Luna del sueno. Cada paso se cumple cuando la zona pone su bandera con Juego.poner_bandera(). Las pistas son de Orbita, en tres niveles: una mirada, una frase y la respuesta. Cada paso lleva tambien 'zona' (donde se cumple) y 'destino' (el nombre del nodo dentro de esa zona; '@orbita' = el gato; '' = basta con llegar a la zona): los usa el minimapa para senalar a donde ir.",
   "misiones": [
     {
       "id": "m1_convocatoria",
@@ -10,6 +10,8 @@
         {
           "bandera": "hablo_orbita",
           "texto": "Habla con Órbita",
+          "zona": "habitacion",
+          "destino": "@orbita",
           "pistas": [
             "Órbita mueve la cola junto a ti.",
             "Acércate a Órbita y pulsa E.",
@@ -19,6 +21,8 @@
         {
           "bandera": "hab_convocatoria",
           "texto": "Lee la convocatoria en el cuaderno del banco de trabajo",
+          "zona": "habitacion",
+          "destino": "Cuaderno",
           "pistas": [
             "Órbita mira el banco de trabajo de la derecha.",
             "El cuaderno abierto está sobre el banco, junto al osciloscopio.",
@@ -28,6 +32,8 @@
         {
           "bandera": "hab_seguidor",
           "texto": "Ajusta el seguidor de la Luna en el banco de trabajo",
+          "zona": "habitacion",
+          "destino": "Seguidor",
           "pistas": [
             "Órbita mira la onda cian del osciloscopio.",
             "El seguidor tiembla porque su control está mal ajustado: pruébalo en el banco.",
@@ -53,6 +59,8 @@
         {
           "bandera": "ciudad_visitada",
           "texto": "Baja por la escalera y sal a la plaza",
+          "zona": "ciudad",
+          "destino": "",
           "pistas": [
             "Órbita mira la marca cian del descanso de la escalera.",
             "La salida del cuarto es la escalera de abajo a la derecha.",
@@ -62,6 +70,8 @@
         {
           "bandera": "sendero_visitado",
           "texto": "Cruza la plaza y toma el camino del cerro hacia el sendero",
+          "zona": "sendero",
+          "destino": "",
           "pistas": [
             "Órbita mira hacia el cerro.",
             "El camino al sendero sale de la plaza, del lado del cerro.",
@@ -71,6 +81,8 @@
         {
           "bandera": "sen_panel",
           "texto": "Recoge el panel solar junto al sendero",
+          "zona": "sendero",
+          "destino": "Panel",
           "pistas": [
             "Órbita olfatea hacia un destello cian.",
             "Los destellos cian marcan lo que se puede recoger.",
@@ -80,6 +92,8 @@
         {
           "bandera": "sen_antena",
           "texto": "Reapunta la antena caída",
+          "zona": "sendero",
+          "destino": "Antena",
           "pistas": [
             "Órbita mira la antena, que apunta al suelo.",
             "La antena necesita seguir al satélite: ni muy lenta ni muy nerviosa.",
@@ -89,6 +103,8 @@
         {
           "bandera": "mirador_visitado",
           "texto": "Sube al Mirador del Faro",
+          "zona": "mirador",
+          "destino": "",
           "pistas": [
             "Órbita mira el final del sendero, cuesta arriba.",
             "El Mirador queda al fondo del sendero.",
@@ -114,6 +130,8 @@
         {
           "bandera": "mir_satelite",
           "texto": "Arma la maqueta de Pegaso en la mesa del club",
+          "zona": "mirador",
+          "destino": "MesaClub",
           "pistas": [
             "Órbita mira la mesa con piezas.",
             "Un satélite necesita energía, radio, antena y computadora.",
@@ -123,6 +141,8 @@
         {
           "bandera": "mir_luna",
           "texto": "Encuentra la Luna con el telescopio",
+          "zona": "mirador",
+          "destino": "Telescopio",
           "pistas": [
             "Órbita mira hacia el oeste, cerca del horizonte.",
             "La Luna de hoy es una sonrisa fina y baja.",
@@ -132,6 +152,8 @@
         {
           "bandera": "mir_linea",
           "texto": "Ordena las diapositivas del atril",
+          "zona": "mirador",
+          "destino": "Atril",
           "pistas": [
             "Órbita mira el atril del club.",
             "Cada foto tiene una pista de su época.",
@@ -159,6 +181,8 @@
         {
           "bandera": "hab_noche",
           "texto": "Vuelve a tu cuarto: la Luna ya se puso",
+          "zona": "habitacion",
+          "destino": "",
           "pistas": [
             "Órbita bosteza.",
             "Baja por el sendero hasta la casa.",
@@ -168,6 +192,8 @@
         {
           "bandera": "hab_durmio",
           "texto": "Acuéstate en la cama",
+          "zona": "habitacion",
+          "destino": "Cama",
           "pistas": [
             "Órbita ya está sobre la cama.",
             "La cama brilla con un borde cian.",
@@ -192,6 +218,8 @@
         {
           "bandera": "luna_baliza",
           "texto": "Aprende a moverte: llega a saltos hasta la baliza",
+          "zona": "luna",
+          "destino": "Baliza",
           "pistas": [
             "Órbita flota un poco más que tú.",
             "Aquí pesas la sexta parte: salta con Espacio y frena con tiempo.",
@@ -217,6 +245,8 @@
         {
           "bandera": "luna_muestras",
           "texto": "Recoge y registra las muestras con la herramienta correcta",
+          "zona": "luna",
+          "destino": "Muestras",
           "pistas": [
             "Órbita mira la caja de herramientas.",
             "Polvo fino, roca suelta y capas del suelo piden herramientas distintas.",
@@ -243,6 +273,8 @@
         {
           "bandera": "luna_foto",
           "texto": "Rodea el anillo cian y toma la foto con la etapa de descenso",
+          "zona": "luna",
+          "destino": "PuntoFoto",
           "pistas": [
             "Órbita se detiene justo antes del anillo.",
             "El anillo marca 75 metros: se mira, no se pisa.",
@@ -268,6 +300,8 @@
         {
           "bandera": "luna_banderas",
           "texto": "Planta juntas las dos banderas en la loma",
+          "zona": "luna",
+          "destino": "Banderas",
           "pistas": [
             "Órbita mira la loma, lejos del anillo.",
             "Sin viento, la tela necesita una barra horizontal.",
@@ -294,6 +328,8 @@
         {
           "bandera": "luna_regreso",
           "texto": "Vuelve a la caja de cartón y regresa a casa",
+          "zona": "luna",
+          "destino": "Caja",
           "pistas": [
             "Órbita ya va hacia la caja.",
             "Solo una parte de la nave volvió a la Tierra, con el escudo por delante.",
@@ -319,6 +355,8 @@
         {
           "bandera": "hab_seguidor_v2",
           "texto": "Arregla el seguidor con lo que aprendiste",
+          "zona": "habitacion",
+          "destino": "Seguidor",
           "pistas": [
             "Órbita mira el seguidor y luego el cielo.",
             "Ya sabes a qué velocidad gira el cielo: dásela al motor.",
@@ -328,6 +366,8 @@
         {
           "bandera": "fin_v0",
           "texto": "Mira por la ventana",
+          "zona": "habitacion",
+          "destino": "Ventana",
           "pistas": [
             "Órbita salta a la ventana.",
             "Algo cambió desde ayer.",
@@ -344,7 +384,7 @@
     {
       "id": "s1_base",
       "titulo": "Tu primera base espacial",
-      "zona": "base",
+      "zona": "ciudad",
       "secundaria": true,
       "requiere": [
         "ciudad_visitada"
@@ -352,29 +392,35 @@
       "pasos": [
         {
           "bandera": "base_visitada",
-          "texto": "Entra en la biblioteca de la plaza y abre el libro del holograma",
+          "texto": "Entra en la biblioteca de la plaza",
+          "zona": "ciudad",
+          "destino": "Biblioteca",
           "pistas": [
             "Órbita mira la puerta de la biblioteca.",
-            "En la biblioteca hay un libro que proyecta una base lunar.",
+            "En la biblioteca hay dos libros que proyectan una base espacial.",
             "Ve a la puerta de la biblioteca en la plaza y pulsa E."
           ]
         },
         {
-          "bandera": "base_sol_1",
-          "texto": "Mantén viva la base durante el primer sol",
+          "bandera": "base_luna_hecha",
+          "texto": "Abre el libro de la Luna y mantén viva la base 7 soles",
+          "zona": "ciudad",
+          "destino": "Biblioteca",
           "pistas": [
             "Órbita mira los cuatro medidores.",
-            "Soporte vital, energía, alimentos y radiación: ninguno puede llegar a cero.",
-            "Limpia los paneles, cuida el invernadero y duerme en el hábitat para cerrar el sol."
+            "Soporte vital, energía, alimentos y radiación: ninguno puede llegar al límite.",
+            "Guarda energía para la sombra y refuerza el refugio antes de la tormenta solar."
           ]
         },
         {
-          "bandera": "base_meta",
-          "texto": "Completa los primeros 7 soles de la base",
+          "bandera": "base_marte_hecha",
+          "texto": "Abre el libro de Marte y mantén viva la base 7 soles",
+          "zona": "ciudad",
+          "destino": "Biblioteca",
           "pistas": [
-            "Órbita revisa el parte de Control de misión.",
-            "Guarda energía para la sombra y refuerza el refugio antes de la tormenta solar.",
-            "Reparte tus horas: paneles, invernadero, reciclador y refugio, y duerme cada sol."
+            "Órbita mira el cielo rosado.",
+            "En Marte el polvo tapa los paneles y la Tierra queda lejos.",
+            "Limpia los paneles tras cada tormenta de polvo y no cuentes con reabastecimiento."
           ]
         }
       ],
@@ -392,11 +438,15 @@
       "pasos": [
         {
           "bandera": "plantilla_paso_1",
-          "texto": "Paso de prueba 1"
+          "texto": "Paso de prueba 1",
+          "zona": "plantilla",
+          "destino": "Cartel"
         },
         {
           "bandera": "plantilla_paso_2",
-          "texto": "Paso de prueba 2"
+          "texto": "Paso de prueba 2",
+          "zona": "plantilla",
+          "destino": "AlFondo"
         }
       ],
       "recompensa": {

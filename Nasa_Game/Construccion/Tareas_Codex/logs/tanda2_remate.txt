@@ -1,0 +1,4 @@
+Codex: C:\Users\guill\AppData\Local\OpenAI\Codex\bin\9e1da79431da526b\codex.exe
+2 tareas, 2 en paralelo
+  remate_banderas              ok                      10.4 min      809 bytes
+  remate_regreso               ok                      22.6 min      627 bytes

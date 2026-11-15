@@ -1,111 +1,60 @@
 extends Node
 
-# Cobertura adicional del montaje con entradas reales y de las causas del balance.
+# Regresion arcade: delta variable, ciclo normal y perdida causal.
 const Satelite := preload("res://minijuegos/satelite/satelite.gd")
 
 
 func _nuevo(nivel: int) -> Control:
 	var m: Control = Satelite.new()
 	add_child(m)
-	m.preparar({"dificultad": nivel}, {})
+	m.preparar({"dificultad": nivel, "semilla": 5346}, {})
 	m.set_process(false)
 	m.empezar()
 	return m
 
 
-func _tecla(m: Control, accion: String) -> void:
-	var e: InputEventAction = InputEventAction.new()
-	e.action = accion
-	e.pressed = true
-	m._input(e)
-
-
-func _raton(m: Control, pos: Vector2, presionado: bool) -> void:
-	var e: InputEventMouseButton = InputEventMouseButton.new()
-	e.button_index = MOUSE_BUTTON_LEFT
-	e.position = pos
-	e.pressed = presionado
-	m._gui_input(e)
-
-
-func _montar(m: Control) -> void:
-	for i in 4:
-		while m.seleccion != i:
-			_tecla(m, "mover_abajo")
-		_tecla(m, "interactuar")
-		while m.hueco != i:
-			_tecla(m, "mover_derecha")
-		_tecla(m, "interactuar")
-	_tecla(m, "saltar")
-
-
-func _resolver(m: Control, paso: float) -> Dictionary:
-	var resultados: Array[Dictionary] = []
-	m.terminado.connect(func(r: Dictionary): resultados.append(r))
-	var limite: int = int(39.0 / paso) + 1
-	for i in limite:
-		if not m.activo:
-			break
-		m._process(paso)
-	return resultados[0] if not resultados.is_empty() else {}
-
-
 func correr(p: Node) -> void:
-	var teclado: Control = _nuevo(1)
-	_tecla(teclado, "saltar")
-	p.comprobar(teclado.fase == 0, "satelite.montaje_incompleto_bloqueado")
-	_tecla(teclado, "interactuar")
-	_tecla(teclado, "mover_derecha")
-	_tecla(teclado, "interactuar")
-	p.comprobar(teclado.piezas[1] == -1 and teclado._mensaje.contains("Enviar datos"), "satelite.hueco_ajeno_explica_funcion")
-	_montar(teclado)
-	p.comprobar(teclado.fase == 1, "satelite.montaje_entero_con_teclado")
-	teclado.free()
-	var raton: Control = _nuevo(1)
-	for i in 4:
-		_raton(raton, raton._rect_pieza(i).get_center(), true)
-		_raton(raton, raton._rect_hueco(i).get_center(), false)
-	_tecla(raton, "saltar")
-	p.comprobar(raton.fase == 1, "satelite.montaje_arrastrando_con_raton")
-	raton.free()
 	for nivel in [1, 2, 3]:
-		for paso in [0.016, 0.37]:
+		var tiempos: Array[float] = []
+		for delta in [0.016, 0.37]:
 			var m: Control = _nuevo(nivel)
+			var resultados: Array[Dictionary] = []
+			m.terminado.connect(func(r: Dictionary): resultados.append(r))
 			m.jugar_solo(true)
-			var r: Dictionary = _resolver(m, paso)
-			p.comprobar(r.get("superado", false) and r.get("tiempo", 99.0) < 40.0, "satelite.piloto_d%d_delta%s" % [nivel, str(paso)], str(r))
+			while m.activo and m.tiempo < 40.0:
+				m._process(delta)
+			var r: Dictionary = resultados[0] if not resultados.is_empty() else {}
+			p.comprobar(bool(r.get("superado", false)), "satelite.modelo.d%d.delta_%s" % [nivel, str(delta)], str(r))
+			p.comprobar(m._cm_cubo == 10 and m._cm_panel == 27 and not m._dato.is_empty(), "satelite.modelo.dimensiones_desde_json")
+			tiempos.append(float(r.get("tiempo", 99.0)))
 			m.free()
-	# Se conserva un unico defecto cada vez para comprobar la explicacion causal.
-	for defecto in ["antena", "computadora", "radio_sol", "paneles", "radio_sombra"]:
-		var m: Control = _nuevo(3)
-		_montar(m)
-		m._cambiar(0, 1)
-		m._cambiar(0, 1)
-		m._cambiar(1, 1)
-		m._cambiar(4, 1)
-		var esperado: String = ""
-		match defecto:
-			"antena":
-				m._cambiar(1, 1)
-				esperado = "no llega a tierra"
-			"computadora":
-				m._cambiar(2, 1)
-				esperado = "nadie ordena"
-			"radio_sol":
-				m._cambiar(3, 1)
-				esperado = "nadie los envía"
-			"paneles":
-				m._cambiar(0, 1)
-				esperado = "generan 2 u"
-			"radio_sombra":
-				m._cambiar(4, 1)
-				esperado = "batería se agota"
+		p.comprobar(absf(tiempos[0] - tiempos[1]) < 0.4, "satelite.modelo.d%d.delta_estable" % nivel, str(tiempos))
+	# Una partida normal usa exactamente la misma cinta sin accionar la palanca rapida.
+	for nivel in [1, 2, 3]:
+		var normal: Control = _nuevo(nivel)
+		normal._auto = 1
 		var resultados: Array[Dictionary] = []
-		m.terminado.connect(func(r: Dictionary): resultados.append(r))
-		_tecla(m, "saltar")
-		for i in 100:
-			if m.activo:
-				m._process(0.13)
+		normal.terminado.connect(func(r: Dictionary): resultados.append(r))
+		for i in 14000:
+			if not normal.activo:
+				break
+			normal.tiempo += normal.DT
+			normal._piloto()
+			normal.turbo = false
+			normal._tic(normal.DT)
 		var r: Dictionary = resultados[0] if not resultados.is_empty() else {}
-		p.comprobar(not r.is_empty() and not r.get("superado", true) and String(r.get("detalle", "")).contains(esperado), "satelite.causa_" + defecto, str(r))
-		m.free()
+		p.comprobar(bool(r.get("superado", false)) and normal.tiempo >= 60.0 and normal.tiempo <= 120.0, "satelite.modelo.d%d.partida_normal_60_a_120s" % nivel, str(r))
+		print("SATELITE_NORMAL d%d segundos=%.3f" % [nivel, normal.tiempo])
+		normal.free()
+	# Quedarse quieto pierde por golpes o tiempo; las piezas no desaparecen para siempre.
+	var quieto: Control = _nuevo(2)
+	var perdidas: Array[Dictionary] = []
+	quieto.terminado.connect(func(resultado: Dictionary): perdidas.append(resultado))
+	var recircula: bool = false
+	while quieto.activo and quieto.tiempo < 110.0:
+		quieto._process(0.1)
+		recircula = recircula or quieto._aviso == "PIEZA RECIRCULANDO"
+	p.comprobar(recircula, "satelite.modelo.pieza_perdida_recircula")
+	var perdida: Dictionary = perdidas[0] if not perdidas.is_empty() else {}
+	p.comprobar(not perdida.is_empty() and not bool(perdida.get("superado", true)) and str(perdida.get("detalle", "")).length() > 20, "satelite.modelo.inaccion_pierde_con_causa", str(perdida))
+	quieto.free()

@@ -1,0 +1,62 @@
+{
+ "L09_P03_torre_borrador": {
+  "id": "9eea87a2-3af1-4075-8d9d-adeba8854214",
+  "archivo": "jpg/L09_P03_torre_borrador.jpg",
+  "bytes": 102824
+ },
+ "L09_P04b_ignicion_borrador": {
+  "id": "4b947eec-57e4-4ed2-a3be-4f1121442b5e",
+  "archivo": "jpg/L09_P04b_ignicion_borrador.jpg",
+  "bytes": 122166
+ },
+ "L09_P05_columna_borrador": {
+  "id": "2b0daa6b-d144-4693-beea-b7b3f4e2897a",
+  "archivo": "jpg/L09_P05_columna_borrador.jpg",
+  "bytes": 153343
+ },
+ "L09_P06_chispa_borrador": {
+  "id": "5617e8e5-076e-4e78-b7d0-a8382d824433",
+  "archivo": "jpg/L09_P06_chispa_borrador.jpg",
+  "bytes": 79168
+ },
+ "L09_P07_tierra_borrador": {
+  "id": "973fe31d-8370-469a-996b-c92d3b4db5dc",
+  "archivo": "jpg/L09_P07_tierra_borrador.jpg",
+  "bytes": 151419
+ },
+ "L09_P08_borde_luna_borrador": {
+  "id": "3332fa4d-e587-4b81-a01c-6713139fa6f8",
+  "archivo": "jpg/L09_P08_borde_luna_borrador.jpg",
+  "bytes": 288173
+ },
+ "L09_P09_sombra_borrador": {
+  "id": "3c8b49bc-d89b-4b0f-9634-1efa000bacba",
+  "archivo": "jpg/L09_P09_sombra_borrador.jpg",
+  "bytes": 435115
+ },
+ "L09_P10_fantasma_tv_borrador": {
+  "id": "130b9af0-a408-46ce-96c4-1b1783fbd884",
+  "archivo": "jpg/L09_P10_fantasma_tv_borrador.jpg",
+  "bytes": 139438
+ },
+ "L09_P11_huella_borrador": {
+  "id": "54095cae-cb0b-490d-9580-c1ef8674d44d",
+  "archivo": "jpg/L09_P11_huella_borrador.jpg",
+  "bytes": 150224
+ },
+ "L09_P12_guayaquil_1969_borrador": {
+  "id": "af6b1e14-c46a-42f9-be7e-b02bb282cd37",
+  "archivo": "jpg/L09_P12_guayaquil_1969_borrador.jpg",
+  "bytes": 219337
+ },
+ "L09b_K04b_final": {
+  "id": "d84b75a5-f148-4d8d-bddf-e39eb2e49aff",
+  "archivo": "jpg/L09b_K04b_final.jpg",
+  "bytes": 437174
+ },
+ "L09b_K11_final": {
+  "id": "c458d8e8-7f42-4076-9ce7-457872d86109",
+  "archivo": "jpg/L09b_K11_final.jpg",
+  "bytes": 522094
+ }
+}

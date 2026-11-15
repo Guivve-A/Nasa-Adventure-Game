@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-14T17:32:20.832589Z",
+    "display_name": "GPT Image 2.6",
+    "id": "7ece05f5-e6f5-47af-8a36-54aaa564e84c",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173220_7ece05f5-e6f5-47af-8a36-54aaa564e84c_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [
+        {
+          "data": {
+            "id": "bcf5a507-65b1-4f85-89b7-797f35e59f9a",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/bcf5a507-65b1-4f85-89b7-797f35e59f9a.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "233d88a5-03cd-49c1-bbf6-b0509f27cad8",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/233d88a5-03cd-49c1-bbf6-b0509f27cad8.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Use the style of the first reference image (an illustrated game map on an engineering notebook). Top-down illustrated region map painted on cream graph paper with ink outlines, soft painted colors and torn paper edges: a green hillside beside a river estuary in a tropical port city. Exactly four places, clearly separated, connected by one dotted ink path that runs from the lower left to the upper right: (1) in the lower left, a small yellow house on a hillside stairway, with a tiny telescope at its window; (2) in the lower center, a round plaza with a fountain and a small library with columns; (3) in the center right, a forest path along a turquoise stream with a wooden plank bridge and a small satellite dish; (4) in the upper right, a white lighthouse viewpoint on the hilltop with a telescope on a stone terrace. In the upper left corner, separate from the land, a round inset showing the gray cratered surface of the Moon, joined to the yellow house by a thin dotted cyan line. Small ink doodles of circuits, a compass rose and stars in the margins. Leave clear cream space next to each place for labels. No labels, no text, no letters, no numbers. No text, no logos, no interface.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_173220_7ece05f5-e6f5-47af-8a36-54aaa564e84c.png",
+    "status": "completed"
+  }
+]

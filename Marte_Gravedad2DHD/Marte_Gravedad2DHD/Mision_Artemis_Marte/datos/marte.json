@@ -1,0 +1,116 @@
+{
+  "cuaderno": {
+    "senal": {
+      "titulo": "La señal tarda",
+      "texto": "Entre la Tierra y Marte, una señal de radio viaja a la velocidad de la luz y aun así tarda minutos. Por eso la nave aterriza sola: nadie puede corregirla en vivo, todo se programa antes.",
+      "dato": "Según dónde esté cada planeta, la señal tarda entre unos 4 y 24 minutos.",
+      "fuente": "ESA, «Spacecraft event time vs. Earth receive time» (2012)"
+    },
+    "siete": {
+      "titulo": "Siete minutos de terror",
+      "texto": "Así llaman los ingenieros al descenso: la nave entra en la atmósfera muy rápido y debe frenar sola, paso a paso, hasta quedar quieta en el suelo.",
+      "dato": "Perseverance entró a unos 20 000 km/h, abrió el paracaídas a unos 11 km y se soltó de él a unos 2,1 km para bajar con cohetes. Todo duró unos siete minutos.",
+      "fuente": "NASA, Mars 2020: Entry, Descent and Landing (2021)"
+    },
+    "gravedad": {
+      "titulo": "Saltar en Marte",
+      "texto": "Aquí pesas mucho menos que en la Tierra: saltas más alto, pero menos que en la Luna. Los músculos y los huesos trabajan menos.",
+      "dato": "La gravedad de Marte es el 38 % de la terrestre.",
+      "fuente": "NASA/JPL, «Mars at a Glance»"
+    },
+    "sol": {
+      "titulo": "Un día marciano",
+      "texto": "Los paneles solo producen mientras hay luz. Un día en Marte dura casi lo mismo que en la Tierra; los científicos lo llaman «sol».",
+      "dato": "Un día solar en Marte dura unas 24 horas y 39 minutos.",
+      "fuente": "NASA, Mars Fact Sheet (NSSDCA)"
+    },
+    "aire": {
+      "titulo": "El aire de Marte",
+      "texto": "No se puede respirar: casi todo es dióxido de carbono y es muy delgado. El extractor toma ese CO₂ y le separa el oxígeno.",
+      "dato": "La atmósfera es 95 % dióxido de carbono y su presión en la superficie es menor al 1 % de la terrestre.",
+      "fuente": "NASA, Mars Fact Sheet (NSSDCA)"
+    },
+    "moxie": {
+      "titulo": "MOXIE",
+      "texto": "Un aparato del tamaño de una tostadora, a bordo del rover Perseverance, demostró que se puede fabricar oxígeno en Marte.",
+      "dato": "MOXIE produjo 122 g de oxígeno entre 2021 y 2023; en su mejor momento, 12 g por hora.",
+      "fuente": "NASA/JPL, «MOXIE Completes Mars Mission» (2023)"
+    },
+    "hielo": {
+      "titulo": "Hielo bajo el polvo",
+      "texto": "El agua líquida no dura en la superficie: con tan poca presión, se evapora. Pero bajo el suelo hay hielo, y de él sale agua para beber y para el invernadero.",
+      "dato": "En las latitudes medias hay hielo a veces a solo 2,5 cm bajo la superficie.",
+      "fuente": "NASA/JPL, «NASA's Treasure Map for Water Ice on Mars» (2019)"
+    },
+    "polvo": {
+      "titulo": "Tormentas de polvo",
+      "texto": "El polvo tapa el Sol y cubre los paneles. Una base solar tiene que limpiarlos para no quedarse sin energía.",
+      "dato": "En junio de 2018 una tormenta cubrió todo el planeta. Opportunity no pudo recargar sus paneles y dejó de comunicarse tras casi 15 años de misión.",
+      "fuente": "NASA, «Opportunity Rover Mission on Mars Comes to End» (2019)"
+    },
+    "frio": {
+      "titulo": "Frío de noche",
+      "texto": "Con un aire tan delgado, el calor del día se escapa rápido. De noche la base gasta energía en calefacción: mejor no alejarse del hábitat.",
+      "dato": "En el sitio del Viking 1, la temperatura iba de unos −31 °C de día a unos −89 °C de noche.",
+      "fuente": "NASA, Mars Fact Sheet (NSSDCA)"
+    },
+    "lunas": {
+      "titulo": "Fobos y Deimos",
+      "texto": "Marte tiene dos lunas pequeñas, con forma irregular, como papas. Fobos es la más grande y la más cercana al planeta.",
+      "dato": "Fobos mide unos 27 × 22 × 18 km y da tres vueltas a Marte cada día. Deimos mide unos 15 × 12 × 11 km y tarda unas 30 horas.",
+      "fuente": "NASA Science, «Phobos» y «Deimos»"
+    },
+    "unidades": {
+      "titulo": "Cuidado con las unidades",
+      "texto": "Un número sin la unidad correcta puede perder una nave. Desde entonces, la NASA exige revisar que todos los equipos usen el sistema métrico.",
+      "dato": "En 1999 se perdió la Mars Climate Orbiter: un programa daba la fuerza en libras y otro la esperaba en newtons.",
+      "fuente": "NASA, informe de la junta de investigación de la Mars Climate Orbiter (1999)"
+    }
+  },
+  "orden_cuaderno": ["senal", "siete", "gravedad", "sol", "aire", "moxie", "hielo", "polvo", "frio", "lunas", "unidades"],
+  "dialogos": {
+    "comandante": {
+      "nombre": "Comandante Rivas",
+      "lineas": [
+        "¡Lo logramos! Somos los primeros en pisar este valle.",
+        "Primero, las banderas: Estados Unidos, Ecuador e IEEE IAS — ESPOL.",
+        "Después levantamos la base antes de que caiga la noche. Aquí el frío no perdona."
+      ]
+    },
+    "medica": {
+      "nombre": "Doctora Lucía",
+      "lineas": [
+        "Fuera del hábitat, la radiación sube: Marte no tiene un campo magnético que nos proteja.",
+        "Si te falta oxígeno o te sube la radiación, entra en la cúpula.",
+        "Anota lo que descubras en tu cuaderno de campo. Lo tienes abajo a la derecha."
+      ]
+    },
+    "ingeniero": {
+      "nombre": "Ingeniero Tomás",
+      "lineas": [
+        "Este extractor convierte el aire de Marte en oxígeno. Pero sin electricidad no hace nada.",
+        "Despliega primero los paneles solares. Luego, el extractor."
+      ],
+      "nota": "aire"
+    },
+    "geologa": {
+      "nombre": "Geóloga Paz",
+      "lineas": [
+        "El radar del orbitador marcó hielo justo aquí abajo.",
+        "Con el taladro sacamos agua para el invernadero. Necesita energía para perforar."
+      ],
+      "nota": "hielo"
+    }
+  },
+  "reporte": {
+    "lineas": [
+      ["Oxígeno producido: 12 g por hora", "Esa línea ya está bien: gramos por hora es una unidad métrica."],
+      ["Temperatura mínima: −89 °C", "Esa línea ya está bien: los grados Celsius son del sistema métrico."],
+      ["Distancia al hielo: 0,6 millas", ""],
+      ["Agua extraída: 40 litros", "Esa línea ya está bien: el litro es una unidad métrica."]
+    ],
+    "correcta": 2,
+    "corregida": "Distancia al hielo: 1 km",
+    "explicacion": "¡Bien visto! Las millas no son del sistema métrico: 0,6 millas son casi 1 km."
+  }
+}

@@ -232,15 +232,27 @@ func reproducir(clip: String) -> void:
 
 func _buscar_interaccion(libre: bool) -> void:
 	var mejor: Node3D = null
-	var mejor_d := INF
+	var mejor_nota := INF
 	if libre:
 		for n in get_tree().get_nodes_in_group("interactuables"):
 			if not n.habilitado or not n.is_visible_in_tree():
 				continue
-			var d := global_position.distance_to(n.global_position)
-			if d < n.radio and d < mejor_d:
+			var hacia: Vector3 = n.global_position - global_position
+			var d: float = hacia.length()
+			if d >= float(n.radio):
+				continue
+			hacia.y = 0.0
+			var de_frente := 0.0
+			if hacia.length() > 0.05:
+				de_frente = hacia.normalized().dot(mirando)
+			var prioridad: int = int(n.get("prioridad"))
+			if prioridad < 0 and de_frente < 0.2:
+				continue
+			# gana lo que esta de frente y cerca; lo de prioridad baja, solo si no hay otra cosa
+			var nota: float = d - 0.45 * de_frente - 10.0 * float(prioridad)
+			if nota < mejor_nota:
 				mejor = n
-				mejor_d = d
+				mejor_nota = nota
 	if mejor != objetivo:
 		objetivo = mejor
 		Interfaz.indicar(("[E] " + objetivo.texto) if objetivo != null else "")

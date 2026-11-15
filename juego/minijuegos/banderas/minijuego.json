@@ -1,17 +1,16 @@
 {
   "titulo": "Dos banderas, un cielo",
-  "resumen": "Coloca juntas las banderas de Estados Unidos y Ecuador en este sueño de cooperación.",
+  "resumen": "Hinca dos mástiles, extiende sus barras y nivela las banderas.",
   "instrucciones": [
-    "Elige un sitio fuera del anillo de 75 m y libre de huellas históricas.",
-    "Arma los 2 conjuntos: mástil, barra horizontal y tela. Hinca cada mástil siguiendo el compás.",
-    "Extiende al 100 % las 2 barras: sin viento, la tela necesita ese soporte.",
-    "Iguala las alturas y separa las banderas hasta que ninguna tape a la otra."
+    "Pulsa E al cruzar el centro del compás.",
+    "Mantén E y suelta en el tope cian.",
+    "Acércate y usa arriba o abajo para nivelar."
   ],
-  "controles": "Flechas / WASD: elegir o ajustar. E / Intro / Espacio: colocar o comprobar. Ratón: sitios y botones; − / + para ajustar.",
+  "controles": "Flechas o WASD: mover y nivelar · E o Espacio: golpear y extender · Esc: salir",
   "pistas": [
-    "Órbita mira el anillo del mapa y luego los soportes de las 2 telas.",
-    "Las huellas se conservan. Pulsa en el centro del compás y extiende ambas barras al 100 %.",
-    "Elige C; ensambla mástil → barra → tela dos veces; pulsa en la zona central del compás; extiende ambas barras al 100 %; iguala las alturas y deja un hueco entre las telas."
+    "Acércate al mástil señalado.",
+    "Golpea en el centro; suelta la barra dentro del corchete.",
+    "Golpea cada mástil, extiende ambas barras y junta las líneas con arriba o abajo."
   ],
   "ficha": "bandera_lunar",
   "escena": "3.5",

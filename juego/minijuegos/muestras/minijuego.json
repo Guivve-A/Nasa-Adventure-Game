@@ -1,17 +1,16 @@
 {
-  "titulo": "La herramienta correcta",
-  "resumen": "Recoge y registra 4 muestras de la Luna del sueño sin perder su lugar de origen.",
+  "titulo": "Recolector lunar",
+  "resumen": "Recoge cuatro muestras lunares con la herramienta adecuada y ll?valas a la caja cian.",
   "instrucciones": [
-    "Lee la muestra y elige entre cucharón de caja, pinzas pequeñas o tubo de núcleo de 2 cm con martillo.",
-    "Para la columna, da 4 golpes al pasar la aguja por la zona central y luego extrae. Es un ritmo didáctico del sueño.",
-    "Guarda la muestra en la bolsa que indica su etiqueta. Si confundes el número, corrige el registro: la muestra se conserva.",
-    "Marca su letra de origen en el croquis. Completa la bolsa y el lugar de cada muestra."
+    "Mu?vete a saltos y evita los cr?teres.",
+    "E cambia herramienta; mant?n Espacio para recoger.",
+    "Lleva cada bolsa a la caja antes de agotar el ox?geno."
   ],
-  "controles": "Flechas / WASD / mando: elegir. E / Intro: confirmar o extraer. Espacio: confirmar o golpear. Ratón: pulsar opciones, Golpear y Extraer. Esc: salir.",
+  "controles": "Flechas o WASD: mover ? E: herramienta ? Espacio: recoger ? Esc: salir",
   "pistas": [
-    "Órbita mira el polvo que se escapa entre las puntas y después las capas del suelo.",
-    "El cucharón recoge suelo y fragmentos pequeños; las pinzas sujetan una roca; el tubo conserva una columna de capas.",
-    "Suelo y fragmentos: cucharón. Roca: pinzas. Columna: tubo y 4 golpes en el centro, luego Extraer. Registro: A → bolsa 2, B → 4, C → 1, D → 3; marca la misma letra."
+    "En nivel 1, el icono junto a cada muestra indica su herramienta.",
+    "Cuchar?n para suelo y fragmentos, pinzas para roca, tubo para capas.",
+    "Suelta las flechas al recoger; lleva una bolsa por viaje a la caja cian. Aterriza fuera de los cr?teres."
   ],
   "ficha": "herramientas_apolo11",
   "escena": "3.2",

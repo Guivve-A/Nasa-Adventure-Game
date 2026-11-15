@@ -9,6 +9,7 @@ extends Control
 #
 # Contrato:
 #   _preparar()      arma los nodos y el estado inicial. El lienzo ya mide LIENZO (1120 x 520 px): usa "size".
+#                    Con pantalla_completa = true (en _init()) mide 1280 x 720: 320 x 180 pixeles gordos x4.
 #   _empezar()       el jugador pulso «Empezar»: arranca el juego.
 #   _paso(delta)     se llama en cada cuadro mientras "activo" es true. Usa SIEMPRE delta para el tiempo
 #                    (las pruebas aceleran el reloj); nunca la hora del sistema.
@@ -25,12 +26,14 @@ signal terminado(resultado: Dictionary)
 
 const Estilo := preload("res://interfaz/estilo.gd")
 const LIENZO := Vector2(1120, 520)
+const LIENZO_COMPLETO := Vector2(1280, 720)   # 320 x 180 pixeles gordos x4: toda la pantalla, sin margenes
 
 var parametros: Dictionary = {}
 var meta: Dictionary = {}       # contenido de minijuego.json
 var activo := false
 var tiempo := 0.0               # segundos de juego desde _empezar()
 var dificultad := 1
+var pantalla_completa := false  # true (ponlo en _init()): el lienzo mide LIENZO_COMPLETO y el anfitrion no deja margen
 var _solo := 0                  # 0 = juega la persona; 1 = solo y acierta; -1 = solo y falla
 
 
@@ -38,8 +41,9 @@ func preparar(p: Dictionary, m: Dictionary) -> void:
 	parametros = p
 	meta = m
 	dificultad = clampi(int(p.get("dificultad", 1)), 1, 3)
-	custom_minimum_size = LIENZO
-	size = LIENZO
+	var tam: Vector2 = LIENZO_COMPLETO if pantalla_completa else LIENZO
+	custom_minimum_size = tam
+	size = tam
 	clip_contents = true
 	focus_mode = Control.FOCUS_ALL
 	_preparar()

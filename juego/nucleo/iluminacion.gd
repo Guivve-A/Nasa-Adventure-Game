@@ -22,9 +22,9 @@ const MOMENTOS := {
 		"contraste": 1.10, "saturacion": 0.84, "exposicion": 1.0,
 	},
 	"noche": {
-		"sol": "9db8e0", "energia": 0.55, "direccion": Vector3(-0.45, -0.75, 0.48),
-		"ambiente": "3f5068", "ambiente_energia": 0.78, "fondo": "141c26",
-		"contraste": 1.08, "saturacion": 0.78, "exposicion": 1.0,
+		"sol": "8fa9d8", "energia": 0.40, "direccion": Vector3(-0.45, -0.75, 0.48),
+		"ambiente": "33456a", "ambiente_energia": 0.55, "fondo": "0c121b",
+		"contraste": 1.10, "saturacion": 0.80, "exposicion": 1.0,
 	},
 	"interior_noche": {
 		"sol": "9db8e0", "energia": 0.40, "direccion": Vector3(0.35, -0.62, 0.70),

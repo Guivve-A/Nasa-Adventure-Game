@@ -1,411 +1,505 @@
 extends "res://nucleo/minijuego.gd"
 
-# Las dimensiones proceden de pegaso/cubesat. El montaje y la energia son didacticos.
-# u = unidades inventadas para el modelo, nunca prestaciones reales de Pegaso.
-const LIMITE_S: float = 180.0
-const TRAMO_S: float = 4.0
-const CAPACIDAD: float = 4.0
-const COSTE_PC: int = 2
-const COSTE_RADIO: int = 3
-const PIEZAS: Array[String] = ["Energía y paneles", "Radio", "Antena", "Computadora"]
-const FUNCIONES: Array[String] = ["Captar luz", "Enviar datos", "Enlace a tierra", "Ordenar datos"]
-
-var fase: int = 0 # 0 montaje, 1 ajustes, 2 sol, 3 sombra
-var piezas: Array[int] = [-1, -1, -1, -1]
-var seleccion: int = 0
-var hueco: int = 0
-var tomada: bool = false
-var paneles: int = 0
-var antena: bool = false
-var computadora: bool = true
-var radio_sol: bool = true
-var radio_sombra: bool = true
-var bateria: float = 0.0
-var carga_al_sol: float = 0.0
-var transcurrido: float = 0.0
+# Maqueta arcade original: caras de montaje, no plano de un satelite real.
+# Distancias, tiempos y golpes son reglas de juego. Dimensiones: fichas del JSON.
+const DT: float = 1.0 / 120.0
+const Y_ENCAJE: float = 146.0
+const X_MIN: float = 16.0
+const X_MAX: float = 256.0
+const CENTRO: float = 136.0
+const CARRILES: Array[float] = [32.0, 84.0, 136.0, 188.0, 240.0]
+const NOMBRES: Array[String] = ["PANEL", "RADIO", "ANTENA", "COMPUTADORA", "BATERIA"]
+const ORDEN: Array[int] = [0, 4, 3, 1, 2]
+const ICONOS: Array[String] = [
+	"###.###/#.#.#.#/###.###/...#.../###.###/#.#.#.#/###.###",
+	"..#..../..#..../#######/#.....#/#.#.#.#/#.....#/#######",
+	"#.....#/.#...#./..###../...#.../...#.../...#.../..###..",
+	".#.#.#./#######/#.....#/##.#.##/#.....#/#######/.#.#.#.",
+	"..###../.#####./.#...#./.#.#.#./.#####./.#####./.#####.",
+	"#....#./.##.#../..###../###.###/..###../.#.##../#....#."
+]
+const BASTIDOR: Array[String] = [
+	"...cccccccccc", "..cCCCCCCCCcC", ".cCCCCCCCCc.C", "cccccccccc..C",
+	"c........c..C", "c........c..C", "c........c..C", "c........c..C",
+	"c........c..C", "c........c..C", "c........c.C.", "ccccccccccc.."
+]
+const GLIFOS: Dictionary = {
+	"A": ".#./#.#/###/#.#/#.#", "B": "##./#.#/##./#.#/##.", "C": ".##/#../#../#../.##",
+	"D": "##./#.#/#.#/#.#/##.", "E": "###/#../##./#../###", "F": "###/#../##./#../#..",
+	"G": ".##/#../#.#/#.#/.##", "H": "#.#/#.#/###/#.#/#.#", "I": "###/.#./.#./.#./###",
+	"J": "..#/..#/..#/#.#/.#.", "K": "#.#/#.#/##./#.#/#.#", "L": "#../#../#../#../###",
+	"M": "#.#/###/###/#.#/#.#", "N": "#.#/###/###/###/#.#", "O": "###/#.#/#.#/#.#/###",
+	"P": "###/#.#/###/#../#..", "Q": "###/#.#/#.#/###/..#", "R": "##./#.#/##./#.#/#.#",
+	"S": ".##/#../.#./..#/##.", "T": "###/.#./.#./.#./.#.", "U": "#.#/#.#/#.#/#.#/###",
+	"V": "#.#/#.#/#.#/#.#/.#.", "W": "#.#/#.#/###/###/#.#", "X": "#.#/#.#/.#./#.#/#.#",
+	"Y": "#.#/#.#/.#./.#./.#.", "Z": "###/..#/.#./#../###",
+	"0": "###/#.#/#.#/#.#/###", "1": ".#./##./.#./.#./###", "2": "###/..#/###/#../###",
+	"3": "###/..#/.##/..#/###", "4": "#.#/#.#/###/..#/..#", "5": "###/#../###/..#/###",
+	"6": "###/#../###/#.#/###", "7": "###/..#/..#/.#./.#.", "8": "###/#.#/###/#.#/###",
+	"9": "###/#.#/###/..#/###",
+	".": ".../.../.../.../.#.", ":": ".../.#./.../.#./...", "!": ".#./.#./.#./.../.#.",
+	"+": ".../.#./###/.#./...", "-": ".../.../###/.../...",
+}
+var fase: int = 0 # 0 mision, 1 cinta, 2 enlace, 3 celebracion
+var cubo_x: float = CENTRO
+var velocidad_x: float = 0.0
+var cara: int = 0
+var montadas: Array[bool] = [false, false, false, false, false]
+var objetos: Array[Dictionary] = []
+var vidas: int = 3
+var puntos: int = 0
+var reloj: float = 0.0
+var limite: float = 110.0
+var rapidez: float = 10.5
+var margen: float = 12.0
+var enlace: float = 0.0
+var destino: float = CENTRO
+var energia: float = 0.0
+var mando: float = 0.0
+var turbo: bool = false
+var accion: bool = false
+var _pulso: bool = false
 var _auto: int = 0
-var _pulso: float = 0.0
-var _arrastrando: bool = false
-var _cursor: Vector2 = Vector2.ZERO
-var _mensaje: String = "Elige una pieza. Los huecos indican su función."
-var _cabecera: Label
-var _lectura: Label
-var _estado: Label
-var _nota: Label
-var _accion: Button
-var _ajustes: Array[Button] = []
+var _acum: float = 0.0
+var _fase_t: float = 0.0
+var _giro_t: float = 0.0
+var _proxima: float = 0.0
+var _basura_t: float = 1.8
+var _contador: int = 0
+var _inmune: float = 0.0
+var _sacudida: float = 0.0
+var _flash: float = 0.0
+var _aviso: String = ""
+var _aviso_t: float = 0.0
+var _gana: bool = false
+var _causa: String = ""
+var _particulas: Array[Dictionary] = []
+var _azar: RandomNumberGenerator = RandomNumberGenerator.new()
+var _cm_cubo: int = 0
+var _cm_panel: int = 0
+var _dato: String = ""
+var _raton: bool = false
+var _raton_x: float = CENTRO
+
+
+func _init() -> void:
+	pantalla_completa = true
 
 
 func _preparar() -> void:
-	_cabecera = _etiqueta("", Vector2(24, 10), 1072, 22)
-	_etiqueta("Pegaso: primer satélite ecuatoriano · Cubo de 10 cm · 2 paneles de 27 cm", Vector2(24, 45), 1072, 18)
-	_nota = _etiqueta("", Vector2(650, 86), 418, 20)
-	for i in 5:
-		var b: Button = Estilo.boton("", 18)
-		b.position = Vector2(632, 82 + i * 53)
-		b.size = Vector2(464, 46)
-		b.focus_mode = Control.FOCUS_NONE
-		b.pressed.connect(_pulsar_ajuste.bind(i))
-		add_child(b)
-		_ajustes.append(b)
-	_lectura = _etiqueta("", Vector2(40, 355), 556, 18)
-	_estado = _etiqueta("", Vector2(632, 355), 464, 18)
-	_accion = Estilo.boton("", 18, true)
-	_accion.position = Vector2(790, 466)
-	_accion.size = Vector2(306, 44)
-	_accion.focus_mode = Control.FOCUS_NONE
-	_accion.pressed.connect(_confirmar)
-	add_child(_accion)
-	_etiqueta("EXA: presentada el 29-08-2007.\nInició actividades el 01-11-2007.", Vector2(24, 466), 726, 16)
-	_refrescar()
-
-
-func _etiqueta(contenido: String, pos: Vector2, ancho: float, tam: int) -> Label:
-	var l: Label = texto(contenido, tam, Estilo.TINTA)
-	l.position = pos
-	l.custom_minimum_size = Vector2(ancho, 0)
-	add_child(l)
-	return l
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	limite = [110.0, 95.0, 80.0][dificultad - 1]
+	rapidez = 10.5
+	margen = [12.0, 10.0, 8.0][dificultad - 1]
+	_azar.seed = int(parametros.get("semilla", 5309 + dificultad * 37))
+	var ficha: Dictionary = Juego.ficha("cubesat")
+	_dato = str(ficha.get("texto", ""))
+	var cifras: RegEx = RegEx.new()
+	cifras.compile("(\\d+) cm")
+	var medidas: Array[RegExMatch] = cifras.search_all(_dato)
+	if medidas.size() >= 2:
+		_cm_cubo = int(medidas[0].get_string(1))
+		_cm_panel = int(medidas[1].get_string(1))
+	queue_redraw()
 
 
 func _empezar() -> void:
-	_refrescar()
-
-
-func _rect_pieza(i: int) -> Rect2:
-	return Rect2(24, 105 + i * 59, 224, 50)
-
-
-func _rect_hueco(i: int) -> Rect2:
-	return Rect2(337 + (i % 2) * 102, 178 + (i / 2) * 74, 94, 66)
-
-
-func _mover(direccion: int) -> void:
-	if fase == 0:
-		if tomada:
-			hueco = posmod(hueco + direccion, 4)
-		else:
-			seleccion = posmod(seleccion + direccion, 4)
-	elif fase == 1:
-		seleccion = posmod(seleccion + direccion, 5)
-	_refrescar()
-
-
-func _tomar_o_colocar() -> void:
-	if fase != 0:
-		if fase == 1:
-			_cambiar(seleccion, 1)
-		return
-	if not tomada:
-		tomada = true
-		_mensaje = "Llevas %s. Elige un hueco y pulsa E." % PIEZAS[seleccion]
-	else:
-		_colocar()
-	_refrescar()
-
-
-func _colocar() -> void:
-	if not tomada:
-		return
-	if seleccion != hueco:
-		_mensaje = "%s no cumple «%s». Busca el hueco de su función." % [PIEZAS[seleccion], FUNCIONES[hueco]]
-		sonar("pagina")
-	else:
-		piezas[hueco] = seleccion
-		_mensaje = "%s instalada: %s." % [PIEZAS[seleccion], FUNCIONES[hueco].to_lower()]
-		sonar("tic")
-	tomada = false
-	_arrastrando = false
-
-
-func _pulsar_ajuste(i: int) -> void:
-	if activo and fase == 1:
-		seleccion = i
-		_cambiar(i, 1)
-
-
-func _cambiar(i: int, direccion: int) -> void:
-	if fase != 1:
-		return
-	match i:
-		0: paneles = posmod(paneles + direccion, 3)
-		1: antena = not antena
-		2: computadora = not computadora
-		3: radio_sol = not radio_sol
-		4: radio_sombra = not radio_sombra
-	_refrescar()
-
-
-func _generado() -> int:
-	if paneles == 0:
-		return 2
-	if paneles == 1:
-		return 5 if dificultad == 1 else 4
-	return 11 - dificultad
-
-
-func _consumo(sombra: bool) -> int:
-	var radio: bool = radio_sombra if sombra else radio_sol
-	return (COSTE_PC if computadora else 0) + (COSTE_RADIO if radio else 0)
-
-
-func _confirmar() -> void:
-	if not activo:
-		return
-	if fase == 0:
-		for i in 4:
-			if piezas[i] != i:
-				_mensaje = "Falta %s: sin esta pieza no puedes %s." % [PIEZAS[i].to_lower(), FUNCIONES[i].to_lower()]
-				_refrescar()
-				return
-		fase = 1
-		seleccion = 0
-		tomada = false
-		_mensaje = "Ajusta una fila cada vez. Después prueba el ciclo."
-	elif fase == 1:
-		if not computadora:
-			_final(false, "Sin computadora encendida nadie ordena los datos ni dirige los equipos.")
-			return
-		if not antena:
-			_final(false, "Sin antena desplegada la radio no llega a tierra: falta el enlace para enviar datos.")
-			return
-		if not radio_sol:
-			_final(false, "La radio está apagada al sol: la computadora prepara datos, pero nadie los envía a tierra.")
-			return
-		fase = 2
-		transcurrido = 0.0
-		bateria = 0.0
-	_refrescar()
-
-
-func _paso(delta: float) -> void:
-	if fase >= 2:
-		_simular(delta)
-	elif _auto != 0:
-		_pulso += delta
-		if _pulso >= 0.28:
-			_pulso = 0.0
-			_piloto()
-	if activo and tiempo >= LIMITE_S:
-		var causa: String = "Faltan piezas: el kit aún no puede captar luz, ordenar y transmitir datos." if fase == 0 else "El ciclo no se probó en 180 s: hay que comprobar la carga al sol y el gasto en sombra."
-		_final(false, causa)
-	_refrescar()
-
-
-func _simular(delta: float) -> void:
-	# Cada tramo dura 4 s de juego. Integra solo el tiempo restante de cada fase.
-	var restante: float = delta
-	while restante > 0.0 and activo and fase >= 2:
-		var paso: float = minf(restante, TRAMO_S - transcurrido)
-		var saldo: int = _generado() - _consumo(false) if fase == 2 else -_consumo(true)
-		if fase == 2:
-			bateria = clampf(bateria + float(saldo) * paso / TRAMO_S, 0.0, CAPACIDAD)
-		else:
-			bateria += float(saldo) * paso / TRAMO_S
-		transcurrido += paso
-		restante -= paso
-		if fase == 3 and bateria < -0.001:
-			_final(false, "La sombra exige %d u y solo guardaste %.0f u: la batería se agota. Apaga la radio en sombra." % [_consumo(true), carga_al_sol])
-		elif transcurrido >= TRAMO_S - 0.00001:
-			if fase == 2:
-				if _generado() < _consumo(false):
-					_final(false, "Consumes %d u al sol y los paneles generan %d u: falta energía para operar y cargar. Despliega más paneles." % [_consumo(false), _generado()])
-				else:
-					carga_al_sol = bateria
-					fase = 3
-					transcurrido = 0.0
-			else:
-				_final(true, "Las 4 piezas funcionan: generas %d u, consumes %d u al sol y guardas %.0f u; en sombra gastas %d u. Modelo simplificado." % [_generado(), _consumo(false), carga_al_sol, _consumo(true)])
-
-
-func _final(gana: bool, causa: String) -> void:
-	print("SATELITE d%d fase=%d paneles=%d bateria=%.3f juego=%.3f" % [dificultad, fase, paneles, bateria, tiempo])
-	terminar(gana, 100.0 if gana else 0.0, causa)
-
-
-func _piloto() -> void:
-	# Usa las mismas operaciones de cursor, toma, colocacion y ajuste que la persona.
-	if fase == 0:
-		if tomada:
-			if hueco != seleccion:
-				_mover(1)
-			else:
-				_tomar_o_colocar()
-		else:
-			for i in 4:
-				if piezas[i] != i:
-					if seleccion != i:
-						_mover(1)
-					else:
-						_tomar_o_colocar()
-					return
-			_confirmar()
-	elif fase == 1:
-		if paneles < 2:
-			_cambiar(0, 1)
-		elif not antena and _auto > 0:
-			_cambiar(1, 1)
-		elif radio_sombra:
-			_cambiar(4, 1)
-		else:
-			# El camino de fallo conserva plegada la antena y prueba de verdad.
-			_confirmar()
+	fase = 0
+	sonar("radio")
 
 
 func jugar_solo(acierta: bool) -> void:
 	_auto = 1 if acierta else -1
-	_pulso = 0.0
 
 
 func _input(evento: InputEvent) -> void:
-	if not activo or _auto != 0 or fase >= 2:
+	if not activo or _auto != 0:
 		return
-	if evento.is_action_pressed("saltar"):
-		_confirmar()
-	elif evento.is_action_pressed("interactuar"):
-		_tomar_o_colocar()
-	elif evento.is_action_pressed("mover_arriba"):
-		_mover(-2 if fase == 0 and tomada else -1)
-	elif evento.is_action_pressed("mover_abajo"):
-		_mover(2 if fase == 0 and tomada else 1)
-	elif evento.is_action_pressed("mover_izquierda"):
-		if fase == 1:
-			_cambiar(seleccion, -1)
-		else:
-			_mover(-1)
-	elif evento.is_action_pressed("mover_derecha"):
-		if fase == 1:
-			_cambiar(seleccion, 1)
-		else:
-			_mover(1)
-	else:
-		return
-	get_viewport().set_input_as_handled()
+	if evento.is_action_pressed("interactuar") or evento.is_action_pressed("saltar"):
+		_pulso = true
+		get_viewport().set_input_as_handled()
+	if evento.is_action_pressed("mover_izquierda") or evento.is_action_pressed("mover_derecha"):
+		_raton = false
 
 
 func _gui_input(evento: InputEvent) -> void:
-	if not activo or _auto != 0 or fase != 0:
+	if not activo or _auto != 0:
 		return
-	if evento is InputEventMouseButton and evento.button_index == MOUSE_BUTTON_LEFT:
-		_cursor = evento.position
+	if evento is InputEventMouseMotion:
+		_raton = true
+		_raton_x = clampf(evento.position.x / 4.0, X_MIN, X_MAX)
+	elif evento is InputEventMouseButton and evento.button_index == MOUSE_BUTTON_LEFT:
+		accion = evento.pressed
 		if evento.pressed:
-			for i in 4:
-				if _rect_pieza(i).has_point(_cursor):
-					seleccion = i
-					tomada = true
-					_arrastrando = true
-					grab_focus()
-					break
-			for i in 4:
-				if tomada and _rect_hueco(i).has_point(_cursor):
-					hueco = i
-					_colocar()
-		else:
-			if _arrastrando:
-				for i in 4:
-					if _rect_hueco(i).has_point(_cursor):
-						hueco = i
-						_colocar()
-						break
-			_arrastrando = false
-			# Fuera de un hueco la pieza queda tomada para colocar con clic o teclado.
-	elif evento is InputEventMouseMotion:
-		_cursor = evento.position
-	_refrescar()
+			_pulso = true
+		accept_event()
 
 
-func _refrescar() -> void:
-	if _cabecera == null:
-		return
-	_cabecera.text = "%s · Nivel %d · %.0f s disponibles" % ["1 / 2 · Montaje" if fase == 0 else "2 / 2 · Balance de energía", dificultad, maxf(0.0, LIMITE_S - tiempo)]
-	for i in 5:
-		_ajustes[i].visible = fase != 0
-		_ajustes[i].disabled = fase >= 2
-		_ajustes[i].add_theme_stylebox_override("normal", Estilo.caja(Estilo.CREMA if seleccion == i else Estilo.PAPEL, 8, 3 if seleccion == i else 1))
-	_nota.visible = fase == 0
-	if fase == 0:
-		_nota.text = "KIT DEL CLUB\n\n4 subsistemas, 4 funciones.\n\nMontaje didáctico, no un plano real de Pegaso.\n\nE: tomar / colocar\nFlechas: elegir"
-		_lectura.text = _mensaje
-		_estado.text = "Maqueta didáctica · Sin escala\n\nComprueba el montaje para pasar al balance."
-		_accion.text = "Comprobar · Espacio"
-	else:
-		var estados: Array[String] = ["Paneles: %s · %d u al sol" % [["plegados", "1 abierto", "2 abiertos"][paneles], _generado()], "Antena: %s · 0 u" % ("desplegada" if antena else "plegada"), "Computadora: %s · %d u / tramo" % ["sí" if computadora else "no", COSTE_PC if computadora else 0], "Radio al sol: %s · %d u" % ["sí" if radio_sol else "no", COSTE_RADIO if radio_sol else 0], "Radio en sombra: %s · %d u" % ["sí" if radio_sombra else "no", COSTE_RADIO if radio_sombra else 0]]
-		for i in 5:
-			_ajustes[i].text = ("› " if seleccion == i else "") + estados[i]
-		var carga: float = clampf(float(_generado() - _consumo(false)), 0.0, CAPACIDAD)
-		_lectura.text = "MODELO SIMPLIFICADO · u = energía de juego\nSol: %d u generadas − %d u de consumo\nBatería vacía → %.0f / 4 u; sombra pide %d u\nCiclo: 4 s de sol + 4 s de sombra. Sin escala real." % [_generado(), _consumo(false), carga, _consumo(true)]
-		if fase == 1:
-			_estado.text = "Objetivo: transmitir al sol y ordenar en sombra.\n\n↑ ↓: fila · ← → / E: cambiar una opción"
+func _paso(delta: float) -> void:
+	_acum += delta
+	while _acum >= DT and activo:
+		_acum -= DT
+		if _auto != 0:
+			_piloto()
 		else:
-			_estado.text = "%s · %.1f / 4 s\nBatería: %.1f / 4 u\n%s" % ["AL SOL · cargando" if fase == 2 else "EN SOMBRA · gastando", transcurrido, maxf(0.0, bateria), "Generación en sombra: 0 u. La batería sostiene los equipos." if fase == 3 else "El sobrante carga hasta 4 u; el resto no se almacena."]
-		_accion.text = "Probar ciclo · Espacio" if fase == 1 else "Ciclo en marcha…"
-	_accion.disabled = fase >= 2
+			mando = eje_x()
+			turbo = Input.is_action_pressed("mover_abajo")
+			if _raton:
+				mando = signf(_raton_x - cubo_x) if absf(_raton_x - cubo_x) > 1.5 else 0.0
+			accion = Input.is_action_pressed("interactuar") or Input.is_action_pressed("saltar") or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+		_tic(DT)
 	queue_redraw()
 
 
-func _letra(contenido: String, pos: Vector2, tam: int = 16, color: Color = Estilo.TINTA) -> void:
-	draw_string(Estilo.fuente(600), pos, contenido, HORIZONTAL_ALIGNMENT_LEFT, -1, tam, color)
+func _tic(dt: float) -> void:
+	_fase_t += dt
+	_giro_t = maxf(0.0, _giro_t - dt)
+	_inmune = maxf(0.0, _inmune - dt)
+	_sacudida = maxf(0.0, _sacudida - dt)
+	_flash = maxf(0.0, _flash - dt)
+	_aviso_t = maxf(0.0, _aviso_t - dt)
+	_efectos(dt)
+	if fase == 0:
+		_pulso = false
+		if _fase_t >= 2.0:
+			fase = 1
+			_fase_t = 0.0
+		return
+	if fase == 3:
+		if _fase_t > 1.4:
+			if _gana:
+				Juego.anotar("cubesat")
+			terminar(_gana, float(puntos), _dato if _gana else _causa)
+		return
+	reloj += dt
+	# Respuesta directa con frenado corto, sin latencia de menus.
+	velocidad_x = move_toward(velocidad_x, mando * 95.0, 650.0 * dt)
+	cubo_x = clampf(cubo_x + velocidad_x * dt, X_MIN, X_MAX)
+	if _pulso and fase == 1 and _giro_t <= 0.0:
+		cara = (cara + 1) % 5
+		_giro_t = 0.16
+		sonar("tic")
+	_pulso = false
+	if fase == 1:
+		_cinta(dt * (2.5 if turbo else 1.0))
+	elif fase == 2:
+		# El panel carga; la bateria mantiene la radio mientras se busca el enlace.
+		energia = minf(1.0, energia + dt * 0.4)
+		if accion and absf(cubo_x - destino) <= margen and energia > 0.05:
+			enlace = minf(3.0, enlace + dt)
+			energia = maxf(0.0, energia - dt * 0.55)
+			if int(enlace * 4.0) != int((enlace - dt) * 4.0):
+				sonar("radio")
+		else:
+			enlace = maxf(0.0, enlace - dt * 0.25)
+		if enlace >= 3.0:
+			_final(true, "")
+	if reloj >= limite and fase != 3:
+		_final(false, "La cinta se detuvo antes de completar el montaje y encender la señal.")
+
+
+func _cinta(dt: float) -> void:
+	_proxima -= dt
+	_basura_t -= dt
+	if _proxima <= 0.0 and not _hay_pieza():
+		_nueva_pieza()
+	if _basura_t <= 0.0:
+		_basura_t += [4.8, 3.2, 2.6][dificultad - 1]
+		_contador += 1
+		var bx: float = CARRILES[(_contador * 2 + dificultad) % 5]
+		# Nunca se genera una pared inevitable sobre la pieza.
+		for o in objetos:
+			if int(o["tipo"]) < 5 and absf(float(o["x"]) - bx) < 26.0:
+				bx = CARRILES[(_contador * 2 + dificultad + 2) % 5]
+		objetos.append({"x": bx, "y": 28.0, "tipo": 5})
+	for i in range(objetos.size() - 1, -1, -1):
+		var o: Dictionary = objetos[i]
+		var tipo: int = o["tipo"]
+		var antes: float = o["y"]
+		var y: float = antes + rapidez * (1.25 if tipo == 5 else 1.0) * dt
+		o["y"] = y
+		if antes < Y_ENCAJE and y >= Y_ENCAJE:
+			if absf(float(o["x"]) - cubo_x) <= (margen if tipo < 5 else 12.0):
+				if tipo < 5 and cara == tipo:
+					montadas[tipo] = true
+					puntos += 200
+					_estallar(cubo_x, Y_ENCAJE, Estilo.CIAN)
+					sonar("recoger")
+					_aviso = NOMBRES[tipo] + " +"
+					_aviso_t = 1.2
+					_proxima = 0.65
+					objetos.remove_at(i)
+					if _total() == 5:
+						fase = 2
+						_fase_t = 0.0
+						destino = CENTRO
+						energia = 1.0
+						sonar("ok")
+						objetos.clear()
+						return
+					continue
+				elif _inmune <= 0.0:
+					_golpe("La chatarra golpeó el bastidor." if tipo == 5 else "La pieza chocó con una cara sin su conector.")
+					objetos.remove_at(i)
+					_proxima = 0.65
+					if fase == 3:
+						return
+					continue
+		if y > 164.0:
+			if tipo < 5:
+				_aviso = "PIEZA RECIRCULANDO"
+				_aviso_t = 1.4
+				_proxima = 0.65
+			else:
+				puntos += 10
+			objetos.remove_at(i)
+
+
+func _hay_pieza() -> bool:
+	for o in objetos:
+		if int(o["tipo"]) < 5:
+			return true
+	return false
+
+
+func _nueva_pieza() -> void:
+	for tipo in ORDEN:
+		if not montadas[tipo]:
+			var carril: int = (tipo * 2 + _contador + dificultad) % 5
+			objetos.append({"x": CARRILES[carril], "y": 28.0, "tipo": tipo})
+			sonar("salto")
+			return
+
+
+func _total() -> int:
+	var n: int = 0
+	for m in montadas:
+		if m:
+			n += 1
+	return n
+
+
+func _golpe(causa: String) -> void:
+	vidas -= 1
+	_inmune = 1.5
+	_sacudida = 0.24
+	_flash = 0.22
+	_aviso = "GOLPE"
+	_aviso_t = 1.0
+	_estallar(cubo_x, Y_ENCAJE, Estilo.CORAL)
+	sonar("error")
+	if vidas <= 0:
+		_final(false, causa + " El cubo perdió sus tres protecciones.")
+
+
+func _final(gana: bool, causa: String) -> void:
+	fase = 3
+	_fase_t = 0.0
+	_gana = gana
+	_causa = causa
+	if gana:
+		puntos += vidas * 100 + int(limite - reloj)
+		_estallar(cubo_x, 139.0, Estilo.DORADO)
+		sonar("logro")
+
+
+func _piloto() -> void:
+	# Solo manda movimiento, accion y palanca rapida: nunca instala ni teletransporta.
+	mando = 0.0
+	turbo = true
+	accion = false
+	if fase == 2:
+		mando = signf(destino - cubo_x) if absf(destino - cubo_x) > 1.0 else 0.0
+		accion = true
+		return
+	var objetivo: float = cubo_x
+	var pieza: Dictionary = {}
+	for o in objetos:
+		if int(o["tipo"]) < 5:
+			pieza = o
+			break
+	if not pieza.is_empty():
+		var tipo: int = pieza["tipo"]
+		objetivo = float(pieza["x"])
+		if _giro_t <= 0.0 and cara != (tipo if _auto > 0 else (tipo + 1) % 5):
+			_pulso = true
+	# Esquiva la basura a su altura; vuelve al conector despues.
+	for o in objetos:
+		if int(o["tipo"]) == 5 and float(o["y"]) > Y_ENCAJE - 21.0 and float(o["y"]) < Y_ENCAJE + 4.0 and absf(float(o["x"]) - objetivo) < 22.0:
+			objetivo = clampf(float(o["x"]) + (30.0 if cubo_x > CENTRO else -30.0), X_MIN, X_MAX)
+	mando = signf(objetivo - cubo_x) if absf(objetivo - cubo_x) > 1.2 else 0.0
+
+
+func _estallar(x: float, y: float, color: Color) -> void:
+	for i in 18:
+		var a: float = _azar.randf_range(0.0, TAU)
+		var v: float = _azar.randf_range(10.0, 36.0)
+		_particulas.append({"p": Vector2(x, y), "v": Vector2(cos(a), sin(a)) * v, "t": 0.65, "c": color})
+
+
+func _efectos(dt: float) -> void:
+	for i in range(_particulas.size() - 1, -1, -1):
+		var p: Dictionary = _particulas[i]
+		var t: float = float(p["t"]) - dt
+		p["t"] = t
+		var pos: Vector2 = p["p"]
+		var v: Vector2 = p["v"]
+		p["p"] = pos + v * dt
+		p["v"] = v + Vector2(0.0, 28.0) * dt
+		if t <= 0.0:
+			_particulas.remove_at(i)
+
+
+func _r(x: float, y: float, w: float, h: float, color: Color) -> void:
+	draw_rect(Rect2(roundf(x) * 4.0, roundf(y) * 4.0, w * 4.0, h * 4.0), color)
+
+
+func _mapa(mapa: String, x: float, y: float, color: Color, e: int = 1) -> void:
+	var filas: PackedStringArray = mapa.split("/")
+	for j in filas.size():
+		var fila: String = filas[j]
+		for i in fila.length():
+			if fila[i] != ".":
+				_r(x + i * e, y + j * e, e, e, color)
+
+
+func _texto(t: String, x: float, y: float, color: Color, e: int = 1) -> void:
+	for i in t.length():
+		var glifo: String = GLIFOS.get(t[i], ".../.../.../.../...")
+		_mapa(glifo, x + i * 4 * e, y, color, e)
+
+
+func _icono(tipo: int, x: float, y: float, color: Color, e: int = 1) -> void:
+	_mapa(ICONOS[tipo], x, y, color, e)
 
 
 func _draw() -> void:
-	draw_style_box(Estilo.caja(Estilo.PAPEL_SOMBRA, 12, 1), Rect2(16, 78, 594, 377))
-	# Pinceladas discretas de la mesa, sin texturas ni recursos externos.
-	for i in 12:
-		draw_line(Vector2(30, 96 + i * 29), Vector2(595, 100 + i * 29), Color(Estilo.CREMA, 0.23), 3.0)
+	_r(0, 0, 320, 180, Estilo.NOCHE)
+	var desplazamiento: Vector2 = Vector2.ZERO
+	if _sacudida > 0.0:
+		desplazamiento = Vector2(4.0 if int(_sacudida * 30.0) % 2 == 0 else -4.0, 0)
+	draw_set_transform(desplazamiento)
+	_dibujar_taller()
+	for o in objetos:
+		var x: float = o["x"]
+		var y: float = o["y"]
+		var tipo: int = o["tipo"]
+		_r(x - 6, y - 6, 13, 13, Estilo.CORAL if tipo == 5 else Estilo.NARANJA)
+		_r(x - 5, y - 5, 11, 11, Estilo.TINTA)
+		_icono(tipo, x - 3, y - 3, Estilo.CORAL if tipo == 5 else Estilo.CREMA)
+		if tipo < 5:
+			_texto(str(tipo + 1), x + 8, y - 2, Estilo.CREMA)
+			for k in 3:
+				_r(x, y + 10 + k * 4, 1, 1, Estilo.CIAN_MEDIO)
+	_dibujar_cubo()
+	for p in _particulas:
+		var pos: Vector2 = p["p"]
+		var color: Color = p["c"]
+		_r(pos.x, pos.y, 1, 1, color)
+	if fase == 2 or (fase == 3 and _gana):
+		_dibujar_enlace()
+	draw_set_transform(Vector2.ZERO)
+	_dibujar_hud()
+	if _aviso_t > 0.0 and fase == 1:
+		_texto(_aviso, CENTRO - _aviso.length() * 2.0, 24, Estilo.CREMA)
 	if fase == 0:
-		_cubo(Vector2(330, 170), Vector2(210, 160))
-		for i in 4:
-			var r: Rect2 = _rect_pieza(i)
-			draw_style_box(Estilo.caja(Estilo.PAPEL, 7, 3 if seleccion == i else 1, Estilo.CIAN_MEDIO if seleccion == i else Estilo.TINTA_SUAVE, 0), r)
-			_letra("%s %s" % ["✓" if piezas.has(i) else str(i + 1) + ".", PIEZAS[i]], r.position + Vector2(10, 31), 18)
-			var h: Rect2 = _rect_hueco(i)
-			draw_style_box(Estilo.caja(Estilo.CREMA if piezas[i] == i else Estilo.PAPEL, 4, 3 if tomada and hueco == i else 1, Estilo.CIAN_MEDIO if tomada and hueco == i else Estilo.TINTA_SUAVE, 0), h)
-			_letra("%d %s" % [i + 1, "✓" if piezas[i] == i else "○"], h.position + Vector2(6, 20))
-			var palabras: PackedStringArray = FUNCIONES[i].split(" ", true, 1)
-			_letra(palabras[0], h.position + Vector2(6, 40))
-			_letra(palabras[1], h.position + Vector2(6, 58))
-		_letra("Cuerpo: 10 cm", Vector2(346, 120), 18)
-		if tomada and _arrastrando:
-			draw_style_box(Estilo.caja(Estilo.CIAN, 6, 2), Rect2(_cursor + Vector2(10, -40), Vector2(224, 42)))
-			_letra(PIEZAS[seleccion], _cursor + Vector2(20, -13), 18)
-	else:
-		for i in 2:
-			var abierto: bool = paneles > i
-			var r: Rect2 = Rect2(54 if i == 0 else 424, 205, 168 if abierto else 18, 88)
-			if not abierto and i == 0:
-				r.position.x = 222
-			draw_line(Vector2(210, 247), Vector2(445, 247), Estilo.TINTA, 8)
-			_panel(r)
-		_cubo(Vector2(240, 185), Vector2(150, 130))
-		_letra("10 cm", Vector2(280, 341), 18)
-		_letra("2 paneles de 27 cm", Vector2(40, 170), 18)
-		_letra("Sin escala", Vector2(464, 170))
-		draw_line(Vector2(316, 160), Vector2(350, 103) if antena else Vector2(347, 161), Estilo.TINTA, 4, true)
-		if antena:
-			draw_arc(Vector2(350, 103), 14, -1.4, 0.3, 12, Estilo.CIAN_MEDIO, 2, true)
-		_letra("PC: %s" % ("sí" if computadora else "no"), Vector2(251, 229))
-		_letra("Radio: %s" % ("sí" if (radio_sombra if fase == 3 else radio_sol) else "no"), Vector2(251, 258))
-		if fase >= 2:
-			draw_rect(Rect2(70, 94, 480 * transcurrido / TRAMO_S, 6), Estilo.DORADO if fase == 2 else Estilo.PETROLEO)
+		_r(44, 59, 185, 37, Estilo.CREMA)
+		_r(45, 60, 183, 35, Estilo.TINTA)
+		_icono(0, 79, 67, Estilo.CIAN, 2)
+		_texto("+", 100, 71, Estilo.DORADO, 2)
+		_icono(3, 114, 67, Estilo.CIAN, 2)
+		_texto("ARMA EL CUBO. ENCIENDE SU SENAL.", 76, 86, Estilo.CREMA)
+	if _flash > 0.0:
+		_r(0, 18, 268, 146, Color(Estilo.CORAL, _flash * 0.6))
+	if fase == 3:
+		_r(72, 77, 127, 18, Estilo.TINTA)
+		_texto("SENAL VIVA" if _gana else "CUBO DETENIDO", 82, 81, Estilo.CIAN if _gana else Estilo.CORAL, 2)
 
 
-func _cubo(pos: Vector2, medida: Vector2) -> void:
-	var sesgo: Vector2 = Vector2(34, -32)
-	draw_colored_polygon(PackedVector2Array([pos, pos + sesgo, pos + Vector2(medida.x, 0) + sesgo, pos + Vector2(medida.x, 0)]), Estilo.CREMA)
-	draw_colored_polygon(PackedVector2Array([pos + Vector2(medida.x, 0), pos + Vector2(medida.x, 0) + sesgo, pos + medida + sesgo, pos + medida]), Estilo.PETROLEO)
-	draw_rect(Rect2(pos, medida), Estilo.PAPEL)
-	draw_rect(Rect2(pos, medida), Estilo.TINTA, false, 3)
-	draw_line(pos + sesgo, pos + Vector2(medida.x, 0) + sesgo, Estilo.TINTA, 2, true)
-	draw_line(pos, pos + sesgo, Estilo.TINTA, 2, true)
-	draw_line(pos + Vector2(medida.x, 0) + sesgo, pos + medida + sesgo, Estilo.TINTA, 2, true)
-	draw_line(pos + medida, pos + medida + sesgo, Estilo.TINTA, 2, true)
+func _dibujar_taller() -> void:
+	# Las guias atraviesan el campo abierto; el suelo llega a ambos bordes.
+	_r(0, 18, 268, 146, Estilo.NOCHE)
+	for i in 36:
+		_r((i * 73 + 11) % 268, 21 + (i * 37) % 112, 1, 1, Estilo.TINTA_SUAVE)
+	for x in CARRILES:
+		_r(x - 20, 18, 1, 146, Color(Estilo.PETROLEO, 0.45))
+		for j in 14:
+			var y: float = 18.0 + fposmod(j * 11.0 + reloj * rapidez * (2.5 if turbo else 1.0), 146.0)
+			_r(x - 16, y, 33, 1, Color(Estilo.PETROLEO, 0.22))
+	_r(0, 164, 320, 16, Estilo.PETROLEO)
+	_r(0, 164, 320, 2, Estilo.NARANJA)
+	for k in 32:
+		_r(k * 10, 166, 5, 2, Estilo.TINTA_SUAVE)
+	# La sexta cara soporta el carro; cinco conectores didacticos a la derecha.
+	_r(268, 18, 52, 146, Estilo.TINTA)
+	_texto("CARAS", 280, 24, Estilo.CREMA)
+	for i in 5:
+		var y: float = 38.0 + i * 22.0
+		_r(276, y, 36, 17, Estilo.CIAN if cara == i else Estilo.TINTA_SUAVE)
+		_r(277, y + 1, 34, 15, Estilo.NOCHE)
+		_icono(i, 280, y + 5, Estilo.CIAN if montadas[i] else Estilo.CREMA)
+		_texto(str(i + 1), 292, y + 6, Estilo.CREMA)
+		if montadas[i]:
+			_mapa("....#/...#./#.#../.#...", 300, y + 6, Estilo.CIAN)
+	_r(276, 151, 9, 9, Estilo.NARANJA)
+	_texto("E", 279, 153, Estilo.NOCHE)
+	_texto("GIRA", 290, 153, Estilo.NARANJA)
+	_texto("A D MOVER   E GIRAR   S RAPIDA   ESC SALIR", 4, 171, Estilo.CREMA)
 
 
-func _panel(r: Rect2) -> void:
-	draw_rect(r, Estilo.PETROLEO)
-	draw_colored_polygon(PackedVector2Array([r.position, r.position + Vector2(r.size.x, 0), r.end]), Estilo.TINTA_SUAVE)
-	for i in range(1, 6):
-		var x: float = r.position.x + r.size.x * float(i) / 6.0
-		draw_line(Vector2(x, r.position.y), Vector2(x, r.end.y), Estilo.CREMA, 1)
-	draw_line(Vector2(r.position.x, r.get_center().y), Vector2(r.end.x, r.get_center().y), Estilo.CREMA, 1)
-	draw_rect(r, Estilo.TINTA, false, 2)
+func _dibujar_cubo() -> void:
+	if _inmune > 0.0 and fmod(_inmune, 0.35) < 0.16:
+		return
+	var x: float = roundf(cubo_x)
+	_r(x - 12, 155, 25, 3, Estilo.NARANJA)
+	_r(x - 9, 158, 4, 3, Estilo.TINTA_SUAVE)
+	_r(x + 6, 158, 4, 3, Estilo.TINTA_SUAVE)
+	for j in BASTIDOR.size():
+		var fila: String = BASTIDOR[j]
+		for i in fila.length():
+			if fila[i] != ".":
+				_r(x - 6 + i, 143 + j, 1, 1, Estilo.CREMA if fila[i] == "c" else Estilo.PETROLEO)
+	_icono(cara, x - 3, 147, Estilo.CIAN if montadas[cara] else Estilo.CREMA)
+	# Conector activo encima del bastidor: forma y numero coinciden con la pieza.
+	_r(x - 7, 133, 15, 10, Estilo.CIAN)
+	_r(x - 6, 134, 13, 8, Estilo.NOCHE)
+	_icono(cara, x - 3, 134, Estilo.CIAN)
+	_texto(str(cara + 1), x + 9, 136, Estilo.CIAN)
+	if fase >= 2:
+		# Un pixel representa un centimetro: proporciones tomadas del JSON.
+		for lado in [-1, 1]:
+			var px: float = x - 5 - _cm_panel if lado < 0 else x + 5
+			_r(px, 144, _cm_panel, 8, Estilo.PETROLEO)
+			for j in range(0, _cm_panel, 4):
+				_r(px + j, 144, 1, 8, Estilo.CREMA)
+			_r(px, 148, _cm_panel, 1, Estilo.CREMA)
+		_texto("%d CM" % _cm_cubo, x - 9, 163, Estilo.CREMA)
+		_texto("%d CM" % _cm_panel, x - _cm_panel - 4, 135, Estilo.DORADO)
+		_r(x, 141, 1, 5, Estilo.CIAN)
+		_icono(2, x - 3, 135, Estilo.CIAN)
+
+
+func _dibujar_enlace() -> void:
+	_r(destino - margen, 38, margen * 2, 1, Estilo.CIAN)
+	_r(destino - margen, 38, 1, 6, Estilo.CIAN)
+	_r(destino + margen - 1, 38, 1, 6, Estilo.CIAN)
+	_icono(1, destino - 3, 23, Estilo.CIAN, 2)
+	_texto("MANTEN E: ENCIENDE LA SENAL", 88, 58, Estilo.CREMA)
+	if accion and absf(cubo_x - destino) <= margen:
+		for i in 18:
+			var y: float = 44.0 + fposmod(i * 5.0 - reloj * 28.0, 88.0)
+			_r(cubo_x, y, 1, 2, Estilo.CIAN)
+	_r(100, 79, 74, 7, Estilo.PETROLEO)
+	_r(101, 80, floorf(72.0 * enlace / 3.0), 5, Estilo.CIAN)
+	_icono(4, 180, 78, Estilo.DORADO)
+	_r(191, 79, floorf(20 * energia), 6, Estilo.DORADO)
+
+
+func _dibujar_hud() -> void:
+	_r(0, 0, 320, 18, Estilo.TINTA)
+	_texto("%04d" % puntos, 4, 4, Estilo.CREMA, 2)
+	_texto("%d:5" % _total(), 65, 4, Estilo.CIAN, 2)
+	for i in 3:
+		_mapa("###/#.#/###", 116 + i * 10, 5, Estilo.CREMA if i < vidas else Estilo.TINTA_SUAVE, 2)
+	_texto("%03d" % int(ceil(maxf(0.0, limite - reloj))), 190, 4, Estilo.CORAL if limite - reloj < 15.0 else Estilo.CREMA, 2)
+	_texto("N%d" % dificultad, 300, 6, Estilo.NARANJA)

@@ -3,6 +3,7 @@ tipo: lote de arte
 fase: 1
 lote: L06
 fecha: 2026-11-13
+revisado: 2026-11-14
 estado: propuesta · solo cotizado, espera la aprobación de Guillermo
 creditos: 0
 decisiones: D-013, D-015
@@ -17,6 +18,7 @@ decisiones: D-013, D-015
 - Regla de Guillermo: cada escenario se valida con él antes de construirlo (concepto → hoja de referencia → producción → motor), y cada escena lleva diseñado su espacio de entrada y salida («ventana de carga»).
 - Este lote es el paso «concepto» de los dos escenarios. **No se generó ninguna imagen: solo está cotizado.**
 - Ilustra las escenas 2.1 a 2.5 (Mirador) y 3.1 a 3.5 (Luna) de [[Fase 2 - Analisis]], que sigue en borrador.
+- Las 4 zonas de la Luna salen del pedido de Guillermo del 2026-11-12: en el sueño ella «camina» (L1), «recolecta muestras» (L2), «ve el Apolo» (L3) y coloca juntas las banderas de Estados Unidos y Ecuador (L4).
 
 ## 2. Lo que comparten los seis encargos
 
@@ -93,7 +95,7 @@ M1 y M2 comparten palabra por palabra la distribución y el umbral. Solo cambian
 
 ## 5. Costo cotizado
 
-Salida de `python -I herramientas/hf_generar.py Nasa_Game/Fase_1_Arte/Exploracion/Lote_06/lote_06_luna_mirador.json --solo-cotizar` (no crea trabajos ni gasta):
+Salida de `python -I herramientas/hf_generar.py Nasa_Game/Fase_1_Arte/Exploracion/Lote_06/lote_06_luna_mirador.json --solo-cotizar` (no crea trabajos ni gasta). Repetida el 2026-11-14, con el mismo resultado:
 
 ```
   cotizado L06_L1_llegada_caja                  gpt_image_2_6          0.25
@@ -115,14 +117,15 @@ Versión final: los mismos encargos en calidad alta y 2k cotizan **2,75 crédito
 | Una ronda de corrección de hasta 6 borradores | 1,50 |
 | **Tope propuesto** | **8,50** |
 
-- Saldo actual: **885,25 créditos**, comprobado el 2026-11-13 con `higgsfield account status`, antes y después de cotizar. Son los 888,00 del registro de [[trabajos]] menos los 2,75 de `L05_A_manana_calida_final`.
+- Saldo actual: **885,25 créditos**, comprobado el 2026-11-14 con `higgsfield account status`, antes y después de cotizar. Coincide con la última fila del registro de [[trabajos]] (lote 05b).
 - El tope es el 0,96 % del saldo. Con el tope gastado quedarían 876,75.
 - El tope no cubre repetir una versión final (2,75) ni una tercera: pedirían partida nueva.
 - El archivo del lote tiene su propio tope en 1,5: `hf_generar.py` se niega a generar si la cotización lo supera.
 
 **Comprobaciones hechas, sin gastar**
 
-- 371 comprobaciones automáticas de las reglas de la sección 2 sobre el JSON: 0 fallos. El comprobador detectó los 7 sabotajes de prueba que se le pusieron.
+- 371 comprobaciones automáticas de las reglas de la sección 2 sobre el JSON: 0 fallos (repetido el 2026-11-14). El comprobador detectó 13 de 13 sabotajes de prueba: la Tierra o la Luna en el cuadro, «diorama», el nombre de la misión, una bandera en el sitio histórico, una bandera que toca el suelo, sin barra horizontal, sin marca cian, sin `{SIN_TEXTO}`, insignias en el traje, calidad alta, tope subido y el ancla del hub.
+- Las versiones finales (los 6 encargos en calidad alta y 2k) se volvieron a cotizar el 2026-11-14: 2,75 cada una, 16,50 en total.
 - Revisión escéptica de Codex, en solo lectura: 11 hallazgos.
   - 7 aplicados: umbrales dentro de la zona nítida, pasos de salida con su marca en L1, L2 y L3, pinzas pequeñas, regreso en la caja y una frase en inglés.
   - 2 aplicados a medias: la forma de la etapa y el suelo intacto de la Loma.
@@ -163,3 +166,11 @@ Versión final: los mismos encargos en calidad alta y 2k cotizan **2,75 crédito
 7. **L3:** ¿aceptas que el concepto acerque la etapa de descenso, aunque a 75 m no entre en el cuadro de juego?
 
 Las preguntas 3 a 7 ya tienen una opción escrita en los encargos: basta con decir «como está» o indicar el cambio.
+
+## 9. Estado (2026-11-14)
+
+- **Listo para presentar.** Los 4 entregables están completos: el lote, las reglas duras, la cotización y esta nota.
+- **Nada generado ni subido.** Saldo 885,25 antes y después; el registro de generaciones sigue en 38 filas; en la carpeta solo están el JSON y esta nota.
+- El lote no se cambió el 2026-11-14: se revisó contra el encargo, la historia (§3.1, §4 y §5), el concepto aprobado de la Habitación y la noche del lote 03, y se repitieron las comprobaciones.
+- Los guiones de apoyo (`comprobar_lote06.py`, `l06_reverificar.py`, `huella_camara.py`, la copia de cotización final y el informe de Codex) están en la carpeta temporal de la sesión, no en el repositorio. Si se quieren conservar, van a `herramientas/`.
+- Siguiente paso: las 7 respuestas de la sección 8. Sin ellas no se genera.

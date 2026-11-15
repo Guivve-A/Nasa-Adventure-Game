@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-15T06:46:48.469639Z",
+    "display_name": "GPT Image 2.6",
+    "id": "c2966f86-3cd1-4f6c-b909-0bf9fbf8c0af",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064648_c2966f86-3cd1-4f6c-b909-0bf9fbf8c0af_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Camera looking straight down at the surface of the Moon from about thirty metres up, 35 mm lens at f/11, everything in focus. Neutral gray powdery regolith fills the whole frame, peppered with small craters and scattered rocks. The sun is only ten degrees above the horizon, off the bottom of the frame: hard single-source light with no atmosphere and no fill, so every rock and crater rim casts a long, razor-sharp black shadow toward the top of the frame and the sunlit faces of the rocks glow. Entering from the bottom centre and reaching the middle of the frame: the long black shadow of a four-legged landing craft, an angular body on four splayed legs with round footpads, stretched to about five times its natural length by the low sun. Only the shadow is visible; the craft itself is never in frame. Fine dust streaks radially outward along the ground in perfectly straight thin rays that hug the surface, with no billowing cloud. No footprints, no flags, no people. Crisp and nearly grainless. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064648_c2966f86-3cd1-4f6c-b909-0bf9fbf8c0af.png",
+    "status": "completed"
+  }
+]

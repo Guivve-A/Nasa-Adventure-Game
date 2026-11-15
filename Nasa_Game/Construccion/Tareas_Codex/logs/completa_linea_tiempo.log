@@ -1,0 +1,2358 @@
+OpenAI Codex v0.167.0-alpha.4.1
+--------
+workdir: C:\Users\guill\Desktop\Juego 2d-hd
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a1ddcb-da84-7f90-a675-d2d9fbdb1cc7
+--------
+user
+# Brief común
+
+Trabajas en el «Proyecto NASA-Ecuador», un RPG educativo espacial en Godot 4.7.2 (carpeta `juego/`). La raíz del repositorio es tu carpeta de trabajo. Hay otros agentes trabajando a la vez en otras carpetas.
+
+Tu minijuego acaba de rehacerse como arcade de acción (campo en píxeles gordos dibujado con `_draw()`, marcador, vidas y tiempo) sobre un lienzo de 1120 × 520 (280 × 130 píxeles gordos ×4). El director lo vio y dijo: **«lo que no me gusta son los bordes en los minijuegos»**. El anfitrión ya no dibuja marco, y el contrato nuevo deja al minijuego ocupar toda la pantalla. **No lo rehagas: amplíalo a pantalla completa.**
+
+Lee antes: `juego/nucleo/minijuego.gd` (variable `pantalla_completa` y `LIENZO_COMPLETO`), `juego/interfaz/anfitrion.gd`, el guion de tu minijuego completo y su `prueba_manos.gd`.
+
+## Qué entregar
+
+1. **Campo a PANTALLA COMPLETA.** Añade `func _init() -> void: pantalla_completa = true`; el lienzo pasa a **1280 × 720, es decir 320 × 180 píxeles gordos ×4**. Adapta el juego a ese campo: fondo, suelo, cielo y recorridos llegan a los cuatro bordes; el marcador, las vidas, la barra y el tiempo van dentro del campo, a 4 píxeles lógicos o más del borde; reparte el espacio ganado (más cielo, más recorrido), no lo dejes vacío. Con pantalla completa el anfitrión no muestra título ni línea de controles durante la partida: lo imprescindible (por ejemplo «E») se dibuja en el campo como pictograma. Revisa todas las constantes que dependían de 280 × 130 y vuelve a ajustar la dificultad 1 para que siga siendo ganable al primer o segundo intento.
+2. **`minijuego.json` al día:** `controles` en una línea corta (flechas o WASD, E o Espacio, Esc), `instrucciones` (2 o 3 frases muy cortas), `resumen` y 3 `pistas` que describan lo que de verdad se juega. Conserva `titulo`, `ficha`, `escena` y `orden`.
+3. **`prueba_manos.gd` al día** con el campo nuevo: sigue ganando solo con teclas simuladas (`Input.parse_input_event` con `InputEventKey`) y comprueba que se superó, que el anfitrión se cerró y que el árbol no queda en pausa.
+4. **Tres capturas** nuevas con ventana en momentos distintos de la partida, en `Nasa_Game/Construccion/Minijuegos/<id>/completa_1.png`, `completa_2.png` y `completa_3.png`:
+
+```
+python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=<id> --auto --captura=<png> --espera=<s>
+```
+
+5. **Las dos pruebas sin fallos** (pega el resumen en el informe):
+
+```
+python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:<id> --ritmo=8
+python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/<id>/prueba_manos.gd --ritmo=1
+```
+
+## Reglas fijas
+
+- Toca **solo** `juego/minijuegos/<id>/` y tu evidencia en `Nasa_Game/Construccion/Minijuegos/<id>/`.
+- No instales ni descargues nada. Sin búsqueda web. Sin créditos de Higgsfield.
+- GDScript sin `class_name`, con tabuladores, comentarios sin tildes y tipos explícitos al leer diccionarios o JSON.
+- Godot solo con `python -I herramientas/juego_ejecutar.py` (candado global: espera su turno; no cierres procesos ajenos).
+- No cambies los datos reales (salen de `juego/datos/datos_espaciales.json`). Contrato intacto: `_preparar`, `_empezar`, `_paso(delta)`, `terminar(...)`, `jugar_solo(acierta)` y los `parametros` que ya acepta.
+- Si tu minijuego todavía es la versión vieja de paneles y deslizadores (no un campo en píxeles), dilo en el informe y no hagas nada más.
+
+## Informe
+
+Breve: qué cambiaste, cómo se reparte el campo de 320 × 180, el resultado de las dos pruebas, las rutas de las capturas y lo que quedó pendiente.
+
+---
+
+# TU TAREA
+
+Tu minijuego: id `linea_tiempo`, carpeta `juego/minijuegos/linea_tiempo/`.
+codex
+Voy a revisar el contrato de pantalla completa y el juego `linea_tiempo`, ajustar su campo y validar las dos pruebas y las tres capturas.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Content juego/nucleo/minijuego.gd; Get-Content juego/interfaz/anfitrion.gd; Get-ChildItem juego/minijuegos/linea_tiempo; rg --files -g AGENTS.md' in C:\Users\guill\Desktop\Juego 2d-hd
+ exited 1 in 1967ms:
+extends Control
+
+# Base de todo minijuego. Cada uno vive en res://minijuegos/<id>/<id>.gd, empieza con
+#   extends "res://nucleo/minijuego.gd"
+# y tiene al lado su minijuego.json (titulo, instrucciones, controles, pistas y ficha del cuaderno).
+#
+# El anfitrion (interfaz/anfitrion.gd) pone el marco, el titulo, las instrucciones, las pistas de Orbita y la
+# pantalla de resultado. El minijuego solo dibuja y juega dentro de su lienzo.
+#
+# Contrato:
+#   _preparar()      arma los nodos y el estado inicial. El lienzo ya mide LIENZO (1120 x 520 px): usa "size".
+#                    Con pantalla_completa = true (en _init()) mide 1280 x 720: 320 x 180 pixeles gordos x4.
+#   _empezar()       el jugador pulso Â«EmpezarÂ»: arranca el juego.
+#   _paso(delta)     se llama en cada cuadro mientras "activo" es true. Usa SIEMPRE delta para el tiempo
+#                    (las pruebas aceleran el reloj); nunca la hora del sistema.
+#   terminar(superado, puntos, detalle)   cierra la partida. "detalle" explica la causa en una frase:
+#                    nunca Â«incorrectoÂ», siempre el porque (regla de Orbita).
+#   jugar_solo(acierta)   OBLIGATORIO para las pruebas: hace que el minijuego se juegue solo y termine,
+#                    superado si acierta = true y no superado si es false, en menos de 40 s de juego.
+#
+# Dificultad: parametros.get("dificultad", 1) va de 1 (primera vez en la historia) a 3.
+# Entradas: teclado (acciones mover_*, interactuar, saltar) y raton; todo lo que se pueda hacer con el raton
+# debe poder hacerse tambien con el teclado.
+
+signal terminado(resultado: Dictionary)
+
+const Estilo := preload("res://interfaz/estilo.gd")
+const LIENZO := Vector2(1120, 520)
+const LIENZO_COMPLETO := Vector2(1280, 720)   # 320 x 180 pixeles gordos x4: toda la pantalla, sin margenes
+
+var parametros: Dictionary = {}
+var meta: Dictionary = {}       # contenido de minijuego.json
+var activo := false
+var tiempo := 0.0               # segundos de juego desde _empezar()
+var dificultad := 1
+var pantalla_completa := false  # true (ponlo en _init()): el lienzo mide LIENZO_COMPLETO y el anfitrion no deja margen
+var _solo := 0                  # 0 = juega la persona; 1 = solo y acierta; -1 = solo y falla
+
+
+func preparar(p: Dictionary, m: Dictionary) -> void:
+	parametros = p
+	meta = m
+	dificultad = clampi(int(p.get("dificultad", 1)), 1, 3)
+	var tam: Vector2 = LIENZO_COMPLETO if pantalla_completa else LIENZO
+	custom_minimum_size = tam
+	size = tam
+	clip_contents = true
+	focus_mode = Control.FOCUS_ALL
+	_preparar()
+
+
+func empezar() -> void:
+	activo = true
+	tiempo = 0.0
+	grab_focus()
+	_empezar()
+	if _solo != 0:
+		jugar_solo(_solo > 0)
+
+
+func terminar(superado: bool, puntos: float = 0.0, detalle: String = "") -> void:
+	if not activo:
+		return
+	activo = false
+	terminado.emit({"superado": superado, "puntos": puntos, "detalle": detalle, "tiempo": tiempo})
+
+
+func _process(delta: float) -> void:
+	if activo:
+		tiempo += delta
+		_paso(delta)
+
+
+# ------------------------------------------------------------------ para sobrescribir
+
+func _preparar() -> void:
+	pass
+
+
+func _empezar() -> void:
+	pass
+
+
+func _paso(_delta: float) -> void:
+	pass
+
+
+func jugar_solo(_acierta: bool) -> void:
+	# cada minijuego lo implementa; por defecto termina sin jugar para que la prueba lo delate
+	terminar(false, 0.0, "Este minijuego todavÃ­a no sabe jugarse solo.")
+
+
+# ------------------------------------------------------------------ utilidades
+
+func eje_x() -> float:
+	# -1..1 con izquierda y derecha (teclado o mando)
+	return Input.get_axis("mover_izquierda", "mover_derecha")
+
+
+func eje_y() -> float:
+	# -1..1 con abajo y arriba (arriba = +1)
+	return Input.get_axis("mover_abajo", "mover_arriba")
+
+
+func texto(contenido: String, tam: int = 20, color: Color = Estilo.TINTA, peso: int = 500) -> Label:
+	return Estilo.texto(contenido, tam, color, peso)
+
+
+func sonar(nombre: String) -> void:
+	Audio.sonar(nombre)
+extends Control
+
+# Anfitrion de minijuegos: pone el marco comun (titulo, instrucciones, controles, pistas de Orbita y resultado)
+# alrededor de cualquier minijuego de res://minijuegos/<id>/. Asi todos se presentan igual.
+#
+# minijuego.json:
+#   {"titulo": "...", "resumen": "una frase", "instrucciones": ["paso 1", "paso 2"], "controles": "texto",
+#    "pistas": ["mirada", "frase", "respuesta"], "ficha": "id_de_ficha", "orden": 1, "escena": "1.2"}
+
+signal _boton(accion: String)
+
+const Estilo := preload("res://interfaz/estilo.gd")
+const LIENZO := Vector2(1120, 520)
+const LIENZO_COMPLETO := Vector2(1280, 720)   # minijuegos con pantalla_completa = true (ver nucleo/minijuego.gd)
+
+# Resplandor del campo: fuera del lienzo, cada pixel toma el color del campo reflejado en su borde, muy
+# desenfocado (niveles bajos de la copia de pantalla) y atenuado con la distancia. Asi el campo no lleva marco:
+# sus propios colores llegan hasta el borde de la pantalla. Un solo pase, sin imagenes ni viewport extra.
+const RESPLANDOR := """
+shader_type canvas_item;
+uniform sampler2D pantalla : hint_screen_texture, filter_linear_mipmap, repeat_disable;
+uniform vec4 campo = vec4(0.0625, 0.139, 0.875, 0.722);
+uniform vec3 tinte : source_color = vec3(0.11, 0.157, 0.18);
+uniform float fuerza = 0.62;
+uniform float desenfoque = 5.5;
+uniform float alcance = 150.0;
+
+void fragment() {
+	vec2 a = campo.xy;
+	vec2 b = campo.xy + campo.zw;
+	vec2 fuera = max(max(a - SCREEN_UV, SCREEN_UV - b), vec2(0.0));
+	if (fuera.x + fuera.y <= 0.0) {
+		COLOR = vec4(0.0);
+	} else {
+		vec2 espejo = clamp(SCREEN_UV, a, b);
+		espejo += (espejo - SCREEN_UV) * 0.6;
+		espejo = clamp(espejo, a + campo.zw * 0.04, b - campo.zw * 0.04);
+		vec3 c = textureLod(pantalla, espejo, desenfoque).rgb;
+		float d = length(fuera / SCREEN_PIXEL_SIZE) * (720.0 * SCREEN_PIXEL_SIZE.y);
+		float caida = exp(-d / alcance);
+		vec3 color = mix(tinte * 0.55, c, fuerza * caida);
+		COLOR = vec4(color, 1.0);
+	}
+}
+"""
+
+var _marco: Control
+var _ambiente: ColorRect
+var _titulo: Label
+var _controles: Label
+var _hueco: Control
+var _capa: PanelContainer
+var _capa_columna: VBoxContainer
+var _salir: Button
+var _minijuego: Control = null
+var _resultado: Dictionary = {}
+var _pendiente := false
+var _pista := 0
+var _lienzo := LIENZO
+var _completo := false           # el minijuego pidio toda la pantalla (pantalla_completa)
+
+
+func _ready() -> void:
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	visible = false
+	var velo := ColorRect.new()
+	# fondo opaco: mientras se juega no se ve (ni se dibuja) el mundo 3D
+	velo.color = Estilo.NOCHE.darkened(0.45)
+	velo.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(velo)
+
+	# sin marco ni recuadro: el campo va centrado sobre el fondo y su resplandor llena los margenes
+	_marco = Control.new()
+	_marco.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_marco.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_marco)
+	_hueco = Control.new()
+	_hueco.custom_minimum_size = LIENZO
+	_hueco.size = LIENZO
+	_hueco.clip_contents = true
+	_marco.add_child(_hueco)
+	_ambiente = ColorRect.new()
+	_ambiente.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_ambiente.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var sombreador := Shader.new()
+	sombreador.code = RESPLANDOR
+	var material_resplandor := ShaderMaterial.new()
+	material_resplandor.shader = sombreador
+	material_resplandor.set_shader_parameter("tinte", Estilo.NOCHE)
+	_ambiente.material = material_resplandor
+	_marco.add_child(_ambiente)
+	_titulo = Estilo.texto("", 18, Color(Estilo.PAPEL, 0.82), 700)
+	_titulo.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_marco.add_child(_titulo)
+	_salir = Button.new()
+	_salir.text = "Esc Â· Salir"
+	_salir.flat = true
+	_salir.focus_mode = Control.FOCUS_NONE
+	_salir.add_theme_font_override("font", Estilo.fuente(600))
+	_salir.add_theme_font_size_override("font_size", 15)
+	_salir.add_theme_color_override("font_color", Color(Estilo.PAPEL, 0.6))
+	_salir.add_theme_color_override("font_hover_color", Estilo.PAPEL)
+	_salir.add_theme_color_override("font_pressed_color", Estilo.PAPEL)
+	_salir.pressed.connect(_abandonar)
+	_marco.add_child(_salir)
+	_controles = Estilo.texto("", 15, Color(Estilo.PAPEL, 0.55), 500)
+	_controles.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_controles.clip_text = true
+	_controles.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_controles.custom_minimum_size = Vector2(LIENZO.x, 0)
+	_marco.add_child(_controles)
+
+	_capa = Estilo.panel(Color(Estilo.PAPEL, 0.98), 16, 4, 26)
+	_capa.custom_minimum_size = Vector2(720, 0)
+	_capa_columna = VBoxContainer.new()
+	_capa_columna.add_theme_constant_override("separation", 12)
+	_capa.add_child(_capa_columna)
+	_capa.visible = false
+	add_child(_capa)
+
+
+func _process(_delta: float) -> void:
+	if not visible:
+		return
+	_capa.reset_size()
+	_capa.position = (size - _capa.size) * 0.5
+	_colocar()
+
+
+func _colocar() -> void:
+	# el campo centrado en pixeles enteros; titulo y salida en el margen de arriba, controles en el de abajo
+	var origen: Vector2 = Vector2.ZERO if _completo else ((size - _lienzo) * 0.5).floor()
+	_hueco.position = origen
+	_hueco.size = _lienzo
+	for nodo in [_ambiente, _titulo, _salir, _controles]:
+		nodo.visible = not _completo
+	_titulo.reset_size()
+	_salir.reset_size()
+	_controles.reset_size()
+	_titulo.position = Vector2(origen.x + 2.0, origen.y - _titulo.size.y - 10.0)
+	_salir.position = Vector2(origen.x + _lienzo.x - _salir.size.x, origen.y - _salir.size.y - 6.0)
+	_controles.size.x = _lienzo.x
+	_controles.position = Vector2(origen.x, origen.y + _lienzo.y + 12.0)
+	if size.x > 0.0 and size.y > 0.0:
+		var m: ShaderMaterial = _ambiente.material
+		m.set_shader_parameter("campo", Vector4(origen.x / size.x, origen.y / size.y, _lienzo.x / size.x, _lienzo.y / size.y))
+
+
+func _unhandled_input(evento: InputEvent) -> void:
+	if visible and _minijuego != null and evento.is_action_pressed("pausa"):
+		get_viewport().set_input_as_handled()
+		_abandonar()
+
+
+func _abandonar() -> void:
+	if _minijuego != null and _minijuego.get("activo"):
+		_minijuego.set("activo", false)
+		_resultado = {"superado": false, "abandonado": true, "puntos": 0.0, "detalle": ""}
+		_pendiente = false
+	elif _capa.visible:
+		_boton.emit("salir")
+
+
+func _al_terminar(resultado: Dictionary) -> void:
+	_resultado = resultado
+	_pendiente = false
+
+
+func _llenar_capa(titulo: String, color: Color, lineas: Array, botones: Array) -> void:
+	for hijo in _capa_columna.get_children():
+		_capa_columna.remove_child(hijo)
+		hijo.queue_free()
+	_capa_columna.add_child(Estilo.texto(titulo, 30, color, 700))
+	for l in lineas:
+		if l is Control:
+			_capa_columna.add_child(l)
+		elif str(l) != "":
+			var etiqueta := Estilo.texto(str(l), 20, Estilo.TINTA, 500)
+			etiqueta.custom_minimum_size = Vector2(660, 0)
+			_capa_columna.add_child(etiqueta)
+	var fila := HBoxContainer.new()
+	fila.add_theme_constant_override("separation", 12)
+	fila.alignment = BoxContainer.ALIGNMENT_END
+	var primero: Button = null
+	for par in botones:
+		var b := Estilo.boton(par[0], 20, par.size() > 2)
+		b.custom_minimum_size = Vector2(170, 46)
+		var accion: String = par[1]
+		b.pressed.connect(func(): _boton.emit(accion))
+		fila.add_child(b)
+		if primero == null:
+			primero = b
+	_capa_columna.add_child(Estilo.separador(4))
+	_capa_columna.add_child(fila)
+	_capa.visible = true
+	_capa.reset_size()
+	if primero != null:
+		primero.grab_focus.call_deferred()
+
+
+func _ficha_control(id_ficha: String) -> Control:
+	var f := Juego.ficha(id_ficha)
+	if f.is_empty():
+		return Estilo.separador(0)
+	var caja := Estilo.panel(Color("fffaf0"), 10, 2, 12)
+	var columna := VBoxContainer.new()
+	columna.add_child(Estilo.texto("AL CUADERNO Â· %s" % String(f.get("titulo", "")).to_upper(), 14, Estilo.PETROLEO, 700))
+	var cuerpo := Estilo.texto(f.get("texto", ""), 18, Estilo.TINTA, 500)
+	cuerpo.custom_minimum_size = Vector2(630, 0)
+	columna.add_child(cuerpo)
+	columna.add_child(Estilo.texto("Fuente: %s" % f.get("fuente", ""), 14, Estilo.TINTA_SUAVE, 500))
+	caja.add_child(columna)
+	return caja
+
+
+func jugar(id: String, parametros: Dictionary) -> Dictionary:
+	var meta := Juego.info_minijuego(id)
+	var ruta := "res://minijuegos/%s/%s.gd" % [id, id]
+	if meta.is_empty() or not FileAccess.file_exists(ruta):
+		print("AVISO minijuego inexistente: ", id)
+		return {"superado": false, "error": "no existe", "puntos": 0.0}
+	var guion: Variant = load(ruta)
+	visible = true
+	_titulo.text = String(meta.get("titulo", id)).to_upper()
+	_controles.text = meta.get("controles", "")
+	_colocar()
+	# el mundo 3D queda tapado por el fondo opaco: no se dibuja mientras dura el minijuego
+	var vista := get_viewport()
+	var tenia_3d: bool = not vista.disable_3d
+	vista.disable_3d = true
+	_pista = 0
+	var solo := 0
+	if Juego.modo_prueba or Juego.minijuegos_solos:
+		solo = -1 if parametros.get("fallar", false) else 1
+	var final: Dictionary = {}
+	while true:
+		if _minijuego != null and is_instance_valid(_minijuego):
+			_minijuego.queue_free()
+		_minijuego = guion.new()
+		_completo = _minijuego.get("pantalla_completa") == true
+		_lienzo = LIENZO_COMPLETO if _completo else LIENZO
+		_colocar()
+		_hueco.add_child(_minijuego)
+		_minijuego.position = Vector2.ZERO
+		_minijuego.terminado.connect(_al_terminar)
+		_minijuego.set("_solo", solo)
+		_minijuego.preparar(parametros, meta)
+		if solo == 0:
+			var lineas: Array = [meta.get("resumen", "")]
+			var n := 1
+			for paso in meta.get("instrucciones", []):
+				lineas.append("%d. %s" % [n, paso])
+				n += 1
+			if String(meta.get("controles", "")) != "":
+				lineas.append(Estilo.texto("Controles: %s" % meta.get("controles", ""), 16, Estilo.TINTA_SUAVE, 500))
+			if _pista > 0:
+				var pistas: Array = meta.get("pistas", [])
+				if not pistas.is_empty():
+					lineas.append("Ã“rbita: Â«%sÂ»" % pistas[mini(_pista - 1, pistas.size() - 1)])
+			_llenar_capa(meta.get("titulo", id), Estilo.TINTA, lineas, [["Empezar", "empezar", true], ["Salir", "salir"]])
+			var accion: String = await _boton
+			_capa.visible = false
+			if accion == "salir":
+				final = {"superado": false, "abandonado": true, "puntos": 0.0}
+				break
+		_pendiente = true
+		_minijuego.empezar()
+		while _pendiente:
+			await get_tree().process_frame
+		final = _resultado
+		print("MINIJUEGO %s superado=%s puntos=%.1f detalle=%s" % [id, str(final.get("superado", false)), float(final.get("puntos", 0.0)), str(final.get("detalle", ""))])
+		if solo != 0 or final.get("abandonado", false):
+			break
+		var siguiente := ""
+		if final.get("superado", false):
+			Audio.sonar("ok")
+			var id_ficha: String = meta.get("ficha", "")
+			var extra: Array = [final.get("detalle", "")]
+			if id_ficha != "":
+				Juego.anotar(id_ficha)
+				extra.append(_ficha_control(id_ficha))
+			_llenar_capa("Â¡Logrado!", Estilo.CIAN_MEDIO, extra, [["Continuar", "continuar", true], ["Otra vez", "reintentar"]])
+			siguiente = await _boton
+		else:
+			Audio.sonar("error")
+			_pista += 1
+			_llenar_capa("Casi", Estilo.TERRACOTA, [final.get("detalle", ""), "Ã“rbita puede darte una pista antes del prÃ³ximo intento."], [["Reintentar", "reintentar", true], ["Salir", "salir"]])
+			siguiente = await _boton
+		_capa.visible = false
+		if siguiente != "reintentar":
+			break
+	if final.get("superado", false):
+		var ficha_final: String = meta.get("ficha", "")
+		if ficha_final != "":
+			Juego.anotar(ficha_final)
+	if _minijuego != null and is_instance_valid(_minijuego):
+		_minijuego.queue_free()
+	_minijuego = null
+	_capa.visible = false
+	visible = false
+	vista.disable_3d = not tenia_3d
+	return final
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\linea_tiempo
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+-a----        14/11/2026     19:33          16743 linea_tiempo.gd                                                      
+-a----        14/11/2026     19:01             19 linea_tiempo.gd.uid                                                  
+-a----        14/11/2026     19:17            769 minijuego.json                                                       
+-a----        14/11/2026     19:33           2489 prueba_linea_tiempo.gd                                               
+-a----        14/11/2026     19:01             20 prueba_linea_tiempo.gd.uid                                           
+-a----        14/11/2026     19:13           4996 prueba_manos.gd                                                      
+-a----        14/11/2026     19:01             20 prueba_manos.gd.uid                                                  
+rg : El término 'rg' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable. 
+Compruebe si escribió correctamente el nombre o, si incluyó una ruta de acceso, compruebe que dicha ruta es correcta e 
+inténtelo de nuevo.
+En línea: 2 Carácter: 126
++ ... anfitrion.gd; Get-ChildItem juego/minijuegos/linea_tiempo; rg --files ...
++                                                                ~~
+    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Content -Encoding UTF8 juego/minijuegos/linea_tiempo/linea_tiempo.gd; Get-Content -Encoding UTF8 juego/minijuegos/linea_tiempo/prueba_manos.gd; Get-Content -Encoding UTF8 juego/minijuegos/linea_tiempo/prueba_linea_tiempo.gd; Get-Content -Encoding UTF8 juego/minijuegos/linea_tiempo/minijuego.json; Get-Content -Encoding UTF8 herramientas/juego_ejecutar.py' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 3255ms:
+extends "res://nucleo/minijuego.gd"
+
+# Escalinata cenital: mundo en pixeles logicos, +y sube por el cerro.
+# Las fechas se extraen de las fichas; velocidades y distancias son reglas arcade.
+const DT: float = 1.0 / 120.0
+const COLUMNAS: Array[float] = [66.0, 140.0, 214.0]
+const FICHAS: Array[String] = ["observatorio_quito", "estacion_cotopaxi", "disco_apolo11", "apolo_soyuz_1975", "sts2_despedida", "estacion_entrega", "exa_2007", "pegaso_lanzamiento", "acuerdos_artemisa"]
+const NOMBRES: Array[String] = ["OBSERVATORIO", "ESTACION QUITO", "DISCO LUNAR", "APOLO SOYUZ", "DESPEDIDA STS2", "ENTREGA", "NACE EXA", "PEGASO", "ACUERDOS"]
+const ICONOS: Array = [
+	["...###...", "..#####..", ".#######.", ".##...##.", ".##...##.", "#########", "#.#.#.#.#"],
+	["#........", ".#.....#.", "..#...#..", "...###...", "....#....", "...###...", "..#...#.."],
+	["..#####..", ".#######.", "###...###", "###.#.###", "###...###", ".#######.", "..#####.."],
+	["##.....##", "###...###", "..##.##..", "...###...", "..##.##..", "###...###", "##.....##"],
+	["....#....", "...###...", "...###...", "..#####..", ".#######.", "###.#.###", "...#.#..."],
+	["#.......#", "###...###", "..#####..", "...###...", "..#####..", "###...###", "#.......#"],
+	["....#....", "..#.#.#..", "...###...", "#########", "...###...", "..#.#.#..", "....#...."],
+	["##.....##", "##..#..##", "#########", "##.###.##", "#########", "##..#..##", "##.....##"],
+	["..#####..", "..#.#.#..", "..#####..", "..#.#.#..", "..#####..", "..#.#.#..", "..#####.."]
+]
+const CHICA: Array[String] = ["..hhh..", ".hhhhh.", ".hpph..", "..ppp..", "..ccc..", ".ccccc.", "p.ccc.p", "..jjj..", "..j.j..", ".jj.jj."]
+const COCO: Array[String] = ["..###..", ".#####.", "##.#.##", "#######", ".#####.", "..###.."]
+const IGUANA: Array[String] = [".....#.....", "....###....", "..#######.#", "###########", "..#.#..#...", ".#..#...#.."]
+const LETRAS := {
+	"A": ["###", "#.#", "###", "#.#", "#.#"], "B": ["##.", "#.#", "##.", "#.#", "##."],
+	"C": ["###", "#..", "#..", "#..", "###"], "D": ["##.", "#.#", "#.#", "#.#", "##."],
+	"E": ["###", "#..", "##.", "#..", "###"], "F": ["###", "#..", "##.", "#..", "#.."],
+	"G": ["###", "#..", "#.#", "#.#", "###"], "H": ["#.#", "#.#", "###", "#.#", "#.#"],
+	"I": ["###", ".#.", ".#.", ".#.", "###"], "J": ["..#", "..#", "..#", "#.#", "###"],
+	"K": ["#.#", "#.#", "##.", "#.#", "#.#"], "L": ["#..", "#..", "#..", "#..", "###"],
+	"M": ["#...#", "##.##", "#.#.#", "#...#", "#...#"], "N": ["#..#", "##.#", "#.##", "#..#", "#..#"],
+	"O": ["###", "#.#", "#.#", "#.#", "###"], "P": ["###", "#.#", "###", "#..", "#.."],
+	"Q": ["###", "#.#", "#.#", "###", "..#"], "R": ["##.", "#.#", "##.", "#.#", "#.#"],
+	"S": ["###", "#..", "###", "..#", "###"], "T": ["###", ".#.", ".#.", ".#.", ".#."],
+	"U": ["#.#", "#.#", "#.#", "#.#", "###"], "V": ["#.#", "#.#", "#.#", "#.#", ".#."],
+	"W": ["#...#", "#...#", "#.#.#", "##.##", "#...#"], "X": ["#.#", "#.#", ".#.", "#.#", "#.#"],
+	"Y": ["#.#", "#.#", ".#.", ".#.", ".#."], "Z": ["###", "..#", ".#.", "#..", "###"],
+	"0": ["###", "#.#", "#.#", "#.#", "###"], "1": [".#.", "##.", ".#.", ".#.", "###"],
+	"2": ["###", "..#", "###", "#..", "###"], "3": ["###", "..#", "###", "..#", "###"],
+	"4": ["#.#", "#.#", "###", "..#", "..#"], "5": ["###", "#..", "###", "..#", "###"],
+	"6": ["###", "#..", "###", "#.#", "###"], "7": ["###", "..#", "..#", "..#", "..#"],
+	"8": ["###", "#.#", "###", "#.#", "###"], "9": ["###", "#.#", "###", "..#", "###"],
+	" ": ["..", "..", "..", "..", ".."], "/": ["..#", "..#", ".#.", "#..", "#.."],
+	":": [".", "#", ".", "#", "."], ".": [".", ".", ".", ".", "#"], "!": ["#", "#", "#", ".", "#"],
+	"-": ["...", "...", "###", "...", "..."], "+": ["...", ".#.", "###", ".#.", "..."],
+	"x": ["...", "#.#", ".#.", "#.#", "..."], "<": ["..#", ".#.", "#..", ".#.", "..#"],
+	">": ["#..", ".#.", "..#", ".#.", "#.."], "?": ["###", "..#", ".#.", "...", ".#."],
+}
+const ACENTOS := {"Á": "A", "É": "E", "Í": "I", "Ó": "O", "Ú": "U", "Ñ": "N"}
+
+
+var hitos: Array[Dictionary] = []
+var placas: Array[Dictionary] = []
+var peligros: Array[Dictionary] = []
+var particulas: Array[Dictionary] = []
+var jugadora: Vector2 = Vector2(140, 0)
+var velocidad: Vector2 = Vector2.ZERO
+var mando: Vector2 = Vector2.ZERO
+var siguiente: int = 0
+var vidas: int = 3
+var puntos: int = 0
+var fase: int = 0 # 0 pictograma, 1 jugando, 2 final
+var reloj: float = 0.0
+var limite: float = 90.0
+var rapidez: float = 56.0
+var radio_placa: float = 14.0
+var salto: float = 0.0
+var altura: float = 0.0
+var inmune: float = 0.0
+var destello: float = 0.0
+var sacudida: float = 0.0
+var descanso: float = 0.0
+var aviso: String = ""
+var aviso_t: float = 0.0
+var final_t: float = 0.0
+var gana: bool = false
+var causa: String = ""
+var _auto: int = 0
+var _pulso: bool = false
+var _acum: float = 0.0
+var _intro: float = 0.0
+var _nuevo_peligro: float = 2.7
+var _azar: RandomNumberGenerator = RandomNumberGenerator.new()
+
+func _preparar() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	limite = [100.0, 90.0, 80.0][dificultad - 1]
+	radio_placa = [16.0, 13.0, 10.0][dificultad - 1]
+	_azar.seed = int(parametros.get("semilla", 7319 + dificultad))
+	# Busca el primer anio de cuatro cifras en texto, luego en fuente (disco).
+	var expresion: RegEx = RegEx.new()
+	expresion.compile("(?:18|19|20)[0-9]{2}")
+	for id in FICHAS:
+		var ficha: Dictionary = Juego.ficha(id)
+		if ficha.is_empty():
+			continue
+		var resultado: RegExMatch = expresion.search(str(ficha.get("texto", "")))
+		if resultado == null:
+			resultado = expresion.search(str(ficha.get("fuente", "")))
+		if id == "estacion_entrega":
+			var fechas: Array[RegExMatch] = expresion.search_all(str(ficha.get("texto", "")))
+			if not fechas.is_empty():
+				resultado = fechas.back()
+		if resultado != null:
+			hitos.append({"id": id, "anio": int(resultado.get_string()), "icono": FICHAS.find(id)})
+	hitos.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return int(a["anio"]) < int(b["anio"]))
+	for fila in hitos.size():
+		var columna: int = (fila * 2 + 1) % 3
+		for c in 3:
+			var indice: int = fila if c == columna else (fila + 1 + (c if c < columna else c - 1)) % hitos.size()
+			placas.append({"fila": fila, "columna": c, "hito": indice, "pos": Vector2(COLUMNAS[c], 55.0 + fila * 70.0), "revelada": false})
+	queue_redraw()
+
+func _empezar() -> void:
+	fase = 0
+	sonar("radio")
+
+func jugar_solo(acierta: bool) -> void:
+	_auto = 1 if acierta else -1
+
+func _input(evento: InputEvent) -> void:
+	if activo and _auto == 0 and (evento.is_action_pressed("interactuar") or evento.is_action_pressed("saltar")):
+		_pulso = true
+		get_viewport().set_input_as_handled()
+
+func _paso(delta: float) -> void:
+	_acum += delta
+	while _acum >= DT and activo:
+		_acum -= DT
+		if _auto != 0:
+			_piloto()
+		else:
+			mando = Vector2(eje_x(), eje_y()).limit_length()
+		_tic(DT)
+	queue_redraw()
+
+func _tic(dt: float) -> void:
+	_animar(dt)
+	if fase == 0:
+		_intro += dt
+		_pulso = false
+		if _intro >= 2.0:
+			fase = 1
+		return
+	if fase == 2:
+		final_t += dt
+		if final_t >= 1.3:
+			terminar(gana, puntos, causa)
+		return
+	reloj += dt
+	if reloj >= limite:
+		_final(false, "Se acabó el tiempo antes de completar los nueve hitos en orden.")
+		return
+	if descanso > 0.0:
+		descanso -= dt
+		_pulso = false
+		return
+	var pulsado: bool = _pulso
+	_pulso = false
+	if pulsado and salto <= 0.0:
+		salto = 0.75
+		sonar("salto")
+	velocidad = velocidad.move_toward(mando * rapidez, dt * 320.0)
+	jugadora += velocidad * dt
+	jugadora.x = clampf(jugadora.x, 37.0, 243.0)
+	var cima: float = 55.0 + siguiente * 70.0
+	jugadora.y = clampf(jugadora.y, maxf(-8.0, cima - 88.0), cima + 12.0)
+	if salto > 0.0:
+		salto = maxf(0.0, salto - dt)
+		altura = sin(PI * salto / 0.75) * 14.0
+		if salto <= 0.0:
+			altura = 0.0
+			_aterrizar()
+	if fase != 1 or descanso > 0.0:
+		return
+	_nuevo_peligro -= dt
+	if _nuevo_peligro <= 0.0:
+		_nuevo_peligro = [3.5, 2.6, 1.9][dificultad - 1]
+		var coco: bool = _azar.randf() < 0.6
+		var lado: int = -1 if _azar.randf() < 0.5 else 1
+		peligros.append({"pos": Vector2(_azar.randf_range(45, 235), cima + 65.0) if coco else Vector2(30 if lado > 0 else 250, cima - 25.0), "vel": Vector2(10.0 * lado, -[24.0, 32.0, 42.0][dificultad - 1]) if coco else Vector2(lado * [28.0, 39.0, 51.0][dificultad - 1], 0), "coco": coco})
+	for i in range(peligros.size() - 1, -1, -1):
+		var peligro: Dictionary = peligros[i]
+		var pos: Vector2 = peligro["pos"]
+		var vel: Vector2 = peligro["vel"]
+		pos += vel * dt
+		peligro["pos"] = pos
+		if inmune <= 0.0 and altura < 5.0 and pos.distance_to(jugadora) < (8.0 if bool(peligro["coco"]) else 10.0):
+			peligros.remove_at(i)
+			_golpe("Los cocos y las iguanas te alcanzaron a ras del mosaico; salta para pasarlos.")
+		elif pos.y < cima - 110.0 or pos.x < 20.0 or pos.x > 260.0:
+			peligros.remove_at(i)
+
+func _aterrizar() -> void:
+	for placa in placas:
+		if int(placa["fila"]) != siguiente:
+			continue
+		var p: Vector2 = placa["pos"]
+		if absf(jugadora.x - p.x) <= radio_placa and absf(jugadora.y - p.y) <= 9.0:
+			if int(placa["hito"]) != siguiente:
+				_golpe("Esa placa pertenece a otro momento: sigue el pictograma pendiente antes de subir.")
+				return
+			placa["revelada"] = true
+			var hito: Dictionary = hitos[siguiente]
+			aviso = "%s %d" % [NOMBRES[int(hito["icono"])], int(hito["anio"])]
+			aviso_t = 2.3
+			puntos += 100 + 25 * vidas
+			_estallar(p, Estilo.DORADO)
+			destello = 0.12
+			descanso = 0.85
+			velocidad = Vector2.ZERO
+			siguiente += 1
+			sonar("recoger")
+			if siguiente == hitos.size():
+				_final(true, "Del observatorio de %d a los Acuerdos de %d: cada hito ocupa su lugar en el tiempo." % [int(hitos[0]["anio"]), int(hitos.back()["anio"])])
+			return
+
+func _golpe(motivo: String) -> void:
+	if inmune > 0.0:
+		return
+	vidas -= 1
+	inmune = 2.0
+	destello = 0.25
+	sacudida = 0.3
+	_estallar(jugadora, Estilo.CORAL)
+	sonar("error")
+	jugadora.y = 55.0 + siguiente * 70.0 - 25.0
+	velocidad = Vector2.ZERO
+	salto = 0.0
+	altura = 0.0
+	if vidas <= 0:
+		_final(false, motivo)
+
+func _final(superado: bool, motivo: String) -> void:
+	fase = 2
+	gana = superado
+	causa = motivo
+	sonar("logro" if superado else "error")
+
+func _piloto() -> void:
+	# Solo manda direcciones y salto; no escribe placas, vidas ni progreso.
+	mando = Vector2.ZERO
+	if fase != 1 or descanso > 0.0:
+		return
+	var objetivo: Vector2 = jugadora
+	for placa in placas:
+		if int(placa["fila"]) == siguiente and ((int(placa["hito"]) == siguiente) == (_auto > 0)):
+			objetivo = placa["pos"]
+			break
+	var diferencia: Vector2 = objetivo - jugadora - velocidad * 0.09
+	mando.x = signf(diferencia.x) if absf(diferencia.x) > 1.0 else 0.0
+	mando.y = signf(diferencia.y) if absf(diferencia.y) > 1.0 else 0.0
+	mando = mando.limit_length()
+	if salto <= 0.0:
+		if jugadora.distance_to(objetivo) < 7.0:
+			_pulso = true
+		for peligro in peligros:
+			var pos: Vector2 = peligro["pos"]
+			var vel: Vector2 = peligro["vel"]
+			if (pos + vel * 0.24).distance_to(jugadora) < 13.0:
+				_pulso = true
+
+func _animar(dt: float) -> void:
+	inmune = maxf(0.0, inmune - dt)
+	destello = maxf(0.0, destello - dt)
+	sacudida = maxf(0.0, sacudida - dt)
+	aviso_t = maxf(0.0, aviso_t - dt)
+	for i in range(particulas.size() - 1, -1, -1):
+		var p: Dictionary = particulas[i]
+		p["vida"] = float(p["vida"]) - dt
+		var pos: Vector2 = p["pos"]
+		var vel: Vector2 = p["vel"]
+		p["pos"] = pos + vel * dt
+		p["vel"] = vel + Vector2(0, -45) * dt
+		if float(p["vida"]) <= 0.0:
+			particulas.remove_at(i)
+
+func _estallar(pos: Vector2, color: Color) -> void:
+	for i in 18:
+		particulas.append({"pos": pos, "vel": Vector2.from_angle(_azar.randf() * TAU) * _azar.randf_range(9, 30), "vida": 0.7, "color": color})
+
+func _camara() -> float:
+	return maxf(0.0, jugadora.y - 28.0)
+
+func _pantalla(pos: Vector2) -> Vector2:
+	return Vector2(pos.x, 111.0 - pos.y + _camara())
+
+func _r(x: float, y: float, w: float, h: float, color: Color) -> void:
+	draw_rect(Rect2(floorf(x), floorf(y), w, h), color)
+
+func _sprite(mapa: Array, pos: Vector2, color: Color, escala: int = 1) -> void:
+	var pal: Dictionary = {"h": Estilo.TERRACOTA, "p": Estilo.CREMA, "c": Estilo.DORADO, "j": Estilo.PETROLEO}
+	for y in mapa.size():
+		var fila: String = mapa[y]
+		for x in fila.length():
+			var c: String = fila[x]
+			if c != ".":
+				var tinta: Color = pal.get(c, color)
+				_r(pos.x + x * escala, pos.y + y * escala, escala, escala, tinta)
+
+func _escribir(t: String, x: float, y: float, color: Color, escala: int = 1) -> void:
+	var cx: float = x
+	for i in t.length():
+		var c: String = t[i]
+		var mapa: Array = LETRAS.get(c, LETRAS[" "])
+		_sprite(mapa, Vector2(cx, y), color, escala)
+		var fila: String = mapa[0]
+		cx += (fila.length() + 1) * escala
+
+func _draw() -> void:
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(4, 4))
+	_r(0, 0, 280, 130, Estilo.NOCHE)
+	var desvio: Vector2 = Vector2(roundf(sin(reloj * 83.0)), roundf(cos(reloj * 91.0))) if sacudida > 0.0 else Vector2.ZERO
+	draw_set_transform(desvio * 4, 0.0, Vector2(4, 4))
+	# Laterales: casas del cerro y plantas; el centro es un mosaico escalonado.
+	for i in 12:
+		var y: float = fposmod(i * 15.0 + _camara() * 0.5, 130.0)
+		for x in [3, 257]:
+			_r(x, y, 19, 13, Estilo.TINTA if i % 2 == 0 else Estilo.PETROLEO.darkened(0.5))
+			_r(x + 3, y + 4, 3, 3, Estilo.NARANJA)
+			_r(x + 11, y + 4, 3, 3, Estilo.DORADO)
+	for i in range(-2, 55):
+		var y: float = _pantalla(Vector2(0, i * 14.0)).y
+		if y < 24 or y > 132:
+			continue
+		_r(30, y, 220, 13, Estilo.TINTA_SUAVE if i % 5 == 0 else Estilo.TINTA)
+		_r(30, y, 220, 1, Estilo.NARANJA if i % 5 == 0 else Estilo.PETROLEO)
+		for x in range(33, 249, 9):
+			_r(x + (4 if i % 2 else 0), y + 5, 3, 2, Estilo.PETROLEO if i % 3 else Estilo.TERRACOTA)
+		_r(28, y, 2, 14, Estilo.CREMA)
+		_r(250, y, 2, 14, Estilo.CREMA)
+	for placa in placas:
+		var p: Vector2 = _pantalla(placa["pos"])
+		if p.y < 29.0 or p.y > 125.0:
+			continue
+		var fila: int = placa["fila"]
+		var indice: int = placa["hito"]
+		var hito: Dictionary = hitos[indice]
+		var revelada: bool = placa["revelada"]
+		var borde: Color = Estilo.DORADO if revelada else Estilo.PETROLEO
+		if dificultad == 1 and fila == siguiente and indice == siguiente:
+			borde = Estilo.CIAN
+		_r(p.x - 19, p.y - 12, 38, 25, borde)
+		_r(p.x - 18, p.y - 11, 36, 22, Estilo.NOCHE)
+		_sprite(ICONOS[int(hito["icono"])], p + Vector2(-4, -9), Estilo.CREMA if fila <= siguiente else Estilo.TINTA_SUAVE)
+		if revelada:
+			_escribir(str(hito["anio"]), p.x - 15, p.y + 1, Estilo.DORADO, 2)
+		else:
+			_escribir("E", p.x - 1, p.y + 3, Estilo.CIAN if fila == siguiente else Estilo.PETROLEO)
+	for peligro in peligros:
+		var p: Vector2 = _pantalla(peligro["pos"])
+		if p.y > 30 and p.y < 126:
+			_sprite(COCO if bool(peligro["coco"]) else IGUANA, p - Vector2(4, 4), Estilo.NARANJA if bool(peligro["coco"]) else Estilo.CORAL)
+	for particula in particulas:
+		var p: Vector2 = _pantalla(particula["pos"])
+		var color: Color = particula["color"]
+		_r(p.x, p.y, 1, 1, color)
+	var chica: Vector2 = _pantalla(jugadora)
+	_r(chica.x - 3, chica.y, 7, 2, Estilo.PETROLEO)
+	if inmune <= 0.0 or fmod(inmune, 0.3) > 0.15:
+		_sprite(CHICA, chica - Vector2(3, 10 + altura), Estilo.CREMA)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(4, 4))
+	_r(0, 0, 280, 29, Estilo.NOCHE)
+	_r(0, 28, 280, 1, Estilo.PETROLEO)
+	_escribir(str(puntos).pad_zeros(4), 4, 2, Estilo.CREMA, 2)
+	_escribir("%d/9" % siguiente, 104, 2, Estilo.DORADO, 2)
+	for i in 3:
+		_sprite(["#.#", "###", ".#."], Vector2(169 + 12 * i, 4), Estilo.CREMA if i < vidas else Estilo.TINTA_SUAVE, 2)
+	_escribir(str(int(ceil(maxf(0, limite - reloj)))).pad_zeros(3), 249, 2, Estilo.CREMA, 2)
+	if siguiente < hitos.size():
+		var hito: Dictionary = hitos[siguiente]
+		_escribir("SIGUE", 4, 19, Estilo.CIAN)
+		_sprite(ICONOS[int(hito["icono"])], Vector2(28, 17), Estilo.CREMA)
+		_escribir(NOMBRES[int(hito["icono"])], 43, 19, Estilo.PAPEL)
+	if aviso_t > 0.0:
+		_r(0, 119, 280, 11, Estilo.NOCHE)
+		_escribir(aviso, 7, 122, Estilo.DORADO)
+	if destello > 0.0:
+		_r(28, 29, 224, 101, Color(Estilo.CREMA if descanso > 0 else Estilo.CORAL, destello))
+	if fase == 0:
+		_r(34, 40, 212, 62, Estilo.NOCHE)
+		for i in 3:
+			_r(108 + i * 20, 76 - i * 9, 20, 4, Estilo.CIAN)
+		_sprite(CHICA, Vector2(112, 63), Estilo.CREMA)
+		_escribir("SUBE LOS HITOS EN ORDEN", 44, 87, Estilo.CREMA, 2)
+	if fase == 2:
+		_r(47, 44, 186, 29, Estilo.NOCHE)
+		_escribir("CIMA DEL TIEMPO" if gana else "OTRO INTENTO", 62, 53, Estilo.DORADO if gana else Estilo.CORAL, 2)
+extends Node
+
+# Observa el pictograma del marcador, las placas y los animales visibles.
+# Todas las acciones pasan por Input.parse_input_event, nunca por el modelo.
+var _resultado: Dictionary = {}
+var _devuelto: bool = false
+var _pulsadas: Dictionary = {}
+
+func correr(pruebas: Node) -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	Juego.modo_prueba = false
+	Juego.sin_guardar = true
+	Juego.minijuegos_solos = false
+	for nivel in [1, 2, 3]:
+		await _manos(pruebas, nivel)
+	pruebas.comprobar(not Interfaz.anfitrion.visible, "linea.manos.anfitrion_cerrado")
+	pruebas.comprobar(not get_tree().paused, "linea.manos.arbol_sin_pausa")
+	Juego.modo_prueba = true
+
+func _abrir(nivel: int) -> void:
+	_resultado = await Interfaz.abrir_minijuego("linea_tiempo", {"dificultad": nivel})
+	_devuelto = true
+
+func _manos(pruebas: Node, nivel: int) -> void:
+	_devuelto = false
+	_resultado = {}
+	_abrir(nivel)
+	for i in 120:
+		await get_tree().process_frame
+		if Interfaz.anfitrion.visible and Interfaz.anfitrion.get("_capa").visible:
+			break
+	await _real(0.12)
+	var mj: Control = Interfaz.anfitrion.get("_minijuego")
+	if not pruebas.comprobar(mj != null, "linea.manos.d%d.abre" % nivel):
+		return
+	pruebas.comprobar(int(mj.get("_auto")) == 0 and int(mj.get("_solo")) == 0, "linea.manos.d%d.sin_piloto" % nivel)
+	await _toque(KEY_ENTER)
+	pruebas.comprobar(bool(mj.get("activo")), "linea.manos.d%d.Empezar_Intro" % nivel)
+	var saltos: int = 0
+	var max_progreso: int = 0
+	var arriba: int = KEY_W if nivel == 2 else KEY_UP
+	var abajo: int = KEY_S if nivel == 2 else KEY_DOWN
+	var izquierda: int = KEY_A if nivel == 2 else KEY_LEFT
+	var derecha: int = KEY_D if nivel == 2 else KEY_RIGHT
+	var accion: int = KEY_SPACE if nivel == 2 else KEY_E
+	while is_instance_valid(mj) and bool(mj.get("activo")) and float(mj.get("tiempo")) < 110.0:
+		var mov: Vector2 = Vector2.ZERO
+		var pulsar: bool = false
+		if int(mj.get("fase")) == 1 and float(mj.get("descanso")) <= 0.0:
+			var siguiente: int = int(mj.get("siguiente"))
+			max_progreso = maxi(max_progreso, siguiente)
+			var hitos: Array = mj.get("hitos")
+			var pendiente: Dictionary = hitos[siguiente]
+			var icono_hud: int = int(pendiente["icono"])
+			var placas: Array = mj.get("placas")
+			var pos: Vector2 = mj.get("jugadora")
+			var velocidad: Vector2 = mj.get("velocidad")
+			var objetivo: Vector2 = pos
+			for placa in placas:
+				var hito: Dictionary = hitos[int(placa["hito"])]
+				# Compara los dibujos, sin leer anios ni ordenar fichas ocultas.
+				if int(placa["fila"]) == siguiente and int(hito["icono"]) == icono_hud:
+					objetivo = placa["pos"]
+					break
+			var diferencia: Vector2 = objetivo - pos - velocidad * 0.09
+			mov.x = signf(diferencia.x) if absf(diferencia.x) > 1.0 else 0.0
+			mov.y = signf(diferencia.y) if absf(diferencia.y) > 1.0 else 0.0
+			if float(mj.get("salto")) <= 0.0:
+				pulsar = pos.distance_to(objetivo) < 7.0
+				var peligros: Array = mj.get("peligros")
+				for peligro in peligros:
+					var animal: Vector2 = peligro["pos"]
+					var marcha: Vector2 = peligro["vel"]
+					if (animal + marcha * 0.24).distance_to(pos) < 13.0:
+						pulsar = true
+		_tecla(izquierda, mov.x < 0)
+		_tecla(derecha, mov.x > 0)
+		_tecla(arriba, mov.y > 0)
+		_tecla(abajo, mov.y < 0)
+		if pulsar and not bool(_pulsadas.get(accion, false)):
+			saltos += 1
+		_tecla(accion, pulsar)
+		await get_tree().process_frame
+	_soltar()
+	await _real(0.15)
+	var resultado: Dictionary = Interfaz.anfitrion.get("_resultado")
+	pruebas.comprobar(bool(resultado.get("superado", false)), "linea.manos.d%d.gana_solo_teclas" % nivel, str(resultado))
+	pruebas.comprobar(saltos >= 9 and max_progreso >= 8, "linea.manos.d%d.nueve_saltos_reales" % nivel, "saltos=%d progreso=%d" % [saltos, max_progreso])
+	print("LINEA_MANOS nivel=%d saltos=%d tiempo=%.2f vidas=%d" % [nivel, saltos, float(mj.get("tiempo")), int(mj.get("vidas"))])
+	await _toque(KEY_ENTER)
+	for i in 120:
+		await get_tree().process_frame
+		if _devuelto:
+			break
+	pruebas.comprobar(_devuelto and not Interfaz.anfitrion.visible, "linea.manos.d%d.Continuar_Intro_cierra" % nivel)
+	pruebas.comprobar(bool(_resultado.get("superado", false)) and not get_tree().paused, "linea.manos.d%d.devuelve_victoria_sin_pausa" % nivel, str(_resultado))
+
+func _tecla(codigo: int, abajo: bool) -> void:
+	if bool(_pulsadas.get(codigo, false)) == abajo:
+		return
+	_pulsadas[codigo] = abajo
+	var evento: InputEventKey = InputEventKey.new()
+	evento.physical_keycode = codigo
+	evento.keycode = codigo
+	evento.pressed = abajo
+	Input.parse_input_event(evento)
+
+func _soltar() -> void:
+	for codigo in _pulsadas.keys():
+		_tecla(int(codigo), false)
+
+func _toque(codigo: int) -> void:
+	_tecla(codigo, true)
+	await get_tree().process_frame
+	await get_tree().physics_frame
+	_tecla(codigo, false)
+	await _real(0.08)
+
+func _real(segundos: float) -> void:
+	await get_tree().create_timer(segundos, true, false, true).timeout
+extends Node
+
+const Minijuego = preload("res://minijuegos/linea_tiempo/linea_tiempo.gd")
+var _resultado: Dictionary = {}
+
+func _crear(nivel: int) -> Control:
+	var mj: Control = Minijuego.new()
+	add_child(mj)
+	mj.preparar({"dificultad": nivel}, {})
+	mj.terminado.connect(func(r: Dictionary): _resultado = r)
+	_resultado = {}
+	mj.empezar()
+	mj.set_process(false)
+	return mj
+
+func correr(pruebas: Node) -> void:
+	for nivel in [1, 2, 3]:
+		for acierta in [true, false]:
+			var mj: Control = _crear(nivel)
+			var anios: Array[int] = []
+			for hito in mj.hitos:
+				anios.append(int(hito["anio"]))
+			pruebas.comprobar(anios == [1873, 1957, 1969, 1975, 1981, 1982, 2007, 2013, 2023], "linea.modelo.d%d.anios_de_fichas" % nivel)
+			var ocultas: bool = true
+			for placa in mj.placas:
+				ocultas = ocultas and not bool(placa["revelada"])
+			pruebas.comprobar(ocultas, "linea.modelo.d%d.fechas_ocultas" % nivel)
+			mj.jugar_solo(acierta)
+			for cuadro in 799:
+				if not mj.activo:
+					break
+				mj._process(0.05)
+			pruebas.comprobar(not mj.activo and bool(_resultado.get("superado", not acierta)) == acierta and mj.tiempo < 40.0, "linea.modelo.d%d.auto_%s_menos40" % [nivel, str(acierta)], str(_resultado))
+			print("LINEA_MODELO nivel=%d acierta=%s tiempo=%.2f vidas=%d" % [nivel, str(acierta), mj.tiempo, mj.vidas])
+			mj.free()
+	var juego: Control = _crear(1)
+	juego.fase = 1
+	juego.jugadora = Vector2(140, 55)
+	# Estar sobre una placa sin saltar no revela el anio.
+	for i in 12:
+		juego._tic(1.0 / 120.0)
+	pruebas.comprobar(juego.siguiente == 0, "linea.modelo.caminar_no_activa")
+	var evento: InputEventAction = InputEventAction.new()
+	evento.action = "saltar"
+	evento.pressed = true
+	juego._input(evento)
+	for i in 100:
+		juego._tic(1.0 / 120.0)
+	pruebas.comprobar(juego.siguiente == 1, "linea.modelo.aterrizar_revela")
+	juego.free()
+	for volando in [false, true]:
+		juego = _crear(1)
+		juego.fase = 1
+		juego.salto = 0.4 if volando else 0.0
+		juego.peligros.append({"pos": juego.jugadora, "vel": Vector2.ZERO, "coco": true})
+		juego._tic(1.0 / 120.0)
+		pruebas.comprobar(juego.vidas == (3 if volando else 2), "linea.modelo.salto_evade_%s" % str(volando))
+		juego.free()
+	juego = _crear(3)
+	juego.fase = 1
+	juego.reloj = juego.limite - 0.001
+	juego._tic(0.01)
+	for i in 150:
+		juego._tic(0.01)
+	pruebas.comprobar(not juego.activo and not bool(_resultado.get("superado", true)), "linea.modelo.tiempo_agotado")
+	juego.free()
+{
+  "titulo": "La escalinata del tiempo",
+  "resumen": "Salta sobre los mosaicos de la historia espacial ecuatoriana, del más antiguo al más reciente.",
+  "instrucciones": [
+    "Busca la placa con el pictograma de SIGUE.",
+    "Muévete hasta ella y salta para revelar el año.",
+    "Salta cocos e iguanas: tienes tres vidas."
+  ],
+  "controles": "Flechas / WASD: moverse · E / Espacio: saltar · Esc: salir",
+  "pistas": [
+    "Mira el pictograma de SIGUE; busca su gemelo en el mosaico.",
+    "El año se revela al aterrizar. Puedes saltar también para esquivar animales.",
+    "Observatorio, estación Quito, disco lunar, Apolo-Soyuz, STS-2, entrega, EXA, Pegaso, Acuerdos."
+  ],
+  "ficha": "disco_apolo11",
+  "escena": "2.4",
+  "orden": 5
+}
+"""Ejecuta el juego (carpeta juego/) con Godot 4.7.2: de uno en uno, y lo cierra si se cuelga.
+
+Varios agentes trabajan a la vez en este equipo (2 nucleos, 8 GB, Intel HD 620). Dos Godot abiertos a la vez
+falsean los fps y pueden agotar la memoria, asi que este envoltorio toma un candado global
+(juego/.candado_godot) y espera su turno. Tambien mata el proceso si no sale solo (pasa en la HD 620).
+
+Uso:
+  python -I herramientas/juego_ejecutar.py [--ventana] [--max=<s>] [--todo] [--importar] -- <argumentos del juego>
+
+  (sin --ventana)  corre con --headless: logica, fisica y guiones, sin GPU. Sirve para las pruebas.
+  --ventana        abre la ventana real: capturas (--captura=<png>) y mediciones de fps (--medir=<s>).
+  --max=<s>        tiempo maximo en segundos (por defecto 240).
+  --todo           imprime toda la salida de Godot, no solo las lineas clave.
+  --importar       antes de ejecutar, corre "--headless --import" (crea .godot y la cache de clases).
+  --proyecto=<carpeta>  otro proyecto de Godot bajo el mismo candado, con su escena si hace falta. Ejemplo:
+                   python -I herramientas/juego_ejecutar.py --ventana --proyecto=pruebas/escena_exploracion
+                     res://vista_previa.tscn -- --glb=<glb> --animacion=caminar --tiempo=0.3 --captura=<png>
+                   (en esos proyectos el fin lo marcan CAPTURA_OK o MEDIDA)
+
+Argumentos del juego (los lee juego/principal.gd):
+  --prueba=<nombre>          nucleo | zonas | minijuegos | recorrido | zona:<id> | minijuego:<id>
+  --zona=<id> [--entrada=<nombre>]   abre una zona directamente
+  --minijuego=<id>           abre un minijuego directamente
+  --auto                     dialogos sin esperas y minijuegos que se juegan solos
+  --captura=<png> [--espera=<s>]     guarda una captura tras <s> segundos (por defecto 2) y sale
+  --medir=<s>                mide fps durante <s> segundos y sale
+  --ritmo=<f>                Engine.time_scale (las pruebas usan 8)
+  --pos=x,z  --mira=x,z      coloca a la protagonista (con --zona) para una captura
+
+Marcadores de la salida: PRUEBA_OK, PRUEBA_FALLO, CAPTURA_OK, MEDIDA y FIN.
+Codigo de salida: 0 si no hubo errores de guion, PRUEBA_FALLO ni tiempo agotado; 1 en caso contrario.
+"""
+import os
+import subprocess
+import sys
+import threading
+import time
+from pathlib import Path
+
+sys.stdout.reconfigure(encoding="utf-8")
+RAIZ = Path(__file__).resolve().parent.parent
+PROYECTO = RAIZ / "juego"
+GODOT_POR_DEFECTO = r"C:\Users\guill\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64_console.exe"
+
+
+def ruta_godot():
+    """Ejecutable de Godot 4.7.2 (version de consola). En otro equipo se indica con la variable de entorno
+    GODOT_EXE o escribiendo la ruta en herramientas/godot_local.txt (una linea; ese archivo no se comparte)."""
+    local = Path(__file__).resolve().parent / "godot_local.txt"
+    if os.environ.get("GODOT_EXE"):
+        return os.environ["GODOT_EXE"]
+    if local.exists():
+        return local.read_text(encoding="utf-8").strip().strip('"')
+    return GODOT_POR_DEFECTO
+
+
+GODOT = ruta_godot()
+CANDADO = PROYECTO / ".candado_godot"
+CLAVES = ("PRUEBA_", "CAPTURA_OK", "MEDIDA", "FIN", "ZONA ", "MINIJUEGO ", "AVISO ", "SCRIPT ERROR", "Parse Error",
+          "ERROR:", "   at:", "WARNING: res")
+ERRORES = ("SCRIPT ERROR", "Parse Error", "PRUEBA_FALLO", "Failed to load script", "Cannot open file",
+           "Invalid call", "Invalid access", "Invalid assignment", "Nonexistent function")
+GRACIA_S = 6.0
+CANDADO_VIEJO_S = 900.0
+ESPERA_CANDADO_S = 2400.0
+
+
+def matar(proceso):
+    subprocess.run(["taskkill", "/T", "/F", "/PID", str(proceso.pid)], capture_output=True)
+
+
+def tomar_candado():
+    inicio = time.time()
+    avisado = False
+    while True:
+        try:
+            descriptor = os.open(str(CANDADO), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(descriptor, f"{os.getpid()} {time.time():.0f}".encode())
+            os.close(descriptor)
+            return
+        except FileExistsError:
+            try:
+                edad = time.time() - CANDADO.stat().st_mtime
+            except FileNotFoundError:
+                continue
+            if edad > CANDADO_VIEJO_S:
+                try:
+                    CANDADO.unlink()
+                except OSError:
+                    pass
+                continue
+            if time.time() - inicio > ESPERA_CANDADO_S:
+                raise SystemExit("No se pudo tomar el candado de Godot (otro proceso lo tiene hace demasiado)")
+            if not avisado:
+                print("(esperando turno: otro Godot esta corriendo)", flush=True)
+                avisado = True
+            time.sleep(1.5)
+
+
+def soltar_candado():
+    try:
+        CANDADO.unlink()
+    except OSError:
+        pass
+
+
+def correr(orden, maximo, todo, marcas_fin=("FIN",)):
+    inicio = time.time()
+    proceso = subprocess.Popen(orden, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+                               encoding="utf-8", errors="replace")
+    estado = {"fin": None, "errores": 0, "lineas": 0}
+
+    def leer():
+        for linea in proceso.stdout:
+            estado["lineas"] += 1
+            texto = linea.rstrip()
+            if todo or any(c in texto for c in CLAVES):
+                print(texto, flush=True)
+            if any(e in texto for e in ERRORES):
+                estado["errores"] += 1
+            if any(texto.startswith(m) or (m != "FIN" and m in texto) for m in marcas_fin):
+                estado["fin"] = time.time()
+
+    hilo = threading.Thread(target=leer, daemon=True)
+    hilo.start()
+    resultado = "ok"
+    while proceso.poll() is None:
+        ahora = time.time()
+        if estado["fin"] is not None and ahora - estado["fin"] > GRACIA_S:
+            matar(proceso)
+            resultado = "ok (Godot no salio solo: se cerro)"
+            break
+        if ahora - inicio > maximo:
+            matar(proceso)
+            resultado = "TIEMPO AGOTADO"
+            estado["errores"] += 1
+            break
+        time.sleep(0.2)
+    hilo.join(timeout=3.0)
+    return resultado, estado, time.time() - inicio
+
+
+def main():
+    if "--" not in sys.argv:
+        raise SystemExit(__doc__)
+    corte = sys.argv.index("--")
+    previos, juego = sys.argv[1:corte], sys.argv[corte + 1:]
+    ventana = "--ventana" in previos
+    todo = "--todo" in previos
+    importar = "--importar" in previos
+    maximo = 240.0
+    proyecto = PROYECTO
+    escena = []
+    for p in previos:
+        if p.startswith("--max="):
+            maximo = float(p.split("=", 1)[1])
+        elif p.startswith("--proyecto="):
+            # otro proyecto de Godot (p. ej. pruebas/escena_exploracion) bajo el mismo candado
+            proyecto = (RAIZ / p.split("=", 1)[1]).resolve()
+        elif p.startswith("res://"):
+            escena.append(p)
+    propio = proyecto == PROYECTO
+    marcas_fin = ("FIN",) if propio else ("FIN", "CAPTURA_OK", "MEDIDA")
+    if not Path(GODOT).exists():
+        raise SystemExit(f"No se encuentra Godot en {GODOT}. Define GODOT_EXE o escribe la ruta en herramientas/godot_local.txt")
+    tomar_candado()
+    try:
+        if importar or (propio and not (PROYECTO / ".godot").exists()):
+            r, e, t = correr([GODOT, "--headless", "--path", str(proyecto), "--import"], 300.0, False, ("FIN_NUNCA",))
+            print(f"[importar: {r}, {t:.0f} s]", flush=True)
+        orden = [GODOT, "--path", str(proyecto), *escena]
+        if not ventana:
+            orden.append("--headless")
+        orden += ["--", *juego]
+        resultado, estado, segundos = correr(orden, maximo, todo, marcas_fin)
+    finally:
+        soltar_candado()
+    print(f"[godot: {resultado}; {segundos:.0f} s; lineas={estado['lineas']}; errores={estado['errores']}]", flush=True)
+    sys.exit(1 if estado["errores"] else 0)
+
+
+if __name__ == "__main__":
+    main()
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-ChildItem -Path AGENTS.md,juego/AGENTS.md,juego/minijuegos/AGENTS.md,juego/minijuegos/linea_tiempo/AGENTS.md -ErrorAction SilentlyContinue | ForEach-Object { Get-Content -LiteralPath $_.FullName }; git status --short' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 2057ms:
+warning: could not open directory 'pruebas/bench_render/corridas/run_4pi1rfpl/': No such file or directory
+ M Nasa_Game/.obsidian/graph.json
+ M Nasa_Game/.obsidian/workspace.json
+ M Nasa_Game/Construccion/Minijuegos/antena/NOTA.md
+ M Nasa_Game/Construccion/Minijuegos/muestras/NOTA.md
+ M Nasa_Game/Construccion/Minijuegos/orbita/NOTA.md
+ M Nasa_Game/Construccion/Minijuegos/satelite/NOTA.md
+ M Nasa_Game/Construccion/Minijuegos/seguidor/NOTA.md
+ M Nasa_Game/Construccion/Minijuegos/telescopio/NOTA.md
+ M Nasa_Game/Construccion/Tareas_Codex/logs/estado.json
+ M "Nasa_Game/Fase_1_Arte/Exploracion/Lote_06/Lote 06 - Luna y Mirador (propuesta).md"
+ M Nasa_Game/Fase_1_Arte/anclas.json
+ M Nasa_Game/Fase_1_Arte/paleta_coherencia.json
+ M Nasa_Game/Fase_1_Arte/registro_generaciones.json
+ M Nasa_Game/Memory.md
+ M Nasa_Game/trabajos.md
+ M herramientas/blender/rig_protagonista.py
+ M juego/ARQUITECTURA.md
+ M juego/datos/misiones.json
+ M juego/interfaz/anfitrion.gd
+ M juego/interfaz/hud.gd
+ M juego/interfaz/menu.gd
+ M juego/interfaz/ventana_carga.gd
+ M juego/minijuegos/antena/antena.gd
+ M juego/minijuegos/antena/minijuego.json
+ M juego/minijuegos/antena/prueba_modelo.gd
+ M juego/minijuegos/banderas/banderas.gd
+ M juego/minijuegos/banderas/minijuego.json
+ M juego/minijuegos/linea_tiempo/linea_tiempo.gd
+ M juego/minijuegos/linea_tiempo/minijuego.json
+ M juego/minijuegos/linea_tiempo/prueba_linea_tiempo.gd
+ M juego/minijuegos/muestras/minijuego.json
+ M juego/minijuegos/muestras/muestras.gd
+ M juego/minijuegos/muestras/prueba_muestras.gd
+ M juego/minijuegos/orbita/minijuego.json
+ M juego/minijuegos/orbita/orbita.gd
+ M juego/minijuegos/orbita/prueba_modelo.gd
+ M juego/minijuegos/regreso/minijuego.json
+ M juego/minijuegos/regreso/regreso.gd
+ M juego/minijuegos/satelite/minijuego.json
+ M juego/minijuegos/satelite/prueba_satelite.gd
+ M juego/minijuegos/satelite/satelite.gd
+ M juego/minijuegos/seguidor/minijuego.json
+ M juego/minijuegos/seguidor/seguidor.gd
+ M juego/minijuegos/telescopio/minijuego.json
+ M juego/minijuegos/telescopio/prueba_telescopio.gd
+ M juego/minijuegos/telescopio/telescopio.gd
+ M juego/nucleo/audio.gd
+ M juego/nucleo/companero.gd
+ M juego/nucleo/iluminacion.gd
+ M juego/nucleo/interactuable.gd
+ M juego/nucleo/interfaz.gd
+ M juego/nucleo/juego.gd
+ M juego/nucleo/jugador.gd
+ M juego/nucleo/minijuego.gd
+ M juego/nucleo/umbral.gd
+ M juego/nucleo/zonas.gd
+ M juego/principal.gd
+ M juego/pruebas/pruebas.gd
+ M juego/shaders/umbral.gdshader
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_base_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_sdfgi_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_sdfgi_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/forward_plus_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_base_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_base_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/gl_compatibility_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_base_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_base_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_4pi1rfpl/mobile_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_base_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_base_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_base_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_base_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_hierba_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_hierba_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sdfgi_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sdfgi_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sdfgi_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sdfgi_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sprites_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/forward_plus_sprites_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_base_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_base_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_base_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_base_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_hierba_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_hierba_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_sprites_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/gl_compatibility_sprites_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_base_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_base_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_base_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_base_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_hierba_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_hierba_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_hierba_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_hierba_1920x1080.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_sprites_1280x720.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_sprites_1280x720.log
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_sprites_1920x1080.json
+ D pruebas/bench_render/corridas/run_kz4ist6c/mobile_sprites_1920x1080.log
+?? Nasa_Game/Construccion/BUCLE_ESTILO.md
+?? Nasa_Game/Construccion/Capturas/
+?? Nasa_Game/Construccion/Minijuegos/antena/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/antena/arcade_1.txt
+?? Nasa_Game/Construccion/Minijuegos/antena/arcade_2.png
+?? Nasa_Game/Construccion/Minijuegos/antena/arcade_2.txt
+?? Nasa_Game/Construccion/Minijuegos/antena/arcade_3.png
+?? Nasa_Game/Construccion/Minijuegos/antena/arcade_3.txt
+?? Nasa_Game/Construccion/Minijuegos/antena/diagnostico_raton.log
+?? Nasa_Game/Construccion/Minijuegos/antena/informe.md
+?? Nasa_Game/Construccion/Minijuegos/antena/manos_inicio.png
+?? Nasa_Game/Construccion/Minijuegos/antena/manos_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/antena/manos_paso.png
+?? Nasa_Game/Construccion/Minijuegos/antena/manos_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_automatica.txt
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_manos.log
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_manos.txt
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_manos_diagnostico.log
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_manos_ventana.log
+?? Nasa_Game/Construccion/Minijuegos/antena/prueba_minijuego_manos.log
+?? Nasa_Game/Construccion/Minijuegos/banderas/INFORME_REMATE.md
+?? Nasa_Game/Construccion/Minijuegos/banderas/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/banderas/arcade_captura_1.log
+?? Nasa_Game/Construccion/Minijuegos/banderas/arcade_captura_2.log
+?? Nasa_Game/Construccion/Minijuegos/banderas/arcade_captura_3.log
+?? Nasa_Game/Construccion/Minijuegos/banderas/arcade_contrato.log
+?? Nasa_Game/Construccion/Minijuegos/banderas/arcade_manos.log
+?? Nasa_Game/Construccion/Minijuegos/banderas/diagnostico_carga_2.png
+?? Nasa_Game/Construccion/Minijuegos/banderas/diagnostico_carga_3.png
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/INFORME_ARCADE.md
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/arcade_2.png
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/arcade_capturas.log
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/arcade_contrato.log
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/arcade_manos.log
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/arcade_modelo.log
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/diagnostico_manos.txt
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_nivel3.png
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_raton.png
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/manos_teclado.png
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/prueba_manos.txt
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/prueba_manos_ventana.txt
+?? Nasa_Game/Construccion/Minijuegos/linea_tiempo/prueba_minijuego_manos.txt
+?? Nasa_Game/Construccion/Minijuegos/muestras/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/muestras/arcade_2.png
+?? Nasa_Game/Construccion/Minijuegos/muestras/arcade_captura_1.log
+?? Nasa_Game/Construccion/Minijuegos/muestras/arcade_captura_2.log
+?? Nasa_Game/Construccion/Minijuegos/muestras/arcade_captura_3.log
+?? Nasa_Game/Construccion/Minijuegos/muestras/arcade_manos.log
+?? Nasa_Game/Construccion/Minijuegos/muestras/arcade_modelo.log
+?? Nasa_Game/Construccion/Minijuegos/muestras/arcade_prueba.log
+?? Nasa_Game/Construccion/Minijuegos/orbita/arcade_1.log
+?? Nasa_Game/Construccion/Minijuegos/orbita/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/orbita/arcade_2.log
+?? Nasa_Game/Construccion/Minijuegos/orbita/arcade_2.png
+?? Nasa_Game/Construccion/Minijuegos/orbita/arcade_3.log
+?? Nasa_Game/Construccion/Minijuegos/orbita/arcade_3.png
+?? Nasa_Game/Construccion/Minijuegos/orbita/modelo_arcade.log
+?? Nasa_Game/Construccion/Minijuegos/orbita/prueba_manos.log
+?? Nasa_Game/Construccion/Minijuegos/orbita/prueba_minijuego.log
+?? Nasa_Game/Construccion/Minijuegos/orbita/usuario_capturas/
+?? Nasa_Game/Construccion/Minijuegos/orbita/usuario_manos/
+?? Nasa_Game/Construccion/Minijuegos/orbita/usuario_pruebas/
+?? Nasa_Game/Construccion/Minijuegos/regreso/INFORME_REMATE.md
+?? Nasa_Game/Construccion/Minijuegos/regreso/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/regreso/arcade_2.png
+?? Nasa_Game/Construccion/Minijuegos/regreso/arcade_3.png
+?? Nasa_Game/Construccion/Minijuegos/regreso/arcade_captura_1.log
+?? Nasa_Game/Construccion/Minijuegos/regreso/arcade_captura_2.log
+?? Nasa_Game/Construccion/Minijuegos/regreso/arcade_captura_3.log
+?? Nasa_Game/Construccion/Minijuegos/regreso/arcade_contrato.log
+?? Nasa_Game/Construccion/Minijuegos/regreso/arcade_manos.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/INFORME_ARCADE.md
+?? Nasa_Game/Construccion/Minijuegos/satelite/INFORME_COMPLETA.md
+?? Nasa_Game/Construccion/Minijuegos/satelite/INFORME_MANOS.md
+?? Nasa_Game/Construccion/Minijuegos/satelite/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/arcade_2.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/arcade_3.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/arcade_contrato.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/arcade_manos.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/arcade_modelo.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/completa_1.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/completa_2.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/completa_3.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/completa_captura_1.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/completa_captura_2.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/completa_captura_3.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/diagnostico_manos_coordenadas.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_raton_balance.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_raton_montaje.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/manos_teclado_balance.png
+?? Nasa_Game/Construccion/Minijuegos/satelite/prueba_manos.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/prueba_manos_ventana.log
+?? Nasa_Game/Construccion/Minijuegos/satelite/prueba_minijuego_manos.log
+?? Nasa_Game/Construccion/Minijuegos/seguidor/INFORME_ARCADE.md
+?? Nasa_Game/Construccion/Minijuegos/seguidor/INFORME_MANOS.md
+?? Nasa_Game/Construccion/Minijuegos/seguidor/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/arcade_2.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/arcade_3.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/manos_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/manos_rampa_varios.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/manos_raton.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/manos_teclado.png
+?? Nasa_Game/Construccion/Minijuegos/seguidor/prueba_comun_manos.txt
+?? Nasa_Game/Construccion/Minijuegos/seguidor/prueba_manos.txt
+?? Nasa_Game/Construccion/Minijuegos/seguidor/prueba_manos_ventana.txt
+?? Nasa_Game/Construccion/Minijuegos/telescopio/ARCADE.md
+?? Nasa_Game/Construccion/Minijuegos/telescopio/INFORME_COMPLETA.md
+?? Nasa_Game/Construccion/Minijuegos/telescopio/INFORME_MANOS.md
+?? Nasa_Game/Construccion/Minijuegos/telescopio/anterior/
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_1.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_2.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_3.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_captura_1.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_captura_2.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_captura_3.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_prueba_contrato.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_prueba_manos.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/arcade_prueba_modelo.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_1.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_2.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_3.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_captura_1.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_captura_1_absoluta.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_captura_2.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_captura_2_absoluta.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_captura_3.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_contrato.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/completa_manos.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/diagnostico_sincronizacion.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_rasgo_0.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_rasgo_1.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_rasgo_2.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_raton_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_buscar.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_enfocar.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_instrucciones.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_rasgo_0.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_rasgo_1.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_rasgo_2.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/manos_teclado_resultado.png
+?? Nasa_Game/Construccion/Minijuegos/telescopio/prueba_manos.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/prueba_manos_ventana.log
+?? Nasa_Game/Construccion/Minijuegos/telescopio/prueba_minijuego_manos.log
+?? Nasa_Game/Construccion/Tareas_Codex/informes/arcade_linea_tiempo.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/arcade_muestras.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/arcade_orbita.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/arcade_satelite.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/arcade_telescopio.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/completa_linea_tiempo.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/completa_muestras.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/completa_orbita.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/completa_satelite.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/completa_telescopio.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_antena.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_linea_tiempo.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_muestras.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_satelite.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_seguidor.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/manos_telescopio.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/remate_antena.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/remate_banderas.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/remate_regreso.md
+?? Nasa_Game/Construccion/Tareas_Codex/informes/remate_seguidor.md
+?? Nasa_Game/Construccion/Tareas_Codex/lanzar_arcade.cmd
+?? Nasa_Game/Construccion/Tareas_Codex/lanzar_arcade_2a.cmd
+?? Nasa_Game/Construccion/Tareas_Codex/lanzar_arcade_2b.cmd
+?? Nasa_Game/Construccion/Tareas_Codex/lanzar_arcade_remate.cmd
+?? Nasa_Game/Construccion/Tareas_Codex/lanzar_manos.cmd
+?? Nasa_Game/Construccion/Tareas_Codex/logs/arcade_linea_tiempo.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/arcade_muestras.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/arcade_orbita.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/arcade_satelite.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/arcade_telescopio.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/completa_linea_tiempo.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/completa_muestras.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/completa_orbita.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/completa_satelite.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/completa_telescopio.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_antena.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_linea_tiempo.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_muestras.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_satelite.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_seguidor.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/manos_telescopio.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/remate_antena.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/remate_banderas.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/remate_regreso.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/remate_seguidor.log
+?? Nasa_Game/Construccion/Tareas_Codex/logs/tanda2_completa.txt
+?? Nasa_Game/Construccion/Tareas_Codex/logs/tanda2_orbita.txt
+?? Nasa_Game/Construccion/Tareas_Codex/logs/tanda2_remate.txt
+?? Nasa_Game/Construccion/Tareas_Codex/logs/tanda_arcade.txt
+?? Nasa_Game/Construccion/Tareas_Codex/logs/tanda_arcade_completa.txt
+?? Nasa_Game/Construccion/Tareas_Codex/logs/tanda_arcade_remate.txt
+?? Nasa_Game/Construccion/Tareas_Codex/logs/tanda_manos.txt
+?? Nasa_Game/Construccion/Tareas_Codex/minijuegos_arcade.md
+?? Nasa_Game/Construccion/Tareas_Codex/minijuegos_arcade_completa.md
+?? Nasa_Game/Construccion/Tareas_Codex/minijuegos_arcade_remate.md
+?? Nasa_Game/Construccion/Tareas_Codex/minijuegos_manos.md
+?? Nasa_Game/Construccion/Zonas/
+?? Nasa_Game/Fase_1_Arte/Exploracion/Lote_05/_vista/
+?? Nasa_Game/Fase_1_Arte/Exploracion/Lote_07/
+?? Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/
+?? Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/
+?? Nasa_Game/Fase_2_Narrativa/Cinematica_apertura/
+?? Nasa_Game/Fase_3_Personajes/
+?? Nasa_Game/Fase_4_Audio/
+?? herramientas/mallas/ciudad_arquitectura.py
+?? herramientas/mallas/ciudad_base.py
+?? herramientas/mallas/ciudad_mobiliario.py
+?? herramientas/mallas/ciudad_vida.py
+?? herramientas/mallas/habitacion_modelos.py
+?? herramientas/mallas/habitacion_vista_previa.py
+?? herramientas/mallas/luna_modelos.py
+?? herramientas/mallas/luna_recursos_v2.py
+?? herramientas/mallas/luna_vista_previa.py
+?? herramientas/mallas/mirador_escena.py
+?? herramientas/mallas/mirador_modelos.py
+?? herramientas/mallas/sendero_ampliacion.py
+?? herramientas/mallas/sendero_visibilidad.py
+?? juego/audio/
+?? juego/datos/mapa.json
+?? juego/interfaz/arte/
+?? juego/interfaz/mapa.gd
+?? juego/interfaz/mapa.gd.uid
+?? juego/interfaz/minimapa.gd
+?? juego/interfaz/minimapa.gd.uid
+?? juego/minijuegos/antena/antena.gd.uid
+?? juego/minijuegos/antena/prueba_manos.gd
+?? juego/minijuegos/antena/prueba_manos.gd.uid
+?? juego/minijuegos/antena/prueba_modelo.gd.uid
+?? juego/minijuegos/banderas/banderas.gd.uid
+?? juego/minijuegos/banderas/prueba_banderas.gd.uid
+?? juego/minijuegos/banderas/prueba_manos.gd
+?? juego/minijuegos/banderas/prueba_manos.gd.uid
+?? juego/minijuegos/linea_tiempo/linea_tiempo.gd.uid
+?? juego/minijuegos/linea_tiempo/prueba_linea_tiempo.gd.uid
+?? juego/minijuegos/linea_tiempo/prueba_manos.gd
+?? juego/minijuegos/linea_tiempo/prueba_manos.gd.uid
+?? juego/minijuegos/muestras/muestras.gd.uid
+?? juego/minijuegos/muestras/prueba_manos.gd
+?? juego/minijuegos/muestras/prueba_manos.gd.uid
+?? juego/minijuegos/muestras/prueba_muestras.gd.uid
+?? juego/minijuegos/orbita/orbita.gd.uid
+?? juego/minijuegos/orbita/prueba_manos.gd
+?? juego/minijuegos/orbita/prueba_manos.gd.uid
+?? juego/minijuegos/orbita/prueba_modelo.gd.uid
+?? juego/minijuegos/regreso/prueba_manos.gd
+?? juego/minijuegos/regreso/prueba_manos.gd.uid
+?? juego/minijuegos/regreso/prueba_regreso.gd.uid
+?? juego/minijuegos/regreso/regreso.gd.uid
+?? juego/minijuegos/satelite/prueba_manos.gd
+?? juego/minijuegos/satelite/prueba_manos.gd.uid
+?? juego/minijuegos/satelite/prueba_satelite.gd.uid
+?? juego/minijuegos/satelite/satelite.gd.uid
+?? juego/minijuegos/seguidor/prueba_manos.gd
+?? juego/minijuegos/seguidor/prueba_manos.gd.uid
+?? juego/minijuegos/seguidor/prueba_seguidor.gd.uid
+?? juego/minijuegos/seguidor/seguidor.gd.uid
+?? juego/minijuegos/telescopio/enfoque.gdshader.uid
+?? juego/minijuegos/telescopio/luna.gdshader.uid
+?? juego/minijuegos/telescopio/prueba_manos.gd
+?? juego/minijuegos/telescopio/prueba_manos.gd.uid
+?? juego/minijuegos/telescopio/prueba_telescopio.gd.uid
+?? juego/minijuegos/telescopio/telescopio.gd.uid
+?? juego/modelos/ciudad/
+?? juego/modelos/habitacion/
+?? juego/modelos/luna/
+?? juego/modelos/mirador/
+?? juego/modelos/personajes/PER-01_medidas.json
+?? juego/modelos/personajes/PER-01_rig.glb
+?? juego/modelos/sendero/
+?? juego/zonas/ciudad/
+?? juego/zonas/habitacion/habitacion.gd
+?? juego/zonas/habitacion/habitacion.gd.tmp.16664.da91f91e31ac
+?? juego/zonas/habitacion/habitacion.gd.uid
+?? juego/zonas/habitacion/zona.json
+?? juego/zonas/luna/
+?? juego/zonas/mirador/brillo.gdshader
+?? juego/zonas/mirador/brillo.gdshader.uid
+?? juego/zonas/mirador/haz.gdshader
+?? juego/zonas/mirador/haz.gdshader.uid
+?? juego/zonas/mirador/layout.json
+?? juego/zonas/mirador/luciernaga.gdshader
+?? juego/zonas/mirador/luciernaga.gdshader.uid
+?? juego/zonas/mirador/mirador.gd
+?? juego/zonas/mirador/mirador.gd.uid
+?? juego/zonas/mirador/vaiven.gdshader
+?? juego/zonas/mirador/vaiven.gdshader.uid
+?? juego/zonas/mirador/vaiven_brillo.gdshader
+?? juego/zonas/mirador/vaiven_brillo.gdshader.uid
+?? juego/zonas/mirador/vida.gd
+?? juego/zonas/mirador/vida.gd.uid
+?? juego/zonas/mirador/zona.json
+?? juego/zonas/sendero/layout.json
+?? juego/zonas/sendero/sendero.gd
+?? juego/zonas/sendero/sendero.gd.uid
+?? juego/zonas/sendero/zona.json
+warning: could not open directory 'pruebas/bench_render/corridas/run_kz4ist6c/': No such file or directory
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "@'
+from pathlib import Path
+import json
+p=Path('juego/minijuegos/linea_tiempo/linea_tiempo.gd')
+s=p.read_text(encoding='utf-8')
+s=s.replace('[66.0, 140.0, 214.0]', '[70.0, 160.0, 250.0]')
+s=s.replace('const DT:', 'const ANCHO: float = 320.0\\nconst ALTO: float = 180.0\\nconst PRIMERA_FILA: float = 65.0\\nconst PASO_FILA: float = 80.0\\nconst DT:')
+s=s.replace('Vector2(140, 0)', 'Vector2(160, 0)').replace('rapidez: float = 56.0', 'rapidez: float = 76.0')
+s=s.replace('func _preparar() -> void:', 'func _init() -> void:\\n\\tpantalla_completa = true\\n\\nfunc _preparar() -> void:')
+s=s.replace('55.0 + fila * 70.0', 'PRIMERA_FILA + fila * PASO_FILA').replace('55.0 + siguiente * 70.0', 'PRIMERA_FILA + siguiente * PASO_FILA')
+s=s.replace('37.0, 243.0', '12.0, ANCHO - 12.0').replace('cima - 88.0', 'cima - 100.0')
+s=s.replace('[3.5, 2.6, 1.9]', '[4.2, 3.1, 2.4]').replace('randf_range(45, 235)', 'randf_range(20, 300)').replace('30 if lado > 0 else 250', '0 if lado > 0 else 320').replace('pos.x < 20.0 or pos.x > 260.0', 'pos.x < -12.0 or pos.x > ANCHO + 12.0').replace('cima - 110.0', 'cima - 160.0')
+s=s.replace('jugadora.y - 28.0', 'jugadora.y - 32.0').replace('111.0 - pos.y', '160.0 - pos.y')
+s=s.replace('_r(0, 0, 280, 130, Estilo.NOCHE)', '_r(0, 0, ANCHO, ALTO, Estilo.NOCHE)')
+s=s.replace('# Laterales: casas del cerro y plantas; el centro es un mosaico escalonado.', '''# Cielo y lomas cubren el horizonte; el mosaico llega al pie de pantalla.
+\\t_r(0, 29, ANCHO, 25, Estilo.PETROLEO.darkened(0.55))
+\\tfor i in 24:
+\\t\\t_r((i * 47 + 11) % 320, 32 + (i * 7) % 17, 1, 1, Estilo.CREMA)
+\\tfor i in 16:
+\\t\\t_r(i * 22, 46 + (i % 4) * 2, 24, 9, Estilo.TINTA)
+\\t# Casas a ambos lados, sin marco alrededor del campo.''')
+s=s.replace('for i in 12:', 'for i in 14:').replace('130.0)', '180.0)').replace('[3, 257]', '[0, 299]').replace('_r(x, y, 19, 13', '_r(x, y, 21, 13')
+s=s.replace('range(-2, 55)', 'range(-4, 65)').replace('if y < 24 or y > 132:', 'if y < 53 or y > ALTO:')
+s=s.replace('_r(30, y, 220, 13', '_r(0, y, ANCHO, 13').replace('_r(30, y, 220, 1', '_r(0, y, ANCHO, 1').replace('range(33, 249, 9)', 'range(2, 320, 9)')
+s=s.replace('\\t\\t_r(28, y, 2, 14, Estilo.CREMA)\\n\\t\\t_r(250, y, 2, 14, Estilo.CREMA)\\n','')
+s=s.replace('p.y < 29.0 or p.y > 125.0', 'p.y < 65.0 or p.y > 166.0').replace('p.y > 30 and p.y < 126', 'p.y > 54 and p.y < 180')
+s=s.replace('_r(0, 0, 280, 29', '_r(0, 0, ANCHO, 29').replace('_r(0, 28, 280, 1', '_r(0, 28, ANCHO, 1')
+s=s.replace('4, 2, Estilo.CREMA, 2', '4, 4, Estilo.CREMA, 2').replace('104, 2, Estilo.DORADO', '114, 4, Estilo.DORADO').replace('169 + 12 * i', '189 + 12 * i').replace('249, 2, Estilo.CREMA', '289, 4, Estilo.CREMA')
+s=s.replace('\\tif aviso_t > 0.0:', '''\\t_r(200, 20, 116, 3, Estilo.PETROLEO)
+\\t_r(200, 20, 116 * clampf(1.0 - reloj / limite, 0.0, 1.0), 3, Estilo.CIAN)
+\\t_escribir(\"< > WASD\", 4, 170, Estilo.CREMA)
+\\t_escribir(\"E SALTA\", 223, 170, Estilo.CIAN)
+\\t_escribir(\"ESC\", 301, 170, Estilo.CREMA)
+\\tif aviso_t > 0.0:''')
+s=s.replace('_r(0, 119, 280, 11', '_r(0, 151, ANCHO, 11').replace('7, 122, Estilo.DORADO', '7, 154, Estilo.DORADO').replace('_r(28, 29, 224, 101', '_r(0, 53, ANCHO, 127')
+s=s.replace('_r(34, 40, 212, 62', '_r(54, 65, 212, 62').replace('108 + i * 20, 76 - i * 9', '128 + i * 20, 101 - i * 9').replace('Vector2(112, 63)', 'Vector2(132, 88)').replace('44, 87, Estilo.CREMA', '64, 112, Estilo.CREMA')
+s=s.replace('_r(47, 44, 186, 29', '_r(67, 69, 186, 29').replace('62, 53, Estilo.DORADO', '82, 78, Estilo.DORADO')
+p.write_text(s,encoding='utf-8')
+p=Path('juego/minijuegos/linea_tiempo/prueba_linea_tiempo.gd'); s=p.read_text(encoding='utf-8').replace('Vector2(140, 55)', 'Vector2(160, 65)'); p.write_text(s,encoding='utf-8')
+p=Path('juego/minijuegos/linea_tiempo/prueba_manos.gd'); s=p.read_text(encoding='utf-8'); s=s.replace('\\tawait _toque(KEY_ENTER)\\n\\tpruebas.comprobar(bool(mj.get(\"activo\"))', '\\tpruebas.comprobar(bool(mj.get(\"pantalla_completa\")) and mj.size == Vector2(1280, 720), \"linea.manos.d%d.campo_completo\" % nivel)\\n\\tpruebas.comprobar(not Interfaz.anfitrion.get(\"_titulo\").visible and not Interfaz.anfitrion.get(\"_controles\").visible, \"linea.manos.d%d.sin_margenes\" % nivel)\\n\\tawait _toque(KEY_ENTER)\\n\\tpruebas.comprobar(bool(mj.get(\"activo\"))'); p.write_text(s,encoding='utf-8')
+p=Path('juego/minijuegos/linea_tiempo/minijuego.json'); m=json.loads(p.read_text(encoding='utf-8')); m.update(resumen='Sube la escalinata: encuentra cada pictograma y revela nueve hitos al aterrizar.', instrucciones=['Busca el pictograma de SIGUE.', 'Salta sobre su placa para revelar el año.', 'Esquiva cocos e iguanas antes de que acabe el tiempo.'], controles='Flechas/WASD: mover · E/Espacio: saltar · Esc: salir', pistas=['La placa pendiente brilla en cian en dificultad 1.', 'Caminar no revela el año: aterriza sobre la placa del pictograma de SIGUE.', 'Salta los animales; tienes tres vidas para llegar a los Acuerdos.']); p.write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+Path('Nasa_Game/Construccion/Minijuegos/linea_tiempo').mkdir(parents=True,exist_ok=True)
+'@ | python -I -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 601ms:
+codex
+El campo ya ocupa 320 × 180: amplié las columnas y los tramos de subida, añadí horizonte y extendí el mosaico hasta los bordes. El HUD y los controles esenciales quedan dentro; ahora comprobaré que el recorrido ampliado siga siendo ganable.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:linea_tiempo --ritmo=8' in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Select-String -Path juego/principal.gd -Pattern 'captura|espera' -Context 2,4; Get-Content -Encoding UTF8 juego/minijuegos/linea_tiempo/linea_tiempo.gd | Select-Object -Last 115" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 880ms:
+
+  juego\principal.gd:2:
+  juego\principal.gd:3:# Arranque del juego. Sin argumentos abre el menu principal. Con argumentos tras "--" entra 
+directo a una
+> juego\principal.gd:4:# zona o a un minijuego, corre las pruebas, guarda capturas o mide fps (ver 
+herramientas/juego_ejecutar.py).
+  juego\principal.gd:5:
+  juego\principal.gd:6:const Pruebas := preload("res://pruebas/pruebas.gd")
+  juego\principal.gd:7:
+  juego\principal.gd:8:
+  juego\principal.gd:17:		return
+  juego\principal.gd:18:	if a.has("minijuego"):
+> juego\principal.gd:19:		if a.has("captura"):
+> juego\principal.gd:20:			_capturar_luego(a["captura"], float(a.get("espera", "3")))
+  juego\principal.gd:21:		var r: Dictionary = await Interfaz.abrir_minijuego(a["minijuego"], {"dificultad": 
+int(a.get("dificultad", "1")), "fallar": a.has("fallar")})
+  juego\principal.gd:22:		print("RESULTADO ", r)
+> juego\principal.gd:23:		if not a.has("captura"):
+  juego\principal.gd:24:			Interfaz.salir()
+  juego\principal.gd:25:		return
+  juego\principal.gd:26:	if a.has("zona"):
+  juego\principal.gd:27:		Juego.nueva_partida()
+  juego\principal.gd:48:			await _medir(float(a["medir"]))
+  juego\principal.gd:49:			Interfaz.salir()
+> juego\principal.gd:50:		elif a.has("captura"):
+> juego\principal.gd:51:			_capturar_luego(a["captura"], float(a.get("espera", "2")))
+  juego\principal.gd:52:		return
+  juego\principal.gd:53:	Interfaz.abrir_menu()
+  juego\principal.gd:54:	if a.has("mapa"):
+  juego\principal.gd:55:		Interfaz.abrir_mapa(true)
+> juego\principal.gd:56:	if a.has("captura"):
+> juego\principal.gd:57:		_capturar_luego(a["captura"], float(a.get("espera", "1.5")))
+  juego\principal.gd:58:
+  juego\principal.gd:59:
+> juego\principal.gd:60:func _capturar_luego(ruta: String, espera: float) -> void:
+> juego\principal.gd:61:	await get_tree().create_timer(espera, true, false, true).timeout
+  juego\principal.gd:62:	if Juego.args.has("sin_hud"):
+  juego\principal.gd:63:		Interfaz.mostrar_hud(false)
+  juego\principal.gd:64:		await get_tree().process_frame
+> juego\principal.gd:65:	await Interfaz.capturar(ruta)
+  juego\principal.gd:66:	Interfaz.salir()
+  juego\principal.gd:67:
+  juego\principal.gd:68:
+  juego\principal.gd:69:func _medir(segundos: float) -> void:
+	return maxf(0.0, jugadora.y - 32.0)
+
+func _pantalla(pos: Vector2) -> Vector2:
+	return Vector2(pos.x, 160.0 - pos.y + _camara())
+
+func _r(x: float, y: float, w: float, h: float, color: Color) -> void:
+	draw_rect(Rect2(floorf(x), floorf(y), w, h), color)
+
+func _sprite(mapa: Array, pos: Vector2, color: Color, escala: int = 1) -> void:
+	var pal: Dictionary = {"h": Estilo.TERRACOTA, "p": Estilo.CREMA, "c": Estilo.DORADO, "j": Estilo.PETROLEO}
+	for y in mapa.size():
+		var fila: String = mapa[y]
+		for x in fila.length():
+			var c: String = fila[x]
+			if c != ".":
+				var tinta: Color = pal.get(c, color)
+				_r(pos.x + x * escala, pos.y + y * escala, escala, escala, tinta)
+
+func _escribir(t: String, x: float, y: float, color: Color, escala: int = 1) -> void:
+	var cx: float = x
+	for i in t.length():
+		var c: String = t[i]
+		var mapa: Array = LETRAS.get(c, LETRAS[" "])
+		_sprite(mapa, Vector2(cx, y), color, escala)
+		var fila: String = mapa[0]
+		cx += (fila.length() + 1) * escala
+
+func _draw() -> void:
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(4, 4))
+	_r(0, 0, ANCHO, ALTO, Estilo.NOCHE)
+	var desvio: Vector2 = Vector2(roundf(sin(reloj * 83.0)), roundf(cos(reloj * 91.0))) if sacudida > 0.0 else Vector2.ZERO
+	draw_set_transform(desvio * 4, 0.0, Vector2(4, 4))
+	# Cielo y lomas cubren el horizonte; el mosaico llega al pie de pantalla.
+	_r(0, 29, ANCHO, 25, Estilo.PETROLEO.darkened(0.55))
+	for i in 24:
+		_r((i * 47 + 11) % 320, 32 + (i * 7) % 17, 1, 1, Estilo.CREMA)
+	for i in 16:
+		_r(i * 22, 46 + (i % 4) * 2, 24, 9, Estilo.TINTA)
+	# Casas a ambos lados, sin marco alrededor del campo.
+	for i in 14:
+		var y: float = fposmod(i * 15.0 + _camara() * 0.5, 180.0)
+		for x in [0, 299]:
+			_r(x, y, 21, 13, Estilo.TINTA if i % 2 == 0 else Estilo.PETROLEO.darkened(0.5))
+			_r(x + 3, y + 4, 3, 3, Estilo.NARANJA)
+			_r(x + 11, y + 4, 3, 3, Estilo.DORADO)
+	for i in range(-4, 65):
+		var y: float = _pantalla(Vector2(0, i * 14.0)).y
+		if y < 53 or y > ALTO:
+			continue
+		_r(0, y, ANCHO, 13, Estilo.TINTA_SUAVE if i % 5 == 0 else Estilo.TINTA)
+		_r(0, y, ANCHO, 1, Estilo.NARANJA if i % 5 == 0 else Estilo.PETROLEO)
+		for x in range(2, 320, 9):
+			_r(x + (4 if i % 2 else 0), y + 5, 3, 2, Estilo.PETROLEO if i % 3 else Estilo.TERRACOTA)
+	for placa in placas:
+		var p: Vector2 = _pantalla(placa["pos"])
+		if p.y < 65.0 or p.y > 166.0:
+			continue
+		var fila: int = placa["fila"]
+		var indice: int = placa["hito"]
+		var hito: Dictionary = hitos[indice]
+		var revelada: bool = placa["revelada"]
+		var borde: Color = Estilo.DORADO if revelada else Estilo.PETROLEO
+		if dificultad == 1 and fila == siguiente and indice == siguiente:
+			borde = Estilo.CIAN
+		_r(p.x - 19, p.y - 12, 38, 25, borde)
+		_r(p.x - 18, p.y - 11, 36, 22, Estilo.NOCHE)
+		_sprite(ICONOS[int(hito["icono"])], p + Vector2(-4, -9), Estilo.CREMA if fila <= siguiente else Estilo.TINTA_SUAVE)
+		if revelada:
+			_escribir(str(hito["anio"]), p.x - 15, p.y + 1, Estilo.DORADO, 2)
+		else:
+			_escribir("E", p.x - 1, p.y + 3, Estilo.CIAN if fila == siguiente else Estilo.PETROLEO)
+	for peligro in peligros:
+		var p: Vector2 = _pantalla(peligro["pos"])
+		if p.y > 54 and p.y < 180:
+			_sprite(COCO if bool(peligro["coco"]) else IGUANA, p - Vector2(4, 4), Estilo.NARANJA if bool(peligro["coco"]) else Estilo.CORAL)
+	for particula in particulas:
+		var p: Vector2 = _pantalla(particula["pos"])
+		var color: Color = particula["color"]
+		_r(p.x, p.y, 1, 1, color)
+	var chica: Vector2 = _pantalla(jugadora)
+	_r(chica.x - 3, chica.y, 7, 2, Estilo.PETROLEO)
+	if inmune <= 0.0 or fmod(inmune, 0.3) > 0.15:
+		_sprite(CHICA, chica - Vector2(3, 10 + altura), Estilo.CREMA)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2(4, 4))
+	_r(0, 0, ANCHO, 29, Estilo.NOCHE)
+	_r(0, 28, ANCHO, 1, Estilo.PETROLEO)
+	_escribir(str(puntos).pad_zeros(4), 4, 4, Estilo.CREMA, 2)
+	_escribir("%d/9" % siguiente, 114, 4, Estilo.DORADO, 2)
+	for i in 3:
+		_sprite(["#.#", "###", ".#."], Vector2(189 + 12 * i, 4), Estilo.CREMA if i < vidas else Estilo.TINTA_SUAVE, 2)
+	_escribir(str(int(ceil(maxf(0, limite - reloj)))).pad_zeros(3), 289, 4, Estilo.CREMA, 2)
+	if siguiente < hitos.size():
+		var hito: Dictionary = hitos[siguiente]
+		_escribir("SIGUE", 4, 19, Estilo.CIAN)
+		_sprite(ICONOS[int(hito["icono"])], Vector2(28, 17), Estilo.CREMA)
+		_escribir(NOMBRES[int(hito["icono"])], 43, 19, Estilo.PAPEL)
+	_r(200, 20, 116, 3, Estilo.PETROLEO)
+	_r(200, 20, 116 * clampf(1.0 - reloj / limite, 0.0, 1.0), 3, Estilo.CIAN)
+	_escribir("< > WASD", 4, 170, Estilo.CREMA)
+	_escribir("E SALTA", 223, 170, Estilo.CIAN)
+	_escribir("ESC", 301, 170, Estilo.CREMA)
+	if aviso_t > 0.0:
+		_r(0, 151, ANCHO, 11, Estilo.NOCHE)
+		_escribir(aviso, 7, 154, Estilo.DORADO)
+	if destello > 0.0:
+		_r(0, 53, ANCHO, 127, Color(Estilo.CREMA if descanso > 0 else Estilo.CORAL, destello))
+	if fase == 0:
+		_r(54, 65, 212, 62, Estilo.NOCHE)
+		for i in 3:
+			_r(128 + i * 20, 101 - i * 9, 20, 4, Estilo.CIAN)
+		_sprite(CHICA, Vector2(132, 88), Estilo.CREMA)
+		_escribir("SUBE LOS HITOS EN ORDEN", 64, 112, Estilo.CREMA, 2)
+	if fase == 2:
+		_r(67, 69, 186, 29, Estilo.NOCHE)
+		_escribir("CIMA DEL TIEMPO" if gana else "OTRO INTENTO", 82, 78, Estilo.DORADO if gana else Estilo.CORAL, 2)
+
+
+
+ succeeded in 48167ms:
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.04.12.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK linea_tiempo.minijuego_json
+PRUEBA_OK linea_tiempo.json.titulo
+PRUEBA_OK linea_tiempo.json.resumen
+PRUEBA_OK linea_tiempo.json.controles
+PRUEBA_OK linea_tiempo.json.instrucciones
+PRUEBA_OK linea_tiempo.json.pistas
+PRUEBA_OK linea_tiempo.json.ficha
+MINIJUEGO linea_tiempo superado=true puntos=1575.0 detalle=Del observatorio de 1873 a los Acuerdos de 2023: cada hito ocupa su lugar en el tiempo.
+PRUEBA_OK linea_tiempo.d1.termina_solo
+PRUEBA_OK linea_tiempo.d1.se_puede_superar
+MINIJUEGO linea_tiempo superado=true puntos=1550.0 detalle=Del observatorio de 1873 a los Acuerdos de 2023: cada hito ocupa su lugar en el tiempo.
+PRUEBA_OK linea_tiempo.d3.termina_solo
+PRUEBA_OK linea_tiempo.d3.se_puede_superar
+MINIJUEGO linea_tiempo superado=false puntos=0.0 detalle=Esa placa pertenece a otro momento: sigue el pictograma pendiente antes de subir.
+PRUEBA_OK linea_tiempo.se_puede_fallar
+PRUEBA_OK linea_tiempo.el_fallo_explica_la_causa
+FIN
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+[godot: ok; 13 s; lineas=30; errores=0]
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "@'
+from pathlib import Path
+p=Path('juego/minijuegos/linea_tiempo/linea_tiempo.gd'); s=p.read_text(encoding='utf-8'); start=s.index('\\t# Casas a ambos lados'); end=s.index('\\tfor i in range(-4, 65):',start); houses=s[start:end]; s=s[:start]+s[end:]; i=s.index('\\tfor placa in placas:',s.index('func _draw')); s=s[:i]+houses+s[i:]; p.write_text(s,encoding='utf-8')
+'@ | python -I -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 685ms:
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/linea_tiempo/prueba_manos.gd --ritmo=1 | Tee-Object -FilePath Nasa_Game/Construccion/Minijuegos/linea_tiempo/prueba_manos.log' in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem Nasa_Game/Construccion/Minijuegos/linea_tiempo; Select-String -Path juego/minijuegos/linea_tiempo/linea_tiempo.gd -Pattern '280|130|140|214|243|55\\.0|70\\.0|111|125|126|249|250|260|257' " in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 8106ms:
+
+
+    Directorio: C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Construccion\Minijuegos\linea_tiempo
+
+
+Mode                 LastWriteTime         Length Name                                                                 
+----                 -------------         ------ ----                                                                 
+-a----        14/11/2026     19:37          61697 arcade_1.png                                                         
+-a----        14/11/2026     19:38          61309 arcade_2.png                                                         
+-a----        14/11/2026     19:38           2272 arcade_capturas.log                                                  
+-a----        14/11/2026     19:39           3120 arcade_contrato.log                                                  
+-a----        14/11/2026     19:41           4718 arcade_manos.log                                                     
+-a----        14/11/2026     19:34           4304 arcade_modelo.log                                                    
+-a----        13/11/2026     17:05          88732 captura_anfitrion.png                                                
+-a----        13/11/2026     17:04          71828 captura_nivel3.png                                                   
+-a----        14/11/2026     14:09           9188 diagnostico_manos.txt                                                
+-a----        14/11/2026     19:43           3720 INFORME_ARCADE.md                                                    
+-a----        14/11/2026     14:09         121163 manos_instrucciones.png                                              
+-a----        14/11/2026     14:10          95254 manos_nivel3.png                                                     
+-a----        14/11/2026     14:10          74031 manos_raton.png                                                      
+-a----        14/11/2026     14:09         103035 manos_resultado.png                                                  
+-a----        14/11/2026     14:09          74031 manos_teclado.png                                                    
+-a----        13/11/2026     17:06           5114 NOTA.md                                                              
+-a----        13/11/2026     17:04           3788 prueba_entradas.txt                                                  
+-a----        15/11/2026      1:04              0 prueba_manos.log                                                     
+-a----        14/11/2026     14:11          11096 prueba_manos.txt                                                     
+-a----        14/11/2026     14:10          10580 prueba_manos_ventana.txt                                             
+-a----        14/11/2026     14:12            694 prueba_minijuego_manos.txt                                           
+-a----        13/11/2026     17:05           2830 prueba_oficial.txt                                                   
+
+IgnoreCase : True
+LineNumber : 10
+Line       : const COLUMNAS: Array[float] = [70.0, 160.0, 250.0]
+Filename   : linea_tiempo.gd
+Path       : C:\Users\guill\Desktop\Juego 2d-hd\juego\minijuegos\linea_tiempo\linea_tiempo.gd
+Pattern    : 280|130|140|214|243|55\.0|70\.0|111|125|126|249|250|260|257
+Context    : 
+Matches    : {0}
+
+
+
+
+codex
+La prueba del contrato pasó: se gana en dificultades 1 y 3, y el fallo devuelve una causa válida. La prueba con teclas está esperando el candado de Godot; verificará también los 1280 × 720, el cierre del anfitrión y que el árbol quede sin pausa.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command '$esperas = @(5, 14, 25)
+foreach ($numero in 1..3) {
+  $ruta = "Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_$numero.png"
+  $espera = $esperas[$numero - 1]
+  python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=linea_tiempo --auto "--captura=$ruta" "--espera=$espera" | Tee-Object -FilePath Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_capturas.log -Append
+}' in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content juego/.candado_godot; Get-Item juego/.candado_godot | Select-Object LastWriteTime; Get-Date; Get-Process -Name '*Godot*' -ErrorAction SilentlyContinue | Select-Object Id,CPU,StartTime" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 826ms:
+732 1794722804
+
+LastWriteTime     
+-------------     
+15/11/2026 1:06:43
+                  
+                  
+                  
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "@'
+from pathlib import Path
+p=Path('Nasa_Game/Construccion/Minijuegos/linea_tiempo/INFORME_COMPLETA.md')
+p.write_text('''# Linea del tiempo a pantalla completa
+
+Se conserva el arcade de escalinata, placas, saltos y animales. "'`_init()` activa `pantalla_completa`; el lienzo es 1280 x 720 (320 x 180 logicos, escala 4).
+
+El marcador ocupa y=0..28, con todos sus indicadores a 4 pixeles o mas del borde. Cielo estrellado y lomas ocupan y=29..54; el mosaico se prolonga hasta y=179 y ambos bordes, con casas laterales. Las columnas pasan a x=70/160/250, las filas distan 80 pixeles y la camara mantiene a la jugadora en y=128 durante la subida. Direcciones, E para saltar y Esc se dibujan en y=170 dentro del campo. Los avisos de anio aparecen en y=151..161.
+
+La rapidez pasa a 76 pixeles/s para compensar el recorrido mas ancho y largo. Dificultad 1 conserva 100 s, tres vidas y placas con tolerancia de 16 pixeles; sus animales aparecen cada 4,2 s y la placa correcta conserva el brillo cian. No se modificaron datos historicos ni parametros aceptados. JSON actualizado con resumen, tres instrucciones cortas, controles y tres pistas del arcade real.
+
+`prueba_manos.gd` sigue usando exclusivamente `Input.parse_input_event` con `InputEventKey` para jugar. Recorre dificultades 1, 2 y 3, comprueba el campo completo, la ausencia de titulo/controles externos, victoria, cierre y arbol sin pausa. La prueba de modelo conserva su comprobacion de aterrizaje con las coordenadas nuevas (160,65).
+
+## Prueba del contrato
+
+Comando: `python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:linea_tiempo --ritmo=8`
+
+```text
+PRUEBA_OK linea_tiempo.minijuego_json
+PRUEBA_OK linea_tiempo.json.titulo
+PRUEBA_OK linea_tiempo.json.resumen
+PRUEBA_OK linea_tiempo.json.controles
+PRUEBA_OK linea_tiempo.json.instrucciones
+PRUEBA_OK linea_tiempo.json.pistas
+PRUEBA_OK linea_tiempo.json.ficha
+PRUEBA_OK linea_tiempo.d1.termina_solo
+PRUEBA_OK linea_tiempo.d1.se_puede_superar
+PRUEBA_OK linea_tiempo.d3.termina_solo
+PRUEBA_OK linea_tiempo.d3.se_puede_superar
+PRUEBA_OK linea_tiempo.se_puede_fallar
+PRUEBA_OK linea_tiempo.el_fallo_explica_la_causa
+FIN
+[godot: ok; 13 s; lineas=30; errores=0]
+```
+
+'"''',encoding='utf-8')
+'@ | python -I -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 1293ms:
+codex
+Las capturas necesitan una ruta absoluta: Godot rechazó la ruta relativa aunque imprimió `CAPTURA_OK`. Las repetiré con la ruta completa y comprobaré los PNG. Las ejecuciones siguen respetando el candado compartido.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Content -Encoding UTF8 Nasa_Game/Construccion/Minijuegos/linea_tiempo/prueba_manos.log -Tail 12; Get-Content -Encoding UTF8 Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_capturas.log -Tail 8' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 761ms:
+(esperando turno: otro Godot esta corriendo)
+CAPTURA_OK Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_1.png
+FIN
+[godot: ok; 8 s; lineas=15; errores=0]
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.07.48.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command '$esperas = @(5, 14, 25)
+foreach ($numero in 1..3) {
+  $ruta = Join-Path (Get-Location).Path "Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_$numero.png"
+  $espera = $esperas[$numero - 1]
+  python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=linea_tiempo --auto "--captura=$ruta" "--espera=$espera" | Tee-Object -FilePath Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_capturas_absolutas.log -Append
+}' in C:\Users\guill\Desktop\Juego 2d-hd
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'git diff --stat -- juego/minijuegos/linea_tiempo; Get-Content -Encoding UTF8 juego/minijuegos/linea_tiempo/linea_tiempo.gd | Select-Object -First 18; Get-Item juego/.candado_godot | Select-Object -ExpandProperty LastWriteTime; Get-Date -Format o' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 484ms:
+ juego/minijuegos/linea_tiempo/linea_tiempo.gd      | 605 +++++++++++++--------
+ juego/minijuegos/linea_tiempo/minijuego.json       |  19 +-
+ .../minijuegos/linea_tiempo/prueba_linea_tiempo.gd | 136 ++---
+ 3 files changed, 433 insertions(+), 327 deletions(-)
+extends "res://nucleo/minijuego.gd"
+
+# Escalinata cenital: mundo en pixeles logicos, +y sube por el cerro.
+# Las fechas se extraen de las fichas; velocidades y distancias son reglas arcade.
+const ANCHO: float = 320.0
+const ALTO: float = 180.0
+const PRIMERA_FILA: float = 65.0
+const PASO_FILA: float = 80.0
+const DT: float = 1.0 / 120.0
+const COLUMNAS: Array[float] = [70.0, 160.0, 250.0]
+const FICHAS: Array[String] = ["observatorio_quito", "estacion_cotopaxi", "disco_apolo11", "apolo_soyuz_1975", "sts2_despedida", "estacion_entrega", "exa_2007", "pegaso_lanzamiento", "acuerdos_artemisa"]
+const NOMBRES: Array[String] = ["OBSERVATORIO", "ESTACION QUITO", "DISCO LUNAR", "APOLO SOYUZ", "DESPEDIDA STS2", "ENTREGA", "NACE EXA", "PEGASO", "ACUERDOS"]
+const ICONOS: Array = [
+	["...###...", "..#####..", ".#######.", ".##...##.", ".##...##.", "#########", "#.#.#.#.#"],
+	["#........", ".#.....#.", "..#...#..", "...###...", "....#....", "...###...", "..#...#.."],
+	["..#####..", ".#######.", "###...###", "###.#.###", "###...###", ".#######.", "..#####.."],
+	["##.....##", "###...###", "..##.##..", "...###...", "..##.##..", "###...###", "##.....##"],
+	["....#....", "...###...", "...###...", "..#####..", ".#######.", "###.#.###", "...#.#..."],
+
+domingo, 15 de noviembre de 2026 1:08:05
+2026-11-15T01:08:50.9221815-05:00
+
+
+
+codex
+Los cambios de código y las comprobaciones de pantalla completa están listos. Faltan los resultados de la prueba con teclas y las capturas, que siguen en cola por el candado compartido de Godot.
+codex
+La prueba con teclas y las capturas aún esperan turno; todavía no hay resultados nuevos. El informe ya recoge el reparto del campo y las 13 comprobaciones aprobadas del contrato.
+2026-11-15T06:10:33.368226Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out
+codex
+La prueba con teclas ya arrancó: confirmó el lienzo de 1280 × 720 y que el anfitrión oculta el título y los controles externos. Está recorriendo las placas mediante teclas simuladas, sin activar el piloto automático.
+codex
+Dificultad 1 superada en 34,72 segundos, con las tres vidas y 10 saltos mediante teclas simuladas. También pasó la comprobación de cierre del anfitrión y árbol sin pausa. Faltan las dificultades 2 y 3 y la revisión de las capturas.
+ succeeded in 473160ms:
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.10.48.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK guion_de_prueba_existe
+PRUEBA_OK linea.manos.d1.abre
+PRUEBA_OK linea.manos.d1.sin_piloto
+PRUEBA_OK linea.manos.d1.campo_completo
+PRUEBA_OK linea.manos.d1.sin_margenes
+PRUEBA_OK linea.manos.d1.Empezar_Intro
+MINIJUEGO linea_tiempo superado=true puntos=1575.0 detalle=Del observatorio de 1873 a los Acuerdos de 2023: cada hito ocupa su lugar en el tiempo.
+PRUEBA_OK linea.manos.d1.gana_solo_teclas
+PRUEBA_OK linea.manos.d1.nueve_saltos_reales
+LINEA_MANOS nivel=1 saltos=10 tiempo=34.72 vidas=3
+PRUEBA_OK linea.manos.d1.Continuar_Intro_cierra
+PRUEBA_OK linea.manos.d1.devuelve_victoria_sin_pausa
+PRUEBA_OK linea.manos.d2.abre
+PRUEBA_OK linea.manos.d2.sin_piloto
+PRUEBA_OK linea.manos.d2.campo_completo
+PRUEBA_OK linea.manos.d2.sin_margenes
+PRUEBA_OK linea.manos.d2.Empezar_Intro
+MINIJUEGO linea_tiempo superado=true puntos=1575.0 detalle=Del observatorio de 1873 a los Acuerdos de 2023: cada hito ocupa su lugar en el tiempo.
+PRUEBA_OK linea.manos.d2.gana_solo_teclas
+PRUEBA_OK linea.manos.d2.nueve_saltos_reales
+LINEA_MANOS nivel=2 saltos=9 tiempo=34.73 vidas=3
+PRUEBA_OK linea.manos.d2.Continuar_Intro_cierra
+PRUEBA_OK linea.manos.d2.devuelve_victoria_sin_pausa
+PRUEBA_OK linea.manos.d3.abre
+PRUEBA_OK linea.manos.d3.sin_piloto
+PRUEBA_OK linea.manos.d3.campo_completo
+PRUEBA_OK linea.manos.d3.sin_margenes
+PRUEBA_OK linea.manos.d3.Empezar_Intro
+MINIJUEGO linea_tiempo superado=true puntos=1550.0 detalle=Del observatorio de 1873 a los Acuerdos de 2023: cada hito ocupa su lugar en el tiempo.
+PRUEBA_OK linea.manos.d3.gana_solo_teclas
+PRUEBA_OK linea.manos.d3.nueve_saltos_reales
+LINEA_MANOS nivel=3 saltos=10 tiempo=35.05 vidas=2
+PRUEBA_OK linea.manos.d3.Continuar_Intro_cierra
+PRUEBA_OK linea.manos.d3.devuelve_victoria_sin_pausa
+PRUEBA_OK linea.manos.anfitrion_cerrado
+PRUEBA_OK linea.manos.arbol_sin_pausa
+PRUEBAS hechas=30 fallos=0
+FIN
+WARNING: 4 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+[godot: ok; 107 s; lineas=50; errores=0]
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-ChildItem Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_*.png -ErrorAction SilentlyContinue | Select-Object Name,Length' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 2914ms:
+ succeeded in 437972ms:
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.06.56.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+ERROR: Can't save PNG at path: 'Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_1.png'.
+   at: save_image (drivers/png/resource_saver_png.cpp:56)
+CAPTURA_OK Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_1.png
+FIN
+[godot: ok; 8 s; lineas=15; errores=0]
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.07.48.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+ERROR: Can't save PNG at path: 'Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_2.png'.
+   at: save_image (drivers/png/resource_saver_png.cpp:56)
+CAPTURA_OK Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_2.png
+FIN
+[godot: ok; 18 s; lineas=15; errores=0]
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.12.46.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+ERROR: Can't save PNG at path: 'Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_3.png'.
+   at: save_image (drivers/png/resource_saver_png.cpp:56)
+CAPTURA_OK Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_3.png
+FIN
+[godot: ok; 29 s; lineas=15; errores=0]
+
+codex
+Las dos pruebas solicitadas pasaron: 13 comprobaciones del contrato y 30 con teclas, sin fallos. Se ganó en las tres dificultades; solo quedan las capturas con ruta corregida y su inspección visual.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "@'
+from pathlib import Path
+p=Path('Nasa_Game/Construccion/Minijuegos/linea_tiempo/INFORME_COMPLETA.md')
+s=p.read_text(encoding='utf-8')
+s+='''## Prueba con teclas
+
+Comando: "'`python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijuegos/linea_tiempo/prueba_manos.gd --ritmo=1`
+
+```text
+LINEA_MANOS nivel=1 saltos=10 tiempo=34.72 vidas=3
+LINEA_MANOS nivel=2 saltos=9 tiempo=34.73 vidas=3
+LINEA_MANOS nivel=3 saltos=10 tiempo=35.05 vidas=2
+PRUEBA_OK linea.manos.anfitrion_cerrado
+PRUEBA_OK linea.manos.arbol_sin_pausa
+PRUEBAS hechas=30 fallos=0
+FIN
+[godot: ok; 107 s; lineas=50; errores=0]
+```
+
+Las dos pruebas terminaron con codigo 0 y sin fallos de prueba ni errores de guion. El motor emitio mensajes de entorno sobre escritura de logs, certificados del sistema y recursos al salir; no se tocaron carpetas comunes para resolverlos. Log completo de teclas: `prueba_manos.log`.
+
+'"'''
+p.write_text(s,encoding='utf-8')
+'@ | python -I -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 2836ms:
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-ChildItem Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_*.png -ErrorAction SilentlyContinue | Select-Object Name,Length' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 3140ms:
+codex
+La revisión visual sigue pendiente del turno de Godot. Los resultados de las pruebas ya están guardados en el informe; no he hecho más cambios de código desde esas validaciones.
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Get-Item juego/.candado_godot | Select-Object -ExpandProperty LastWriteTime; Get-Date -Format o; Get-Content Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_capturas_absolutas.log -Tail 5' in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 529ms:
+
+domingo, 15 de noviembre de 2026 1:14:56
+2026-11-15T01:15:50.9192678-05:00
+(esperando turno: otro Godot esta corriendo)
+
+
+
+codex
+El candado sigue pasando entre las tareas compartidas. `linea_tiempo` ya tiene ambas pruebas aprobadas; las tres capturas con ruta absoluta continúan esperando, y comprobaré los archivos antes de dar la tarea por terminada.
+codex
+Sin cambios en los resultados: contrato y prueba con teclas aprobados. Sigo esperando el candado para generar y revisar los PNG finales.
+codex
+La primera captura está guardada y revisada: el campo llena los 1280 × 720, sin marco exterior, con el HUD y los controles dentro. Corresponde al primer hito revelado; faltan las tomas de los segundos 14 y 25.
+ succeeded in 641350ms:
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.17.51.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+CAPTURA_OK C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Construccion\Minijuegos\linea_tiempo\completa_1.png
+FIN
+[godot: ok; 9 s; lineas=11; errores=0]
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.17.58.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+CAPTURA_OK C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Construccion\Minijuegos\linea_tiempo\completa_2.png
+FIN
+[godot: ok; 16 s; lineas=11; errores=0]
+ERROR: Failed to open 'user://logs/godot2026-11-15T01.18.16.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+CAPTURA_OK C:\Users\guill\Desktop\Juego 2d-hd\Nasa_Game\Construccion\Minijuegos\linea_tiempo\completa_3.png
+FIN
+[godot: ok; 27 s; lineas=11; errores=0]
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "@'
+from pathlib import Path
+import struct
+for p in sorted(Path('Nasa_Game/Construccion/Minijuegos/linea_tiempo').glob('completa_*.png')):
+    b=p.read_bytes()
+    print(p.name, struct.unpack('>II', b[16:24]), len(b))
+'@ | python -I -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 444ms:
+completa_1.png (1280, 720) 7654
+completa_2.png (1280, 720) 7765
+completa_3.png (1280, 720) 7624
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "@'
+from pathlib import Path
+p=Path('Nasa_Game/Construccion/Minijuegos/linea_tiempo/INFORME_COMPLETA.md')
+s=p.read_text(encoding='utf-8')
+s+='''## Capturas con ventana
+
+Tres PNG de 1280 x 720, abiertos y revisados visualmente: campo sin marco exterior, HUD legible dentro del campo y progreso distinto (1/9, 3/9 y 6/9).
+
+- "'`Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_1.png`: espera 5 s, primer hito revelado.
+- `Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_2.png`: espera 14 s, disco lunar revelado.
+- `Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_3.png`: espera 25 s, entrega revelada y salto hacia EXA.
+
+Se ejecutaron mediante `python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=linea_tiempo --auto --captura=<ruta_absoluta_del_png> --espera=<5|14|25>`.
+
+```text
+completa_1.png: CAPTURA_OK; [godot: ok; 9 s; lineas=11; errores=0]
+completa_2.png: CAPTURA_OK; [godot: ok; 16 s; lineas=11; errores=0]
+completa_3.png: CAPTURA_OK; [godot: ok; 27 s; lineas=11; errores=0]
+```
+
+Log de las capturas validas: `completa_capturas_absolutas.log`. Los primeros intentos con rutas relativas no guardaron PNG; se repitieron con rutas absolutas y se comprobaron los archivos reales.
+
+Pendiente: nada dentro del alcance solicitado. Solo se modifico `juego/minijuegos/linea_tiempo/` y su carpeta de evidencia.
+'"'''
+p.write_text(s,encoding='utf-8')
+'@ | python -I -" in C:\Users\guill\Desktop\Juego 2d-hd
+ succeeded in 686ms:
+codex
+Implementado a pantalla completa: 320 × 180, con más cielo y recorrido, HUD interior y dificultad reajustada. JSON y prueba de teclas actualizados.
+
+- Contrato: **13 comprobaciones aprobadas**.
+- Teclas: **30 comprobaciones, 0 fallos**, victoria en las tres dificultades, anfitrión cerrado y árbol sin pausa.
+- Capturas revisadas: [1](Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_1.png), [2](Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_2.png), [3](Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_3.png).
+
+[Informe completo](Nasa_Game/Construccion/Minijuegos/linea_tiempo/INFORME_COMPLETA.md). Nada pendiente.
+tokens used
+99.683
+Implementado a pantalla completa: 320 × 180, con más cielo y recorrido, HUD interior y dificultad reajustada. JSON y prueba de teclas actualizados.
+
+- Contrato: **13 comprobaciones aprobadas**.
+- Teclas: **30 comprobaciones, 0 fallos**, victoria en las tres dificultades, anfitrión cerrado y árbol sin pausa.
+- Capturas revisadas: [1](Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_1.png), [2](Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_2.png), [3](Nasa_Game/Construccion/Minijuegos/linea_tiempo/completa_3.png).
+
+[Informe completo](Nasa_Game/Construccion/Minijuegos/linea_tiempo/INFORME_COMPLETA.md). Nada pendiente.

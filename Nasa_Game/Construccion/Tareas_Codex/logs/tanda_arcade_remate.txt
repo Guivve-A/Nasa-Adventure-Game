@@ -1,0 +1,6 @@
+Codex: C:\Users\guill\AppData\Local\OpenAI\Codex\bin\9e1da79431da526b\codex.exe
+4 tareas, 2 en paralelo
+  remate_seguidor              ok                      40.2 min      671 bytes
+  remate_antena                ok                      25.7 min      687 bytes
+  remate_banderas              error (codigo 1)        15.0 min        0 bytes
+  remate_regreso               error (codigo 1)         0.4 min        0 bytes

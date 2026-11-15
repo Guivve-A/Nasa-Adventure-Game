@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-14T19:20:01.366678Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "e33c1a51-1019-4511-ae3e-e0f66660805c",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 1,
+      "prompt": "A single dull metallic clank of a small hammer driving a thin aluminum pole into dry compact dust, muffled as if heard through a space suit, short, no echo. No voice, no speech, no music."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261114_192001_e33c1a51-1019-4511-ae3e-e0f66660805c.mp3",
+    "status": "completed"
+  }
+]

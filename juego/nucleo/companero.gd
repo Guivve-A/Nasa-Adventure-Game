@@ -18,6 +18,7 @@ var _pivote := Node3D.new()
 var _mira := Vector3(0, 0, 1)
 var _clip := ""
 var _pistas_dadas := {}
+var _andando := false
 
 
 func _ready() -> void:
@@ -38,7 +39,8 @@ func _ready() -> void:
 	hablar = Interactuable.new()
 	hablar.name = "HablarConOrbita"
 	hablar.texto = "Hablar con Órbita"
-	hablar.radio = 1.0
+	hablar.radio = 1.6
+	hablar.prioridad = -1
 	hablar.altura_marca = 0.75
 	hablar.al_usar = _hablar
 	add_child(hablar)
@@ -53,19 +55,24 @@ func colocar_junto(pos: Vector3, mira: Vector3) -> void:
 func _physics_process(delta: float) -> void:
 	if jugador == null or not is_instance_valid(jugador):
 		return
-	var mira: Vector3 = jugador.mirando
-	var lado := Vector3(mira.z, 0.0, -mira.x)
-	var destino: Vector3 = jugador.global_position - mira * 0.75 + lado * 0.55
-	var d := destino - global_position
+	# correa: se acerca cuando ella se aleja y se queda quieto cuando ella se detiene o se gira,
+	# para que se le pueda mirar de frente y hablarle sin que de vueltas alrededor
+	var d: Vector3 = jugador.global_position - global_position
 	d.y = 0.0
 	var distancia := d.length()
 	var rapidez := 0.0
 	if distancia > 9.0:
-		global_position = destino
-	elif distancia > 0.55:
-		rapidez = minf(distancia * 2.6, 4.2)
+		var mira: Vector3 = jugador.mirando
+		global_position = jugador.global_position - mira * 0.9
+	elif distancia > (1.2 if _andando else 1.7):
+		_andando = true
+		rapidez = minf((distancia - 0.9) * 3.0 + 0.6, 4.4)
 		global_position += d.normalized() * rapidez * delta
 		_mira = d.normalized()
+	else:
+		_andando = false
+		if distancia > 0.05:
+			_mira = d.normalized()   # sentado, mira a la protagonista
 	# sigue el suelo con un rayo hacia abajo
 	var espacio := get_world_3d().direct_space_state
 	var desde := Vector3(global_position.x, jugador.global_position.y + 1.6, global_position.z)

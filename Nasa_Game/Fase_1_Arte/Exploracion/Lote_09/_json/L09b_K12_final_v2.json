@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-15T13:37:23.618931Z",
+    "display_name": "GPT Image 2.6",
+    "id": "28f7e7d7-9e9b-404f-a5bb-4509481ef120",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133723_28f7e7d7-9e9b-404f-a5bb-4509481ef120_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "9d0b5c50-0f81-4d30-837e-aa9386a69700",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9d0b5c50-0f81-4d30-837e-aa9386a69700.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "The first reference image is the character sheet of the student; the second is the back view of her turnaround sheet. Night photograph, vintage 50 mm lens wide open at f/2, locked off at standing eye height, looking west and slightly upward from the top of a steep public stairway in an old hillside neighbourhood of a tropical port city in 1969. The focus is on the distance: the stairway falling away between small wooden houses with corrugated zinc roofs, laundry hanging on lines, four bare yellow tungsten bulbs that bloom into soft round highlights, and beyond, the dark rooftops and scattered warm lights of the city and low hills under a deep blue-black sky. The bulbs are the only key light: warm pools on the steps and walls, everything else falls into blue-black, about sixteen to one. The patch of sky at three fifths of the frame width and one third of the height from the top, above the roofs, is clear and empty, with a few faint stars: no Moon in the sky. In the foreground at the left third, softly out of focus and seen from behind, stands the small chibi student of the reference sheet, with her proportions, her voluminous dark curly hair, her khaki short-sleeve shirt worn open over a dark T-shirt and her brown cargo pants, barefoot on the stone step, without any bag, her chin slightly raised toward that empty patch of sky; seen from behind exactly as in the back view of her turnaround sheet: a big rounded mass of separate dark curl clumps, never a smooth ball; her khaki short-sleeve shirt with rolled cuffs and plain blank shoulder patches with no symbol, her brown cargo pants with side pockets; she is soft and out of focus, but her silhouette reads clearly against the lit wall, with a thin warm rim light from a bulb behind her on the right, and her face is not visible. Inland view only: no river, no bay, no sea and no water anywhere in the frame. No cars, no antennas, no television sets, no signs, no lighthouse, no numbered steps, no modern railings. Warm colour of 1960s 16 mm reversal film: amber bulbs, deep blue-black night, slightly lifted blacks. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "xhigh",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133723_28f7e7d7-9e9b-404f-a5bb-4509481ef120.png",
+    "status": "completed"
+  }
+]

@@ -127,7 +127,8 @@ Copia `minijuegos/plantilla/`. Un minijuego es `minijuegos/<id>/<id>.gd` con `ex
 ```gdscript
 extends "res://nucleo/minijuego.gd"
 
-func _preparar() -> void: ...          # arma nodos y estado; size ya vale 1120 x 520; dificultad = 1..3
+func _init() -> void: pantalla_completa = true   # opcional: el lienzo mide 1280 x 720 (320 x 180 pixeles gordos x4), sin margenes
+func _preparar() -> void: ...          # arma nodos y estado; size ya vale 1120 x 520 (o 1280 x 720); dificultad = 1..3
 func _empezar() -> void: ...           # el jugador pulsó «Empezar»
 func _paso(delta: float) -> void: ...  # cada cuadro mientras activo; usa SIEMPRE delta, nunca la hora del sistema
 func jugar_solo(acierta: bool) -> void: ...   # OBLIGATORIO: se juega solo y termina (superado o no) en menos de 40 s de juego
@@ -163,6 +164,7 @@ python -I herramientas/juego_ejecutar.py --ventana -- --minijuego=seguidor --aut
 python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --captura_carga=C:/ruta/carga.png --captura=C:/ruta/d.png
 ```
 
+- **Todo debe ser jugable por una persona.** `--prueba=manos --ritmo=2` juega el núcleo con teclas simuladas (entran por `Input.parse_input_event`, como las de verdad) y `--prueba=recorrido_manos --ritmo=3` recorre la historia entera así. Cada minijuego lleva su `prueba_manos.gd` (`--prueba=guion:res://minijuegos/<id>/prueba_manos.gd`), que lo gana solo con teclado y solo con ratón.
 - Sin `--ventana` corre sin GPU (lógica y física). Con `--ventana` abre la ventana real: capturas y fps.
 - `--todo` imprime toda la salida de Godot. Sale con código 1 si hay errores de guion o `PRUEBA_FALLO`.
 - `--zona` entra en «visita libre» (umbrales abiertos). Con `--historia` respeta los requisitos. `--banderas=a,b` pone banderas antes de entrar. `--sin_hud` oculta el HUD en la captura.
@@ -176,12 +178,11 @@ python -I herramientas/juego_ejecutar.py --ventana -- --zona=habitacion --captur
 | Zona | Entradas | Salidas | Banderas que pone |
 |---|---|---|---|
 | `habitacion` | `inicio`, `escalera`, `cama` | Escalera → `ciudad:casa` (requiere `hab_seguidor`); cama (de noche) → `luna:inicio` | `hab_convocatoria`, `hab_seguidor`, `hab_noche`, `hab_durmio`, `hab_seguidor_v2`, `fin_v0` |
-| `ciudad` | `inicio`, `casa`, `sendero`, `biblioteca` | → `habitacion:escalera`; → `sendero:casa`; puerta de la biblioteca → `base:inicio` | `ciudad_visitada` |
+| `ciudad` | `inicio`, `casa`, `sendero`, `biblioteca` | → `habitacion:escalera`; → `sendero:casa`. La puerta de la biblioteca abre los libros: minijuegos `base_luna` y `base_marte` | `ciudad_visitada`, `base_visitada`, `base_luna_hecha`, `base_marte_hecha` |
 | `sendero` | `casa`, `mirador` | → `ciudad:sendero`; → `mirador:sendero` (requiere `sen_antena`) | `sendero_visitado`, `sen_panel`, `sen_antena` |
 | `mirador` | `sendero`, `inicio` | → `sendero:mirador`; atajo de los faroles → `habitacion:escalera` (requiere `mir_luna` y `mir_linea`) | `mirador_visitado`, `mir_satelite`, `mir_luna`, `mir_linea` |
 | `luna` | `inicio` | La caja → `habitacion:cama`; `despertar()` desde la pausa | `luna_baliza`, `luna_muestras`, `luna_foto`, `luna_banderas`, `luna_regreso` |
-| `base` | `inicio` | El libro holográfico → `ciudad:biblioteca`; `despertar()` desde la pausa | `base_visitada`, `base_sol_1`, `base_meta` |
 
 Minijuegos: `seguidor` (habitación), `antena` (sendero), `satelite`, `telescopio`, `linea_tiempo` y `orbita` (mirador), `muestras`, `banderas` y `regreso` (luna).
 
-**La base espacial** («Tu primera base espacial») es un mundo propio dentro del juego: diseño en `Nasa_Game/Construccion/Base espacial - Diseno.md`, código en `juego/base/` y zona `base`. Sus pruebas propias se corren con `--prueba=guion:res://base/prueba_base.gd`.
+**La base espacial** («Tu primera base espacial») son dos minijuegos 2D en píxel-art, `base_luna` y `base_marte`, que se abren desde los libros de la biblioteca de la plaza. Los construye el equipo (Jean, Joel y Domenica) según `PLAN_EQUIPO_BASE_LUNA_MARTE.md`.

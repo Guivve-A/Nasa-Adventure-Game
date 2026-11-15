@@ -1,0 +1,49 @@
+[
+  {
+    "created_at": "2026-11-15T05:29:12.921368Z",
+    "display_name": "GPT Image 2.6",
+    "id": "36e86d81-8cc7-478d-bb06-baf322eef351",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052912_36e86d81-8cc7-478d-bb06-baf322eef351_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/ff4e139f-ab33-4aff-8831-db4b2f92c40d.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "88fb81bc-1444-41d8-a433-9334e04849e0",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/88fb81bc-1444-41d8-a433-9334e04849e0.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Keep the composition, the layout and the painting technique of the last reference image (the approved draft) and repaint it as the finished gouache plate at higher resolution, with the same loose brushwork, the same paper grain and the same level of detail: do not add fine detail, do not sharpen, do not make it look like digital art. A storybook painting. Make the red flowers on the foreground branch fewer and smaller, loosely painted. A wide vista of a small neighborhood plaza at the foot of a hillside stair neighborhood in a tropical port city, late golden afternoon. Colorful simple houses with tin roofs climb the hill along a long stairway; at the back of the plaza a small municipal library with a few columns, wide steps and a softly glowing doorway; a round stone fountain, a couple of benches and two green iguanas resting on a low wall. Far away on the right, a pale wide river estuary dissolving into the haze. The student and the cat cross the plaza toward the library, seen from behind. Foreground framed by the dark silhouette of a big tree branch with a few red flowers and a low wall in shadow. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052912_36e86d81-8cc7-478d-bb06-baf322eef351.png",
+    "status": "completed"
+  }
+]

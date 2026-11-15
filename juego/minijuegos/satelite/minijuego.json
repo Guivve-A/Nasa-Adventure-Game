@@ -1,17 +1,16 @@
 {
   "titulo": "Un cubo de 10 cm",
-  "resumen": "Arma una maqueta de Pegaso y prueba su energía al sol y en sombra.",
+  "resumen": "Monta cinco piezas en el cubo, esquiva chatarra y enciende su señal.",
   "instrucciones": [
-    "Coloca las 4 piezas en los huecos según su función. Es una maqueta didáctica, no un plano real.",
-    "Despliega los paneles y la antena; elige qué equipos encender al sol y en sombra.",
-    "Consulta el modelo simplificado: la energía sobrante al sol carga una batería de 4 unidades.",
-    "Pulsa Probar ciclo: debes enviar datos al sol y mantener la computadora en sombra."
+    "Atrapa cada pieza con su mismo conector.",
+    "Esquiva la chatarra; S acelera la cinta.",
+    "Con cinco piezas, centra el cubo y mantén E."
   ],
-  "controles": "Flechas / WASD: elegir pieza, hueco o ajuste. E / Intro: tomar, colocar o cambiar. Espacio: comprobar / probar. Ratón: arrastrar piezas y pulsar ajustes.",
+  "controles": "A/D o flechas: mover; S/abajo: acelerar; E/Espacio: girar o señal; Esc: salir",
   "pistas": [
-    "Órbita mira los 4 huecos y después el saldo que carga la batería.",
-    "La radio necesita antena y computadora. En sombra no hay generación: apaga la radio para ahorrar.",
-    "Energía → captar luz; radio → enviar; antena → enlace; computadora → ordenar. Abre los 2 paneles y la antena, enciende computadora y radio al sol y apaga radio en sombra."
+    "La forma y el número deben coincidir: E cambia la cara.",
+    "Esquiva las aspas. Las piezas que pierdes vuelven a caer.",
+    "Monta las cinco piezas y mantén E bajo el receptor durante tres segundos."
   ],
   "ficha": "pegaso",
   "escena": "1.5",

@@ -1,0 +1,41 @@
+[
+  {
+    "created_at": "2026-11-15T05:20:54.837978Z",
+    "display_name": "GPT Image 2.6",
+    "id": "756f876f-ea8e-4faa-9a2a-ccbefec2f415",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052054_756f876f-ea8e-4faa-9a2a-ccbefec2f415_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        },
+        {
+          "data": {
+            "id": "ff4e139f-ab33-4aff-8831-db4b2f92c40d",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/ff4e139f-ab33-4aff-8831-db4b2f92c40d.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "A storybook painting. A wide view of a small upstairs bedroom-workshop in an old wooden hillside house of a tropical port city, on a warm early morning. Through a big open window with wooden shutters, the pale hazy river city and a green hill far away. Inside: a simple bed with a blue blanket, a long workbench with hand tools, a soldering iron, notebooks and a small homemade motorized telescope mount, a little telescope on a tripod facing the window, potted plants and a terracotta tile floor with a woven rug. Soft morning light falls across the floor in one calm warm shape. The student sits at the workbench working on the mount and the cat sleeps on the windowsill. Foreground framed by dark leaf silhouettes of a potted plant and the edge of a wooden beam. Tiny in the frame, less than one tenth of the image height: the young engineering student from the first reference image (voluminous dark curly hair, warm brown skin, khaki jacket and cargo pants, brown crossbody bag) and her small gray-taupe cat from the second reference image (cream face and paws, blue collar with a small cyan round tag). Use the references only for their design and colors, and paint both with a few gouache brush strokes in the same style as the scene. Painted as a full-bleed plate from a hand-made illustrated storybook: traditional gouache and transparent watercolor on textured cold-press paper, visible brush strokes, soft wet-in-wet washes with the paper grain showing through, simplified flat shapes with loose painterly edges, very few small details, large calm areas. Restrained warm palette of cream, ochre, terracotta, muted tropical green and petrol-blue shadows; shadows are colored, never black; low saturation. Strong atmospheric perspective: the far distance is pale, hazy and bluish with almost no detail, and only the focal area is a little crisper. Composition in three layered planes like a paper theater: a dark, simple silhouette framing the foreground, the lit middle ground, and a pale background. Matte and handmade: no glossy highlights, no bloom, no lens flare, no light rays, no 3D render look, no digital sharpness, no hyper-detail. No text, no letters, no numbers, no logos, no insignia, no emblems, no flags. No text, no logos, no interface.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_052054_756f876f-ea8e-4faa-9a2a-ccbefec2f415.png",
+    "status": "completed"
+  }
+]

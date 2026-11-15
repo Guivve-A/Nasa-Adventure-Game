@@ -1,0 +1,24 @@
+[
+  {
+    "created_at": "2026-11-15T06:47:05.293307Z",
+    "display_name": "GPT Image 2.6",
+    "id": "5703b1d6-d950-4bb8-a450-51bd31d32367",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064705_5703b1d6-d950-4bb8-a450-51bd31d32367_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Stark black-and-white image in the manner of a low-resolution slow-scan television camera, very high contrast with blown-out whites, crushed shadows and soft detail. View from a camera fixed low on the side of a landing craft on the Moon, wide 20 mm-equivalent lens with slight barrel distortion. On the left, in deep shadow, the dark angular leg of the craft with a ladder. On the lowest rung of the ladder, seen from the side and facing the ladder, a bulky figure in a white pressure suit with a large square backpack and a round helmet holds the rails with both hands and lowers one boot toward the round footpad. The figure is pale and slightly translucent, like a ghost image, with no visible face, no identifiable person and no markings on the suit. Behind it, a blinding sunlit plain, a slightly tilted horizon and a pitch-black sky without stars. A vertical band of glare runs down the right side of the picture. No flag, no lettering on the craft or the suit. No scan lines and no borders. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064705_5703b1d6-d950-4bb8-a450-51bd31d32367.png",
+    "status": "completed"
+  }
+]

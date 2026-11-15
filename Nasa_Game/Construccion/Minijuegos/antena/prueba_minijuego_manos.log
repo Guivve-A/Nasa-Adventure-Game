@@ -1,0 +1,25 @@
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-14T13.49.55.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK antena.minijuego_json
+PRUEBA_OK antena.json.titulo
+PRUEBA_OK antena.json.resumen
+PRUEBA_OK antena.json.controles
+PRUEBA_OK antena.json.instrucciones
+PRUEBA_OK antena.json.pistas
+PRUEBA_OK antena.json.ficha
+MINIJUEGO antena superado=true puntos=94.0 detalle=Señal > 70 % durante 94.0 % del paso; meta: 80 %. La ganancia sostiene el haz sobre el satélite.
+PRUEBA_OK antena.d1.termina_solo
+PRUEBA_OK antena.d1.se_puede_superar
+MINIJUEGO antena superado=true puntos=83.8 detalle=Señal > 70 % durante 83.8 % del paso; meta: 80 %. La ganancia sostiene el haz sobre el satélite.
+PRUEBA_OK antena.d3.termina_solo
+PRUEBA_OK antena.d3.se_puede_superar
+MINIJUEGO antena superado=false puntos=0.0 detalle=Señal > 70 % durante 26.1 % del paso; meta: 80 %. El motor recibe tarde correcciones grandes: el haz se pasa y oscila. Baja la ganancia.
+PRUEBA_OK antena.se_puede_fallar
+PRUEBA_OK antena.el_fallo_explica_la_causa
+FIN
+[godot: ok; 8 s; lineas=31; errores=0]

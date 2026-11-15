@@ -20,3 +20,13 @@ Validación final (14-11-2026):
 - JSON válido; sangría de tabuladores, sin `class_name` ni comentarios con tildes. Sin instalaciones ni consultas externas.
 
 No quedan pendientes funcionales en este carril. El entorno restringido emite avisos `Failed to open ... user://logs` y `Failed to read the root certificate store`; ambos constan en los logs. No hubo `PRUEBA_FALLO` ni `SCRIPT ERROR`. No se modificó infraestructura ajena para corregir esos avisos. La prueba de entradas usa eventos sintéticos sobre los manejadores reales; no se verificó un mando físico.
+
+## Jugado con teclado y con ratón
+
+La nueva `prueba_manos.gd` abre `Interfaz.abrir_minijuego("satelite", {"dificultad": 1})` en otra corrutina, desactiva el piloto y gana por teclado y por ratón mediante eventos físicos simulados con `Input.parse_input_event()`. Comprueba todas las teclas anunciadas, las cuatro piezas, los cinco ajustes, los botones de acción, Continuar, Esc en seis fases, cierre y árbol sin pausa. Es una comprobación del recorrido real del anfitrión, adicional a la prueba anterior que llamaba directamente a los manejadores.
+
+Se precisó qué flechas eligen filas y cuáles cambian valores, se explicó Comprobar, se anunció el montaje por dos clics y se hizo visible una guía para ganar sin memorizar números. Las regiones de piezas y huecos ahora son controles con nombre y ayuda; la prueba obtiene sus posiciones con `get_global_rect()`. No se modificaron el modelo energético ni los datos reales. No se encontró una acción necesaria sin alternativa de teclado o ratón ni dependencia del foco durante la partida.
+
+El inventario control por control, los comandos, la salida completa de ambas pruebas, la revisión visual y los límites de la evidencia están en [INFORME_MANOS.md](INFORME_MANOS.md). Los logs finales son `prueba_manos.log`, `prueba_minijuego_manos.log` y `prueba_manos_ventana.log`.
+
+Resultado final: manos **88 comprobaciones, 0 fallos**; contrato **13 comprobaciones correctas**; ventana real **88 comprobaciones, 0 fallos**. Las dos pruebas solicitadas terminan con `FIN` y `errores=0`, sin `PRUEBA_FALLO` ni `SCRIPT ERROR`. Esc funciona durante instrucciones, pieza tomada, ajustes, sol, sombra y resultado. Se abrieron las cinco capturas finales: textos, botones y ayudas legibles, sin recortes importantes. Sin pendientes funcionales identificados; permanecen los avisos del entorno descritos arriba.

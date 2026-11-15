@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-11-15T13:31:22.642606Z",
+    "display_name": "GPT Image 2.6",
+    "id": "b2b27aa5-664f-44f8-83b3-5f0c8224e26b",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133122_b2b27aa5-664f-44f8-83b3-5f0c8224e26b_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "3332fa4d-e587-4b81-a01c-6713139fa6f8",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/3332fa4d-e587-4b81-a01c-6713139fa6f8.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Photograph of the Moon from an approaching spacecraft, 85 mm lens at f/8, crisp large-format clarity. The curved limb of the Moon rises from the lower left and fills two thirds of the frame; the highest point of the limb sits at three fifths of the frame width and one third of the height from the top. Neutral silver-gray surface, densely cratered; hard, low raking sunlight from the right, so the craters near the terminator cast long black shadows and their sunward rims glow; on the left the surface sinks into darkness along a diagonal terminator. There is no atmosphere: every shadow edge is razor sharp and the black is absolute. Pure black sky, no stars, no Earth, no spacecraft. Nearly grainless, high contrast. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "xhigh",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133122_b2b27aa5-664f-44f8-83b3-5f0c8224e26b.png",
+    "status": "completed"
+  }
+]

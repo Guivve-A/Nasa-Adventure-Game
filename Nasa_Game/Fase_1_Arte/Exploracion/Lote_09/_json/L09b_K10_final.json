@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-11-15T13:32:15.253887Z",
+    "display_name": "GPT Image 2.6",
+    "id": "c60da9aa-2dc3-4d4d-b922-bdd7912193de",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133215_c60da9aa-2dc3-4d4d-b922-bdd7912193de_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 1520,
+      "medias": [
+        {
+          "data": {
+            "id": "130b9af0-a408-46ce-96c4-1b1783fbd884",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/130b9af0-a408-46ce-96c4-1b1783fbd884.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Stark black-and-white image in the manner of a low-resolution slow-scan television camera, very high contrast with blown-out whites, crushed shadows and soft detail. View from a camera fixed low on the side of a landing craft on the Moon, wide 20 mm-equivalent lens with slight barrel distortion. On the left, in deep shadow, the dark angular leg of the craft with a ladder. On the lowest rung of the ladder, seen from the side and facing the ladder, a bulky figure in a white pressure suit with a large square backpack and a round helmet holds the rails with both hands and lowers one boot toward the round footpad. The figure is pale and slightly translucent, like a ghost image, with no visible face, no identifiable person and no markings on the suit. Behind it, a blinding sunlit plain, a slightly tilted horizon and a pitch-black sky without stars. A vertical band of glare runs down the right side of the picture. No flag, no lettering on the craft or the suit. No scan lines and no borders. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "high",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "2k",
+      "width": 2688
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_133215_c60da9aa-2dc3-4d4d-b922-bdd7912193de.png",
+    "status": "completed"
+  }
+]

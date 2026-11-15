@@ -1,0 +1,81 @@
+{
+  "lote": "L09d",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09",
+  "tope": 50.0,
+  "_nota": "Fotogramas finales del movimiento III (P13 y P14), direccion C «cine» elegida por Guillermo el 2026-11-15. K13a es la toma r1 de la variante A (copia, 0 creditos) y K13b se compone en posproduccion (0 creditos). Hoja de expresiones y K14a-K14d en gpt_image_2_6 xhigh 2k. K14c sin lagrima (storyboard §3.1: la gota se compone); K14a, K14b y K14d son ediciones de K14c para fijar el mismo encuadre. Tope del encargo: 50 creditos, reintentos incluidos.",
+  "trabajos": [
+    {
+      "id": "L09d_hoja_expresiones_C",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "8b980a9f-e5db-41c2-aae5-3a229b61d764",
+        "@ANC_PROTA_1",
+        "481919be-a76a-4920-bb90-662b31f458fc",
+        "39712f78-40d4-4043-8355-9074af995982"
+      ],
+      "prompt": "Character expression sheet for a cinematic close-up, on a plain warm light-gray background, even soft studio light from the upper right, clean grid with generous spacing. The first reference image is her approved cinematic close-up: match its rendering style, its face, eyes, brows, nose, skin, hair clumps and earring exactly; the other references are her character sheet, its row of head studies and the clean front view of her head. She is exactly the character of the reference images: a round face, warm brown skin, large dark-brown eyes with a small dark wing at the outer end of the upper lash line, thick softly arched dark-brown brows, a small rounded button nose, a small mouth, a few faint freckles and a soft warm blush on the cheeks, a tiny silver diamond-shaped stud earring (a small square turned forty-five degrees), and big voluminous dark-brown curly hair with one small curl at the temple. She is a university student about twenty years old drawn with the stylized proportions of her sheet: youthful but not a child, gently defined cheekbones and jaw, natural, no makeup look. Style: a stylized cinematic 3D close-up from a feature-length animated film, smooth sculpted forms that keep the design of her sheet. Soft translucent skin with a gentle subsurface glow, a hand-painted skin texture with subtle colour variation, faint freckles and fine peach fuzz catching the rim light. Eyes full of life: a clear cornea, a layered dark-brown iris with fine radial fibres, a wet waterline and a thin moist meniscus, individual dark lashes. The curls are sculpted clumps with soft volume and faint bevelled faceted edges that echo the low-poly game style, exactly like the hair of the first reference image; the khaki collar shows a fine cotton weave, and only the shirt and the cream pillow keep gentle low-poly faceted planes. Not photorealistic: painted, warm and stylized. Top row, three large panels, each the same extreme close-up of her face lying on her left side on a cream pillow, face horizontal (forehead to the right, chin to the left, upper eye in the upper half), framed like a 100 mm lens, exactly the framing of the first reference image: 1) deeply asleep, eyelids closed and relaxed, lashes resting on the cheek, lips soft; 2) waking, the upper eyelid half open, lashes parting, an unfocused gaze, cheeks still relaxed; 3) awake and smiling with the eyes: lower lids lifted, upper cheek raised, a small closed smile, eyes moist and shining, no tear. Bottom row, the same three expressions upright and seen from the front at the same scale, plus a smaller fourth panel: a detail study of a single tear, a tiny bead at the inner corner of the eye and a thin glistening line across the bridge of the nose. The same face, hair, earring and khaki collar in every panel. No labels, no numbers. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09d_K14c_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "8b980a9f-e5db-41c2-aae5-3a229b61d764",
+        "PENDIENTE_HOJA",
+        "@ANC_PROTA_1"
+      ],
+      "prompt": "The same frame as the first reference image: the same extreme close-up, the same 100 mm macro lens at f/2 locked off at pillow height, the same position and size of her face, eyes, nose, mouth, ear, earring, curls, collar and pillow in the frame. She lies on her left side with her left cheek sunk into the cream pillow, her face horizontal: forehead toward the right edge, chin toward the left edge, the line through her two eyes runs vertically; her upper eye is in the upper half of the frame and her lower eye is half hidden by the pillow, softly out of focus. A razor-thin plane of focus lies on the lashes of her upper eye. The face, hair and earring are exactly those of the second reference image, her close-up expression sheet. She is exactly the character of the reference images: a round face, warm brown skin, large dark-brown eyes with a small dark wing at the outer end of the upper lash line, thick softly arched dark-brown brows, a small rounded button nose, a small mouth, a few faint freckles and a soft warm blush on the cheeks, a tiny silver diamond-shaped stud earring (a small square turned forty-five degrees), and big voluminous dark-brown curly hair with one small curl at the temple. She is a university student about twenty years old drawn with the stylized proportions of her sheet: youthful but not a child, gently defined cheekbones and jaw, natural, no makeup look. She has just woken: her eyes are open, wet and bright, looking softly past the camera without focusing, with two small rectangular catchlights from the window shutters in each eye. The smile is born in her eyes: the lower lids lift, the upper cheek rises, the outer corners crinkle softly, and her mouth is only a small closed smile beginning, as in the third top panel of the expression sheet. Her eyes are moist and shining, but there is no teardrop and no tear line anywhere on her face: her skin is dry. The feeling is quiet, overwhelming joy, not sadness. Light: low warm morning sun through wooden window shutters. Soft-edged bands of amber light, split by the shutter slats, fall diagonally across her cheek and eyes at about thirty degrees, rising from her jaw toward her upper eyelid; between the bands the skin stays in a gentle petrol-blue shade, about three to one, the darkest tones warm and never black. A golden rim of light runs along the curls, and the background is a soft warm blur. Style: a stylized cinematic 3D close-up from a feature-length animated film, smooth sculpted forms that keep the design of her sheet. Soft translucent skin with a gentle subsurface glow, a hand-painted skin texture with subtle colour variation, faint freckles and fine peach fuzz catching the rim light. Eyes full of life: a clear cornea, a layered dark-brown iris with fine radial fibres, a wet waterline and a thin moist meniscus, individual dark lashes. The curls are sculpted clumps with soft volume and faint bevelled faceted edges that echo the low-poly game style, exactly like the hair of the first reference image; the khaki collar shows a fine cotton weave, and only the shirt and the cream pillow keep gentle low-poly faceted planes. Not photorealistic: painted, warm and stylized. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face. Clean image without film grain. The face stays horizontal, never tilted upright. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09d_K14d_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "PENDIENTE_K14C",
+        "PENDIENTE_HOJA"
+      ],
+      "prompt": "Edit of the first reference image: the same frame, the same face, the same hair, the same earring, the same light, the same colours and the same gentle smile in the cheeks, with both eyes fully closed in a soft blink: the upper lids down, the lashes meeting the lower lids, no squeeze. Nothing else changes: no tear, no camera move, no change of framing. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09d_K14a_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "PENDIENTE_K14C",
+        "PENDIENTE_HOJA"
+      ],
+      "prompt": "Edit of the first reference image: exactly the same frame, lens, framing and position of her face, eyes, nose, mouth, ear, earring, curls, collar and pillow; the same face, hair and earring (the second reference image is her close-up expression sheet). Change only her expression and the light. She is deeply asleep, as in the first top panel of the expression sheet: both eyelids closed and relaxed, lashes resting on the cheek, brows without tension, the cheek relaxed with no smile, lips soft and barely parted. The lashes and the inner corner of her upper eye are slightly wet and catch a tiny cool glint, with no visible teardrop and no tear line. It is just before dawn: there is no sunlight and no warm light anywhere. The only light is faint cool bluish light from above her head, a thin cool edge along the bridge of her nose, the lashes and the top of the curls; the whole face is in deep petrol-blue shadow, about six to one, the darkest tones warm and never pure black, and the background melts into a soft dark blur. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face. Clean image without film grain. The face stays horizontal, never tilted upright. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09d_K14b_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "PENDIENTE_K14A",
+        "PENDIENTE_HOJA"
+      ],
+      "prompt": "Edit of the first reference image: exactly the same frame, the same sleeping face with both eyes still closed and relaxed, no smile, the same hair, earring, collar and pillow; nothing in her face or pose changes. Change only the light: a soft-edged band of amber morning sunlight, about one fifth of the frame wide and split into two or three soft stripes by window shutter slats, now lies diagonally across her jaw and cheek at about thirty degrees, rising from her jaw, and has just reached the closed eyelid of her upper eye. Inside the band the skin glows warm amber and cream with a gentle subsurface glow; outside it everything stays in the cool petrol-blue shade of the reference, about four to one. The lashes and the inner corner of that eye catch a warm glint, with no visible teardrop and no tear line. No large flat facets on the face, no plastic or toy-like eyes, no thick outlines, no anime style, no childlike baby face. Clean image without film grain. The face stays horizontal, never tilted upright. No text, no logos, no insignia, no emblems, no watermark."
+    }
+  ]
+}

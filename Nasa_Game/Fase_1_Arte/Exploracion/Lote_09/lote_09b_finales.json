@@ -1,0 +1,177 @@
+{
+  "lote": "L09b",
+  "carpeta": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09",
+  "tope": 55.0,
+  "_nota": "Fotogramas finales de los planos que no cambian tras el veredicto del 2026-11-15 (K03 a K12). Partida del director: «Usa los mejores modelos de Higgsfield para este objetivo, no importa el gasto». Tope del encargo completo (09b + 09c + reintentos): 150. Encargos copiados por script de la seccion 2 del storyboard, sin retocar; solo se antepone la frase que declara la viñeta de borrador como referencia de composicion (ids en subidas_09b.json). gpt_image_2_6 2k xhigh en todos menos K10 (high: la señal degradada a proposito). K04a y K11a van en una segunda tanda con K04b y K11 finales como referencia. No incluye K01, K02, K13, K14a-d ni K15: dependen del director.",
+  "trabajos": [
+    {
+      "id": "L09b_K03_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "9eea87a2-3af1-4075-8d9d-adeba8854214"
+      ],
+      "_referencia_composicion": "L09_P03_torre_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Extreme telephoto photograph, 600 mm full-frame-equivalent lens at f/11, camera locked on a heavy tripod at standing eye height, strongly compressed perspective that stacks the far shore, the launch tower and the haze into flat layers. Hard mid-morning sunlight from high behind the rocket: the scene is backlit, the rocket and the tower are rimmed with light, and hot haze over a perfectly still lagoon on a flat subtropical coast lowers the contrast to about two to one. Far away on the horizon, at three fifths of the frame width, stands a tall slender white three-stage rocket attached to its dark steel launch tower: tiny, about one sixth of the frame height, softened and wavering in the heat shimmer. Along the bottom edge of the frame, in its left two thirds, six or seven small black silhouettes of people seen from behind stand motionless on the hoods and beside two boxy 1960s cars, backlit, less than one twentieth of the frame height, no faces visible. A huge pale sky fills the upper two thirds of the frame. Colour of 1960s 16 mm reversal film: muted amber, cream and faded cyan, slightly lifted warm blacks, highlights that roll off softly. No markings, letters, flags or symbols on the rocket, the tower or the cars. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K04b_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "4b947eec-57e4-4ed2-a3be-4f1121442b5e"
+      ],
+      "_referencia_composicion": "L09_P04b_ignicion_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Extreme telephoto photograph from a long-range tracking camera, about 1800 mm full-frame-equivalent lens at f/11, same camera position as a 600 mm view tightened three times, locked off, strongly compressed perspective and heat shimmer. A tall white three-stage rocket beside its dark steel launch tower stands at three fifths of the frame width and fills the central half of the frame height against a pale hot morning sky, rim-lit by the sun behind it; flat marsh and a strip of still water run along the bottom. The engines have just ignited: at the base, a blinding orange-white fire, the only saturated colour in the whole image, blooming with a soft red-orange halation. The fire lights the underside of the rocket and the steam from below, so the steam rolling outward low along the ground on both sides glows amber at its base and turns cream above. The rocket has barely left the pad, its base just above the launch platform, perfectly vertical, the tower still beside it. No people. Colour of 1960s 16 mm reversal film: muted cream and faded cyan everywhere except the fire, slightly lifted warm blacks. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K05_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "2b0daa6b-d144-4693-beea-b7b3f4e2897a"
+      ],
+      "_referencia_composicion": "L09_P05_columna_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Wide-angle photograph, 24 mm lens at f/8, deep focus from the stones at the waterline to the horizon, camera one metre above the ground on the shore of a still lagoon, behind a small group of spectators, level and slightly tilted up. In the lower fifth of the frame: the dark shoreline, two boxy 1960s cars and six or seven black silhouettes of people seen from behind, standing still on the hoods and beside the cars, less than one tenth of the frame height, no faces. Far across the water, at three fifths of the frame width, a colossal column of fire and cream-white smoke climbs straight up from the horizon and leaves the top of the frame; the column glows from inside like a lantern with orange fire, is amber on its sunlit side and falls into soft cream shadow on the other; the rocket itself is only a bright point at the head of the flame near the top edge. The calm water mirrors the column. Huge pale blue sky. Colour of 1960s 16 mm reversal film: amber, cream and faded blue, slightly lifted warm blacks. No markings, letters, flags or symbols anywhere. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K06_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "5617e8e5-076e-4e78-b7d0-a8382d824433"
+      ],
+      "_referencia_composicion": "L09_P06_chispa_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Looking steeply up into a vast empty sky, 50 mm lens focused at infinity at f/8, locked off. The sky grades smoothly from pale blue at the bottom of the frame to deep indigo at the top, as at high altitude. A single tiny white spark sits at three fifths of the frame width and one third of the height from the top, at the tip of a long, thin white exhaust trail that sweeps across the frame in one clean arc, like the upper part of a very large circle whose centre lies below the spark: the arc rises from the lower left and levels off at its apex exactly where the spark is. The trail is lit by the sun from below the frame, bright white on its lower side and softly shaded above; its lower part is wider, slightly twisted and thinned by high-altitude wind. Nothing else: no ground, no clouds, no aircraft, no birds, no sun in frame. Faded colour of 1960s 16 mm reversal film. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K07_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "973fe31d-8370-469a-996b-c92d3b4db5dc"
+      ],
+      "_referencia_composicion": "L09_P07_tierra_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. The whole planet Earth floating in pure black space, photographed with a 24 mm lens at f/8 from a departing spacecraft, exposed for the sunlit clouds so that no stars show. A blue-and-white gibbous globe about three quarters lit, hard sunlight from the upper right, a band of night along its lower left edge melting into the black, and a thin luminous blue line of atmosphere along the sunlit limb. The globe sits slightly right of centre and low in the frame: its sunlit top edge touches a point at three fifths of the frame width and one third of the height from the top, and its bottom edge sits just above the bottom of the frame, so it fills 60 percent of the frame height. Deep saturated ocean blue and bright white cloud swirls, with only faint hints of land under the clouds: no sharply drawn or recognisable coastlines, no city lights. No stars, no Moon, no spacecraft parts, no lens flare. The background is perfectly black. Crisp large-format clarity, almost grainless. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K08_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "3332fa4d-e587-4b81-a01c-6713139fa6f8"
+      ],
+      "_referencia_composicion": "L09_P08_borde_luna_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Photograph of the Moon from an approaching spacecraft, 85 mm lens at f/8, crisp large-format clarity. The curved limb of the Moon rises from the lower left and fills two thirds of the frame; the highest point of the limb sits at three fifths of the frame width and one third of the height from the top. Neutral silver-gray surface, densely cratered; hard, low raking sunlight from the right, so the craters near the terminator cast long black shadows and their sunward rims glow; on the left the surface sinks into darkness along a diagonal terminator. There is no atmosphere: every shadow edge is razor sharp and the black is absolute. Pure black sky, no stars, no Earth, no spacecraft. Nearly grainless, high contrast. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K09_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "3c8b49bc-d89b-4b0f-9634-1efa000bacba"
+      ],
+      "_referencia_composicion": "L09_P09_sombra_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Camera looking straight down at the surface of the Moon from about thirty metres up, 35 mm lens at f/11, everything in focus. Neutral gray powdery regolith fills the whole frame, peppered with small craters and scattered rocks. The sun is only ten degrees above the horizon, off the bottom of the frame: hard single-source light with no atmosphere and no fill, so every rock and crater rim casts a long, razor-sharp black shadow toward the top of the frame and the sunlit faces of the rocks glow. Entering from the bottom centre and reaching the middle of the frame: the long black shadow of a four-legged landing craft, an angular body on four splayed legs with round footpads, stretched to about five times its natural length by the low sun. Only the shadow is visible; the craft itself is never in frame. Fine dust streaks radially outward along the ground in perfectly straight thin rays that hug the surface, with no billowing cloud. No footprints, no flags, no people. Crisp and nearly grainless. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K10_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "high"
+      },
+      "imagenes": [
+        "130b9af0-a408-46ce-96c4-1b1783fbd884"
+      ],
+      "_referencia_composicion": "L09_P10_fantasma_tv_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Stark black-and-white image in the manner of a low-resolution slow-scan television camera, very high contrast with blown-out whites, crushed shadows and soft detail. View from a camera fixed low on the side of a landing craft on the Moon, wide 20 mm-equivalent lens with slight barrel distortion. On the left, in deep shadow, the dark angular leg of the craft with a ladder. On the lowest rung of the ladder, seen from the side and facing the ladder, a bulky figure in a white pressure suit with a large square backpack and a round helmet holds the rails with both hands and lowers one boot toward the round footpad. The figure is pale and slightly translucent, like a ghost image, with no visible face, no identifiable person and no markings on the suit. Behind it, a blinding sunlit plain, a slightly tilted horizon and a pitch-black sky without stars. A vertical band of glare runs down the right side of the picture. No flag, no lettering on the craft or the suit. No scan lines and no borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K11_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "54095cae-cb0b-490d-9580-c1ef8674d44d"
+      ],
+      "_referencia_composicion": "L09_P11_huella_borrador",
+      "prompt": "The reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. Macro photograph, 100 mm macro lens at f/4, camera lying on the ground, side view at a grazing angle of about ten degrees: a single fresh boot print pressed into fine gray lunar dust, with crisp parallel tread ribs and sharp vertical walls, like a print in damp flour. A razor-thin plane of focus lies across the ribs in the lower middle of the frame; the dust before and behind it melts within a few centimetres into a soft blur. The print lies inside a large cool shadow and is lit only by soft light bounced from the sunlit ground beyond it: gentle, almost shadowless, slightly cool gray, about two to one, just enough to model each rib. In the background the hard edge of the shadow crosses the frame diagonally from the upper left toward the right, and beyond it the plain blazes in direct sunlight, five stops brighter and strongly out of focus; a thin strip of pitch-black sky runs along the very top. No boot, no person, no flag, no equipment. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K12_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "af6b1e14-c46a-42f9-be7e-b02bb282cd37",
+        "@ANC_PROTA_1"
+      ],
+      "_referencia_composicion": "L09_P12_guayaquil_1969_borrador",
+      "prompt": "The first reference image is the approved rough draft of this exact shot: keep its composition, framing and the placement of every element, but render it as a finished, refined final frame that follows this description exactly. The second reference image is the character sheet of the student. Night photograph, vintage 50 mm lens wide open at f/2, locked off at standing eye height, looking west and slightly upward from the top of a steep public stairway in an old hillside neighbourhood of a tropical port city in 1969. The focus is on the distance: the stairway falling away between small wooden houses with corrugated zinc roofs, laundry hanging on lines, four bare yellow tungsten bulbs that bloom into soft round highlights, and beyond, the dark rooftops and scattered warm lights of the city and low hills under a deep blue-black sky. The bulbs are the only key light: warm pools on the steps and walls, everything else falls into blue-black, about sixteen to one. The patch of sky at three fifths of the frame width and one third of the height from the top, above the roofs, is clear and empty, with a few faint stars: no Moon in the sky. In the foreground at the left third, softly out of focus and seen from behind, stands the small chibi student of the reference sheet, with her proportions, her voluminous dark curly hair, her khaki short-sleeve shirt worn open over a dark T-shirt and her brown cargo pants, barefoot on the stone step, without any bag, her chin slightly raised toward that empty patch of sky; she is a dark soft shape with a thin warm rim light from a bulb behind her on the right, and her face is not visible. No cars, no antennas, no television sets, no signs, no lighthouse, no numbered steps, no modern railings. Warm colour of 1960s 16 mm reversal film: amber bulbs, deep blue-black night, slightly lifted blacks. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    }
+  ],
+  "_segunda_tanda": [
+    {
+      "id": "L09b_K04a_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "PENDIENTE_K04b"
+      ],
+      "prompt": "Same frame, same lens, same light and same colour as the reference image, a few seconds earlier: the rocket stands completely still on the launch platform beside its tower, with no fire, no steam cloud and no glow at its base; only a thin wisp of white vapour drifts from its side in the heat shimmer. No people. No markings, letters, flags or symbols on the rocket or the tower. Clean image without film grain or borders. No text, no logos, no insignia, no emblems, no watermark."
+    },
+    {
+      "id": "L09b_K11a_final",
+      "modelo": "gpt_image_2_6",
+      "params": {
+        "aspect_ratio": "16:9",
+        "resolution": "2k",
+        "quality": "xhigh"
+      },
+      "imagenes": [
+        "PENDIENTE_K11"
+      ],
+      "prompt": "Same frame, same lens, same focus and same light as the reference image, one second earlier: the edge of a gray boot sole with tread ribs is just lifting straight up out of the print and leaving through the top of the frame, with a few grains of dust hanging below it. Only the edge of the sole is visible: no person, no markings. The sharpest and cleanest image possible, without film grain. No text, no logos, no insignia, no emblems, no watermark."
+    }
+  ]
+}

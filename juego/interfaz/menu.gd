@@ -90,6 +90,7 @@ func mostrar_inicio() -> void:
 		_boton("Nueva partida", "nueva")
 	else:
 		primero = _boton("Nueva partida", "nueva", "", true)
+	_boton("Mapa del mundo", "mapa")
 	_boton("Minijuegos", "minijuegos")
 	_boton("Lugares", "lugares")
 	_boton("Salir", "salir")

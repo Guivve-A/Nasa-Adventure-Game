@@ -1,0 +1,450 @@
+{
+ "malla": {
+  "triangulos": 8114,
+  "triangulos_cuerpo": 7522,
+  "vertices_glb": 6319,
+  "huesos": 20,
+  "clips": [
+   "reposo",
+   "caminar",
+   "correr",
+   "salto_lunar",
+   "recoger",
+   "celebrar"
+  ]
+ },
+ "imagenes": [
+  {
+   "nombre": "PER01_bolso_v2",
+   "tipo": "image/png",
+   "bytes": 147008,
+   "px": [
+    512,
+    512
+   ]
+  },
+  {
+   "nombre": "PER01_cuerpo_color",
+   "tipo": "image/png",
+   "bytes": 3429938,
+   "px": [
+    2048,
+    2048
+   ]
+  }
+ ],
+ "glb_bytes": 4111568,
+ "a_reposo": {
+  "dif_max_salida_a_entrada_m": 2.5924264755497183e-08,
+  "dif_max_entrada_a_salida_m": 2.5924264755497183e-08,
+  "dif_max_piel_reposo_m": 9.026844422915792e-07,
+  "triangulos_entrada": 8114,
+  "triangulos_salida": 8114,
+  "caja_min": [
+   -0.1865207999944687,
+   -0.5000261068344116,
+   -0.24119457602500916
+  ],
+  "caja_max": [
+   0.18934234976768494,
+   0.4938586354255676,
+   0.2544621527194977
+  ],
+  "caja_entrada_min": [
+   -0.18652080630453644,
+   -0.5000261068344116,
+   -0.24119457562882446
+  ],
+  "caja_entrada_max": [
+   0.18934234976768494,
+   0.4938586354255676,
+   0.2544621268157821
+  ]
+ },
+ "pesos": {
+  "dif_max_exportado_vs_calculado": 9.104596188080905e-08,
+  "suma_min": 0.9999998845160007,
+  "suma_max": 1.000000111758709
+ },
+ "b_cabeza": {
+  "vertices_cabeza_y_pelo": 2294,
+  "no_rigidos": 0
+ },
+ "e_bolso": {
+  "pose_de_union": {
+   "vertices_dentro": 0,
+   "hondura_max_m": 0.0,
+   "vertices_bolso": 1163
+  },
+  "reposo": {
+   "vertices_dentro_max": 26,
+   "hondura_max_m": 0.0517875961959362,
+   "peor_instante_s": 0.52
+  },
+  "caminar": {
+   "vertices_dentro_max": 57,
+   "hondura_max_m": 0.06430356949567795,
+   "peor_instante_s": 0.4
+  },
+  "correr": {
+   "vertices_dentro_max": 307,
+   "hondura_max_m": 0.060869041830301285,
+   "peor_instante_s": 0.08
+  },
+  "salto_lunar": {
+   "vertices_dentro_max": 139,
+   "hondura_max_m": 0.0641666054725647,
+   "peor_instante_s": 0.84
+  },
+  "recoger": {
+   "vertices_dentro_max": 385,
+   "hondura_max_m": 0.05573700740933418,
+   "peor_instante_s": 0.32
+  },
+  "celebrar": {
+   "vertices_dentro_max": 81,
+   "hondura_max_m": 0.060241054743528366,
+   "peor_instante_s": 0.24
+  }
+ },
+ "b_aristas": {
+  "reposo": {
+   "fraccion_min_bajo_2_2": 1.0,
+   "razon_max": 1.162260686729791,
+   "deformacion_max_cabeza_pelo": 2.200711607391881e-07,
+   "cuadros": 101
+  },
+  "caminar": {
+   "fraccion_min_bajo_2_2": 1.0,
+   "razon_max": 2.100853575504131,
+   "deformacion_max_cabeza_pelo": 2.2151822209881544e-07,
+   "cuadros": 41
+  },
+  "correr": {
+   "fraccion_min_bajo_2_2": 0.9993587459921625,
+   "razon_max": 2.8698062330992107,
+   "deformacion_max_cabeza_pelo": 2.2833213519923845e-07,
+   "cuadros": 29
+  },
+  "salto_lunar": {
+   "fraccion_min_bajo_2_2": 0.999002493765586,
+   "razon_max": 3.3270658826807984,
+   "deformacion_max_cabeza_pelo": 2.2331328852764898e-07,
+   "cuadros": 61
+  },
+  "recoger": {
+   "fraccion_min_bajo_2_2": 0.9983612397577485,
+   "razon_max": 2.8432698325146317,
+   "deformacion_max_cabeza_pelo": 2.429701316808419e-07,
+   "cuadros": 51
+  },
+  "celebrar": {
+   "fraccion_min_bajo_2_2": 0.9981474884218027,
+   "razon_max": 4.666024677942924,
+   "deformacion_max_cabeza_pelo": 2.218994495928328e-07,
+   "cuadros": 71
+  }
+ },
+ "d_ciclos": {
+  "reposo": {
+   "ciclico": true,
+   "giro_max_grados": 2.4148365394514667e-06,
+   "traslacion_max_m": 0.0
+  },
+  "caminar": {
+   "ciclico": true,
+   "giro_max_grados": 2.4148365394514667e-06,
+   "traslacion_max_m": 0.0
+  },
+  "correr": {
+   "ciclico": true,
+   "giro_max_grados": 2.9575586669421963e-06,
+   "traslacion_max_m": 0.0
+  },
+  "salto_lunar": {
+   "ciclico": true,
+   "giro_max_grados": 2.4148365394514667e-06,
+   "traslacion_max_m": 0.0
+  },
+  "recoger": {
+   "ciclico": false,
+   "giro_max_grados": 2.4148365394514667e-06,
+   "traslacion_max_m": 0.0
+  },
+  "celebrar": {
+   "ciclico": false,
+   "giro_max_grados": 2.4148365394514667e-06,
+   "traslacion_max_m": 0.0
+  }
+ },
+ "raiz_plano": {
+  "reposo": 2.3163905515932726e-10,
+  "caminar": 2.9976945370435715e-09,
+  "correr": 5.6461431086063385e-09,
+  "salto_lunar": 1.0477378964424133e-09,
+  "recoger": 2.7939677238464355e-08,
+  "celebrar": 2.561137080192566e-09
+ },
+ "zancadas": {
+  "caminar": {
+   "zancada_m": 0.5636345976150863,
+   "velocidad_apoyo_m_s": 0.7045432470188578,
+   "velocidad_p10": 0.6989494921351772,
+   "velocidad_p90": 0.7079555626659788,
+   "fraccion_del_ciclo_con_apoyo": 1.0
+  },
+  "correr": {
+   "zancada_m": 0.9976783574372144,
+   "velocidad_apoyo_m_s": 1.781568495423597,
+   "velocidad_p10": 1.7343546459623427,
+   "velocidad_p90": 1.7868949738610547,
+   "fraccion_del_ciclo_con_apoyo": 0.6428571428571429
+  }
+ },
+ "duraciones": {
+  "reposo": 2.0,
+  "caminar": 0.8,
+  "correr": 0.56,
+  "salto_lunar": 1.2,
+  "recoger": 1.0,
+  "celebrar": 1.4
+ },
+ "c_pies": {
+  "reposo": {
+   "y_mas_bajo_min": -0.5000261354905033,
+   "y_mas_bajo_max": -0.5000260744212363
+  },
+  "caminar": {
+   "y_mas_bajo_min": -0.5000262153698165,
+   "y_mas_bajo_max": -0.5000254241619431
+  },
+  "correr": {
+   "y_mas_bajo_min": -0.5000264243985163,
+   "y_mas_bajo_max": -0.4679492149802268
+  },
+  "salto_lunar": {
+   "y_mas_bajo_min": -0.4550262828003949,
+   "y_mas_bajo_max": -0.42126145552074423
+  },
+  "recoger": {
+   "y_mas_bajo_min": -0.5000263872605964,
+   "y_mas_bajo_max": -0.5000260946373062
+  },
+  "celebrar": {
+   "y_mas_bajo_min": -0.5000262477093608,
+   "y_mas_bajo_max": -0.5000167087836141
+  }
+ },
+ "mano_mas_baja_m": {
+  "reposo": 0.3623854722586918,
+  "caminar": 0.3407701316503502,
+  "correr": 0.3616817270530816,
+  "salto_lunar": 0.48502066003241595,
+  "recoger": 0.06922938599615525,
+  "celebrar": 0.3369571301206817
+ },
+ "piel_blender_vs_glb_m": 2.982398367268324e-06,
+ "falta_alcance_piernas_m": {
+  "reposo": {
+   "en_vuelo": 0.00010310286095460697,
+   "apoyada": 0.00010310286095460697
+  },
+  "caminar": {
+   "en_vuelo": 0.0,
+   "apoyada": 0.0
+  },
+  "correr": {
+   "en_vuelo": 0.020665041670533513,
+   "apoyada": 0.0
+  },
+  "salto_lunar": {
+   "en_vuelo": 0.0,
+   "apoyada": 0.0
+  },
+  "recoger": {
+   "en_vuelo": 0.0,
+   "apoyada": 0.0
+  },
+  "celebrar": {
+   "en_vuelo": 0.00044341532323383115,
+   "apoyada": 0.00044341532323383115
+  }
+ },
+ "entrada": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\juego\\modelos\\personajes\\PER-01.glb",
+ "salida": "C:\\Users\\guill\\Desktop\\Juego 2d-hd\\juego\\modelos\\personajes\\PER-01_rig.glb",
+ "blender": "5.3.0",
+ "textura": {
+  "antes": [
+   4096,
+   4096
+  ],
+  "despues": [
+   2048,
+   2048
+  ]
+ },
+ "pesos_info": {
+  "libres_hombro_izq": 87,
+  "libres_hombro_der": 77,
+  "libres_cadera": 312,
+  "libres_cuello": 39,
+  "libres": 512,
+  "influencias_max": 4,
+  "por_hueso": {
+   "cadera": 128,
+   "columna": 190,
+   "pecho": 82,
+   "cuello": 3,
+   "cabeza": 1606,
+   "hombro_izq": 32,
+   "brazo_izq": 68,
+   "antebrazo_izq": 42,
+   "mano_izq": 65,
+   "hombro_der": 19,
+   "brazo_der": 60,
+   "antebrazo_der": 22,
+   "mano_der": 70,
+   "muslo_izq": 152,
+   "pierna_izq": 256,
+   "pie_izq": 280,
+   "muslo_der": 143,
+   "pierna_der": 185,
+   "pie_der": 217,
+   "bolso": 0
+  }
+ },
+ "cinematica_propia_vs_blender_m": 2.123768363038248e-06,
+ "alto_malla_m": 0.9938847422599792,
+ "fps": 50,
+ "medidas": {
+  "alto": 1.0,
+  "cadera_y": -0.105,
+  "cuello_y": 0.152,
+  "hombro_y": 0.112,
+  "hombro_z": 0.108,
+  "rodilla_y": -0.26,
+  "zancada_caminar_m": 0.5636,
+  "zancada_correr_m": 0.9977,
+  "duraciones": {
+   "reposo": 2.0,
+   "caminar": 0.8,
+   "correr": 0.56,
+   "salto_lunar": 1.2,
+   "recoger": 1.0,
+   "celebrar": 1.4
+  },
+  "ciclicos": [
+   "reposo",
+   "caminar",
+   "correr",
+   "salto_lunar"
+  ],
+  "alto_malla": 0.9939,
+  "suelo_y": -0.5,
+  "tobillo_y": -0.415,
+  "articulaciones": {
+   "cadera": [
+    0.0609,
+    -0.1,
+    -0.0
+   ],
+   "columna": [
+    0.0685,
+    -0.025,
+    -0.0
+   ],
+   "pecho": [
+    0.0761,
+    0.06,
+    -0.0
+   ],
+   "cuello": [
+    0.0761,
+    0.152,
+    -0.0
+   ],
+   "cabeza": [
+    0.0761,
+    0.19,
+    -0.0
+   ],
+   "hombro_izq": [
+    0.0711,
+    0.13,
+    -0.03
+   ],
+   "brazo_izq": [
+    0.0494,
+    0.112,
+    -0.108
+   ],
+   "antebrazo_izq": [
+    0.0356,
+    0.0156,
+    -0.1439
+   ],
+   "mano_izq": [
+    0.0462,
+    -0.0474,
+    -0.1854
+   ],
+   "hombro_der": [
+    0.0711,
+    0.13,
+    0.03
+   ],
+   "brazo_der": [
+    0.0588,
+    0.112,
+    0.108
+   ],
+   "antebrazo_der": [
+    0.0507,
+    0.027,
+    0.1477
+   ],
+   "mano_der": [
+    0.0667,
+    -0.0406,
+    0.1977
+   ],
+   "muslo_izq": [
+    0.0609,
+    -0.105,
+    -0.072
+   ],
+   "pierna_izq": [
+    0.0656,
+    -0.26,
+    -0.0896
+   ],
+   "pie_izq": [
+    0.0423,
+    -0.415,
+    -0.1072
+   ],
+   "muslo_der": [
+    0.0609,
+    -0.105,
+    0.072
+   ],
+   "pierna_der": [
+    0.0694,
+    -0.26,
+    0.088
+   ],
+   "pie_der": [
+    0.05,
+    -0.415,
+    0.104
+   ],
+   "bolso": [
+    0.1208,
+    -0.0664,
+    0.0933
+   ]
+  },
+  "nota": "Unidades del GLB (1 m de alto, origen a media altura, mira a +X, derecha +Z). Zancada = avance por ciclo completo sin que resbale el pie apoyado. Generado por herramientas/blender/rig_protagonista.py."
+ },
+ "avisos": []
+}

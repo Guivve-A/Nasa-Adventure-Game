@@ -1,0 +1,20 @@
+python -I herramientas/juego_ejecutar.py -- --prueba=minijuego:banderas --ritmo=8
+PRUEBA_OK banderas.minijuego_json
+PRUEBA_OK banderas.json.titulo
+PRUEBA_OK banderas.json.resumen
+PRUEBA_OK banderas.json.controles
+PRUEBA_OK banderas.json.instrucciones
+PRUEBA_OK banderas.json.pistas
+PRUEBA_OK banderas.json.ficha
+MINIJUEGO banderas superado=true puntos=5910.0 detalle=Sin viento, la barra horizontal sostiene la tela extendida. Y plantar una bandera no da territorio: es cooperación.
+PRUEBA_OK banderas.d1.termina_solo
+PRUEBA_OK banderas.d1.se_puede_superar
+MINIJUEGO banderas superado=true puntos=7530.0 detalle=Sin viento, la barra horizontal sostiene la tela extendida. Y plantar una bandera no da territorio: es cooperación.
+PRUEBA_OK banderas.d3.termina_solo
+PRUEBA_OK banderas.d3.se_puede_superar
+MINIJUEGO banderas superado=false puntos=0.0 detalle=Tres golpes lejos del centro del compás: el mástil se asienta con ritmo, no con fuerza.
+PRUEBA_OK banderas.se_puede_fallar
+PRUEBA_OK banderas.el_fallo_explica_la_causa
+FIN
+[godot: ok; 10 s; lineas=36; errores=0]
+Resumen transcrito de la salida observada; mensajes del entorno documentados en INFORME_REMATE.md.

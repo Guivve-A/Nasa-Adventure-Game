@@ -1,0 +1,28 @@
+(esperando turno: otro Godot esta corriendo)
+ERROR: Failed to open 'user://logs/godot2026-11-14T19.01.51.log'.
+   at: copy (core/io/dir_access.cpp:429)
+ERROR: Failed to open log file for writing: user://logs/godot.log
+   at: rotate_file (core/io/logger.cpp:169)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2582)
+PRUEBA_OK telescopio.minijuego_json
+PRUEBA_OK telescopio.json.titulo
+PRUEBA_OK telescopio.json.resumen
+PRUEBA_OK telescopio.json.controles
+PRUEBA_OK telescopio.json.instrucciones
+PRUEBA_OK telescopio.json.pistas
+PRUEBA_OK telescopio.json.ficha
+MINIJUEGO telescopio superado=true puntos=2003.0 detalle=Sol: 12,2 %; altura: 20,0 grados; la Tierra ilumina la noche lunar.
+PRUEBA_OK telescopio.d1.termina_solo
+PRUEBA_OK telescopio.d1.se_puede_superar
+MINIJUEGO telescopio superado=true puntos=1933.0 detalle=Sol: 12,2 %; altura: 20,0 grados; la Tierra ilumina la noche lunar.
+PRUEBA_OK telescopio.d3.termina_solo
+PRUEBA_OK telescopio.d3.se_puede_superar
+MINIJUEGO telescopio superado=false puntos=0.0 detalle=La Luna quedó fuera del visor: busca la sonrisa baja al oeste.
+PRUEBA_OK telescopio.se_puede_fallar
+PRUEBA_OK telescopio.el_fallo_explica_la_causa
+FIN
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 4 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+[godot: ok; 10 s; lineas=30; errores=0]

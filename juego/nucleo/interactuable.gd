@@ -14,6 +14,7 @@ var habilitado := true
 var al_usar: Callable         # funcion que se llama al usarlo (puede ser una corrutina)
 var altura_marca := 1.2       # altura del rombo sobre el origen del nodo
 var una_vez := false          # se desactiva solo tras el primer uso
+var prioridad := 0            # -1: solo se elige si no hay otra cosa al alcance y se le mira (Orbita)
 var _marca: MeshInstance3D
 var _t := 0.0
 var _cerca := 0.0

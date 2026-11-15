@@ -18,12 +18,12 @@ void fragment() {
 	float r = length(p);
 	float pulso = 0.5 + 0.5 * sin(TIME * 2.2);
 	float anillo = smoothstep(0.08, 0.0, abs(r - (0.74 + 0.04 * pulso)));
-	float halo = smoothstep(1.0, 0.2, r) * 0.22;
+	float halo = smoothstep(1.0, 0.2, r) * 0.14;
 	// estrella de cuatro puntas: |x|^k + |y|^k < c con k < 1
 	float estrella_d = pow(abs(p.x), 0.55) + pow(abs(p.y), 0.55);
 	float estrella = smoothstep(0.78, 0.60, estrella_d) * (0.75 + 0.25 * pulso);
 	float brillo = anillo * 0.9 + halo + estrella * (1.0 - cerrado);
 	brillo *= mix(1.0, 0.35, cerrado) * fuerza;
 	ALBEDO = color * (1.0 + 0.5 * estrella);
-	ALPHA = clamp(brillo * 1.15, 0.0, 0.95);
+	ALPHA = clamp(brillo * 0.9, 0.0, 0.8);
 }

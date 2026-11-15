@@ -22,3 +22,13 @@ python -I herramientas/juego_ejecutar.py --todo -- --prueba=guion:res://minijueg
 Archivos: `seguidor.gd`, `minijuego.json`, `prueba_seguidor.gd`; evidencia: esta nota, `prueba_comun.txt`, `prueba_adicional.txt`, `seguidor.png` y `rampa.png`.
 
 El entorno emite avisos de permisos al escribir logs de `user://` y al leer certificados del sistema; las pruebas finalizan con código 0. La primera captura no se guardó porque faltaba esta carpeta: no se tomó el marcador CAPTURA_OK como prueba de existencia.
+
+## Jugado con teclado y con ratón
+
+Revisión del 14 de noviembre de 2026: `prueba_manos.gd` abre por el anfitrión real, pulsa Empezar, gana y cierra Continuar mediante eventos físicos simulados. Parte A solo teclado; parte B solo ratón. Se verifican además el tercer dial de prealimentación con ambos medios, los tres botones Solo…, el bloqueo de cambios múltiples, las curvas anterior/actual y las salidas en cada fase, sin dejar el árbol en pausa. Los pilotos están desactivados y los diales nunca se escriben desde la prueba.
+
+W/S o ↑/↓ eligen; A/D o ←/→ ajustan; E/Intro prueban; Espacio conserva el cambio elegido. El ratón arrastra y pulsa Probar/Solo… . Intro o clic abre Empezar y cierra Continuar; Esc y Salir abandonan. Los controles del lienzo no necesitan foco. Al pulsar Solo… ahora la selección sigue al parámetro conservado. Las instrucciones proponen subir amortiguación hacia el centro tras observar oscilaciones; la prueba gana la segunda medición de dificultad 1 siguiendo esa pista, sin memorizar 6,5. Modelo y datos sin cambios.
+
+La prueba de manos sin ventana finalizó `PRUEBAS hechas=134 fallos=0`, código 0. Sus clics parten de `get_global_rect()` y se convierten con `get_final_transform()` a coordenadas de ventana, necesario también en headless (escala 0,05 y margen vertical 14 observados). Revisión completa, comandos, resultados finales y salidas en [INFORME_MANOS.md](INFORME_MANOS.md).
+
+Prueba original: 13 `PRUEBA_OK`, código 0, 8 s. Repetición con ventana y capturas: `PRUEBAS hechas=148 fallos=0`, código 0, 55 s. Sin `PRUEBA_FALLO` ni `SCRIPT ERROR` en las tres corridas finales. Las cuatro capturas `manos_*.png` fueron abiertas e inspeccionadas: instrucciones, botones, diales y texto dentro de sus límites, incluidos los tres botones Solo… de rampa. Sin pendientes funcionales en este carril; las partidas se realizaron con eventos de entrada simulados y revisión visual.

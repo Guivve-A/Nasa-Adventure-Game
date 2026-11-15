@@ -17,6 +17,17 @@ externos/
 # Obsidian
 .obsidian/workspace*.json
 
+# Datos de usuario de Godot que dejan las pruebas (caches de shaders y registros)
+Nasa_Game/Construccion/**/usuario_*/
+app_userdata/
+shader_cache/
+*.vulkan.cache
+
+# Video: capturas crudas e intermedios del montaje (se regeneran con herramientas/demo/)
+*.avi
+Nasa_Game/Presentacion/material/
+Nasa_Game/Presentacion/intermedios/
+
 # Trabajo de Blender
 *.blend1
 herramientas/blender/salidas/

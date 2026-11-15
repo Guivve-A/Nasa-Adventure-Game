@@ -1,403 +1,467 @@
 extends "res://nucleo/minijuego.gd"
 
-# Una instantanea del cielo: el reloj de partida no avanza la efemeride.
-# Los margenes y la escala del buscador son reglas didacticas, no medidas astronomicas.
-const Recursos = preload("res://nucleo/recursos.gd")
-const RAIZ: String = "res://minijuegos/telescopio/"
-const VISTA: Rect2 = Rect2(16, 46, 620, 420)
-const CENTRO: Vector2 = Vector2(326, 256)
-const RADIO: float = 151.2
-const ESCALA_BUSCADOR: float = 6.0
-const FOCO: float = 0.62
-const LIMITE: float = 150.0
-const RASGOS: Array[String] = ["Terminador", "Luz cenicienta", "Mare Crisium"]
-# Punto contrastado en la propuesta: (588,4; 522,4), centro (512; 360), radio 208,8.
-const CRISIUM: Vector2 = Vector2(76.4 / 208.8, 162.4 / 208.8)
+# Ocular de salon: escalas, deriva y exposicion son reglas de juego.
+# Solo las cifras leidas de las fichas son mediciones astronomicas.
+const DT: float = 1.0 / 120.0
+const CAMPO: Vector2 = Vector2(320, 180)
+const MUNDO: Vector2 = Vector2(640, 260)
+const HORIZONTE: float = 244.0
+const RADIO_LUNA: int = 52
+const CENTRO: Vector2 = Vector2(160, 94)
+const RASGOS: Array[String] = ["TERMINADOR", "LUZ CENICIENTA", "MARE CRISIUM"]
+const CORAZON: Array[String] = [".##.##.", "#######", "#######", ".#####.", "..###..", "...#..."]
+const TIERRA: Array[String] = ["...pppp...", ".ppvvvvpp.", "ppvvvvvppp", "pppvvppppp", "ppppppvvpp", ".ppppvvpp.", "...pppp..."]
+const TUBO: Array[String] = ["......cc", "....pppc", "..ppppp.", "ppppp...", ".pp.....", "..p.....", ".p.p....", "p...p..."]
+const MAR: Array[String] = ["..###...", ".#####..", "#######.", "########", ".######.", "..####..", "....#..."]
+const GLIFOS: Dictionary = {
+	"A":".#./#.#/###/#.#/#.#", "B":"##./#.#/##./#.#/##.", "C":"###/#../#../#../###",
+	"D":"##./#.#/#.#/#.#/##.", "E":"###/#../##./#../###", "F":"###/#../##./#../#..",
+	"G":"###/#../#.#/#.#/###", "H":"#.#/#.#/###/#.#/#.#", "I":"###/.#./.#./.#./###",
+	"J":"..#/..#/..#/#.#/###", "K":"#.#/#.#/##./#.#/#.#", "L":"#../#../#../#../###",
+	"M":"#.#/###/###/#.#/#.#", "N":"#.#/###/###/###/#.#", "O":"###/#.#/#.#/#.#/###",
+	"P":"###/#.#/###/#../#..", "Q":"###/#.#/#.#/###/..#", "R":"##./#.#/##./#.#/#.#",
+	"S":"###/#../###/..#/###", "T":"###/.#./.#./.#./.#.", "U":"#.#/#.#/#.#/#.#/###",
+	"V":"#.#/#.#/#.#/#.#/.#.", "W":"#.#/#.#/###/###/#.#", "X":"#.#/#.#/.#./#.#/#.#",
+	"Y":"#.#/#.#/.#./.#./.#.", "Z":"###/..#/.#./#../###",
+	"0":"###/#.#/#.#/#.#/###", "1":".#./##./.#./.#./###", "2":"###/..#/###/#../###",
+	"3":"###/..#/###/..#/###", "4":"#.#/#.#/###/..#/..#", "5":"###/#../###/..#/###",
+	"6":"###/#../###/#.#/###", "7":"###/..#/..#/.#./.#.", "8":"###/#.#/###/#.#/###",
+	"9":"###/#.#/###/..#/###", ".":".../.../.../.../.#.", ",":".../.../.../.#./#..",
+	"/":"..#/..#/.#./#../#..", ":":".../.#./.../.#./...", "-":".../.../###/.../...",
+	"%":"#.#/..#/.#./#../#.#", "+":".../.#./###/.#./...", "!":".#./.#./.#./.../.#.",
+}
 
-var datos: Dictionary = {}
-var etapa: int = 0
+var etapa: int = 0 # 0 buscar, 1 enfoque, 2 registrar, 3 final
 var rasgo: int = 0
-var acimut: float = 265.0
-var altura: float = 42.0
-var enfoque: float = 0.12
+var visor: Vector2 = Vector2(450, 62)
+var velocidad: Vector2 = Vector2.ZERO
 var mira: Vector2 = CENTRO
-var revisiones: int = 0
-var max_revisiones: int = 5
-var margen_busqueda: float = 1.6
-var margen_foco: float = 0.07
-var margen_terminador: float = 0.12
-var margen_crisium: float = 0.17
-var marcas: Array[Vector2] = []
+var luna_mundo: Vector2 = Vector2(114, 194)
+var luna_centro: Vector2 = CENTRO
+var diana: Vector2 = CENTRO
+var iluminacion: float = 0.0
+var altura: float = 0.0
+var inclinacion: float = 0.0
+var vidas: int = 3
+var puntos: float = 0.0
+var limite: float = 90.0
+var margen: float = 8.0
+var ventana_foco: float = 0.2
+var enfoque: float = 0.0
+var exposicion: float = 0.0
+var exposicion_meta: float = 6.0
+var fuera: float = 0.0
+var mando: Vector2 = Vector2.ZERO
+var accion: bool = false
+var pulso: bool = false
 var _auto: int = 0
-var _pulso: float = 0.0
-var _observador: Vector3
-var _sol: Vector3
-var _norte: Vector3
-var _este: Vector3
-var _sn: Vector2
-var _sb: Vector2
-var _luna: ShaderMaterial
-var _borroso: ShaderMaterial
-var _ocular: SubViewport
-var _superficie: TextureRect
-var _capa_mira: Control
-var _estado: Label
-var _lectura: Label
-var _altura_lectura: Label
-var _tarea: Label
-var _ayuda: Label
-var _mensaje: Label
-var _tiempo: Label
-var _dial_az: HSlider
-var _dial_alt: HSlider
-var _dial_foco: HSlider
-var _confirmar_boton: Button
+var _acum: float = 0.0
+var reloj: float = 0.0
+var t_etapa: float = 0.0
+var inmune: float = 0.0
+var destello: float = 0.0
+var sacudida: float = 0.0
+var causa: String = ""
+var ganado: bool = false
+var aviso: String = ""
+var aviso_t: float = 0.0
+var estrellas: Array[Vector3] = []
+var particulas: Array[Dictionary] = []
+var azar: RandomNumberGenerator = RandomNumberGenerator.new()
+var glifos: Dictionary = {}
+
+
+func _init() -> void:
+	pantalla_completa = true
 
 
 func _preparar() -> void:
-	datos = JSON.parse_string(FileAccess.get_file_as_string(RAIZ + "datos/luna.json"))
-	max_revisiones = [5, 4, 3][dificultad - 1]
-	margen_busqueda = [1.6, 1.2, 0.8][dificultad - 1]
-	margen_foco = [0.07, 0.05, 0.035][dificultad - 1]
-	margen_terminador = [0.12, 0.09, 0.065][dificultad - 1]
-	margen_crisium = [0.17, 0.14, 0.11][dificultad - 1]
-	_crear_luna()
-	_estado = _etiqueta("", Vector2(24, 10), 610, 20, Estilo.TINTA)
-	_tiempo = _etiqueta("", Vector2(674, 10), 416, 18, Estilo.TINTA)
-	_etiqueta("Guayaquil · 12-11-2026 · 19:30", Vector2(674, 52), 416, 20)
-	_etiqueta("12,2 % al Sol · 403 151 km\n20,0° de altura · creciente", Vector2(674, 84), 416, 20)
-	_lectura = _etiqueta("", Vector2(674, 148), 416, 20)
-	_altura_lectura = _etiqueta("", Vector2(674, 210), 416, 20)
-	_dial_az = _dial(Vector2(674, 175), 200, 290, acimut)
-	_dial_az.value_changed.connect(func(v: float): acimut = v)
-	_dial_alt = _dial(Vector2(674, 235), 0, 70, altura)
-	_dial_alt.value_changed.connect(func(v: float): altura = v)
-	_dial_foco = _dial(Vector2(674, 210), 0, 1, enfoque)
-	_dial_foco.value_changed.connect(func(v: float): enfoque = v)
-	_tarea = _etiqueta("", Vector2(674, 284), 416, 22)
-	_ayuda = _etiqueta("", Vector2(674, 321), 416, 18)
-	_confirmar_boton = Estilo.boton("Confirmar · E / Espacio", 19, true)
-	_confirmar_boton.position = Vector2(674, 420)
-	_confirmar_boton.size = Vector2(416, 44)
-	_confirmar_boton.focus_mode = Control.FOCUS_NONE
-	_confirmar_boton.pressed.connect(_confirmar)
-	add_child(_confirmar_boton)
-	_mensaje = _etiqueta("", Vector2(24, 476), 1070, 18)
-	_capa_mira = Control.new()
-	_capa_mira.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_capa_mira.draw.connect(_dibujar_mira)
-	add_child(_capa_mira)
-	_refrescar()
-
-
-func _etiqueta(contenido: String, pos: Vector2, ancho: float, tam: int, color: Color = Estilo.TINTA) -> Label:
-	var l: Label = texto(contenido, tam, color)
-	l.position = pos
-	l.custom_minimum_size.x = ancho
-	add_child(l)
-	return l
-
-
-func _dial(pos: Vector2, minimo: float, maximo: float, valor: float) -> HSlider:
-	var d: HSlider = HSlider.new()
-	d.position = pos
-	d.size = Vector2(416, 30)
-	d.min_value = minimo
-	d.max_value = maximo
-	d.step = 0.001
-	d.value = valor
-	d.focus_mode = Control.FOCUS_NONE
-	d.add_theme_stylebox_override("slider", Estilo.caja(Estilo.PAPEL_SOMBRA, 4, 1))
-	d.add_theme_stylebox_override("grabber_area", Estilo.caja(Estilo.CIAN_MEDIO, 4))
-	add_child(d)
-	return d
-
-
-func _direccion(lon_deg: float, lat_deg: float) -> Vector3:
-	var lon: float = deg_to_rad(lon_deg)
-	var lat: float = deg_to_rad(lat_deg)
-	return Vector3(cos(lat) * cos(lon), cos(lat) * sin(lon), sin(lat))
-
-
-func _crear_luna() -> void:
-	_observador = _direccion(datos["subobservador_lon_deg"], datos["subobservador_lat_deg"])
-	_sol = _direccion(datos["subsolar_lon_deg"], datos["subsolar_lat_deg"])
-	_norte = (Vector3(0, 0, 1) - _observador.z * _observador).normalized()
-	_este = _observador.cross(_norte)
-	var pa: float = deg_to_rad(float(datos["pa_polo_norte_deg"]) - float(datos["angulo_paralactico_deg"]))
-	_sn = Vector2(-sin(pa), cos(pa))
-	_sb = Vector2(-cos(pa), -sin(pa))
-	_luna = ShaderMaterial.new()
-	_luna.shader = load(RAIZ + "luna.gdshader")
-	_luna.set_shader_parameter("color_luna", Recursos.textura(RAIZ + "texturas/luna_color_4k.jpg"))
-	_luna.set_shader_parameter("normales_luna", Recursos.textura(RAIZ + "texturas/luna_normales.png"))
-	_luna.set_shader_parameter("dir_obs", _observador)
-	_luna.set_shader_parameter("dir_sol", _sol)
-	_luna.set_shader_parameter("pa_norte", pa)
-	var texturas: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(RAIZ + "texturas/texturas.json"))
-	_luna.set_shader_parameter("lon_centro", deg_to_rad(float(texturas["lon_centro_deg"])))
-	_luna.set_shader_parameter("centro", Vector2(0.5, 0.5))
-	_luna.set_shader_parameter("aspecto", VISTA.size.x / VISTA.size.y)
-	_luna.set_shader_parameter("radio_ocular", 0.48)
-	_luna.set_shader_parameter("factor_cenicienta", (1.0 - cos(deg_to_rad(float(datos["angulo_fase_deg"])))) / 1.757)
-	_ocular = SubViewport.new()
-	_ocular.size = Vector2i(VISTA.size)
-	_ocular.disable_3d = true
-	_ocular.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	add_child(_ocular)
-	var lienzo: ColorRect = ColorRect.new()
-	lienzo.size = VISTA.size
-	lienzo.material = _luna
-	_ocular.add_child(lienzo)
-	_borroso = ShaderMaterial.new()
-	_borroso.shader = load(RAIZ + "enfoque.gdshader")
-	_superficie = TextureRect.new()
-	_superficie.position = VISTA.position
-	_superficie.size = VISTA.size
-	_superficie.texture = _ocular.get_texture()
-	_superficie.material = _borroso
-	_superficie.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(_superficie)
-
-
-func _empezar() -> void:
-	_mensaje.text = "Busca la creciente baja en el oeste. El buscador amplía el campo de forma esquemática."
-	_refrescar()
-
-
-func _mover(mando: Vector2, delta: float) -> void:
-	match etapa:
-		0:
-			acimut = clampf(acimut + mando.x * delta * 9.0, 200, 290)
-			altura = clampf(altura + mando.y * delta * 9.0, 0, 70)
-		1:
-			enfoque = clampf(enfoque + mando.x * delta * 0.2, 0, 1)
-		2:
-			mira += Vector2(mando.x, -mando.y) * delta * 115.0
-			mira = CENTRO + (mira - CENTRO).limit_length(193)
-
-
-func _paso(delta: float) -> void:
-	var mando: Vector2 = Vector2(eje_x(), eje_y())
-	if _auto != 0:
-		mando = _mando_auto(delta)
-	_mover(mando, delta)
-	_pulso += delta
-	if _auto != 0 and _pulso >= 0.65:
-		var listo: bool = _centrada() if etapa == 0 else absf(enfoque - FOCO) < margen_foco * 0.5
-		if etapa == 2:
-			listo = mira.distance_to(_objetivo_auto()) < 3.0
-		if _auto < 0:
-			listo = altura >= 57.0
-		if listo:
-			_pulso = 0.0
-			_confirmar()
-	if activo and tiempo >= LIMITE:
-		terminar(false, 0, _causa_tiempo())
-	_refrescar()
-
-
-func _centrada() -> bool:
-	return absf(acimut - float(datos["azimut_deg"])) <= margen_busqueda and absf(altura - float(datos["elevacion_deg"])) <= margen_busqueda
-
-
-func _confirmar() -> void:
-	if not activo:
-		return
-	if etapa == 0:
-		if not _centrada():
-			_revisar(_causa_busqueda())
-			return
-		etapa = 1
-		_mensaje.text = "Luna centrada. Gira la rueda: compara el borde borroso con el borde nítido."
-	elif etapa == 1:
-		if absf(enfoque - FOCO) > margen_foco:
-			_revisar("El borde sigue borroso: ajusta la rueda hasta que la nitidez llegue al umbral.")
-			return
-		etapa = 2
-		_mensaje.text = "Imagen nítida. Señala la frontera entre el día y la noche lunar."
-	else:
-		var causa: String = _causa_marca(mira, rasgo)
-		if causa != "":
-			_revisar(causa)
-			return
-		marcas.append(mira)
-		sonar("ok")
-		rasgo += 1
-		if rasgo == 3:
-			print("TELESCOPIO d%d marcas=3 revisiones=%d tiempo=%.3f" % [dificultad, revisiones, tiempo])
-			terminar(true, maxf(40, 100 - revisiones * 10), "Reconociste 3 rasgos: terminador, luz reflejada por la Tierra y Mare Crisium. El Sol ilumina el 12,2 %.")
-			return
-		_mensaje.text = "Terminador marcado. Ahora busca la parte oscura, iluminada por la Tierra." if rasgo == 1 else "Luz cenicienta marcada. Busca Mare Crisium: la guía encuadra su entorno."
-	_refrescar()
-
-
-func _revisar(causa: String) -> void:
-	revisiones += 1
-	_mensaje.text = causa
-	sonar("error")
-	if revisiones >= max_revisiones:
-		terminar(false, 0, causa)
-	_refrescar()
-
-
-func _causa_busqueda() -> String:
-	if altura > float(datos["elevacion_deg"]) + margen_busqueda:
-		return "Buscas demasiado alto: esta noche la Luna está a 20,0° de altura. Baja el telescopio."
-	if altura < float(datos["elevacion_deg"]) - margen_busqueda:
-		return "Apuntas bajo la Luna: está a 20,0° de altura. Sube el telescopio."
-	return "El acimut deja la Luna fuera del centro: apunta a 241,4°, hacia el oeste."
-
-
-func _causa_tiempo() -> String:
-	if etapa == 0:
-		return "Se agotaron los 150 s. " + _causa_busqueda() if not _centrada() else "La Luna estaba centrada: faltó confirmar para pasar al enfoque."
-	if etapa == 1:
-		return "Se agotaron los 150 s sin confirmar una imagen nítida: el desenfoque impide distinguir los rasgos."
-	return "Se agotaron los 150 s: faltó reconocer %s. %s" % [RASGOS[rasgo], _explicacion()]
-
-
-func _punto_lunar(pantalla: Vector2) -> Vector3:
-	# Inversa de la misma proyeccion ortografica que usa luna.gdshader.
-	var d: Vector2 = (pantalla - CENTRO) / RADIO
-	d.y = -d.y
-	var z: float = sqrt(maxf(0, 1.0 - d.length_squared()))
-	return (d.dot(_sn) * _norte + d.dot(_sb) * _este + z * _observador).normalized()
-
-
-func _causa_marca(punto: Vector2, cual: int) -> String:
-	var r: float = punto.distance_to(CENTRO) / RADIO
-	if r >= 0.97:
-		return "La mira está fuera del disco o sobre el borde exterior: busca el rasgo dentro de la Luna."
-	var geo: float = _punto_lunar(punto).dot(_sol)
-	match cual:
-		0:
-			if absf(geo) <= margen_terminador:
-				return ""
-			return "Esa zona recibe Sol." + " El terminador es la frontera interior entre el día y la noche." if geo > 0 else "Esa zona está en la noche lunar: lleva la mira a su frontera con la sonrisa brillante."
-		1:
-			if geo < -0.12 and r < 0.88:
-				return ""
-			return "Esa zona brillante recibe luz del Sol; la luz cenicienta está en la parte oscura, iluminada por la Tierra." if geo >= -0.12 else "Estás junto al borde exterior. Busca la parte oscura dentro del disco."
-		2:
-			if ((punto - CENTRO) / RADIO).distance_to(CRISIUM) <= margen_crisium:
-				return ""
-			return "La mira queda lejos de Mare Crisium: busca la mancha de abajo a la derecha, dentro de la guía."
-	return ""
-
-
-func _explicacion() -> String:
-	return ["Frontera entre el día y la noche lunar.", "Parte oscura con luz reflejada por la Tierra.", "Mancha identificada en la prueba del ocular."][rasgo]
-
-
-func _objetivo_auto() -> Vector2:
-	if rasgo == 0:
-		# En el eje de la luz, el terminador cruza a -cos(fase) radios.
-		var solar: Vector2 = Vector2(_sol.dot(_norte), _sol.dot(_este))
-		var eje: Vector2 = (_sn * solar.x + _sb * solar.y).normalized()
-		eje.y = -eje.y
-		return CENTRO + eje * (-cos(deg_to_rad(float(datos["angulo_fase_deg"])))) * RADIO
-	if rasgo == 1:
-		return CENTRO
-	return CENTRO + CRISIUM * RADIO
-
-
-func _mando_auto(delta: float) -> Vector2:
-	# Solo mueve las mismas variables con las mismas velocidades y pulsa confirmar.
-	if etapa == 0:
-		var destino: Vector2 = Vector2(float(datos["azimut_deg"]), float(datos["elevacion_deg"])) if _auto > 0 else Vector2(acimut, 58)
-		return (destino - Vector2(acimut, altura)).clamp(Vector2.ONE * -9 * delta, Vector2.ONE * 9 * delta) / maxf(9 * delta, 0.0001)
-	if etapa == 1:
-		return Vector2(clampf((FOCO - enfoque) / maxf(delta * 0.2, 0.0001), -1, 1), 0)
-	var diferencia: Vector2 = _objetivo_auto() - mira
-	diferencia.y = -diferencia.y
-	return diferencia.limit_length(115 * delta) / maxf(delta * 115, 0.0001)
-
-
-func _input(evento: InputEvent) -> void:
-	if not activo or _auto != 0:
-		return
-	if evento.is_action_pressed("interactuar") or evento.is_action_pressed("saltar"):
-		_confirmar()
-		get_viewport().set_input_as_handled()
-
-
-func _gui_input(evento: InputEvent) -> void:
-	if not activo or _auto != 0:
-		return
-	if evento is InputEventMouseButton and evento.pressed:
-		if etapa == 1 and evento.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-			enfoque = clampf(enfoque + (0.025 if evento.button_index == MOUSE_BUTTON_WHEEL_UP else -0.025), 0, 1)
-		elif evento.button_index == MOUSE_BUTTON_LEFT and evento.position.distance_to(CENTRO) < 195:
-			if etapa == 0:
-				acimut = clampf(acimut + (evento.position.x - CENTRO.x) / ESCALA_BUSCADOR, 200, 290)
-				altura = clampf(altura - (evento.position.y - CENTRO.y) / ESCALA_BUSCADOR, 0, 70)
-			elif etapa == 2:
-				mira = evento.position
-	if evento is InputEventMouseMotion and etapa == 2 and evento.position.distance_to(CENTRO) < 195:
-		mira = evento.position
-	_refrescar()
-
-
-func _refrescar() -> void:
-	_estado.text = ["1 / 3 · BUSCAR", "2 / 3 · ENFOCAR", "3 / 3 · SEÑALAR"][etapa]
-	_tiempo.text = "%d s · Revisiones: %d / %d" % [maxi(0, ceili(LIMITE - tiempo)), revisiones, max_revisiones]
-	_dial_az.visible = etapa == 0
-	_dial_alt.visible = etapa == 0
-	_dial_foco.visible = etapa == 1
-	_altura_lectura.visible = etapa == 0
-	_dial_az.set_value_no_signal(acimut)
-	_dial_alt.set_value_no_signal(altura)
-	_dial_foco.set_value_no_signal(enfoque)
-	if etapa == 0:
-		_lectura.text = ("Acimut: %.1f°" % acimut).replace(".", ",")
-		_altura_lectura.text = ("Altura: %.1f°" % altura).replace(".", ",")
-		_tarea.text = "Centra la Luna y confirma"
-		_ayuda.text = "← →: acimut · ↑ ↓: altura\nO pulsa la Luna en el buscador.\nObjetivo: 241,4° · 20,0°"
-	elif etapa == 1:
-		var nitidez: float = maxf(0, 100 * (1 - absf(enfoque - FOCO)))
-		_lectura.text = ("Rueda: %.0f / 100\nNitidez: %.0f %% · umbral: %.1f %%" % [enfoque * 100, nitidez, (1 - margen_foco) * 100]).replace(".", ",")
-		_tarea.text = "Gira la rueda y confirma"
-		_ayuda.text = "← →: girar la rueda\nRatón: dial o rueda del ratón.\nObserva el borde de la sonrisa."
-	else:
-		_lectura.text = "Marcas: %d / 3\n✓ = rasgo ya reconocido" % marcas.size()
-		_tarea.text = "%d / 3 · %s" % [mini(3, rasgo + 1), RASGOS[mini(rasgo, 2)]]
-		_ayuda.text = _explicacion() if rasgo < 3 else "Los 3 rasgos están reconocidos."
-		_ayuda.text += "\nMueve la mira y confirma con E."
-	var desplazamiento: Vector2 = Vector2((float(datos["azimut_deg"]) - acimut) * ESCALA_BUSCADOR, (altura - float(datos["elevacion_deg"])) * ESCALA_BUSCADOR)
-	desplazamiento.y = -desplazamiento.y
-	_luna.set_shader_parameter("desplazamiento", desplazamiento / VISTA.size.y if etapa == 0 else Vector2.ZERO)
-	_luna.set_shader_parameter("radio", 0.035 if etapa == 0 else RADIO / VISTA.size.y)
-	_borroso.set_shader_parameter("desenfoque", 0.0 if etapa == 0 else absf(enfoque - FOCO) * 30)
-	if _capa_mira != null:
-		_capa_mira.queue_redraw()
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	# Las fichas son la unica fuente de las cifras mostradas y de la fase dibujada.
+	var ficha: Dictionary = Juego.ficha("luna_12_noviembre")
+	var patron: RegEx = RegEx.new()
+	patron.compile("[0-9]+[,\\.][0-9]+")
+	var cifras: Array[RegExMatch] = patron.search_all(String(ficha.get("texto", "")))
+	if cifras.size() >= 2:
+		iluminacion = float(cifras[0].get_string().replace(",", ".")) / 100.0
+		altura = float(cifras[1].get_string().replace(",", "."))
+	var sonrisa: Dictionary = Juego.ficha("luna_sonriente")
+	var orientacion: Array[RegExMatch] = patron.search_all(String(sonrisa.get("texto", "")))
+	if not orientacion.is_empty():
+		inclinacion = deg_to_rad(float(orientacion[0].get_string().replace(",", ".")) - 180.0)
+	luna_mundo.y = HORIZONTE - altura * 2.5
+	limite = [100.0, 85.0, 75.0][dificultad - 1]
+	margen = [10.0, 7.0, 5.0][dificultad - 1]
+	ventana_foco = [0.23, 0.14, 0.09][dificultad - 1]
+	exposicion_meta = [5.5, 7.0, 8.0][dificultad - 1]
+	azar.seed = int(parametros.get("semilla", 1220))
+	for i in 310:
+		estrellas.append(Vector3(azar.randf_range(0, MUNDO.x), azar.randf_range(0, MUNDO.y), azar.randf()))
+	for c in GLIFOS:
+		var mapa: String = GLIFOS[c]
+		glifos[c] = mapa.split("/")
 	queue_redraw()
 
 
-func _dibujar_mira() -> void:
-	var c: Vector2 = mira if etapa == 2 else CENTRO
-	if etapa != 1:
-		_capa_mira.draw_arc(c, 11, 0, TAU, 32, Estilo.CIAN, 2, true)
-		for eje in [Vector2(1, 0), Vector2(0, 1)]:
-			_capa_mira.draw_line(c - eje * 18, c - eje * 5, Estilo.CIAN, 2, true)
-			_capa_mira.draw_line(c + eje * 5, c + eje * 18, Estilo.CIAN, 2, true)
-	for i in marcas.size():
-		_capa_mira.draw_circle(marcas[i], 5, Estilo.CREMA)
-		_capa_mira.draw_string(Estilo.fuente(), marcas[i] + Vector2(9, -8), "✓ %d" % (i + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Estilo.CREMA)
-	if etapa == 2 and rasgo == 2:
-		# Guia amplia de localizacion; el area aceptada es menor y sigue la textura.
-		_capa_mira.draw_arc(CENTRO + CRISIUM * RADIO, 38, 0, TAU, 48, Estilo.CREMA, 1.5, true)
-	if etapa == 1:
-		var rueda: Vector2 = Vector2(930, 258)
-		_capa_mira.draw_circle(rueda, 19, Estilo.PAPEL_SOMBRA)
-		_capa_mira.draw_arc(rueda, 19, 0, TAU, 32, Estilo.TINTA, 2, true)
-		_capa_mira.draw_line(rueda, rueda + Vector2.from_angle(enfoque * TAU) * 16, Estilo.CIAN_MEDIO, 3, true)
-
-
-func _draw() -> void:
-	draw_style_box(Estilo.caja(Estilo.PAPEL_SOMBRA, 12, 2), Rect2(658, 42, 448, 426))
-	draw_style_box(Estilo.caja(Estilo.PETROLEO, 12, 2), Rect2(12, 42, 628, 428))
+func _empezar() -> void:
+	sonar("radio")
 
 
 func jugar_solo(acierta: bool) -> void:
 	_auto = 1 if acierta else -1
+
+
+func _input(evento: InputEvent) -> void:
+	if not activo or _auto != 0 or etapa == 3:
+		return
+	if evento.is_action_pressed("interactuar") or evento.is_action_pressed("saltar"):
+		if not evento.is_echo():
+			pulso = true
+		get_viewport().set_input_as_handled()
+
+
+func _paso(delta: float) -> void:
+	_acum += delta
+	while _acum >= DT and activo:
+		_acum -= DT
+		_tic(DT)
+	queue_redraw()
+
+
+func _tic(dt: float) -> void:
+	reloj += dt
+	t_etapa += dt
+	inmune = maxf(0, inmune - dt)
+	destello = maxf(0, destello - dt)
+	sacudida = maxf(0, sacudida - dt)
+	aviso_t = maxf(0, aviso_t - dt)
+	_animar(dt)
+	if etapa == 3:
+		if t_etapa >= 1.4:
+			var porcentaje: String = ("%.1f" % (iluminacion * 100)).replace(".", ",")
+			var elevacion: String = ("%.1f" % altura).replace(".", ",")
+			var dato: String = "Sol: %s %%; altura: %s grados; la Tierra ilumina la noche lunar." % [porcentaje, elevacion]
+			terminar(ganado, roundf(puntos), dato if ganado else causa)
+		return
+	luna_centro = CENTRO + Vector2(sin(reloj * 0.75) * dificultad * 2.0, sin(reloj * 0.49) * dificultad)
+	diana = _rasgo_visible()
+	enfoque = 0.5 + 0.5 * sin(t_etapa * (1.5 + dificultad * 0.4))
+	if _auto == 0:
+		mando = Vector2(eje_x(), -eje_y()).limit_length(1)
+		accion = Input.is_action_pressed("interactuar") or Input.is_action_pressed("saltar")
+	else:
+		_piloto()
+	mando = mando.limit_length(1)
+	var disparo: bool = pulso
+	pulso = false
+	if etapa == 0:
+		velocidad = velocidad.move_toward(mando * 100.0, 650.0 * dt)
+		visor += velocidad * dt
+		visor = visor.clamp(Vector2(0, 0), MUNDO)
+		if disparo:
+			if visor.distance_to(luna_mundo) <= [10.0, 8.0, 6.0][dificultad - 1]:
+				_cambiar(1)
+				puntos += 100
+				sonar("recoger")
+			else:
+				_golpe("La Luna quedó fuera del visor: busca la sonrisa baja al oeste.")
+	elif etapa == 1:
+		if disparo:
+			if absf(enfoque - 0.5) <= ventana_foco:
+				_cambiar(2)
+				mira = CENTRO
+				puntos += 200
+				sonar("salto")
+			else:
+				_golpe("El borde quedó desenfocado: pulsa cuando la aguja cruce la franja nítida.")
+	elif etapa == 2:
+		velocidad = velocidad.move_toward(mando * 42.0, 500.0 * dt)
+		mira = (mira + velocidad * dt).clamp(Vector2(9, 36), Vector2(310, 157))
+		var dentro: bool = mira.distance_to(diana) <= margen
+		if accion and dentro:
+			var antes: int = int(exposicion)
+			exposicion += dt
+			fuera = maxf(0, fuera - dt * 3)
+			puntos += dt * 10
+			if int(exposicion) > antes:
+				sonar("tic")
+				_chispas(mira, Estilo.DORADO, 3)
+			if exposicion >= exposicion_meta:
+				_chispas(diana, Estilo.CIAN, 24)
+				sonar("ok")
+				puntos += 300
+				rasgo += 1
+				exposicion = 0
+				fuera = 0
+				# Gracia breve para soltar E y trasladarse hacia la siguiente diana.
+				accion = false
+				inmune = 1.2
+				destello = 0.12
+				if rasgo >= 3:
+					_final(true, "")
+		elif accion and inmune <= 0:
+			fuera += dt
+			if fuera >= [0.85, 0.65, 0.45][dificultad - 1]:
+				_golpe("La exposición se movió fuera del rasgo: suelta E al trasladar la mira.")
+		else:
+			fuera = maxf(0, fuera - dt * 2)
+	if reloj >= limite and etapa != 3:
+		_final(false, "Se cerró la ventana de observación antes de registrar los tres rasgos lunares.")
+
+
+func _rasgo_visible() -> Vector2:
+	if rasgo == 0:
+		return luna_centro + Vector2(-18, (1 - 2 * iluminacion) * sqrt(float(RADIO_LUNA * RADIO_LUNA - 324))).rotated(inclinacion)
+	if rasgo == 1:
+		return luna_centro + Vector2(-11, -11)
+	return luna_centro + Vector2(19, 40)
+
+
+func _cambiar(nueva: int) -> void:
+	etapa = nueva
+	t_etapa = 0
+	velocidad = Vector2.ZERO
+	destello = 0.15
+
+
+func _golpe(motivo: String) -> void:
+	if inmune > 0:
+		return
+	vidas -= 1
+	inmune = 1.3
+	sacudida = 0.25
+	destello = 0.2
+	exposicion = maxf(0, exposicion - 1.5)
+	fuera = 0
+	aviso = "SUELTA E AL MOVER" if etapa == 2 else ("ESPERA LA FRANJA" if etapa == 1 else "BAJA AL OESTE")
+	aviso_t = 1.4
+	sonar("error")
+	_chispas(mira if etapa == 2 else CENTRO, Estilo.CORAL, 18)
+	if vidas == 0:
+		_final(false, motivo)
+
+
+func _final(exito: bool, motivo: String) -> void:
+	ganado = exito
+	causa = motivo
+	_cambiar(3)
+	if exito:
+		puntos += vidas * 100 + maxf(0, limite - reloj) * 5
+		sonar("logro")
+		_chispas(luna_centro, Estilo.DORADO, 45)
+
+
+func _piloto() -> void:
+	# Solo escribe las ordenes del jugador; nunca recoloca objetos ni concede aciertos.
+	mando = Vector2.ZERO
+	accion = false
+	if _auto < 0:
+		pulso = inmune <= 0 and t_etapa > 1.5
+		return
+	var error: Vector2 = (luna_mundo - visor) if etapa == 0 else (diana - mira)
+	var correccion: Vector2 = error - velocidad * 0.10
+	mando.x = signf(correccion.x) if absf(correccion.x) > 0.8 else 0.0
+	mando.y = signf(correccion.y) if absf(correccion.y) > 0.8 else 0.0
+	if etapa == 0:
+		pulso = error.length() < 3 and velocidad.length() < 15
+	elif etapa == 1:
+		pulso = t_etapa > 1 and absf(enfoque - 0.5) < ventana_foco * 0.5
+	elif etapa == 2:
+		accion = error.length() < margen * 0.75
+
+
+func _chispas(pos: Vector2, color: Color, cantidad: int) -> void:
+	for i in cantidad:
+		var v: Vector2 = Vector2.from_angle(azar.randf() * TAU) * azar.randf_range(8, 34)
+		particulas.append({"p": pos, "v": v, "t": azar.randf_range(0.3, 0.9), "c": color})
+
+
+func _animar(dt: float) -> void:
+	for i in range(particulas.size() - 1, -1, -1):
+		var p: Dictionary = particulas[i]
+		var pos: Vector2 = p["p"]
+		var v: Vector2 = p["v"]
+		p["p"] = pos + v * dt
+		p["t"] = float(p["t"]) - dt
+		if float(p["t"]) <= 0:
+			particulas.remove_at(i)
+
+
+func _px(x: float, y: float, w: float, h: float, color: Color) -> void:
+	draw_rect(Rect2(floorf(x), floorf(y), floorf(w), floorf(h)), color)
+
+
+func _sprite(mapa: Variant, pos: Vector2, color: Color, escala: int = 1) -> void:
+	for y in mapa.size():
+		var fila: String = mapa[y]
+		for x in fila.length():
+			if fila[x] == ".":
+				continue
+			var tinta: Color = color
+			if fila[x] == "v":
+				tinta = Estilo.CREMA
+			elif fila[x] == "c":
+				tinta = Estilo.CIAN
+			_px(pos.x + x * escala, pos.y + y * escala, escala, escala, tinta)
+
+
+func _texto(t: String, x: float, y: float, color: Color, escala: int = 1) -> void:
+	for c in t:
+		if glifos.has(c):
+			var filas: PackedStringArray = glifos[c]
+			_sprite(filas, Vector2(x, y), color, escala)
+		x += 4 * escala
+
+
+func _cruz(p: Vector2, radio: float, color: Color) -> void:
+	_px(p.x - radio, p.y, radio - 2, 1, color)
+	_px(p.x + 3, p.y, radio - 2, 1, color)
+	_px(p.x, p.y - radio, 1, radio - 2, color)
+	_px(p.x, p.y + 3, 1, radio - 2, color)
+
+
+func _anillo(p: Vector2, radio: float, color: Color) -> void:
+	for i in 40:
+		var a: float = TAU * i / 40
+		_px(roundf(p.x + cos(a) * radio), roundf(p.y + sin(a) * radio), 1, 1, color)
+
+
+func _luna(c: Vector2, r: int, nitida: bool) -> void:
+	# Una elipse interior deja exactamente la fraccion iluminada de la ficha.
+	var k: float = 1 - 2 * iluminacion
+	for x in range(-r, r + 1):
+		var borde: float = sqrt(maxf(0, r * r - x * x))
+		for y in range(-int(borde), int(borde) + 1):
+			var local: Vector2 = Vector2(x, y).rotated(-inclinacion)
+			var luz: bool = local.y >= k * sqrt(maxf(0, r * r - local.x * local.x))
+			var color: Color = Estilo.CREMA if luz else Estilo.PETROLEO.darkened(0.35)
+			if not nitida and (x + y) % 3 == 0:
+				color = color.lerp(Estilo.NOCHE, 0.45)
+			_px(c.x + x, c.y + y, 1, 1, color)
+	if r > 20 and nitida:
+		_sprite(MAR, c + Vector2(15, 36), Estilo.TINTA_SUAVE)
+		_sprite(["##..", "###.", ".###", "..##"], c + Vector2(-22, -10), Estilo.NOCHE)
+		_sprite([".##", "###", "##."], c + Vector2(6, -20), Estilo.NOCHE)
+
+
+func _draw() -> void:
+	draw_set_transform(Vector2.ZERO, 0, Vector2(4, 4))
+	_px(0, 0, CAMPO.x, CAMPO.y, Estilo.NOCHE)
+	var desplazamiento: Vector2 = Vector2.ZERO
+	if sacudida > 0:
+		desplazamiento = Vector2(roundf(sin(reloj * 65) * 2), roundf(cos(reloj * 47)))
+	draw_set_transform(desplazamiento * 4, 0, Vector2(4, 4))
+	if etapa == 0:
+		_dibujar_busqueda()
+	else:
+		for s in estrellas:
+			var p: Vector2 = Vector2(fposmod(s.x, CAMPO.x), fposmod(s.y, CAMPO.y))
+			_px(p.x, p.y, 1, 1, Estilo.PETROLEO)
+		_luna(luna_centro, RADIO_LUNA, etapa != 1 or absf(enfoque - 0.5) < ventana_foco)
+		if etapa == 1:
+			_dibujar_foco()
+		elif etapa == 2:
+			_dibujar_registro()
+	for p in particulas:
+		var pos: Vector2 = p["p"]
+		var color: Color = p["c"]
+		_px(pos.x, pos.y, 1, 1, color)
+	draw_set_transform(Vector2.ZERO, 0, Vector2(4, 4))
+	_dibujar_hud()
+	if etapa == 0 and t_etapa < 2.0:
+		_px(59, 65, 202, 40, Estilo.TINTA)
+		_sprite(TUBO, Vector2(148, 68), Estilo.CREMA, 2)
+		_texto("ENCUENTRA LA SONRISA DEL OESTE", 66, 93, Estilo.CREMA)
+	if etapa == 3:
+		_px(86, 80, 148, 22, Estilo.TINTA)
+		_texto("TRES RASGOS" if ganado else "FIN DE SESION", 116 if ganado else 108, 87, Estilo.DORADO if ganado else Estilo.CORAL, 2)
+	if aviso_t > 0:
+		_px(90, 156, 140, 9, Estilo.TINTA)
+		_texto(aviso, 160 - aviso.length() * 2, 158, Estilo.CORAL)
+	if destello > 0:
+		_px(0, 0, CAMPO.x, CAMPO.y, Color(Estilo.CORAL if inmune > 0 else Estilo.CREMA, destello))
+
+
+func _dibujar_busqueda() -> void:
+	var offset: Vector2 = CENTRO - visor
+	for s in estrellas:
+		var p: Vector2 = Vector2(s.x, s.y) + offset
+		if p.y >= 0 and p.y < CAMPO.y:
+			_px(p.x, p.y, 1, 1, Estilo.CREMA if s.z > 0.7 else Estilo.PETROLEO)
+	var horizonte: float = HORIZONTE + offset.y
+	if horizonte < CAMPO.y:
+		_px(0, maxf(0, horizonte), CAMPO.x, CAMPO.y - maxf(0, horizonte), Estilo.TINTA)
+		for x in range(0, int(CAMPO.x), 12):
+			_px(x, horizonte - (x % 7), 8, 9, Estilo.TINTA)
+	_luna(luna_mundo + offset, 8, true)
+	_cruz(CENTRO, 13, Estilo.CIAN if inmune <= 0 or fmod(reloj, 0.3) > 0.15 else Estilo.CORAL)
+	if visor.distance_to(luna_mundo) < 12:
+		_texto("E", 178, 89, Estilo.CIAN, 2)
+	# Buscador: mapa de todo el recorrido; el anillo indica el visor.
+	_px(246, 31, 70, 41, Estilo.CREMA)
+	_px(247, 32, 68, 39, Estilo.NOCHE)
+	var m: Vector2 = Vector2(251, 37) + luna_mundo * Vector2(58.0 / MUNDO.x, 28.0 / MUNDO.y)
+	_luna(m, 2, true)
+	var v: Vector2 = Vector2(251, 37) + visor * Vector2(58.0 / MUNDO.x, 28.0 / MUNDO.y)
+	_anillo(v, 4, Estilo.CIAN)
+	_texto("O", 250, 65, Estilo.NARANJA)
+	_texto("E", 309, 65, Estilo.NARANJA)
+	_texto(("%.1f ALT" % (maxf(0, HORIZONTE - visor.y) / 2.5)).replace(".", ","), 5, 156, Estilo.CREMA)
+	_sprite(TUBO, Vector2(8, 141), Estilo.CREMA, 1)
+
+
+func _dibujar_foco() -> void:
+	_texto("BORROSO", 22, 87, Estilo.PETROLEO)
+	_texto("NITIDO", 260, 87, Estilo.CREMA)
+	_px(45, 143, 230, 10, Estilo.TINTA)
+	_px(50, 145, 220, 6, Estilo.PETROLEO)
+	_px(160 - ventana_foco * 220, 145, ventana_foco * 440, 6, Estilo.DORADO)
+	_px(50 + enfoque * 220, 142, 2, 12, Estilo.CIAN)
+	_cruz(luna_centro, 58, Estilo.CIAN)
+	_texto("E", 158, 157, Estilo.CIAN)
+
+
+func _dibujar_registro() -> void:
+	var color: Color = Estilo.CIAN if mira.distance_to(diana) <= margen else Estilo.NARANJA
+	_anillo(diana, margen, color)
+	_texto(str(rasgo + 1), diana.x + margen + 3, diana.y - 2, color)
+	if inmune <= 0 or fmod(reloj, 0.3) > 0.15:
+		_cruz(mira, 7, Estilo.CIAN)
+	_px(246, 98, 65, 7, Estilo.PETROLEO)
+	_px(247, 99, 63 * minf(1, exposicion / exposicion_meta), 5, Estilo.DORADO)
+	_texto("MANTEN E", 258, 88, Estilo.CIAN)
+	_texto("%d/3" % rasgo, 262, 113, Estilo.CREMA, 2)
+	for i in 3:
+		_texto("+" if i < rasgo else "-", 254 + i * 19, 139, Estilo.DORADO if i < rasgo else Estilo.PETROLEO, 2)
+	if rasgo == 1:
+		_sprite(TIERRA, Vector2(19, 101), Estilo.PETROLEO, 3)
+		_texto("TIERRA", 22, 131, Estilo.CREMA)
+		# Luz reflejada: la flecha sale de la Tierra y llega a la noche lunar.
+		for i in 15:
+			var f: float = fposmod(reloj * 0.5 + i / 15.0, 1)
+			var p: Vector2 = Vector2(52, 108).lerp(diana, f)
+			_px(p.x, p.y, 2, 1, Estilo.CREMA)
+		_texto("SOL", 26, 67, Estilo.DORADO)
+		_texto("+", 25, 77, Estilo.DORADO, 2)
+		for i in 4:
+			_px(33, 88 + fposmod(reloj * 9 + i * 3, 12), 1, 2, Estilo.DORADO)
+
+
+func _dibujar_hud() -> void:
+
+	_texto("%05d" % int(puntos), 4, 4, Estilo.CREMA, 2)
+	for i in 3:
+		_sprite(CORAZON, Vector2(136 + i * 12, 5), Estilo.CORAL if i < vidas else Estilo.TINTA_SUAVE)
+	_texto("%02d" % maxi(0, ceili(limite - reloj)), 292, 4, Estilo.CREMA, 2)
+	_texto("TIEMPO", 257, 6, Estilo.PAPEL)
+
+	var orden: String = "BUSCA LA SONRISA BAJA AL OESTE"
+	if etapa == 1:
+		orden = "E EN LA FRANJA NITIDA"
+	elif etapa == 2:
+		orden = RASGOS[mini(rasgo, 2)]
+	_texto(orden, 160 - orden.length() * 2, 21, Estilo.CREMA)
+
+	_texto("WASD MOVER", 5, 170, Estilo.CIAN)
+	_texto("E FOCO / REGISTRAR", 113, 170, Estilo.CREMA)
+	_texto("ESC SALIR", 279, 170, Estilo.CREMA)

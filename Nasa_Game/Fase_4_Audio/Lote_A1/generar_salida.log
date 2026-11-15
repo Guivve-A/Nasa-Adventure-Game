@@ -1,0 +1,22 @@
+  cotizado paso_luna              1 s   0.25
+  cotizado salto                  1 s   0.25
+  cotizado recoger                1 s   0.25
+  cotizado umbral                 2 s   0.50
+  cotizado logro                  2 s   0.50
+  cotizado pagina                 1 s   0.25
+  cotizado radio                  1 s   0.25
+  cotizado golpe_mastil           1 s   0.25
+  cotizado ambiente_luna          8 s   2.00
+  cotizado ambiente_sendero       6 s   1.50
+Cotizado: 6.00  |  ya gastado en el lote: 0.25  |  tope: 8.00
+  paso_luna            ok             originales/paso_luna.mp3
+  salto                ok             originales/salto.mp3
+  recoger              ok             originales/recoger.mp3
+  umbral               ok             originales/umbral.mp3
+  logro                ok             originales/logro.mp3
+  pagina               ok             originales/pagina.mp3
+  radio                ok             originales/radio.mp3
+  golpe_mastil         ok             originales/golpe_mastil.mp3
+  ambiente_luna        ok             originales/ambiente_luna.mp3
+  ambiente_sendero     ok             originales/ambiente_sendero.mp3
+Saldo: 876.00 -> 870.00 (gastado 6.00)

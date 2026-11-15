@@ -1,3 +1,5 @@
+> Esta nota describe la versión anterior con diales y texturas. La versión arcade vigente y sus pruebas están documentadas en [ARCADE.md](ARCADE.md).
+
 # Telescopio · La Luna sonriente
 
 Implementado para la escena 2.2, orden 4, ficha `luz_cenicienta`. Solo se escribieron archivos en `juego/minijuegos/telescopio/` y en esta carpeta. No hubo descargas ni instalaciones.
@@ -99,3 +101,13 @@ Con ventana, la misma prueba pasó y guardó las 4 fases visuales usando `--evid
 No quedan funciones del minijuego pendientes. No se midió una tasa de fotogramas sostenida ni se verificó una exportación.
 
 Las corridas no contienen `PRUEBA_FALLO` ni `SCRIPT ERROR`. El motor sí informa que no puede escribir registros en `user://logs`, que no puede leer el almacén de certificados y, con ventana, que no puede guardar la caché de shaders (`_save_to_cache`, `f.is_null()`). La última corrida contractual también notificó 5 instancias ObjectDB al salir. Las pruebas y capturas finalizaron con código 0; esos avisos se conservan en los registros, sin ocultarlos ni modificar carpetas compartidas para resolverlos.
+
+## Jugado con teclado y con ratón
+
+Revisión del 14-11-2026: `prueba_manos.gd` abre el anfitrión real y gana a dificultad 1 enviando exclusivamente eventos físicos de teclado en una partida y de ratón en otra. Ambas victorias: 100 puntos, tres rasgos y cero revisiones. No usa el piloto ni llama directamente a los manejadores de entrada.
+
+WASD/flechas controlan búsqueda, enfoque y mira; E/Intro/Espacio confirman. El ratón centra al pulsar la Luna, arrastra los tres diales, enfoca con rueda sobre el ocular, mueve la mira y confirma con el botón. Intro o clic cierran la victoria. Esc y Salir funcionan desde instrucciones, durante el juego y en el resultado, sin dejar pausa.
+
+Se corrigieron textos: el dial ajusta enfoque, la nitidez se lee como porcentaje y umbral; el botón incluye Intro y las ayudas anuncian WASD, ratón y el alcance de la rueda. No cambiaron los datos ni las reglas. Se revisaron doce capturas del recorrido completo, sin controles fuera del lienzo.
+
+Resultados finales: **90 comprobaciones y 0 fallos** en manos sin GPU, **13 comprobaciones correctas** en la prueba común y **90 comprobaciones y 0 fallos** con ventana. Las dos pruebas solicitadas salen con código 0, sin errores de guion. Informe de controles, cambios, salidas completas y límites en [INFORME_MANOS.md](INFORME_MANOS.md). No quedan bloqueos de jugabilidad detectados. Los avisos de registros y certificados del entorno siguen documentados en las salidas.

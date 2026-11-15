@@ -1,0 +1,33 @@
+[
+  {
+    "created_at": "2026-11-15T06:47:53.847217Z",
+    "display_name": "GPT Image 2.6",
+    "id": "bfa0210a-7974-4921-abfa-cf2524529953",
+    "job_type": "gpt_image_2_6",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064753_bfa0210a-7974-4921-abfa-cf2524529953_min.webp",
+    "params": {
+      "aspect_ratio": "16:9",
+      "height": 752,
+      "medias": [
+        {
+          "data": {
+            "id": "9adcb4d8-b79d-4f59-b076-7552d3f6b4c3",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/9adcb4d8-b79d-4f59-b076-7552d3f6b4c3.jpg"
+          },
+          "role": "image"
+        }
+      ],
+      "model": "aurora-img-alpha",
+      "output_format": "png",
+      "prompt": "Extreme close-up, 100 mm macro lens at f/2, camera fixed at pillow height with the lens axis parallel to the pillow. The sleeping face of the girl from the reference sheet, the same hand-painted low-poly character: warm brown skin, big closed eyelids with thick dark lashes, round cheeks, voluminous dark curly hair. She lies on her left side, so her face is horizontal in the frame, forehead toward the right and chin toward the left, her left cheek sunk into a cream pillow, a few curls fallen over her temple and the collar of a khaki shirt over a dark T-shirt at the edge of the frame. Eyes still closed, calm. A razor-thin plane of focus lies on the lashes of her upper eye. A soft-edged band of amber morning sunlight, about one fifth of the frame wide and split into two or three soft stripes by window shutter slats, lies diagonally across her jaw and cheek at about thirty degrees and has just reached the closed eyelid of her upper eye; inside the band the skin glows warm orange and the painted facets catch the light, outside it everything stays petrol-blue, about four to one. The lashes and the inner corner of that eye are slightly wet and catch a warm glint, with no visible teardrop; the inner corner sits slightly above and to the right of the centre of the frame. The background melts into a soft dark blur. Art style: stylized low-poly 3D exactly like the reference images, crisp faceted flat-shaded planes with a hand-painted gradient on each facet, cel-shaded lighting with a bright rim light, chunky simplified forms, clean readable silhouettes, matte materials, palette of cream, terracotta, tropical green, petrol blue and warm wood browns, with cyan reserved for technology, data and collectibles. Clean image without film grain. No text, no logos, no insignia, no emblems, no watermark.",
+      "quality": "low",
+      "reference_elements": [],
+      "remove_bg": false,
+      "resolution": "1k",
+      "width": 1344
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_064753_bfa0210a-7974-4921-abfa-cf2524529953.png",
+    "status": "completed"
+  }
+]

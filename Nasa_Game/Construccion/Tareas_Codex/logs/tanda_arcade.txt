@@ -1,0 +1,7 @@
+Codex: C:\Users\guill\AppData\Local\OpenAI\Codex\bin\9e1da79431da526b\codex.exe
+5 tareas, 2 en paralelo
+  arcade_satelite              ok                      18.7 min     1515 bytes
+  arcade_telescopio            ok                      20.5 min     1182 bytes
+  arcade_linea_tiempo          error (codigo 1)        42.5 min        0 bytes
+  arcade_muestras              error (codigo 1)        40.5 min        0 bytes
+  arcade_orbita                error (codigo 1)         0.1 min        0 bytes
