@@ -29,6 +29,7 @@
       </a>
       <nav class="menu" aria-label="Secciones">
         <a href="#capturas">Capturas</a>
+        <a href="#jugar">Jugar</a>
         <a href="#recursos">Recursos</a>
       </nav>
       <a class="boton" data-descarga="windows" href="https://github.com/Guivve-A/Nasa-Adventure-Game/releases">Descargar</a>
@@ -115,6 +116,36 @@
       </div>
     </section>
 
+    <section class="jugar" id="jugar">
+      <div class="ancho">
+        <h2>Jugar en el navegador</h2>
+        <p class="grupo-texto">Las misiones de la Luna y de Marte, los libros de la biblioteca, se juegan aquí mismo, sin descargar nada.</p>
+
+        <div class="juegos">
+          <article class="juego" data-juego="base-luna">
+            <img src="/capturas/base-luna-invernadero.jpg" alt="Base lunar con cúpula, invernadero y paneles solares." loading="lazy" width="1600" height="888">
+            <div class="juego-texto">
+              <h3>Misión Artemis: la base lunar</h3>
+              <p>Construye el cohete en el polo sur de la Luna, cuida el oxígeno y la radiación, y despega hacia Marte.</p>
+              <p class="controles"><kbd>← →</kbd> moverse · <kbd>Espacio</kbd> saltar · <kbd>Mayús</kbd> correr · <kbd>E</kbd> usar</p>
+              <a class="boton" href="/jugar/base-luna/" data-jugar="base-luna" data-titulo="Misión Artemis: la base lunar">Jugar ahora</a>
+            </div>
+          </article>
+          <article class="juego" data-juego="marte">
+            <img src="/capturas/marte-descenso.jpg" alt="El cohete desciende sobre Marte con el paracaídas abierto." loading="lazy" width="1600" height="897">
+            <div class="juego-texto">
+              <h3>Misión Artemis: Marte</h3>
+              <p>Programa los siete minutos del descenso, planta las banderas y sostén la base durante la tormenta de polvo.</p>
+              <p class="controles"><kbd>← →</kbd> moverse · <kbd>Espacio</kbd> saltar · <kbd>E</kbd> usar · <kbd>Tab</kbd> cuaderno</p>
+              <a class="boton" href="/jugar/marte/" data-jugar="marte" data-titulo="Misión Artemis: Marte">Jugar ahora</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="aviso">Para navegador de escritorio con teclado. La primera carga descarga unos <span data-peso>N</span>&nbsp;MB por juego. El mundo 3D completo de Guayaquil, con sus minijuegos, está en la <a href="#descargar">descarga para Windows</a>.</p>
+      </div>
+    </section>
+
     <section class="recursos" id="recursos">
       <div class="ancho">
         <h2>Datos y recursos</h2>
@@ -158,6 +189,7 @@
         <p>Windows 10 u 11 de 64 bits. Funciona con gráfica integrada y 8 GB de RAM.</p>
         <a class="boton grande" data-descarga="windows" href="https://github.com/Guivve-A/Nasa-Adventure-Game/releases">Descargar para Windows</a>
         <p class="nota">ZIP de 136 MB. Extrae todo y abre <strong>Jugar.cmd</strong>, o <strong>Instalar.cmd</strong> para tener el acceso directo.</p>
+        <p class="nota">Es la versión completa: el mundo 3D, los nueve minijuegos y las misiones de la Luna y de Marte. ¿Solo quieres probar? <a href="#jugar">Juega en el navegador</a>.</p>
       </div>
     </section>
   </main>
@@ -168,6 +200,15 @@
       <p>El arte conceptual, parte de los modelos y los efectos de sonido se generaron con IA y se terminaron a mano; el código contó con asistencia de IA.</p>
     </div>
   </footer>
+
+  <div class="sala" id="sala" role="dialog" aria-modal="true" aria-labelledby="sala-titulo" hidden>
+    <div class="sala-barra">
+      <button class="boton" id="sala-volver" type="button">← Volver</button>
+      <p id="sala-titulo"></p>
+      <button class="sala-completa" id="sala-completa" type="button">Pantalla completa</button>
+    </div>
+    <iframe id="sala-marco" title="Juego" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+  </div>
 
   <dialog class="visor" id="visor" aria-label="Captura ampliada">
     <button class="visor-cerrar" id="visor-cerrar" type="button" aria-label="Cerrar">×</button>

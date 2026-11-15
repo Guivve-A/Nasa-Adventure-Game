@@ -1,0 +1,182 @@
+[
+ {
+  "archivo": "alarma_corta.wav",
+  "duracion_s": 2.0,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-12.7",
+  "pico_dB": "-6.0",
+  "LUFS_integrados": "-12.8",
+  "pico_real_dBTP": "-6.0"
+ },
+ {
+  "archivo": "barrido.wav",
+  "duracion_s": 2.02,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-16.6",
+  "pico_dB": "-3.8",
+  "LUFS_integrados": "-18.9",
+  "pico_real_dBTP": "-3.7"
+ },
+ {
+  "archivo": "efectos_gancho.wav",
+  "duracion_s": 17.0,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-19.9",
+  "pico_dB": "-1.0",
+  "LUFS_integrados": "-18.0",
+  "pico_real_dBTP": "-0.9"
+ },
+ {
+  "archivo": "golpe_grave.wav",
+  "duracion_s": 3.008,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-11.4",
+  "pico_dB": "-1.0",
+  "LUFS_integrados": "-14.4",
+  "pico_real_dBTP": "-1.0"
+ },
+ {
+  "archivo": "grillos.wav",
+  "duracion_s": 6.014,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-21.8",
+  "pico_dB": "-6.0",
+  "LUFS_integrados": "-18.9",
+  "pico_real_dBTP": "-5.9"
+ },
+ {
+  "archivo": "musica_demo.wav",
+  "duracion_s": 150.0,
+  "canales": 2,
+  "hz": 48000,
+  "media_dB": "-18.4",
+  "pico_dB": "-1.0",
+  "LUFS_integrados": "-16.1",
+  "pico_real_dBTP": "-1.0"
+ },
+ {
+  "archivo": "musica_demo_automatizada.wav",
+  "duracion_s": 150.0,
+  "canales": 2,
+  "hz": 48000,
+  "media_dB": "-23.8",
+  "pico_dB": "-1.0",
+  "LUFS_integrados": "-16.9",
+  "pico_real_dBTP": "-1.0"
+ },
+ {
+  "archivo": "respiracion.wav",
+  "duracion_s": 6.0,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-21.8",
+  "pico_dB": "-10.4",
+  "LUFS_integrados": "-25.3",
+  "pico_real_dBTP": "-10.4"
+ },
+ {
+  "archivo": "rugido_cohete.wav",
+  "duracion_s": 6.014,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-18.9",
+  "pico_dB": "-1.0",
+  "LUFS_integrados": "-18.6",
+  "pico_real_dBTP": "-1.0"
+ },
+ {
+  "archivo": "rugido_corto.wav",
+  "duracion_s": 3.5,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-19.3",
+  "pico_dB": "-1.0",
+  "LUFS_integrados": "-17.5",
+  "pico_real_dBTP": "-1.0"
+ },
+ {
+  "archivo": "sint_barrido.wav",
+  "duracion_s": 1.2,
+  "canales": 2,
+  "hz": 48000,
+  "media_dB": "-19.4",
+  "pico_dB": "-3.0",
+  "LUFS_integrados": "-14.4",
+  "pico_real_dBTP": "-3.0"
+ },
+ {
+  "archivo": "sint_golpe_grave.wav",
+  "duracion_s": 2.5,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-14.0",
+  "pico_dB": "-1.0",
+  "LUFS_integrados": "-20.5",
+  "pico_real_dBTP": "-1.0"
+ },
+ {
+  "archivo": "sint_subida.wav",
+  "duracion_s": 3.0,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-17.3",
+  "pico_dB": "-1.6",
+  "LUFS_integrados": "-14.4",
+  "pico_real_dBTP": "-1.3"
+ },
+ {
+  "archivo": "siseo_tv.wav",
+  "duracion_s": 4.0,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-26.2",
+  "pico_dB": "-12.0",
+  "LUFS_integrados": "-23.0",
+  "pico_real_dBTP": "-12.0"
+ },
+ {
+  "archivo": "subida.wav",
+  "duracion_s": 3.019,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-13.2",
+  "pico_dB": "-1.0",
+  "LUFS_integrados": "-16.6",
+  "pico_real_dBTP": "-1.0"
+ },
+ {
+  "archivo": "tecleo.wav",
+  "duracion_s": 3.019,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-33.5",
+  "pico_dB": "-6.0",
+  "LUFS_integrados": "-36.2",
+  "pico_real_dBTP": "-5.9"
+ },
+ {
+  "archivo": "toma_aire.wav",
+  "duracion_s": 1.2,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-29.7",
+  "pico_dB": "-12.0",
+  "LUFS_integrados": "-27.4",
+  "pico_real_dBTP": "-12.0"
+ },
+ {
+  "archivo": "viento_orilla.wav",
+  "duracion_s": 4.017,
+  "canales": 1,
+  "hz": 48000,
+  "media_dB": "-26.0",
+  "pico_dB": "-6.0",
+  "LUFS_integrados": "-22.6",
+  "pico_real_dBTP": "-5.9"
+ }
+]

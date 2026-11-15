@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-15T15:21:21.565655Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "f99213c4-cf90-4fd2-9da3-462c4893fb63",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 6,
+      "prompt": "Warm tropical night ambience in a quiet hillside neighborhood: steady crickets chirping, a very light breeze, distant and calm, continuous and even from start to end. No voice, no speech, no traffic, no music."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_152121_f99213c4-cf90-4fd2-9da3-462c4893fb63.mp3",
+    "status": "completed"
+  }
+]

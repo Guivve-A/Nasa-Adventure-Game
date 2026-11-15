@@ -1,10 +1,10 @@
 {
- "proyecto": "Luz cenicienta",
- "version": 1,
+ "proyecto": "Zingularity: Artemis",
+ "version": 2,
  "fecha": "2026-11-15",
  "guion": "Nasa_Game/Presentacion/Guion del video demo.md",
  "salida": {
-  "archivo": "Nasa_Game/Presentacion/demo_luz_cenicienta_v1.mp4",
+  "archivo": "Nasa_Game/Presentacion/demo_v2.mp4",
   "resolucion": [
    1920,
    1080
@@ -25,10 +25,11 @@
  },
  "mezcla": {
   "pleno_LUFS": -14,
-  "pico_dBTP": -1,
-  "musica_bajo_voz_dB": -20,
-  "efectos_bajo_voz_dB": -12,
-  "rampa_s": 0.4
+  "pico_dBTP": -1.5,
+  "musica_bajo_voz_dB": -15,
+  "efectos_bajo_voz_dB": -20,
+  "rampa_s": 0.5,
+  "nota": "v2: los tramos plenos se normalizan a -14 LUFS (titulo, minijuegos, cierre); la cama bajo la voz queda unos 12 LU por debajo; crescendo de 123 a 126 s"
  },
  "ventanas_expositor": [
   {
@@ -42,19 +43,19 @@
    "bloque": "2. El mundo y su arte"
   },
   {
-   "inicio": 55.0,
-   "fin": 70.0,
+   "inicio": 54.5,
+   "fin": 69.5,
    "bloque": "3. Datos reales"
   },
   {
    "inicio": 82.0,
-   "fin": 101.0,
-   "bloque": "5. La base: Luna y Marte"
+   "fin": 102.0,
+   "bloque": "4. La base: Luna y Marte"
   },
   {
    "inicio": 105.0,
    "fin": 126.0,
-   "bloque": "6. Ingenieria y proceso"
+   "bloque": "5. Ingenieria y proceso"
   }
  ],
  "ventanas_sin_voz": [
@@ -65,18 +66,18 @@
   },
   {
    "inicio": 52.0,
-   "fin": 55.0,
+   "fin": 54.5,
    "tramo": "respiro: el ocular"
   },
   {
-   "inicio": 70.0,
+   "inicio": 69.5,
    "fin": 82.0,
    "tramo": "montaje de los 9 minijuegos"
   },
   {
-   "inicio": 101.0,
+   "inicio": 102.0,
    "fin": 105.0,
-   "tramo": "respiro: despegue"
+   "tramo": "respiro: la base de Marte"
   },
   {
    "inicio": 126.0,
@@ -85,12 +86,12 @@
   }
  ],
  "musica": {
-  "pista": "Nasa_Game/Presentacion/audio/musica_demo.wav (por generar)",
+  "pista": "Nasa_Game/Presentacion/audio/musica_demo.wav",
   "marcas": {
    "primera_nota": 11.0,
    "segunda_nota": 13.0,
-   "acorde_titulo": 15.5,
-   "inicio_montaje": 70.0,
+   "acorde_titulo": 15.0,
+   "inicio_montaje": 69.5,
    "fin_montaje": 82.0,
    "crescendo": 123.0,
    "acorde_final": 142.0
@@ -118,7 +119,14 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/cine/cine_P03.mp4",
+     "tipo": "video"
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S02",
@@ -144,7 +152,14 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/cine/cine_P04.mp4",
+     "tipo": "video"
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S03",
@@ -165,7 +180,18 @@
     ],
     "nivel": "pico de la mezcla, -1 dBTP"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/cine/cine_P05.mp4",
+     "tipo": "video"
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/cine__L10_K05_placas_lisas.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S04",
@@ -188,12 +214,27 @@
     "efectos": [],
     "nivel": "silencio total desde el primer cuadro"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/cine__L09b_K11a_final.jpg",
+     "tipo": "fija",
+     "de": 8.5,
+     "a": 9.3
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/cine__L09b_K11_final.jpg",
+     "tipo": "fija",
+     "de": 9.3,
+     "a": 11.0
+    }
+   ],
+   "material_estado": "fija"
   },
   {
    "id": "S05",
    "inicio": 11.0,
-   "fin": 13.0,
+   "fin": 12.5,
    "fuente": {
     "clip": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_10/clips/P13_elegido.mp4"
    },
@@ -207,12 +248,19 @@
     "musica": "primera nota, sola",
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/cine__L09d_K13a_final.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "fija"
   },
   {
    "id": "S06",
-   "inicio": 13.0,
-   "fin": 15.5,
+   "inicio": 12.5,
+   "fin": 14.5,
    "fuente": {
     "clip": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_10/clips/P14_elegido.mp4"
    },
@@ -229,11 +277,18 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/cine__L09c_P14c_C_cine_gpt.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "fija"
   },
   {
    "id": "S07",
-   "inicio": 15.5,
+   "inicio": 14.5,
    "fin": 17.0,
    "fuente": {
     "grafico": "G01"
@@ -242,8 +297,8 @@
    "movimiento": "fijo",
    "transicion_entrada": "corte a negro",
    "rotulo": {
-    "texto": "Luz cenicienta",
-    "inicio": 15.5,
+    "texto": "Zingularity: Artemis",
+    "inicio": 14.5,
     "fin": 17.0
    },
    "sello": null,
@@ -251,7 +306,14 @@
     "musica": "acorde pleno; baja a cama desde 16,6",
     "nivel": "pleno -> cama"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/ (G01)",
+     "tipo": "grafico"
+    }
+   ],
+   "material_estado": "grafico"
   },
   {
    "id": "S08",
@@ -278,7 +340,14 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Más de quinientos millones de personas vieron el primer paso en un televisor."
+   "expositor": "Más de quinientos millones de personas vieron el primer paso por televisión.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/cine__L09b_K10_final.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "fija"
   },
   {
    "id": "S09",
@@ -299,7 +368,14 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Aquí, en Guayaquil, eran las nueve y cincuenta y seis de la noche."
+   "expositor": "Aquí, en Guayaquil, eran las nueve y cincuenta y seis de la noche.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/cine__L09b_K12_final_v2.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "fija"
   },
   {
    "id": "S10",
@@ -326,12 +402,21 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Nosotros no queremos que solo lo miren. Queremos que lo diseñen."
+   "expositor": "Nosotros no queremos que solo lo miren: queremos que lo construyan.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/habitacion.mp4",
+     "tipo": "video",
+     "desde_s": 2.0
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "desde 2,0 s: el titulo de zona del juego («La habitación-taller») ya se apago"
   },
   {
    "id": "S11",
    "inicio": 34.0,
-   "fin": 38.0,
+   "fin": 37.5,
    "fuente": {
     "toma": "T02"
    },
@@ -348,12 +433,21 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Luz cenicienta es una aventura de exploración espacial."
+   "expositor": "Luz cenicienta es una aventura de exploración espacial.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/orbita.mp4",
+     "tipo": "video",
+     "desde_s": 1.2
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "desde 1,2 s: sin el titulo de zona; el globo de Orbita va de 1,5 a 4,4 s"
   },
   {
    "id": "S12",
-   "inicio": 38.0,
-   "fin": 42.0,
+   "inicio": 37.5,
+   "fin": 40.5,
    "fuente": {
     "toma": "T03"
    },
@@ -362,8 +456,8 @@
    "transicion_entrada": "corte",
    "rotulo": {
     "texto": "Habitación · Plaza · Sendero · Mirador · Luna",
-    "inicio": 38.0,
-    "fin": 44.0
+    "inicio": 37.7,
+    "fin": 40.3
    },
    "sello": null,
    "sonido": {
@@ -374,19 +468,31 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Una estudiante de ingeniería de control y Órbita, su gato científico,"
+   "expositor": "Una estudiante de ingeniería de control y Órbita, su gato científico,",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/ciudad.mp4",
+     "tipo": "video",
+     "desde_s": 4.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S13",
-   "inicio": 42.0,
-   "fin": 45.0,
+   "inicio": 40.5,
+   "fin": 43.0,
    "fuente": {
     "toma": "T04"
    },
    "recorte": "ninguno",
    "movimiento": "fijo",
    "transicion_entrada": "corte",
-   "rotulo": null,
+   "rotulo": {
+    "texto": "Minimapa con el objetivo",
+    "inicio": 40.7,
+    "fin": 42.8
+   },
    "sello": null,
    "sonido": {
     "musica": "cama",
@@ -396,46 +502,28 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "recorren su barrio, Las Escalinatas,"
-  },
-  {
-   "id": "S14",
-   "inicio": 45.0,
-   "fin": 46.5,
-   "fuente": {
-    "toma": "T07"
-   },
-   "alternativa": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_08/L08_carga_mirador.png",
-   "recorte": "ninguno",
-   "movimiento": "acercamiento lento",
-   "transicion_entrada": "corte",
-   "rotulo": null,
-   "sello": null,
-   "sonido": {
-    "musica": "cama",
-    "efectos": [
-     "juego/audio/umbral.ogg"
-    ],
-    "nivel": "cama"
-   },
-   "expositor_habla": true,
-   "expositor": "hasta la Luna"
+   "expositor": "recorren su barrio",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/minimapa.mp4",
+     "tipo": "video",
+     "desde_s": 3.0
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "desde 3,0 s: sin el titulo de zona ni «Mision cumplida»; el minimapa se agranda hacia 3,75 s"
   },
   {
    "id": "S15",
-   "inicio": 46.5,
-   "fin": 49.0,
+   "inicio": 43.0,
+   "fin": 44.5,
    "fuente": {
     "toma": "T05"
    },
    "recorte": "ninguno",
    "movimiento": "fijo",
    "transicion_entrada": "corte",
-   "rotulo": {
-    "texto": "Minimapa con el objetivo",
-    "inicio": 46.5,
-    "fin": 49.0
-   },
+   "rotulo": null,
    "sello": null,
    "sonido": {
     "musica": "cama",
@@ -445,15 +533,27 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "de un sueño.",
-   "nota": "Si T05 no muestra el minimapa, este rotulo pasa a S13 (42,0-45,0)."
+   "expositor": "hasta la Luna",
+   "nota": "Si T05 no muestra el minimapa, este rotulo pasa a S13 (42,0-45,0).",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mirador_telescopio.mp4",
+     "tipo": "video",
+     "desde_s": 0.3
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "el titulo de zona del juego («El Mirador del Faro») hace de rotulo; sin rotulo del video encima"
   },
   {
    "id": "S16",
-   "inicio": 49.0,
-   "fin": 50.5,
+   "inicio": 44.5,
+   "fin": 47.0,
    "fuente": {
-    "toma": "T20"
+    "video": "Nasa_Game/Presentacion/material/luna_lenta.mp4",
+    "desde": 0.6,
+    "mov": "acercamiento 160->175 %",
+    "eq": "contrast=1.18:saturation=1.25:gamma=0.95"
    },
    "recorte": "ninguno",
    "movimiento": "fijo",
@@ -469,12 +569,21 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Todo es low-poly pintado a mano,"
+   "expositor": "de un sueño. Un mundo low-poly de acabado pintado,",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/luna_lenta.mp4",
+     "tipo": "video",
+     "desde_s": 0.6
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "encuadre cerrado sobre ella y Orbita saltando, con mas contraste (la toma abierta se veia lavada)"
   },
   {
    "id": "S17",
-   "inicio": 50.5,
-   "fin": 52.0,
+   "inicio": 47.0,
+   "fin": 49.5,
    "fuente": {
     "toma": "T06"
    },
@@ -492,22 +601,65 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "con mapa y cargas ilustrados."
+   "expositor": "con mapa",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mapa_tecla_m.mp4",
+     "tipo": "video",
+     "desde_s": 1.0
+    }
+   ],
+   "material_estado": "movimiento"
+  },
+  {
+   "id": "S14",
+   "inicio": 49.5,
+   "fin": 52.0,
+   "fuente": {
+    "imagen": "Nasa_Game/Presentacion/material/fijas/arte__L08_carga_luna.jpg"
+   },
+   "recorte": "ninguno",
+   "movimiento": "acercamiento lento 100->107 %",
+   "transicion_entrada": "corte",
+   "rotulo": {
+    "texto": "Pantalla de carga pintada",
+    "inicio": 49.7,
+    "fin": 51.8
+   },
+   "sello": null,
+   "sonido": {
+    "musica": "cama",
+    "efectos": [
+     "juego/audio/umbral.ogg"
+    ],
+    "nivel": "cama"
+   },
+   "expositor_habla": true,
+   "expositor": "y pantallas de carga ilustrados.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/arte__L08_carga_luna.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "la lamina de carga de la Luna (juego/interfaz/arte/carga_luna.jpg) entera, sin el fundido de la toma"
   },
   {
    "id": "S18",
    "inicio": 52.0,
-   "fin": 55.0,
+   "fin": 54.5,
    "fuente": [
     {
-     "toma": "T08",
+     "video": "Nasa_Game/Presentacion/material/mirador_telescopio.mp4",
+     "desde": 5.3,
      "de": 52.0,
      "a": 53.0
     },
     {
-     "imagen": "Nasa_Game/Propuestas/Capturas/luna_telescopio.png",
+     "imagen": "Nasa_Game/Presentacion/graficos/luna_sola.png",
      "de": 53.0,
-     "a": 55.0
+     "a": 54.5
     }
    ],
    "recorte": "ninguno",
@@ -515,8 +667,8 @@
    "transicion_entrada": "mascara circular de ocular que se abre en 53,0",
    "rotulo": {
     "texto": "Guayaquil · 12 nov 2026, 19:30",
-    "inicio": 52.5,
-    "fin": 55.0
+    "inicio": 52.4,
+    "fin": 54.4
    },
    "sello": null,
    "sonido": {
@@ -526,22 +678,37 @@
     ],
     "nivel": "intermedio"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mirador_telescopio.mp4",
+     "tipo": "video",
+     "desde_s": 5.3,
+     "de": 52.0,
+     "a": 53.0
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/luna_sola.png",
+     "tipo": "fija",
+     "de": 53.0,
+     "a": 54.5
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S19",
-   "inicio": 55.0,
+   "inicio": 54.5,
    "fin": 60.0,
-   "fuente": "Nasa_Game/Propuestas/Capturas/luna_telescopio.png",
-   "alternativa": {
-    "toma": "T21"
+   "fuente": {
+    "imagen": "Nasa_Game/Presentacion/graficos/luna_sola.png"
    },
    "recorte": "ninguno",
-   "movimiento": "acercamiento 100->115 % hacia el terminador",
+   "movimiento": "acercamiento 104->120 % hacia abajo derecha (terminador)",
    "transicion_entrada": "corte",
    "rotulo": {
     "texto": "Texturas LRO · prueba técnica",
-    "inicio": 55.3,
+    "inicio": 54.8,
     "fin": 59.7
    },
    "sello": null,
@@ -550,35 +717,47 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Usamos datos abiertos de la NASA: nuestra Luna lleva texturas del orbitador LRO"
+   "expositor": "Usamos datos abiertos de la NASA: la Luna lleva texturas del orbitador LRO",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/luna_sola.png",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "graficos/luna_sola.png: la Luna de telescopio_luna_real.mp4 sin el panel ni el globo de Orbita"
   },
   {
    "id": "S20",
    "inicio": 60.0,
-   "fin": 64.0,
+   "fin": 63.5,
    "fuente": {
     "grafico": "G02"
    },
    "recorte": "ninguno",
    "movimiento": "fijo",
    "transicion_entrada": "corte",
-   "rotulo": {
-    "texto": "Medido 12,15 % · Horizons 12,2 %",
-    "inicio": 60.2,
-    "fin": 63.8
-   },
+   "rotulo": null,
    "sello": null,
    "sonido": {
     "musica": "cama",
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "y su luz coincide con JPL Horizons."
+   "expositor": "y su luz coincide con JPL Horizons.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/ (G02)",
+     "tipo": "grafico"
+    }
+   ],
+   "material_estado": "grafico",
+   "nota_v2": "G02 animado (G02_luna_medida.mp4): las lunas se encienden y las cifras cuentan en 1 s"
   },
   {
    "id": "S21",
-   "inicio": 64.0,
-   "fin": 67.5,
+   "inicio": 63.5,
+   "fin": 66.5,
    "fuente": {
     "toma": "T09"
    },
@@ -587,8 +766,8 @@
    "transicion_entrada": "corte",
    "rotulo": {
     "texto": "55 fichas · 39 verificadas",
-    "inicio": 64.2,
-    "fin": 67.3
+    "inicio": 63.7,
+    "fin": 66.3
    },
    "sello": null,
    "sonido": {
@@ -599,20 +778,30 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Cada ficha del cuaderno cita su fuente."
+   "expositor": "Cada ficha cita su fuente.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/cuaderno.mp4",
+     "tipo": "video",
+     "desde_s": 2.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S22",
-   "inicio": 67.5,
+   "inicio": 66.5,
    "fin": 70.0,
    "fuente": "Nasa_Game/Construccion/Capturas/vuelta6_arcade_nueve.jpg",
    "recorte": "ninguno",
    "movimiento": "alejamiento de una casilla a la rejilla",
    "transicion_entrada": "corte",
    "rotulo": {
-    "texto": "9 minijuegos arcade",
-    "inicio": 67.7,
-    "fin": 69.9
+    "texto": "9 minijuegos · 9 ideas reales",
+    "inicio": 66.7,
+    "fin": 70.0,
+    "sub": "Arcade, a pantalla completa",
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -620,7 +809,14 @@
     "nivel": "cama -> sube"
    },
    "expositor_habla": true,
-   "expositor": "Y cada minijuego enseña una idea real."
+   "expositor": "Y cada minijuego enseña una idea real.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/capturas__vuelta6_arcade_nueve.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "fija"
   },
   {
    "id": "S23",
@@ -638,9 +834,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "Control",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 70.0,
-    "fin": 71.33
+    "fin": 71.33,
+    "sub": "Control con inercia (realimentación)",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -650,7 +849,15 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_seguidor.mp4",
+     "tipo": "video",
+     "desde_s": 5.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S24",
@@ -668,9 +875,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "Rastreo",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 71.33,
-    "fin": 72.67
+    "fin": 72.67,
+    "sub": "Rastreo de satélites",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -680,7 +890,15 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_antena.mp4",
+     "tipo": "video",
+     "desde_s": 2.5
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S25",
@@ -698,9 +916,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "CubeSat",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 72.67,
-    "fin": 74.0
+    "fin": 74.0,
+    "sub": "Armar un CubeSat de 10 cm",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -710,7 +931,15 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_satelite.mp4",
+     "tipo": "video",
+     "desde_s": 5.5
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S26",
@@ -728,9 +957,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "Observación",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 74.0,
-    "fin": 75.33
+    "fin": 75.33,
+    "sub": "Buscar y enfocar la Luna",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -740,7 +972,15 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_telescopio.mp4",
+     "tipo": "video",
+     "desde_s": 4.3
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S27",
@@ -758,9 +998,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "Historia",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 75.33,
-    "fin": 76.67
+    "fin": 76.67,
+    "sub": "Línea de tiempo de hitos",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -770,7 +1013,15 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_linea_tiempo.mp4",
+     "tipo": "video",
+     "desde_s": 2.5
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S28",
@@ -788,9 +1039,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "Herramientas",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 76.67,
-    "fin": 78.0
+    "fin": 78.0,
+    "sub": "Herramientas del Apolo 11",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -800,7 +1054,15 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_muestras.mp4",
+     "tipo": "video",
+     "desde_s": 3.8
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S29",
@@ -818,9 +1080,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "Cooperación",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 78.0,
-    "fin": 79.33
+    "fin": 79.33,
+    "sub": "Hincar y nivelar una bandera lunar",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -830,7 +1095,15 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_banderas.mp4",
+     "tipo": "video",
+     "desde_s": 3.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S30",
@@ -848,9 +1121,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "Reentrada",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 79.33,
-    "fin": 80.67
+    "fin": 80.67,
+    "sub": "Reentrada y amerizaje",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": true
    },
    "sello": null,
    "sonido": {
@@ -860,7 +1136,15 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_regreso.mp4",
+     "tipo": "video",
+     "desde_s": 3.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S31",
@@ -878,9 +1162,12 @@
    "movimiento": "empuje 4 % si es la casilla fija",
    "transicion_entrada": "corte en el pulso",
    "rotulo": {
-    "texto": "Órbita",
+    "texto": "9 minijuegos · 9 ideas reales",
     "inicio": 80.67,
-    "fin": 82.0
+    "fin": 82.0,
+    "sub": "Una órbita como la de Pegaso",
+    "sin_fundido_entrada": true,
+    "sin_fundido_salida": false
    },
    "sello": null,
    "sonido": {
@@ -890,12 +1177,20 @@
     ],
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_orbita.mp4",
+     "tipo": "video",
+     "desde_s": 3.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S32",
    "inicio": 82.0,
-   "fin": 85.0,
+   "fin": 85.5,
    "fuente": {
     "toma": "T22a"
    },
@@ -904,9 +1199,9 @@
    "movimiento": "acercamiento lento",
    "transicion_entrada": "corte",
    "rotulo": {
-    "texto": "Dos juegos de la biblioteca",
+    "texto": "El reto: sostener una base",
     "inicio": 82.2,
-    "fin": 84.9
+    "fin": 85.3
    },
    "sello": null,
    "sonido": {
@@ -914,46 +1209,64 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Y el corazón del reto: sostener una base espacial."
+   "expositor": "Y el corazón del reto: sostener una base espacial.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/artemis_base.mp4",
+     "tipo": "video"
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S33",
-   "inicio": 85.0,
-   "fin": 90.0,
+   "inicio": 85.5,
+   "fin": 88.5,
    "fuente": {
-    "toma": "T23"
+    "video": "Nasa_Game/Presentacion/material/artemis_rover_hielo.mp4",
+    "desde": 0.0
    },
-   "alternativa": [
-    "Misión Artemis/capturas/05_rover.png (85,0-87,5)",
-    "Misión Artemis/capturas/11_marte_llegada.png (87,5-90,0)"
-   ],
    "recorte": "ninguno",
    "movimiento": "paneo lateral lento",
    "transicion_entrada": "corte",
-   "rotulo": null,
+   "rotulo": {
+    "texto": "Juegos del equipo · en integración",
+    "inicio": 85.7,
+    "fin": 88.3
+   },
    "sello": null,
    "sonido": {
     "musica": "cama",
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Jean, Joel y Domenica crearon la del polo sur lunar y la de Marte."
+   "expositor": "Jean, Joel y Domenica crearon las bases",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/artemis_rover_hielo.mp4",
+     "tipo": "video",
+     "desde_s": 0.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S34",
-   "inicio": 90.0,
-   "fin": 95.0,
+   "inicio": 88.5,
+   "fin": 94.5,
    "fuente": {
-    "toma": "T22"
+    "video": "Nasa_Game/Presentacion/material/artemis_lluvia_solar.mp4",
+    "desde": 0.0,
+    "mov": "acercamiento 100->140 % hacia arriba izquierda",
+    "velocidad": 0.9
    },
-   "alternativa": "Misión Artemis/capturas/02_lluvia_solar.png",
    "recorte": "ninguno",
    "movimiento": "acercamiento a las cuatro barras (arriba a la izquierda)",
    "transicion_entrada": "corte",
    "rotulo": {
-    "texto": "Lluvia solar: ¡a la cúpula!",
-    "inicio": 90.3,
-    "fin": 94.7
+    "texto": "Oxígeno, energía, alimentos y radiación",
+    "inicio": 88.7,
+    "fin": 94.3
    },
    "sello": null,
    "sonido": {
@@ -964,22 +1277,92 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Hay que equilibrar oxígeno, energía, alimentos y radiación."
+   "expositor": "de la Luna y de Marte. Hay que equilibrar oxígeno, energía, alimentos y radiación.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/artemis_lluvia_solar.mp4",
+     "tipo": "video",
+     "desde_s": 0.0
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "acercamiento a las cuatro barras del HUD (arriba a la izquierda)"
+  },
+  {
+   "id": "S36",
+   "inicio": 94.5,
+   "fin": 97.0,
+   "fuente": [
+    {
+     "video": "Nasa_Game/Presentacion/material/artemis_despegue_viaje.mp4",
+     "desde": 1.0,
+     "de": 94.5,
+     "a": 95.8
+    },
+    {
+     "video": "Nasa_Game/Presentacion/material/artemis_despegue_viaje.mp4",
+     "desde": 4.6,
+     "de": 95.8,
+     "a": 97.0
+    }
+   ],
+   "recorte": "ninguno",
+   "movimiento": "fijo",
+   "transicion_entrada": "corte",
+   "rotulo": null,
+   "sello": null,
+   "sonido": {
+    "musica": "cama",
+    "efectos": [
+     "rugido corto en 94.5"
+    ],
+    "nivel": "cama"
+   },
+   "expositor_habla": true,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/artemis_despegue_viaje.mp4",
+     "tipo": "video",
+     "desde_s": 1.0,
+     "de": 94.5,
+     "a": 95.8
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/artemis_despegue_viaje.mp4",
+     "tipo": "video",
+     "desde_s": 4.6,
+     "de": 95.8,
+     "a": 97.0
+    }
+   ],
+   "material_estado": "movimiento",
+   "expositor": "(pausa) En Marte la señal tarda minutos:",
+   "nota_v2": "despegue en 1,7 s y viaje: va ANTES de Marte (orden de la historia)"
   },
   {
    "id": "S35",
-   "inicio": 95.0,
-   "fin": 101.0,
-   "fuente": {
-    "toma": "T25"
-   },
+   "inicio": 97.0,
+   "fin": 102.0,
+   "fuente": [
+    {
+     "imagen": "Nasa_Game/Presentacion/material/fijas/marte__01_programa.jpg",
+     "de": 97.0,
+     "a": 97.8
+    },
+    {
+     "video": "Nasa_Game/Presentacion/material/marte_aterrizaje.mp4",
+     "desde": 3.6,
+     "de": 97.8,
+     "a": 102.0
+    }
+   ],
    "recorte": "ninguno",
    "movimiento": "fijo",
    "transicion_entrada": "corte",
    "rotulo": {
-    "texto": "Siete minutos de terror",
-    "inicio": 95.3,
-    "fin": 100.7
+    "texto": "Aterrizaje programado, sin pilotear en vivo",
+    "inicio": 97.2,
+    "fin": 101.8
    },
    "sello": null,
    "sonido": {
@@ -987,33 +1370,57 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "En Marte, la señal tarda demasiado: el aterrizaje se programa y se simula.",
-   "nota": "Marte no tiene capturas en disco: T25 es obligatoria. Si falla, usar Misión Artemis/capturas/11_marte_llegada.png con rotulo igual."
+   "expositor": "por eso el aterrizaje se programa y se simula.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/marte__01_programa.jpg",
+     "tipo": "fija",
+     "de": 97.0,
+     "a": 97.8
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/marte_aterrizaje.mp4",
+     "tipo": "video",
+     "desde_s": 3.6,
+     "de": 97.8,
+     "a": 102.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
-   "id": "S36",
-   "inicio": 101.0,
+   "id": "S36b",
+   "inicio": 102.0,
    "fin": 105.0,
    "fuente": {
-    "toma": "T24"
+    "video": "Nasa_Game/Presentacion/material/marte_superficie.mp4",
+    "desde": 0.5,
+    "mov": "acercamiento 100->112 %"
    },
-   "alternativa": [
-    "Misión Artemis/capturas/09_despegue.png (101-103)",
-    "Misión Artemis/capturas/10_viaje.png (103-105)"
-   ],
    "recorte": "ninguno",
-   "movimiento": "temblor 1 % en el despegue",
+   "movimiento": "fijo",
    "transicion_entrada": "corte",
-   "rotulo": null,
+   "rotulo": {
+    "texto": "La base de Marte · Domenica",
+    "inicio": 102.2,
+    "fin": 104.8
+   },
    "sello": null,
    "sonido": {
-    "musica": "sube a -8 dB y baja a cama en 104,7",
-    "efectos": [
-     "rugido corto"
-    ],
+    "musica": "sube a -6 dB y baja a cama en 104,5",
+    "efectos": [],
     "nivel": "intermedio"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/marte_superficie.mp4",
+     "tipo": "video",
+     "desde_s": 0.5
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "respiro sobre el proyecto de Domenica (--capitulo=superficie), con las cuatro barras"
   },
   {
    "id": "S37",
@@ -1039,7 +1446,34 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Detrás hay método de estudio: concepto, hoja de referencia y motor."
+   "expositor": "Detrás hay método de estudio: concepto, hoja de referencia y motor.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/ (G03)",
+     "tipo": "grafico"
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/hojas__HR_PER_v1.jpg",
+     "tipo": "fija"
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/hojas__HR_URB_v1.jpg",
+     "tipo": "fija"
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/hojas__HR_VEG_v1.jpg",
+     "tipo": "fija"
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/hojas__Hojas_v1_lamina.jpg",
+     "tipo": "fija"
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/arte__L02_exploracion_camara_alta.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "fija"
   },
   {
    "id": "S38",
@@ -1047,17 +1481,19 @@
    "fin": 115.0,
    "fuente": [
     {
-     "toma": "T27"
+     "video": "Nasa_Game/Presentacion/material/mj_muestras.mp4",
+     "desde": 2.0
     },
     {
-     "grafico": "G05"
+     "imagen": "Nasa_Game/Presentacion/graficos/G05_registro_largo.png",
+     "mov": "paneo vertical hacia abajo 0 %"
     }
    ],
    "recorte": "pantalla partida 50/50",
    "movimiento": "fijo",
    "transicion_entrada": "corte",
    "rotulo": {
-    "texto": "329 comprobaciones · 0 fallos",
+    "texto": "212 pruebas, 0 fallos",
     "inicio": 110.3,
     "fin": 114.7
    },
@@ -1070,27 +1506,36 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Más de veinte mil líneas de código y pruebas que juegan solas.",
-   "nota": "Volver a correr las pruebas antes de montar; si la cifra cambia, se cambia el rotulo."
+   "expositor": "Todo está hecho por código, con pruebas que lo juegan solas con el teclado.",
+   "nota": "La cifra sale de correr las 9 prueba_manos.gd el 2026-11-15 (212 comprobaciones, 0 fallos). El recorrido completo (recorrido_manos) no esta en verde: no se muestra.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mj_muestras.mp4",
+     "tipo": "video",
+     "desde_s": 2.0
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/G05_registro_largo.png",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S39",
    "inicio": 115.0,
-   "fin": 120.0,
+   "fin": 119.5,
    "fuente": {
-    "toma": "T28"
-   },
-   "alternativa": {
-    "toma": "T05",
-    "con": "contador de fps de --medir"
+    "video": "Nasa_Game/Presentacion/material/sendero.mp4",
+    "desde": 1.0
    },
    "recorte": "ninguno",
    "movimiento": "fijo",
    "transicion_entrada": "corte",
    "rotulo": {
-    "texto": "43–59 fps en Intel HD 620",
+    "texto": "Corre en una Intel HD 620",
     "inicio": 115.3,
-    "fin": 119.7
+    "fin": 119.3
    },
    "sello": null,
    "sonido": {
@@ -1098,17 +1543,26 @@
     "nivel": "cama"
    },
    "expositor_habla": true,
-   "expositor": "Corre a más de cuarenta cuadros por segundo en un portátil modesto."
+   "expositor": "Corre en un portátil modesto, con gráfica integrada.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/sendero.mp4",
+     "tipo": "video",
+     "desde_s": 1.0
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota": "Medido el 2026-11-15 con --medir=5: de 38,3 (Plaza) a 60,3 fps (Luna). La Plaza baja de 40: el rotulo no lleva cifra."
   },
   {
    "id": "S40",
-   "inicio": 120.0,
+   "inicio": 119.5,
    "fin": 126.0,
    "fuente": {
-    "toma": "T29"
+    "imagen": "Nasa_Game/Presentacion/material/fijas/arte__L08_carga_mirador.jpg"
    },
    "recorte": "ninguno",
-   "movimiento": "fijo",
+   "movimiento": "acercamiento lento 100->109 %",
    "transicion_entrada": "corte",
    "rotulo": null,
    "sello": null,
@@ -1120,15 +1574,25 @@
     "nivel": "cama -> pleno"
    },
    "expositor_habla": true,
-   "expositor": "(pausa) La próxima ingeniera de una misión lunar puede estar hoy en Guayaquil. Jugando."
+   "expositor": "La próxima ingeniera lunar puede estar hoy en un aula de Guayaquil. / Jugando.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/arte__L08_carga_mirador.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "ella, pequena, junto al telescopio y frente a la Luna creciente (lamina de carga del Mirador del juego)"
   },
   {
    "id": "S41",
    "inicio": 126.0,
    "fin": 128.5,
-   "fuente": "Nasa_Game/Construccion/Capturas/vuelta3_seis_escenas.jpg",
+   "fuente": {
+    "imagen": "Nasa_Game/Presentacion/graficos/G07_escenarios.png"
+   },
    "recorte": "ninguno",
-   "movimiento": "paneo lento",
+   "movimiento": "acercamiento lento 100->104 %",
    "transicion_entrada": "corte",
    "rotulo": {
     "texto": "5 escenarios jugables",
@@ -1140,7 +1604,15 @@
     "musica": "plena",
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/G07_escenarios.png",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "fija",
+   "nota_v2": "G07: un cuadro de cada escenario de las tomas de hoy; Plaza, Mirador y Luna marcados «arte provisional»"
   },
   {
    "id": "S42",
@@ -1160,7 +1632,14 @@
     "musica": "plena",
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/fijas/capturas__vuelta6_arcade_nueve.jpg",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "fija"
   },
   {
    "id": "S43",
@@ -1182,14 +1661,31 @@
     "musica": "plena",
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/cuaderno.mp4",
+     "tipo": "video",
+     "desde_s": 4.0
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S44",
    "inicio": 133.5,
    "fin": 136.0,
-   "fuente": "Misión Artemis/capturas/13_marte_base.png",
-   "recorte": "ninguno",
+   "fuente": [
+    {
+     "video": "Nasa_Game/Presentacion/material/artemis_base.mp4",
+     "desde": 0.5
+    },
+    {
+     "video": "Nasa_Game/Presentacion/material/marte_superficie.mp4",
+     "desde": 1.0
+    }
+   ],
+   "recorte": "pantalla partida 50/50",
    "movimiento": "acercamiento lento",
    "transicion_entrada": "corte",
    "rotulo": {
@@ -1203,17 +1699,30 @@
     "nivel": "pleno"
    },
    "expositor_habla": false,
-   "alternativa": {
-    "toma": "T26"
-   }
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/artemis_base.mp4",
+     "tipo": "video",
+     "desde_s": 0.5
+    },
+    {
+     "ruta": "Nasa_Game/Presentacion/material/marte_superficie.mp4",
+     "tipo": "video",
+     "desde_s": 1.0
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "Luna (Jean y Joel) a la izquierda y Marte (Domenica) a la derecha; sin el capitulo Marte provisional de Mision Artemis"
   },
   {
    "id": "S45",
    "inicio": 136.0,
    "fin": 138.5,
-   "fuente": "Nasa_Game/Propuestas/Capturas/luna_telescopio.png",
+   "fuente": {
+    "imagen": "Nasa_Game/Presentacion/graficos/luna_sola.png"
+   },
    "recorte": "ninguno",
-   "movimiento": "acercamiento lento",
+   "movimiento": "acercamiento lento 108->116 %",
    "transicion_entrada": "corte",
    "rotulo": {
     "texto": "Datos: LRO y JPL Horizons",
@@ -1225,7 +1734,14 @@
     "musica": "plena",
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/luna_sola.png",
+     "tipo": "fija"
+    }
+   ],
+   "material_estado": "movimiento"
   },
   {
    "id": "S46",
@@ -1235,26 +1751,31 @@
     "grafico": "G04"
    },
    "recorte": "ninguno",
-   "movimiento": "fijo",
+   "movimiento": "empuje 3 %",
    "transicion_entrada": "corte",
-   "rotulo": {
-    "texto": "Guillermo · Jean · Joel · Domenica",
-    "inicio": 138.7,
-    "fin": 141.8
-   },
+   "rotulo": null,
    "sello": null,
    "sonido": {
     "musica": "plena",
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/ (G04)",
+     "tipo": "grafico"
+    }
+   ],
+   "material_estado": "grafico"
   },
   {
    "id": "S47",
    "inicio": 142.0,
    "fin": 146.0,
    "fuente": {
-    "toma": "T30"
+    "video": "Nasa_Game/Presentacion/material/mirador_alejar.mp4",
+    "desde": 0.3,
+    "velocidad": 0.62
    },
    "alternativa": "Nasa_Game/Fase_1_Arte/Exploracion/Lote_09/L09d_K13a_final.png (con sello IA)",
    "recorte": "ninguno",
@@ -1266,7 +1787,16 @@
     "musica": "acorde final",
     "nivel": "pleno"
    },
-   "expositor_habla": false
+   "expositor_habla": false,
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/material/mirador_alejar.mp4",
+     "tipo": "video",
+     "desde_s": 0.3
+    }
+   ],
+   "material_estado": "movimiento",
+   "nota_v2": "camara lenta (0,62): el alejamiento ocupa casi todo el plano"
   },
   {
    "id": "S48",
@@ -1280,7 +1810,7 @@
    "movimiento": "fijo",
    "transicion_entrada": "cierre en punto de luz",
    "rotulo": {
-    "texto": "Luz cenicienta",
+    "texto": "Zingularity: Artemis",
     "inicio": 146.5,
     "fin": 149.5
    },
@@ -1290,7 +1820,15 @@
     "nivel": "pleno -> silencio"
    },
    "expositor_habla": false,
-   "nota": "Fundido a negro en 149,5."
+   "nota": "Fundido a negro en 149,5.",
+   "material": [
+    {
+     "ruta": "Nasa_Game/Presentacion/graficos/ (G01)",
+     "tipo": "grafico"
+    }
+   ],
+   "material_estado": "grafico"
   }
- ]
+ ],
+ "cambios_v2": "2026-11-15: correcciones de los criticos de video y guion (ver LEEME de la presentacion.md)"
 }

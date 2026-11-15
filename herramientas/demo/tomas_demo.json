@@ -1,0 +1,201 @@
+{
+ "_nota": "Que archivo de Nasa_Game/Presentacion/material/ usa cada toma del guion (T01...). Lo lee herramientas/demo/montar_demo.py. 'archivos': nombres sin .mp4 en orden de preferencia (vale el primero que exista y se pueda leer). 'desde': segundo de la toma donde empieza el plano. 'desde_final': si se da, el plano empieza a esa distancia del final de la toma. 'recorte_inferior': pixeles (a 1080p) que se quitan abajo para ocultar la ayuda de controles. Si en material/ aparece un archivo T01.mp4 o T01_algo.mp4, gana ese. 'desde_por_segmento': {'S43': 4.6} cambia el inicio solo en ese segmento.",
+ "T01": {
+  "archivos": [
+   "habitacion"
+  ],
+  "desde": 0.0
+ },
+ "T02": {
+  "archivos": [
+   "orbita"
+  ],
+  "desde": 0.8,
+  "_nota": "el globo de dialogo va de 1,5 a 4,4 s"
+ },
+ "T03": {
+  "archivos": [
+   "ciudad"
+  ],
+  "desde": 0.0
+ },
+ "T04": {
+  "archivos": [
+   "minimapa",
+   "sendero"
+  ],
+  "desde": 0.0
+ },
+ "T05": {
+  "archivos": [
+   "mirador_telescopio",
+   "mirador"
+  ],
+  "desde": 0.0
+ },
+ "T06": {
+  "archivos": [
+   "mapa_tecla_m",
+   "mapa"
+  ],
+  "desde": 0.5
+ },
+ "T07": {
+  "archivos": [
+   "carga_mirador",
+   "carga"
+  ],
+  "desde": 0.0
+ },
+ "T08": {
+  "archivos": [
+   "mirador_telescopio"
+  ],
+  "desde": 5.3,
+  "_nota": "junto al telescopio con el dialogo del 12,2 %; el minijuego se abre hacia 7,0 s"
+ },
+ "T09": {
+  "archivos": [
+   "cuaderno"
+  ],
+  "desde": 1.4,
+  "desde_por_segmento": {
+   "S43": 4.6
+  },
+  "_nota": "el cuaderno se abre hacia 1,3 s"
+ },
+ "T11": {
+  "archivos": [
+   "mj_seguidor"
+  ],
+  "desde": 1.0
+ },
+ "T12": {
+  "archivos": [
+   "mj_antena"
+  ],
+  "desde": 1.0
+ },
+ "T13": {
+  "archivos": [
+   "mj_satelite"
+  ],
+  "desde": 1.0
+ },
+ "T14": {
+  "archivos": [
+   "mj_telescopio"
+  ],
+  "desde": 1.0
+ },
+ "T15": {
+  "archivos": [
+   "mj_linea_tiempo"
+  ],
+  "desde": 1.0
+ },
+ "T16": {
+  "archivos": [
+   "mj_muestras"
+  ],
+  "desde": 1.0
+ },
+ "T17": {
+  "archivos": [
+   "mj_banderas"
+  ],
+  "desde": 1.0
+ },
+ "T18": {
+  "archivos": [
+   "mj_regreso"
+  ],
+  "desde": 1.0
+ },
+ "T19": {
+  "archivos": [
+   "mj_orbita"
+  ],
+  "desde": 1.0
+ },
+ "T20": {
+  "archivos": [
+   "luna_lenta",
+   "luna"
+  ],
+  "desde": 1.3,
+  "_nota": "en pleno salto con Orbita al lado"
+ },
+ "T21": {
+  "archivos": [
+   "telescopio_luna_real"
+  ],
+  "desde": 0.0
+ },
+ "T22a": {
+  "archivos": [
+   "artemis_base",
+   "artemis_inicio"
+  ],
+  "desde": 0.0
+ },
+ "T22": {
+  "archivos": [
+   "artemis_lluvia_solar"
+  ],
+  "desde": 0.0
+ },
+ "T23": {
+  "archivos": [
+   "artemis_rover_hielo",
+   "artemis_rover"
+  ],
+  "desde": 0.0
+ },
+ "T24": {
+  "archivos": [
+   "artemis_despegue_viaje",
+   "artemis_despegue"
+  ],
+  "desde": 0.0
+ },
+ "T25": {
+  "archivos": [
+   "marte_aterrizaje",
+   "artemis_marte"
+  ],
+  "desde": 0.0
+ },
+ "T26": {
+  "archivos": [
+   "marte_base",
+   "artemis_marte"
+  ],
+  "desde": 0.0
+ },
+ "T27": {
+  "archivos": [
+   "recorrido_manos"
+  ],
+  "desde": 0.0
+ },
+ "T28": {
+  "archivos": [
+   "portatil"
+  ],
+  "desde": 0.0
+ },
+ "T29": {
+  "archivos": [
+   "mirador_quieto",
+   "mirador"
+  ],
+  "desde": 0.0
+ },
+ "T30": {
+  "archivos": [
+   "mirador_alejar"
+  ],
+  "desde": 0.0
+ }
+}

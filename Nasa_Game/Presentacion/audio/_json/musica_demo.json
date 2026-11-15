@@ -1,0 +1,17 @@
+[
+  {
+    "created_at": "2026-11-15T15:19:07.623935Z",
+    "display_name": "ElevenLabs Music v2.5",
+    "id": "0583e913-905c-41cc-b8a2-97567fd348a6",
+    "job_type": "elevenlabs_music_v2_5",
+    "min_result_url": null,
+    "params": {
+      "batch_size": 1,
+      "duration": 150,
+      "force_instrumental": true,
+      "prompt": "Original instrumental score for a 2 minute 30 second presentation trailer of a hand-painted space exploration adventure game about a young engineering student from Ecuador who dreams of the Moon. Warm cinematic orchestra (piano, strings, soft brass, timpani) with a gentle electronic pulse, hopeful, emotional, full of wonder. Steady tempo of 90 BPM throughout. Structure: 0:00 to 0:11 almost silent, only a very faint low warm drone. At 0:11 one single soft solo piano note, alone. At 0:13 a second solo piano note. At 0:15 a warm full chord of strings and piano that swells and then settles. 0:17 to 1:10 a calm, steady underscore bed meant to sit under a live spoken presentation: soft repeating piano arpeggios, sustained warm strings and a quiet pulsing synth on every beat, no lead melody in front, gradually a little fuller. 1:10 to 1:22 an energetic rhythmic section with light drums, a driving pulse and bright plucked synths, playful and adventurous, with a clear downbeat every two beats. 1:22 to 2:03 back to the steady underscore bed with the pulse, warm and confident, still no lead melody. 2:03 to 2:22 a big emotional crescendo: rising strings, timpani rolls and brass, the main theme finally played in full. At 2:22 a broad, bright major final chord that rings out and fades naturally to silence by 2:30. Instrumental only: no vocals, no choir, no humming, no lyrics."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_151907_0583e913-905c-41cc-b8a2-97567fd348a6.mp3",
+    "status": "completed"
+  }
+]

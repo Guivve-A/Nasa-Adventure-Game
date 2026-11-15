@@ -60,6 +60,16 @@ TOMAS_JUEGO = {
     "carga": "cambio de zona real: de la plaza al sendero por el umbral, con la pantalla de carga pintada",
     "cuaderno": "cuaderno abierto: fichas de datos reales con su fuente",
 }
+# tomas extra (juego/pruebas/demo_extra.gd), pedidas por el guion del 2026-11-15
+GUION_EXTRA = "--prueba=guion:res://pruebas/demo_extra.gd"
+TOMAS_EXTRA = {
+    "mirador_telescopio": "Mirador de noche con HUD: camina al telescopio, pulsa E y se abre el ocular",
+    "carga_mirador": "del Sendero al Mirador por el umbral: pantalla de carga pintada",
+    "mirador_quieto": "Mirador de noche: ella y Orbita quietos junto al telescopio, la Luna sobre la ciudad",
+    "mirador_alejar": "Mirador de noche: la camara se aleja con X (ultima imagen)",
+    "luna_lenta": "Luna del sueno: saltos a paso lento con Orbita, sin HUD",
+    "mapa_tecla_m": "en el Sendero, tecla M: mapa del mundo y el cursor recorre los lugares",
+}
 MINIJUEGOS = {
     "seguidor": "control con inercia y prealimentacion",
     "antena": "rastreo de satelites",
@@ -74,6 +84,11 @@ MINIJUEGOS = {
 
 # --- grabaciones externas: una grabacion da una o varias tomas cortadas por segundos de juego ---
 EXTERNAS = {
+    "recorrido": {
+        "proyecto": "juego", "args": ["--prueba=recorrido_manos", "--ritmo=2"], "fps": 30, "cuadros": 900, "sonido": False,
+        "max": 900,
+        "tomas": {"recorrido_manos": (3.0, 12.0, "--prueba=recorrido_manos con ventana: el juego jugandose solo con teclas simuladas (ritmo 2)")},
+    },
     "telescopio_real": {
         "proyecto": "pruebas/luna_telescopio", "args": [], "fps": 30, "cuadros": 330, "sonido": False,
         "tomas": {"telescopio_luna_real": (1.0, 9.0, "la Luna real del telescopio: texturas LRO y efemerides de JPL Horizons")},
@@ -81,6 +96,10 @@ EXTERNAS = {
     "artemis": {
         "proyecto": ARTEMIS, "args": ["--prueba"], "fps": 180, "sonido": False, "max": 1800,
         "tomas": {},      # se llenan tras ver la hoja de la grabacion completa (ver SEGMENTOS)
+    },
+    "marte_sup": {
+        "proyecto": MARTE, "args": ["--capitulo=superficie"], "fps": 30, "cuadros": 300, "sonido": True, "max": 300,
+        "tomas": {"marte_superficie": (1.5, 8.0, "Mision Artemis - Marte (companeros), --capitulo=superficie: la base ya aterrizada, sin jugador (sin --prueba)")},
     },
     "marte": {
         "proyecto": MARTE, "args": ["--prueba"], "fps": 120, "sonido": False, "max": 1800,
@@ -105,6 +124,8 @@ def catalogo():
     cargar_segmentos()
     c = {}
     for t, d in TOMAS_JUEGO.items():
+        c[t] = ("juego", d)
+    for t, d in TOMAS_EXTRA.items():
         c[t] = ("juego", d)
     for m, d in MINIJUEGOS.items():
         c["mj_" + m] = ("juego", f"minijuego {m} jugandose solo: {d}")
@@ -223,7 +244,8 @@ def registrar(id_toma: str, archivo: Path, segundos: float, que: str):
 
 def toma_juego(id_toma: str, que: str, espejo_juego: Path, conservar: bool):
     avi = TEMPORAL / f"{id_toma}.avi"
-    lineas = grabar(espejo_juego, [GUION, f"--toma={id_toma}"], avi, FPS, 400.0)
+    guion = GUION_EXTRA if id_toma in TOMAS_EXTRA else GUION
+    lineas = grabar(espejo_juego, [guion, f"--toma={id_toma}"], avi, FPS, 400.0)
     a, b = marca(lineas, "inicio"), marca(lineas, "fin")
     total = cuadros_avi(avi)
     if a is None:

@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-15T15:20:37.974874Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "05cd4e32-ae60-4898-9812-64e1f0e699e7",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 3,
+      "prompt": "A smooth cinematic riser for a trailer transition: airy noise and a shimmering tone that rise steadily in pitch and volume for three seconds and stop cleanly at the peak. No voice, no speech, no drums, no melody."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_152037_05cd4e32-ae60-4898-9812-64e1f0e699e7.mp3",
+    "status": "completed"
+  }
+]

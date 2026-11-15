@@ -2,12 +2,15 @@
 
 > Video de presentación de «Luz cenicienta» para el reto de diseño de juegos espaciales. **150 s exactos, 1920 × 1080, 30 cuadros por segundo.** El expositor habla en vivo sobre el video durante 90 s ([[Guion del expositor]]); no hay voz grabada. Los otros 60 s son del video solo, con sonido pleno. Lista para el editor: `montaje.json` (misma carpeta). Cifras y estados: [[Inventario para la presentacion]].
 
+> [!important] Versión 2 (2026-11-15)
+> Este guion es el plan original. **Manda `montaje.json` v2**, que corrige lo que encontraron los dos críticos: título legible 2 s, el bloque 2 en el orden Órbita → Plaza → Sendero → Mirador → Luna → mapa → carga, la Luna sola en el ocular, G02 animado, un rótulo fijo para los 9 minijuegos con la idea de cada uno, la base en el orden de la historia (base lunar → rover → lluvia solar → despegue → Marte) y un respiro sobre la base de Marte de Domenica, cifras de pruebas y fps verdaderas, la lámina del Mirador con la Luna para la frase final y el collage de escenarios con las tomas de hoy. El texto del expositor vigente está en [[Guion del expositor]]; los cambios y el ensayo, en [[LEEME de la presentacion]].
+
 ## 1. Estructura
 
 | Tramo | Tiempo | Dura | Voz | Qué tiene que lograr |
 |---|---|---:|---|---|
 | Gancho | 0:00–0:17 | 17 s | no | Emoción: ignición, huella, bandera y Tierra, ella que despierta, título |
-| 1. Problema y respuesta | 0:17–0:34 | 17 s | **sí** | 500 millones lo miraron; nosotros queremos que lo diseñen |
+| 1. Problema y respuesta | 0:17–0:34 | 17 s | **sí** | 500 millones lo miraron; nosotros queremos que lo construyan |
 | 2. El mundo y su arte | 0:34–0:52 | 18 s | **sí** | Cinco escenarios pintados a mano, Órbita, mapa y carga |
 | Respiro | 0:52–0:55 | 3 s | no | El ocular se abre a la Luna real |
 | 3. Datos reales | 0:55–1:10 | 15 s | **sí** | LRO, JPL Horizons, 55 fichas con fuente |
@@ -101,10 +104,10 @@
 
 | N.º | Entra–Sale | Qué se ve | Rótulo | Sonido | Expositor |
 |---|---|---|---|---|---|
-| S32 | 1:22,0–1:25,0 | **T22a**: Misión Artemis, la base del polo sur lunar (o `Misión Artemis/capturas/01_inicio.png`) | «Dos juegos de la biblioteca» | Cama | «Y el corazón del reto: sostener una base espacial.» |
+| S32 | 1:22,0–1:25,5 | **T22a**: Misión Artemis, la base del polo sur lunar | «El reto: sostener una base» | Cama | «Y el corazón del reto: sostener una base espacial.» |
 | S33 | 1:25,0–1:30,0 | **T23**: el rover y la veta de hielo; corte a Marte, llegada (o `capturas/05_rover.png` 2,5 s y `capturas/11_marte_llegada.png` 2,5 s) | — | Cama | «Jean, Joel y Domenica crearon…» |
 | S34 | 1:30,0–1:35,0 | **T22**: lluvia solar, carrera a la cúpula; acercamiento a las cuatro barras (o `capturas/02_lluvia_solar.png`) | «Lluvia solar: ¡a la cúpula!» | Alarma corta, baja | «Hay que equilibrar oxígeno, energía…» |
-| S35 | 1:35,0–1:41,0 | **T25**: Marte, el simulador de aterrizaje: se programa y se prueba; sale el resultado con su causa | «Siete minutos de terror» | Cama | «En Marte, la señal tarda demasiado…» |
+| S35 | 1:37,0–1:42,0 | **T25**: Marte, el simulador de aterrizaje: se programa y se prueba; sale el resultado con su causa | «Aterrizaje programado, sin pilotear en vivo» | Cama | «…por eso el aterrizaje se programa y se simula.» |
 
 ### Respiro · 1:41–1:45 · sin voz
 
@@ -117,8 +120,8 @@
 | N.º | Entra–Sale | Qué se ve | Rótulo | Sonido | Expositor |
 |---|---|---|---|---|---|
 | S37 | 1:45,0–1:50,0 | **G03**: tríptico que entra de izquierda a derecha cada 1,5 s: concepto `Fase_1_Arte/Exploracion/Lote_02/L02_exploracion_camara_alta.png` → hojas `Fase_1_Arte/Hojas_de_referencia/Hojas_v1_lamina.jpg` → motor `Construccion/Capturas/sendero_jugable.png` | «9 hojas · 104 piezas» | Cama; `pagina.ogg` en cada entrada | «Detrás hay método de estudio…» |
-| S38 | 1:50,0–1:55,0 | **T27**: pantalla partida. Izquierda, el juego jugándose solo con teclas simuladas; derecha, el registro real desplazándose con sus `PRUEBA_OK` | «329 comprobaciones · 0 fallos» | Cama; tecleo suave | «Más de veinte mil líneas…» |
-| S39 | 1:55,0–2:00,0 | **T28**: el portátil real con el juego corriendo (filmado con teléfono) o, si no, **T05** con el contador de fps de `--medir` | «43–59 fps en Intel HD 620» | Cama | «Corre a más de cuarenta cuadros…» |
+| S38 | 1:50,0–1:55,0 | Pantalla partida. Izquierda, `mj_muestras.mp4` (el recolector lunar jugándose solo con teclas); derecha, su registro real desplazándose (`graficos/G05_registro_largo.png`, de `material/consola_muestras_manos.txt`) | «Minijuegos: 212 pruebas, 0 fallos» | Cama; tecleo suave | «Todo está hecho por código, con pruebas que lo juegan solas con el teclado.» |
+| S39 | 1:55,0–1:59,5 | `sendero.mp4` (no hay toma del portátil, T28) | «Corre en una Intel HD 620» (sin cifra: la Plaza mide 38,3 fps) | Cama | «Corre en un portátil modesto, con gráfica integrada.» |
 | S40 | 2:00,0–2:06,0 | **T29**: el Mirador de noche; ella y Órbita junto al telescopio, la Luna sobre la ciudad. Cámara del juego, quieta | — | Grillos. La música crece desde 2:03 y está plena en 2:06 | «La próxima ingeniera… Jugando.» |
 
 ### Cierre · 2:06–2:30 · sin voz

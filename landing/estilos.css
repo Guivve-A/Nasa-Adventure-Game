@@ -85,6 +85,34 @@ h2 { font-size: clamp(30px, 3.6vw, 44px); color: var(--marino); }
 figcaption { margin-top: 12px; font-size: 16.500px; color: var(--texto); }
 figcaption strong { display: block; color: var(--marino); font-size: 19px; font-weight: 700; }
 
+/* Jugar en el navegador */
+.jugar { padding: 84px 0 90px; background: var(--niebla); border-top: 1px solid var(--linea); }
+.jugar .grupo-texto { margin-top: 14px; }
+.juegos { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 30px 26px; margin-top: 34px; }
+.juego { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--linea); border-radius: 6px; overflow: hidden; }
+.juego img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.juego-texto { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px 22px 24px; flex: 1; }
+.juego h3 { font-size: 21px; font-weight: 700; color: var(--marino); line-height: 1.2; }
+.juego p { color: var(--texto); font-size: 16.500px; }
+.juego .controles { font-size: 15px; }
+.juego .boton { margin-top: auto; }
+kbd { display: inline-block; padding: 0 6px; border: 1px solid var(--linea); border-bottom-width: 2px; border-radius: 4px; background: var(--niebla); font: 500 13.500px/1.6 var(--fuente); color: var(--tinta); white-space: nowrap; }
+.aviso { margin-top: 26px; font-size: 15.500px; color: var(--texto); max-width: 760px; }
+.aviso a, .cierre .nota a { color: inherit; font-weight: 500; text-underline-offset: 3px; }
+.recursos { border-top: 1px solid var(--linea); }
+
+/* Sala de juego: marco a pantalla completa con boton de volver */
+.sala { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; background: #05081c; }
+.sala[hidden] { display: none; }
+.sala-barra { display: flex; align-items: center; gap: 16px; height: 52px; padding: 0 12px; background: var(--marino); color: #fff; flex-shrink: 0; }
+.sala-barra p { flex: 1; min-width: 0; font-weight: 700; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sala-barra .boton { padding: 7px 14px; font-size: 16px; }
+.sala-completa { padding: 6px 13px; border-radius: 4px; border: 1.500px solid rgba(255, 255, 255, .55); background: transparent; color: #fff; font-size: 15px; font-weight: 500; }
+.sala-completa:hover { border-color: #fff; }
+.sala :focus-visible { outline-color: var(--amarillo); }
+.sala iframe { flex: 1; width: 100%; border: 0; background: #0b0e1a; }
+body.jugando { overflow: hidden; }
+
 /* Recursos */
 .recursos { padding: 84px 0 90px; background: var(--niebla); }
 .recursos .grupo-texto { margin-top: 14px; }
@@ -123,7 +151,7 @@ figcaption strong { display: block; color: var(--marino); font-size: 19px; font-
   .portada-rejilla { grid-template-columns: 1fr; gap: 44px; }
   .destino { justify-self: start; width: min(280px, 78%); }
   .columnas { grid-template-columns: 1fr; gap: 30px; }
-  .capturas, .recursos, .cierre { padding: 62px 0 68px; }
+  .capturas, .jugar, .recursos, .cierre { padding: 62px 0 68px; }
 }
 @media (max-width: 600px) {
   body { font-size: 17px; }
@@ -132,7 +160,8 @@ figcaption strong { display: block; color: var(--marino); font-size: 19px; font-
   .barra-fila { gap: 12px; }
   .marca { font-size: 16px; gap: 8px; white-space: nowrap; }
   .marca svg { width: 32px; height: 32px; }
-  .rejilla { grid-template-columns: 1fr; }
+  .rejilla, .juegos { grid-template-columns: 1fr; }
+  .sala-completa { display: none; }
   .acciones .boton { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {

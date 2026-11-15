@@ -1,0 +1,264 @@
+[
+ {
+  "segmento": "S07",
+  "texto": "Zingularity: Artemis",
+  "archivo": "G01 (titulo)",
+  "inicio": 14.5,
+  "fin": 17.0
+ },
+ {
+  "segmento": "S08",
+  "texto": "20 de julio de 1969",
+  "archivo": "rotulos/rotulo_S08.png",
+  "inicio": 17.5,
+  "fin": 21.5,
+  "palabras": 5
+ },
+ {
+  "segmento": "S10",
+  "texto": "Godot 4.7 · jugable hoy",
+  "archivo": "rotulos/rotulo_S10.png",
+  "inicio": 28.0,
+  "fin": 33.0,
+  "palabras": 4
+ },
+ {
+  "segmento": "S12",
+  "texto": "Habitación · Plaza · Sendero · Mirador · Luna",
+  "archivo": "rotulos/rotulo_S12.png",
+  "inicio": 37.7,
+  "fin": 40.3,
+  "palabras": 5
+ },
+ {
+  "segmento": "S13",
+  "texto": "Minimapa con el objetivo",
+  "archivo": "rotulos/rotulo_S13.png",
+  "inicio": 40.7,
+  "fin": 42.8,
+  "palabras": 4
+ },
+ {
+  "segmento": "S14",
+  "texto": "Pantalla de carga pintada",
+  "archivo": "rotulos/rotulo_S14.png",
+  "inicio": 49.7,
+  "fin": 51.8,
+  "palabras": 4
+ },
+ {
+  "segmento": "S18",
+  "texto": "Guayaquil · 12 nov 2026, 19:30",
+  "archivo": "rotulos/rotulo_S18.png",
+  "inicio": 52.4,
+  "fin": 54.4,
+  "palabras": 5
+ },
+ {
+  "segmento": "S19",
+  "texto": "Texturas LRO · prueba técnica",
+  "archivo": "rotulos/rotulo_S19.png",
+  "inicio": 54.8,
+  "fin": 59.7,
+  "palabras": 4
+ },
+ {
+  "segmento": "S21",
+  "texto": "55 fichas · 39 verificadas",
+  "archivo": "rotulos/rotulo_S21.png",
+  "inicio": 63.7,
+  "fin": 66.3,
+  "palabras": 4
+ },
+ {
+  "segmento": "S22",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S22.png",
+  "inicio": 66.7,
+  "fin": 70.0,
+  "palabras": 5
+ },
+ {
+  "segmento": "S23",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S23.png",
+  "inicio": 70.0,
+  "fin": 71.33,
+  "palabras": 5
+ },
+ {
+  "segmento": "S24",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S24.png",
+  "inicio": 71.33,
+  "fin": 72.67,
+  "palabras": 5
+ },
+ {
+  "segmento": "S25",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S25.png",
+  "inicio": 72.67,
+  "fin": 74.0,
+  "palabras": 5
+ },
+ {
+  "segmento": "S26",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S26.png",
+  "inicio": 74.0,
+  "fin": 75.33,
+  "palabras": 5
+ },
+ {
+  "segmento": "S27",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S27.png",
+  "inicio": 75.33,
+  "fin": 76.67,
+  "palabras": 5
+ },
+ {
+  "segmento": "S28",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S28.png",
+  "inicio": 76.67,
+  "fin": 78.0,
+  "palabras": 5
+ },
+ {
+  "segmento": "S29",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S29.png",
+  "inicio": 78.0,
+  "fin": 79.33,
+  "palabras": 5
+ },
+ {
+  "segmento": "S30",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S30.png",
+  "inicio": 79.33,
+  "fin": 80.67,
+  "palabras": 5
+ },
+ {
+  "segmento": "S31",
+  "texto": "9 minijuegos · 9 ideas reales",
+  "archivo": "rotulos/rotulo_S31.png",
+  "inicio": 80.67,
+  "fin": 82.0,
+  "palabras": 5
+ },
+ {
+  "segmento": "S32",
+  "texto": "El reto: sostener una base",
+  "archivo": "rotulos/rotulo_S32.png",
+  "inicio": 82.2,
+  "fin": 85.3,
+  "palabras": 5
+ },
+ {
+  "segmento": "S33",
+  "texto": "Juegos del equipo · en integración",
+  "archivo": "rotulos/rotulo_S33.png",
+  "inicio": 85.7,
+  "fin": 88.3,
+  "palabras": 5
+ },
+ {
+  "segmento": "S34",
+  "texto": "Oxígeno, energía, alimentos y radiación",
+  "archivo": "rotulos/rotulo_S34.png",
+  "inicio": 88.7,
+  "fin": 94.3,
+  "palabras": 5
+ },
+ {
+  "segmento": "S35",
+  "texto": "Aterrizaje programado, sin pilotear en vivo",
+  "archivo": "rotulos/rotulo_S35.png",
+  "inicio": 97.2,
+  "fin": 101.8,
+  "palabras": 6
+ },
+ {
+  "segmento": "S36b",
+  "texto": "La base de Marte · Domenica",
+  "archivo": "rotulos/rotulo_S36b.png",
+  "inicio": 102.2,
+  "fin": 104.8,
+  "palabras": 5
+ },
+ {
+  "segmento": "S37",
+  "texto": "9 hojas · 104 piezas",
+  "archivo": "rotulos/rotulo_S37.png",
+  "inicio": 105.3,
+  "fin": 109.7,
+  "palabras": 4
+ },
+ {
+  "segmento": "S38",
+  "texto": "212 pruebas, 0 fallos",
+  "archivo": "rotulos/rotulo_S38.png",
+  "inicio": 110.3,
+  "fin": 114.7,
+  "palabras": 4
+ },
+ {
+  "segmento": "S39",
+  "texto": "Corre en una Intel HD 620",
+  "archivo": "rotulos/rotulo_S39.png",
+  "inicio": 115.3,
+  "fin": 119.3,
+  "palabras": 6
+ },
+ {
+  "segmento": "S41",
+  "texto": "5 escenarios jugables",
+  "archivo": "rotulos/rotulo_S41.png",
+  "inicio": 126.2,
+  "fin": 128.3,
+  "palabras": 3
+ },
+ {
+  "segmento": "S42",
+  "texto": "9 minijuegos arcade",
+  "archivo": "rotulos/rotulo_S42.png",
+  "inicio": 128.7,
+  "fin": 130.8,
+  "palabras": 3
+ },
+ {
+  "segmento": "S43",
+  "texto": "55 fichas con su fuente",
+  "archivo": "rotulos/rotulo_S43.png",
+  "inicio": 131.2,
+  "fin": 133.3,
+  "palabras": 5
+ },
+ {
+  "segmento": "S44",
+  "texto": "2 bases: Luna y Marte",
+  "archivo": "rotulos/rotulo_S44.png",
+  "inicio": 133.7,
+  "fin": 135.8,
+  "palabras": 5
+ },
+ {
+  "segmento": "S45",
+  "texto": "Datos: LRO y JPL Horizons",
+  "archivo": "rotulos/rotulo_S45.png",
+  "inicio": 136.2,
+  "fin": 138.3,
+  "palabras": 5
+ },
+ {
+  "segmento": "S48",
+  "texto": "Zingularity: Artemis",
+  "archivo": "G01 (titulo)",
+  "inicio": 146.5,
+  "fin": 149.5
+ }
+]

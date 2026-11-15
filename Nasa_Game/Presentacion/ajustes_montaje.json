@@ -1,0 +1,4 @@
+{
+ "_nota": "Ajustes del montador sobre montaje.json. Los lee herramientas/demo/montar_demo.py. Por segmento: 'fuente' sustituye a fuente y a material; 'rotulo' cambia el texto del rotulo (se dibuja con la plantilla de graficos.py) o lo quita con null. Cada ajuste lleva su motivo. v2 (2026-11-15): los ajustes de la v1 (S14, S18, S20, S38, S39, S46) pasaron a montaje.json, que ahora es la unica fuente del montaje; este archivo queda vacio para ajustes rapidos futuros.",
+ "segmentos": {}
+}

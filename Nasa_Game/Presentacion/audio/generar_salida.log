@@ -1,0 +1,17 @@
+  cotizado musica_demo      elevenlabs_music_v2_5     150 s   21.80
+  cotizado rugido_cohete    mirelo_text_to_audio        6 s    1.50
+  cotizado golpe_grave      mirelo_text_to_audio        3 s    0.75
+  cotizado subida           mirelo_text_to_audio        3 s    0.75
+  cotizado barrido          mirelo_text_to_audio        2 s    0.50
+  cotizado grillos          mirelo_text_to_audio        6 s    1.50
+  cotizado viento_orilla    mirelo_text_to_audio        4 s    1.00
+  cotizado tecleo           mirelo_text_to_audio        3 s    0.75
+Cotizado: 28.55 | ya gastado en el demo: 0.00 | tope: 40.00
+  musica_demo      ok             originales/musica_demo.mp3  saldo 657.25 -> 635.45
+  rugido_cohete    ok             originales/rugido_cohete.mp3  saldo 635.45 -> 633.95
+  golpe_grave      ok             originales/golpe_grave.mp3  saldo 633.95 -> 633.2
+  subida           ok             originales/subida.mp3  saldo 633.2 -> 632.45
+  barrido          ok             originales/barrido.mp3  saldo 632.45 -> 631.95
+  grillos          ok             originales/grillos.mp3  saldo 631.95 -> 630.45
+  viento_orilla    ok             originales/viento_orilla.mp3  saldo 630.45 -> 629.45
+  tecleo           ok             originales/tecleo.mp3  saldo 629.45 -> 628.7

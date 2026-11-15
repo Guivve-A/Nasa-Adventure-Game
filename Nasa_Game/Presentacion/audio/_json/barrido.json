@@ -1,0 +1,15 @@
+[
+  {
+    "created_at": "2026-11-15T15:20:59.806025Z",
+    "display_name": "Mirelo Text to Audio",
+    "id": "a0e010bf-deb8-46c3-bd83-3997ada677ed",
+    "job_type": "mirelo_text_to_audio",
+    "min_result_url": null,
+    "params": {
+      "duration": 2,
+      "prompt": "A single soft cinematic whoosh transition, air passing quickly from left to right, smooth and clean, short tail. No voice, no speech, no music."
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3Lr54S6ZoZRPNUQrx8UqBTjBjB3/hf_20261115_152059_a0e010bf-deb8-46c3-bd83-3997ada677ed.mp3",
+    "status": "completed"
+  }
+]

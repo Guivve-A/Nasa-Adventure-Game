@@ -1,0 +1,56 @@
+{
+  "lote": "DEMO-A",
+  "tope": 40.0,
+  "_nota": "Audio del video demo de 150 s. Tope de 40 creditos para todo el demo (musica + efectos). Sin voces ni letras, sin parecido buscado con ninguna banda sonora existente, sin marcas. Cada trabajo sale a originales/<id>.<ext>; herramientas/demo/audio_procesar.py lo deja en wav 48 kHz.",
+  "trabajos": [
+    {
+      "id": "musica_demo",
+      "modelo": "elevenlabs_music_v2_5",
+      "duracion": 150,
+      "extra": ["--force_instrumental=true"],
+      "prompt": "Original instrumental score for a 2 minute 30 second presentation trailer of a hand-painted space exploration adventure game about a young engineering student from Ecuador who dreams of the Moon. Warm cinematic orchestra (piano, strings, soft brass, timpani) with a gentle electronic pulse, hopeful, emotional, full of wonder. Steady tempo of 90 BPM throughout. Structure: 0:00 to 0:11 almost silent, only a very faint low warm drone. At 0:11 one single soft solo piano note, alone. At 0:13 a second solo piano note. At 0:15 a warm full chord of strings and piano that swells and then settles. 0:17 to 1:10 a calm, steady underscore bed meant to sit under a live spoken presentation: soft repeating piano arpeggios, sustained warm strings and a quiet pulsing synth on every beat, no lead melody in front, gradually a little fuller. 1:10 to 1:22 an energetic rhythmic section with light drums, a driving pulse and bright plucked synths, playful and adventurous, with a clear downbeat every two beats. 1:22 to 2:03 back to the steady underscore bed with the pulse, warm and confident, still no lead melody. 2:03 to 2:22 a big emotional crescendo: rising strings, timpani rolls and brass, the main theme finally played in full. At 2:22 a broad, bright major final chord that rings out and fades naturally to silence by 2:30. Instrumental only: no vocals, no choir, no humming, no lyrics."
+    },
+    {
+      "id": "rugido_cohete",
+      "modelo": "mirelo_text_to_audio",
+      "duracion": 6,
+      "prompt": "A huge rocket engine ignition and liftoff roar heard from a few kilometers away: deep rumbling thunder, crackling low-frequency blasts, powerful and continuous, building to full intensity. No voice, no speech, no music, no countdown."
+    },
+    {
+      "id": "golpe_grave",
+      "modelo": "mirelo_text_to_audio",
+      "duracion": 3,
+      "prompt": "A single cinematic sub-bass impact hit for a movie trailer title: one deep boom with a short low rumble tail and soft reverb, clean ending. No voice, no speech, no music, no melody."
+    },
+    {
+      "id": "subida",
+      "modelo": "mirelo_text_to_audio",
+      "duracion": 3,
+      "prompt": "A smooth cinematic riser for a trailer transition: airy noise and a shimmering tone that rise steadily in pitch and volume for three seconds and stop cleanly at the peak. No voice, no speech, no drums, no melody."
+    },
+    {
+      "id": "barrido",
+      "modelo": "mirelo_text_to_audio",
+      "duracion": 2,
+      "prompt": "A single soft cinematic whoosh transition, air passing quickly from left to right, smooth and clean, short tail. No voice, no speech, no music."
+    },
+    {
+      "id": "grillos",
+      "modelo": "mirelo_text_to_audio",
+      "duracion": 6,
+      "prompt": "Warm tropical night ambience in a quiet hillside neighborhood: steady crickets chirping, a very light breeze, distant and calm, continuous and even from start to end. No voice, no speech, no traffic, no music."
+    },
+    {
+      "id": "viento_orilla",
+      "modelo": "mirelo_text_to_audio",
+      "duracion": 4,
+      "prompt": "Early morning on a flat sandy coast: steady sea wind and small waves lapping gently on the shore, open and calm, continuous and even from start to end. No voice, no speech, no birds, no music."
+    },
+    {
+      "id": "tecleo",
+      "modelo": "mirelo_text_to_audio",
+      "duracion": 3,
+      "prompt": "Soft quiet typing on a laptop keyboard, steady relaxed rhythm, close and dry, continuous. No voice, no speech, no music, no clicks of a mouse."
+    }
+  ]
+}

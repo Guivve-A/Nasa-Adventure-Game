@@ -28,9 +28,18 @@ shader_cache/
 Nasa_Game/Presentacion/material/
 Nasa_Game/Presentacion/intermedios/
 
+# Versiones intermedias del demo y copias de respaldo (queda DEMO_ZINGULARITY.mp4)
+Nasa_Game/Presentacion/demo_v*.mp4
+Nasa_Game/Presentacion/DEMO_PRESENTACION.mp4
+Nasa_Game/Presentacion/graficos/*_luz.*
+Nasa_Game/Presentacion/canva/preparar.sh
+
 # Trabajo de Blender
 *.blend1
 herramientas/blender/salidas/
 
 # Paquete jugable generado (herramientas/empaquetar_juego.py)
 entrega/
+
+# Copias de trabajo para exportar a web (herramientas/exportar_web.py)
+web_build/

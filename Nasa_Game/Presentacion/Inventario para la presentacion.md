@@ -22,7 +22,7 @@ Criterios oficiales (Judging & Awards Guide de Space Apps): impacto, creatividad
 | Criterio | Qué mira el jurado | Cómo responde el proyecto | Prueba |
 |---|---|---|---|
 | **Impacto** | Problema que ataca y a cuántos inspira o ayuda | Diseñar misiones suele aprenderse en teoría. El juego lo vuelve experiencia, en español y desde Guayaquil, y corre en un portátil escolar con gráfica integrada | fps medidos (§4); fichas con fuente (§3) |
-| **Creatividad** | Originalidad o mejora significativa | Una aventura 2.5D pintada a mano con un gato científico; 9 minijuegos arcade, cada uno con una idea real; un telescopio con la Luna real de una noche concreta; una cinemática de homenaje al Apolo 11 | §2, §3 y §5 |
+| **Creatividad** | Originalidad o mejora significativa | Una aventura low-poly con acabado pintado (2.5D) y un gato científico; 9 minijuegos arcade, cada uno con una idea real; un telescopio con la Luna real de una noche concreta; una cinemática de homenaje al Apolo 11 | §2, §3 y §5 |
 | **Validez** | Base científica, factibilidad, usabilidad | Datos verificados con fuentes primarias; la Luna se mide contra JPL Horizons; todo se demuestra jugable con teclado simulado; corre en hardware modesto | §3, §4 |
 | **Relevancia** | Responde al reto y usa datos de NASA como núcleo, no como adorno | Base lunar y marciana con oxígeno, energía, alimentos y radiación (reto local). Arco de misión: armar el satélite, rastrearlo, ponerlo en órbita, aterrizar, operar y volver (reto global). Datos de LRO y JPL Horizons dentro del juego | §2.3, §3 |
 | **Presentación** | Claridad, historia, estructura; también la demo | Video de 2:30 con guion de expositor de 1:30 sincronizado | [[Guion del video demo]] |
@@ -41,7 +41,7 @@ Criterios oficiales (Judging & Awards Guide de Space Apps): impacto, creatividad
 | Código | probado | 20 255 líneas en los `.gd` de `juego/` (con pruebas, comentarios y líneas en blanco): «más de 20 000 líneas» | `find juego -name "*.gd" \| xargs cat \| wc -l` (2026-11-15) |
 | Escenarios | Habitación y Sendero: validados por Guillermo. Plaza, Mirador y Luna: **provisionales**. Luna v2: **en producción** | 5 zonas: `habitacion`, `ciudad` (Plaza de las Iguanas), `sendero`, `mirador`, `luna` | `juego/zonas/*/zona.json`; `Construccion/BUCLE_ESTILO.md` filas 3 y 5j |
 | Estilo | probado | Low-poly pintado a mano (D-011) y acabado 2.5D (D-015) aprobados | `Memory.md` §2 |
-| Misiones | probado | 11 misiones jugables (de `m1_convocatoria` a `m10_referencia_fija`, más `s1_base`) | `juego/datos/misiones.json` |
+| Misiones | probado | 10 misiones jugables (de `m1_convocatoria` a `m10_referencia_fija`). `s1_base` («Tu primera base espacial») existe pero no se puede completar hasta que se integren `base_luna` y `base_marte` (en producción) | `juego/datos/misiones.json`; `juego/zonas/ciudad/ciudad.gd` |
 | Protagonista y Órbita | probado | Protagonista v9 con 82,1 % de parecido a su hoja; Órbita con rig por script (Rigify) y pistas en tres niveles | `BUCLE_ESTILO.md` (tabla de estilo); `Memory.md` (lecciones de rig); `misiones.json` (`_nota`) |
 | Mapa del mundo ilustrado | probado (capturado) | Cinco lugares, conexiones y candados (tecla M) | `juego/interfaz/mapa.gd`, `juego/datos/mapa.json`, `Construccion/Capturas/mapa_del_mundo.png` |
 | Pantallas de carga pintadas | arte hecho; integración **en producción** (sin revisar) | 5 láminas finales del lote 08 | `Fase_1_Arte/Exploracion/Lote_08/L08_carga_*.png` |
@@ -96,11 +96,11 @@ Rótulo permitido: «datos abiertos de la NASA» y las fuentes (LRO, JPL Horizon
 
 | Qué | Estado | Cifra | Origen |
 |---|---|---|---|
-| fps en Intel HD 620 a 1280 × 720 | medido | Habitación 51,9; Plaza 44,0 (Plaza v2: 43,7); Sendero 43,6; Mirador 45,9; Luna 59,3. Rótulo: «de 43 a 59 fps» | `BUCLE_ESTILO.md` filas 3 y 5j |
+| fps en Intel HD 620 a 1280 × 720 | medido el 2026-11-15, 11:59, sin otros procesos de Godot (`--medir=5`) | Habitación 56,3; **Plaza 38,3**; Sendero 41,1; Mirador 40,1; Luna 60,3. Como la Plaza baja de 40, el video no lleva cifra de fps: «Corre en una Intel HD 620». (Medición anterior, vuelta 3: de 43,6 a 59,3, antes de la Plaza v2 y la Luna v2) | `material/fps_medido.txt`; `BUCLE_ESTILO.md` filas 3 y 5j |
 | Equipo de medición | medido | i5-7200U, 8 GB, Intel HD 620 | `Memory.md` §3 |
 | Historia completa con teclas simuladas | probado (vuelta 4) | **117** comprobaciones, 0 fallos (WASD, E, diálogos y umbrales) | `BUCLE_ESTILO.md` fila 4 |
 | Minijuegos con teclas simuladas | probado (vuelta 5j) | **212** comprobaciones, 0 fallos | §2.2 |
-| Total usado en el video | — | **329 comprobaciones, 0 fallos** (117 + 212). **Repetir antes de presentar** (`--prueba=recorrido_manos` y las `prueba_manos.gd`): el código cambió desde entonces | — |
+| Total usado en el video (v2) | corrido el 2026-11-15, 12:00 a 12:16 | **212 comprobaciones con teclas simuladas en los 9 minijuegos, 0 fallos** (seguidor 16, antena 9, satélite 28, telescopio 29, línea de tiempo 30, muestras 66, banderas 11, regreso 6, órbita 17). El recorrido completo (`--prueba=recorrido_manos`) **no** se cuenta: la corrida de la mañana dio 126 y 7 fallos (Mirador) y se volvió a correr (ver LEEME de la presentación). El «329» de la v1 ya no vale | `material/consola_muestras_manos.txt`; LEEME de la presentación |
 | Otras pruebas entregadas por agentes, sin revisión final | — | núcleo 22, manos 23, zonas 332, zona:ciudad 87 | `BUCLE_ESTILO.md` fila 5j. No se usan en pantalla |
 | Del concepto al motor | hecho | Ancla de vista `L02_exploracion_camara_alta.png` → hojas `HR_*_v1.png` → Sendero en el motor (ΔE 19,4 contra el ancla) | `Fase_1_Arte/Exploracion/Lote_02/`, `Hojas_de_referencia/`, `Construccion/Capturas/sendero_jugable.png`; `Memory.md` D-015 |
 | Hoja → modelo 3D | hecho | Protagonista v8T: 81,1 % de parecido; v9: 82,1 % | `Fase_1_Arte/Modelado/Lote_04/parecido/hoja_vs_v8T.png`; `Memory.md` D-017 |

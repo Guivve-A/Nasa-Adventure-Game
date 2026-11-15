@@ -1,0 +1,41 @@
+{
+ "artemis": {
+  "artemis_base": {
+   "inicio": 0.5,
+   "duracion": 3.5,
+   "que": "Mision Artemis (Jean, Joel y Domenica): la base del polo sur con la cupula, inicio"
+  },
+  "artemis_lluvia_solar": {
+   "inicio": 8.5,
+   "duracion": 5.5,
+   "que": "Mision Artemis: aviso de lluvia solar y refugio en la cupula, con las cuatro barras"
+  },
+  "artemis_rover_hielo": {
+   "inicio": 13.5,
+   "duracion": 6.0,
+   "que": "Mision Artemis: rover, entregas a la constructora y extraccion"
+  },
+  "artemis_despegue_viaje": {
+   "inicio": 40.5,
+   "duracion": 6.5,
+   "que": "Mision Artemis: despegue del cohete y viaje a Marte"
+  },
+  "artemis_marte": {
+   "inicio": 53.5,
+   "duracion": 5.0,
+   "que": "Mision Artemis, capitulo Marte: aterrizaje, tres banderas y modulos de la base"
+  }
+ },
+ "marte": {
+  "marte_aterrizaje": {
+   "inicio": 0.0,
+   "duracion": 8.0,
+   "que": "Mision Artemis - Marte (companeros): siete minutos de terror, el simulador de descenso y el resultado con su causa ('La nave se perderia')"
+  },
+  "marte_senal_tarda": {
+   "inicio": 8.0,
+   "duracion": 3.0,
+   "que": "Mision Artemis - Marte: ficha del cuaderno de campo 'La senal tarda' (4 a 24 min, fuente ESA)"
+  }
+ }
+}

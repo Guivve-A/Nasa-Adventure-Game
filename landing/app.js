@@ -122,6 +122,46 @@
     if (e.key === "ArrowRight") { pasar(1); } else if (e.key === "ArrowLeft") { pasar(-1); }
   });
 
+  // ---- Jugar en el navegador: el juego se abre en un marco a pantalla completa con boton de volver ----
+  // Sin JS, o con Ctrl/clic central, el enlace abre /jugar/<id>/ como pagina propia.
+  var sala = uno("#sala"), marco = uno("#sala-marco"), salaTitulo = uno("#sala-titulo");
+  var origenFoco = null;
+  function abrirJuego(enlace) {
+    origenFoco = enlace;
+    salaTitulo.textContent = enlace.getAttribute("data-titulo") || "";
+    marco.title = enlace.getAttribute("data-titulo") || "Juego";
+    marco.src = enlace.getAttribute("href");
+    sala.hidden = false;
+    doc.body.classList.add("jugando");
+    marco.addEventListener("load", function () { try { marco.contentWindow.focus(); } catch (e) { marco.focus(); } }, { once: true });
+    marco.focus();
+    if (window.history && history.pushState) { history.pushState({ jugando: true }, "", "#jugar"); }
+  }
+  function cerrarJuego(desdeHistorial) {
+    if (sala.hidden) { return; }
+    if (doc.fullscreenElement && doc.exitFullscreen) { doc.exitFullscreen().catch(function () {}); }
+    marco.src = "about:blank";
+    sala.hidden = true;
+    doc.body.classList.remove("jugando");
+    if (origenFoco) { origenFoco.focus(); }
+    if (!desdeHistorial && history.state && history.state.jugando) { history.back(); }
+  }
+  if (sala && marco) {
+    todos("[data-jugar]").forEach(function (enlace) {
+      enlace.addEventListener("click", function (e) {
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) { return; }
+        e.preventDefault();
+        abrirJuego(enlace);
+      });
+    });
+    uno("#sala-volver").addEventListener("click", function () { cerrarJuego(false); });
+    uno("#sala-completa").addEventListener("click", function () {
+      if (sala.requestFullscreen) { sala.requestFullscreen().catch(function () {}); }
+      try { marco.contentWindow.focus(); } catch (e) { marco.focus(); }
+    });
+    window.addEventListener("popstate", function () { cerrarJuego(true); });
+  }
+
   if (!animar) { return; }
 
   // ---- Entrada de la portada ----
@@ -166,13 +206,15 @@
     gsap.registerPlugin(window.ScrollTrigger);
     gsap.to("#progreso", { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: .3 } });
 
-    todos(".capturas h2, .recursos h2, .cierre h2").forEach(function (h) {
+    todos(".capturas h2, .jugar h2, .recursos h2, .cierre h2").forEach(function (h) {
       gsap.from(h, { opacity: 0, x: mov(-36), duration: .7, ease: "power3.out", scrollTrigger: { trigger: h, start: "top 86%" } });
     });
     gsap.from(".pestanas button", { opacity: 0, y: mov(16), duration: .45, stagger: .06, ease: "power2.out",
       scrollTrigger: { trigger: ".pestanas", start: "top 88%" } });
     gsap.from("#g-explora figure", { opacity: 0, y: mov(40), duration: .6, stagger: .09, ease: "power2.out",
       scrollTrigger: { trigger: "#g-explora .rejilla", start: "top 84%" } });
+    gsap.from(".juego", { opacity: 0, y: mov(40), duration: .6, stagger: .12, ease: "power2.out",
+      scrollTrigger: { trigger: ".juegos", start: "top 84%" } });
     gsap.from(".columnas > div", { opacity: 0, y: mov(34), duration: .6, stagger: .12, ease: "power2.out",
       scrollTrigger: { trigger: ".columnas", start: "top 84%" } });
     gsap.from(".cierre p, .cierre .boton", { opacity: 0, y: mov(20), duration: .5, stagger: .1, ease: "power2.out",
